@@ -1,0 +1,29 @@
+{
+  "name": "vidatio",
+  "version": "0.0.1",
+  "authors": [
+    "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
+  ],
+  "description": "Plattform to upload, share and expand datasets and visualizations",
+  "main": "assets/js/main.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "data",
+    "diagram",
+    "visualization",
+    "open",
+    "data",
+    "ogd"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.vidat.io",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
