@@ -4,13 +4,33 @@
     <meta charset="utf-8">
     <title>Vidatio</title>
     <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/css/fileUpload.css"/>
 </head>
 <body>
 
 <div id="container" ng-controller="MainCtrl">{{message}}</div>
 
+<div id="fileUpload" ng-controller="FileUploadCtrl">
+    <h1>File-Upload via Browsing</h1>
+    <div class="button" ng-file-select ng-model="files">Browse</div>
+
+    <h1>File-Upload via Drag-and-Drop</h1>
+    <div ng-file-drop ng-model="files" class="drop-box"
+         drag-over-class="drag-over" ng-multiple="false" allow-dir="false"
+         accept=".csv,.xml,.xls">Drop dataset here</div>
+    <div ng-no-file-drop>File Drag-and-Drop is not supported for this browser</div>
+
+    <ul>
+        <li ng-repeat="file in files" style="font:smaller">{{file.name}}, {{file.size}}</li>
+    </ul>
+</div>
+
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
+<script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
+
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>
+<script src="assets/js/controller/fileUpload.js"></script>
 </body>
 </html>

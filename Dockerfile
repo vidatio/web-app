@@ -15,6 +15,9 @@ ENV PATH=$PATH:$NODE_PATH
 
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
 RUN echo "nvm install stable" >> ~/.nvm/installnode.sh
+
+# bower shouln't be installed manual, it should be installed via package.json
+RUN echo "npm install -g bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
 # set bash start directory to /var/www/vidatio
