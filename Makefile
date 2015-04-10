@@ -12,7 +12,7 @@ build:
 
 # create and start container from image
 run:
-	docker run -P -d --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -d -P --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # stop container
 stop:

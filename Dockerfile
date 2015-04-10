@@ -4,7 +4,6 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 # prevents a weird error message
 ENV DEBIAN_FRONTEND=noninteractive
 
-
 RUN apt-get update
 RUN apt-get install -y curl git
 
