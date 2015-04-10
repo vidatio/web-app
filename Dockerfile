@@ -19,7 +19,7 @@ RUN gem install --no-rdoc --no-ri compass
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
 
 # set node path in container
-ENV NODE_PATH=/root/.nvm/versions/node/v0.12.1/bin
+ENV NODE_PATH=/root/.nvm/versions/node/v0.12.2/bin
 ENV PATH=$PATH:$NODE_PATH
 
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
