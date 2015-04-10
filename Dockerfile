@@ -6,15 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 RUN apt-get update
-
-RUN apt-get install -y curl man
-
-# install ruby (required by compass)
-RUN  apt-get install -y ruby-dev
-RUN apt-get install -y make
-
-# install compass
-RUN gem install --no-rdoc --no-ri compass
+RUN apt-get install -y curl git
 
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
 
@@ -35,6 +27,7 @@ RUN mkdir -p /var/www/vidatio
 COPY . /var/www/vidatio/
 
 RUN npm install
+RUN bower install --allow-root
 
 # expose port 5000 to host OS
 EXPOSE 5000
