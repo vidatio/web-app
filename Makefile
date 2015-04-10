@@ -35,7 +35,4 @@ port:
 
 # Mac OS only: 
 ip:
-	if [ boot2docker ] ; \
-	then \
-		boot2docker ip ; \
-	fi;
+	
