@@ -1,9 +1,15 @@
+/**
+ * Server of vidatio website
+ * @license MIT
+ */
+
 var express = require('express');
 var app = express();
 
+//Add directory for file lockup
 app.use(express.static(__dirname + '/'));
-app.use('/bower_components', express.static(__dirname + '/bower_components'));
 
+//Response get on root with main index.html
 app.get('/', function (req, res) {
   res.sendfile('./app/index.html');
 });

@@ -4,14 +4,13 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 # prevents a weird error message
 ENV DEBIAN_FRONTEND=noninteractive
 
-
 RUN apt-get update
-
 RUN apt-get install -y curl man
 
 # install ruby (required by compass)
-RUN  apt-get install -y ruby-dev
+RUN apt-get install -y ruby-dev
 RUN apt-get install -y make
+RUN apt-get install -y git
 
 # install compass
 RUN gem install --no-rdoc --no-ri compass
@@ -35,6 +34,7 @@ RUN mkdir -p /var/www/vidatio
 COPY . /var/www/vidatio/
 
 RUN npm install
+RUN bower install --allow-root
 
 # expose port 5000 to host OS
 EXPOSE 5000
