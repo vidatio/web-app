@@ -1,1 +1,1 @@
-var App = angular.module("vidatio", ['angularFileUpload']);
+var App = angular.module("vidatio", ['angularFileUpload', 'ngHandsontable']);

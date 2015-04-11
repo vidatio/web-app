@@ -23,4 +23,21 @@ angular.module('vidatio').controller('FileUploadCtrl', function ($scope, $upload
     }
   };
 
+  // Config and fill table
+  $scope.colHeaders = true;
+  $scope.db = {};
+  $scope.db.items = [
+    {
+      hours: 4
+    },
+    {
+      hours: 8
+    }
+  ];
+
+  $scope.db.dynamicColumns = [{
+    data: 'hours',
+    title: 'Hours worked per day'
+  }];
+
 });

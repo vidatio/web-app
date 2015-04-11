@@ -5,6 +5,7 @@
     <title>Vidatio</title>
     <link rel="stylesheet" href="assets/css/main.css"/>
     <link rel="stylesheet" href="assets/css/fileUpload.css"/>
+    <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
 </head>
 <body>
 
@@ -23,11 +24,17 @@
     <ul>
         <li ng-repeat="file in files" style="font:smaller">{{file.name}}, {{file.size}}</li>
     </ul>
+
+    <h1>Table with Data from File</h1>
+    <hot-table datarows="items">
+
+    </hot-table>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/ng-file-upload/angular-file-upload.js"></script>
-<script src="bower_components/ng-file-upload/angular-file-upload-shim.js"></script>
+<script src="bower_components/ng-file-upload/angular-file-upload-all.js"></script>
+<script src="bower_components/handsontable/dist/handsontable.full.js"></script>
+<script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>
