@@ -16,10 +16,13 @@
 
     <h1>File-Upload via Drag-and-Drop</h1>
 
+    <h1>File-Upload via Link</h1>
+    <input type="text" placeholder="URL to dataset" ng-model="link"/>
+    <input type="button" ng-click="load()" value="Load"/>
+
     <h1>Table with Data from File</h1>
-    <hot-table settings="{rowHeaders: true, contextMenu: true, afterChange: afterChange}"
-               datarows="db.items" columns="db.dynamicColumns">
-    </hot-table>
+
+    {{content}}
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
