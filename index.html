@@ -13,17 +13,8 @@
 
 <div id="fileUpload" ng-controller="FileUploadCtrl">
     <h1>File-Upload via Browsing</h1>
-    <div class="button" ng-file-select ng-model="files">Browse</div>
 
     <h1>File-Upload via Drag-and-Drop</h1>
-    <div ng-file-drop ng-model="files" class="drop-box"
-         drag-over-class="drag-over" ng-multiple="false" allow-dir="false"
-         accept=".csv,.xml,.xls">Drop dataset here</div>
-    <div ng-no-file-drop>File Drag-and-Drop is not supported for this browser</div>
-
-    <ul>
-        <li ng-repeat="file in files" style="font:smaller">{{file.name}}, {{file.size}}</li>
-    </ul>
 
     <h1>Table with Data from File</h1>
     <hot-table settings="{rowHeaders: true, contextMenu: true, afterChange: afterChange}"
@@ -32,7 +23,6 @@
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/ng-file-upload/angular-file-upload-all.js"></script>
 <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
 <script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
 
