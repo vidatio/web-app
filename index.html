@@ -26,8 +26,8 @@
     </ul>
 
     <h1>Table with Data from File</h1>
-    <hot-table datarows="items">
-
+    <hot-table settings="{rowHeaders: true, contextMenu: true, afterChange: afterChange}"
+               datarows="db.items" columns="db.dynamicColumns">
     </hot-table>
 </div>
 

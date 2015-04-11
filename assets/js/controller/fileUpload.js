@@ -12,7 +12,12 @@ angular.module('vidatio').controller('FileUploadCtrl', function ($scope, $upload
       for (var i = 0; i < files.length; i++) {
         var file = files[i];
 
-        $upload.progress(function (evt) {
+        console.log(file.blob);
+
+        $upload.upload({
+          url: 'upload/url',
+          file: file
+        }).progress(function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
           console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
         }).success(function (data, status, headers, config) {
@@ -24,20 +29,34 @@ angular.module('vidatio').controller('FileUploadCtrl', function ($scope, $upload
   };
 
   // Config and fill table
-  $scope.colHeaders = true;
+
   $scope.db = {};
   $scope.db.items = [
     {
-      hours: 4
+      col1: "row1col1",
+      col2: "row1col2",
+      col3: "row1col3"
     },
     {
-      hours: 8
+      col1: "row2col1",
+      col2: "row2col2",
+      col3: "row2col3"
     }
   ];
 
-  $scope.db.dynamicColumns = [{
-    data: 'hours',
-    title: 'Hours worked per day'
-  }];
+  $scope.db.dynamicColumns = [
+    {
+      data: 'col1',
+      title: 'COL1'
+    },
+    {
+      data: 'col2',
+      title: 'COL2'
+    },
+    {
+      data: 'col3',
+      title: 'COL3'
+    }
+  ];
 
 });
