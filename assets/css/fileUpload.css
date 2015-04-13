@@ -7,7 +7,7 @@
     margin: 10px;
     width: 70px;
 }
-.drop-box {
+#drop-zone {
     background: #F8F8F8;
     border: 5px dashed #DDD;
     width: 200px;
