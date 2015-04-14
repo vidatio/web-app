@@ -28,7 +28,7 @@ rm_image:
 	docker rmi -f $(IMAGE_NAME)
 # stop + delete container, delete image
 # fails if something went wrong during build process, because the image has no name or the container name is in use ...
-rm_all: rm_container rm_image
+clean: rm_container rm_image
 
 # show mapped port, which maps to exposed port inside the container (5000 in our case)
 port:
