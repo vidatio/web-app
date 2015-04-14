@@ -1,5 +1,6 @@
-angular.module('vidatio').controller('FileUploadCtrl', function ($scope, $http) {
+angular.module('vidatio').controller('FileUploadCtrl', function ($scope, $http, FileReader) {
   $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv";
+  $scope.progress = 0;
 
   // Read via link
   $scope.load = function () {

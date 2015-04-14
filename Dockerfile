@@ -14,7 +14,7 @@ ENV NODE_PATH=/root/.nvm/versions/node/v0.12.2/bin
 ENV PATH=$PATH:$NODE_PATH
 
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
-RUN echo "nvm install stable" >> ~/.nvm/installnode.sh
+RUN echo "nvm install v0.12.2" >> ~/.nvm/installnode.sh
 
 # bower shouln't be installed manual, it should be installed via package.json
 RUN echo "npm install -g bower" >> ~/.nvm/installnode.sh
