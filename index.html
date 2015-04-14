@@ -13,6 +13,7 @@
 
 <div id="file-upload" ng-controller="FileUploadCtrl">
     <h1>File-Upload</h1>
+
     <h2>Browsing</h2>
     <form>
         <input type="file" ng-file-select="onFileSelect($files)" >
@@ -28,8 +29,10 @@
     </form>
 
     <h1>Result</h1>
+
     <h2>Progress:</h2>
     <progress value="{{progress}}"></progress>
+
     <h2>Preview:</h2>
     <i ng-hide="content">No file choosen.</i>
     <pre>{{content}}</pre>
