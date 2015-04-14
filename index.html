@@ -9,7 +9,9 @@
 </head>
 <body>
 
-<div id="container" ng-controller="MainCtrl">{{message}}</div>
+<div id="container" ng-controller="MainCtrl">
+    <h1>{{message}}</h1>
+</div>
 
 <div id="fileUpload" ng-controller="FileUploadCtrl">
     <h1>File-Upload via Browsing</h1>
@@ -21,8 +23,6 @@
     <input type="button" ng-click="load()" value="Load"/>
 
     <h1>Table with Data from File</h1>
-
-    {{content}}
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
