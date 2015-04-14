@@ -12,24 +12,27 @@
 <div id="container" ng-controller="MainCtrl">{{message}}</div>
 
 <div id="file-upload" ng-controller="FileUploadCtrl">
-    <h1>File-Upload via Browsing</h1>
+    <h1>File-Upload</h1>
+    <h2>Browsing</h2>
     <form>
         <input type="file" ng-file-select="onFileSelect($files)" >
     </form>
-    <b>Preview:</b><br />
-    <i ng-hide="content">No file choosen.</i>
-    <pre>{{content}}</pre><br/>
-    <b>Progress:</b>
-    <progress value="{{progress}}"></progress>
 
-    <h1>File-Upload via Drag-and-Drop</h1>
+    <h2>Drag-and-Drop</h2>
     <div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>
 
-    <h1>File-Upload via Link</h1>
+    <h2>Link</h2>
     <form>
         <input type="text" ng-model='fileurl'>
         <button ng-file-url="onFileUrl($file)" url="fileurl">Import from URL</button>
     </form>
+
+    <h1>Result</h1>
+    <h2>Progress:</h2>
+    <progress value="{{progress}}"></progress>
+    <h2>Preview:</h2>
+    <i ng-hide="content">No file choosen.</i>
+    <pre>{{content}}</pre>
 
     <h1>Table with Data from File</h1>
 <!--     <hot-table settings="{rowHeaders: true, contextMenu: true, afterChange: afterChange}"
