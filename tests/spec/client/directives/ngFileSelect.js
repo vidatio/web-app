@@ -1,7 +1,7 @@
 //Source: http://www.tuesdaydeveloper.com/2013/06/angularjs-testing-with-karma-and-jasmine/
 
-describe('Controller', function() {
-  describe('MainCtrl', function() {
+describe('Directive', function() {
+  describe('ngFileSelect', function() {
     var scope;
 
     //mock Application to allow us to inject our own dependencies
@@ -11,12 +11,9 @@ describe('Controller', function() {
       //create an empty scope
       scope = $rootScope.$new();
       //declare the controller and inject our empty scope
-      $controller('MainCtrl', {$scope: scope});
+      $controller('FileReadCtrl', {$scope: scope});
     }));
 
-    it('should print hello world', function() {
-      expect(scope.message).toBe("Welcome to Vidatio!");
-    });
   });
 
 });

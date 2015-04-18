@@ -13,13 +13,11 @@
     <h1>{{message}}</h1>
 </div>
 
-<div id="file-upload" ng-controller="FileUploadCtrl">
+<div id="file-read" ng-controller="FileReadCtrl">
     <h1>File-Reading</h1>
 
     <h2>Browsing</h2>
-    <form>
-        <input type="file" ng-file-select="onFileSelect($files)">
-    </form>
+    <input type="file" ng-file-select="onFileSelect($files)">
 
     <h2>Drag-and-Drop</h2>
     <div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>
@@ -48,7 +46,7 @@
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>
-<script src="assets/js/controller/fileUpload.js"></script>
+<script src="assets/js/controller/fileRead.js"></script>
 <script src="assets/js/directives/ngFileSelect.js"></script>
 <script src="assets/js/directives/ngFileDrop.js"></script>
 <script src="assets/js/services/fileReader.js"></script>
