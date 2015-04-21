@@ -1,5 +1,3 @@
-//Source: http://www.tuesdaydeveloper.com/2013/06/angularjs-testing-with-karma-and-jasmine/
-
 describe('Controller', function() {
   describe('MainCtrl', function() {
     var scope;
