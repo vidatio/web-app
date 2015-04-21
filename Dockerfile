@@ -13,15 +13,14 @@ git config --global url."https://".insteadOf git://
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
 
 # set node path in container
-ENV NODE_PATH=/root/.nvm/versions/node/v0.12.2/bin
+ENV NODE_VERSION=v0.12.2
+ENV NODE_PATH=/root/.nvm/versions/node/$NODE_VERSION/bin
 ENV PATH=$PATH:$NODE_PATH
 
 # install node.js via NVM
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
-RUN echo "nvm install v0.12.2" >> ~/.nvm/installnode.sh
-
-# bower shouln't be installed manual, it should be installed via package.json
-RUN echo "npm install -g bower" >> ~/.nvm/installnode.sh
+RUN echo "nvm install $NODE_VERSION" >> ~/.nvm/installnode.sh
+RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
 # set bash start directory to /var/www/vidatio
