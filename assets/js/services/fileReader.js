@@ -33,7 +33,7 @@ angular.module('vidatio').factory('FileReader', function($q, $log){
         return reader;
     };
 
-    var readAsDataURL = function (file, scope) {
+    var readAsDataUrl = function (file, scope) {
         var deferred = $q.defer();
          
         var reader = getReader(deferred, scope);         
@@ -43,6 +43,6 @@ angular.module('vidatio').factory('FileReader', function($q, $log){
     };
 
     return {
-        readAsDataUrl: readAsDataURL  
+        readAsDataUrl: readAsDataUrl  
     };
 });
