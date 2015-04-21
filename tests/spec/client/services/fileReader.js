@@ -24,7 +24,7 @@ describe('Service', function () {
       spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
 
       scope.$on("fileProgress", function (e, progress) {
-        alert("fileProgress!");
+        scope.progress = progress.loaded / progress.total;
       });
 
       FileReader.readAsDataUrl(scope.file, scope)
@@ -40,7 +40,23 @@ describe('Service', function () {
 
     it('should have progress finished at the end', function () {
       rootScope.$apply();
+      // because of promises the broadcast of the service is never called, 
+      // so we have to run a broadcast
+      scope.$broadcast("fileProgress",
+        {
+            total: 10,
+            loaded: 10
+        });
+
       expect(scope.progress).toBe(1);
+
+      scope.$broadcast("fileProgress",
+        {
+            total: 10,
+            loaded: 5
+        });
+
+      expect(scope.progress).toBe(0.5);
     });
   });
 
