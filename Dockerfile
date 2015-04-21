@@ -5,7 +5,7 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update
-RUN apt-get install -y curl git
+RUN apt-get install -y curl git nginx
 
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.24.0/install.sh | bash
 
@@ -36,4 +36,4 @@ ADD . /var/www/vidatio/
 EXPOSE 5000
 
 # run the app
-CMD ["node", "server.js"]
+CMD ["nginx -s start"]
