@@ -11,7 +11,7 @@ build:
 
 # create and start container from image
 run:
-	docker run -d -p $(PORT):5000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -d -p $(PORT):80 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # stop container
 stop:
@@ -30,6 +30,6 @@ rm_image:
 # fails if something went wrong during build process, because the image has no name or the container name is in use ...
 clean: rm_container rm_image
 
-# show mapped port, which maps to exposed port inside the container (5000 in our case)
+# show mapped port, which maps to exposed port inside the container (80 in our case)
 port:
-	docker port $(CONTAINER_NAME) 5000
+	docker port $(CONTAINER_NAME) 80
