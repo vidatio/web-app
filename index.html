@@ -33,16 +33,9 @@
     <h2>Preview:</h2>
     <i ng-hide="content">No file choosen.</i>
     <pre>{{content}}</pre>
-
-    <h1>Table with Data from File</h1>
-    <hot-table settings="{rowHeaders: true, contextMenu: true, afterChange: afterChange}"
-               datarows="db.items" columns="db.dynamicColumns">
-    </hot-table>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/handsontable/dist/handsontable.full.js"></script>
-<script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>

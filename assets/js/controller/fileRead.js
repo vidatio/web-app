@@ -27,21 +27,4 @@ angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, Fi
   $scope.$on("fileProgress", function (e, progress) {
     $scope.progress = progress.loaded / progress.total;
   });
-
-  // Data table
-  $scope.colHeaders = true;
-  $scope.db = {};
-  $scope.db.items = [
-    {
-      hours: 4
-    },
-    {
-      hours: 8
-    }
-  ];
-
-  $scope.db.dynamicColumns = [{
-    data: 'hours',
-    title: 'Hours worked per day'
-  }];
 });
