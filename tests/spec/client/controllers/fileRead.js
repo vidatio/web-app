@@ -10,15 +10,15 @@ describe('Controller', function() {
       //mock the controller for the same reason and include $rootScope and $controller
       beforeEach(inject(function($rootScope, $controller, $q, FileReader){
         //create an empty scope
-        var deferred = $q.defer();
-
         scope = $rootScope.$new();
         //declare the controller and inject our empty scope
         $controller('FileReadCtrl', {$scope: scope});
 
         rootScope = $rootScope;
-
+        //create promise and set it's return value
+        var deferred = $q.defer();
         deferred.resolve("aaa: 123; bbb: 456");
+        
         spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
       }));
 
@@ -35,18 +35,18 @@ describe('Controller', function() {
       it('should update the progress value', function() {
 
         scope.$broadcast("fileProgress",
-                {
-                    total: 10,
-                    loaded: 10
-                });
+          {
+              total: 10,
+              loaded: 10
+          });
 
         expect(scope.progress).toBe(1);
 
         scope.$broadcast("fileProgress",
-                {
-                    total: 10,
-                    loaded: 5
-                });
+          {
+              total: 10,
+              loaded: 5
+          });
 
         expect(scope.progress).toBe(0.5);
       });

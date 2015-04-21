@@ -17,7 +17,6 @@ angular.module('vidatio').directive("ngFileDrop",function(){
       el.bind("dragleave", preventDefault);
       
       el.bind("drop", function(e){
-      	console.log("file droped");
       	e.preventDefault();
 
         $scope.file = e.dataTransfer.files[0];
