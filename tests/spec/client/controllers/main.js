@@ -14,7 +14,7 @@ describe('Controller', function() {
       $controller('MainCtrl', {$scope: scope});
     }));
 
-    it('should print hello world', function() {
+    it('should print Welcome to Vidatio!', function() {
       expect(scope.message).toBe("Welcome to Vidatio!");
     });
   });

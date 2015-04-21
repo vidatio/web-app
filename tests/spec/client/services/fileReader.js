@@ -1,17 +1,31 @@
-describe('Service', function() {
-  describe('FileReader', function() {
-    var scope;
+describe('Service', function () {
+  describe('FileReader', function () {
+    var scope, rootScope, file;
 
-    //mock Application to allow us to inject our own dependencies
     beforeEach(module('vidatio'));
-    //mock the controller for the same reason and include $rootScope and $controller
-    beforeEach(inject(function($rootScope, $controller){
-      //create an empty scope
+
+    beforeEach(inject(function ($rootScope, $q, $controller, FileReader) {
+
       scope = $rootScope.$new();
-      //declare the controller and inject our empty scope
+
       $controller('MainCtrl', {$scope: scope});
 
-      scope.file = new Blob(["File test content"])
+      rootScope = $rootScope;
+
+      file = ["File test content"];
+      var blob = new Blob(file, {type: 'text/html'});
+      scope.file = blob;
+
+      scope.progress = 0;
+
+      var deferred = $q.defer();
+      deferred.resolve(file[0]);
+
+      spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
+
+      scope.$on("fileProgress", function (e, progress) {
+        alert("fileProgress!");
+      });
 
       FileReader.readAsDataUrl(scope.file, scope)
         .then(function (result) {
@@ -19,16 +33,13 @@ describe('Service', function() {
         });
     }));
 
-    it('check result', function() {
-
-      expect(scope.content).toBe("Hello World!");
+    it('should read data of the file', function () {
+      rootScope.$apply();
+      expect(scope.content).toBe(file[0]);
     });
 
-    it('check result', function() {
-      scope.$on("fileProgress", function (e, progress) {
-        scope.progress = progress.loaded / progress.total;
-      });
-
+    it('should have progress finished at the end', function () {
+      rootScope.$apply();
       expect(scope.progress).toBe(1);
     });
   });
