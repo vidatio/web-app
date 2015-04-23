@@ -35,10 +35,11 @@ RUN bower install --allow-root
 RUN mkdir -p /var/www/vidatio
 ADD . /var/www/vidatio/
 
-# expose port 5000 to host OS
-EXPOSE 5000
-EXPOSE 80
+# expose port 5000 and 80 to host OS
+EXPOSE 5000 80
 
-# run the app
-CMD nginx -s start && node api.js
+
+
+# run nginx and the app
+CMD nginx && node api.js
 
