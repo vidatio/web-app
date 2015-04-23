@@ -1,11 +1,14 @@
 angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, FileReader) {
   $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv";
   $scope.progress = 0;
+  $scope.host = window.location.hostname
 
   // Read via link
   $scope.load = function () {
     var url = $scope.link;
-    $http.get("http://localhost:5000/api", {
+
+    // window.location.hostname to work on Linux and Mac OS + Boot2Docker hosts
+    $http.get("http://" + $scope.host + ":5000/api", {
       params: {
         url: url
       }
