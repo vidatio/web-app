@@ -4,8 +4,9 @@
   "description": "Plattform to upload, share and expand datasets and visualizations",
   "main": "index.js",
   "dependencies": {
+    "bower": "~1.4.1",
     "express": "^4.12.3",
-    "bower": "~1.4.1"
+    "request": "^2.55.0"
   },
   "devDependencies": {
     "jasmine": "~2.2.1",
