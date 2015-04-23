@@ -23,6 +23,12 @@ RUN echo "nvm install $NODE_VERSION" >> ~/.nvm/installnode.sh
 RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
+# copy nginx config
+ADD nginx_config /etc/nginx/sites-enabled/
+
+#delete default nginx config to run the new one on localhost:80
+RUN rm /etc/nginx/sites-enabled/default
+
 # set bash start directory to /var/www/vidatio
 WORKDIR /var/www/vidatio
 
@@ -37,8 +43,6 @@ ADD . /var/www/vidatio/
 
 # expose port 5000 and 80 to host OS
 EXPOSE 5000 80
-
-
 
 # run nginx and the app
 CMD nginx && node api.js

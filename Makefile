@@ -1,6 +1,5 @@
 IMAGE_NAME = "vidatio/app"
 CONTAINER_NAME = "vidatio"
-PORT = 49000
 
 all: rm_container build run port
 restart: rm_container run
@@ -11,7 +10,7 @@ build:
 
 # create and start container from image
 run:
-	docker run -d -p $(PORT):80 -p 5000:5000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -d -p 80:80 -p 5000:5000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # stop container
 stop:
