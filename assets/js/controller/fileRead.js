@@ -5,7 +5,7 @@ angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, Fi
   // Read via link
   $scope.load = function () {
     var url = $scope.link;
-    $http.get("/api", {
+    $http.get("http://localhost:5000/api", {
       params: {
         url: url
       }
