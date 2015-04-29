@@ -10,7 +10,9 @@
   },
   "devDependencies": {
     "jasmine": "~2.2.1",
-    "coffee-script": "~1.9.1"
+    "coffee-script": "~1.9.1",
+    "frisby": "~0.8.5",
+    "jasmine-node": "~1.14.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

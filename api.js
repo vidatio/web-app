@@ -7,7 +7,6 @@ var express = require('express');
 var request = require('request');
 var app = express();
 
-
 // allow CORS to allow requests from other hosts and ports (e.g. localhost:49000)
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
