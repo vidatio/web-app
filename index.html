@@ -4,13 +4,19 @@
     <meta charset="utf-8">
     <title>Vidatio</title>
     <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="assets/css/fileUpload.css"/>
+    <link rel="stylesheet" href="assets/css/fileRead.css"/>
     <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
 </head>
 <body>
 
 <div id="container" ng-controller="MainCtrl">
     <h1>{{message}}</h1>
+</div>
+
+<div id="data-table" ng-controller="DataTableCtrl">
+    <h1>Table with Data from File</h1>
+    <hot-table datarows="rows" settings="{afterInit: afterInit}">
+    </hot-table>
 </div>
 
 <div id="file-read" ng-controller="FileReadCtrl">
@@ -36,12 +42,16 @@
 </div>
 
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/handsontable/dist/handsontable.full.js"></script>
+<script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>
 <script src="assets/js/controller/fileRead.js"></script>
+<script src="assets/js/controller/dataTable.js"></script>
 <script src="assets/js/directives/ngFileSelect.js"></script>
 <script src="assets/js/directives/ngFileDrop.js"></script>
 <script src="assets/js/services/fileReader.js"></script>
+<script src="assets/js/services/dataTable.js"></script>
 </body>
 </html>

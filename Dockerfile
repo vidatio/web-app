@@ -4,8 +4,8 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 # prevents a weird error message
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-RUN apt-get install -y curl git
+RUN apt-get update && apt-get clean && apt-get autoclean && apt-get autoremove && apt-get upgrade -y
+RUN apt-get install -y curl git nginx
 
 # needed for bower github installations
 RUN git config --global url."https://".insteadOf git://
@@ -23,6 +23,12 @@ RUN echo "nvm install $NODE_VERSION" >> ~/.nvm/installnode.sh
 RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
+# copy nginx config
+ADD nginx_config /etc/nginx/sites-enabled/
+
+#delete default nginx config to run the new one on localhost:80
+RUN rm /etc/nginx/sites-enabled/default
+
 # set bash start directory to /var/www/vidatio
 WORKDIR /var/www/vidatio
 
@@ -35,8 +41,8 @@ RUN bower install --allow-root
 RUN mkdir -p /var/www/vidatio
 ADD . /var/www/vidatio/
 
-# expose port 5000 to host OS
-EXPOSE 5000
+# expose port 5000 and 80 to host OS
+EXPOSE 5000 80
 
-# run the app
-CMD ["node", "server.js"]
+# run nginx and the app
+CMD nginx && node api.js

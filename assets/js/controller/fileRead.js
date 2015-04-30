@@ -1,4 +1,4 @@
-angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, FileReader) {
+angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, FileReader, DataTable) {
   $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv";
   $scope.progress = 0;
 
@@ -6,10 +6,10 @@ angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, Fi
   $scope.load = function () {
     var url = $scope.link;
     $http.get("/api", {
-      params: {
-        url: url
-      }
-    })
+        params: {
+          url: url
+        }
+      })
       .success(function (data) {
         $scope.content = data;
       });
@@ -20,7 +20,7 @@ angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, Fi
     $scope.progress = 0;
     FileReader.readAsDataUrl($scope.file, $scope)
       .then(function (result) {
-        $scope.content = result;
+        DataTable.setDataset(result);
       });
   };
 

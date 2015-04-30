@@ -1,4 +1,4 @@
-angular.module('vidatio').factory('FileReader', function ($q, $log) {
+angular.module('vidatio').service('FileReader', function ($q) {
   var onLoad = function (reader, deferred, scope) {
     return function () {
       scope.$apply(function () {
