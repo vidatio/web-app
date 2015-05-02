@@ -1,5 +1,5 @@
-# Animals - inline edit directive
-# ===============================
+# inline edit directive
+# =====================
 
 "use strict"
 

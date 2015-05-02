@@ -1,5 +1,5 @@
-# Animals - User Service
-# ======================
+# User Factory
+# ============
 
 "use strict"
 

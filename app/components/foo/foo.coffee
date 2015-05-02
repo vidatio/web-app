@@ -1,1 +1,4 @@
-# optional module defn
+# Foo
+# ===
+
+# optional module stuff

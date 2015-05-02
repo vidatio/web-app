@@ -1,3 +1,6 @@
+# User Controller Test
+# ====================
+
 "use strict"
 
 describe "Testing user controller", ->

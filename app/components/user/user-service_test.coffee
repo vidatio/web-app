@@ -1,3 +1,6 @@
+# User Service Test
+# =================
+
 "use strict"
 
 describe "testing component 'UserService'", ->

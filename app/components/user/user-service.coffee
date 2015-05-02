@@ -1,3 +1,6 @@
+# User Service
+# ============
+
 "use strict"
 
 app = angular.module "animals.services"
@@ -15,7 +18,6 @@ app.service "UserService", [
                 @user = name: ""
 
             init: =>
-                console.log "user", @user
                 ProgressService.startLoading()
 
                 deferred = $q.defer()
@@ -23,8 +25,6 @@ app.service "UserService", [
                 UserFactory.get().$promise.then(
                     (result) =>
                         @user = result
-                        console.log "result", result
-                        console.log "user", @user
                         $rootScope.globals.authorized = true
                         ProgressService.finishedLoading()
                         deferred.resolve @user

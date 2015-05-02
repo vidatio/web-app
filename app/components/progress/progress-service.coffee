@@ -1,4 +1,4 @@
-# Animals - Progress Service
+# Progress Service
 # ==========================
 
 "use strict"

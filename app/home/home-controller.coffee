@@ -1,5 +1,5 @@
-# Animals - Home Controller
-# =========================
+# Home Controller
+# ===============
 
 "use strict"
 

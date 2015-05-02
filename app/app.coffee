@@ -1,3 +1,5 @@
+# Animals App
+# ===========
 "use strict"
 
 app = angular.module "animals", [

@@ -1,3 +1,6 @@
+# Home Controller Test
+# ====================
+
 "use strict"
 
 describe "Testing home controller", ->

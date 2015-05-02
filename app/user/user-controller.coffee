@@ -1,3 +1,6 @@
+# User Controller
+# ===============
+
 "use strict"
 
 app = angular.module "animals.controllers"

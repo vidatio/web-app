@@ -1,5 +1,5 @@
-# Animals - Penguin Directive
-# ===========================
+# Progress Directive
+# ==================
 
 "use strict"
 

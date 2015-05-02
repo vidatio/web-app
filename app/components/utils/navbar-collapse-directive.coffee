@@ -1,3 +1,5 @@
+# navbar collapse directive
+# =========================
 
 "use strict"
 

@@ -1,5 +1,5 @@
-# Animals - Base64 Factory
-# ========================
+# Base64 Factory
+# ==============
 
 "use strict"
 

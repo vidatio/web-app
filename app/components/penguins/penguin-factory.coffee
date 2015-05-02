@@ -1,5 +1,5 @@
-# Animals - Penguin Factory
-# =========================
+# Penguin Factory
+# ===============
 # factory to abstract the api resource /accounts
 # to adapt and add functionality (e.g. update = PUT)
 

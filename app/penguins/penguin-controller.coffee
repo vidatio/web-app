@@ -1,3 +1,6 @@
+# Penguins Controller
+# ===================
+
 "use strict"
 
 app = angular.module "animals.controllers"

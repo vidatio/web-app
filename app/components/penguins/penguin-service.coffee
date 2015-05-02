@@ -1,11 +1,9 @@
-# Animals - Penguin Service
-# =========================
+# Penguin Service
+# ===============
 
 "use strict"
 
 app = angular.module "animals.services"
-
-
 
 
 app.service "PenguinService", [
@@ -59,7 +57,6 @@ app.service "PenguinService", [
                 ProgressService.startLoading()
                 PenguinFactory.save( penguin ).$promise.then(
                     ( result ) =>
-                        console.log "create penguin", result
                         @penguins.push result
                         ProgressService.finishedLoading()
                         deferred.resolve result
@@ -76,13 +73,11 @@ app.service "PenguinService", [
                 ProgressService.startLoading()
                 PenguinFactory.remove( { id: penguin } ).$promise.then(
                     ( result ) =>
-                        console.log "result", result
                         for _penguin, index in @penguins
                             if _penguin._id is penguin
                                 @penguins.splice index, 1
                                 break
 
-                        console.log "penguins", @penguins
                         ProgressService.finishedLoading()
                         deferred.resolve result
                     ( error ) ->

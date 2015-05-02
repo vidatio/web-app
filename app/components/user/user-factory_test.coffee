@@ -1,3 +1,6 @@
+# User Factory Test
+# =================
+
 "use strict"
 
 describe "testing component 'UserFactory'", ->

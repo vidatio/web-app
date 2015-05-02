@@ -1,5 +1,5 @@
-# Animals - Authentication Service
-# ================================
+# Authentication Service
+# ======================
 
 "use strict"
 
