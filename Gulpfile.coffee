@@ -135,6 +135,7 @@ gulp.task "develop",
     [
         "build:watch"
         "test"
+        "run"
     ]
 
 
@@ -206,6 +207,7 @@ gulp.task "run", "Serves the App.", ->
         root: "./build"
         livereload: true
         port: 3123
+        fallback: "./build/index.html"
 
 
 # clean stream of onerror

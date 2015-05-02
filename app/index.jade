@@ -1,7 +1,7 @@
 doctype html
 html
     head
-        title Penguins WebApp
+        title Animals WebApp
         //- must be replaced in production
         base(href="/")
         link(rel="stylesheet", href="/css/bootstrap.css")
@@ -17,13 +17,13 @@ html
             .progress-wrapper
                 .spinner
                     .content
-                        p Penguins
+                        p Animals
                 progress-arc-mask
         div.clearfix.navbar.navbar-default.navbar-fixed-top(role="navigation")
             progressbar.progress-striped.active(value=100, type="indeterminate", ng-show="progressService.indeterminateLoading")
             div.container
                 div.navbar-header
-                    a.navbar-brand(href="") Penguins
+                    a.navbar-brand(href="") Animals
                     button.navbar-toggle.collapsed(type="button",
                             data-toggle="collapse",
                             data-target=".navbar-collapse")
@@ -34,10 +34,10 @@ html
                 div.collapse.navbar-collapse
                     ul.nav.navbar-nav
                         li(ng-class="{active : state.current.name == 'home'}")
-                            a(ui-sref="home", navbar-collapse) Startseite
+                            a(ui-sref="home", navbar-collapse) Home
                         li.ng-cloak(ng-class="{active : state.current.name != 'home'}",
                             ng-show="userService.user.name != ''")
-                            a(ui-sref="penguins", navbar-collapse) Verwaltung
+                            a(ui-sref="penguins", navbar-collapse) Penguins
 
                     div.navbar-right
                         ul.nav.navbar-nav
