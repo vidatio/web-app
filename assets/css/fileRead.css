@@ -1,21 +1,110 @@
+#container-file-read {
+  width: 1024px;
+  margin: 20px auto 55px auto;
+  text-align: center;
+}
+
+#container-file-read .row {
+  margin-bottom: 56px;
+}
+
+#container-file-read .row.other .col-xs-6 {
+  height: 254px;
+  width: 484px;
+}
+
+#container-file-read .row.file-read .col-xs-4 {
+  height: 254px;
+  width: 304px;
+}
+
+#container-file-read .row.other .col-xs-6#empty-table {
+  margin-right: 28px;
+}
+
+#container-file-read .row.other .col-xs-6#browse-data {
+  margin-left: 28px;
+}
+
+#container-file-read .row.file-read .col-xs-4#browse-filesystem {
+  margin-right: 28px;
+}
+
+#container-file-read .row.file-read .col-xs-4#drag-and-drop {
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+#container-file-read .row.file-read .col-xs-4#link {
+  margin-left: 28px;
+}
+
+#container-file-read .row.other > div {
+  border-top: 3px solid #ff5347;
+}
+
+#container-file-read .row.file-read > div {
+  border-top: 3px solid #12ddc9;
+}
+
+#container-file-read .row > div {
+  background: white;
+  -webkit-box-shadow: 0px 2px 9px #e3e3e3; /* webkit browser*/
+  -moz-box-shadow: 0px 2px 9px #e3e3e3; /* firefox */
+  box-shadow: 0px 2px 9px #e3e3e3;
+}
+
+#container-file-read .text{
+  padding:10px;
+  font-size:18px;
+}
+
+#container-file-read .icon{
+  width:80px;
+  margin:60px auto 0px auto;
+  height:100px;
+}
+
+#container-file-read #empty-table .icon {
+  background: url(../img/table.png) no-repeat;
+}
+
+#container-file-read #browse-data .icon {
+  background: url(../img/open_data.png) no-repeat;
+}
+
+#container-file-read #browse-filesystem .icon {
+  background: url(../img/table.png) no-repeat;
+}
+
+#container-file-read #drag-and-drop .icon {
+  background: url(../img/drag_and_drop.png) no-repeat;
+}
+
+#container-file-read #link .icon {
+  background: url(../img/link.png) no-repeat;
+}
+
 .button {
-    -moz-appearance: button;
-    /* Firefox */
-    -webkit-appearance: button;
-    /* Safari and Chrome */
-    padding: 10px;
-    margin: 10px;
-    width: 70px;
+  -moz-appearance: button;
+  /* Firefox */
+  -webkit-appearance: button;
+  /* Safari and Chrome */
+  padding: 10px;
+  margin: 10px;
+  width: 70px;
 }
+
 #drop-zone {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    width: 200px;
-    height: 65px;
-    text-align: center;
-    padding-top: 25px;
-    margin: 10px;
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 200px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin: 10px;
 }
+
 .drag-over {
-    border: 5px dashed blue;
+  border: 5px dashed blue;
 }

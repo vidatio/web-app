@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html ng-app="vidatio">
 <head>
-    <meta charset="utf-8">
-    <title>Vidatio</title>
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="assets/css/fileRead.css"/>
-    <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vidatio</title>
+
+  <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/fileRead.css"/>
 </head>
 <body>
 
-<div id="container" ng-controller="MainCtrl">
-    <h1>{{message}}</h1>
+<div id="header">
+  <div class="row">
+    <div class="col-xs-6" id="line-right"></div>
+    <div class="col-xs-6" id="line-left"></div>
+  </div>
+  <div>
+    <div class="row" id="navigation">
+      <div class="col-xs-4 logo">LOGO</div>
+      <div class="col-xs-4 step">
+        UPLOAD
+      </div>
+      <div class="col-xs-4 buttons">
+        <div id="menu"></div>
+        <div id="user"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="file-read" ng-controller="FileReadCtrl">
-    <h1>File-Reading</h1>
-
-    <h2>Browsing</h2>
-    <input type="file" ng-file-select="onFileSelect($files)">
-
-    <h2>Drag-and-Drop</h2>
-    <div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>
-
-    <h2>Link</h2>
-    <input type="text" placeholder="URL to dataset" ng-model="link"/>
-    <input type="button" ng-click="load()" value="Load"/>
-
-    <h1>Result</h1>
-
-    <h2>Progress:</h2>
-    <progress value="{{progress}}"></progress>
+<div id="container-file-read" ng-controller="FileReadCtrl">
+  <div class="row other">
+    <div class="col-xs-6" id="empty-table">
+      <div class="icon"></div>
+      <div class="text">LEERE TABELLE</div>
+    </div>
+    <div class="col-xs-6" id="browse-data">
+      <div class="icon"></div>
+      <div class="text">ALLE DATENSÄTZE</div>
+    </div>
+  </div>
+  <div class="row file-read">
+    <div class="col-xs-4" id="browse-filesystem" ng-file-select>
+      <div class="icon"></div>
+      <div class="text">DATEI AUSWÄHLEN</div>
+      <input type="file" ng-file-select="onFileSelect($files)"/>
+    </div>
+    <div class="col-xs-4" id="drag-and-drop" id="drop-zone" ng-file-drop="onFileDrop($file)">
+      <div class="icon"></div>
+      <div class="text">DRAG AND DROP</div>
+    </div>
+    <div class="col-xs-4" id="link">
+      <div class="icon"></div>
+      <div class="text">LINK</div>
+      <input type="text" placeholder="URL to dataset" ng-model="link"/>
+      <input type="button" ng-click="load()" value="Load"/>
+    </div>
+  </div>
+  <div class="row">
     <h2>Preview:</h2>
     <i ng-hide="content">No file choosen.</i>
     <pre>{{content}}</pre>
+    <h2>Progress:</h2>
+    <progress value="{{progress}}"></progress>
+  </div>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>

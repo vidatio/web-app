@@ -1,0 +1,83 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  background: url(../img/pattern_bright.jpg);
+}
+
+#header {
+  height: 108px;
+  width: 100%;
+}
+
+#header > div {
+  width: 100%;
+}
+
+#header #line-right {
+  background: #ff5347;
+  height: 8px;
+}
+#header #line-left {
+  background: #12ddc9;
+  height: 8px;
+}
+
+#header #navigation {
+  clear: both;
+  width: 1024px;
+  margin: 0px auto;
+  padding:30px 0 30px 0;
+  height:100px;
+}
+
+#header .logo {
+  text-align:left;
+}
+
+#header .step {
+  text-align:center;
+}
+
+#header .buttons {
+  height: 40px;
+  text-align: right;
+}
+
+#header .buttons div {
+  width: 40px;
+  height: 40px;
+  margin-left: 10px;
+  float: right;
+}
+
+#header .buttons #user {
+  background: url(../img/user.png);
+}
+
+#header .buttons #user:hover {
+  background: url(../img/user_hover.png);
+}
+
+#header .buttons #menu {
+  background: url(../img/menu.png);
+}
+
+#header .buttons #menu:hover {
+  background: url(../img/menu_hover.png);
+}
+
+/**
+ * RESET BOOTSTRAP
+ */
+
+.row{
+  margin:0;
+  padding:0;
+}
+
+.col-xs-4{
+  padding:0;
+  margin:0;
+}
+
+
