@@ -60,6 +60,9 @@ COPY_FILES =
     ]
     fonts: "./bower_components/bootstrap/dist/fonts/*.*"
 
+
+BASEURL = "http://localhost:3123"
+
 gulp.task "lint",
     "Lints all CoffeeScript source files.",
     ->
@@ -84,7 +87,7 @@ gulp.task "e2e",
         gulp.src ["./app/**/*_e2e.coffee"]
             .pipe protractor
                 configFile: "./protractor.config.coffee",
-                args: ["--baseUrl", "http://127.0.0.1:3123"]
+                args: ["--baseUrl", BASEURL]
 
 
 gulp.task "build",
