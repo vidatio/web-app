@@ -79,6 +79,7 @@ gulp.task "test",
 
 gulp.task "e2e",
     "Runs all e2e tests.",
+    [ "run" ],
     ->
         gulp.src ["./app/**/*_e2e.coffee"]
             .pipe protractor
