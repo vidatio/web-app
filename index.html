@@ -44,11 +44,12 @@
     </div>
   </div>
   <div class="row file-read">
-    <div class="col-xs-4" id="browse-filesystem" ng-file-select>
+    <div class="col-xs-4" id="browse-filesystem">
       <div class="icon"></div>
       <div class="text">DATEI AUSWÄHLEN</div>
-      <input type="file" ng-file-select="onFileSelect($files)"/>
+      <input type="file" id="input-browse-filesystem" ng-file-select="onFileSelect($files)"/>
     </div>
+
     <div class="col-xs-4" id="drag-and-drop" id="drop-zone" ng-file-drop="onFileDrop($file)">
       <div class="icon"></div>
       <div class="text">DRAG AND DROP</div>
