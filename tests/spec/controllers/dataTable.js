@@ -11,18 +11,6 @@ describe('Controller', function() {
       scope = $rootScope.$new();
       //declare the controller and inject our empty scope
       DataTableCtrl = $controller('DataTableCtrl', {$scope: scope});
-
-      // scope.afterInit = function() {
-      //   table = {
-      //     loadData: function(){}
-      //   };
-      // };
-
-      // spyOn(scope, 'afterInit').and.callFake(function(){
-      //   table = {
-      //     loadData: function(){}
-      //   };
-      // });
       
       DataTable = _DataTable_;
       dataset = "Montag,5\nDienstag,2\nMittwoch,4";
@@ -32,7 +20,6 @@ describe('Controller', function() {
     it('should set data table content', function() {
       // scope.$broadcast("datasetChanged", {});
       // expect(scope.rows).toBe();
-      // console.log(scope.rows);
     });
   });
 
