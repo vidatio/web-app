@@ -3,7 +3,7 @@ exports.config =
     chromeDriver: "./node_modules/protractor/selenium/chromedriver"
     multiCapabilities: [
         { browserName: "chrome" }
-        # { browserName: "firefox" }
+        { browserName: "firefox" }
     ]
     onPrepare: ->
         global.By = global.by

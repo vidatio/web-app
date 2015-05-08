@@ -7,35 +7,14 @@ concat        = require "gulp-concat"
 uglify        = require "gulp-uglify"
 gif           = require "gulp-if"
 karma         = require "gulp-karma"
-shell         = require "gulp-shell"
 debug         = require "gulp-debug"
 copy          = require "gulp-copy"
 docco         = require "gulp-docco"
 groc          = require "gulp-groc"
-clean         = require "gulp-clean"
-
-connect = require "gulp-connect"
-{protractor} = require "gulp-protractor"
-
-BUILD_FILES = [
-    "./bower_components/jquery/dist/jquery.js"
-    "./bower_components/angular/angular.js"
-    "./bower_components/angular-route/angular-route.js"
-    "./bower_components/angular-resource/angular-resource.js"
-    "./bower_components/angular-animate/angular-animate.js"
-    "./bower_components/angular-cookies/angular-cookies.js"
-    "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-    "./bower_components/ng-file-upload/angular-file-upload.js"
-    "./bower_components/angular-ui-router/release/angular-ui-router.js"
-    "./bower_components/bootstrap/dist/js/bootstrap.js"
-    "./app/init-deps.coffee"
-    "./app/app.coffee"
-    "./app/app-controller.coffee"
-    "./app/*/**/*.coffee"
-    "!./app/*/**/*_test.coffee" #exclude test files
-    "!./app/**/*_e2e.coffee" #exclude e2e test files
-    "./app/**/*.jade"
-]
+del           = require "del"
+cache         = require "gulp-cached"
+connect       = require "gulp-connect"
+{protractor}  = require "gulp-protractor"
 
 DOC_FILES = [
     "./README.md"
@@ -63,76 +42,128 @@ COPY_FILES =
 
 BASEURL = "http://localhost:3123"
 
+E2E_FILES = "./app/**/*_e2e.coffee"
+
+APP_FILES = "./app/**/*.coffee"
+
+BUILD =
+    files: [
+        "./bower_components/jquery/dist/jquery.js"
+        "./bower_components/angular/angular.js"
+        "./bower_components/angular-route/angular-route.js"
+        "./bower_components/angular-resource/angular-resource.js"
+        "./bower_components/angular-animate/angular-animate.js"
+        "./bower_components/angular-cookies/angular-cookies.js"
+        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
+        "./bower_components/ng-file-upload/angular-file-upload.js"
+        "./bower_components/angular-ui-router/release/angular-ui-router.js"
+        "./bower_components/bootstrap/dist/js/bootstrap.js"
+        "./app/init-deps.coffee"
+        "./app/app.coffee"
+        "./app/app-controller.coffee"
+        "./app/*/**/*.coffee"
+        "!./app/*/**/*_test.coffee" #exclude test files
+        "!./app/**/*_e2e.coffee"    #exclude e2e test files
+        "./app/**/*.jade"
+    ]
+    dirs:
+        out: "./build"
+        js:  "./build/js"
+        docs: "./docs"
+    module: "animals"
+    app: "app.js"
+
+
+
 gulp.task "lint",
     "Lints all CoffeeScript source files.",
     ->
-        gulp.src "./app/**/*.coffee"
-            .pipe(coffeelint())
-            .pipe(coffeelint.reporter())
+        gulp.src APP_FILES
+            .pipe coffeelint()
+            .pipe coffeelint.reporter()
 
 
 gulp.task "test",
     "Starts and reruns all tests on change of test or source files.",
     ->
         gulp.src []
-            .pipe karma(
+            .pipe karma
                 configFile: "karma.conf.coffee"
                 action: "watch"
-            )
 
 gulp.task "e2e",
     "Runs all e2e tests.",
-    [ "run" ],
+    [
+        "run"
+    ],
     ->
-        gulp.src ["./app/**/*_e2e.coffee"]
+        gulp.src E2E_FILES
             .pipe protractor
-                configFile: "./protractor.config.coffee",
-                args: ["--baseUrl", BASEURL]
+                configFile: "./protractor.config.coffee"
+                args: [
+                    "--baseUrl"
+                    BASEURL
+                ]
 
 
 gulp.task "build",
-    "Lints and builds the project to './build/'.",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "lint"
         "copy"
     ],
     ->
-        gulp.src BUILD_FILES
-            .pipe gif( "*.coffee", continueOnError(coffee()) )
-            .pipe gif( "*.jade", continueOnError(jade()) )
-            .pipe gif( "**/index.html", gulp.dest("./build/") )
-            .pipe gif( "*.html", templateCache(module: "animals") )
-            .pipe gif( "*.js", concat("app.js") )
-            .pipe gulp.dest("./build/js/")
+        gulp.src BUILD.files
+            .pipe cache( "build" )
+            .pipe gif "*.coffee", continueOnError( coffee() )
+            .pipe gif "*.jade", continueOnError( jade() )
+            .pipe gif "**/index.html", gulp.dest( BUILD.dirs.out )
+            .pipe gif "*.html", templateCache( module: BUILD.module )
+            .pipe gif "*.js", concat( BUILD.app )
+            .pipe gulp.dest( BUILD.dirs.js )
             .pipe connect.reload()
 
 
 gulp.task "build:production",
-    "Lints, builds and minifies the project to './build/'.",
-    [ "lint" ],
+    "Lints, builds and minifies the project to '#{BUILD.dirs.out}'.",
+    [
+        "clean:build"
+        "lint"
+        "copy:css"
+        "copy:fonts"
+        "copy:img"
+    ],
     ->
-        gulp.src BUILD_FILES
-            .pipe gif("*.coffee", coffee())
-                .on "error", (error) ->
-                    console.error 'CoffeeScript Compile Error: ', error
-            .pipe gif("*.jade", jade())
-            .pipe gif("**/index.html", gulp.dest("./build/"))
-            .pipe gif "*.html", templateCache(module: "animals")
-            .pipe gif("*.js", concat("app.js"))
+        gulp.src BUILD.files
+            .pipe cache( "build" )
+            .pipe gif "*.coffee", coffee()
+            .pipe gif "*.jade", jade()
+            .pipe gif "**/index.html", gulp.dest( BUILD.dirs.out )
+            .pipe gif "*.html", templateCache( module: BUILD.module )
+            .pipe gif "*.js", concat( BUILD.app )
             .pipe uglify()
-            .pipe gulp.dest("./build/js/")
+            .pipe gulp.dest( BUILD.dirs.js )
 
 
 gulp.task "default",
     "Runs 'develop' and 'test'.",
-    [ "develop" ]
+    [
+        "develop"
+    ]
 
 
 gulp.task "build:watch",
     "Runs 'build' and watches the source files, rebuilds the project on change.",
-    [ "build" ],
+    [
+        "build"
+    ],
     ->
-        gulp.watch ["app/**/*.coffee", "app/**/*.jade"], ["build"]
+        watcher = gulp.watch BUILD.files, ["build"]
+
+        watcher.on "change", ( event ) ->
+            if event.type is "deleted"
+                delete cache.caches[build][event.path]
+
 
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
@@ -150,7 +181,7 @@ gulp.task "dev",
     ]
 
 gulp.task "copy",
-    "Copy every assets to './build/' dir.",
+    "Copy every assets to '#{BUILD.dirs.out}' dir.",
     [
         "copy:img"
         "copy:css"
@@ -159,48 +190,51 @@ gulp.task "copy",
     ]
 
 gulp.task "copy:img",
-    "Copy images to './build/' dir.",
+    "Copy images to '#{BUILD.dirs.out}' dir.",
     ->
         gulp.src COPY_FILES.img
-            .pipe copy "./build/", prefix: 1
+            .pipe copy BUILD.dirs.out, prefix: 1
 
 gulp.task "copy:css",
-    "Copy css to './build/' dir.",
+    "Copy css to '#{BUILD.dirs.out}' dir.",
     ->
         gulp.src COPY_FILES.css
-            .pipe copy "./build/", prefix: 3
+            .pipe copy BUILD.dirs.out, prefix: 3
 
 gulp.task "copy:fonts",
-    "Copy fonts to './build/' dir.",
+    "Copy fonts to '#{BUILD.dirs.out}' dir.",
     ->
         gulp.src COPY_FILES.fonts
-            .pipe copy "./build/", prefix: 3
+            .pipe copy BUILD.dirs.out, prefix: 3
 
 gulp.task "copy:js",
-    "Copy js to './build/' dir.",
+    "Copy js to '#{BUILD.dirs.out}' dir.",
     ->
         gulp.src COPY_FILES.js
-            .pipe copy "./build/", prefix: 3
+            .pipe copy BUILD.dirs.out, prefix: 3
 
 gulp.task "clean",
-    "Clear './build/' and './docs/' folder.",
-    (cb) ->
-        gulp.src ["./docs", "./build"], read: false
-            .pipe clean()
+    "Clear '#{BUILD.dirs.out}' and '#{BUILD.dirs.docs}' folder.",
+    ( cb ) ->
+        del [BUILD.dirs.out, BUILD.dirs.docs], -> cb null, []
 
 
-gulp.task "docs:clean",
-    "Cleans the docs directory",
-    ->
-        gulp.src ["./docs"], read: false
-            .pipe clean()
+gulp.task "clean:build",
+    "Cleans the '#{BUILD.dirs.out}' directory",
+    ( cb ) ->
+        del BUILD.dirs.out, -> cb null, []
+
+gulp.task "clean:docs",
+    "Cleans the '#{BUILD.dirs.docs}' directory",
+    ( cb ) ->
+        del BUILD.dirs.docs, -> cb null, []
 
 gulp.task "docs",
-    "Generates documentation in 'docs' directory",
-    [ "docs:clean" ]
+    "Generates documentation in '#{BUILD.dirs.docs}' directory",
+    [ "clean:docs" ]
     ->
         gulp.src DOC_FILES
-            .pipe groc( out: "./docs" )
+            .pipe groc( out: BUILD.dirs.docs )
 
 serverStarted = false
 gulp.task "run", "Serves the App.", ->
@@ -208,24 +242,22 @@ gulp.task "run", "Serves the App.", ->
     serverStarted = true
 
     connect.server
-        root: "./build"
+        root: BUILD.dirs.out
         livereload: true
         port: 3123
-        fallback: "./build/index.html"
+        fallback: BUILD.dirs.out + "/index.html"
 
 
 # clean stream of onerror
 
-continueOnError = (stream) ->
-    stream
-        .on 'error', (err) ->
+continueOnError = ( stream ) ->
+    stream.on "error", ( err ) ->
             console.log err
-            return
-        .on 'newListener', ->
+        .on "newListener", ->
             cleaner @
 
-cleaner = (stream) ->
-    stream.listeners('error').forEach( (item) ->
-        if (item.name is 'onerror') then @.removeListener('error', item)
-    , stream)
+cleaner = ( stream ) ->
+    stream.listeners( "error" ).forEach ( item ) ->
+        if item.name is "onerror" then @.removeListener "error", item
+    , stream
 
