@@ -1,27 +1,19 @@
 describe('Service', function () {
   describe('DataTable', function () {
-    var scope, rootScope, dataset, result, DataTable;
+    var input, output, DataTable;
 
     beforeEach(module('vidatio'));
 
-    beforeEach(inject(function ($rootScope, _DataTable_) {
-      //create an empty scope
-      scope = $rootScope.$new();
-      rootScope = $rootScope;
+    beforeEach(inject(function ($rootScope, DataTableService) {
+      DataTable = DataTableService;
 
-      spyOn(rootScope, '$broadcast');
-
-      DataTable = _DataTable_;
-
-      // //initialize dataset and result
-      dataset = "Montag,5\nDienstag,2\nMittwoch,4";
-      result = [['Montag','5'],['Dienstag','2'],['Mittwoch','4']];
+      input = "Montag,5\nDienstag,2\nMittwoch,4";
+      output = [['Montag','5'],['Dienstag','2'],['Mittwoch','4']];
     }));
 
-    it('should convert dataset to array and fire event "datasetChanged"', function () {
+    it('should convert dataset to array', function () {
       DataTable.setDataset(dataset);
-      expect(rootScope.$broadcast).toHaveBeenCalledWith('datasetChanged');
-      expect(DataTable.getDataset()).toEqual(result);
+      expect(DataTable.getDataset()).toEqual(output);
     });
 
   });

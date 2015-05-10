@@ -6,13 +6,14 @@ describe('Controller', function() {
     beforeEach(module('vidatio'));
 
     //mock the controller for the same reason and include $rootScope and $controller
-    beforeEach(inject(function($rootScope, $controller, _DataTable_){
+    beforeEach(inject(function($rootScope, $controller, DataTableService){
       //create an empty scope
       scope = $rootScope.$new();
       //declare the controller and inject our empty scope
       DataTableCtrl = $controller('DataTableCtrl', {$scope: scope});
       
-      DataTable = _DataTable_;
+      DataTable = DataTableService;
+
       dataset = "Montag,5\nDienstag,2\nMittwoch,4";
       DataTable.setDataset(dataset);
     }));
