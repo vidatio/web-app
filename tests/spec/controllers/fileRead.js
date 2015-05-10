@@ -1,7 +1,7 @@
 describe('Controller', function () {
   describe('FileReadCtrl', function () {
     describe('read file via browsing and drag & drop', function () {
-      var scope, rootScope, FileReader;
+      var scope, FileReader;
 
       //mock Application to allow us to inject our own dependencies
       beforeEach(module('vidatio'));
@@ -10,7 +10,6 @@ describe('Controller', function () {
       beforeEach(inject(function ($rootScope, $controller, $q, FileReaderService) {
         //create an empty scope
         scope = $rootScope.$new();
-        rootScope = $rootScope;
 
         //declare the controller and inject our empty scope
         $controller('FileReadCtrl', {$scope: scope});

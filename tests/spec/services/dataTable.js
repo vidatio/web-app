@@ -4,7 +4,7 @@ describe('Service', function () {
 
     beforeEach(module('vidatio'));
 
-    beforeEach(inject(function ($rootScope, DataTableService) {
+    beforeEach(inject(function (DataTableService) {
       DataTable = DataTableService;
 
       input = "Montag,5\nDienstag,2\nMittwoch,4";

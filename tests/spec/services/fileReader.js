@@ -1,21 +1,21 @@
 describe('Service', function () {
   describe('FileReader', function () {
-    var content, rootScope, DataTable, FileReader;
+    var fileContent, scope, DataTable, FileReader;
 
     beforeEach(module('vidatio'));
 
     beforeEach(inject(function ($rootScope, $q, FileReaderService, DataTableService) {
       DataTable = DataTableService;
       FileReader = FileReaderService;
-      rootScope = $rootScope.$new();
+      scope = $rootScope.$new();
 
       //Initialize test file
-      content = ["File test content"];
-      var blob = new Blob(content, {type: 'text/html'});
+      fileContent = ["File test content"];
+      var blob = new Blob(fileContent, {type: 'text/html'});
 
       //Create promise and set it's return value
       var deferred = $q.defer();
-      deferred.resolve(content);
+      deferred.resolve(fileContent);
 
       //Create FileReader Mock
       spyOn(FileReaderService, 'readAsDataUrl').and.returnValue(deferred.promise);
@@ -28,8 +28,8 @@ describe('Service', function () {
 
     it('should read data of the file', function () {
       //To resolve the promise
-      rootScope.$digest();
-      expect(DataTable.getDataset()[0]).toEqual(content);
+      scope.$digest();
+      expect(DataTable.getDataset()[0]).toEqual(fileContent);
     });
 
     it('should have progress updated', function () {
