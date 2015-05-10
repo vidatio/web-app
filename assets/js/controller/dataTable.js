@@ -1,22 +1,22 @@
-angular.module('vidatio').controller('DataTableCtrl', function ($scope, $rootScope, DataTable) {
-  var table;
+angular.module('vidatio').controller("DataTableCtrl",
+  ["$scope", "DataTableService",
+    function ($scope, DataTable) {
+      $scope.table;
 
-  //Initial receiving the handsontable instance
-  $scope.afterInit = function () {
-    table = this;
-  };
+      //Initial receiving the handsontable instance
+      $scope.afterInit = function () {
+        $scope.table = this;
+        $scope.table.loadData($scope.rows);
+      };
 
-  //Event gets fired from the DataTable service, when the dataset has been changed by the user
-  $rootScope.$on("datasetChanged", function (e) {
-    //Because watch on model rows doesn't work, we have to call the function loadData
-    //Table have to be a variable on scope, because else we can't access
-    $scope.rows = DataTable.getDataset();
-    table.loadData($scope.rows);
-  });
+      $scope.rows = DataTable.dataset;
+      DataTable.setDataset("Montag,5\nDienstag,2\nMittwoch,4");
 
-  $scope.rowHeaders = true;
-  $scope.colHeaders = true;
-  $scope.minCols = 5;
-  $scope.minRows = 5;
-  $scope.autoColumnSize = true;
-});
+      $scope.rowHeaders = true;
+      $scope.colHeaders = true;
+      $scope.minCols = 5;
+      $scope.minRows = 5;
+      $scope.autoColumnSize = true;
+    }
+  ]
+);

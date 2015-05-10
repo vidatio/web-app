@@ -1,6 +1,4 @@
 angular.module('vidatio').directive("ngFileDrop",function(){
-
-
   return {
     link: function($scope,el){
     
