@@ -1,21 +1,23 @@
-angular.module('vidatio').service("DataTableService",
-  (function () {
+angular.module('vidatio').service("DataTableService", function () {
     function DataTable() {
-      this.dataset = []
+      this.dataset = [];
     }
 
     DataTable.prototype.setDataset = function (data) {
-      this.dataset.splice(0, this.dataset.length);        // safely remove all items, keeps data binding alive
+
+      // safely remove all items, keeps data binding alive
+      this.dataset.splice(0, this.dataset.length);
+
       var rows = data.split("\n");
-      var i = 0;
-      var lengthRows = rows.length;
-      for (i; i < lengthRows; ++i) {
+      for (var i = 0; i < rows.length; ++i) {
         this.dataset.push(rows[i].split(","));
       }
-    }
+    };
+
     DataTable.prototype.getDataset = function () {
       return this.dataset;
-    }
-    return DataTable;
-  })()
+    };
+
+    return new DataTable;
+  }
 );
