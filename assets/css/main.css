@@ -1,11 +1,34 @@
+@font-face {
+  font-family: Colaborate;
+  src: url(../fonts/ColabReg.otf);
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Colaborate-Bold;
+  src: url(../fonts/ColabBol.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Colaborate-Light;
+  src: url(../fonts/ColabLig.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
 html, body {
   padding: 0;
   margin: 0;
+  width: 100%;
+  height: 100%;
   background: url(../img/pattern_bright.jpg);
+  font-family: Colaborate, Arial, Helvetica, sans-serif;
 }
 
 #header {
-  height: 108px;
   width: 100%;
 }
 
@@ -17,6 +40,7 @@ html, body {
   background: #ff5347;
   height: 8px;
 }
+
 #header #line-left {
   background: #12ddc9;
   height: 8px;
@@ -26,16 +50,16 @@ html, body {
   clear: both;
   width: 1024px;
   margin: 0px auto;
-  padding:30px 0 30px 0;
-  height:100px;
+  padding: 30px 0 30px 0;
+  height: 100px;
 }
 
 #header .logo {
-  text-align:left;
+  text-align: left;
 }
 
 #header .step {
-  text-align:center;
+  text-align: center;
 }
 
 #header .buttons {
@@ -66,18 +90,48 @@ html, body {
   background: url(../img/menu_hover.png);
 }
 
+#footer {
+  color: white;
+  background: url(../img/pattern_dark.jpg);
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 18.18181818%;
+  font-size:20px;
+  text-align: center;
+  padding:20px;
+}
+
+#footer img{
+  margin:0 5px 0 30px;
+}
+
 /**
  * RESET BOOTSTRAP
  */
 
-.row{
-  margin:0;
-  padding:0;
+.row {
+  margin: 0;
+  padding: 0;
 }
 
-.col-xs-4{
-  padding:0;
-  margin:0;
+.col-xs-4 {
+  padding: 0;
+  margin: 0;
+}
+
+/**
+ * LINK STYLES
+ */
+
+a:link{
+  color:white;
 }
 
 
+
+- Logo hochauflösend
+- Upload-Button
+- Hover-Bilder von allen Icons/Logos
+- Das Brief Icon
+- Das Browse Icon (soll ja wahrscheinlich nicht das gleiche wie Empty Table able sein, oder?)

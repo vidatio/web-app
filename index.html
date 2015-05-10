@@ -10,6 +10,7 @@
 
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="assets/css/fileRead.css"/>
+  <link rel="stylesheet" href="assets/css/landingPage.css"/>
 </head>
 <body>
 
@@ -18,55 +19,26 @@
     <div class="col-xs-6" id="line-right"></div>
     <div class="col-xs-6" id="line-left"></div>
   </div>
-  <div>
-    <div class="row" id="navigation">
-      <div class="col-xs-4 logo">LOGO</div>
-      <div class="col-xs-4 step">
-        UPLOAD
-      </div>
-      <div class="col-xs-4 buttons">
-        <div id="menu"></div>
-        <div id="user"></div>
-      </div>
+</div>
+
+<div id="container-landing-page" ng-controller="MainCtrl">
+  <div class="row" id="row-one">
+    <img src="assets/img/logo.png" id="logo"/>
+    <div class="text">
+      <div id="title">vidatio</div>
+      <div id="slogan">Visualize your shit</div>
     </div>
+  </div>
+  <div class="row" id="row-two">
+    <div id="text-one">COMING</div>
+    <div id="text-two">SOON!</div>
   </div>
 </div>
 
-<div id="container-file-read" ng-controller="FileReadCtrl">
-  <div class="row other">
-    <div class="col-xs-6" id="empty-table">
-      <div class="icon"></div>
-      <div class="text">LEERE TABELLE</div>
-    </div>
-    <div class="col-xs-6" id="browse-data">
-      <div class="icon"></div>
-      <div class="text">ALLE DATENSÄTZE</div>
-    </div>
-  </div>
-  <div class="row file-read">
-    <div class="col-xs-4" id="browse-filesystem" ng-file-select>
-      <div class="icon"></div>
-      <div class="text">DATEI AUSWÄHLEN</div>
-      <input type="file" ng-file-select="onFileSelect($files)"/>
-    </div>
-    <div class="col-xs-4" id="drag-and-drop" id="drop-zone" ng-file-drop="onFileDrop($file)">
-      <div class="icon"></div>
-      <div class="text">DRAG AND DROP</div>
-    </div>
-    <div class="col-xs-4" id="link">
-      <div class="icon"></div>
-      <div class="text">LINK</div>
-      <input type="text" placeholder="URL to dataset" ng-model="link"/>
-      <input type="button" ng-click="load()" value="Load"/>
-    </div>
-  </div>
-  <div class="row">
-    <h2>Preview:</h2>
-    <i ng-hide="content">No file choosen.</i>
-    <pre>{{content}}</pre>
-    <h2>Progress:</h2>
-    <progress value="{{progress}}"></progress>
-  </div>
+<div id="footer">
+  <img src="assets/img/telephone.png"/>
+  <a href="tel:+436649966496">+43 664 99 66 496</a> <img src="assets/img/email.png"/>
+  <a href="mailto:gbeschbacher@sbg.at">gbeschbacher@sbg.at</a>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>

@@ -1,0 +1,48 @@
+#container-landing-page {
+  position:absolute;
+  left:50%;
+  top:33%;
+  width: 500px;
+  height:300px;
+  margin-left:-250px;
+  margin-top:-150px;
+}
+
+#row-one img{
+  padding:20px;
+  float:left;
+}
+
+.text{
+  float:right;
+  width:350px;
+}
+
+#container-landing-page #title{
+  font-size:65px;
+  padding-top:70px;
+}
+
+#container-landing-page #slogan{
+  font-size:30px;
+  font-family: Colaborate-Light;
+  color:#555;
+  margin-top:-10px;
+
+}
+
+#container-landing-page #row-two{
+  font-size: 90px;
+  font-weight: bold;
+  line-height: 90px;
+  color:#00DBC7;
+}
+
+#container-landing-page #row-two{
+  margin-top:50px;
+  font-family: Colaborate-Bold;
+}
+
+#row-two #text-two{
+  text-align: right;
+}
