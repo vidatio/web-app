@@ -22,15 +22,20 @@ describe('Controller', function () {
         spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
       }));
 
-      it('should get the content of a file', function () {
-        var scopeContent = ["aaa: 123; bbb: 456"];
-        var blob = new Blob(scopeContent, {type: 'text/html'});
-        scope.file = blob;
+      // ***
+      // scope.content was only for testing purposes
+      // got replaced by the data table
+      // ***
+      
+      // it('should get the content of a file', function () {
+      //   var scopeContent = ["aaa: 123; bbb: 456"];
+      //   var blob = new Blob(scopeContent, {type: 'text/html'});
+      //   scope.file = blob;
 
-        scope.getFile();
-        rootScope.$apply();
-        expect(scope.content).toBe(scopeContent[0]);
-      });
+      //   scope.getFile();
+      //   rootScope.$apply();
+      //   expect(scope.content).toBe(scopeContent[0]);
+      // });
 
       it('should update the progress value', function () {
         scope.$broadcast("fileProgress", {
