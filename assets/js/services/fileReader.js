@@ -4,25 +4,15 @@ angular.module("vidatio").service("FileReaderService",
     function Reader() {
       this.reader = undefined;
       this.deferred = undefined;
-      this.progress = {
-        total: 100,
-        loaded: 0
-      }
+      this.progress = 0
     }
-
-    Reader.prototype.getProgress = function(){
-      return this.progress.loaded/this.progress.total;
-    };
 
     Reader.prototype.readAsDataUrl = function (file) {
 
       // maybe there's a scope apply necessary here
       this.deferred = $q.defer();
       this.reader = new FileReader();
-      this.progress = {
-        total: 100,
-        loaded: 0
-      }
+      this.progress = 0;
 
       var that = this;
       this.reader.onload = function () {
@@ -34,8 +24,7 @@ angular.module("vidatio").service("FileReaderService",
       }
 
       this.reader.onprogress = function (event) {
-        that.progress.total = event.total;
-        that.progress.loaded = event.loaded;
+        this.progress = event.loaded/event.total;
       }
 
       this.reader.readAsText(file);

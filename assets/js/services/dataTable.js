@@ -14,10 +14,6 @@ angular.module('vidatio').service("DataTableService", function () {
       }
     };
 
-    DataTable.prototype.getDataset = function () {
-      return this.dataset;
-    };
-
     return new DataTable;
   }
 );

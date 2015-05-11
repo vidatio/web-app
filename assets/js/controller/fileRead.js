@@ -3,12 +3,8 @@ angular.module('vidatio').controller('FileReadCtrl',
     function ($scope, $http, FileReader, DataTable) {
       $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv";
 
-      // Display progress of reading file
-      $scope.$watch(function () { return FileReader.getProgress(); },
-        function (value) {
-          $scope.progress = value;
-        }
-      );
+      $scope.progress = FileReader.progress
+
 
       // Read via link
       $scope.load = function () {
