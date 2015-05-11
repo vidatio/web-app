@@ -29,17 +29,15 @@ describe('Service', function () {
     it('should read data of the file', function () {
       //To resolve the promise
       scope.$digest();
-      expect(DataTable.getDataset()[0]).toEqual(fileContent);
+      expect(DataTable.dataset[0]).toEqual(fileContent);
     });
 
     it('should have progress updated', function () {
-      FileReader.progress.loaded = 10;
-      FileReader.progress.total = 10;
-      expect(FileReader.getProgress()).toBe(1);
+      FileReader.progress = 1;
+      expect(FileReader.progress).toBe(1);
 
-      FileReader.progress.loaded = 25;
-      FileReader.progress.total = 50;
-      expect(FileReader.getProgress()).toBe(0.5);
+      FileReader.progress = 0.5;
+      expect(FileReader.progress).toBe(0.5);
     });
   });
 });

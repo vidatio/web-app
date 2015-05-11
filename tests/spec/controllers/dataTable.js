@@ -19,8 +19,7 @@ describe('Controller', function() {
     }));
 
     it('should set data table content', function() {
-      // scope.$broadcast("datasetChanged", {});
-      // expect(scope.rows).toBe();
+      expect(DataTable.dataset).toEqual([["Montag", "5"], ["Dienstag", "2"], ["Mittwoch", "4"]])
     });
   });
 

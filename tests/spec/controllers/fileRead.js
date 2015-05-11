@@ -18,12 +18,10 @@ describe('Controller', function () {
       }));
 
       it('should update the progress value', function () {
-        FileReader.progress.loaded = 100;
-        FileReader.progress.total = 100;
-        expect(scope.progress).toBe(1);
+        FileReader.progress = 0.1;
+        expect(scope.progress).toBe(0.1);
 
-        FileReader.progress.loaded = 50;
-        FileReader.progress.total = 100;
+        FileReader.progress = 0.5;
         expect(scope.progress).toBe(0.5);
       });
     });
@@ -55,7 +53,7 @@ describe('Controller', function () {
         scope.load();
         httpBackend.flush();
 
-        expect(DataTable.getDataset()).toEqual([["test","1"],["test","2"],["test","3"]]);
+        expect(DataTable.dataset).toEqual([["test","1"],["test","2"],["test","3"]]);
       });
     });
   });

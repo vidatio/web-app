@@ -13,7 +13,7 @@ describe('Service', function () {
 
     it('should convert dataset to array', function () {
       DataTable.setDataset(dataset);
-      expect(DataTable.getDataset()).toEqual(output);
+      expect(DataTable.dataset).toEqual(output);
     });
 
   });
