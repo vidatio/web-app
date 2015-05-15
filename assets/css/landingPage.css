@@ -1,3 +1,17 @@
+.page-wrap {
+  min-height: 100%;
+  margin-bottom: -87px;
+}
+
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+
+.site-footer, .page-wrap:after {
+  height: 87px;
+}
+
 #container-landing-page {
   position:absolute;
   left:50%;
@@ -7,7 +21,6 @@
   margin-left:-250px;
   margin-top:-150px;
 }
-
 
 #row-one img{
   padding:20px;
@@ -47,27 +60,4 @@
 
 #row-two #text-two{
   text-align: right;
-}
-
-
-
-
-
-
-* {
-  margin: 0;
-}
-html, body {
-  height: 100%;
-}
-.page-wrap {
-  min-height: 100%;
-  margin-bottom: -87px;
-}
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-.site-footer, .page-wrap:after {
-  height: 87px;
 }
