@@ -5,31 +5,19 @@
  * the directive where it should start and the directive
  * on which element it should end
  */
+angular.module('vidatio').directive("ngFileDropStart", function () {
 
-angular.module('vidatio').directive("ngFileDrop", function () {
   return {
     link: function ($scope, el) {
-      //leave: cursor moves out of drop-zone
-      el.bind("dragleave", function (e) {
-        e.target.parentElement.style.display = "none";
-
-        e.preventDefault();
-        return false;
-      }.bind(this));
-
       //over: cursor currently moves over the drop-zone
       el.bind("dragover", function (e) {
         e.preventDefault();
         return false;
       });
 
-      //drop: file got dropped on the drop-zone
-      el.bind("drop", function (e) {
-        e.target.parentElement.style.display = "none";
-
-        $scope.file = e.dataTransfer.files[0];
-        $scope.getFile();
-
+      //enter: cursor enters the drop-zone
+      el.bind("dragenter", function (e) {
+        document.getElementsByClassName("drag-and-drop")[0].style.display = "block";
         e.preventDefault();
         return false;
       });
