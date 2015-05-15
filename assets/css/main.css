@@ -1,11 +1,34 @@
+@font-face {
+  font-family: Colaborate;
+  src: url(../fonts/ColabReg.otf);
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Colaborate-Bold;
+  src: url(../fonts/ColabBol.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Colaborate-Light;
+  src: url(../fonts/ColabLig.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
 html, body {
   padding: 0;
   margin: 0;
+  width: 100%;
+  height: 100%;
   background: url(../img/pattern_bright.jpg);
+  font-family: Colaborate, Arial, Helvetica, sans-serif;
 }
 
 #header {
-  height: 108px;
   width: 100%;
   min-width:1024px;
 }
@@ -18,6 +41,7 @@ html, body {
   background: #ff5347;
   height: 8px;
 }
+
 #header #line-left {
   background: #12ddc9;
   height: 8px;
@@ -27,16 +51,19 @@ html, body {
   clear: both;
   width: 1024px;
   margin: 0px auto;
-  padding:30px 0 30px 0;
-  height:100px;
+  padding: 30px 0 30px 0;
+  height: 100px;
 }
 
 #header .logo {
-  text-align:left;
+  text-align: left;
+  background: url(../img/logo.png) no-repeat;
+  background-size: 40px;
+  height:60px;
 }
 
 #header .step {
-  text-align:center;
+  text-align: center;
 }
 
 #header .buttons {
@@ -67,18 +94,71 @@ html, body {
   background: url(../img/menu_hover.png);
 }
 
+#footer {
+  color: white;
+  background: url(../img/pattern_dark.jpg);
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 18.18181818%;
+  font-size:16px;
+  text-align: center;
+  padding:20px;
+}
+
+#footer a{
+  display:inline-block;
+  margin:0 20px 0px 20px;
+}
+
+#footer span.icon{
+  width:40px;
+  height:40px;
+  margin-right:10px;
+  float:left;
+}
+
+#footer span.icon.phone{
+  background: url(../img/icons.png) 0px -440px;
+  background-size:480px auto;
+}
+
+#footer span.icon.email{
+  background: url(../img/icons.png) -40px -440px;
+  background-size:480px auto;
+}
+
+#footer span.text{
+  width:auto;
+  height:40px;
+  line-height:40px;
+  vertical-align: middle;
+  float:right;
+}
+
 /**
  * RESET BOOTSTRAP
  */
 
-.row{
-  margin:0;
-  padding:0;
+.row {
+  margin: 0;
+  padding: 0;
 }
 
-.col-xs-4{
-  padding:0;
-  margin:0;
+.col-xs-4 {
+  padding: 0;
+  margin: 0;
 }
 
+/**
+ * LINK STYLES
+ */
 
+a:link{
+  color:white;
+  text-decoration: none;
+}
+
+a:hover, a:active{
+  color: #12ddc9;
+}
