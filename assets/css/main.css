@@ -75,9 +75,8 @@ html, body {
 }
 
 #header .buttons div {
-  width: 40px;
-  height: 40px;
-  margin-left: 10px;
+  width: 50px;
+  height: 50px;
   float: right;
 }
 
@@ -87,16 +86,18 @@ html, body {
 }
 
 #header .buttons #user:hover {
-  background: url(../img/icons.png) -200px -40px;
+  background: url(../img/icons.png) -250px -50px;
+  background-size: 600px;
 }
 
 #header .buttons #menu {
-  background: url(../img/icons.png) -320px 0px;
+  background: url(../img/icons.png) -400px 0px;
   background-size: 600px;
 }
 
 #header .buttons #menu:hover {
-  background: url(../img/icons.png) -320px -40px;
+  background: url(../img/icons.png) -400px -50px;
+  background-size: 600px;
 }
 
 #footer {
@@ -150,7 +151,7 @@ html, body {
   padding: 0;
 }
 
-.col-xs-4 {
+.col-sm-4, .col-sm-12 {
   padding: 0;
   margin: 0;
 }

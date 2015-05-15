@@ -1,25 +1,80 @@
+
+/**
+ * LAYOUT
+ **/
+
 #container-file-read {
-    width: 1024px;
-    margin: 20px auto 55px auto;
-    text-align: center;
+  width: 1024px;
+  margin: 20px auto 55px auto;
+  text-align: center;
 }
 
-#container-file-read .row {
-    margin-bottom: 56px;
+#container-file-read .row.other, #container-file-read .row.file-read {
+  margin-bottom: 56px;
 }
 
-#container-file-read .row.other .col-xs-6 {
-    height: 254px;
-    width: 484px;
+#container-file-read .row.file-read .col-sm-4 {
+  height: 254px;
+  width: 304px;
 }
 
-#container-file-read .row.file-read .col-xs-4 {
-    height: 254px;
-    width: 304px;
+#container-file-read .row.other .col-sm-6 {
+  height: 254px;
+  width: 484px;
 }
+
+#container-file-read .row.other .col-sm-6#empty-table {
+  margin-right: 28px;
+}
+
+
+#container-file-read .row.other #browse-data {
+  margin-left: 28px;
+}
+
+#container-file-read .file-read #browse-filesystem {
+  margin-right: 28px;
+}
+
+#container-file-read .file-read #drag-and-drop {
+  margin-left: 28px;
+  margin-right: 28px;
+}
+
+#container-file-read .row.file-read .col-sm-4#link {
+  margin-left: 28px;
+}
+
+/**
+ * COLORS
+ **/
+
+#container-file-read .file-read .area, #container-file-read .other .area {
+  background: white;
+  -webkit-box-shadow: 0px 2px 9px #e3e3e3; /* webkit browser*/
+  -moz-box-shadow: 0px 2px 9px #e3e3e3; /* firefox */
+  box-shadow: 0px 2px 9px #e3e3e3;
+}
+
+#container-file-read .row.other > div, #container-file-read .row.other > div {
+  border-top: 3px solid #ff5347;
+}
+
+#container-file-read .row.file-read > div {
+  border-top: 3px solid #12ddc9;
+}
+
+#container-file-read .text {
+  padding: 10px;
+  font-size: 18px;
+}
+
+/**
+ *  FILE BY BROWSING
+ **/
 
 #container-file-read #browse-filesystem, #input-browse-filesystem {
-    position: relative;
+  position: relative;
 }
 
 /**
@@ -27,89 +82,114 @@
  * so the user only see the big button below
  **/
 #input-browse-filesystem {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    -moz-opacity: 0;
-    filter: alpha(opacity:0);
-    opacity: 0;
-    z-index: 2;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  -moz-opacity: 0;
+  filter: alpha(opacity:0);
+  opacity: 0;
+  z-index: 2;
 }
 
-#container-file-read .row.other .col-xs-6#empty-table {
-    margin-right: 28px;
+/**
+ * HOVER EFFECTS
+ **/
+
+#container-file-read .file-read .area:hover {
+  background: #93F3E6;
 }
 
-#container-file-read .col-xs-6:hover, #container-file-read .col-xs-4:hover{
-    background:#F8F8F8;
+#container-file-read .other .area:hover {
+  background: #FFB3B4;
 }
 
-#container-file-read .row.other .col-xs-6#browse-data {
-    margin-left: 28px;
-}
-
-#container-file-read .row.file-read .col-xs-4#browse-filesystem {
-    margin-right: 28px;
-}
-
-#container-file-read .row.file-read .col-xs-4#drag-and-drop {
-    margin-left: 28px;
-    margin-right: 28px;
-}
-
-#container-file-read .row.file-read .col-xs-4#link {
-    margin-left: 28px;
-}
-
-#container-file-read .row.other > div {
-    border-top: 3px solid #ff5347;
-}
-
-#container-file-read .row.file-read > div {
-    border-top: 3px solid #12ddc9;
-}
-
-#container-file-read .row > div {
-    background: white;
-    -webkit-box-shadow: 0px 2px 9px #e3e3e3; /* webkit browser*/
-    -moz-box-shadow: 0px 2px 9px #e3e3e3; /* firefox */
-    box-shadow: 0px 2px 9px #e3e3e3;
-}
-
-#container-file-read .text {
-    padding: 10px;
-    font-size: 18px;
-}
+/**
+ * ICONS
+ **/
 
 #container-file-read .icon {
-    width: 80px;
-    margin: 60px auto 0px auto;
-    height: 100px;
+  width: 100px;
+  margin: 60px auto 0px auto;
+  height: 100px;
 }
 
 #container-file-read #empty-table .icon {
-    background: url(../img/table.png) no-repeat;
+  background: url(../img/icons.png) -400px 0px no-repeat;
+  background-size:1200px;
 }
 
 #container-file-read #browse-data .icon {
-    background: url(../img/open_data.png) no-repeat;
+  background: url(../img/icons.png) -100px 0px no-repeat;
+  background-size:1200px;
 }
 
 #container-file-read #browse-filesystem .icon {
-    background: url(../img/table.png) no-repeat;
+  background: url(../img/icons.png) -400px 0px no-repeat;
+  background-size:1200px;
 }
 
 #container-file-read #drag-and-drop .icon {
-    background: url(../img/drag_and_drop.png) no-repeat;
+  background: url(../img/icons.png) -300px 0px no-repeat;
+  background-size:1200px;
 }
 
 #container-file-read #link .icon {
-    background: url(../img/link.png) no-repeat;
+  background: url(../img/icons.png) -200px 0px no-repeat;
+  background-size:1200px;
+}
+
+/**
+ * DRAG AND DROP OVERLAY
+ */
+
+#container-file-read .drag-and-drop {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 221, 201, 0.8);
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+#container-file-read .drag-and-drop .col-sm-12 {
+  padding: 30px;
+  height: 100%;
+}
+
+#container-file-read .drag-and-drop .area {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: 10px solid white;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+#container-file-read .drag-and-drop .area .fa-30x {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -165px;
+  margin-top: -200px;
+  font-size: 30em;
+  color: white;
+}
+
+#container-file-read .drag-and-drop .area .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -95px;
+  margin-top: -35px;
+  font-size: 28px;
 }
 
 .drag-enter {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
 }
