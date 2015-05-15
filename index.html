@@ -24,6 +24,7 @@
 <div id="container-landing-page" ng-controller="MainCtrl">
   <div class="row" id="row-one">
     <img src="assets/img/logo.png" id="logo"/>
+
     <div class="text">
       <div id="title">vidatio</div>
       <div id="slogan">Visualize your shit</div>
@@ -35,10 +36,16 @@
   </div>
 </div>
 
+
 <div id="footer">
-  <img src="assets/img/telephone.png"/>
-  <a href="tel:+436649966496">+43 664 99 66 496</a> <img src="assets/img/email.png"/>
-  <a href="mailto:gbeschbacher@sbg.at">gbeschbacher@sbg.at</a>
+  <a href="tel:+436649966496">
+    <span class="icon phone"></span>
+    <span class="text"> +43 664 99 66 496</span>
+  </a>
+  <a href="mailto:gbeschbacher@sbg.at">
+    <span class="icon email"></span>
+    <span class="text">gbeschbacher@sbg.at</span>
+  </a>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>

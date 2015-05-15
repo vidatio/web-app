@@ -11,9 +11,10 @@
 #row-one img{
   padding:20px;
   float:left;
+  width:140px;
 }
 
-.text{
+#row-one .text{
   float:right;
   width:350px;
 }
