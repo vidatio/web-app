@@ -10,64 +10,54 @@
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/main.css"/>
-  <link rel="stylesheet" href="assets/css/fileRead.css"/>
+  <link rel="stylesheet" href="assets/css/index.css"/>
 </head>
 <body ng-file-drop>
-
-<div id="header">
-  <div class="row">
-    <div class="col-sm-6" id="line-right"></div>
-    <div class="col-sm-6" id="line-left"></div>
-  </div>
-  <div>
-    <div class="row" id="navigation">
-      <div class="col-sm-4 logo">vidatio</div>
-      <div class="col-sm-4 step"></div>
-      <div class="col-sm-4 buttons">
-        <div id="menu"></div>
-        <div id="user"></div>
+<div class="container-fluid content-wrapper">
+  <div id="header">
+    <div class="row">
+      <div class="col-sm-6" id="line-right"></div>
+      <div class="col-sm-6" id="line-left"></div>
+    </div>
+    <div>
+      <div class="row" id="navigation">
+        <div class="col-sm-4 logo">vidatio</div>
+        <div class="col-sm-4 step"></div>
+        <div class="col-sm-4 buttons">
+          <div id="menu"></div>
+          <div id="user"></div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="content">
+    <section>
+      <p class="slogan">Hier steht der Slogan.</p>
+      <div class="row">
+        <img class="col-sm-7" src="assets/img/diagram_placeholder.png">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4 promo">
+          <div class="video">awesome promo video here!</div>
+          <div>
+            <p class="description">In nur <span class="red-font">drei Schritten</span> zur Infografik!</p>
+            <ol>
+              <li class="active">Datei hochladen.</li>
+              <li>Eine Grafik wird automatisch erstellt.</li>
+              <li>Speichern oder Teilen.</li>
+
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
 </div>
 
-<div id="container-file-read" ng-controller="FileReadCtrl">
-  <div class="row other">
-    <div class="col-sm-6 area" id="empty-table">
-      <div class="icon"></div>
-      <div class="text">LEERE TABELLE</div>
-    </div>
-    <div class="col-sm-6 area" id="browse-data">
-      <div class="icon"></div>
-      <div class="text">ALLE DATENSÄTZE</div>
-    </div>
-  </div>
-  <div class="row file-read">
-    <div class="col-sm-4 area" id="browse-filesystem">
-      <div class="icon"></div>
-      <div class="text">DATEI AUSWÄHLEN</div>
-      <input type="file" id="input-browse-filesystem" ng-file-select="onFileSelect($files)"/>
-    </div>
-    <div class="col-sm-4 area" id="drag-and-drop">
-      <div class="icon"></div>
-      <div class="text">DRAG AND DROP</div>
-    </div>
-    <div class="col-sm-4 area" id="link">
-      <div class="icon"></div>
-      <div class="text">LINK</div>
-      <input type="text" placeholder="URL to dataset" ng-model="link"/>
-      <input type="button" ng-click="load()" value="Load"/>
-    </div>
-  </div>
-  <div class="row drag-and-drop">
-    <div class="col-sm-12">
-      <div class="area">
-        <div class="fa fa-plus fa-30x "></div>
-        <div class="text">DRAG & DROP</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script src="bower_components/angular/angular.js"></script>
 
