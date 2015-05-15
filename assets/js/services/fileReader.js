@@ -2,7 +2,7 @@ angular.module("vidatio").service("FileReaderService",
   ["$q", function ($q) {
 
     function Reader() {
-      this.reader = undefined;
+      this.reader = new FileReader();
       this.deferred = undefined;
       this.progress = 0
     }
@@ -11,25 +11,23 @@ angular.module("vidatio").service("FileReaderService",
 
       // maybe there's a scope apply necessary here
       this.deferred = $q.defer();
-      this.reader =
       this.progress = 0;
 
-      var that = this;
       this.reader.onload = function () {
-        that.deferred.resolve(that.reader.result);
-      }
+        this.deferred.resolve(this.reader.result);
+      }.bind(this);
 
       this.reader.onerror = function () {
-        that.deferred.reject(that.reader.result);
-      }
+        this.deferred.reject(this.reader.result);
+      }.bind(this);
 
       this.reader.onprogress = function (event) {
-        this.progress = event.loaded/event.total;
-      }
+        this.progress = event.loaded / event.total;
+      }.bind(this);
 
       this.reader.readAsText(file);
       return this.deferred.promise;
-    }
+    };
 
     return new Reader;
   }]

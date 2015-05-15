@@ -1,7 +1,6 @@
 angular.module('vidatio').controller('FileReadCtrl',
   ["$scope", "$http", "FileReaderService", "DataTableService",
     function ($scope, $http, FileReader, DataTable) {
-
       $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv";
       $scope.progress = FileReader.progress;
 
