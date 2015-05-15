@@ -7,14 +7,18 @@ describe('Controller', function () {
       beforeEach(module('vidatio'));
 
       //mock the controller for the same reason and include $rootScope and $controller
-      beforeEach(inject(function ($rootScope, $controller, $q, FileReaderService) {
+      beforeEach(inject(function ($rootScope, $controller, $q, $http, FileReaderService, DataTableService) {
         //create an empty scope
         scope = $rootScope.$new();
+        FileReader = FileReaderService;
 
         //declare the controller and inject our empty scope
-        $controller('FileReadCtrl', {$scope: scope});
-
-        FileReader = FileReaderService;
+        $controller('FileReadCtrl', {
+          $scope: scope,
+          $http: $http,
+          FileReaderService: FileReader,
+          DataTableService: DataTableService
+        });
       }));
 
       it('should update the progress value', function () {
@@ -53,7 +57,7 @@ describe('Controller', function () {
         scope.load();
         httpBackend.flush();
 
-        expect(DataTable.dataset).toEqual([["test","1"],["test","2"],["test","3"]]);
+        expect(DataTable.dataset).toEqual([["test", "1"], ["test", "2"], ["test", "3"]]);
       });
     });
   });
