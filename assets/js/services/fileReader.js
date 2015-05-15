@@ -11,7 +11,7 @@ angular.module("vidatio").service("FileReaderService",
 
       // maybe there's a scope apply necessary here
       this.deferred = $q.defer();
-      this.reader = new FileReader();
+      this.reader =
       this.progress = 0;
 
       var that = this;

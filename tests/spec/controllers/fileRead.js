@@ -17,11 +17,13 @@ describe('Controller', function () {
         FileReader = FileReaderService;
       }));
 
-      it('should update the progress value', function () {
+      it('should update the progress value', function () {        scope.$apply();
         FileReader.progress = 0.1;
+        scope.$apply();
         expect(scope.progress).toBe(0.1);
-
+        scope.$apply();
         FileReader.progress = 0.5;
+        scope.$apply();
         expect(scope.progress).toBe(0.5);
       });
     });
