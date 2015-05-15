@@ -30,6 +30,7 @@ html, body {
 
 #header {
   width: 100%;
+  min-width:1024px;
 }
 
 #header > div {
