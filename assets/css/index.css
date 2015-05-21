@@ -4,6 +4,12 @@
   
 }
 
+#featured-vidatios h1 {
+  width: 50%;
+  margin: 0 0 20px;
+  border-bottom: 3px solid #12ddc9;
+}
+
 .col-sm-7 {
   padding-left: 0 !important;
 }
@@ -11,6 +17,10 @@
 .content {
   max-width: 1024px;
   margin: 0 auto;
+}
+
+section {
+  padding: 30px 0 30px;
 }
 
 .slogan {
@@ -53,10 +63,100 @@ ol > li:before {
   left: -25px;
   width: 20px;
   height: 20px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
   background-color: #ff5347;
   color: white;
   text-align: center;
   content: counter(li-counter);
   counter-increment: li-counter;
+}
+
+/* Get started button */
+.get-started {
+  position: relative;
+  width: 120px;
+  margin: 50px auto 0;
+
+  -webkit-box-shadow: 5px 5px 0 #009989;
+  -moz-box-shadow: 5px 5px 0 #009989;
+  box-shadow: 5px 5px 0 #009989;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+}
+
+.get-started a {
+  width: inherit;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+.get-started a:visited {
+  color: #fff;
+}
+
+.get-started span {
+  position: absolute;
+  width: 25px;
+  top: -10px;
+  right: -10px;
+  display: inline-block;
+  transform: rotate(10deg);
+
+  -webkit-box-shadow: 5px 0 0 #009989;
+  -moz-box-shadow: 5px 0 0 #009989;
+  box-shadow: 5px 0 0 #009989;
+
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+
+
+#usp {
+  background-color: #343434;
+  color: #fff;
+}
+
+#featured-vidatios {
+  background: url(../img/pattern_bright.jpg);
+}
+
+#usp .api {
+  width: 100px;
+  height: 100px;
+  background: url(../img/icons.png) 0px -200px no-repeat;
+  background-size:1200px;
+  margin: 0 auto;
+}
+
+#usp .live-data {
+  width: 100px;
+  height: 100px;
+  background: url(../img/icons.png) -200px -200px no-repeat;
+  background-size:1200px;
+  margin: 0 auto;
+}
+
+#usp .open-data {
+  width: 100px;
+  height: 100px;
+  background: url(../img/icons.png) -100px -200px no-repeat;
+  background-size:1200px;
+  margin: 0 auto;
+}
+
+#usp div {
+  text-align: center;
+}
+
+p > a:link {
+  color: #000;
 }
