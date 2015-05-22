@@ -35,12 +35,24 @@ html, body {
   font-family: Colaborate, Arial, Helvetica, sans-serif;
 }
 
-.red-font {
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+.font-red {
   color: #ff5347;
+}
+
+.font-cyan{
+  color: #12ddc9;
 }
 
 .bg-cyan{
   background: #12ddc9;
+}
+
+.bg-dark {
+  background-color: #343434;
 }
 
 .bg-wrapper {
