@@ -19,6 +19,13 @@
   font-weight: bold;
 }
 
+@font-face {
+  font-family: Colaborate-Thin;
+  src: url(../fonts/ColabThi.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
 html, body {
   padding: 0;
   margin: 0;
