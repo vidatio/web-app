@@ -1,4 +1,4 @@
-# File-Select Directory
+# File-Select Directive
 # ======================
 
 app = angular.module "app.directives"
