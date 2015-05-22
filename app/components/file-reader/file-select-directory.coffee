@@ -1,7 +1,7 @@
 # File-Select Directory
 # ======================
 
-app = angular.module "upload.directives"
+app = angular.module "app.directives"
 
 app.directive 'ngFileSelect', ->
     link: ($scope, el) ->

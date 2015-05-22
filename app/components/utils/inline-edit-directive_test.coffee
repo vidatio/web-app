@@ -11,7 +11,7 @@ describe "Testing util component 'InlineEdit' directive", ->
     element = undefined
 
     beforeEach ->
-        module "animals"
+        module "app"
         inject ( _$compile_, _$rootScope_ ) ->
             $compile = _$compile_
             $scope = _$rootScope_.$new()

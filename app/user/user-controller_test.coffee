@@ -9,7 +9,7 @@ describe "Testing user controller", ->
     $scope = undefined
 
     beforeEach( ->
-        module "animals"
+        module "app"
         inject( ($controller, $rootScope) ->
             $scope = $rootScope.$new()
             UserCtrl = $controller( "UserCtrl",

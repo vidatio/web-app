@@ -70,7 +70,7 @@ BUILD =
         out: "./build"
         js:  "./build/js"
         docs: "./docs"
-    module: "animals"
+    module: "app"
     app: "app.js"
 
 

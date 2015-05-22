@@ -3,7 +3,7 @@
 
 "use strict"
 
-app = angular.module "upload.services"
+app = angular.module "app.services"
 
 app.factory 'FileReader', [
     "$q"

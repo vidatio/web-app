@@ -9,7 +9,7 @@ describe "Testing home controller", ->
     $scope = undefined
 
     beforeEach ->
-        module "animals"
+        module "app"
         inject ($controller, $rootScope) ->
             $scope = $rootScope.$new()
             HomeCtrl = $controller "HomeCtrl", $scope: $scope

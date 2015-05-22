@@ -8,7 +8,7 @@ describe "testing component 'UserService'", ->
     UserService = undefined
 
     beforeEach ->
-        module "animals"
+        module "app"
         inject ( _UserService_ ) ->
             UserService = _UserService_
 

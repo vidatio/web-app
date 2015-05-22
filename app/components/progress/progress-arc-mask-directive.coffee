@@ -3,7 +3,7 @@
 
 "use strict"
 
-app = angular.module "animals.directives"
+app = angular.module "app.directives"
 
 app.directive "progressArcMask", ->
     restrict: "E"

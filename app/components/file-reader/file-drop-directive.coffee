@@ -1,7 +1,7 @@
 # File-Drop Directive
 # ======================
 
-app = angular.module "upload.directives"
+app = angular.module "app.directives"
 
 app.directive 'ngFileDrop', ->
     link: ($scope, el) ->
@@ -13,10 +13,10 @@ app.directive 'ngFileDrop', ->
         el.bind 'dragenter', preventDefault
         el.bind 'dragleave', preventDefault
         el.bind 'drop', (e) ->
-          preventDefault(e)
-          $scope.file = e.dataTransfer.files[0]
-          $scope.getFile()
-          false
+            preventDefault(e)
+            $scope.file = e.dataTransfer.files[0]
+            $scope.getFile()
+            false
 
 
 preventDefault = (e) ->

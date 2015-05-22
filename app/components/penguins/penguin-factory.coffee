@@ -5,7 +5,7 @@
 
 "use strict"
 
-app = angular.module "animals.services"
+app = angular.module "app.services"
 
 app.factory "PenguinFactory", [
     "$resource"

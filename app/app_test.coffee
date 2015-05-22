@@ -13,8 +13,8 @@ describe "testing app modules: ", ->
     describe "testing app module dependencies", ->
 
         beforeEach ->
-            app_module = angular.module "animals"
-            deps = app_module.value( "animals" ).requires
+            app_module = angular.module "app"
+            deps = app_module.value( "app" ).requires
 
 
         it "should be registered", ->
@@ -32,12 +32,12 @@ describe "testing app modules: ", ->
         it "should have a registered 'ui.bootstrap' dependency", ->
             expect( hasModule("ui.bootstrap") ).toBeTruthy()
 
-        it "should have a registered 'animals.controllers' dependency", ->
-            expect( hasModule("animals.controllers") ).toBeTruthy()
+        it "should have a registered 'app.controllers' dependency", ->
+            expect( hasModule("app.controllers") ).toBeTruthy()
 
-        it "should have a registered 'animals.services' dependency", ->
-            expect( hasModule("animals.services") ).toBeTruthy()
+        it "should have a registered 'app.services' dependency", ->
+            expect( hasModule("app.services") ).toBeTruthy()
 
-        it "should have a registered 'animals.directives' dependency", ->
-            expect( hasModule("animals.directives") ).toBeTruthy()
+        it "should have a registered 'app.directives' dependency", ->
+            expect( hasModule("app.directives") ).toBeTruthy()
 

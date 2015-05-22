@@ -1,0 +1,21 @@
+#file-read(ng-controller='FileReadCtrl')
+    h1 File-Reading
+
+    h2 Browsing
+    input(type='file', ng-file-select='onFileSelect($files)')
+
+    h2 Drag-and-Drop
+    #drop-zone(ng-file-drop='onFileDrop($file)') Drop Files Here
+
+    h2 Link
+    input(type='text', placeholder='URL to dataset', ng-model='link')
+    input(type='button', ng-click='load()', value='Load')
+
+    h1 Result
+
+    h2 Progress:
+    progress(value='{{progress}}')
+
+    h2 Preview:
+    i(ng-hide='content') No file choosen.
+    pre {{content}}

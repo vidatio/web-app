@@ -2,17 +2,17 @@
 # ===========
 "use strict"
 
-app = angular.module "animals", [
+app = angular.module "app", [
     "ngRoute"
     "ngResource"
     "ngAnimate"
     "ngCookies"
     "ui.router"
     "ui.bootstrap"
-    "animals.controllers"
-    "animals.services"
-    "animals.directives"
-    "animals.filters"
+    "app.controllers"
+    "app.services"
+    "app.directives"
+    "app.filters"
 ]
 
 app.run [
@@ -64,6 +64,12 @@ app.config [
                 url: "/"
                 templateUrl: "home/home.html"
                 controller: "HomeCtrl"
+
+            .state "upload",
+                url: "/upload"
+                templateUrl: "upload/fileReader.html"
+                controller: "FileReadCtrl"
+
 
             # /penguins
             .state "penguins",

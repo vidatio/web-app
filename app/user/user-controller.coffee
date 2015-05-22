@@ -3,7 +3,7 @@
 
 "use strict"
 
-app = angular.module "animals.controllers"
+app = angular.module "app.controllers"
 
 app.controller "UserCtrl", [
     "$scope"
