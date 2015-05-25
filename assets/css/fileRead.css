@@ -256,3 +256,12 @@
 #button-upload:hover{
     box-shadow: 4px 4px 0px 0px #44948E;
 }
+
+#link-submit-button {
+    top:0px;
+}
+
+.form-link{
+    width:80%;
+    margin: 0 auto;
+}
