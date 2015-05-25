@@ -1,90 +1,94 @@
 <!DOCTYPE html>
 <html ng-app="vidatio">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vidatio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Vidatio</title>
 
-  <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
-  <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
-  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="assets/css/main.css"/>
-  <link rel="stylesheet" href="assets/css/fileRead.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/css/fileRead.css"/>
 </head>
 <body ng-file-drop-start>
 
-<div id="header">
-  <div class="row">
-    <div class="col-sm-6" id="line-right"></div>
-    <div class="col-sm-6" id="line-left"></div>
-  </div>
-  <div>
-    <div class="row" id="navigation">
-      <div class="col-sm-4 logo">vidatio</div>
-      <div class="col-sm-4 step"></div>
-      <div class="col-sm-4 buttons">
-        <div id="menu"></div>
-        <div id="user"></div>
-      </div>
+<div id="header" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6" id="line-right"></div>
+        <div class="col-sm-6" id="line-left"></div>
     </div>
-  </div>
+    <div>
+        <div class="row" id="navigation">
+            <div class="col-sm-4 logo">vidatio</div>
+            <div class="col-sm-4 breadcrumbs">
+                <div class="breadcrumb">HOCHLADEN</div>
+            </div>
+            <div class="col-sm-4 buttons">
+                <div id="menu"></div>
+                <div id="user"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="container-file-read" ng-controller="FileReadCtrl">
-  <div class="row other">
-    <div class="col-sm-6 area" id="empty-table">
-      <div class="icon"></div>
-      <div class="text">LEERE TABELLE</div>
+<div class="container-fluid" id="container-file-read" ng-controller="FileReadCtrl">
+    <div class="row other">
+        <div class="col-sm-6 area" id="empty-table">
+            <div class="icon"></div>
+            <h2>LEERE TABELLE</h2>
+        </div>
+        <div class="col-sm-6 area" id="browse-data">
+            <div class="icon"></div>
+            <h2>ALLE DATENSÄTZE</h2>
+        </div>
     </div>
-    <div class="col-sm-6 area" id="browse-data">
-      <div class="icon"></div>
-      <div class="text">ALLE DATENSÄTZE</div>
+    <div class="row file-read">
+        <div class="col-sm-4 area" id="browse-filesystem">
+            <div class="icon"></div>
+            <h2>DATEI AUSWÄHLEN</h2>
+            <input type="file" id="input-browse-filesystem" ng-file-select/>
+        </div>
+        <div class="col-sm-4 area" id="drag-and-drop">
+            <div class="icon"></div>
+            <h2>DRAG AND DROP</h2>
+        </div>
+        <div class="col-sm-4 area" id="link">
+            <div class="icon"></div>
+            <h2>LINK</h2>
+            <input type="text" placeholder="URL to dataset" ng-model="link"/>
+            <input type="button" ng-click="load()" value="Load"/>
+        </div>
     </div>
-  </div>
-  <div class="row file-read">
-    <div class="col-sm-4 area" id="browse-filesystem">
-      <div class="icon"></div>
-      <div class="text">DATEI AUSWÄHLEN</div>
-      <input type="file" id="input-browse-filesystem" ng-file-select="onFileSelect($files)"/>
+    <div class="row">
+        <div id="button-upload" class="center">HOCHLADEN</div>
     </div>
-    <div class="col-sm-4 area" id="drag-and-drop">
-      <div class="icon"></div>
-      <div class="text">DRAG AND DROP</div>
+    <div class="row" id="drop-zone">
+        <div class="col-sm-12">
+            <div class="area">
+                <div class="fa fa-plus fa-30x "></div>
+                <h2>DRAG & DROP</h2>
+            </div>
+        </div>
+        <div class="col-sm-12 drop-area" ng-file-drop></div>
     </div>
-    <div class="col-sm-4 area" id="link">
-      <div class="icon"></div>
-      <div class="text">LINK</div>
-      <input type="text" placeholder="URL to dataset" ng-model="link"/>
-      <input type="button" ng-click="load()" value="Load"/>
-    </div>
-  </div>
-  <div class="row drag-and-drop">
-    <div class="col-sm-12">
-      <div class="area">
-        <div class="fa fa-plus fa-30x "></div>
-        <div class="text">DRAG & DROP</div>
-      </div>
-    </div>
-    <div class="col-sm-12 drop-area" ng-file-drop></div>
-  </div>
-
-  {{content}}
+    {{content}}
 </div>
 
 <div id="footer">
-  <div class="row">
-    <div class="col-sm-12">
-      <a href="tel:+436649966496">
-        <span class="icon phone"></span>
-        <span class="text"> +43 664 99 66 496</span>
-      </a>
-      <a href="mailto:gbeschbacher@sbg.at">
-        <span class="icon email"></span>
-        <span class="text">gbeschbacher@sbg.at</span>
-      </a>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="tel:+436649966496">
+                <span class="icon phone"></span>
+                <span class="text"> +43 664 99 66 496</span>
+            </a>
+            <a href="mailto:gbeschbacher@sbg.at">
+                <span class="icon email"></span>
+                <span class="text">gbeschbacher@sbg.at</span>
+            </a>
+        </div>
     </div>
-  </div>
 </div>
 
 <script src="bower_components/angular/angular.js"></script>

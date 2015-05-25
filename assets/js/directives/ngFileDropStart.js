@@ -17,7 +17,7 @@ angular.module('vidatio').directive("ngFileDropStart", function () {
 
       //enter: cursor enters the drop-zone
       el.bind("dragenter", function (e) {
-        document.getElementsByClassName("drag-and-drop")[0].style.display = "block";
+        document.getElementById("drop-zone").style.display = "block";
         e.preventDefault();
         return false;
       });

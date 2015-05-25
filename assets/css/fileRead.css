@@ -1,48 +1,46 @@
-
 /**
  * LAYOUT
  **/
 
 #container-file-read {
-  width: 1024px;
-  margin: 20px auto 55px auto;
-  text-align: center;
+    width: 1024px;
+    margin: 20px auto 55px auto;
+    text-align: center;
 }
 
 #container-file-read .row.other, #container-file-read .row.file-read {
-  margin-bottom: 56px;
+    margin-bottom: 56px;
 }
 
 #container-file-read .row.file-read .col-sm-4 {
-  height: 254px;
-  width: 304px;
+    height: 254px;
+    width: 304px;
 }
 
 #container-file-read .row.other .col-sm-6 {
-  height: 254px;
-  width: 484px;
+    height: 254px;
+    width: 484px;
 }
 
 #container-file-read .row.other .col-sm-6#empty-table {
-  margin-right: 28px;
+    margin-right: 28px;
 }
 
-
 #container-file-read .row.other #browse-data {
-  margin-left: 28px;
+    margin-left: 28px;
 }
 
 #container-file-read .file-read #browse-filesystem {
-  margin-right: 28px;
+    margin-right: 28px;
 }
 
 #container-file-read .file-read #drag-and-drop {
-  margin-left: 28px;
-  margin-right: 28px;
+    margin-left: 28px;
+    margin-right: 28px;
 }
 
 #container-file-read .row.file-read .col-sm-4#link {
-  margin-left: 28px;
+    margin-left: 28px;
 }
 
 /**
@@ -50,23 +48,23 @@
  **/
 
 #container-file-read .file-read .area, #container-file-read .other .area {
-  background: white;
-  -webkit-box-shadow: 0px 2px 9px #e3e3e3; /* webkit browser*/
-  -moz-box-shadow: 0px 2px 9px #e3e3e3; /* firefox */
-  box-shadow: 0px 2px 9px #e3e3e3;
+    background: white;
+    -webkit-box-shadow: 0px 2px 9px #e3e3e3; /* webkit browser*/
+    -moz-box-shadow: 0px 2px 9px #e3e3e3; /* firefox */
+    box-shadow: 0px 2px 9px #e3e3e3;
 }
 
 #container-file-read .row.other > div, #container-file-read .row.other > div {
-  border-top: 3px solid #ff5347;
+    border-top: 3px solid #ff5347;
 }
 
 #container-file-read .row.file-read > div {
-  border-top: 3px solid #12ddc9;
+    border-top: 3px solid #12ddc9;
 }
 
 #container-file-read .text {
-  padding: 10px;
-  font-size: 18px;
+    padding: 10px;
+    font-size: 18px;
 }
 
 /**
@@ -74,7 +72,7 @@
  **/
 
 #container-file-read #browse-filesystem, #input-browse-filesystem {
-  position: relative;
+    position: relative;
 }
 
 /**
@@ -82,15 +80,15 @@
  * so the user only see the big button below
  **/
 #input-browse-filesystem {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  -moz-opacity: 0;
-  filter: alpha(opacity:0);
-  opacity: 0;
-  z-index: 2;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    -moz-opacity: 0;
+    filter: alpha(opacity:0);
+    opacity: 0;
+    z-index: 2;
 }
 
 /**
@@ -98,11 +96,11 @@
  **/
 
 #container-file-read .file-read .area:hover {
-  background: #93F3E6;
+    background: #93F3E6;
 }
 
 #container-file-read .other .area:hover {
-  background: #FFB3B4;
+    background: #FFB3B4;
 }
 
 /**
@@ -110,95 +108,151 @@
  **/
 
 #container-file-read .icon {
-  width: 100px;
-  margin: 60px auto 0px auto;
-  height: 100px;
+    width: 100px;
+    margin: 60px auto 0px auto;
+    height: 100px;
 }
 
 #container-file-read #empty-table .icon {
-  background: url(../img/icons.png) -400px 0px no-repeat;
-  background-size:1200px;
+    background: url(../img/icons.png) -400px 0px no-repeat;
+    background-size: 1200px;
 }
 
 #container-file-read #browse-data .icon {
-  background: url(../img/icons.png) -100px 0px no-repeat;
-  background-size:1200px;
+    background: url(../img/icons.png) -100px 0px no-repeat;
+    background-size: 1200px;
 }
 
 #container-file-read #browse-filesystem .icon {
-  background: url(../img/icons.png) -400px 0px no-repeat;
-  background-size:1200px;
+    background: url(../img/icons.png) -400px 0px no-repeat;
+    background-size: 1200px;
 }
 
 #container-file-read #drag-and-drop .icon {
-  background: url(../img/icons.png) -300px 0px no-repeat;
-  background-size:1200px;
+    background: url(../img/icons.png) -300px 0px no-repeat;
+    background-size: 1200px;
 }
 
 #container-file-read #link .icon {
-  background: url(../img/icons.png) -200px 0px no-repeat;
-  background-size:1200px;
+    background: url(../img/icons.png) -200px 0px no-repeat;
+    background-size: 1200px;
 }
 
 /**
  * DRAG AND DROP OVERLAY
  */
 
-#container-file-read .drag-and-drop {
-  display: none;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(18, 221, 201, 0.8);
-  top: 0;
-  left: 0;
-  z-index: 999;
+#container-file-read #drop-zone {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 221, 201, 0.8);
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
-#container-file-read .drag-and-drop .col-sm-12 {
-  padding: 30px;
-  height: 100%;
+#container-file-read #drop-zone .col-sm-12 {
+    padding: 30px;
+    height: 100%;
 }
 
-#container-file-read .drag-and-drop .area {
-  width: 100%;
-  height: 100%;
-  background: none;
-  border: 10px solid white;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+#container-file-read #drop-zone .area {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 10px solid white;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-#container-file-read .drag-and-drop .area .fa-30x {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -165px;
-  margin-top: -200px;
-  font-size: 30em;
-  color: white;
+#container-file-read #drop-zone .area .fa-30x {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -165px;
+    margin-top: -200px;
+    font-size: 30em;
+    color: white;
 }
 
-#container-file-read .drag-and-drop .area .text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -95px;
-  margin-top: -35px;
-  font-size: 28px;
+#container-file-read #drop-zone .area .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -95px;
+    margin-top: -35px;
+    font-size: 28px;
 }
 
 .drag-enter {
-  background: #F8F8F8;
-  border: 5px dashed #DDD;
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
 }
 
-#container-file-read .drop-area{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 999999;
+#container-file-read .drop-area {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999999;
+}
+
+.breadcrumb:hover {
+    background: #4F4E4E;
+}
+
+.breadcrumb {
+    margin: 5px auto;
+    width: 150px;
+    height: 40px;
+    background: #598380;
+    border-top: 3px solid #56BDB7;
+    position: relative;
+    border-radius: 4px;
+    color: white;
+    text-align: center;
+    padding: 7px;
+    font-family: Colaborate-Light;
+}
+
+.breadcrumb::after, #button_test::before {
+    border: medium solid transparent;
+    content: " ";
+    height: 0;
+    left: 50%;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 0;
+}
+
+.breadcrumb::after {
+    border-top-color: #56BDB7;
+    border-width: 3px;
+    margin-left: -3px;
+}
+
+.breadcrumb::before {
+    border-top-color: #56BDB7;
+    border-width: 3px;
+    margin-left: -3px;
+}
+
+#button-upload {
+    width: 180px;
+    height: 40px;
+    font-family: Colaborate-Bold;
+    font-size: 16px;
+    background: #55BEB5;
+    border-radius: 5px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+#button-upload:hover{
+    box-shadow: 4px 4px 0px 0px #44948E;
 }

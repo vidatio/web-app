@@ -1,144 +1,169 @@
 @font-face {
-  font-family: Colaborate;
-  src: url(../fonts/ColabReg.otf);
-  font-style: normal;
-  font-weight: normal;
+    font-family: Colaborate;
+    src: url(../fonts/ColabReg.otf);
+    font-style: normal;
+    font-weight: normal;
 }
 
 @font-face {
-  font-family: Colaborate-Bold;
-  src: url(../fonts/ColabBol.otf);
-  font-style: normal;
-  font-weight: bold;
+    font-family: Colaborate-Bold;
+    src: url(../fonts/ColabBol.otf);
+    font-style: normal;
+    font-weight: bold;
 }
 
 @font-face {
-  font-family: Colaborate-Light;
-  src: url(../fonts/ColabLig.otf);
-  font-style: normal;
-  font-weight: bold;
+    font-family: Colaborate-Light;
+    src: url(../fonts/ColabLig.otf);
+    font-style: normal;
+    font-weight: bold;
+}
+
+h1{
+    font-family: Colaborate;
+    font-size:30px;
+}
+
+h2{
+    font-size:16px;
+}
+
+.center{
+    text-align:center;
+    margin: 0 auto;
 }
 
 html, body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  background: url(../img/pattern_bright.jpg);
-  font-family: Colaborate, Arial, Helvetica, sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../img/pattern_bright.jpg);
+    font-family: Colaborate, Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 
 #header {
-  width: 100%;
-  min-width:1024px;
+    width: 100%;
+    min-width: 1024px;
 }
 
 #header > div {
-  width: 100%;
+    width: 100%;
 }
 
 #header #line-right {
-  background: #ff5347;
-  height: 8px;
+    background: #ff5347;
+    height: 8px;
 }
 
 #header #line-left {
-  background: #12ddc9;
-  height: 8px;
+    background: #12ddc9;
+    height: 8px;
 }
 
 #header #navigation {
-  clear: both;
-  width: 1024px;
-  margin: 0px auto;
-  padding: 30px 0 30px 0;
-  height: 100px;
+    clear: both;
+    width: 1024px;
+    margin: 0px auto;
+    padding: 30px 0 30px 0;
+    height: 100px;
 }
 
 #header .logo {
-  text-align: left;
-  padding-left:50px;
-  line-height:60px;
-  background: url(../img/logo.png) no-repeat;
-  background-size: 40px;
-  font-size:24px;
-  height:60px;
+    text-align: left;
+    padding-left: 50px;
+    line-height: 60px;
+    background: url(../img/logo.png) no-repeat;
+    background-size: 40px;
+    font-size: 24px;
+    height: 60px;
 }
 
-#header .step {
-  text-align: center;
+#header .breadcrumbs {
+    text-align: center;
 }
 
 #header .buttons {
-  height: 40px;
-  text-align: right;
+    height: 40px;
+    text-align: right;
 }
 
 #header .buttons div {
-  width: 50px;
-  height: 50px;
-  float: right;
+    width: 50px;
+    height: 50px;
+    float: right;
 }
 
 #header .buttons #user {
-  background: url(../img/icons.png) -250px 0px;
-  background-size: 600px;
+    background: url(../img/icons.png) -250px 0px;
+    background-size: 600px;
 }
 
 #header .buttons #user:hover {
-  background: url(../img/icons.png) -250px -50px;
-  background-size: 600px;
+    background: url(../img/icons.png) -250px -50px;
+    background-size: 600px;
 }
 
 #header .buttons #menu {
-  background: url(../img/icons.png) -400px 0px;
-  background-size: 600px;
+    background: url(../img/icons.png) -400px 0px;
+    background-size: 600px;
 }
 
 #header .buttons #menu:hover {
-  background: url(../img/icons.png) -400px -50px;
-  background-size: 600px;
+    background: url(../img/icons.png) -400px -50px;
+    background-size: 600px;
 }
 
 #footer {
-  color: white;
-  background: url(../img/pattern_dark.jpg);
-  position: absolute;
-  width: 100%;
-  height: 175px;
-  font-size:16px;
-  text-align: center;
-  padding:20px;
+    color: white;
+    background: url(../img/pattern_dark.jpg);
+    position: absolute;
+    width: 100%;
+    height: 175px;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
 }
 
-#footer a{
-  display:inline-block;
-  margin:0 20px 0px 20px;
+#footer a {
+    display: inline-block;
+    margin: 0 20px 0px 20px;
 }
 
-#footer span.icon{
-  width:40px;
-  height:40px;
-  margin-right:10px;
-  float:left;
+#footer span.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    float: left;
 }
 
-#footer span.icon.phone{
-  background: url(../img/icons.png) 0px -440px;
-  background-size:480px auto;
+#footer span.icon.phone {
+    background: url(../img/icons.png) 0px -440px;
+    background-size: 480px auto;
 }
 
-#footer span.icon.email{
-  background: url(../img/icons.png) -40px -440px;
-  background-size:480px auto;
+#footer span.icon.email {
+    background: url(../img/icons.png) -40px -440px;
+    background-size: 480px auto;
 }
 
-#footer span.text{
-  width:auto;
-  height:40px;
-  line-height:40px;
-  vertical-align: middle;
-  float:right;
+#footer span.icon.phone {
+    background: url(../img/icons.png) 0px -440px;
+    background-size: 480px auto;
+}
+
+#footer span.icon.email {
+    background: url(../img/icons.png) -40px -440px;
+    background-size: 480px auto;
+}
+
+#footer span.text {
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    float: right;
 }
 
 /**
@@ -146,24 +171,28 @@ html, body {
  */
 
 .row {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .col-sm-4, .col-sm-12 {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
 }
 
 /**
  * LINK STYLES
  */
 
-a:link{
-  color:white;
-  text-decoration: none;
+a:link {
+    color: white;
+    text-decoration: none;
 }
 
-a:hover, a:active{
-  color: #12ddc9;
+a:hover, a:active {
+    color: #12ddc9;
 }
