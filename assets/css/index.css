@@ -230,6 +230,9 @@ section#intro {
  **/
 #popular-categories{
   min-height: 500px;
+  background: url(../img/o-HAPPY-COLLEGE-STUDENTS-facebook-blau.jpg);
+  background-size: cover;
+  width: 100%;
 }
 
 #popular-categories h1 {
@@ -263,6 +266,7 @@ footer .contact {
   text-align: center;
   font-size: 20px;
 }
+
 
 /**
  * CUSTOMIZE BOOTSTRAP
