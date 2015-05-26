@@ -21,7 +21,7 @@ describe "Testing fileReader controller", ->
                 deferred = $q.defer()
                 deferred.resolve "aaa: 123; bbb:456"
 
-                spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
+                spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise)
 
         it "should be present", ->
             expect( FileReadCtrl ).toBeDefined()

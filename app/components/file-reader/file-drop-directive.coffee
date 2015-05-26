@@ -13,8 +13,10 @@ app.directive 'ngFileDrop', ->
         el.bind 'dragenter', preventDefault
         el.bind 'dragleave', preventDefault
         el.bind 'drop', (e) ->
-            preventDefault(e)
-            $scope.file = e.dataTransfer.files[0]
+            e.preventDefault()
+            #$scope.file = e.dataTransfer.files[0]
+            $scope.file = e.originalEvent.dataTransfer.files[0]
+            console.log $scope.file
             $scope.getFile()
             false
 

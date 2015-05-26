@@ -20,7 +20,7 @@ describe "testing component 'file-drop-directive'", ->
             spyOn(scope, 'getFile').and.callFake()
             element = compile('<div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>')(scope)
 
-            #spyOnEvent $(element), 'drop'
+            spyOnEvent $(element), 'drop'
 
             $(element).on 'drop', ->
                 scope.getFile()
