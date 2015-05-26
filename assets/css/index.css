@@ -30,7 +30,8 @@ section {
  * INTRO SECTION
  **/
 section#intro {
-  padding-top: 0;
+  position: relative;
+  padding: 0;
 }
 
 #intro .slogan {
@@ -96,6 +97,11 @@ section#intro {
 
 #intro .get-started a {
   color: #fff;
+  width: inherit;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -131,16 +137,13 @@ section#intro {
   background-color: #11AA9A;
 }
 
-#intro .get-started a {
-  width: inherit;
-  font-size: 25px;
-  font-weight: bold;
-  text-align: center;
-  display: inline-block;
-}
-
 #intro .get-started a:visited {
   color: #fff;
+}
+
+.shape {
+  width: 101%;
+  margin-top: -100px;
 }
 
 /**
