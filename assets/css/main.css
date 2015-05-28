@@ -32,6 +32,30 @@ h2 {
 }
 
 /**
+ * RESET BOOTSTRAP
+ */
+
+.row {
+  margin: 0;
+  padding: 0;
+}
+
+.col-sm-4, .col-sm-6, .col-sm-12 {
+  padding: 0;
+  margin: 0;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+.btn-default:hover,
+.btn-default:active {
+  color: white;
+  background-color: #12ddc9;
+}
+
+/**
  * LAYOUT
  **/
 
@@ -54,17 +78,17 @@ html, body {
  * HEADER
  **/
 
-#header #line-right {
+header #line-right {
   background: #ff5347;
   height: 8px;
 }
 
-#header #line-left {
+header #line-left {
   background: #12ddc9;
   height: 8px;
 }
 
-#header #navigation {
+header #navigation {
   clear: both;
   max-width: 1024px;
   margin: 0px auto;
@@ -72,7 +96,7 @@ html, body {
   height: 100px;
 }
 
-#header #logo {
+header #logo {
   text-align: left;
   padding-left: 50px;
   line-height: 60px;
@@ -82,33 +106,33 @@ html, body {
   height: 60px;
 }
 
-#header .menu-buttons {
+header .menu-buttons {
   height: 40px;
   text-align: right;
 }
 
-#header .menu-buttons div {
+header .menu-buttons div {
   width: 50px;
   height: 50px;
   float: right;
 }
 
-#header .menu-buttons #user {
+header .menu-buttons #user {
   background: url(../img/icons.png) -250px 0px;
   background-size: 600px;
 }
 
-#header .menu-buttons #user:hover {
+header .menu-buttons #user:hover {
   background: url(../img/icons.png) -250px -50px;
   background-size: 600px;
 }
 
-#header .menu-buttons #menu {
+header .menu-buttons #menu {
   background: url(../img/icons.png) -400px 0px;
   background-size: 600px;
 }
 
-#header .menu-buttons #menu:hover {
+header .menu-buttons #menu:hover {
   background: url(../img/icons.png) -400px -50px;
   background-size: 600px;
 }
@@ -117,7 +141,7 @@ html, body {
  * FOOTER
  **/
 
-#footer {
+footer.container-fluid {
   color: white;
   width: 100%;
   font-size: 16px;
@@ -127,68 +151,44 @@ html, body {
   background: url(../img/pattern_dark.jpg);
 }
 
-#footer a {
+footer a {
   display: inline-block;
   margin: 0 20px 0px 20px;
 }
 
-#footer span.icon {
+footer span.icon {
   width: 40px;
   height: 40px;
   margin-right: 10px;
   float: left;
 }
 
-#footer span.icon.phone {
+footer span.icon.phone {
   background: url(../img/icons.png) 0px -440px;
   background-size: 480px auto;
 }
 
-#footer span.icon.email {
+footer span.icon.email {
   background: url(../img/icons.png) -40px -440px;
   background-size: 480px auto;
 }
 
-#footer span.icon.phone {
+footer span.icon.phone {
   background: url(../img/icons.png) 0px -440px;
   background-size: 480px auto;
 }
 
-#footer span.icon.email {
+footer span.icon.email {
   background: url(../img/icons.png) -40px -440px;
   background-size: 480px auto;
 }
 
-#footer span.text {
+footer span.text {
   width: auto;
   height: 40px;
   line-height: 40px;
   vertical-align: middle;
   float: right;
-}
-
-/**
- * RESET BOOTSTRAP
- */
-
-.row {
-  margin: 0;
-  padding: 0;
-}
-
-.col-sm-4, .col-sm-6, .col-sm-12 {
-  padding: 0;
-  margin: 0;
-}
-
-.container-fluid {
-  padding: 0;
-}
-
-.btn-default:hover,
-.btn-default:active {
-  color: white;
-  background-color: #12ddc9;
 }
 
 /* TODO: Reset focus state for btn-default button?! */
