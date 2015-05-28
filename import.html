@@ -1,109 +1,113 @@
 <!DOCTYPE html>
 <html ng-app="vidatio">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Vidatio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vidatio</title>
 
-    <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
-    <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+  <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <link rel="stylesheet" href="assets/css/fileRead.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/fileRead.css"/>
 </head>
 <body ng-file-drop-start>
 
 <div class="wrapper">
-    <header class="container-fluid">
-        <div class="row">
-            <div class="col-xs-6" id="line-right"></div>
-            <div class="col-xs-6" id="line-left"></div>
+  <header class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6" id="line-right"></div>
+      <div class="col-xs-6" id="line-left"></div>
+    </div>
+    <div>
+      <div class="row" id="navigation">
+        <div class="col-sm-4" id="logo">vidatio</div>
+        <div class="col-sm-4 breadcrumbs"></div>
+        <div class="col-sm-4 menu-buttons">
+          <a id="menu" href="#"></a>
+          <a id="user" href="#"></a>
         </div>
-        <div>
-            <div class="row" id="navigation">
-                <div class="col-sm-4" id="logo">vidatio</div>
-                <div class="col-sm-4 breadcrumbs"></div>
-                <div class="col-sm-4 menu-buttons">
-                    <a id="menu" href="#"></a>
-                    <a id="user" href="#"></a>
-                </div>
-            </div>
-        </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
-    <div class="container-fluid" id="container-file-read" ng-controller="FileReadCtrl">
-        <div class="row other">
-            <div class="col-sm-6">
-                <div class="area" id="option-empty-table">
-                    <div class="icon"></div>
-                    <h2>LEERE TABELLE</h2>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="area" id="option-browse-data">
-                    <div class="icon"></div>
-                    <h2>ALLE DATENSÄTZE</h2>
-                </div>
-            </div>
+  <div class="container-fluid" id="container-file-read" ng-controller="FileReadCtrl">
+    <div class="row other">
+      <div class="col-sm-6">
+        <div class="area" id="option-empty-table">
+          <a href="#">
+            <div class="icon"></div>
+            <h2>LEERE TABELLE</h2>
+          </a>
         </div>
-        <div class="row file-read">
-            <div class="col-sm-4">
-                <div class="area" id="option-browse-filesystem">
-                    <div class="icon"></div>
-                    <h2>DATEI AUSWÄHLEN</h2>
-                    <input type="file" id="input-browse-filesystem" ng-file-select/>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="area" id="option-drag-and-drop">
-                    <div class="icon"></div>
-                    <h2>DRAG AND DROP</h2>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="area" id="option-link">
-                    <div class="icon"></div>
-                    <h2>LINK</h2>
+      </div>
+      <div class="col-sm-6">
+        <div class="area" id="option-browse-data">
+          <a href="#">
+            <div class="icon"></div>
+            <h2>ALLE DATENSÄTZE</h2>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row file-read">
+      <div class="col-sm-4">
+        <div class="area" id="option-browse-filesystem">
+            <div class="icon"></div>
+            <h2>DATEI AUSWÄHLEN</h2>
+            <input type="file" id="input-browse-filesystem" ng-file-select/>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="area" id="option-drag-and-drop">
+            <div class="icon"></div>
+            <h2>DRAG AND DROP</h2>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="area" id="option-link">
+            <div class="icon"></div>
+            <h2>LINK</h2>
 
-                    <div class="input-group form-link">
-                        <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
+            <div class="input-group form-link">
+              <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default glyphicon glyphicon-arrow-right" id="link-submit-button"
                                     type="button" ng-click="load()"/>
                         </span>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <!-- have to be inside the file-controller area for handling purpose-->
-        <div id="drop-zone">
-            <div class="col-sm-12">
-                <div class="area">
-                    <div class="glyphicon glyphicon-plus"></div>
-                    <span class="text">DRAG & DROP</span>
-                </div>
-            </div>
-            <div class="col-sm-12 drop-area" ng-file-drop-end></div>
-        </div>
+      </div>
     </div>
 
-    <footer class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <a href="tel:+436649966496">
-                    <span class="icon phone"></span>
-                    <span class="text"> +43 664 99 66 496</span>
-                </a>
-                <a href="mailto:gbeschbacher@sbg.at">
-                    <span class="icon email"></span>
-                    <span class="text">gbeschbacher@sbg.at</span>
-                </a>
-            </div>
+    <!-- have to be inside the file-controller area for handling purpose-->
+    <div id="drop-zone">
+      <div class="col-sm-12">
+        <div class="area">
+          <div class="glyphicon glyphicon-plus"></div>
+          <span class="text">Datei Landeplatz</span>
         </div>
-    </footer>
+      </div>
+      <div class="col-sm-12 drop-area" ng-file-drop-end></div>
+    </div>
+  </div>
 </div>
+
+<footer class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <a href="tel:+436649966496">
+        <span class="icon phone"></span>
+        <span class="text"> +43 664 99 66 496</span>
+      </a>
+      <a href="mailto:gbeschbacher@sbg.at">
+        <span class="icon email"></span>
+        <span class="text">gbeschbacher@sbg.at</span>
+      </a>
+    </div>
+  </div>
+</footer>
 
 <script src="bower_components/angular/angular.js"></script>
 
