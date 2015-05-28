@@ -1,3 +1,7 @@
+/**
+ * DEFAULTS
+ **/
+
 @font-face {
     font-family: Colaborate;
     src: url(../fonts/ColabReg.otf);
@@ -20,7 +24,6 @@
 }
 
 h1 {
-    font-family: Colaborate;
     font-size: 30px;
 }
 
@@ -28,15 +31,15 @@ h2 {
     font-size: 16px;
 }
 
-.center {
-    text-align: center;
-    margin: 0 auto;
-}
+/**
+ * LAYOUT
+ **/
 
 html, body {
     padding: 0;
     margin: 0;
     width: 100%;
+    min-width: 256px;
     height: 100%;
     font-family: Colaborate, Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -44,24 +47,19 @@ html, body {
 
 .background {
     position: fixed;
-    z-index:-999;
-    width:100%;
-    height:99999px;
+    z-index: -999;
+    width: 100%;
+    height: 99999px;
     background: url(../img/pattern_dark.jpg);
 }
 
-.wrapper{
+.wrapper {
     background: url(../img/pattern_bright.jpg);
 }
 
-#header {
-    width: 100%;
-    min-width: 1024px;
-}
-
-#header > div {
-    width: 100%;
-}
+/**
+ * HEADER
+ **/
 
 #header #line-right {
     background: #ff5347;
@@ -75,13 +73,13 @@ html, body {
 
 #header #navigation {
     clear: both;
-    width: 1024px;
+    max-width: 1024px;
     margin: 0px auto;
     padding: 30px 0 30px 0;
     height: 100px;
 }
 
-#header .logo {
+#header #logo {
     text-align: left;
     padding-left: 50px;
     line-height: 60px;
@@ -91,40 +89,40 @@ html, body {
     height: 60px;
 }
 
-#header .breadcrumbs {
-    text-align: center;
-}
-
-#header .buttons {
+#header .menu-buttons {
     height: 40px;
     text-align: right;
 }
 
-#header .buttons div {
+#header .menu-buttons div {
     width: 50px;
     height: 50px;
     float: right;
 }
 
-#header .buttons #user {
+#header .menu-buttons #user {
     background: url(../img/icons.png) -250px 0px;
     background-size: 600px;
 }
 
-#header .buttons #user:hover {
+#header .menu-buttons #user:hover {
     background: url(../img/icons.png) -250px -50px;
     background-size: 600px;
 }
 
-#header .buttons #menu {
+#header .menu-buttons #menu {
     background: url(../img/icons.png) -400px 0px;
     background-size: 600px;
 }
 
-#header .buttons #menu:hover {
+#header .menu-buttons #menu:hover {
     background: url(../img/icons.png) -400px -50px;
     background-size: 600px;
 }
+
+/**
+ * FOOTER
+ **/
 
 #footer {
     color: white;
@@ -185,7 +183,7 @@ html, body {
     padding: 0;
 }
 
-.col-sm-4, .col-sm-12 {
+.col-sm-4, .col-sm-6, .col-sm-12 {
     padding: 0;
     margin: 0;
 }
@@ -195,14 +193,12 @@ html, body {
 }
 
 .btn-default:hover,
-.btn-default:focus,
-.btn-default.focus,
-.btn-default:active,
-.btn-default.active,
-.open > .dropdown-toggle.btn-default {
+.btn-default:active {
     color: white;
     background-color: #12ddc9;
 }
+
+/* TODO: Reset focus state for btn-default button?! */
 
 /**
  * LINK STYLES

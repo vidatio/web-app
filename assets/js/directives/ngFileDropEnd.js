@@ -6,7 +6,7 @@
  * on which element it should end
  */
 
-angular.module('vidatio').directive("ngFileDrop", function () {
+angular.module('vidatio').directive("ngFileDropEnd", function () {
   return {
     link: function ($scope, el) {
       //leave: cursor moves out of drop-zone
