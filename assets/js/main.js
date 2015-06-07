@@ -1,1 +1,1 @@
-var App = angular.module("vidatio", ['ngHandsontable']);
+var App = angular.module("vidatio", ['ngHandsontable', 'leaflet-directive']);
