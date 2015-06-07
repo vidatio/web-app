@@ -1,7 +1,6 @@
 angular.module('vidatio').controller("MapCtrl",
   ["$scope", "DataTableService", "MapService",
     function ($scope, DataTable, Map) {
-
       //Default settings - Works like scope.center, etc.
       angular.extend($scope, {
         center: {
@@ -10,8 +9,17 @@ angular.module('vidatio').controller("MapCtrl",
           zoom: 16
         }
       });
+      // Watch on the dataset from the data table
+      // and update markers on changed data
+      $scope.$watch(
+        function () {
+          return DataTable.dataset
+        },
+        function (dataset) {
+          Map.setMarkers(dataset);
+        }, true
+      );
 
-      Map.setMarkers(DataTable.dataset);
       $scope.markers = Map.markers;
     }
   ]

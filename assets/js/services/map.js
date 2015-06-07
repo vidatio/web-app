@@ -3,20 +3,37 @@ angular.module('vidatio').service("MapService", function () {
       this.markers = {};
     }
 
+    var isCoordinate = function (value) {
+      return value === Number(value) && value >= 0 && value <= 180;
+    };
+
     Map.prototype.setMarkers = function (data) {
+      console.log(data);
+
       // safely removes all attributes to keep databinding alive
-      for(var property in this.markers) {
+      for (var property in this.markers) {
         delete this.markers[property];
       }
 
-      data.forEach(function(element,index,array){
-        this.markers[index] = {
-          lat: parseFloat(element[0]),
-          lng: parseFloat(element[1])
-        }
-      }.bind(this));
+      // update markers
+      var length = 0;
+      data.forEach(function (element, index, array) {
+          var lat =  parseFloat(element[0]);
+          var lng =  parseFloat(element[1]);
+
+          if (isCoordinate(lat) && isCoordinate(lng)) {
+            this.markers[length++] = {
+              lat: parseFloat(lat),
+              lng: parseFloat(lng)
+            }
+          }
+        }.bind(this)
+      );
+
+      console.log(this.markers)
     };
 
     return new Map;
   }
-);
+)
+;
