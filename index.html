@@ -14,22 +14,23 @@
 </head>
 <body>
 <div class="container-fluid content-wrapper">
-  <div id="header">
+  <header>
     <div class="row">
-      <div class="col-sm-6" id="line-right"></div>
-      <div class="col-sm-6" id="line-left"></div>
+      <div class="col-xs-6" id="line-right"></div>
+      <div class="col-xs-6" id="line-left"></div>
     </div>
     <div>
       <div class="row" id="navigation">
-        <div class="col-sm-4 logo">vidatio</div>
-        <div class="col-sm-4 step"></div>
-        <div class="col-sm-4 buttons">
-          <div id="menu"></div>
-          <div id="user"></div>
+        <div class="col-sm-4" id="logo">vidatio</div>
+        <div class="col-sm-4 breadcrumbs"></div>
+        <div class="col-sm-4 menu-buttons">
+          <a id="menu" href="#"></a>
+          <a id="user" href="#"></a>
         </div>
       </div>
     </div>
-  </div>
+  </header>
+
   <section id="intro">
     <div class="content">
       <aside class="slogan thin-font">Hier steht der Slogan.</aside>
@@ -37,8 +38,7 @@
         <div class="col-sm-7 diagram">
           <img src="assets/img/placeholder_diagram.png">
         </div>
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4 promo">
+        <div class="col-sm-5 promo">
           <div class="video">awesome promo video here!</div>
           <div>
             <p class="description">In nur <span class="font-red">drei Schritten</span> zur Infografik!</p>
@@ -52,7 +52,7 @@
 
       </div>
       <div class="get-started">
-        <a href="upload.html" class="bg-cyan">GET<br>STARTED<span class="bg-cyan">!</span></a>
+        <a href="import.html" class="bg-cyan">GET<br>STARTED<span class="bg-cyan">!</span></a>
       </div>
     </div>
   </section>
@@ -84,18 +84,24 @@
   <section id="featured-vidatios">
     <div class="content">
       <h1>BELIEBTE VIDATIOS</h1>
-      <div class="row">
+      <div class="row layout-3-columns">
         <div class="col-sm-4">
-          <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
-          <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          <div class="gap">
+            <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
+            <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          </div>
         </div>
         <div class="col-sm-4">
-          <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
-          <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          <div class="gap">
+            <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
+            <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          </div>
         </div>
         <div class="col-sm-4">
-          <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
-          <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          <div class="gap">
+            <img src="assets/img/placeholder_featured_vidatios.png" alt=""/>
+            <p>Wasserverbrauch | <a class="thin-font" href="#">Mehr</a></p>
+          </div>
         </div>
       </div>
       <div class="browse">
