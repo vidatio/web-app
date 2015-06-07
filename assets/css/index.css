@@ -24,7 +24,10 @@ section {
   padding: 95px 0;
 }
 
-
+h1 {
+  display: inline-block;
+  margin-bottom: 20px;
+}
 
 /**
  * INTRO SECTION
@@ -41,6 +44,14 @@ section#intro {
 #intro .diagram img {
   width: 100%;
 }
+
+@media(max-width: 767px) {
+  #intro .promo {
+    padding-top: 20px;
+  }
+}
+
+
 
 #intro .promo .video {
   width: 100%;
@@ -201,8 +212,6 @@ section#intro {
 }
 
 #featured-vidatios h1 {
-  display: inline-block;
-  margin: 0 0 20px;
   border-bottom: 3px solid #12ddc9;
 }
 
@@ -247,7 +256,6 @@ section#intro {
 }
 
 #popular-categories h1 {
-  display: inline-block;
   border-bottom: 3px solid #ff5347;
 }
 
@@ -280,18 +288,10 @@ footer .contact {
 
 
 /**
- * CUSTOMIZE BOOTSTRAP
+ * Reset Lukas' changes to bootstrap
  **/
-.col-sm-3-custom {
-  width: 32%;
-  float: left;
-  margin-right: 2%;
-}
 
-.col-sm-3-custom:last-child {
-  margin-right: 0;
-}
-
-.col-sm-7 {
-  padding-left: 0 !important;
+.col-sm-4, .col-sm-6, .col-sm-12 {
+  padding-left: 15px;
+  padding-right: 15px;
 }
