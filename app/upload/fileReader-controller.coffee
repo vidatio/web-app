@@ -7,10 +7,9 @@ app = angular.module "app.controllers"
 
 app.controller "FileReadCtrl", [
     "$scope"
-    "$rootScope"
     "$http"
     "FileReader"
-    ($scope, $rootScope, $http, FileReader) ->
+    ($scope, $http, FileReader) ->
         $scope.link = 'http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv'
         $scope.progress = 0
 
