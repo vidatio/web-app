@@ -3,7 +3,8 @@ angular.module('vidatio').service("MapService", function () {
       this.markers = {};
     }
 
-    var isCoordinate = function (value) {
+    Map.prototype.isCoordinate = function (value){
+      var value = parseFloat(value);
       return value === Number(value) && value >= 0 && value <= 180;
     };
 
@@ -19,10 +20,10 @@ angular.module('vidatio').service("MapService", function () {
           var lat =  parseFloat(element[0]);
           var lng =  parseFloat(element[1]);
 
-          if (isCoordinate(lat) && isCoordinate(lng)) {
+          if (this.isCoordinate(lat) && this.isCoordinate(lng)) {
             this.markers[length++] = {
-              lat: parseFloat(lat),
-              lng: parseFloat(lng)
+              lat: lat,
+              lng: lng
             }
           }
         }.bind(this)

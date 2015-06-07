@@ -2,7 +2,7 @@ angular.module('vidatio').controller("MapCtrl",
   ["$scope", "DataTableService", "MapService",
     function ($scope, DataTable, Map) {
 
-      //Default settings - Works like scope.center, etc.
+      // Default settings for the map
       angular.extend($scope, {
         center: {
           lat: 47.723407,
@@ -18,7 +18,6 @@ angular.module('vidatio').controller("MapCtrl",
           return DataTable.dataset
         },
         function (dataset) {
-          console.log("data changed");
           Map.setMarkers(dataset);
         }, true
       );
