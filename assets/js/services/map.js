@@ -8,8 +8,6 @@ angular.module('vidatio').service("MapService", function () {
     };
 
     Map.prototype.setMarkers = function (data) {
-      console.log(data);
-
       // safely removes all attributes to keep databinding alive
       for (var property in this.markers) {
         delete this.markers[property];
@@ -29,8 +27,6 @@ angular.module('vidatio').service("MapService", function () {
           }
         }.bind(this)
       );
-
-      console.log(this.markers)
     };
 
     return new Map;
