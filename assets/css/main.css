@@ -4,28 +4,28 @@
 
 @font-face {
   font-family: Colaborate;
-  src: url(../fonts/ColabReg.otf);
+  src: url(../fonts/colaborate-regular.otf);
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: Colaborate-Bold;
-  src: url(../fonts/ColabBol.otf);
+  src: url(../fonts/colaborate-bold.otf);
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: Colaborate-Light;
-  src: url(../fonts/ColabLig.otf);
+  src: url(../fonts/colaborate-light.otf);
   font-style: normal;
   font-weight: normal;
 }
 
-h1, h2{
-  padding:0;
-  margin:0;
+h1, h2 {
+  padding: 0;
+  margin: 0;
 }
 
 h1 {
@@ -38,11 +38,11 @@ h2 {
   font-size: 16px;
 }
 
-.underline-red{
+.underline-red {
   border-bottom: 3px solid #ff5444;
 }
 
-.underline-turqoise{
+.underline-turqoise {
   border-bottom: 3px solid #11ddc6;
 }
 
@@ -84,23 +84,23 @@ html, body {
 }
 
 .wrapper {
-  min-height:80vh;
+  min-height: 80vh;
   background: #FAFAFA;
 }
 
 /* row layout with 3 columns and margin between */
 
 .layout-3-columns .col-sm-4:first-child > div {
-  margin-right: 18.66px;
+  margin-right: 17.66px;
 }
 
-.layout-3-columns .col-sm-4:nth-child(2n) > div{
-  margin-right: 9.33px;
-  margin-left:9.33px;
+.layout-3-columns .col-sm-4:nth-child(2n) > div {
+  margin-right: 8.33px;
+  margin-left: 8.33px;
 }
 
 .layout-3-columns .col-sm-4:last-child > div {
-  margin-left: 18.66px;
+  margin-left: 17.66px;
 }
 
 /**
@@ -132,25 +132,25 @@ header .logo {
   height: 40px;
 }
 
-header .logo a, header .logo a:hover{
+header .logo a, header .logo a:hover {
   color: #000000;
 }
 
-header .logo #logo{
+header .logo #logo {
   background: url(../img/logo.png) no-repeat;
   background-size: 30px;
-  width:40px;
-  height:40px;
-  float:left;
+  width: 40px;
+  height: 40px;
+  float: left;
 }
 
-header .logo span{
-  float:left;
+header .logo span {
+  float: left;
 }
 
-header .middle{
-  text-align:center;
-  height:100%;
+header .middle {
+  text-align: center;
+  height: 100%;
 }
 
 header .menu-buttons {
@@ -162,7 +162,7 @@ header .menu-buttons a {
   width: 40px;
   height: 40px;
   float: right;
-  margin-left:3px;
+  margin-left: 3px;
 }
 
 header .menu-buttons #user {
@@ -198,14 +198,14 @@ footer {
   background: url(../img/dotgrid.png) #333333;
 }
 
-footer .container-fluid{
-  max-width:1024px;
+footer .container-fluid {
+  max-width: 1024px;
 }
 
 footer .container-fluid a {
   display: inline-block;
   padding: 0 5px 0px 5px;
-  height:30px;
+  height: 30px;
 }
 
 footer span.icon {
