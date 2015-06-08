@@ -14,6 +14,7 @@ header .middle h1{
 
 #container-file-read h2{
   text-align: center;
+  margin: 10px;
 }
 
 #container-file-read .row > div > div {
@@ -67,12 +68,8 @@ header .middle h1{
   box-shadow: 0px 2px 9px #e3e3e3;
 }
 
-#container-file-read .row.other > div > div {
-  border-top: 3px solid #ff5347;
-}
-
-#container-file-read .row.file-read > div > div {
-  border-top: 3px solid #12ddc9;
+#container-file-read .row.other > div > div, #container-file-read .row.file-read > div > div {
+  border-top: 3px solid #11ddc6;
 }
 
 #container-file-read .text {
@@ -81,7 +78,7 @@ header .middle h1{
 }
 
 #container-file-read .file-read .area a, #container-file-read .other .area a {
-  color: black;
+  color: #000000;
 }
 
 /**
@@ -114,11 +111,11 @@ header .middle h1{
  **/
 
 #container-file-read .file-read #option-browse-filesystem:hover {
-  background: #93F3E6;
+  background: #11ddc6;
 }
 
 #container-file-read .other .area:hover {
-  background: #FFB3B4;
+  background: #11ddc6;
 }
 
 /**

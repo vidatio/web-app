@@ -39,11 +39,11 @@ h2 {
 }
 
 .underline-red{
-  border-bottom: 3px solid #ff5347;
+  border-bottom: 3px solid #ff5444;
 }
 
 .underline-turqoise{
-  border-bottom: 3px solid #12ddc9;
+  border-bottom: 3px solid #11ddc6;
 }
 
 /**
@@ -66,7 +66,7 @@ h2 {
 .btn-default:hover,
 .btn-default:active {
   color: white;
-  background-color: #12ddc9;
+  background-color: #11ddc6;
 }
 
 /**
@@ -108,12 +108,12 @@ html, body {
  **/
 
 header #line-right {
-  background: #ff5347;
+  background: #ff5444;
   height: 8px;
 }
 
 header #line-left {
-  background: #12ddc9;
+  background: #11ddc6;
   height: 8px;
 }
 
@@ -133,7 +133,7 @@ header .logo {
 }
 
 header .logo a, header .logo a:hover{
-  color:black;
+  color: #000000;
 }
 
 header .logo #logo{
@@ -189,19 +189,23 @@ header .menu-buttons #menu:hover {
  * FOOTER
  **/
 
-footer.container-fluid {
+footer {
   color: white;
-  width: 100%;
-  font-size: 16px;
-  text-align: center;
+  max-width: 100%;
+  font-size: 12px;
   padding: 20px;
   min-height: 20vh;
-  background: url(../img/dotgrid.png) #333;
+  background: url(../img/dotgrid.png) #333333;
 }
 
-footer a {
+footer .container-fluid{
+  max-width:1024px;
+}
+
+footer .container-fluid a {
   display: inline-block;
-  margin: 0 20px 0px 20px;
+  padding: 0 5px 0px 5px;
+  height:30px;
 }
 
 footer span.icon {
@@ -209,26 +213,6 @@ footer span.icon {
   height: 40px;
   margin-right: 10px;
   float: left;
-}
-
-footer span.icon.phone {
-  background: url(../img/icons.png) 0px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.email {
-  background: url(../img/icons.png) -40px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.phone {
-  background: url(../img/icons.png) 0px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.email {
-  background: url(../img/icons.png) -40px -440px;
-  background-size: 480px auto;
 }
 
 footer span.text {
@@ -245,11 +229,11 @@ footer span.text {
  * LINK STYLES
  */
 
-a:link {
+a:link, a {
   color: white;
   text-decoration: none;
 }
 
 a:hover, a:active {
-  color: #12ddc9;
+  color: #11ddc6;
 }
