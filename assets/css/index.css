@@ -107,16 +107,17 @@ h1 {
 /* Get started button */
 #intro .get-started {
   position: relative;
-  width: 150px;
+  width: 175px;
   margin: 100px auto 0;
 }
 
 #intro .get-started a {
   width: inherit;
-  padding: 5px;
+  padding: 10px;
   font-size: 30px;
   text-align: center;
   display: inline-block;
+  line-height: 30px;
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -125,12 +126,15 @@ h1 {
 
 #intro .get-started span {
   position: absolute;
-  width: 30px;
+  width: 50px;
   top: -20px;
   right: -15px;
   display: inline-block;
   transform: rotate(10deg);
   font-size: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -140,6 +144,21 @@ h1 {
 #intro .get-started a:visited {
   color: #fff;
 }
+
+@media(max-width: 1200px) {
+  #intro .get-started {
+    margin-bottom: 100px;
+  }
+}
+
+@media(max-width: 700px) {
+  #intro .get-started {
+    margin-top: 50px;
+    margin-bottom: 200px;
+
+  }
+}
+
 
 /**
  * USP SECTION
@@ -165,24 +184,22 @@ h1 {
 #usp .open-data {
   width: 100px;
   height: 100px;
+  margin: 0 auto;
 }
 
 #usp .api {
   background: url(../img/icons.png) 0px -200px no-repeat;
   background-size:1200px;
-  margin: 0 auto;
 }
 
 #usp .live-data {
   background: url(../img/icons.png) -200px -200px no-repeat;
   background-size:1200px;
-  margin: 0 auto;
 }
 
 #usp .open-data {
   background: url(../img/icons.png) -100px -200px no-repeat;
   background-size:1200px;
-  margin: 0 auto;
 }
 
 #usp div {

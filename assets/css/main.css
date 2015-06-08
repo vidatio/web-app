@@ -253,7 +253,8 @@ footer span.text {
  * LINK STYLES
  */
 
-a:link {
+a:link,
+a:focus {
   color: white;
   text-decoration: none;
 }
