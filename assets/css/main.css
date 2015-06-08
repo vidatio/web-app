@@ -85,7 +85,7 @@ html, body {
 
 .wrapper {
   min-height:80vh;
-  background: url(../img/pattern_bright.jpg);
+  background: #FAFAFA;
 }
 
 /* row layout with 3 columns and margin between */
@@ -196,7 +196,7 @@ footer.container-fluid {
   text-align: center;
   padding: 20px;
   min-height: 20vh;
-  background: url(../img/pattern_dark.jpg);
+  background: url(../img/dotgrid.png) #333;
 }
 
 footer a {
