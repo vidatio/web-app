@@ -9,6 +9,10 @@
   font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
 }
 
+.bold-font {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
+}
+
 .container-fluid.content-wrapper {
   padding: 0 !important;
   background-color: #FAFAFA;
@@ -38,7 +42,8 @@ h1 {
 }
 
 #intro .slogan {
-  font-size: 25px;
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 #intro .diagram img {
@@ -81,7 +86,7 @@ h1 {
 }
 
 #intro ol > li.active:before {
-  background-color: #12ddc9;
+  background-color: #11ddc6;
 }
 
 #intro ol > li:before {
@@ -102,51 +107,34 @@ h1 {
 /* Get started button */
 #intro .get-started {
   position: relative;
-  width: 130px;
+  width: 150px;
   margin: 100px auto 0;
 }
 
 #intro .get-started a {
-  color: #fff;
   width: inherit;
   padding: 5px;
-  font-size: 25px;
-  font-weight: bold;
+  font-size: 30px;
   text-align: center;
   display: inline-block;
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-
-  -webkit-box-shadow: 3px 3px 0 #009989;
-  -moz-box-shadow: 3px 3px 0 #009989;
-  box-shadow: 3px 3px 0 #009989;
 }
 
 #intro .get-started span {
   position: absolute;
-  width: 25px;
-  top: -10px;
-  right: -10px;
+  width: 30px;
+  top: -20px;
+  right: -15px;
   display: inline-block;
   transform: rotate(10deg);
-
-  -webkit-box-shadow: 3px 0 0 #009989;
-  -moz-box-shadow: 3px 0 0 #009989;
-  box-shadow: 3px 0 0 #009989;
+  font-size: 50px;
 
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-}
-
-#intro .get-started a:hover {
-  background-color: #11AA9A;
-}
-
-#intro .get-started a:hover span {
-  background-color: #11AA9A;
 }
 
 #intro .get-started a:visited {
@@ -214,7 +202,7 @@ h1 {
 }
 
 #featured-vidatios h1 {
-  border-bottom: 3px solid #12ddc9;
+  border-bottom: 3px solid #11ddc6;
 }
 
 #featured-vidatios p {
@@ -236,10 +224,6 @@ h1 {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-}
-
-#featured-vidatios .browse a:hover {
-  background-color: #11AA9A;
 }
 
 #featured-vidatios .browse img {
