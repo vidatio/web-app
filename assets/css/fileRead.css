@@ -37,24 +37,11 @@ header .middle h1{
 /* Margin over 768px */
 
 #container-file-read #option-empty-table {
-  margin-right: 28px;
+  margin-right: 13px;
 }
 
 #container-file-read #option-browse-data {
-  margin-left: 28px;
-}
-
-#container-file-read #option-browse-filesystem {
-  margin-right: 28px;
-}
-
-#container-file-read #option-drag-and-drop {
-  margin-left: 28px;
-  margin-right: 28px;
-}
-
-#container-file-read #option-link {
-  margin-left: 28px;
+  margin-left: 13px;
 }
 
 /* Margin under 768px */
