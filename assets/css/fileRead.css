@@ -93,6 +93,11 @@ header .middle h1{
  * Set the input type=file opacity = 0
  * so the user only see the big button below
  **/
+
+#option-browse-filesystem{
+  position: relative;
+}
+
 #input-browse-filesystem {
   position: absolute;
   top: 0px;
@@ -110,12 +115,8 @@ header .middle h1{
  * HOVER EFFECTS
  **/
 
-#container-file-read .file-read #option-browse-filesystem:hover {
-  background: #11ddc6;
-}
-
-#container-file-read .other .area:hover {
-  background: #11ddc6;
+#container-file-read .file-read #option-browse-filesystem:hover, #container-file-read .other .area:hover {
+  background: #77EDDD;
 }
 
 /**
