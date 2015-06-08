@@ -22,9 +22,14 @@
     </div>
     <div>
       <div class="row" id="navigation">
-        <div class="col-sm-3" id="logo">vidatio</div>
-        <div class="col-sm-6 middle"><h1 class="underline-red">IMPORT</h1></div>
-        <div class="col-sm-3 menu-buttons">
+        <div class="col-xs-4 logo">
+          <a href="#">
+            <div id="logo"></div>
+            <span>vidatio</span>
+          </a>
+        </div>
+        <div class="col-xs-4 middle"><h1 class="underline-red">IMPORT</h1></div>
+        <div class="col-xs-4 menu-buttons">
           <a id="menu" href="#"></a>
           <a id="user" href="#"></a>
         </div>
@@ -51,32 +56,32 @@
         </div>
       </div>
     </div>
-    <div class="row file-read">
+    <div class="row file-read layout-3-columns">
       <div class="col-sm-4">
         <div class="area" id="option-browse-filesystem">
-            <div class="icon"></div>
-            <h2>DATEI AUSWÄHLEN</h2>
-            <input type="file" id="input-browse-filesystem" ng-file-select/>
+          <div class="icon"></div>
+          <h2>DATEI AUSWÄHLEN</h2>
+          <input type="file" id="input-browse-filesystem" ng-file-select/>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-drag-and-drop">
-            <div class="icon"></div>
-            <h2>DRAG AND DROP</h2>
+          <div class="icon"></div>
+          <h2>DRAG AND DROP</h2>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-link">
-            <div class="icon"></div>
-            <h2>LINK</h2>
+          <div class="icon"></div>
+          <h2>LINK</h2>
 
-            <div class="input-group form-link">
-              <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
+          <div class="input-group form-link">
+            <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default glyphicon glyphicon-arrow-right" id="link-submit-button"
                                     type="button" ng-click="load()"/>
                         </span>
-            </div>
+          </div>
         </div>
       </div>
     </div>
