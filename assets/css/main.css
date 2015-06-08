@@ -208,6 +208,16 @@ footer .container-fluid a {
   height: 30px;
 }
 
+footer .container-fluid .middle {
+  text-align: center;
+
+}
+
+footer .container-fluid .middle a:link {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 footer span.icon {
   width: 40px;
   height: 40px;
