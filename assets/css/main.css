@@ -37,16 +37,21 @@
   font-weight: normal;
   font-style: normal;
 }
-.icon:before {
+.icon {
+  position: relative;
+  top: 1px;
   display: inline-block;
   font-family: 'Vidatio-Icons';
-  text-decoration: none;
-  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .email:before {
-  content: "\e2";
+  content: "\e801";
 }
-
 /* Titles */
 
 h1, h2 {
