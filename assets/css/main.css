@@ -2,6 +2,8 @@
  * DEFAULTS
  **/
 
+/* Vidatio fonts */
+
 @font-face {
   font-family: Colaborate;
   src: url(../fonts/colaborate-regular.otf);
@@ -22,6 +24,30 @@
   font-style: normal;
   font-weight: normal;
 }
+
+/* Icon fonts */
+
+@font-face {
+  font-family: 'Vidatio-Icons';
+  src: url('assets/fonts/icons.eot');
+  src: url('assets/fonts/icons.eot?#iefix') format('embedded-opentype'),
+  url('assets/fonts/icons.woff') format('woff'),
+  url('assets/fonts/icons.ttf') format('truetype'),
+  url('assets/fonts/icons.svg#Vidatio-Icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.icon:before {
+  display: inline-block;
+  font-family: 'Vidatio-Icons';
+  text-decoration: none;
+  speak: none;
+}
+.email:before {
+  content: "\e2";
+}
+
+/* Titles */
 
 h1, h2 {
   padding: 0;
