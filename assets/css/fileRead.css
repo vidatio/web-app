@@ -104,9 +104,11 @@ header .middle h1{
   left: 0px;
   height: 100%;
   width: 100%;
+
   -moz-opacity: 0;
   filter: alpha(opacity:0);
   opacity: 0;
+
   z-index: 2;
   cursor: pointer;
 }
@@ -116,42 +118,20 @@ header .middle h1{
  **/
 
 #container-file-read .file-read #option-browse-filesystem:hover, #container-file-read .other .area:hover {
-  background: #77EDDD;
+  background: #ABF4E9;
 }
 
 /**
  * ICONS
  **/
 
-#container-file-read .icon {
+#container-file-read .option-icon {
   width: 100px;
-  margin: 60px auto 0px auto;
+  margin: 50px auto 0px auto;
   height: 100px;
-}
-
-#container-file-read #option-empty-table .icon {
-  background: url(../img/icons.png) -400px 0px no-repeat;
-  background-size: 1200px;
-}
-
-#container-file-read #option-browse-data .icon {
-  background: url(../img/icons.png) -100px 0px no-repeat;
-  background-size: 1200px;
-}
-
-#container-file-read #option-browse-filesystem .icon {
-  background: url(../img/icons.png) -700px -500px no-repeat;
-  background-size: 1200px;
-}
-
-#container-file-read #option-drag-and-drop .icon {
-  background: url(../img/icons.png) -300px 0px no-repeat;
-  background-size: 1200px;
-}
-
-#container-file-read #option-link .icon {
-  background: url(../img/icons.png) -200px 0px no-repeat;
-  background-size: 1200px;
+  font-size:75px;
+  color:#333;
+  text-align: center;
 }
 
 /**

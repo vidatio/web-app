@@ -25,33 +25,6 @@
   font-weight: normal;
 }
 
-/* Icon fonts */
-
-@font-face {
-  font-family: 'Vidatio-Icons';
-  src: url('assets/fonts/icons.eot');
-  src: url('assets/fonts/icons.eot?#iefix') format('embedded-opentype'),
-  url('assets/fonts/icons.woff') format('woff'),
-  url('assets/fonts/icons.ttf') format('truetype'),
-  url('assets/fonts/icons.svg#Vidatio-Icons') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.icon {
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  font-family: 'Vidatio-Icons';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.email:before {
-  content: "\e801";
-}
 /* Titles */
 
 h1, h2 {
@@ -95,7 +68,8 @@ h2 {
 }
 
 .btn-default:hover,
-.btn-default:active {
+.btn-default:active,
+.btn-default:focus {
   color: white;
   background-color: #11ddc6;
 }
@@ -156,26 +130,11 @@ header #navigation {
   height: 100px;
 }
 
-header .logo {
-  text-align: left;
-  line-height: 40px;
-  font-size: 24px;
-  height: 40px;
-}
-
-header .logo a, header .logo a:hover {
-  color: #000000;
-}
-
-header .logo #logo {
+header #logo {
   background: url(../img/logo.png) no-repeat;
-  background-size: 30px;
-  width: 40px;
+  background-size: 105px;
+  width: 105px;
   height: 40px;
-  float: left;
-}
-
-header .logo span {
   float: left;
 }
 
@@ -190,30 +149,32 @@ header .menu-buttons {
 }
 
 header .menu-buttons a {
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
   width: 40px;
   height: 40px;
   float: right;
+
   margin-left: 3px;
+
+  background: #333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
-header .menu-buttons #user {
-  background: url(../img/icons.png) -255px -5px;
-  background-size: 600px;
+header .menu-buttons a:hover {
+  background: #3f7773;
+  color: white;
 }
 
-header .menu-buttons #user:hover {
-  background: url(../img/icons.png) -255px -55px;
-  background-size: 600px;
+header .menu-buttons a#user {
+  font-size: 20px;
 }
 
-header .menu-buttons #menu {
-  background: url(../img/icons.png) -405px -5px;
-  background-size: 600px;
-}
-
-header .menu-buttons #menu:hover {
-  background: url(../img/icons.png) -405px -55px;
-  background-size: 600px;
+header .menu-buttons a#menu {
+  font-size: 25px;
 }
 
 /**
@@ -241,7 +202,6 @@ footer .container-fluid a {
 
 footer .container-fluid .middle {
   text-align: center;
-
 }
 
 footer .container-fluid .middle a:link {
@@ -275,6 +235,6 @@ a:link, a {
   text-decoration: none;
 }
 
-a:hover, a:active {
+a:hover, a:active, a:focus {
   color: #11ddc6;
 }
