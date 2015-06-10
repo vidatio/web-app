@@ -1,34 +1,12 @@
 /**
  * GENERAL STYLING
  **/
-.thin-font {
-  font-family: Colaborate-Thin, Arial, Helvetica, sans-serif;
-}
-
-.light-font {
-  font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
-}
-
-.bold-font {
-  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
-}
-
-.container-fluid.content-wrapper {
-  padding: 0 !important;
-  background-color: #FAFAFA;
-}
-
-.content {
-  max-width: 1024px;
-  margin: 0 auto;
-}
 
 section {
   padding: 50px 0;
 }
 
 h1 {
-  display: inline-block;
   margin-bottom: 20px;
 }
 
@@ -135,7 +113,6 @@ h1 {
   padding-top: 15px;
   padding-bottom: 15px;
 
-
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -177,14 +154,11 @@ h1 {
   margin-bottom: -200px;
   color: #fff;
   padding-top: 0;
+  background: url(../img/dotgrid.png) #333333;
 }
 
-#usp .api,
-#usp .live-data,
-#usp .open-data {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto;
+.usp-icon {
+  font-size: 90px;
 }
 
 #usp .api {
@@ -216,10 +190,6 @@ h1 {
 
 #featured-vidatios img {
   width: 100%;
-}
-
-#featured-vidatios h1 {
-  border-bottom: 3px solid #11ddc6;
 }
 
 #featured-vidatios p {
@@ -254,43 +224,6 @@ h1 {
   width: 100%;
 }
 
-#popular-categories h1 {
-  border-bottom: 3px solid #ff5347;
-}
-
 /**
  * CUSTOMERS SECTION
  **/
-
-footer {
-  height: 200px;
-}
-
-footer ul {
-  display: inline-block;
-  margin: 20px 0;
-  padding: 0;
-}
-
-footer ul li {
-  list-style-type: none;
-}
-
-footer ul li a {
-  color: #fff;
-}
-
-footer .contact {
-  text-align: center;
-  font-size: 20px;
-}
-
-
-/**
- * Reset Lukas' changes to bootstrap
- **/
-
-.col-sm-4, .col-sm-6, .col-sm-12 {
-  padding-left: 15px;
-  padding-right: 15px;
-}

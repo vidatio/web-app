@@ -2,25 +2,35 @@
  * DEFAULTS
  **/
 
+/* Vidatio fonts */
+
 @font-face {
   font-family: Colaborate;
-  src: url(../fonts/ColabReg.otf);
+  src: url(../fonts/colaborate-regular.otf);
   font-style: normal;
   font-weight: normal;
 }
 
 @font-face {
   font-family: Colaborate-Bold;
-  src: url(../fonts/ColabBol.otf);
+  src: url(../fonts/colaborate-bold.otf);
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 @font-face {
   font-family: Colaborate-Light;
-  src: url(../fonts/ColabLig.otf);
+  src: url(../fonts/colaborate-light.otf);
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
+}
+
+/* Titles */
+
+h1, h2 {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
 }
 
 @font-face {
@@ -31,15 +41,35 @@
 }
 
 h1 {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
   font-size: 30px;
 }
 
 h2 {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+h3 {
+  font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
 
 .dotgrid {
   background-image: url(../img/dotgrid-dunkel-transp.png);
+}
+
+.underline-red {
+  border-bottom: 3px solid #ff5444;
+}
+
+.underline-turqoise {
+  border-bottom: 3px solid #11ddc6;
+}
+
+.content {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 /**
@@ -51,8 +81,7 @@ h2 {
   padding: 0;
 }
 
-.col-sm-4, .col-sm-6, .col-sm-12 {
-  padding: 0;
+.col-sm-4, .col-sm-3, .col-sm-6, .col-sm-12 {
   margin: 0;
 }
 
@@ -61,9 +90,10 @@ h2 {
 }
 
 .btn-default:hover,
-.btn-default:active {
+.btn-default:active,
+.btn-default:focus {
   color: white;
-  background-color: #12ddc9;
+  background-color: #11ddc6;
 }
 
 /**
@@ -74,10 +104,11 @@ html, body {
   padding: 0;
   margin: 0;
   width: 100%;
-  min-width: 256px;
+  min-width: 480px;
   height: 100%;
   font-family: Colaborate, Arial, Helvetica, sans-serif;
   font-size: 12px;
+  background-color: #FAFAFA;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -107,8 +138,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wrapper {
-  min-height:80vh;
-  background: url(../img/pattern_bright.jpg);
+  min-height: 80vh;
+  background: #FAFAFA;
+}
+
+/* row layout with 3 columns and margin between */
+
+.layout-3-columns .col-sm-4:first-child > div {
+  margin-right: 17.66px;
+}
+
+.layout-3-columns .col-sm-4:nth-child(2n) > div {
+  margin-right: 8.33px;
+  margin-left: 8.33px;
+}
+
+.layout-3-columns .col-sm-4:last-child > div {
+  margin-left: 17.66px;
 }
 
 /**
@@ -116,12 +162,12 @@ h1, h2, h3, h4, h5, h6 {
  **/
 
 header #line-right {
-  background: #ff5347;
+  background: #ff5444;
   height: 8px;
 }
 
 header #line-left {
-  background: #12ddc9;
+  background: #11ddc6;
   height: 8px;
 }
 
@@ -134,44 +180,50 @@ header #navigation {
 }
 
 header #logo {
-  text-align: left;
-  padding-left: 50px;
-  line-height: 60px;
   background: url(../img/logo.png) no-repeat;
-  background-size: 40px;
-  font-size: 24px;
-  height: 60px;
+  background-size: 105px;
+  width: 105px;
+  height: 40px;
+  float: left;
+}
+
+header .middle {
+  text-align: center;
+  height: 100%;
 }
 
 header .menu-buttons {
-  height: 40px;
+  height: 100%;
   text-align: right;
 }
 
 header .menu-buttons a {
-  width: 50px;
-  height: 50px;
-  float: right;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  display:inline-block;
+
+  margin-left: 3px;
+
+  background: #333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 
-header .menu-buttons #user {
-  background: url(../img/icons.png) -250px 0px;
-  background-size: 600px;
+header .menu-buttons a:hover {
+  background: #3f7773;
+  color: white;
 }
 
-header .menu-buttons #user:hover {
-  background: url(../img/icons.png) -250px -50px;
-  background-size: 600px;
+header .menu-buttons a#user {
+  font-size: 20px;
 }
 
-header .menu-buttons #menu {
-  background: url(../img/icons.png) -400px 0px;
-  background-size: 600px;
-}
-
-header .menu-buttons #menu:hover {
-  background: url(../img/icons.png) -400px -50px;
-  background-size: 600px;
+header .menu-buttons a#menu {
+  font-size: 25px;
 }
 
 .layout-3-columns .col-sm-4:first-child .col-wrapper {
@@ -197,19 +249,32 @@ header .menu-buttons #menu:hover {
  * FOOTER
  **/
 
-footer.container-fluid {
+footer {
   color: white;
-  width: 100%;
-  font-size: 16px;
-  text-align: center;
+  max-width: 100%;
+  font-size: 12px;
   padding: 20px;
   min-height: 20vh;
-  background: url(../img/pattern_dark.jpg);
+  background: url(../img/dotgrid.png) #333333;
 }
 
-footer a {
+footer .container-fluid {
+  max-width: 1024px;
+}
+
+footer .container-fluid a {
   display: inline-block;
-  margin: 0 20px 0px 20px;
+  padding: 0 5px 0px 5px;
+  height: 30px;
+}
+
+footer .container-fluid .middle {
+  text-align: center;
+}
+
+footer .container-fluid .middle a:link {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 footer span.icon {
@@ -217,26 +282,6 @@ footer span.icon {
   height: 40px;
   margin-right: 10px;
   float: left;
-}
-
-footer span.icon.phone {
-  background: url(../img/icons.png) 0px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.email {
-  background: url(../img/icons.png) -40px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.phone {
-  background: url(../img/icons.png) 0px -440px;
-  background-size: 480px auto;
-}
-
-footer span.icon.email {
-  background: url(../img/icons.png) -40px -440px;
-  background-size: 480px auto;
 }
 
 footer span.text {
@@ -247,20 +292,17 @@ footer span.text {
   float: right;
 }
 
-/* TODO: Reset focus state for btn-default button?! */
-
 /**
  * LINK STYLES
  */
 
-a:link,
-a:focus {
+a:link, a:visited {
   color: white;
   text-decoration: none;
 }
 
-a:hover, a:active {
-  color: #12ddc9;
+a:hover, a:active, a:focus {
+  color: #11ddc6;
 }
 
 
@@ -288,4 +330,20 @@ a:hover, a:active {
 .button:hover,
 .button:hover span {
   background-color: #11AA9A;
+  color: #fff;
+}
+
+/**
+ * Font classes for special cases
+ */
+.thin-font {
+  font-family: Colaborate-Thin, Arial, Helvetica, sans-serif;
+}
+
+.light-font {
+  font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
+}
+
+.bold-font {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
 }

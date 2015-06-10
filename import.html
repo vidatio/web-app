@@ -6,9 +6,9 @@
   <title>Vidatio</title>
 
   <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
-  <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 
+  <link rel="stylesheet" href="assets/css/icons.css"/>
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="assets/css/fileRead.css"/>
 </head>
@@ -22,11 +22,15 @@
     </div>
     <div>
       <div class="row" id="navigation">
-        <div class="col-sm-4" id="logo">vidatio</div>
-        <div class="col-sm-4 breadcrumbs"></div>
-        <div class="col-sm-4 menu-buttons">
-          <a id="menu" href="#"></a>
-          <a id="user" href="#"></a>
+        <div class="col-xs-4 logo">
+          <a href="#">
+            <div id="logo"></div>
+          </a>
+        </div>
+        <div class="col-xs-4 middle"><h1 class="underline-red">IMPORT</h1></div>
+        <div class="col-xs-4 menu-buttons">
+          <a id="menu" href="#" class="icon-profile"></a>
+          <a id="user" href="#" class="icon-hamburger"></a>
         </div>
       </div>
     </div>
@@ -37,7 +41,7 @@
       <div class="col-sm-6">
         <div class="area" id="option-empty-table">
           <a href="#">
-            <div class="icon"></div>
+            <div class="option-icon icon-table"></div>
             <h2>LEERE TABELLE</h2>
           </a>
         </div>
@@ -45,38 +49,38 @@
       <div class="col-sm-6">
         <div class="area" id="option-browse-data">
           <a href="#">
-            <div class="icon"></div>
+            <div class="option-icon icon-opendata"></div>
             <h2>ALLE DATENSÄTZE</h2>
           </a>
         </div>
       </div>
     </div>
-    <div class="row file-read">
+    <div class="row file-read layout-3-columns">
       <div class="col-sm-4">
         <div class="area" id="option-browse-filesystem">
-            <div class="icon"></div>
-            <h2>DATEI AUSWÄHLEN</h2>
-            <input type="file" id="input-browse-filesystem" ng-file-select/>
+          <div class="option-icon icon-searchfiles"></div>
+          <h2>DATEI AUSWÄHLEN</h2>
+          <input type="file" id="input-browse-filesystem" ng-file-select/>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-drag-and-drop">
-            <div class="icon"></div>
-            <h2>DRAG AND DROP</h2>
+          <div class="option-icon icon-draganddrop"></div>
+          <h2>DRAG AND DROP</h2>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-link">
-            <div class="icon"></div>
-            <h2>LINK</h2>
+          <div class="option-icon icon-link"></div>
+          <h2>LINK</h2>
 
-            <div class="input-group form-link">
-              <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
+          <div class="input-group form-link">
+            <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
                         <span class="input-group-btn">
                             <button class="btn btn-default glyphicon glyphicon-arrow-right" id="link-submit-button"
                                     type="button" ng-click="load()"/>
                         </span>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -94,20 +98,25 @@
   </div>
 </div>
 
-<footer class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <a href="tel:+436649966496">
-        <span class="icon phone"></span>
-        <span class="text"> +43 664 99 66 496</span>
-      </a>
-      <a href="mailto:gbeschbacher@sbg.at">
-        <span class="icon email"></span>
-        <span class="text">gbeschbacher@sbg.at</span>
-      </a>
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-4">
+        <a href="#">Über das Projekt</a> |
+        <a href="#">API</a> |
+        <a href="#">Team</a> |
+        <a href="#">Impressum</a>
+      </div>
+      <div class="col-xs-4 middle">
+        <a href="mailto:gbeschbacher@sbg.at" class="icon-mail">gbeschbacher@sbg.at</a>
+      </div>
+      <div class="col-xs-4">
+      </div>
     </div>
   </div>
 </footer>
+
+
 
 <script src="bower_components/angular/angular.js"></script>
 

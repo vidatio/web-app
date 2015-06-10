@@ -8,12 +8,13 @@
   <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
   <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
   <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/icons.css" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="assets/css/index.css"/>
 </head>
-<body>
-<div class="container-fluid content-wrapper">
+<body class="container-fluid">
+<div class="content-wrapper">
   <header>
     <div class="row">
       <div class="col-xs-6" id="line-right"></div>
@@ -21,11 +22,14 @@
     </div>
     <div>
       <div class="row" id="navigation">
-        <div class="col-sm-4" id="logo">vidatio</div>
-        <div class="col-sm-4 breadcrumbs"></div>
-        <div class="col-sm-4 menu-buttons">
-          <a id="menu" href="#"></a>
-          <a id="user" href="#"></a>
+        <div class="col-xs-6 logo">
+          <a href="#">
+            <div id="logo"></div>
+          </a>
+        </div>
+        <div class="col-xs-6 menu-buttons">
+          <a id="menu" href="#" class="icon-profile"></a>
+          <a id="user" href="#" class="icon-hamburger"></a>
         </div>
       </div>
     </div>
@@ -35,7 +39,7 @@
     <div class="content">
       <div class="row">
         <div class="col-sm-12">
-          <aside class="slogan thin-font">Hier steht der Slogan.</aside>
+          <aside class="slogan light-font">Hier steht der Slogan.</aside>
         </div>
       </div>
 
@@ -62,35 +66,34 @@
     </div>
   </section>
 
-  <section id="usp" class="bg-dark dotgrid">
+  <section id="usp">
     <img src="assets/img/landingpage-shape.png" class="shape" />
     <div class="content">
       <div class="row">
         <div class="col-sm-4">
-          <div class="api"></div>
-          <h1 class="bold-font">API</h1>
+          <div class="usp-icon icon-api"></div>
+          <h2>API</h2>
           <p>Vidatio bietet eine gute API</p>
         </div>
         <div class="col-sm-4">
-          <div class="live-data"></div>
-          <h1 class="bold-font">LIVE DATA</h1>
+          <div class="usp-icon icon-livedata"></div>
+          <h2>LIVE DATA</h2>
           <p>Vidatio biete Daten in Echtzeit</p>
         </div>
         <div class="col-sm-4">
-          <div class="open-data"></div>
-          <h1 class="bold-font">OPEN DATA</h1>
+          <div class="usp-icon icon-opendata"></div>
+          <h2>OPEN DATA</h2>
           <p>Vidatio unterstützt freien Zugang zu Daten</p>
         </div>
       </div>
     </div>
   </section>
 
-
   <section id="featured-vidatios">
     <div class="content">
       <div class="row">
         <div class="col-sm-12">
-          <h1 class="bold-font">BELIEBTE VIDATIOS</h1>
+          <h1 class="underline-turqoise">BELIEBTE VIDATIOS</h1>
         </div>
       </div>
       <div class="row layout-3-columns">
@@ -123,7 +126,7 @@
     <div class="content">
       <div class="row">
         <div class="col-sm-12">
-          <h1 class="bold-font">BELIEBTE KATEGORIEN</h1>
+          <h1 class="underline-red">BELIEBTE KATEGORIEN</h1>
         </div>
       </div>
     </div>
@@ -131,7 +134,7 @@
 
   <section id="customers">
     <div class="content">
-      <h1 class="bold-font">UNSERE NUTZER</h1>
+      <h1 class="underline-turqoise">UNSERE NUTZER</h1>
       <div class="row">
         <div class="col-sm-3">
           <h2>Logo Platzhalter</h2>
@@ -149,28 +152,24 @@
     </div>
   </section>
 
-  <footer class="bg-dark dotgrid">
+
+  <footer>
     <div class="content">
-      <ul>
-        <li>
-          <a href="#">Über das Projekt</a>
-        </li>
-        <li>
-          <a href="#">Team</a>
-        </li>
-        <li>
-          <a href="#">API</a>
-        </li>
-        <li>
+      <div class="row">
+        <div class="col-xs-4">
+          <a href="#">Über das Projekt</a> |
+          <a href="#">API</a> |
+          <a href="#">Team</a> |
           <a href="#">Impressum</a>
-        </li>
-      </ul>
-      <div class="contact">
-        <a href="mailto:info@vidat.io">info@vidat.io</a>
+        </div>
+        <div class="col-xs-4 middle">
+          <a href="mailto:gbeschbacher@sbg.at" class="icon-mail">gbeschbacher@sbg.at</a>
+        </div>
+        <div class="col-xs-4">
+        </div>
       </div>
     </div>
   </footer>
-</div>
 
 <script src="bower_components/angular/angular.js"></script>
 <script src="assets/js/main.js"></script>

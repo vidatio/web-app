@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="vidatio">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vidatio</title>
+
+  <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+  <link href="bower_components/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/fileRead.css"/>
+  <link rel="stylesheet" href="assets/css/editor.css"/>
+</head>
+<body ng-file-drop-start>
+
+<div class="wrapper">
+  <header class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6" id="line-right"></div>
+      <div class="col-xs-6" id="line-left"></div>
+    </div>
+    <div>
+      <div class="row" id="navigation">
+        <div class="col-sm-3" id="logo">vidatio</div>
+        <div class="col-sm-6 middle">
+          <div class="breadcrumbs">
+            <div class="breadcrumb border-left">DATEN</div>
+            <div class="breadcrumb">VISUALISIERUNG</div>
+            <div class="breadcrumb border-right">SHARE</div>
+          </div>
+        </div>
+        <div class="col-sm-3 menu-buttons">
+          <a id="menu" href="#"></a>
+          <a id="user" href="#"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="container-data-table" class="container-fluid" ng-controller="DataTableCtrl">
+    <div class="row area">
+      <div class="col-sm-12">
+        <hot-table id="data-table" datarows="rows" settings="{afterInit: afterInit}">
+        </hot-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <a href="tel:+436649966496">
+        <span class="icon phone"></span>
+        <span class="text"> +43 664 99 66 496</span>
+      </a>
+      <a href="mailto:gbeschbacher@sbg.at">
+        <span class="icon email"></span>
+        <span class="text">gbeschbacher@sbg.at</span>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script src="bower_components/angular/angular.js"></script>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/controller/main.js"></script>
+<script src="assets/js/controller/fileRead.js"></script>
+<script src="assets/js/directives/ngFileSelect.js"></script>
+<script src="assets/js/directives/ngFileDropStart.js"></script>
+<script src="assets/js/directives/ngFileDropEnd.js"></script>
+<script src="assets/js/services/fileReader.js"></script>
+</body>
+</html>
