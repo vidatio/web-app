@@ -147,6 +147,10 @@ h1 {
 
 
 #usp {
+  /*
+     move usp section upwards that the shape surrounds "GET STARTED" button
+     move only 180px to bypass a bug with firefox
+  */
   margin-top: -180px;
   color: #fff;
   padding-top: 0;
