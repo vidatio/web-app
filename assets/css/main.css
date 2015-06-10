@@ -30,6 +30,7 @@
 h1, h2 {
   padding: 0;
   margin: 0;
+  display: inline-block;
 }
 
 h1 {
@@ -38,6 +39,11 @@ h1 {
 }
 
 h2 {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+
+h3 {
   font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
   font-size: 16px;
 }
@@ -86,11 +92,16 @@ html, body {
   height: 100%;
   font-family: Colaborate, Arial, Helvetica, sans-serif;
   font-size: 12px;
+  background: #FAFAFA;
 }
 
 .wrapper {
   min-height: 80vh;
-  background: #FAFAFA;
+}
+
+.content {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
 /* row layout with 3 columns and margin between */
@@ -141,6 +152,7 @@ header #logo {
 header .middle {
   text-align: center;
   height: 100%;
+  font-weight: bold;
 }
 
 header .menu-buttons {
@@ -154,7 +166,7 @@ header .menu-buttons a {
   text-align: center;
   width: 40px;
   height: 40px;
-  display:inline-block;
+  display: inline-block;
 
   margin-left: 3px;
 
@@ -190,10 +202,6 @@ footer {
   background: url(../img/dotgrid.png) #333333;
 }
 
-footer .container-fluid {
-  max-width: 1024px;
-}
-
 footer .container-fluid a {
   display: inline-block;
   padding: 0 5px 0px 5px;
@@ -223,8 +231,6 @@ footer span.text {
   vertical-align: middle;
   float: right;
 }
-
-/* TODO: Reset focus state for btn-default button?! */
 
 /**
  * LINK STYLES

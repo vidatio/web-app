@@ -15,7 +15,7 @@
 <body ng-file-drop-start>
 
 <div class="wrapper">
-  <header class="container-fluid">
+  <header>
     <div class="row">
       <div class="col-xs-6" id="line-right"></div>
       <div class="col-xs-6" id="line-left"></div>
@@ -36,13 +36,13 @@
     </div>
   </header>
 
-  <div class="container-fluid" id="container-file-read" ng-controller="FileReadCtrl">
+  <div id="container-file-read" class="content" ng-controller="FileReadCtrl">
     <div class="row other">
       <div class="col-sm-6">
         <div class="area" id="option-empty-table">
           <a href="#">
             <div class="option-icon icon-table"></div>
-            <h2>LEERE TABELLE</h2>
+            <h3>LEERE TABELLE</h3>
           </a>
         </div>
       </div>
@@ -50,7 +50,7 @@
         <div class="area" id="option-browse-data">
           <a href="#">
             <div class="option-icon icon-opendata"></div>
-            <h2>ALLE DATENSÄTZE</h2>
+            <h3>ALLE DATENSÄTZE</h3>
           </a>
         </div>
       </div>
@@ -59,20 +59,20 @@
       <div class="col-sm-4">
         <div class="area" id="option-browse-filesystem">
           <div class="option-icon icon-searchfiles"></div>
-          <h2>DATEI AUSWÄHLEN</h2>
+          <h3>DATEI AUSWÄHLEN</h3>
           <input type="file" id="input-browse-filesystem" ng-file-select/>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-drag-and-drop">
           <div class="option-icon icon-draganddrop"></div>
-          <h2>DRAG AND DROP</h2>
+          <h3>DRAG AND DROP</h3>
         </div>
       </div>
       <div class="col-sm-4">
         <div class="area" id="option-link">
           <div class="option-icon icon-link"></div>
-          <h2>LINK</h2>
+          <h3>LINK</h3>
 
           <div class="input-group form-link">
             <input type="text" class="form-control" placeholder="Link zur Datei..." ng-model="link"/>
@@ -99,7 +99,7 @@
 </div>
 
 <footer>
-  <div class="container-fluid">
+  <div class="content">
     <div class="row">
       <div class="col-xs-4">
         <a href="#">Über das Projekt</a> |
@@ -115,8 +115,6 @@
     </div>
   </div>
 </footer>
-
-
 
 <script src="bower_components/angular/angular.js"></script>
 
