@@ -14,9 +14,7 @@ h1 {
  * INTRO SECTION
  **/
 #intro {
-  position: relative;
   padding: 0;
-  z-index: 50;
 }
 
 #intro .slogan {
@@ -149,9 +147,7 @@ h1 {
 
 
 #usp {
-  position: relative;
-  top: -200px;
-  margin-bottom: -200px;
+  margin-top: -180px;
   color: #fff;
   padding-top: 0;
   background: url(../img/dotgrid.png) #333333;
@@ -159,21 +155,6 @@ h1 {
 
 .usp-icon {
   font-size: 90px;
-}
-
-#usp .api {
-  background: url(../img/icons.png) 0px -200px no-repeat;
-  background-size:1200px;
-}
-
-#usp .live-data {
-  background: url(../img/icons.png) -200px -200px no-repeat;
-  background-size:1200px;
-}
-
-#usp .open-data {
-  background: url(../img/icons.png) -100px -200px no-repeat;
-  background-size:1200px;
 }
 
 #usp div {
