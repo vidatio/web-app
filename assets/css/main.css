@@ -25,19 +25,35 @@
   font-weight: normal;
 }
 
+@font-face {
+  font-family: Colaborate-Thin;
+  src: url(../fonts/colaborate-thin.otf);
+  font-style: normal;
+  font-weight: bold;
+}
+
+/**
+ * Font classes for special cases
+ */
+
+.thin-font {
+  font-family: Colaborate-Thin, Arial, Helvetica, sans-serif;
+}
+
+.light-font {
+  font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
+}
+
+.bold-font {
+  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
+}
+
 /* Titles */
 
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 0;
   display: inline-block;
-}
-
-@font-face {
-  font-family: Colaborate-Thin;
-  src: url(../fonts/ColabThi.otf);
-  font-style: normal;
-  font-weight: bold;
 }
 
 h1 {
@@ -67,9 +83,20 @@ h3 {
   border-bottom: 3px solid #11ddc6;
 }
 
-.content {
-  max-width: 1024px;
-  margin: 0 auto;
+.font-red {
+  color: #ff5347;
+}
+
+.font-cyan{
+  color: #11ddc6;
+}
+
+.bg-cyan{
+  background: #11ddc6;
+}
+
+.bg-dark {
+  background-color: #333;
 }
 
 /**
@@ -111,25 +138,11 @@ html, body {
   background-color: #FAFAFA;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+.content {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-.font-red {
-  color: #ff5347;
-}
-
-.font-cyan{
-  color: #11ddc6;
-}
-
-.bg-cyan{
-  background: #11ddc6;
-}
-
-.bg-dark {
-  background-color: #333;
-}
 
 .bg-wrapper {
   width: 100%;
@@ -305,7 +318,6 @@ a:hover, a:active, a:focus {
   color: #11ddc6;
 }
 
-
 /**
  * BUTTON STYLES
  */
@@ -331,19 +343,4 @@ a:hover, a:active, a:focus {
 .button:hover span {
   background-color: #11AA9A;
   color: #fff;
-}
-
-/**
- * Font classes for special cases
- */
-.thin-font {
-  font-family: Colaborate-Thin, Arial, Helvetica, sans-serif;
-}
-
-.light-font {
-  font-family: Colaborate-Light, Arial, Helvetica, sans-serif;
-}
-
-.bold-font {
-  font-family: Colaborate-Bold, Arial, Helvetica, sans-serif;
 }
