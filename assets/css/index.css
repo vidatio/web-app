@@ -197,9 +197,9 @@ h1 {
 #featured-vidatios .browse a {
   padding: 10px;
   color: #FFF;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 #featured-vidatios .browse img {

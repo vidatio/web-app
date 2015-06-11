@@ -222,9 +222,9 @@ header .menu-buttons a {
   margin-left: 3px;
 
   background: #333;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
 header .menu-buttons a:hover {
