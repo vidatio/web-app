@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * DEFAULTS
  **/
@@ -256,6 +257,46 @@ header .menu-buttons a#menu {
   .layout-3-columns .col-sm-4 .col-wrapper {
     margin: 0 !important;
   }
+}
+
+#footer {
+  color: white;
+  background: url(../img/pattern_dark.jpg);
+  bottom: 0px;
+  width: 100%;
+  font-size:16px;
+  text-align: center;
+  padding:20px;
+}
+
+#footer a{
+  display:inline-block;
+  margin:0 20px 0px 20px;
+}
+
+#footer span.icon{
+  width:40px;
+  height:40px;
+  margin-right:10px;
+  float:left;
+}
+
+#footer span.icon.phone{
+  background: url(../img/icons.png) 0px -440px;
+  background-size:480px auto;
+}
+
+#footer span.icon.email{
+  background: url(../img/icons.png) -40px -440px;
+  background-size:480px auto;
+}
+
+#footer span.text{
+  width:auto;
+  height:40px;
+  line-height:40px;
+  vertical-align: middle;
+  float:right;
 }
 
 /**

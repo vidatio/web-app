@@ -1,0 +1,56 @@
+html, body {
+  min-width: 500px;
+  min-height: 550px;
+}
+
+#container-landing-page {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 500px;
+  height: auto;
+  margin-left: -250px;
+  margin-top: -255px;
+}
+
+#row-one img {
+  padding: 20px;
+  float: left;
+  width: 300px;
+}
+
+#container-landing-page #slogan {
+  font-size: 30px;
+  font-family: Colaborate-Light;
+  color: #555;
+  margin-top: -20px;
+  padding-left: 135px;
+
+}
+
+#container-landing-page #row-two {
+  font-size: 90px;
+  font-weight: bold;
+  line-height: 90px;
+  color: #00DBC7;
+  margin-top: 50px;
+  font-family: Colaborate-Bold;
+}
+
+#row-two #text-two {
+  text-align: right;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+}
+
+@media (max-height: 550px) {
+  #container-landing-page {
+    position: inherit;
+    margin: 0 auto;
+  }
+}
+
