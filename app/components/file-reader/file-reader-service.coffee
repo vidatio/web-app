@@ -5,7 +5,7 @@
 
 app = angular.module "app.services"
 
-app.factory 'FileReader', [
+app.service 'FileReader', [
     "$q"
     "$log"
     ($q, $log) ->
