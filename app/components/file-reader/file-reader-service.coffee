@@ -1,4 +1,4 @@
-# File-Reader Factory
+# File-Reader Service
 # ======================
 
 "use strict"
@@ -7,43 +7,31 @@ app = angular.module "app.services"
 
 app.service 'FileReader', [
     "$q"
-    "$log"
-    ($q, $log) ->
+    ($q) ->
 
-        onLoad = (reader, deferred, scope) ->
-            ->
-                scope.$apply ->
-                    deferred.resolve reader.result
-                    return
-                return
+      Reader ->
+        this.reader = new FileReader()
+        this.deferred = undefined
+        this.progress = 0
 
-        onError = (reader, deferred, scope) ->
-            ->
-                scope.$apply ->
-                    deferred.reject reader.result
-                    return
-                return
+      Reader.prototype.readAsDataUrl -> (file)
+        this.deferred = $q.defer()
+        this.progress = 0
 
-        onProgress = (reader, scope) ->
-            (event) ->
-                scope.$broadcast 'fileProgress',
-                    total: event.total
-                    loaded: event.loaded
-                return
+        this.reader.onload ->
+          this.deferred.resolve this.reader.result
+        .bind(this)
 
-        getReader = (deferred, scope) ->
-            reader = new FileReader
-            reader.onload = onLoad(reader, deferred, scope)
-            reader.onerror = onError(reader, deferred, scope)
-            reader.onprogress = onProgress(reader, scope)
-            reader
+        this.reader.onerror ->
+          this.deferred.reject this.reader.result
+        .bind(this)
 
-        readAsDataUrl = (file, scope) ->
-            deferred = $q.defer()
-            reader = getReader(deferred, scope)
-            reader.readAsText file
-            deferred.promise
+        this.reader.onprogress -> (event)
+          this.progress = event.loaded / event.total
+        .bind(this)
 
-        { readAsDataUrl: readAsDataUrl }
+        this.reader.readAsText file
+        this.deferred.promise
 
+      new Reader()
 ]

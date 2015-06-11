@@ -1,48 +1,34 @@
-angular.module('vidatio').factory('FileReader', function ($q, $log) {
-  var onLoad = function (reader, deferred, scope) {
-    return function () {
-      scope.$apply(function () {
-        deferred.resolve(reader.result);
-      });
+angular.module("vidatio").service("FileReaderService",
+  ["$q", function ($q) {
+
+    function Reader() {
+      this.reader = new FileReader();
+      this.deferred = undefined;
+      this.progress = 0
+    }
+
+    Reader.prototype.readAsDataUrl = function (file) {
+
+      // maybe there's a scope apply necessary here
+      this.deferred = $q.defer();
+      this.progress = 0;
+
+      this.reader.onload = function () {
+        this.deferred.resolve(this.reader.result);
+      }.bind(this);
+
+      this.reader.onerror = function () {
+        this.deferred.reject(this.reader.result);
+      }.bind(this);
+
+      this.reader.onprogress = function (event) {
+        this.progress = event.loaded / event.total;
+      }.bind(this);
+
+      this.reader.readAsText(file);
+      return this.deferred.promise;
     };
-  };
 
-  var onError = function (reader, deferred, scope) {
-    return function () {
-      scope.$apply(function () {
-        deferred.reject(reader.result);
-      });
-    };
-  };
-
-  var onProgress = function (reader, scope) {
-    return function (event) {
-      scope.$broadcast("fileProgress",
-        {
-          total: event.total,
-          loaded: event.loaded
-        });
-    };
-  };
-
-  var getReader = function (deferred, scope) {
-    var reader = new FileReader();
-    reader.onload = onLoad(reader, deferred, scope);
-    reader.onerror = onError(reader, deferred, scope);
-    reader.onprogress = onProgress(reader, scope);
-    return reader;
-  };
-
-  var readAsDataUrl = function (file, scope) {
-    var deferred = $q.defer();
-
-    var reader = getReader(deferred, scope);
-    reader.readAsText(file);
-
-    return deferred.promise;
-  };
-
-  return {
-    readAsDataUrl: readAsDataUrl
-  };
-});
+    return new Reader;
+  }]
+);
