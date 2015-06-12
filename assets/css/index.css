@@ -32,8 +32,6 @@ h1 {
   }
 }
 
-
-
 #intro .promo .video {
   width: 100%;
   height: 200px;
@@ -123,7 +121,7 @@ h1 {
 @media(max-width: 1200px) {
   #intro .get-started {
     margin-top:100px;
-    margin-bottom:8c0px;
+    margin-bottom:0px;
   }
 }
 
