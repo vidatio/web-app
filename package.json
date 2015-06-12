@@ -41,6 +41,7 @@
     "gulp-jade": "^1.0.0",
     "gulp-karma": "0.0.4",
     "gulp-protractor": "^1.0.0",
+    "gulp-rename": "^1.2.2",
     "gulp-stylus": "^2.0.3",
     "gulp-uglify": "^1.2.0",
     "jasmine-core": "^2.3.2",
