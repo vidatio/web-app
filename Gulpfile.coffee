@@ -14,6 +14,8 @@ groc          = require "gulp-groc"
 del           = require "del"
 cache         = require "gulp-cached"
 connect       = require "gulp-connect"
+stylus        = require "gulp-stylus"
+rename        = require "gulp-rename"
 {protractor}  = require "gulp-protractor"
 
 DOC_FILES = [
@@ -65,10 +67,12 @@ BUILD =
         "!./app/*/**/*_test.coffee" #exclude test files
         "!./app/**/*_e2e.coffee"    #exclude e2e test files
         "./app/**/*.jade"
+        "./app/**/*.styl"
     ]
     dirs:
         out: "./build"
         js:  "./build/js"
+        css: "./build/css"
         docs: "./docs"
     module: "app"
     app: "app.js"
@@ -110,6 +114,7 @@ gulp.task "build",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "lint"
+        "stylus"
         "copy"
     ],
     ->
@@ -129,6 +134,7 @@ gulp.task "build:production",
     [
         "clean:build"
         "lint"
+        "stylus"
         "copy:css"
         "copy:fonts"
         "copy:img"
@@ -143,6 +149,15 @@ gulp.task "build:production",
             .pipe gif "*.js", concat( BUILD.app )
             .pipe uglify()
             .pipe gulp.dest( BUILD.dirs.js )
+
+gulp.task "stylus",
+  "Converts Stylus in CSS files",
+  [],
+  ->
+    gulp.src BUILD.files
+    .pipe gif "*.styl", continueOnError( stylus({ compress: true }) )
+    .pipe gif "*.css", continueOnError( rename({ dirname: '' }) ) # remove sub-directories assets/css
+    .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
 
 
 gulp.task "default",
