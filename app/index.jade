@@ -1,48 +1,129 @@
 doctype html
-html
-    head
-        title Animals WebApp
-        //- must be replaced in production
-        base(href="/")
-        link(rel="stylesheet", href="/css/bootstrap.css")
-        link(rel="stylesheet", href="/css/bootstrap-theme.css")
-        style
-            | body { padding-top: 70px; }
-        meta(charset="utf-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
-    body(ng-app="app", ng-controller="AppCtrl")
-        div.lock-screen.ng-cloak(ng-show="progressService.screenLocked")
-            .progress-wrapper
-                .spinner
-                    .content
-                        p Animals
-                progress-arc-mask
-        div.clearfix.navbar.navbar-default.navbar-fixed-top(role="navigation")
-            progressbar.progress-striped.active(value=100, type="indeterminate", ng-show="progressService.indeterminateLoading")
-            div.container
-                div.navbar-header
-                    a.navbar-brand(href="") Animals
-                    button.navbar-toggle.collapsed(type="button",
-                    data-toggle="collapse",
-                    data-target=".navbar-collapse")
-                        span.sr-only Toggle navigation
-                        span.icon-bar
-                        span.icon-bar
-                        span.icon-bar
-                div.collapse.navbar-collapse
-                    ul.nav.navbar-nav
-                        li(ng-class="{active : state.current.name == 'home'}")
-                            a(ui-sref="home", navbar-collapse) Home
-                        li.ng-cloak(ng-class="{active : state.current.name != 'home'}",
-                        ng-show="userService.user.name != ''")
-                            a(ui-sref="penguins", navbar-collapse) Penguins
-                                div.navbar-right
-                        ul.nav.navbar-nav
-                            li(ng-show="userService.user.name != ''")
-                                a.ng-cloak(href="", navbar-collapse,
-                                ng-click='logout()')
-                                    | Logout
-        .container(ui-view)
-        //- following scripts must be replaced in production!
-        script(src="/js/app.js")
-        script(src="/js/bootstrap.js")
+html(ng-app='vidatio')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Vidatio
+    link(rel='stylesheet', href='bower_components/handsontable/dist/handsontable.full.css')
+    link(href='../css/font-awesome.css', rel='stylesheet')
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+    link(href='assets/css/icons.css', rel='stylesheet')
+    link(rel='stylesheet', href='../css/main.css')
+    link(rel='stylesheet', href='../css/index.css')
+  body.container-fluid
+    header
+      .row
+        #line-right.col-xs-6
+        #line-left.col-xs-6
+      div
+        #navigation.row
+          .col-xs-6.logo
+            a(href='#')
+              #logo
+          .col-xs-6.menu-buttons
+            a#menu.icon-profile(href='#')
+            a#user.icon-hamburger(href='#')
+    section#intro
+      .content
+        .row
+          .col-sm-12
+            aside.slogan.light-font Hier steht der Slogan.
+        .row
+          .col-sm-7.diagram
+            img(src='assets/img/placeholder-diagram.png', alt='placeholder')
+          .col-sm-5.promo
+            .video awesome promo video here!
+            div
+              p.description.bold-font
+                | In nur
+                span.font-red drei Schritten
+                |  zur Infografik!
+              ol
+                li.active Datei hochladen.
+                li Eine Grafik wird automatisch erstellt.
+                li Speichern oder Teilen.
+        .get-started
+          a.bold-font.button(href='import.html')
+            | GET
+            br
+            | STARTED
+            span.bg-cyan !
+    section#usp
+      img.shape(src='assets/img/landingpage-shape.png', alt='')
+      .content
+        .row
+          .col-sm-4
+            .usp-icon.icon-api
+            h2 API
+            p Vidatio bietet eine gute API
+          .col-sm-4
+            .usp-icon.icon-livedata
+            h2 LIVE DATA
+            p Vidatio biete Daten in Echtzeit
+          .col-sm-4
+            .usp-icon.icon-opendata
+            h2 OPEN DATA
+            p Vidatio unterstützt freien Zugang zu Daten
+    section#featured-vidatios
+      .content
+        .row
+          .col-sm-12
+            h1.underline-turqoise BELIEBTE VIDATIOS
+        .row.layout-3-columns
+          .col-sm-4
+            .col-wrapper
+              img(src='assets/img/placeholder-featured-vidatios.png', alt='')
+              p
+                | Wasserverbrauch
+                a.thin-font(href='#') Mehr
+          .col-sm-4
+            .col-wrapper
+              img(src='assets/img/placeholder-featured-vidatios.png', alt='')
+              p
+                | Wasserverbrauch
+                a.thin-font(href='#') Mehr
+          .col-sm-4
+            .col-wrapper
+              img(src='assets/img/placeholder-featured-vidatios.png', alt='')
+              p
+                | Wasserverbrauch
+                a.thin-font(href='#') Mehr
+        .browse
+          a.light-font.button(href='#')
+            | VIDATIOS DURCHSUCHEN
+            img(src='assets/img/arrow.png', alt='')
+    section#popular-categories
+      .content
+        .row
+          .col-sm-12
+            h1.underline-red BELIEBTE KATEGORIEN
+    section#customers
+      .content
+        .row
+          .col-sm-12
+            h1.underline-turqoise UNSERE NUTZER
+        .row
+          .col-sm-3
+            h2 Logo Platzhalter
+          .col-sm-3
+            h2 Logo Platzhalter
+          .col-sm-3
+            h2 Logo Platzhalter
+          .col-sm-3
+            h2 Logo Platzhalter
+    footer
+      .content
+        .row
+          .col-xs-4
+            a(href='#') Über das Projekt
+            |  |
+            a(href='#') API
+            |  |
+            a(href='#') Team
+            |  |
+            a(href='#') Impressum
+          .col-xs-4.middle
+            a.icon-mail(href='mailto:gbeschbacher@sbg.at') gbeschbacher@sbg.at
+          .col-xs-4
+    script(src='bower_components/angular/angular.js')
+    script(src='assets/js/main.js')
