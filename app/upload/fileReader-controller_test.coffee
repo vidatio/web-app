@@ -15,7 +15,7 @@ describe "Testing fileReader controller", ->
             inject ($controller, $rootScope, $httpBackend) ->
                 httpBackend = $httpBackend
                 scope = $rootScope.$new()
-                FileReadCtrl = $controller "FileReadCtrl", $scope: scop
+                FileReadCtrl = $controller "FileReadCtrl", $scope: scope
 
         it 'should get the content of a file', ->
             httpBackend.whenGET('/v0/upload?url=test.txt').respond 'aaa: 123; bbb: 456'
