@@ -29,17 +29,21 @@ DOC_FILES = [
 ]
 
 COPY_FILES =
-    img:   "./app/images/**/**.*"
+    img:   "./app/assets/images/**/**.*"
     css:   [
-        "./bower_components/bootstrap/dist/css/bootstrap.css"
-        "./bower_components/bootstrap/dist/css/bootstrap-theme.css"
+        "./bower_components/bootstrap/dist/css/bootstrap.min.css"
+        "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
+        "./app/assets/css/*.css"
     ]
     js: [
         "./bower_components/bootstrap/dist/js/bootstrap.js"
     ]
-    fonts: "./bower_components/bootstrap/dist/fonts/*.*"
+    fonts: [
+        "./app/assets/fonts/*.*"
+        "./bower_components/bootstrap/dist/fonts/*.*"
+    ]
 
 
 BASEURL = "http://localhost:3123"
@@ -73,6 +77,8 @@ BUILD =
         out: "./build"
         js:  "./build/js"
         css: "./build/css"
+        fonts: "./build/fonts"
+        images: "./build/images"
         docs: "./docs"
     module: "app"
     app: "app.js"
@@ -205,22 +211,22 @@ gulp.task "copy",
     ]
 
 gulp.task "copy:img",
-    "Copy images to '#{BUILD.dirs.out}' dir.",
+    "Copy images to '#{BUILD.dirs.images}' dir.",
     ->
         gulp.src COPY_FILES.img
-            .pipe copy BUILD.dirs.out, prefix: 1
+            .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:css",
-    "Copy css to '#{BUILD.dirs.out}' dir.",
+    "Copy css to '#{BUILD.dirs.css}' dir.",
     ->
         gulp.src COPY_FILES.css
-            .pipe copy BUILD.dirs.out, prefix: 3
+            .pipe gulp.dest BUILD.dirs.css
 
 gulp.task "copy:fonts",
-    "Copy fonts to '#{BUILD.dirs.out}' dir.",
+    "Copy fonts to '#{BUILD.dirs.fonts}' dir.",
     ->
         gulp.src COPY_FILES.fonts
-            .pipe copy BUILD.dirs.out, prefix: 3
+            .pipe gulp.dest BUILD.dirs.fonts
 
 gulp.task "copy:js",
     "Copy js to '#{BUILD.dirs.out}' dir.",
