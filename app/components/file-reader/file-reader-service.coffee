@@ -1,49 +1,36 @@
-# File-Reader Factory
+# File-Reader Service
 # ======================
 
 "use strict"
 
 app = angular.module "app.services"
 
-app.service 'FileReader', [
+app.service 'FileReaderService', [
     "$q"
-    "$log"
-    ($q, $log) ->
+    ($q) ->
+        Reader = ->
+            @reader = new FileReader()
+            @deferred = undefined
+            @progress = 0
 
-        onLoad = (reader, deferred, scope) ->
-            ->
-                scope.$apply ->
-                    deferred.resolve reader.result
-                    return
-                return
+        Reader::readAsDataUrl = (file) ->
+            @deferred = $q.defer()
+            @progress = 0
 
-        onError = (reader, deferred, scope) ->
-            ->
-                scope.$apply ->
-                    deferred.reject reader.result
-                    return
-                return
+            @reader.onload = (->
+                @deferred.resolve @reader.result
+            ).bind(this)
 
-        onProgress = (reader, scope) ->
-            (event) ->
-                scope.$broadcast 'fileProgress',
-                    total: event.total
-                    loaded: event.loaded
-                return
+            @reader.onerror = (->
+                @deferred.reject @reader.result
+            ).bind(this)
 
-        getReader = (deferred, scope) ->
-            reader = new FileReader
-            reader.onload = onLoad(reader, deferred, scope)
-            reader.onerror = onError(reader, deferred, scope)
-            reader.onprogress = onProgress(reader, scope)
-            reader
+            @reader.onprogress = ((event) ->
+                @progress = event.loaded / event.total
+            ).bind(this)
 
-        readAsDataUrl = (file, scope) ->
-            deferred = $q.defer()
-            reader = getReader(deferred, scope)
-            reader.readAsText file
-            deferred.promise
+            @reader.readAsText file
+            @deferred.promise
 
-        { readAsDataUrl: readAsDataUrl }
-
+        new Reader
 ]

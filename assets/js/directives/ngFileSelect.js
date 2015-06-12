@@ -8,5 +8,5 @@ angular.module('vidatio').directive("ngFileSelect",function(){
       })
     }
   }
-  
+
 })
