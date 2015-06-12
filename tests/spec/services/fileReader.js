@@ -1,65 +1,43 @@
 describe('Service', function () {
   describe('FileReader', function () {
-    var scope, rootScope, file;
+    var fileContent, scope, DataTable, FileReader;
 
     beforeEach(module('vidatio'));
 
-    beforeEach(inject(function ($rootScope, $q, $controller, FileReader) {
-      //create an empty scope
+    beforeEach(inject(function ($rootScope, $q, FileReaderService, DataTableService) {
+      DataTable = DataTableService;
+      FileReader = FileReaderService;
       scope = $rootScope.$new();
 
-      //declare the controller and inject our empty scope
-      $controller('MainCtrl', {$scope: scope});
+      //Initialize test file
+      fileContent = ["File test content"];
+      var blob = new Blob(fileContent, {type: 'text/html'});
 
-      rootScope = $rootScope;
-
-      //initialize test file 
-      file = ["File test content"];
-      var blob = new Blob(file, {type: 'text/html'});
-      scope.file = blob;
-
-      scope.progress = 0;
-
-      //create promise and set it's return value
+      //Create promise and set it's return value
       var deferred = $q.defer();
-      deferred.resolve(file[0]);
+      deferred.resolve(fileContent);
 
-      spyOn(FileReader, 'readAsDataUrl').and.returnValue(deferred.promise);
+      //Create FileReader Mock
+      spyOn(FileReaderService, 'readAsDataUrl').and.returnValue(deferred.promise);
 
-      //mock fileProgress funtion to return progress status
-      scope.$on("fileProgress", function (e, progress) {
-        scope.progress = {loaded: progress.loaded, total: progress.total};
-      });
-
-      //use of FileReader mock
-      FileReader.readAsDataUrl(scope.file, scope).then(function (result) {
-        scope.content = result;
+      //Use of FileReader mock
+      FileReaderService.readAsDataUrl(blob).then(function (result) {
+        DataTable.setDataset(result[0]);
       });
     }));
 
     it('should read data of the file', function () {
-      rootScope.$apply();
-      expect(scope.content).toBe(file[0]);
+      //To resolve the promise
+      scope.$digest();
+      expect(DataTable.dataset[0]).toEqual(fileContent);
     });
 
-    it('should have progress finished at the end', function () {
-      rootScope.$apply();
+    it('should have progress updated', function () {
+      FileReader.progress = 1;
+      expect(FileReader.progress).toBe(1);
 
-      // because of promises the broadcast of the service is never called, 
-      // so we have to run a broadcast
-      scope.$broadcast("fileProgress", {
-        total: 10,
-        loaded: 10
-      });
-      expect(scope.progress.loaded).toBe(10);
-      expect(scope.progress.total).toBe(10);
-
-      scope.$broadcast("fileProgress", {
-        total: 10,
-        loaded: 5
-      });
-      expect(scope.progress.loaded).toBe(5);
-      expect(scope.progress.total).toBe(10);
+      FileReader.progress = 0.5;
+      expect(FileReader.progress).toBe(0.5);
     });
   });
 });

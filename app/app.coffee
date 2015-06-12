@@ -59,46 +59,46 @@ app.config [
         $urlRouterProvider.otherwise "/"
 
         $stateProvider
-            # /
-            .state "home",
-                url: "/"
-                templateUrl: "home/home.html"
-                controller: "HomeCtrl"
+# /
+        .state "home",
+            url: "/"
+            templateUrl: "home/home.html"
+            controller: "HomeCtrl"
 
-            .state "upload",
-                url: "/upload"
-                templateUrl: "upload/fileReader.html"
-                controller: "FileReadCtrl"
+        .state "upload",
+            url: "/upload"
+            templateUrl: "upload/fileReader.html"
+            controller: "FileReadCtrl"
 
 
-            # /penguins
-            .state "penguins",
-                url: "/penguins"
-                templateUrl: "penguins/penguins.html"
-                controller: "PenguinCtrl"
-                resolve:
-                    penguins: [
-                        "PenguinService"
-                        (PenguinService) ->
-                            PenguinService.query()
-                    ]
+# /penguins
+        .state "penguins",
+            url: "/penguins"
+            templateUrl: "penguins/penguins.html"
+            controller: "PenguinCtrl"
+            resolve:
+                penguins: [
+                    "PenguinService"
+                    (PenguinService) ->
+                        PenguinService.query()
+                ]
 
-            # /penguins/new
-            .state "penguins.new",
-                url: "/new"
-                templateUrl: "penguins/penguins.new.html"
-                controller: "PenguinCtrl"
+# /penguins/new
+        .state "penguins.new",
+            url: "/new"
+            templateUrl: "penguins/penguins.new.html"
+            controller: "PenguinCtrl"
 
-            # /penguins/:penguin
-            .state "penguins.detail",
-                url: "/:penguin"
-                templateUrl: "penguins/penguin.detail.html"
-                controller: "PenguinCtrl"
-                resolve:
-                    penguin: [
-                        "PenguinService"
-                        "$stateParams"
-                        (PenguinService, $stateParams) ->
-                            PenguinService.get $stateParams.penguin
-                    ]
+# /penguins/:penguin
+        .state "penguins.detail",
+            url: "/:penguin"
+            templateUrl: "penguins/penguin.detail.html"
+            controller: "PenguinCtrl"
+            resolve:
+                penguin: [
+                    "PenguinService"
+                    "$stateParams"
+                    (PenguinService, $stateParams) ->
+                        PenguinService.get $stateParams.penguin
+                ]
 ]

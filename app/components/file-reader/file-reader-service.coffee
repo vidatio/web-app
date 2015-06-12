@@ -5,33 +5,32 @@
 
 app = angular.module "app.services"
 
-app.service 'FileReader', [
+app.service 'FileReaderService', [
     "$q"
     ($q) ->
+        Reader = ->
+            @reader = new FileReader()
+            @deferred = undefined
+            @progress = 0
 
-      Reader ->
-        this.reader = new FileReader()
-        this.deferred = undefined
-        this.progress = 0
+        Reader::readAsDataUrl = (file) ->
+            @deferred = $q.defer()
+            @progress = 0
 
-      Reader.prototype.readAsDataUrl -> (file)
-        this.deferred = $q.defer()
-        this.progress = 0
+            @reader.onload = (->
+                @deferred.resolve @reader.result
+            ).bind(this)
 
-        this.reader.onload ->
-          this.deferred.resolve this.reader.result
-        .bind(this)
+            @reader.onerror = (->
+                @deferred.reject @reader.result
+            ).bind(this)
 
-        this.reader.onerror ->
-          this.deferred.reject this.reader.result
-        .bind(this)
+            @reader.onprogress = ((event) ->
+                @progress = event.loaded / event.total
+            ).bind(this)
 
-        this.reader.onprogress -> (event)
-          this.progress = event.loaded / event.total
-        .bind(this)
+            @reader.readAsText file
+            @deferred.promise
 
-        this.reader.readAsText file
-        this.deferred.promise
-
-      new Reader()
+        new Reader
 ]
