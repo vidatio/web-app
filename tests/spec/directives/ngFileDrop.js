@@ -1,6 +1,6 @@
 describe('Directive', function() {
   describe('ngFileDrop', function() {
-    var scope, compile, element;    
+    var scope, element;
 
     //mock Application to allow us to inject our own dependencies
     beforeEach(module('vidatio'));
@@ -13,13 +13,11 @@ describe('Directive', function() {
       //declare the controller and inject our empty scope
       $controller('FileReadCtrl', {$scope: scope});
 
-      //to combine template and scope
-      compile = $compile;
-
       //mock the function scope.getFile
       spyOn(scope, 'getFile').and.callFake(function(){});
 
-      element = compile('<div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>')(scope);
+      //combine template and scope
+      element = $compile('<div id="drop-zone" ng-file-drop="onFileDrop($file)">Drop Files Here</div>')(scope);
       spyOnEvent($(element), 'drop');
 
       //mock drop event listener, because event.dataTransfer can not be set manually
