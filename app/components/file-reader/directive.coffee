@@ -1,3 +1,26 @@
+# File Reader Directive
+# =================
+
+###
+DESCRIPTION
+User should be allowed to drop a file everywhere, so the file drop directive is split into two parts.
+Into the directive on which element it should start draggingZ and the directive on which element it should end
+###
+
+app.directive 'ngFileDropStart', ->
+    link: ($scope, el) ->
+
+#over: cursor currently moves over the drop-zone
+        el.bind "dragover", (e) ->
+            e.preventDefault()
+            false
+
+        #enter: cursor enters the drop-zone
+        el.bind "dragenter", (e) ->
+            document.getElementById("drop-zone").style.display = "block"
+            e.preventDefault()
+            false
+
 ###
 DESCRIPTION
 User should be allowed to drop a file everywhere, so the file drop directive is split into two parts.
@@ -28,3 +51,9 @@ app.directive 'ngFileDropEnd', ->
             $scope.getFile()
             e.preventDefault()
             false
+
+app.directive 'ngFileSelect', ->
+    link: ($scope, el) ->
+        el.bind "change", (e) ->
+            $scope.file = (e.srcElement or e.target).files[0]
+            $scope.getFile()

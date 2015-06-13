@@ -1,4 +1,4 @@
-# File Drop Directive Test
+# File Reader Directive Test
 # =================
 
 "use strict"

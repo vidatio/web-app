@@ -3,7 +3,7 @@
 
 "use strict"
 
-app = angular.module "app.services"
+app = angular.module "animals.services"
 
 
 app.service "UserService", [
