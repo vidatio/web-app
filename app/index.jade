@@ -1,15 +1,21 @@
 doctype html
-html(ng-app='vidatio')
+html(ng-app='app')
   head
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no")
+
     title Vidatio
+
+    //- must be replaced in production
+    base(href="/")
+
     link(href='bower_components/handsontable/dist/handsontable.full.css', rel='stylesheet')
     link(href='css/font-awesome.css', rel='stylesheet')
     link(href='css/bootstrap.min.css', rel='stylesheet')
     link(href='css/icons.css', rel='stylesheet')
     link(href='css/main.css', rel='stylesheet')
     link(href='css/index.css', rel='stylesheet')
+
   body.container-fluid
     header
       .row
@@ -36,7 +42,7 @@ html(ng-app='vidatio')
             div
               p.description.bold-font
                 | In nur
-                span.font-red drei Schritten
+                span.font-red  drei Schritten
                 |  zur Infografik!
               ol
                 li.active Datei hochladen.
@@ -125,5 +131,7 @@ html(ng-app='vidatio')
           .col-xs-4.middle
             a.icon-mail(href='mailto:gbeschbacher@sbg.at') gbeschbacher@sbg.at
           .col-xs-4
-    script(src='bower_components/angular/angular.js')
-    script(src='assets/js/main.js')
+    //- script(src='bower_components/angular/angular.js')
+    //- script(src='assets/js/main.js'
+    script(src="js/app.js")
+    script(src="js/bootstrap.js")

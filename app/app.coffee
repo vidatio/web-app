@@ -65,6 +65,7 @@ app.config [
             templateUrl: "home/home.html"
             controller: "HomeCtrl"
 
+# /upload
         .state "upload",
             url: "/upload"
             templateUrl: "upload/fileReader.html"
