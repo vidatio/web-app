@@ -128,7 +128,7 @@ gulp.task "build",
             .pipe cache( "build" )
             .pipe gif "*.coffee", continueOnError( coffee() )
             .pipe gif "*.jade", continueOnError( jade() )
-            .pipe gif "**/index.html", gulp.dest( BUILD.dirs.out )
+            .pipe gif "**/master.html", gulp.dest( BUILD.dirs.out )
             .pipe gif "*.html", templateCache( module: BUILD.module )
             .pipe gif "*.js", concat( BUILD.app )
             .pipe gulp.dest( BUILD.dirs.js )
@@ -266,7 +266,7 @@ gulp.task "run", "Serves the App.", ->
         root: BUILD.dirs.out
         livereload: true
         port: 3123
-        fallback: BUILD.dirs.out + "/index.html"
+        fallback: BUILD.dirs.out + "/statics/master.html"
 
 
 # clean stream of onerror
