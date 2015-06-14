@@ -31,18 +31,18 @@ DOC_FILES = [
 COPY_FILES =
     img:   "./app/assets/images/**/**.*"
     css:   [
-        "./bower-components/bootstrap/dist/css/bootstrap.min.css"
-        "./bower-components/bootstrap/dist/css/bootstrap-theme.min.css"
-        "./bower-components/bootstrap/dist/css/bootstrap.css.map"
-        "./bower-components/bootstrap/dist/css/bootstrap-theme.css.map"
+        "./bower_components/bootstrap/dist/css/bootstrap.min.css"
+        "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
+        "./bower_components/bootstrap/dist/css/bootstrap.css.map"
+        "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
         "./app/assets/css/*.css"
     ]
     js: [
-        "./bower-components/bootstrap/dist/js/bootstrap.js"
+        "./bower_components/bootstrap/dist/js/bootstrap.js"
     ]
     fonts: [
         "./app/assets/fonts/*.*"
-        "./bower-components/bootstrap/dist/fonts/*.*"
+        "./bower_components/bootstrap/dist/fonts/*.*"
     ]
 
 
@@ -54,16 +54,16 @@ APP_FILES = "./app/**/*.coffee"
 
 BUILD =
     files: [
-        "./bower-components/jquery/dist/jquery.js"
-        "./bower-components/angular/angular.js"
-        "./bower-components/angular-route/angular-route.js"
-        "./bower-components/angular-resource/angular-resource.js"
-        "./bower-components/angular-animate/angular-animate.js"
-        "./bower-components/angular-cookies/angular-cookies.js"
-        "./bower-components/angular-bootstrap/ui-bootstrap-tpls.js"
-        "./bower-components/ng-file-upload/angular-file-upload.js"
-        "./bower-components/angular-ui-router/release/angular-ui-router.js"
-        "./bower-components/bootstrap/dist/js/bootstrap.js"
+        "./bower_components/jquery/dist/jquery.js"
+        "./bower_components/angular/angular.js"
+        "./bower_components/angular-route/angular-route.js"
+        "./bower_components/angular-resource/angular-resource.js"
+        "./bower_components/angular-animate/angular-animate.js"
+        "./bower_components/angular-cookies/angular-cookies.js"
+        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
+        "./bower_components/ng-file-upload/angular-file-upload.js"
+        "./bower_components/angular-ui-router/release/angular-ui-router.js"
+        "./bower_components/bootstrap/dist/js/bootstrap.js"
         "./app/init-deps.coffee"
         "./app/app.coffee"
         "./app/app-controller.coffee"
