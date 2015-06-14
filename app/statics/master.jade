@@ -1,0 +1,16 @@
+doctype html
+html
+    header
+        base(href="/")
+        include includes/meta
+
+        title Vidatio
+        include includes/styl
+
+body.container-fluid(ng-app="app")
+    include header
+
+    div(ui-view)
+
+    include footer
+    include includes/js

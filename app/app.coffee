@@ -35,10 +35,10 @@ app.run [
             UserService.init $rootScope.globals.currentUser.name
 
         $rootScope.$on "$stateChangeStart", ( event, next, current ) ->
-            unless next.name is "home"
+            unless next.name is "landingPage"
                 unless $rootScope.globals.currentUser
                     event.preventDefault()
-                    $state.go "home"
+                    $state.go "landingPage"
 ]
 
 # ***
@@ -56,50 +56,49 @@ app.config [
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider ) ->
         $locationProvider.html5Mode true
 
-        $urlRouterProvider.otherwise "/"
+        #$urlRouterProvider.otherwise "/"
 
         $stateProvider
 # /
-        .state "home",
+        .state "landingPage",
             url: "/"
-            templateUrl: "home/home.html"
-            controller: "HomeCtrl"
+            templateUrl: "landing-page/landing-page.html"
 
 # /upload
-        .state "upload",
-            url: "/upload"
-            templateUrl: "upload/fileReader.html"
-            controller: "FileReadCtrl"
+        # .state "upload",
+        #     url: "/upload"
+        #     templateUrl: "upload/fileReader.html"
+        #     controller: "FileReadCtrl"
 
 
 # /penguins
-        .state "penguins",
-            url: "/penguins"
-            templateUrl: "penguins/penguins.html"
-            controller: "PenguinCtrl"
-            resolve:
-                penguins: [
-                    "PenguinService"
-                    (PenguinService) ->
-                        PenguinService.query()
-                ]
+        # .state "penguins",
+        #     url: "/penguins"
+        #     templateUrl: "penguins/penguins.html"
+        #     controller: "PenguinCtrl"
+        #     resolve:
+        #         penguins: [
+        #             "PenguinService"
+        #             (PenguinService) ->
+        #                 PenguinService.query()
+        #         ]
 
 # /penguins/new
-        .state "penguins.new",
-            url: "/new"
-            templateUrl: "penguins/penguins.new.html"
-            controller: "PenguinCtrl"
+        # .state "penguins.new",
+        #     url: "/new"
+        #     templateUrl: "penguins/penguins.new.html"
+        #     controller: "PenguinCtrl"
 
 # /penguins/:penguin
-        .state "penguins.detail",
-            url: "/:penguin"
-            templateUrl: "penguins/penguin.detail.html"
-            controller: "PenguinCtrl"
-            resolve:
-                penguin: [
-                    "PenguinService"
-                    "$stateParams"
-                    (PenguinService, $stateParams) ->
-                        PenguinService.get $stateParams.penguin
-                ]
+        # .state "penguins.detail",
+        #     url: "/:penguin"
+        #     templateUrl: "penguins/penguin.detail.html"
+        #     controller: "PenguinCtrl"
+        #     resolve:
+        #         penguin: [
+        #             "PenguinService"
+        #             "$stateParams"
+        #             (PenguinService, $stateParams) ->
+        #                 PenguinService.get $stateParams.penguin
+        #         ]
 ]
