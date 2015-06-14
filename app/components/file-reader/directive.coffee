@@ -1,6 +1,9 @@
 # File Reader Directive
 # =================
 
+"use strict"
+app = angular.module "app.directives"
+
 ###
 DESCRIPTION
 User should be allowed to drop a file everywhere, so the file drop directive is split into two parts.
