@@ -1,39 +1,44 @@
-.content#file-read(ng-controller="FileReadCtrl")
-  .row
-    .col-sm-6
-      .area#option-empty-table
-        a(href="#")
-          .option-icon.icon-table
-          h3 LEERE TABELLE
-    .col-sm-6
-      .area#option-browse-data
-        a(href="#")
-          .option-icon.icon-opendata
-          h3 ALLE DATENSÄTZE
+#file-read.content(ng-controller="FileReadCtrl")
+    .row
+        .col-sm-6
+            #option-empty-table.area
+                a(href="#")
+                    .option-icon.icon-table
+                    h3 LEERE TABELLE
 
-  .row.file-read.layout-3-columns
-    .col-sm-4
-      .area#option-browse-filesystem
-        .option-icon.icon-searchfiles
-        h3 DATEI AUSWÄHLEN
-        input#input-browse-filesystem(type="file" ng-file-select)
-    .col-sm-4
-      .area#option-drag-and-drop
-        .option-icon.icon-draganddrop
-        h3 DRAG AND DROP
-    .col-sm-4
-      .area#option-link
-        .option-icon.icon-link
-        h3 LINK
-        .input-group.form-link
-          input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
-          span.input-group-btn
-            button.btn.btn-default.glyphicon.glyphicon-arrow-right#link-submit-button(type="button" ng-click="load()")
-  #drop-zone
-    .row
-      .col-sm-12
-        .area
-          .glyphicon.glyphicon-plus
-            span.text Datei Landeplatz
-    .row
-      .col-sm-12.drop-area(ng-file-drop-end)
+        .col-sm-6
+            #option-browse-data.area
+                a(href="#")
+                    .option-icon.icon-opendata
+                    h3 ALLE DATENSÄTZE
+
+    .row.file-read.layout-3-columns
+
+        .col-sm-4
+            #option-browse-filesystem.area
+                .option-icon.icon-searchfiles
+                h3 DATEI AUSWÄHLEN
+                input#input-browse-filesystem(type="file" ng-file-select)
+        .col-sm-4
+            #option-drag-and-drop.area
+                .option-icon.icon-draganddrop
+                h3 DRAG AND DROP
+
+        .col-sm-4
+            #option-link.area
+                .option-icon.icon-link
+                h3 LINK
+                .input-group.form-link
+                    input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
+                    span.input-group-btn
+                        button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
+
+    #drop-zone
+        .row
+            .col-sm-12
+                .area
+                    .glyphicon.glyphicon-plus
+                        span.text Datei Landeplatz
+
+        .row
+            .col-sm-12.drop-area(ng-file-drop-end)
