@@ -29,19 +29,19 @@ DOC_FILES = [
 ]
 
 COPY_FILES =
-    img:   "./app/assets/images/**/**.*"
+    img:   "./app/statics/assets/images/**/*.*"
     css:   [
         "./bower_components/bootstrap/dist/css/bootstrap.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
-        "./app/assets/css/*.css"
+        "./app/statics/assets/css/*.css"
     ]
     js: [
         "./bower_components/bootstrap/dist/js/bootstrap.js"
     ]
     fonts: [
-        "./app/assets/fonts/*.*"
+        "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
     ]
 
