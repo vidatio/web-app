@@ -1,23 +1,4 @@
-@font-face
-  font-family Colaborate
-  src url(../fonts/colaborate-regular.otf)
-  font-style normal
-  font-weight normal
-@font-face
-  font-family Colaborate-Bold
-  src url(../fonts/colaborate-bold.otf)
-  font-style normal
-  font-weight normal
-@font-face
-  font-family Colaborate-Light
-  src url(../fonts/colaborate-light.otf)
-  font-style normal
-  font-weight normal
-@font-face
-  font-family Colaborate-Thin
-  src url(../fonts/colaborate-thin.otf)
-  font-style normal
-  font-weight bold
+@require "colors"
 
 .thin-font
   font-family Colaborate-Thin, Arial, Helvetica, sans-serif
@@ -49,22 +30,22 @@ h3
   background-image url(../images/dotgrid-dunkel-transp.png)
 
 .underline-red
-  border-bottom 3px solid #ff5444
+  border-bottom 3px solid $color-red
 
 .underline-turqoise
-  border-bottom 3px solid #11ddc6
+  border-bottom 3px solid $color-green
 
 .font-red
-  color #ff5347
+  color $color-red
 
 .font-cyan
-  color #11ddc6
+  color $color-green
 
 .bg-cyan
-  background #11ddc6
+  background-color $color-green
 
 .bg-dark
-  background-color #333
+  background-color $color-dark-grey
 
 .row
   margin 0
@@ -80,7 +61,7 @@ h3
 .btn-default:active,
 .btn-default:focus
   color white
-  background-color #11ddc6
+  background-color $color-green
 
 html, body
   padding 0
@@ -90,7 +71,7 @@ html, body
   height 100%
   font-family Colaborate, Arial, Helvetica, sans-serif
   font-size 12px
-  background-color #FAFAFA
+  background-color $color-light-grey
 
 .content
   max-width 1024px
@@ -126,10 +107,10 @@ html, body
 
 header
   #line-right
-    background #ff5444
+    background $color-red
     height 8px
   #line-left
-    background #11ddc6
+    background $color-green
     height 8px
   #navigation
     clear both
@@ -163,7 +144,7 @@ header
       -moz-border-radius 4px
       border-radius 4px
       &:hover
-        background #3f7773
+        background $color-navigation
         color white
     a#user
       font-size 20px
@@ -241,15 +222,15 @@ a:link, a:visited
   text-decoration none
 
 a:hover, a:active, a:focus
-  color #11ddc6
+  color $color-green
 
 .button
   position relative
   color #fff
-  background-color #11ddc6
-  -webkit-box-shadow 0 3px 0 #009989
-  -moz-box-shadow 0 3px 0 #009989
-  box-shadow 0 3px 0 #009989
+  background-color $color-green
+  -webkit-box-shadow 0 3px 0 $color-button-shadow
+  -moz-box-shadow 0 3px 0 $color-button-shadow
+  box-shadow 0 3px 0 $color-button-shadow
 
 .button:active,
 .button:active span
@@ -260,6 +241,6 @@ a:hover, a:active, a:focus
 
 .button:hover,
 .button:hover span
-  background-color #11AA9A
+  background-color $color-green-hover
   color #fff
 
