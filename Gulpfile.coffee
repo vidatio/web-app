@@ -61,7 +61,6 @@ BUILD =
         "./bower_components/angular-animate/angular-animate.js"
         "./bower_components/angular-cookies/angular-cookies.js"
         "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-        "./bower_components/ng-file-upload/angular-file-upload.js"
         "./bower_components/angular-ui-router/release/angular-ui-router.js"
         "./bower_components/bootstrap/dist/js/bootstrap.js"
         "./app/init-deps.coffee"
