@@ -64,11 +64,11 @@ app.config [
             url: "/"
             templateUrl: "landing-page/landing-page.html"
 
-# /upload
-        # .state "upload",
-        #     url: "/upload"
-        #     templateUrl: "upload/fileReader.html"
-        #     controller: "FileReadCtrl"
+# /import
+        .state "import",
+            url: "/import"
+            templateUrl: "import/import.html"
+            controller: "ImportCtrl"
 
 
 # /penguins

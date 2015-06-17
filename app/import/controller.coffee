@@ -6,7 +6,7 @@
 app = angular.module "app.controllers"
 
 
-app.controller "FileReadCtrl", [
+app.controller "ImportCtrl", [
     "$scope"
     "$http"
     "FileReaderService"
