@@ -35,7 +35,7 @@ COPY_FILES =
         "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
-        "./app/statics/assets/css/*.css"
+        "./app/statics/assets/styl/*.styl"
     ]
     js: [
         "./bower_components/bootstrap/dist/js/bootstrap.js"
@@ -71,6 +71,7 @@ BUILD =
         "!./app/*/**/*-test.coffee" #exclude test files
         "!./app/**/*-e2e.coffee"    #exclude e2e test files
         "./app/**/*.jade"
+        "./app/statics/master.styl"
         "./app/**/*.styl"
     ]
     dirs:
@@ -82,6 +83,7 @@ BUILD =
         docs: "./docs"
     module: "app"
     app: "app.js"
+    css: "app.css"
 
 
 
@@ -120,7 +122,6 @@ gulp.task "build",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "lint"
-        "stylus"
         "copy"
     ],
     ->
@@ -128,8 +129,11 @@ gulp.task "build",
             .pipe cache( "build" )
             .pipe gif "*.coffee", continueOnError( coffee() )
             .pipe gif "*.jade", continueOnError( jade() )
+            .pipe gif "*.styl", continueOnError( stylus() )
             .pipe gif "**/master.html", gulp.dest( BUILD.dirs.out )
             .pipe gif "*.html", templateCache( module: BUILD.module )
+            .pipe gif "*.css", concat( BUILD.css )
+            .pipe gulp.dest( BUILD.dirs.css )
             .pipe gif "*.js", concat( BUILD.app )
             .pipe gulp.dest( BUILD.dirs.js )
             .pipe connect.reload()

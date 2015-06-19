@@ -25,20 +25,20 @@ app.run [
     "AuthenticationService"
     "UserService"
     ( $rootScope, $state, $stateParams, $http, $cookieStore, $location, AuthenticationService, UserService ) ->
-        $rootScope.state = $state
-        $rootScope.stateParams = $stateParams
+        # $rootScope.state = $state
+        # $rootScope.stateParams = $stateParams
 
-        $rootScope.globals = $cookieStore.get( "globals" ) or {}
+        # $rootScope.globals = $cookieStore.get( "globals" ) or {}
 
-        if $rootScope.globals.currentUser
-            AuthenticationService.SetExistingCredentials $rootScope.globals.currentUser
-            UserService.init $rootScope.globals.currentUser.name
+        # if $rootScope.globals.currentUser
+        #     AuthenticationService.SetExistingCredentials $rootScope.globals.currentUser
+        #     UserService.init $rootScope.globals.currentUser.name
 
-        $rootScope.$on "$stateChangeStart", ( event, next, current ) ->
-            unless next.name is "landingPage"
-                unless $rootScope.globals.currentUser
-                    event.preventDefault()
-                    $state.go "landingPage"
+        # $rootScope.$on "$stateChangeStart", ( event, next, current ) ->
+        #     unless next.name is "landingPage"
+        #         unless $rootScope.globals.currentUser
+        #             event.preventDefault()
+        #             $state.go "landingPage"
 ]
 
 # ***
