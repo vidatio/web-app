@@ -72,6 +72,7 @@ BUILD =
         "./app/**/*.jade"
         "./app/statics/master.styl"
         "./app/**/*.styl"
+        "./app/**/*.css"
     ]
     dirs:
         out: "./build"
