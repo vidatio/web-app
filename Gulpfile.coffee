@@ -35,7 +35,6 @@ COPY_FILES =
         "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
-        "./app/statics/assets/styl/*.styl"
     ]
     js: [
         "./bower_components/bootstrap/dist/js/bootstrap.js"
@@ -133,7 +132,7 @@ gulp.task "build",
             .pipe gif "**/master.html", gulp.dest( BUILD.dirs.out )
             .pipe gif "*.html", templateCache( module: BUILD.module )
             .pipe gif "*.css", concat( BUILD.css )
-            .pipe gulp.dest( BUILD.dirs.css )
+            .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
             .pipe gif "*.js", concat( BUILD.app )
             .pipe gulp.dest( BUILD.dirs.js )
             .pipe connect.reload()
