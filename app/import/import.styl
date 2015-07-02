@@ -35,6 +35,40 @@
             margin-right 13px
         #option-browse-data
             margin-left 13px
+        #option-drag-and-drop
+            position: relative
+            .hover-wrapper
+                display none
+                background $color-hover-light
+                position absolute
+                z-index 999
+                {overlayParent}
+                padding 10px
+            &:hover
+                .option-icon
+                h3
+                    display none
+                .hover-wrapper
+                    display block
+                    .area
+                        box-shadow none
+                        {fillParent}
+                        border 7px solid white
+                        background none
+                        .glyphicon-plus
+                            {centerElement}
+                            cursor default
+                            margin-left -70px
+                            margin-top -73px
+                            font-size 13em
+                            color $color-white
+
+                        .text
+                            {centerElement}
+                            cursor default
+                            margin-left -53.5px
+                            margin-top -9px
+                            font-size 16px
         #option-link
             #link-submit-button
                 top 0px
