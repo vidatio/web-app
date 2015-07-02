@@ -45,7 +45,7 @@ h3
     background-color $color-green
 
 .bg-dark
-    background-color $color-dark-grey
+    background-color $color-grey-dark
 
 .row
     margin 0
@@ -60,8 +60,8 @@ h3
 .btn-default:hover,
 .btn-default:active,
 .btn-default:focus
-    color white
-    background-color $color-green
+    color $color-white
+    background-color $color-hover-light
 
 html, body
     padding 0
@@ -71,7 +71,7 @@ html, body
     height 100%
     font-family Colaborate, Arial, Helvetica, sans-serif
     font-size 12px
-    background-color $color-light-grey
+    background-color $color-grey-light
 
 .content
     max-width 1024px
@@ -117,15 +117,15 @@ a:link, a:visited
     text-decoration none
 
 a:hover, a:active, a:focus
-  color $color-green
+  color $color-hover-dark
 
 .button
     position relative
-    color #fff
+    color $color-white
     background-color $color-green
-    -webkit-box-shadow 0 3px 0 $color-button-shadow
-    -moz-box-shadow 0 3px 0 $color-button-shadow
-    box-shadow 0 3px 0 $color-button-shadow
+    -webkit-box-shadow 0 3px 0 $color-border
+    -moz-box-shadow 0 3px 0 $color-border
+    box-shadow 0 3px 0 $color-border
 
 .button:active,
 .button:active span
@@ -136,8 +136,8 @@ a:hover, a:active, a:focus
 
 .button:hover,
 .button:hover span
-    background-color $color-green-hover
-    color #fff
+    background-color $color-hover-dark
+    color $color-white
 
 /**
  * Variables

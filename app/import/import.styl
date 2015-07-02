@@ -1,35 +1,3 @@
-// functions
-opacity(n)
-    opacity n
-    filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
-
-box-shadow()
-    -webkit-box-shadow arguments
-    -moz-box-shadow arguments
-    box-shadow arguments
-
-box-sizing()
-    -webkit-box-sizing arguments
-    -moz-box-sizing arguments
-    box-sizing arguments
-
-//blocks
-overlayParent =
-    width 100%
-    height 100%
-    top 0
-    left 0
-
-fillParent =
-    width 100%
-    height 100%
-
-centerElement =
-    position absolute
-    top 50%
-    left 50%
-
-// import styles
 #import
     margin 10px auto 0px
     h3
@@ -41,15 +9,15 @@ centerElement =
         .area
             height 254px
             border-top 3px solid $color-green
-            background white
-            box-shadow $box-shadow-size $color-box-shadow
+            background $color-white
+            box-shadow $box-shadow-size $color-shadow
             text-align center
         .option-icon
             width 100px
             margin 50px auto 0px auto
             height 100px
             font-size 75px
-            color #333
+            color $color-dark-grey
             text-align center
         #option-browse-filesystem
             cursor pointer
@@ -62,7 +30,7 @@ centerElement =
                 cursor pointer
         #option-browse-filesystem:hover
         .other .area:hover
-            background $color-import-options-hover
+            background $color-hover-light
         #option-empty-table
             margin-right 13px
         #option-browse-data
@@ -79,7 +47,7 @@ centerElement =
         .other .area a
             {fillParent}
             display inline-block
-            color black
+            color $color-grey-dark
         @media screen and (max-width: 768px)
             #option-empty-table
             #option-browse-data
@@ -90,7 +58,7 @@ centerElement =
 
     #drop-zone
         display none
-        background $color-import-dropzone
+        background $color-dropzone
         position fixed
         z-index: 999
         {overlayParent}
@@ -103,7 +71,6 @@ centerElement =
 
         .area
             {fillParent}
-            background none
             border 10px solid white
             box-sizing border-box
 
@@ -112,7 +79,7 @@ centerElement =
                 margin-left -195px
                 margin-top -200px
                 font-size 35em
-                color white
+                color $color-white
 
             .text
                 {centerElement}
