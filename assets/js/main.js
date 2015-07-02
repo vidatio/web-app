@@ -1,1 +1,1 @@
-var App = angular.module("vidatio", []);
+var App = angular.module("vidatio", ['ngHandsontable']);

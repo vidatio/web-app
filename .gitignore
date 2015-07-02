@@ -32,7 +32,6 @@ tmp/
 app/public/
 build/*
 
-
 userconfig.coffee
 userconfig*
 

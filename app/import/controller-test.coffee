@@ -4,7 +4,7 @@ describe 'Controller Import', ->
         scope = undefined
         httpBackend = undefined
         DataTable = undefined
-
+###
         beforeEach ->
             module "app"
             inject ($controller, $rootScope, $httpBackend, DataTableService) ->
@@ -48,3 +48,4 @@ describe 'Controller Import', ->
                 ['test','2']
                 ['test','3']
             ]
+###

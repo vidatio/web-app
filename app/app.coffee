@@ -7,6 +7,7 @@ app = angular.module "app", [
     "ngResource"
     "ngAnimate"
     "ngCookies"
+    "ngHandsontable"
     "ui.router"
     "ui.bootstrap"
     "app.controllers"
@@ -69,6 +70,12 @@ app.config [
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
+
+# /import
+        .state "editor",
+            url: "/editor"
+            templateUrl: "editor/editor.html"
+            controller: "DataTableCtrl"
 
 # /penguins
         # .state "penguins",
