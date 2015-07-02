@@ -23,7 +23,6 @@ app.controller "ImportCtrl", [
             ).success (data) ->
                # DataTable.setDataset data
 
-
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
             FileReader.readAsDataUrl($scope.file, $scope).then (result) ->

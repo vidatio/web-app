@@ -1,128 +1,124 @@
-// helper function
+// functions
 opacity(n)
     opacity n
     filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
 
-#file-read
+box-shadow()
+    -webkit-box-shadow arguments
+    -moz-box-shadow arguments
+    box-shadow arguments
+
+box-sizing()
+    -webkit-box-sizing arguments
+    -moz-box-sizing arguments
+    box-sizing arguments
+
+//blocks
+overlayParent =
+    width 100%
+    height 100%
+    top 0
+    left 0
+
+fillParent =
+    width 100%
+    height 100%
+
+centerElement =
+    position absolute
+    top 50%
+    left 50%
+
+// import styles
+#import
     margin 10px auto 0px
-    h2
+    h3
         text-align center
-        margin 10px
-    .row
+        margin 10px auto
+        width 100%
+
+    .options
         .area
             height 254px
-            border-top 3px solid #11ddc6
-    #option-browse-filesystem
-        cursor pointer
-    #option-empty-table
-        margin-right 13px
-    #option-browse-data
-        margin-left 13px
-    .text
-        padding 10px
-        font-size 18px
-    .option-icon
-        width 100px
-        margin 50px auto 0px auto
-        height 100px
-        font-size 75px
-        color #333
-        text-align center
+            border-top 3px solid $color-green
+            background white
+            box-shadow $box-shadow-size $color-box-shadow
+            text-align center
+        .option-icon
+            width 100px
+            margin 50px auto 0px auto
+            height 100px
+            font-size 75px
+            color #333
+            text-align center
+        #option-browse-filesystem
+            cursor pointer
+            position relative
+            #input-browse-filesystem
+                position absolute
+                z-index 2
+                {overlayParent}
+                opacity 0
+                cursor pointer
+        #option-browse-filesystem:hover
+        .other .area:hover
+            background $color-import-options-hover
+        #option-empty-table
+            margin-right 13px
+        #option-browse-data
+            margin-left 13px
+        #option-link
+            #link-submit-button
+                top 0px
+            .form-link
+                width 80%
+                margin 0 auto
+        .other, .file-read
+            margin-bottom 56px
+        .file-read .area a
+        .other .area a
+            {fillParent}
+            display inline-block
+            color black
+        @media screen and (max-width: 768px)
+            #option-empty-table
+            #option-browse-data
+            #option-browse-filesystem
+            #option-drag-and-drop
+            #option-link
+                margin: 0
+
     #drop-zone
         display none
+        background $color-import-dropzone
         position fixed
-        width 100%
-        height 100%
-        background rgba(18, 221, 201, 0.8)
-        top 0
-        left 0
-        z-index 999
+        z-index: 999
+        {overlayParent}
+
         .col-sm-12
             padding 30px
             height 100%
+
         .area
-            width 100%
-            height 100%
+            {fillParent}
             background none
             border 10px solid white
-            -webkit-box-sizing border-box
-            -moz-box-sizing border-box
             box-sizing border-box
+
             .glyphicon-plus
-                position absolute
-                top 50%
-                left 50%
+                {centerElement}
                 margin-left -195px
                 margin-top -225px
                 font-size 35em
                 color white
+
             .text
-                position absolute
-                top 50%
-                left 50%
+                {centerElement}
                 margin-left -105px
                 margin-top -35px
                 font-size 30px
-    .drop-area
-        position fixed
-        width 100%
-        height 100%
-        top 0
-        left 0
-        z-index 999999
 
-    .row.other,
-    .row.file-read
-        margin-bottom 56px
-
-    .file-read .area a,
-    .other .area a
-        width 100%
-        height 100%
-        display inline-block
-
-@media (max-width: 768px)
-    #file-read  #option-empty-table,
-    #file-read  #option-browse-data,
-    #file-read  #option-browse-filesystem,
-    #file-read  #option-drag-and-drop,
-    #file-read  #option-link
-        margin: 0
-
-#file-read  .file-read .area, #file-read .other .area
-    background white
-    -webkit-box-shadow 0px 2px 9px #e3e3e3
-    -moz-box-shadow 0px 2px 9px #e3e3e3
-    box-shadow 0px 2px 9px #e3e3e3
-    text-align center
-
-#file-read  .file-read .area a, #file-read  .other .area a
-    color #000000
-
-#file-read  #browse-filesystem, #input-browse-filesystem
-    position relative
-
-#option-browse-filesystem
-    position relative
-
-#input-browse-filesystem
-    position absolute
-    top 0px
-    left 0px
-    height 100%
-    width 100%
-    opacity 0
-    z-index 2
-    cursor pointer
-
-#file-read  .file-read #option-browse-filesystem:hover,
-#file-read  .other .area:hover
-    background #ABF4E9
-
-#link-submit-button
-    top 0px
-
-.form-link
-    width 80%
-    margin 0 auto
-
+        .drop-area
+            position fixed
+            z-index: 999
+            {overlayParent}

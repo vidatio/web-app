@@ -42,3 +42,4 @@ public/js/app.js
 docs/
 
 .idea/
+*lock.*
