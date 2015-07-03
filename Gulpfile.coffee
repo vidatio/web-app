@@ -196,7 +196,7 @@ gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
         "build:watch"
-        "test"
+        #"test"
         "run"
     ]
 

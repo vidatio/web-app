@@ -7,6 +7,7 @@ app = angular.module "app", [
     "ngResource"
     "ngAnimate"
     "ngCookies"
+    "ngHandsontable"
     "ui.router"
     "ui.bootstrap"
     "app.controllers"

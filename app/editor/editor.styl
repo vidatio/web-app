@@ -5,47 +5,47 @@
         border-top 3px solid #FF5444
         background $color-white
         box-shadow $box-shadow-size $color-shadow
-    .test
-        .handsontable
-            width 100%
-            overflow scroll
-            height 100%
-            max-height 60vh
 
-            .ht_master
-                thead
-                    tr
-                        &:first-child
-                            th
-                                background #79F1DD
-                                padding 3px 4px
-                                border 2px solid white
-                                line-height 16px
-                tbody
-                    tr
-                        &:nth-child(even)
-                            td
-                                background #E5E5E5
-                        &:nth-child(odd)
-                            td
-                                background #F2F2F2
+    .handsontable
+        width 100%
+        overflow scroll
+        height 100%
+        max-height 60vh
+
+        .ht_master
+            thead
+                tr
+                    &:first-child
                         th
-                            &:first-child
-                                min-width 40px !important
-                                width 40px !important
-                                background #FD8C92
-                                width 30px
-                th, td, tbody tr th:first-child
-                    border 2px solid white
-                    height 16px
-                    line-height 16px
-                    padding 5px 4px
-                th, td
-                    min-width 80px
-                tr:first-child th, tr:first-child td
-                    border-top 2px solid white
-            .ht_clone_left, .ht_clone_top, .ht_clone_corner
-                display none
+                            background #79F1DD
+                            padding 3px 4px
+                            border 2px solid white
+                            line-height 16px
+            tbody
+                tr
+                    &:nth-child(even)
+                        td
+                            background #E5E5E5
+                    &:nth-child(odd)
+                        td
+                            background #F2F2F2
+                    th
+                        &:first-child
+                            min-width 40px !important
+                            width 40px !important
+                            background #FD8C92
+                            width 30px
+            th, td, tbody tr th:first-child
+                border 2px solid white
+                height 16px
+                line-height 16px
+                padding 5px 4px
+            th, td
+                min-width 80px
+            tr:first-child th, tr:first-child td
+                border-top 2px solid white
+        .ht_clone_left, .ht_clone_top, .ht_clone_corner
+            display none
 
     /* TODO: check why this class doesn't get used */
     .current-col
