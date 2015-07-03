@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="assets/css/main.css"/>
   <link rel="stylesheet" href="assets/css/fileRead.css"/>
 </head>
-<body ng-file-drop-start>
+<body ng-file-drop-start class="container-fluid">
 
 <div class="wrapper">
   <header>
@@ -39,7 +39,7 @@
   <div id="container-file-read" class="content" ng-controller="FileReadCtrl">
     <div class="row other">
       <div class="col-sm-6">
-        <div class="area" id="option-empty-table">
+        <div class="content-area" id="option-empty-table">
           <a href="#">
             <div class="option-icon icon-table"></div>
             <h3>LEERE TABELLE</h3>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-sm-6">
-        <div class="area" id="option-browse-data">
+        <div class="content-area" id="option-browse-data">
           <a href="#">
             <div class="option-icon icon-opendata"></div>
             <h3>ALLE DATENSÄTZE</h3>
@@ -57,20 +57,20 @@
     </div>
     <div class="row file-read layout-3-columns">
       <div class="col-sm-4">
-        <div class="area" id="option-browse-filesystem">
+        <div class="content-area" id="option-browse-filesystem">
           <div class="option-icon icon-searchfiles"></div>
           <h3>DATEI AUSWÄHLEN</h3>
           <input type="file" id="input-browse-filesystem" ng-file-select/>
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="area" id="option-drag-and-drop">
+        <div class="content-area" id="option-drag-and-drop">
           <div class="option-icon icon-draganddrop"></div>
           <h3>DRAG AND DROP</h3>
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="area" id="option-link">
+        <div class="content-area" id="option-link">
           <div class="option-icon icon-link"></div>
           <h3>LINK</h3>
 
@@ -117,13 +117,16 @@
 </footer>
 
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
 
 <script src="assets/js/main.js"></script>
 <script src="assets/js/controller/main.js"></script>
 <script src="assets/js/controller/fileRead.js"></script>
+<script src="assets/js/controller/dataTable.js"></script>
 <script src="assets/js/directives/ngFileSelect.js"></script>
 <script src="assets/js/directives/ngFileDropStart.js"></script>
 <script src="assets/js/directives/ngFileDropEnd.js"></script>
 <script src="assets/js/services/fileReader.js"></script>
+<script src="assets/js/services/dataTable.js"></script>
 </body>
 </html>

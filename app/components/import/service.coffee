@@ -1,4 +1,4 @@
-# File-Reader Service
+# FileReader Service
 # ======================
 
 "use strict"

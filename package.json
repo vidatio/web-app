@@ -2,27 +2,11 @@
   "name": "vidatio",
   "version": "0.0.3",
   "description": "Plattform to upload, share and expand datasets and visualizations",
-  "main": "main.js",
-  "directories": {
-    "test": "test"
+  "main": "index.js",
+  "privat": true,
+  "dependencies": {
+    "coffee-script": "^1.9.2"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@git.mediacube.at:vidatio/website.git"
-  },
-  "keywords": [
-    "data",
-    "diagram",
-    "visualization",
-    "open",
-    "data",
-    "ogd"
-  ],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "del": "^1.1.1",
     "gulp": "^3.8.11",
@@ -52,7 +36,21 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "protractor": "^2.0.0"
   },
-  "dependencies": {
-    "coffee-script": "^1.9.2"
-  }
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.mediacube.at:vidatio/website.git"
+  },
+  "keywords": [
+    "data",
+    "diagram",
+    "visualization",
+    "open",
+    "data",
+    "ogd"
+  ],
+  "author": "",
+  "license": "ISC"
 }

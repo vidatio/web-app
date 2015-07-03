@@ -1,4 +1,6 @@
-// functions
+/**
+ * Functions
+ */
 opacity(n)
     opacity n
     filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')
@@ -13,7 +15,9 @@ box-sizing()
     -moz-box-sizing arguments
     box-sizing arguments
 
-//blocks
+/**
+ * Blocks
+ */
 overlayParent =
     width 100%
     height 100%
@@ -28,3 +32,9 @@ centerElement =
     position absolute
     top 50%
     left 50%
+
+/**
+ * Variables
+ */
+$box-shadow-size = 0px 2px 9px
+

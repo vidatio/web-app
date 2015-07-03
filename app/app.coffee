@@ -70,6 +70,12 @@ app.config [
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
 
+# /import
+        .state "editor",
+            url: "/editor"
+            templateUrl: "editor/editor.html"
+            controller: "DataTableCtrl"
+
 # /penguins
         # .state "penguins",
         #     url: "/penguins"

@@ -1,52 +1,126 @@
-#container-file-read {
-  max-width: 1024px;
-  margin: 20px auto 0px auto;
-  margin-top:10px;
+#container-data-table {
+  margin: 0px auto 30px auto;
 }
 
-#container-data-table #data-table{
+#container-data-table .handsontable {
+  width:100%;
+  overflow:scroll;
+  height:100%;
+  max-height:60vh;
+}
+
+#container-data-table .content-area{
+  padding:25px;
+  border-top: 3px solid #FF5444;
+}
+
+@media (max-width: 715px) {
+  header #navigation .panel {
+    display:block;
     width:100%;
+    margin:0 auto;
+  }
 }
 
+/**
+ * DATA TABLE
+ **/
+
+/* Col-Headers */
+.handsontable .ht_master thead tr:first-child th{
+  background:#79F1DD;
+  padding:3px 4px;
+  border:2px solid white;
+  line-height:16px;
+}
+
+/* Even rows */
+.handsontable .ht_master tbody tr:nth-child(even) td{
+  background:#E5E5E5;
+}
+
+/* Odd rows */
+.handsontable .ht_master tbody tr:nth-child(odd) td{
+  background:#F2F2F2;
+}
+
+/* All cells */
+.handsontable th, .handsontable td, .handsontable .ht_master tbody tr th:first-child{
+  border: 2px solid white;
+  height:16px;
+  line-height:16px;
+  padding:5px 4px;
+}
+
+/* All cells except row headers */
+.handsontable th, .handsontable td{
+  min-width:80px;
+}
+
+.handsontable .ht_master tbody tr th:first-child{
+  min-width: 40px !important;
+  width:40px !important;
+}
+
+/* Remove border top of body and header */
+.handsontable tr:first-child th, .handsontable tr:first-child td{
+  border-top:2px solid white;
+}
+
+/* Row headers */
+.handsontable .ht_master tbody tr th:first-child{
+  background: #FD8C92;
+  width:30px;
+}
+
+/* BUG FIX: Remove double row headers */
+.ht_clone_left, .ht_clone_top, .ht_clone_corner{
+  display:none;
+}
+
+/* TODO: check why this class doesn't get used */
+.current-col{
+  background:blue;
+}
+
+
+/* TODO: check text-size, change scroll bars in color and width */
 
 /**
  * Breadcrumbs
  **/
 
-.breadcrumbs {
-  text-align: center;
+.panel:hover {
+  background: #3F7773;
 }
 
-.breadcrumb:hover {
-  background: #4F4E4E;
-}
-
-.breadcrumb {
-  float:left;
-  margin: 5px auto;
-  width: 150px;
+.panel {
+  display:inline-block;
+  margin: 0 -2px;
+  width: 33.33%;
+  max-width:150px;
+  min-width:110px;
   height: 40px;
-  background: #598380;
+  background: #333;
   border-top: 3px solid #56BDB7;
   position: relative;
   color: white;
   text-align: center;
   padding: 7px;
   font-family: Colaborate-Light;
-  margin: 0px 5px;
 }
 
-.breadcrumb.border-left{
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+.panel.border-left {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
 }
 
-.breadcrumb.border-right{
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+.panel.border-right {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
 }
 
-.breadcrumb::after, #button_test::before {
+.panel::after {
   border: medium solid transparent;
   content: " ";
   height: 0;
@@ -57,14 +131,14 @@
   width: 0;
 }
 
-.breadcrumb::after {
+.panel::after {
   border-top-color: #56BDB7;
-  border-width: 3px;
-  margin-left: -3px;
+  border-width: 4px;
+  margin-left: -4px;
 }
 
-.breadcrumb::before {
+.panel::before {
   border-top-color: #56BDB7;
-  border-width: 3px;
-  margin-left: -3px;
+  border-width: 4px;
+  margin-left: -4px;
 }

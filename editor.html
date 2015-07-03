@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="vidatio">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vidatio</title>
+
+  <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css"/>
+  <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/icons.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+  <link rel="stylesheet" href="assets/css/editor.css"/>
+</head>
+<body class="container-fluid">
+
+<div class="wrapper">
+  <header>
+    <div class="row">
+      <div class="col-xs-6" id="line-right"></div>
+      <div class="col-xs-6" id="line-left"></div>
+    </div>
+    <div>
+      <div class="row" id="navigation">
+        <div class="col-xs-3 logo">
+          <a href="#">
+            <div id="logo"></div>
+          </a>
+        </div>
+        <div class="col-xs-6 middle">
+          <a href="#" class="panel border-left">Daten</a>
+          <a href="#" class="panel">Visualisierung</a>
+          <a href="#" class="panel border-right">Speicherung</a>
+        </div>
+        <div class="col-xs-3 menu-buttons">
+          <a id="menu" href="#" class="icon-profile"></a>
+          <a id="user" href="#" class="icon-hamburger"></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div id="container-data-table" class="content" ng-controller="DataTableCtrl">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="content-area">
+          <hot-table id="data-table" datarows="rows" settings="{afterInit: afterInit, currentColClassName: current-col}">
+          </hot-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="content">
+    <div class="row">
+      <div class="col-xs-4">
+        <a href="#">Über das Projekt</a> |
+        <a href="#">API</a> |
+        <a href="#">Team</a> |
+        <a href="#">Impressum</a>
+      </div>
+      <div class="col-xs-4 middle">
+        <a href="mailto:gbeschbacher@sbg.at" class="icon-mail">gbeschbacher@sbg.at</a>
+      </div>
+      <div class="col-xs-4">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/handsontable/dist/handsontable.full.js"></script>
+<script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/controller/main.js"></script>
+<script src="assets/js/controller/fileRead.js"></script>
+<script src="assets/js/controller/dataTable.js"></script>
+<script src="assets/js/directives/ngFileSelect.js"></script>
+<script src="assets/js/directives/ngFileDropStart.js"></script>
+<script src="assets/js/directives/ngFileDropEnd.js"></script>
+<script src="assets/js/services/fileReader.js"></script>
+<script src="assets/js/services/dataTable.js"></script>
+</body>
+</html>
