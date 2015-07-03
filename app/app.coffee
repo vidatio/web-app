@@ -21,11 +21,10 @@ app.run [
     "$state"
     "$stateParams"
     "$http"
-    "$cookieStore"
     "$location"
     "AuthenticationService"
     "UserService"
-    ( $rootScope, $state, $stateParams, $http, $cookieStore, $location, AuthenticationService, UserService ) ->
+    ( $rootScope, $state, $stateParams, $http, $location, AuthenticationService, UserService ) ->
         # $rootScope.state = $state
         # $rootScope.stateParams = $stateParams
 
@@ -76,6 +75,11 @@ app.config [
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "DataTableCtrl"
+            resolve:
+                title: [
+                    ->
+                        "editor"
+                ]
 
 # /penguins
         # .state "penguins",

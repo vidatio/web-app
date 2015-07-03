@@ -2,7 +2,7 @@
     margin 0px auto 30px auto
     .content-area
         padding 25px
-        border-top 3px solid #FF5444
+        border-top 3px solid $color-red
         background $color-white
         box-shadow $box-shadow-size $color-shadow
 
@@ -17,33 +17,33 @@
                 tr
                     &:first-child
                         th
-                            background #79F1DD
+                            background $color-hover-light
                             padding 3px 4px
                             border 2px solid white
                             line-height 16px
             tbody
                 tr
-                    &:nth-child(even)
-                        td
-                            background #E5E5E5
                     &:nth-child(odd)
                         td
-                            background #F2F2F2
+                            background $color-table-odd-passive
+                    &:nth-child(even)
+                        td
+                            background $color-table-even-passive
                     th
                         &:first-child
                             min-width 40px !important
                             width 40px !important
-                            background #FD8C92
+                            background $color-hover-light
                             width 30px
             th, td, tbody tr th:first-child
-                border 2px solid white
+                border 2px solid $color-white
                 height 16px
                 line-height 16px
                 padding 5px 4px
             th, td
                 min-width 80px
             tr:first-child th, tr:first-child td
-                border-top 2px solid white
+                border-top 2px solid $color-white
         .ht_clone_left, .ht_clone_top, .ht_clone_corner
             display none
 

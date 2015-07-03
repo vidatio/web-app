@@ -5,11 +5,37 @@ header
         #line-left.col-xs-6
 
     div
-        #navigation.row
-            .col-xs-6.logo
-                a(href='#')
-                    #logo
+        case title
+            when "import"
+                #navigation.row
+                    .col-xs-3.logo
+                        a(href='#')
+                            #logo
+                    .col-xs-3.menu-buttons
+                        a#menu.icon-profile(href='#')
+                        a#user.icon-hamburger(href='#')
+            when "editor"
+                #navigation.row
+                    .col-xs-3.logo
+                        a(href='#')
+                            #logo
+                    .col-xs-6
+                        a.panel.border-left(href='#')
+                            Daten
+                        a.panel(href='#')
+                            Visualisierung
+                        a.panel.border-right(href='#')
+                            Speicherung
+                    .col-xs-3.menu-buttons
+                        a#menu.icon-profile(href='#')
+                        a#user.icon-hamburger(href='#')
+            default
+                #navigation.row
+                    .col-xs-6.logo
+                        a(href='#')
+                            #logo
+                    .col-xs-6.menu-buttons
+                        a#menu.icon-profile(href='#')
+                        a#user.icon-hamburger(href='#')
 
-            .col-xs-6.menu-buttons
-                a#menu.icon-profile(href='#')
-                a#user.icon-hamburger(href='#')
+
