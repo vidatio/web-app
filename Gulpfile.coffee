@@ -31,7 +31,7 @@ DOC_FILES = [
 COPY_FILES =
     img:   "./app/statics/assets/images/**/*.*"
     css:   [
-        #"./bower_components/handsontable/dist/handsontable.full.css"
+        "./bower_components/handsontable/dist/handsontable.full.css"
         "./bower_components/bootstrap/dist/css/bootstrap.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
@@ -62,8 +62,8 @@ BUILD =
         "./bower_components/angular-cookies/angular-cookies.js"
         "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
         "./bower_components/angular-ui-router/release/angular-ui-router.js"
-        #"./bower_components/handsontable/dist/handsontable.full.js"
-        #"./bower_components/nghandsontable/dist/ngHandsontable.js"
+        "./bower_components/handsontable/dist/handsontable.full.js"
+        "./bower_components/nghandsontable/dist/ngHandsontable.js"
         "./bower_components/bootstrap/dist/js/bootstrap.js"
         "./app/init-deps.coffee"
         "./app/app.coffee"
