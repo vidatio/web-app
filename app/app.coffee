@@ -25,6 +25,10 @@ app.run [
     "AuthenticationService"
     "UserService"
     ( $rootScope, $state, $stateParams, $http, $location, AuthenticationService, UserService ) ->
+
+        $rootScope.$state = $state
+        $rootScope.$stateParams = $stateParams
+
         # $rootScope.state = $state
         # $rootScope.stateParams = $stateParams
 
@@ -69,17 +73,13 @@ app.config [
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
+            title: "HALLELUJAH"
 
 # /import
         .state "editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "DataTableCtrl"
-            resolve:
-                title: [
-                    ->
-                        "editor"
-                ]
 
 # /penguins
         # .state "penguins",
