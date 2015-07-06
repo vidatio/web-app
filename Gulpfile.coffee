@@ -9,11 +9,11 @@ gif = require "gulp-if"
 karma = require "gulp-karma"
 debug = require "gulp-debug"
 copy = require "gulp-copy"
-groc = require "gulp-groc"
 del = require "del"
 connect = require "gulp-connect"
 stylus = require "gulp-stylus"
 rename = require "gulp-rename"
+shell = require "gulp-shell"
 {protractor} = require "gulp-protractor"
 
 DOC_FILES = [
@@ -236,10 +236,7 @@ gulp.task "clean:docs",
 
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory",
-    [ "clean:docs" ]
-    ->
-        gulp.src DOC_FILES
-            .pipe groc( out: BUILD.dirs.docs )
+    [ "clean:docs" ], shell.task "groc"
 
 serverStarted = false
 gulp.task "run", "Serves the App.", ->
