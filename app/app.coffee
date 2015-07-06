@@ -73,7 +73,7 @@ app.config [
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
-            title: "HALLELUJAH"
+            title: "test"
 
 # /import
         .state "editor",
