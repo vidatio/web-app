@@ -5,7 +5,6 @@
 app = angular.module "app", [
     "ngRoute"
     "ngResource"
-    "ngAnimate"
     "ngCookies"
     "ngHandsontable"
     "ui.router"
