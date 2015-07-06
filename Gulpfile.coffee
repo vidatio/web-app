@@ -127,7 +127,6 @@ gulp.task "build",
         "copy"
     ],
     ->
-        console.log("reload");
         gulp.src BUILD.files
             .pipe gif "*.coffee", continueOnError( coffee() )
             .pipe gif "*.jade", continueOnError( jade() )
@@ -196,7 +195,7 @@ gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
         "build:watch"
-        #"test"
+        "test"
         "run"
     ]
 
