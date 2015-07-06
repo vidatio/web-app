@@ -73,13 +73,14 @@ app.config [
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
-            title: "HALLELUJAH"
+            title: "import"
 
 # /import
         .state "editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "DataTableCtrl"
+            title: "editor"
 
 # /penguins
         # .state "penguins",
