@@ -1,22 +1,22 @@
-gulp          = require("gulp-help")(require("gulp"))
-coffee        = require "gulp-coffee"
-coffeelint    = require "gulp-coffeelint"
-jade          = require "gulp-jade"
+gulp = require("gulp-help")(require("gulp"))
+coffee = require "gulp-coffee"
+coffeelint = require "gulp-coffeelint"
+jade = require "gulp-jade"
 templateCache = require "gulp-angular-templatecache"
-concat        = require "gulp-concat"
-uglify        = require "gulp-uglify"
-gif           = require "gulp-if"
-karma         = require "gulp-karma"
-debug         = require "gulp-debug"
-copy          = require "gulp-copy"
-docco         = require "gulp-docco"
-groc          = require "gulp-groc"
-del           = require "del"
-cache         = require "gulp-cached"
-connect       = require "gulp-connect"
-stylus        = require "gulp-stylus"
-rename        = require "gulp-rename"
-{protractor}  = require "gulp-protractor"
+concat = require "gulp-concat"
+uglify = require "gulp-uglify"
+gif = require "gulp-if"
+karma = require "gulp-karma"
+debug = require "gulp-debug"
+copy = require "gulp-copy"
+docco = require "gulp-docco"
+groc = require "gulp-groc"
+del = require "del"
+cache = require "gulp-cached"
+connect = require "gulp-connect"
+stylus = require "gulp-stylus"
+rename = require "gulp-rename"
+{protractor} = require "gulp-protractor"
 
 DOC_FILES = [
     "./README.MD"
@@ -85,7 +85,6 @@ BUILD =
         docs: "./docs"
     module: "app"
     app: "app.js"
-    css: "app.css"
 
 
 
@@ -133,10 +132,9 @@ gulp.task "build",
             .pipe gif "*.styl", continueOnError( stylus() )
             .pipe gif "**/master.html", gulp.dest( BUILD.dirs.out )
             .pipe gif "*.html", templateCache( module: BUILD.module )
-            .pipe gif "*.css", concat( BUILD.css )
-            .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
+            .pipe gif "**/master.css", gulp.dest( BUILD.dirs.css  )
             .pipe gif "*.js", concat( BUILD.app )
-            .pipe gulp.dest( BUILD.dirs.js )
+            .pipe gif "*.js", gulp.dest( BUILD.dirs.js )
             .pipe connect.reload()
 
 
@@ -145,7 +143,6 @@ gulp.task "build:production",
     [
         "clean:build"
         "lint"
-        "stylus"
         "copy:css"
         "copy:fonts"
         "copy:img"
@@ -160,16 +157,6 @@ gulp.task "build:production",
             .pipe gif "*.js", concat( BUILD.app )
             .pipe uglify()
             .pipe gulp.dest( BUILD.dirs.js )
-
-gulp.task "stylus",
-  "Converts Stylus in CSS files",
-  [],
-  ->
-    gulp.src BUILD.files
-    .pipe gif "*.styl", continueOnError( stylus({ compress: true }) )
-    .pipe gif "*.css", continueOnError( rename({ dirname: '' }) ) # remove sub-directories assets/css
-    .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
-
 
 gulp.task "default",
     "Runs 'develop' and 'test'.",
