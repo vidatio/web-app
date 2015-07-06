@@ -11,7 +11,7 @@ app.controller "DataTableCtrl", [
     ($scope, DataTable) ->
         $scope.rows = DataTable.dataset
 
-        #DataTable.setDataset 'Montag,5\nDienstag,2\nMittwoch,4'
+        DataTable.setDataset 'Montag,5\nDienstag,2\nMittwoch,4'
 
         $scope.colHeaders = true
         $scope.rowHeaders = true
