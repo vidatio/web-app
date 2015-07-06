@@ -1,16 +1,16 @@
 # User Factory Test
 # =================
 
-"use strict"
+# "use strict"
 
-describe "testing component 'UserFactory'", ->
+# describe "testing component 'UserFactory'", ->
 
-    UserFactory = undefined
+#     UserFactory = undefined
 
-    beforeEach ->
-        module "app"
-        inject (_UserFactory_) ->
-            UserFactory = _UserFactory_
+#     beforeEach ->
+#         module "app"
+#         inject (_UserFactory_) ->
+#             UserFactory = _UserFactory_
 
-    it "should be available", ->
-        expect( UserFactory ).toBeDefined()
+#     it "should be available", ->
+#         expect( UserFactory ).toBeDefined()
