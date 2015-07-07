@@ -30,7 +30,7 @@ DOC_FILES = [
 ]
 
 COPY_FILES =
-    img:   "./app/statics/assets/images/**/*.*"
+    img: "./app/statics/assets/images/**/*.*"
     fonts: [
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
@@ -73,18 +73,19 @@ BUILD =
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/nghandsontable/dist/ngHandsontable.js"
+            "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/bootstrap/dist/js/bootstrap.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
+            "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/bootstrap/dist/css/bootstrap.min.css"
-            "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
             "./bower_components/bootstrap/dist/css/bootstrap.css.map"
-            "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
         ]
     dirs:
         out: "./build"
-        js:  "./build/js"
+        js: "./build/js"
         css: "./build/css"
         html: "./build/html"
         fonts: "./build/fonts"
@@ -111,17 +112,17 @@ gulp.task "lint",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-            .pipe coffeelint()
-            .pipe coffeelint.reporter()
+        .pipe coffeelint()
+        .pipe coffeelint.reporter()
 
 
 gulp.task "test",
     "Starts and reruns all tests on change of test or source files.",
     ->
         gulp.src []
-            .pipe karma
-                configFile: "karma.conf.coffee"
-                action: "watch"
+        .pipe karma
+            configFile: "karma.conf.coffee"
+            action: "watch"
 
 gulp.task "e2e",
     "Runs all e2e tests.",
@@ -130,12 +131,12 @@ gulp.task "e2e",
     ],
     ->
         gulp.src E2E_FILES
-            .pipe protractor
-                configFile: "./protractor.config.coffee"
-                args: [
-                    "--baseUrl"
-                    BASEURL
-                ]
+        .pipe protractor
+            configFile: "./protractor.config.coffee"
+            args: [
+                "--baseUrl"
+                BASEURL
+            ]
 
 gulp.task "build",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
@@ -161,50 +162,50 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-            .pipe cache( "plugins.js" )
-            .pipe gif "*.js", concat( BUILD.plugin.js )
-            .pipe gif "*.js", gulp.dest( BUILD.dirs.js )
-            .pipe connect.reload()
+        .pipe cache("plugins.js")
+        .pipe gif "*.js", concat(BUILD.plugin.js)
+        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+        .pipe connect.reload()
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-            .pipe cache( "plugins.css" )
-            .pipe gif "*.css", concat( BUILD.plugin.css )
-            .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
-            .pipe connect.reload()
+        .pipe cache("plugins.css")
+        .pipe gif "*.css", concat(BUILD.plugin.css)
+        .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
+        .pipe connect.reload()
 
 gulp.task "build:source:coffee",
     "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.source.coffee
-            .pipe sourcemaps.init()
-            .pipe coffee().on "error", gutil.log
-            .pipe concat( BUILD.app )
-            .pipe sourcemaps.write( './map' )
-            .pipe gulp.dest( BUILD.dirs.js )
-            .pipe connect.reload()
+        .pipe sourcemaps.init()
+        .pipe coffee().on "error", gutil.log
+        .pipe concat(BUILD.app)
+        .pipe sourcemaps.write('./map')
+        .pipe gulp.dest(BUILD.dirs.js)
+        .pipe connect.reload()
 
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.source.stylus
-            .pipe sourcemaps.init()
-            .pipe stylus
-                compress: true
-                linenos: true
-            .pipe sourcemaps.write( './map' )
-            .pipe gulp.dest( BUILD.dirs.css )
-            .pipe connect.reload()
+        .pipe sourcemaps.init()
+        .pipe stylus
+            compress: true
+            linenos: true
+        .pipe sourcemaps.write('./map')
+        .pipe gulp.dest(BUILD.dirs.css)
+        .pipe connect.reload()
 
 gulp.task "build:source:jade",
     "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'.",
     ->
         gulp.src BUILD.source.jade
-            .pipe jade()
-            .pipe gulp.dest( BUILD.dirs.html )
-            .pipe connect.reload()
+        .pipe jade()
+        .pipe gulp.dest(BUILD.dirs.html)
+        .pipe connect.reload()
 
 
 gulp.task "build:copy",
@@ -214,8 +215,8 @@ gulp.task "build:copy",
     ]
     ->
         gulp.src BUILD.source.html
-            .pipe gif "**/master.html", gulp.dest ( BUILD.dirs.out )
-            .pipe connect.reload()
+        .pipe gif "**/master.html", gulp.dest ( BUILD.dirs.out )
+        .pipe connect.reload()
 
 gulp.task "build:cache",
     "Caches all angular.js templates in '#{BUILD.dirs.js}'.",
@@ -224,9 +225,9 @@ gulp.task "build:cache",
     ]
     ->
         gulp.src BUILD.source.html
-            .pipe templateCache( module: BUILD.module )
-            .pipe gulp.dest ( BUILD.dirs.js )
-            .pipe connect.reload()
+        .pipe templateCache(module: BUILD.module)
+        .pipe gulp.dest ( BUILD.dirs.js )
+        .pipe connect.reload()
 
 gulp.task "build:watch",
     "Runs 'build' and watches the source files, rebuilds the project on change.",
@@ -261,27 +262,27 @@ gulp.task "copy:img",
     "Copy images to '#{BUILD.dirs.images}' dir.",
     ->
         gulp.src COPY_FILES.img
-            .pipe gulp.dest BUILD.dirs.images
+        .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     "Copy fonts to '#{BUILD.dirs.fonts}' dir.",
     ->
         gulp.src COPY_FILES.fonts
-            .pipe gulp.dest BUILD.dirs.fonts
+        .pipe gulp.dest BUILD.dirs.fonts
 
 gulp.task "clean",
     "Clear '#{BUILD.dirs.out}' and '#{BUILD.dirs.docs}' folder.",
-    ( cb ) ->
+    (cb) ->
         del [BUILD.dirs.out, BUILD.dirs.docs], -> cb null, []
 
 gulp.task "clean:build",
     "Cleans the '#{BUILD.dirs.out}' directory",
-    ( cb ) ->
+    (cb) ->
         del BUILD.dirs.out, -> cb null, []
 
 gulp.task "clean:docs",
     "Cleans the '#{BUILD.dirs.docs}' directory",
-    ( cb ) ->
+    (cb) ->
         del BUILD.dirs.docs, -> cb null, []
 
 gulp.task "clean:html",
@@ -289,12 +290,12 @@ gulp.task "clean:html",
     [
         "build:copy"
     ]
-    ( cb ) ->
+    (cb) ->
         del BUILD.dirs.html, -> cb null, []
 
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory.",
-    [ "clean:docs" ], shell.task "groc"
+    ["clean:docs"], shell.task "groc"
 
 serverStarted = false
 gulp.task "run", "Serves the App.", ->
