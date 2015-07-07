@@ -1,12 +1,12 @@
-# Editor Controller
+# Share Controller
 # ===================
 
 "use strict"
 
 app = angular.module "app.controllers"
 
-app.controller "EditorCtrl", [
+app.controller "ShareCtrl", [
     "$scope"
     ($scope) ->
-        $scope.tab = $scope.$parent.tab
+
 ]

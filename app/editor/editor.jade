@@ -1,5 +1,7 @@
-#table.content(ng-controller='DataTableCtrl')
-    .row
-        .col-sm-12
-            .content-area
-                hot-table#data-table(datarows='rows', settings='{afterInit: afterInit, currentColClassName: current-col}')
+#editor.content(ng-controller="EditorCtrl")
+
+    {{tab}}
+
+    include table/table
+    include visualization/visualization
+    include share/share

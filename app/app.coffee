@@ -78,7 +78,7 @@ app.config [
         .state "editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
-            controller: "DataTableCtrl"
+            controller: "EditorCtrl"
             title: "editor"
 
 # /penguins

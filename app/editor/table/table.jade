@@ -1,0 +1,5 @@
+#table.content(ng-controller='TableCtrl' ng-show="tab === 1")
+    .row
+        .col-sm-12
+            .content-area
+                hot-table#data-table(datarows='rows', settings='{afterInit: afterInit, currentColClassName: current-col}')

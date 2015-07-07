@@ -1,12 +1,12 @@
-# Editor Controller
+# Visualization Controller
 # ===================
 
 "use strict"
 
 app = angular.module "app.controllers"
 
-app.controller "EditorCtrl", [
+app.controller "VisualizationCtrl", [
     "$scope"
     ($scope) ->
-        $scope.tab = $scope.$parent.tab
+
 ]

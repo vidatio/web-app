@@ -1,13 +1,13 @@
-# DataTable Service
+# Table Service
 # ======================
 
 "use strict"
 
 app = angular.module "app.services"
 
-app.service 'DataTableService', [ ->
+app.service 'TableService', [ ->
 
-    class DataTable
+    class Table
         constructor: ->
             @dataset = []
 
@@ -23,5 +23,5 @@ app.service 'DataTableService', [ ->
                 @dataset.push rows[i].split(',')
                 ++i
 
-    new DataTable
+    new Table
 ]
