@@ -27,6 +27,12 @@
     "test",
     "tests"
   ],
+  "dependencies": {
+    "handsontable": "~0.14.1",
+    "nghandsontable": "0.5.1",
+    "jQuery": "~2.1.3",
+    "bootstrap": "~3.3.4"
+  },
   "devDependencies": {
     "angular-route": "~1.3.0",
     "angular-animate": "~1.3.0",
@@ -42,8 +48,7 @@
     "bootstrap": "~3.3.4",
     "jasmine-jquery": "~2.1.0"
   },
-  "dependencies": {
-    "angular": "~1.3.15",
-    "nghandsontable": "0.5.1"
+  "resolutions": {
+    "angular": "~1.3.15"
   }
 }
