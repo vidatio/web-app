@@ -9,13 +9,11 @@ gif = require "gulp-if"
 karma = require "gulp-karma"
 debug = require "gulp-debug"
 copy = require "gulp-copy"
-docco = require "gulp-docco"
-groc = require "gulp-groc"
 del = require "del"
-cache = require "gulp-cached"
 connect = require "gulp-connect"
 stylus = require "gulp-stylus"
 rename = require "gulp-rename"
+shell = require "gulp-shell"
 {protractor} = require "gulp-protractor"
 
 DOC_FILES = [
@@ -149,7 +147,6 @@ gulp.task "build:production",
     ],
     ->
         gulp.src BUILD.files
-            .pipe cache( "build" )
             .pipe gif "*.coffee", coffee()
             .pipe gif "*.jade", jade()
             .pipe gif "**/index.html", gulp.dest( BUILD.dirs.out )
@@ -172,11 +169,6 @@ gulp.task "build:watch",
     ],
     ->
         watcher = gulp.watch BUILD.files, ["build"]
-
-        watcher.on "change", ( event ) ->
-            if event.type is "deleted"
-                delete cache.caches[build][event.path]
-
 
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
@@ -244,10 +236,7 @@ gulp.task "clean:docs",
 
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory",
-    [ "clean:docs" ]
-    ->
-        gulp.src DOC_FILES
-            .pipe groc( out: BUILD.dirs.docs )
+    [ "clean:docs" ], shell.task "groc"
 
 serverStarted = false
 gulp.task "run", "Serves the App.", ->

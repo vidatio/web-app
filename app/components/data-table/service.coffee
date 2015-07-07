@@ -8,11 +8,11 @@ app = angular.module "app.services"
 app.service 'DataTableService', [ ->
 
     class DataTable
-        constructor: () ->
+        constructor: ->
             @dataset = []
 
 
-        @setDataset (data) ->
+        setDataset: (data) ->
             # safely remove all items, keeps data binding alive
             @dataset.splice 0, @dataset.length
 
