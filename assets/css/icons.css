@@ -1,0 +1,90 @@
+@font-face {
+  font-family: 'vidatio_icons';
+  src: url('../fonts/icons.eot?30722434');
+  src: url('../fonts/icons.eot?30722434#iefix') format('embedded-opentype'),
+  url('../fonts/icons.woff?30722434') format('woff'),
+  url('../fonts/icons.ttf?30722434') format('truetype'),
+  url('../fonts/icons.svg?30722434#vidatio_icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'vidatio_icons';
+    src: url('../font/vidatio_icons.svg?30722434#vidatio_icons') format('svg');
+  }
+}
+*/
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "vidatio_icons";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+
+  display: inline-block;
+  text-decoration: inherit;
+  /*width: 1em;*/
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+
+  /* fix buttons height, for twitter bootstrap */
+  /*line-height: 1em;*/
+
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-visualizations:before { content: '\e800'; } /* '' */
+.icon-upload:before { content: '\e801'; } /* '' */
+.icon-upgradeaccount:before { content: '\e802'; } /* '' */
+.icon-twitter:before { content: '\e803'; } /* '' */
+.icon-trash:before { content: '\e804'; } /* '' */
+.icon-text:before { content: '\e805'; } /* '' */
+.icon-share:before { content: '\e806'; } /* '' */
+.icon-searchfiles:before { content: '\e807'; } /* '' */
+.icon-search:before { content: '\e808'; } /* '' */
+.icon-api:before { content: '\e809'; } /* '' */
+.icon-back:before { content: '\e80a'; } /* '' */
+.icon-coin1:before { content: '\e80b'; } /* '' */
+.icon-coin2:before { content: '\e80c'; } /* '' */
+.icon-coin3:before { content: '\e80d'; } /* '' */
+.icon-open:before { content: '\e80e'; } /* '' */
+.icon-opendata:before { content: '\e80f'; } /* '' */
+.icon-options:before { content: '\e810'; } /* '' */
+.icon-phone:before { content: '\e811'; } /* '' */
+.icon-profile:before { content: '\e812'; } /* '' */
+.icon-colors:before { content: '\e813'; } /* '' */
+.icon-table:before { content: '\e814'; } /* '' */
+.icon-database2:before { content: '\e815'; } /* '' */
+.icon-draganddrop:before { content: '\e816'; } /* '' */
+.icon-edit:before { content: '\e817'; } /* '' */
+.icon-facebook:before { content: '\e818'; } /* '' */
+.icon-fill:before { content: '\e819'; } /* '' */
+.icon-googleplus:before { content: '\e81a'; } /* '' */
+.icon-hamburger:before { content: '\e81b'; } /* '' */
+.icon-icon-17:before { content: '\e81c'; } /* '' */
+.icon-link:before { content: '\e81d'; } /* '' */
+.icon-livedata:before { content: '\e81e'; } /* '' */
+.icon-mail:before { content: '\e81f'; } /* '' */
+.icon-mydata:before { content: '\e820'; } /* '' */
+.icon-myvisualisazions:before { content: '\e821'; } /* '' */

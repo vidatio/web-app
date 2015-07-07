@@ -19,7 +19,6 @@ angular.module('vidatio').controller('FileReadCtrl', function ($scope, $http, Fi
 
   // Read via Browsing and Drag-and-Drop
   $scope.getFile = function () {
-    $scope.progress = 0;
     FileReader.readAsDataUrl($scope.file, $scope)
       .then(function (result) {
         $scope.content = result;
