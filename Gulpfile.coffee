@@ -96,6 +96,17 @@ BUILD =
         js: "plugins.js"
         css: "plugins.css"
 
+WATCH = [
+    "./app/init-deps.coffee"
+    "./app/app.coffee"
+    "./app/app-controller.coffee"
+    "./app/*/**/*.coffee"
+    "!./app/*/**/*-test.coffee"
+    "!./app/**/*-e2e.coffee"
+    "./app/**/*.jade"
+    "./app/*/**/*.stylus"
+]
+
 gulp.task "lint",
     "Lints all CoffeeScript source files.",
     ->
@@ -223,9 +234,7 @@ gulp.task "build:watch",
         "build"
     ],
     ->
-        gulp.watch BUILD.source.coffee, ["build"]
-        gulp.watch BUILD.source.jade, ["build"]
-        gulp.watch BUILD.source.stylus, ["build"]
+        gulp.watch WATCH, ["build"]
 
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
