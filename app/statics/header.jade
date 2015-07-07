@@ -17,17 +17,19 @@ header
                     a#user.icon-hamburger(href='#')
 
             #navigation.row(ng-switch-when="editor")
-                .col-xs-3.logo
+                .col-xs-6.col-sm-3.logo
                     a(href='#')
                         #logo
-                .col-xs-6.middle
+
+                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
+                    a#menu.icon-profile(href='#')
+                    a#user.icon-hamburger(href='#')
+
+                .col-xs-12.col-sm-pull-3.col-sm-6.middle
                     a.tab.border-left(href='#' ng-click="tab = 1") Daten
                     a.tab(href='#' ng-click="tab = 2") Visualisierung
                     a.tab.border-right(href='#' ng-click="tab = 3") Speicherung
                     h1 {{tab}}
-                .col-xs-3.menu-buttons
-                    a#menu.icon-profile(href='#')
-                    a#user.icon-hamburger(href='#')
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
