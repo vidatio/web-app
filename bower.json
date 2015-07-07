@@ -31,7 +31,8 @@
     "handsontable": "~0.14.1",
     "nghandsontable": "0.5.1",
     "jQuery": "~2.1.3",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "angular-leaflet-directive": "~0.8.2"
   },
   "devDependencies": {
     "angular-route": "~1.3.0",
