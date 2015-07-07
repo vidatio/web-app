@@ -223,7 +223,9 @@ gulp.task "build:watch",
         "build"
     ],
     ->
-        watcher = gulp.watch BUILD.files, ["build"]
+        gulp.watch BUILD.source.coffee, ["build"]
+        gulp.watch BUILD.source.jade, ["build"]
+        gulp.watch BUILD.source.stylus, ["build"]
 
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
@@ -295,17 +297,3 @@ gulp.task "run", "Serves the App.", ["build:copy"], ->
         livereload: true
         port: 3123
         fallback: BUILD.dirs.out + "/statics/master.html"
-
-
-# clean stream of onerror
-continueOnError = ( stream ) ->
-    stream.on "error", ( err ) ->
-            console.log err
-        .on "newListener", ->
-            cleaner @
-
-cleaner = ( stream ) ->
-    stream.listeners( "erreor" ).forEach ( item ) ->
-        if item.name is "onerror" then @.removeListener "error", item
-    , stream
-
