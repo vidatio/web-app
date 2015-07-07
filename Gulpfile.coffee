@@ -31,21 +31,10 @@ DOC_FILES = [
 
 COPY_FILES =
     img:   "./app/statics/assets/images/**/*.*"
-    css:   [
-        "./bower_components/handsontable/dist/handsontable.full.css"
-        "./bower_components/bootstrap/dist/css/bootstrap.min.css"
-        "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
-        "./bower_components/bootstrap/dist/css/bootstrap.css.map"
-        "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
-    ]
-    js: [
-        "./bower_components/bootstrap/dist/js/bootstrap.js"
-    ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
     ]
-
 
 BASEURL = "http://localhost:3123"
 
@@ -54,40 +43,58 @@ E2E_FILES = "./app/**/*-e2e.coffee"
 APP_FILES = "./app/**/*.coffee"
 
 BUILD =
-    files: [
-        "./bower_components/jquery/dist/jquery.js"
-        "./bower_components/angular/angular.js"
-        "./bower_components/angular-route/angular-route.js"
-        "./bower_components/angular-resource/angular-resource.js"
-        "./bower_components/angular-animate/angular-animate.js"
-        "./bower_components/angular-cookies/angular-cookies.js"
-        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-        "./bower_components/angular-ui-router/release/angular-ui-router.js"
-        "./bower_components/handsontable/dist/handsontable.full.js"
-        "./bower_components/nghandsontable/dist/ngHandsontable.js"
-        "./bower_components/bootstrap/dist/js/bootstrap.js"
-        "./app/init-deps.coffee"
-        "./app/app.coffee"
-        "./app/app-controller.coffee"
-        "./app/*/**/*.coffee"
-        "!./app/*/**/*-test.coffee" #exclude test files
-        "!./app/**/*-e2e.coffee"    #exclude e2e test files
-        "./app/**/*.jade"
-        "./app/statics/master.styl"
-        "./app/**/*.styl"
-        "./app/**/*.css"
-    ]
+    source:
+        coffee: [
+            "./app/init-deps.coffee"
+            "./app/app.coffee"
+            "./app/app-controller.coffee"
+            "./app/*/**/*.coffee"
+            "!./app/*/**/*-test.coffee"
+            "!./app/**/*-e2e.coffee"
+        ]
+        stylus: [
+            "./app/statics/master.styl"
+        ]
+        jade: [
+            "./app/**/*.jade"
+        ]
+        html: [
+            "./build/html/**/*.html"
+        ]
+    plugins:
+        js: [
+            "./bower_components/jquery/dist/jquery.js"
+            "./bower_components/angular/angular.js"
+            "./bower_components/angular-route/angular-route.js"
+            "./bower_components/angular-resource/angular-resource.js"
+            "./bower_components/angular-animate/angular-animate.js"
+            "./bower_components/angular-cookies/angular-cookies.js"
+            "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
+            "./bower_components/angular-ui-router/release/angular-ui-router.js"
+            "./bower_components/handsontable/dist/handsontable.full.js"
+            "./bower_components/nghandsontable/dist/ngHandsontable.js"
+            "./bower_components/bootstrap/dist/js/bootstrap.js"
+        ]
+        css: [
+            "./bower_components/handsontable/dist/handsontable.full.css"
+            "./bower_components/bootstrap/dist/css/bootstrap.min.css"
+            "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
+            "./bower_components/bootstrap/dist/css/bootstrap.css.map"
+            "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
+        ]
     dirs:
         out: "./build"
         js:  "./build/js"
         css: "./build/css"
+        html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
         docs: "./docs"
     module: "app"
     app: "app.js"
-
-
+    plugin:
+        js: "plugins.js"
+        css: "plugins.css"
 
 gulp.task "lint",
     "Lints all CoffeeScript source files.",
@@ -119,44 +126,19 @@ gulp.task "e2e",
                     BASEURL
                 ]
 
-
 gulp.task "build",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "lint"
         "copy"
-    ],
-    ->
-        gulp.src BUILD.files
-            .pipe gif "*.coffee", continueOnError( coffee() )
-            .pipe gif "*.jade", continueOnError( jade() )
-            .pipe gif "*.styl", continueOnError( stylus() )
-            .pipe gif "**/master.html", gulp.dest( BUILD.dirs.out )
-            .pipe gif "*.html", templateCache( module: BUILD.module )
-            .pipe gif "**/master.css", gulp.dest( BUILD.dirs.css  )
-            .pipe gif "*.js", concat( BUILD.app )
-            .pipe gif "*.js", gulp.dest( BUILD.dirs.js )
-            .pipe connect.reload()
-
-
-gulp.task "build:production",
-    "Lints, builds and minifies the project to '#{BUILD.dirs.out}'.",
-    [
-        "clean:build"
-        "lint"
-        "copy:css"
-        "copy:fonts"
-        "copy:img"
-    ],
-    ->
-        gulp.src BUILD.files
-            .pipe gif "*.coffee", coffee()
-            .pipe gif "*.jade", jade()
-            .pipe gif "**/index.html", gulp.dest( BUILD.dirs.out )
-            .pipe gif "*.html", templateCache( module: BUILD.module )
-            .pipe gif "*.js", concat( BUILD.app )
-            .pipe uglify()
-            .pipe gulp.dest( BUILD.dirs.js )
+        "build:cache"
+        "build:copy"
+        "build:source:stylus"
+        "build:source:coffee"
+        "build:plugins:js"
+        "build:plugins:css"
+        "clean:html"
+    ]
 
 gulp.task "default",
     "Runs 'develop' and 'test'.",
@@ -164,6 +146,76 @@ gulp.task "default",
         "develop"
     ]
 
+gulp.task "build:plugins:js",
+    "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
+    ->
+        gulp.src BUILD.plugins.js
+            .pipe cache( "plugins.js" )
+            .pipe gif "*.js", concat( BUILD.plugin.js )
+            .pipe gif "*.js", gulp.dest( BUILD.dirs.js )
+            .pipe connect.reload()
+
+gulp.task "build:plugins:css",
+    "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
+    ->
+        gulp.src BUILD.plugins.css
+            .pipe cache( "plugins.css" )
+            .pipe gif "*.css", concat( BUILD.plugin.css )
+            .pipe gif "*.css", gulp.dest( BUILD.dirs.css )
+            .pipe connect.reload()
+
+gulp.task "build:source:coffee",
+    "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
+    ->
+        gulp.src BUILD.source.coffee
+            .pipe sourcemaps.init()
+            .pipe coffee().on "error", gutil.log
+            .pipe concat( BUILD.app )
+            .pipe sourcemaps.write( './map' )
+            .pipe gulp.dest( BUILD.dirs.js )
+            .pipe connect.reload()
+
+gulp.task "build:source:stylus",
+    "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'..",
+    ->
+        gulp.src BUILD.source.stylus
+            .pipe sourcemaps.init()
+            .pipe stylus
+                compress: true
+                linenos: true
+            .pipe sourcemaps.write( './map' )
+            .pipe gulp.dest( BUILD.dirs.css )
+            .pipe connect.reload()
+
+gulp.task "build:source:jade",
+    "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'..",
+    ->
+        gulp.src BUILD.source.jade
+            .pipe jade()
+            .pipe gulp.dest( BUILD.dirs.html )
+            .pipe connect.reload()
+
+
+gulp.task "build:copy",
+    "Copies master.html to '#{BUILD.dirs.out}/static'.",
+    [
+        "build:source:jade"
+    ]
+    ->
+        gulp.src BUILD.source.html
+            .pipe gif "**/master.html", gulp.dest ( BUILD.dirs.out )
+            .pipe connect.reload()
+
+gulp.task "build:cache",
+    "Caches all angular.js templates in '#{BUILD.dirs.js}'.",
+    [
+        "build:source:jade"
+    ]
+    ->
+        gulp.src BUILD.source.html
+            .pipe templateCache( module: BUILD.module )
+            .pipe gulp.dest ( BUILD.dirs.js )
+            .pipe connect.reload()
 
 gulp.task "build:watch",
     "Runs 'build' and watches the source files, rebuilds the project on change.",
@@ -173,16 +225,6 @@ gulp.task "build:watch",
     ->
         watcher = gulp.watch BUILD.files, ["build"]
 
-
-gulp.task "build2:watch",
-    "Runs 'build' and watches the source files, rebuilds the project on change.",
-    [
-        "build2"
-    ],
-    ->
-        watcher = gulp.watch BUILD.files, ["build2"]
-
-
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
@@ -190,15 +232,6 @@ gulp.task "develop",
         "test"
         "run"
     ]
-
-gulp.task "develop2",
-    "Watches/Build and Test the source files on change.",
-    [
-        "build2:watch"
-        "test"
-        "run"
-    ]
-
 
 gulp.task "dev",
     "Shorthand for develop.",
@@ -210,9 +243,7 @@ gulp.task "copy",
     "Copy every assets to '#{BUILD.dirs.out}' dir.",
     [
         "copy:img"
-        "copy:css"
         "copy:fonts"
-        "copy:js"
     ]
 
 gulp.task "copy:img",
@@ -221,29 +252,16 @@ gulp.task "copy:img",
         gulp.src COPY_FILES.img
             .pipe gulp.dest BUILD.dirs.images
 
-gulp.task "copy:css",
-    "Copy css to '#{BUILD.dirs.css}' dir.",
-    ->
-        gulp.src COPY_FILES.css
-            .pipe gulp.dest BUILD.dirs.css
-
 gulp.task "copy:fonts",
     "Copy fonts to '#{BUILD.dirs.fonts}' dir.",
     ->
         gulp.src COPY_FILES.fonts
             .pipe gulp.dest BUILD.dirs.fonts
 
-gulp.task "copy:js",
-    "Copy js to '#{BUILD.dirs.out}' dir.",
-    ->
-        gulp.src COPY_FILES.js
-            .pipe copy BUILD.dirs.out, prefix: 3
-
 gulp.task "clean",
     "Clear '#{BUILD.dirs.out}' and '#{BUILD.dirs.docs}' folder.",
     ( cb ) ->
         del [BUILD.dirs.out, BUILD.dirs.docs], -> cb null, []
-
 
 gulp.task "clean:build",
     "Cleans the '#{BUILD.dirs.out}' directory",
@@ -255,13 +273,20 @@ gulp.task "clean:docs",
     ( cb ) ->
         del BUILD.dirs.docs, -> cb null, []
 
+gulp.task "clean:html",
+    "Cleans the '#{BUILD.dirs.html}' directory",
+    [
+        "build:copy"
+    ]
+    ( cb ) ->
+        del BUILD.dirs.html, -> cb null, []
+
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory",
     [ "clean:docs" ], shell.task "groc"
 
 serverStarted = false
-
-gulp.task "run", "Serves the App.", ["build2:copy"], ->
+gulp.task "run", "Serves the App.", ["build:copy"], ->
     return if serverStarted
     serverStarted = true
 
@@ -270,149 +295,6 @@ gulp.task "run", "Serves the App.", ["build2:copy"], ->
         livereload: true
         port: 3123
         fallback: BUILD.dirs.out + "/statics/master.html"
-
-
-
-TEST =
-    sourceCoffee: [
-        "./app/init-deps.coffee"
-        "./app/app.coffee"
-        "./app/app-controller.coffee"
-        "./app/*/**/*.coffee"
-        "!./app/*/**/*-test.coffee" #exclude test files
-        "!./app/**/*-e2e.coffee"    #exclude e2e test files
-    ]
-    sourceStylus: [
-        "./app/statics/master.styl"
-    ]
-    sourceJade: [
-        "./app/**/*.jade"
-    ]
-    sourceHtml: [
-        "./build/html/**/*.html"
-    ]
-    # plugins: [
-    #     "./bower_components/angular/angular.js"
-    #     "./bower_components/angular-route/angular-route.js"
-    #     "./bower_components/angular-resource/angular-resource.js"
-    #     "./bower_components/angular-cookies/angular-cookies.js"
-    #     "./bower_components/nghandsontable/dist/ngHandsontable.js"
-    #     "./bower_components/angular-ui-router/release/angular-ui-router.js"
-    # ]
-    plugins:[
-        "./bower_components/jquery/dist/jquery.js"
-        "./bower_components/angular/angular.js"
-        "./bower_components/angular-route/angular-route.js"
-        "./bower_components/angular-resource/angular-resource.js"
-        "./bower_components/angular-animate/angular-animate.js"
-        "./bower_components/angular-cookies/angular-cookies.js"
-        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-        "./bower_components/angular-ui-router/release/angular-ui-router.js"
-        "./bower_components/handsontable/dist/handsontable.full.js"
-        "./bower_components/nghandsontable/dist/ngHandsontable.js"
-        "./bower_components/bootstrap/dist/js/bootstrap.js"
-    ]
-    dirs:
-        out: "./build"
-        js:  "./build/js"
-        css: "./build/css"
-        html: "./build/html"
-        fonts: "./build/fonts"
-        images: "./build/images"
-        docs: "./docs"
-    module: "app"
-    app: "app.js"
-    plugin: "plugins.js"
-
-
-
-gulp.task "build2:plugins",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    ->
-        gulp.src TEST.plugins
-            .pipe cache( "plugins" )
-            .pipe gif "*.js", concat( TEST.plugin )
-            .pipe gif "*.js", gulp.dest( TEST.dirs.js )
-
-gulp.task "build2:sourceCoffee",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    ->
-        gulp.src TEST.sourceCoffee
-            .pipe sourcemaps.init()
-            .pipe coffee()
-            .on "error", gutil.log
-            .pipe concat( TEST.app )
-            .pipe sourcemaps.write( './map' )
-            .pipe gulp.dest( TEST.dirs.js )
-
-gulp.task "build2:sourceStylus",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    ->
-        gulp.src TEST.sourceStylus
-            .pipe sourcemaps.init()
-            .pipe stylus
-                compress: true
-                linenos: true
-            .pipe sourcemaps.write( './map' )
-            .pipe gulp.dest( TEST.dirs.css )
-            .pipe connect.reload()
-
-gulp.task "build2:sourceJade",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    ->
-        gulp.src TEST.sourceJade
-            .pipe jade()
-            .pipe gulp.dest( TEST.dirs.html )
-            .pipe connect.reload()
-
-
-gulp.task "build2:copy",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    [
-        "build2:sourceJade"
-    ]
-    ->
-        gulp.src TEST.sourceHtml
-            .pipe gif "**/master.html", gulp.dest ( TEST.dirs.out )
-            .pipe connect.reload()
-
-        #del "./build/html", (err, paths) ->
-            #console.log 'Deleted files/folders:\n', paths.join('\n')
-        #del [BUILD.dirs.html], -> cb null, []
-
-
-gulp.task "build2:cache",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    [
-        "build2:sourceJade"
-    ]
-    ->
-        gulp.src TEST.sourceHtml
-            .pipe templateCache( module: TEST.module )
-            .pipe gulp.dest ( TEST.dirs.js )
-            .pipe connect.reload()
-
-gulp.task "build2",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    [
-        "lint"
-        "copy:img"
-        "copy:css"
-        "copy:fonts"
-        "build2:cache"
-        "build2:copy"
-        "build2:sourceStylus"
-        "build2:sourceCoffee"
-        "build2:plugins"
-    ]
-
-
-gulp.task "asdf",
-    "Runs 'develop' and 'test'.",
-    [
-        "develop2"
-    ]
-
 
 
 # clean stream of onerror
