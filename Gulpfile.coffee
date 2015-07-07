@@ -260,7 +260,8 @@ gulp.task "docs",
     [ "clean:docs" ], shell.task "groc"
 
 serverStarted = false
-gulp.task "run", "Serves the App.", ->
+
+gulp.task "run", "Serves the App.", ["build2:copy"], ->
     return if serverStarted
     serverStarted = true
 
