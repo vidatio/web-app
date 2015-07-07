@@ -274,8 +274,8 @@ gulp.task "run", "Serves the App.", ->
 
 TEST =
     sourceCoffee: [
-        "./app/app.coffee"
         "./app/init-deps.coffee"
+        "./app/app.coffee"
         "./app/app-controller.coffee"
         "./app/*/**/*.coffee"
         "!./app/*/**/*-test.coffee" #exclude test files
@@ -291,17 +291,12 @@ TEST =
         "./build/html/**/*.html"
     ]
     plugins: [
-        "./bower_components/jquery/dist/jquery.js"
         "./bower_components/angular/angular.js"
         "./bower_components/angular-route/angular-route.js"
         "./bower_components/angular-resource/angular-resource.js"
-        "./bower_components/angular-animate/angular-animate.js"
         "./bower_components/angular-cookies/angular-cookies.js"
-        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-        "./bower_components/angular-ui-router/release/angular-ui-router.js"
-        "./bower_components/handsontable/dist/handsontable.full.js"
         "./bower_components/nghandsontable/dist/ngHandsontable.js"
-        "./bower_components/bootstrap/dist/js/bootstrap.js"
+        "./bower_components/angular-ui-router/release/angular-ui-router.js"
     ]
     dirs:
         out: "./build"
@@ -330,7 +325,8 @@ gulp.task "build2:sourceCoffee",
     ->
         gulp.src TEST.sourceCoffee
             .pipe sourcemaps.init()
-            .pipe coffee().on "error", gutil.log
+            .pipe coffee()
+            .on "error", gutil.log
             .pipe concat( TEST.app )
             .pipe sourcemaps.write( './map' )
             .pipe gulp.dest( TEST.dirs.js )

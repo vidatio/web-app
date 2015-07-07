@@ -8,7 +8,6 @@ app = angular.module "app", [
     "ngCookies"
     "ngHandsontable"
     "ui.router"
-    "ui.bootstrap"
     "app.controllers"
     "app.services"
     "app.directives"
