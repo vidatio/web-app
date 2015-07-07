@@ -16,6 +16,7 @@ app.controller "VisualizationCtrl", [
             lat: 47.723407
             lng: 13.086921
             zoom: 16
+
         # Watch on the dataset from the data table
         # and update markers on changed data
         $scope.$watch (->
@@ -23,9 +24,7 @@ app.controller "VisualizationCtrl", [
         ), ((dataset) ->
             console.log 'data changed'
             Map.setMarkers dataset
-            return
         ), true
-        $scope.markers = Map.markers
-        return
 
+        $scope.markers = Map.markers
 ]

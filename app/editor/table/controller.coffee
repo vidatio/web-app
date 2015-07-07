@@ -11,7 +11,7 @@ app.controller "TableCtrl", [
     ($scope, Table) ->
         $scope.rows = Table.dataset
 
-        Table.setDataset 'Montag,5\nDienstag,2\nMittwoch,4'
+        Table.setDataset '47.723955,13.084850\n47.725081,13.087736\n47.724881,13.086685'
 
         $scope.colHeaders = true
         $scope.rowHeaders = true
