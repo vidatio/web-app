@@ -24,7 +24,7 @@ app.service 'MapService', [ ->
             data.forEach ((element, index, array) ->
                 lat = parseFloat(element[0])
                 lng = parseFloat(element[1])
-                if isCoordinate(lat) and isCoordinate(lng)
+                if this.isCoordinate(lat) and this.isCoordinate(lng)
                     @markers[length++] =
                         lat: parseFloat(lat)
                         lng: parseFloat(lng)
