@@ -176,7 +176,7 @@ gulp.task "build:source:coffee",
             .pipe connect.reload()
 
 gulp.task "build:source:stylus",
-    "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'..",
+    "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.source.stylus
             .pipe sourcemaps.init()
@@ -188,7 +188,7 @@ gulp.task "build:source:stylus",
             .pipe connect.reload()
 
 gulp.task "build:source:jade",
-    "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'..",
+    "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'.",
     ->
         gulp.src BUILD.source.jade
             .pipe jade()
@@ -284,11 +284,11 @@ gulp.task "clean:html",
         del BUILD.dirs.html, -> cb null, []
 
 gulp.task "docs",
-    "Generates documentation in '#{BUILD.dirs.docs}' directory",
+    "Generates documentation in '#{BUILD.dirs.docs}' directory.",
     [ "clean:docs" ], shell.task "groc"
 
 serverStarted = false
-gulp.task "run", "Serves the App.", ["build:copy"], ->
+gulp.task "run", "Serves the App.", ->
     return if serverStarted
     serverStarted = true
 
