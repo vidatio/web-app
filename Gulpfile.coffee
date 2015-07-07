@@ -24,8 +24,8 @@ DOC_FILES = [
     "./app/init-deps.coffee"
     "./app/app.coffee"
     "./app/app-controller.coffee"
-    "./app/*/**/*.coffee"
-    "!./app/*/**/*-test.coffee"
+    "./app/**/*.coffee"
+    "!./app/**/*-test.coffee"
     "!./app/**/*-e2e.coffee"
 ]
 
@@ -48,8 +48,8 @@ BUILD =
             "./app/init-deps.coffee"
             "./app/app.coffee"
             "./app/app-controller.coffee"
-            "./app/*/**/*.coffee"
-            "!./app/*/**/*-test.coffee"
+            "./app/**/*.coffee"
+            "!./app/**/*-test.coffee"
             "!./app/**/*-e2e.coffee"
         ]
         stylus: [
@@ -100,11 +100,11 @@ WATCH = [
     "./app/init-deps.coffee"
     "./app/app.coffee"
     "./app/app-controller.coffee"
-    "./app/*/**/*.coffee"
-    "!./app/*/**/*-test.coffee"
+    "./app/**/*.coffee"
+    "!./app/**/*-test.coffee"
     "!./app/**/*-e2e.coffee"
     "./app/**/*.jade"
-    "./app/*/**/*.stylus"
+    "./app/**/*.styl"
 ]
 
 gulp.task "lint",
