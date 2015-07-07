@@ -14,6 +14,9 @@ connect = require "gulp-connect"
 stylus = require "gulp-stylus"
 rename = require "gulp-rename"
 shell = require "gulp-shell"
+sourcemaps = require 'gulp-sourcemaps'
+gutil = require "gulp-util"
+cache = require "gulp-cached"
 {protractor} = require "gulp-protractor"
 
 DOC_FILES = [
@@ -170,10 +173,28 @@ gulp.task "build:watch",
     ->
         watcher = gulp.watch BUILD.files, ["build"]
 
+
+gulp.task "build2:watch",
+    "Runs 'build' and watches the source files, rebuilds the project on change.",
+    [
+        "build2"
+    ],
+    ->
+        watcher = gulp.watch BUILD.files, ["build2"]
+
+
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
         "build:watch"
+        "test"
+        "run"
+    ]
+
+gulp.task "develop2",
+    "Watches/Build and Test the source files on change.",
+    [
+        "build2:watch"
         "test"
         "run"
     ]
@@ -249,8 +270,142 @@ gulp.task "run", "Serves the App.", ->
         port: 3123
         fallback: BUILD.dirs.out + "/statics/master.html"
 
-# clean stream of onerror
 
+
+TEST =
+    sourceCoffee: [
+        "./app/app.coffee"
+        "./app/init-deps.coffee"
+        "./app/app-controller.coffee"
+        "./app/*/**/*.coffee"
+        "!./app/*/**/*-test.coffee" #exclude test files
+        "!./app/**/*-e2e.coffee"    #exclude e2e test files
+    ]
+    sourceStylus: [
+        "./app/statics/master.styl"
+    ]
+    sourceJade: [
+        "./app/**/*.jade"
+    ]
+    sourceHtml: [
+        "./build/html/**/*.html"
+    ]
+    plugins: [
+        "./bower_components/jquery/dist/jquery.js"
+        "./bower_components/angular/angular.js"
+        "./bower_components/angular-route/angular-route.js"
+        "./bower_components/angular-resource/angular-resource.js"
+        "./bower_components/angular-animate/angular-animate.js"
+        "./bower_components/angular-cookies/angular-cookies.js"
+        "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
+        "./bower_components/angular-ui-router/release/angular-ui-router.js"
+        "./bower_components/handsontable/dist/handsontable.full.js"
+        "./bower_components/nghandsontable/dist/ngHandsontable.js"
+        "./bower_components/bootstrap/dist/js/bootstrap.js"
+    ]
+    dirs:
+        out: "./build"
+        js:  "./build/js"
+        css: "./build/css"
+        html: "./build/html"
+        fonts: "./build/fonts"
+        images: "./build/images"
+        docs: "./docs"
+    module: "app"
+    app: "app.js"
+    plugin: "plugins.js"
+
+
+
+gulp.task "build2:plugins",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    ->
+        gulp.src TEST.plugins
+            .pipe cache( "plugins" )
+            .pipe gif "*.js", concat( TEST.plugin )
+            .pipe gif "*.js", gulp.dest( TEST.dirs.js )
+
+gulp.task "build2:sourceCoffee",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    ->
+        gulp.src TEST.sourceCoffee
+            .pipe sourcemaps.init()
+            .pipe coffee().on "error", gutil.log
+            .pipe concat( TEST.app )
+            .pipe sourcemaps.write( './map' )
+            .pipe gulp.dest( TEST.dirs.js )
+
+gulp.task "build2:sourceStylus",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    ->
+        gulp.src TEST.sourceStylus
+            .pipe sourcemaps.init()
+            .pipe stylus
+                compress: true
+                linenos: true
+            .pipe sourcemaps.write( './map' )
+            .pipe gulp.dest( TEST.dirs.css )
+            .pipe connect.reload()
+
+gulp.task "build2:sourceJade",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    ->
+        gulp.src TEST.sourceJade
+            .pipe jade()
+            .pipe gulp.dest( TEST.dirs.html )
+            .pipe connect.reload()
+
+
+gulp.task "build2:copy",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    [
+        "build2:sourceJade"
+    ]
+    ->
+        gulp.src TEST.sourceHtml
+            .pipe gif "**/master.html", gulp.dest ( TEST.dirs.out )
+            .pipe connect.reload()
+
+        #del "./build/html", (err, paths) ->
+            #console.log 'Deleted files/folders:\n', paths.join('\n')
+        #del [BUILD.dirs.html], -> cb null, []
+
+
+gulp.task "build2:cache",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    [
+        "build2:sourceJade"
+    ]
+    ->
+        gulp.src TEST.sourceHtml
+            .pipe templateCache( module: TEST.module )
+            .pipe gulp.dest ( TEST.dirs.js )
+            .pipe connect.reload()
+
+gulp.task "build2",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    [
+        "lint"
+        "copy:img"
+        "copy:css"
+        "copy:fonts"
+        "build2:cache"
+        "build2:copy"
+        "build2:sourceStylus"
+        "build2:sourceCoffee"
+        "build2:plugins"
+    ]
+
+
+gulp.task "asdf",
+    "Runs 'develop' and 'test'.",
+    [
+        "develop2"
+    ]
+
+
+
+# clean stream of onerror
 continueOnError = ( stream ) ->
     stream.on "error", ( err ) ->
             console.log err
@@ -258,7 +413,7 @@ continueOnError = ( stream ) ->
             cleaner @
 
 cleaner = ( stream ) ->
-    stream.listeners( "error" ).forEach ( item ) ->
+    stream.listeners( "erreor" ).forEach ( item ) ->
         if item.name is "onerror" then @.removeListener "error", item
     , stream
 
