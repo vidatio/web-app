@@ -31,9 +31,8 @@ COPY_FILES =
     css:   [
         "./bower_components/handsontable/dist/handsontable.full.css"
         "./bower_components/bootstrap/dist/css/bootstrap.min.css"
-        "./bower_components/bootstrap/dist/css/bootstrap-theme.min.css"
         "./bower_components/bootstrap/dist/css/bootstrap.css.map"
-        "./bower_components/bootstrap/dist/css/bootstrap-theme.css.map"
+        "./bower_components/leaflet/dist/leaflet.css"
     ]
     js: [
         "./bower_components/bootstrap/dist/js/bootstrap.js"
@@ -63,6 +62,8 @@ BUILD =
         "./bower_components/handsontable/dist/handsontable.full.js"
         "./bower_components/nghandsontable/dist/ngHandsontable.js"
         "./bower_components/bootstrap/dist/js/bootstrap.js"
+        "./bower_components/leaflet/dist/leaflet.js"
+        "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
         "./app/init-deps.coffee"
         "./app/app.coffee"
         "./app/app-controller.coffee"
