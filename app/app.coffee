@@ -13,6 +13,7 @@ app = angular.module "app", [
     "app.services"
     "app.directives"
     "app.filters"
+    "leaflet-directive"
 ]
 
 app.run [
