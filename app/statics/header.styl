@@ -15,7 +15,6 @@ header
         max-width 1024px
         margin 0px auto
         padding 30px 0 30px 0
-        height 100px
 
     #logo
         background url(../images/logo.png) no-repeat
@@ -53,18 +52,10 @@ header
         a#menu
             font-size 25px
 
-    @media screen and (max-width: 715px)
-        #navigation .panel
-            display block
-            width 100%
-            margin 0 auto
-
     .tab
         display inline-block
         margin 0 -2px
         width 33.33%
-        max-width 150px
-        min-width 110px
         height 40px
         background $color-passive
         border-top 3px solid $color-green
@@ -98,3 +89,6 @@ header
             border-width 4px
             margin-left -4px
 
+@media(max-width: 767px)
+    .editor-panel
+        margin-top: 20px
