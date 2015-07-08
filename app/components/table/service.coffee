@@ -1,6 +1,3 @@
-# Table Service
-# ======================
-
 "use strict"
 
 app = angular.module "app.services"
@@ -10,7 +7,6 @@ app.service 'TableService', [ ->
     class Table
         constructor: ->
             @dataset = []
-
 
         setDataset: (data) ->
             # safely remove all items, keeps data binding alive
