@@ -21,10 +21,12 @@ module.exports = (config) ->
             "./bower_components/angular-animate/angular-animate.js"
             "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
-            "./bower_components/ng-file-upload/angular-file-upload.js"
             "./bower_components/angular-mocks/angular-mocks.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
-            "./bower_components/bootstrap/dist/js/bootstrap.js"
+            "./bower_components/handsontable/dist/handsontable.full.js"
+            "./bower_components/nghandsontable/dist/ngHandsontable.js"
+            "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
 
             # source files
             "./app/init-deps.coffee"
@@ -32,7 +34,7 @@ module.exports = (config) ->
             "./app/app-controller.coffee"
             "./app/*/**/*.coffee"
 
-            #test files
+            # test files
             "./app/**/*_test.coffee"
         ]
 
