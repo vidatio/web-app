@@ -9,7 +9,7 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    ($scope, DataTable, Map) ->
+    ($scope, Table, Map) ->
 
         #Default settings - Works like scope.center, etc.
         $scope.center =
@@ -20,7 +20,7 @@ app.controller "VisualizationCtrl", [
         # Watch on the dataset from the data table
         # and update markers on changed data
         $scope.$watch (->
-            DataTable.dataset
+            Table.dataset
         ), ((dataset) ->
             console.log 'data changed'
             Map.setMarkers dataset
