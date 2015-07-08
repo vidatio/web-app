@@ -18,10 +18,10 @@ describe('Service', function () {
       deferred.resolve(fileContent);
 
       //Create FileReader Mock
-      spyOn(FileReaderService, 'readAsDataUrl').and.returnValue(deferred.promise);
+      spyOn(FileReaderService, 'readFile').and.returnValue(deferred.promise);
 
       //Use of FileReader mock
-      FileReaderService.readAsDataUrl(blob).then(function (result) {
+      FileReaderService.readFile(blob).then(function (result) {
         DataTable.setDataset(result[0]);
       });
     }));
