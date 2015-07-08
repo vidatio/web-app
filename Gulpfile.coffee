@@ -75,7 +75,6 @@ BUILD =
             "./bower_components/nghandsontable/dist/ngHandsontable.js"
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
-            "./bower_components/bootstrap/dist/js/bootstrap.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
