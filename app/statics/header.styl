@@ -1,4 +1,5 @@
 @require "assets/styl/colors"
+@require "assets/styl/helpers"
 
 header
 
@@ -48,46 +49,42 @@ header
         a#menu
             font-size 25px
 
-    .editor-panel
-        text-align center
-        padding 0 11px
-
     .tab
         display inline-block
-        margin 0 -2px
         width 33.33%
         height 40px
+        line-height 40px
         background $color-passive
-        border-top 3px solid $color-green
+
         position relative
+        float left
+
         color white
         text-align center
-        padding 7px
         font-family Colaborate-Light
+        box-sizing border-box
+
         &:hover
             background $color-active
-        &.border-left
-            border-top-left-radius 3px
-            border-bottom-left-radius 3px
-        &.border-right
-            border-top-right-radius 3px
-            border-bottom-right-radius 3px
-        &::after
-            border medium solid transparent
-            content " "
-            height 0
-            left 50%
-            pointer-events none
-            position absolute
-            top 0
-            width 0
-            border-top-color $color-green
-            border-width 4px
-            margin-left -4px
-        &::before
-            border-top-color $color-green
-            border-width 4px
-            margin-left -4px
+            border-top 3px solid $color-green
+            line-height 35px
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 0
+                width 0
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+            &::before
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
 
 @media(max-width: 767px)
     .editor-panel
