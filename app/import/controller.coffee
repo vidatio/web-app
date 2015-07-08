@@ -8,8 +8,8 @@ app = angular.module "app.controllers"
 app.controller "ImportCtrl", [
     "$scope"
     "$http"
-    "FileReaderService"
-    "DataTableService"
+    "ImportService"
+    "TableService"
     ($scope, $http, FileReader, DataTable) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = FileReader.progress
