@@ -12,7 +12,7 @@ app.controller "VisualizationCtrl", [
     ($scope, DataTable, Map) ->
 
         #Default settings - Works like scope.center, etc.
-        angular.extend $scope, center:
+        $scope.center =
             lat: 47.723407
             lng: 13.086921
             zoom: 16
