@@ -13,7 +13,7 @@ app.service 'FileReaderService', [
             @deferred = undefined
             @progress = 0
 
-        Reader::readAsDataUrl = (file) ->
+        Reader::readFile = (file) ->
             @deferred = $q.defer()
             @progress = 0
 
@@ -29,7 +29,7 @@ app.service 'FileReaderService', [
                 @progress = event.loaded / event.total
             ).bind(this)
 
-            @reader.readAsText file
+            @reader.readFile file
             @deferred.promise
 
         new Reader
