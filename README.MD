@@ -126,6 +126,17 @@ There's a [CoffeeScript Style Guide](https://github.com/polarmobile/coffeescript
 ## EditorConfig
 The `.editorconfig` contains all relevant styles for your editor, your IDE/Editor should support it, otherwise install a plugin from [editorconfig.org](http://editorconfig.org/).
 
+## Visualizations
+
+For visualizations of geo coded data the library [Leaflet.js](http://leafletjs.com/) is used.
+
+## Subdomains
+
+* api.vidatio.mediacube.at
+* db.vidatio.mediacube.at
+* develop.vidatio.mediacube.at
+* log.vidatio.mediacube.at
+* test.vidatio.mediacube.at
 
 ## Some thoughts
 The application is designed in a highly modularized way.
@@ -136,3 +147,4 @@ The application is designed in a highly modularized way.
     * Each subfolder of `app/*` except `app/components` and `app/statics` has its own controller, style and markup files.
     * `app/statics` provides overall layout files and assets like stylus mixins, helper functions etc.
     * `app/components/*` holds all services, factories and directives of a feature
+
