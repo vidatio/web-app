@@ -10,21 +10,21 @@ app.controller "ImportCtrl", [
     "$http"
     "ImportService"
     "TableService"
-    ($scope, $http, FileReader, DataTable) ->
+    ($scope, $http, Import, Table) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = FileReader.progress
 
         # Read via link
         $scope.load = ->
             url = $scope.link
-            $http.get("/api"
+            $http.get("http://localhost:9876/v0/import"
                 params:
                     url: url
             ).success (data) ->
-               DataTable.setDataset data
+                Table.setDataset data
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            FileReader.readFile($scope.file, $scope).then (result) ->
-               DataTable.setDataset result
+            Import.readFile($scope.file, $scope).then (result) ->
+                Table.setDataset result
 ]
