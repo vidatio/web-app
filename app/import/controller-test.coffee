@@ -48,17 +48,14 @@ describe "Controller Import", ->
 
             expect(Table.setDataset).toHaveBeenCalled()
             expect(Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
-    ###
+
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
             scope.file = "test.txt"
             scope.getFile()
 
-            deferred.resolve('resolveData')
+            expect(Import.readFile).toHaveBeenCalled()
 
-            #expect(Import.readFile).toHaveBeenCalled()
-            #expect(Import.readFile).toHaveBeenCalledWith(scope.file)
-    ###
     afterEach ->
         Import.readFile.calls.reset()
         Table.setDataset.calls.reset()
