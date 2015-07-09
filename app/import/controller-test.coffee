@@ -14,29 +14,30 @@
 describe "Controller Import", ->
     scope = undefined
     httpBackend = undefined
-    q = undefined
+    deferred = undefined
     Table = undefined
     Import = undefined
+    rootScope = undefined
 
     beforeEach ->
         module "app"
-        inject ($controller, $rootScope, $httpBackend, $q) ->
+        inject ($controller, $rootScope, $httpBackend, $q, $http) ->
             httpBackend = $httpBackend
+            rootScope = $rootScope
             scope = $rootScope.$new()
-            q = $q.defer()
 
-            # Stubs for the controller allow to spy on the service calls
+            deferred = $q.defer()
+
             Table =
                 dataset: []
                 setDataset: ->
             Import =
-                readFile: ->
-                    return q.promise
+                readFile: (file, scope) ->
 
-            spyOn(Import, 'readFile')#.and.returnValue(q.promise)
+            spyOn(Import, 'readFile').and.returnValue(deferred.promise)
             spyOn(Table, 'setDataset')
 
-            ImportCtrl = $controller "ImportCtrl", $scope: scope, TableService: Table, ImportService: Import
+            ImportCtrl = $controller "ImportCtrl", $scope: scope, $http: $http, TableService: Table, ImportService: Import
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
@@ -47,20 +48,22 @@ describe "Controller Import", ->
 
             expect(Table.setDataset).toHaveBeenCalled()
             expect(Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
+    ###
+    describe "on upload via browse and drag and drop", ->
+        it 'should read the file via the ImportService', ->
+            scope.file = "test.txt"
+            scope.getFile()
 
+            deferred.resolve('resolveData')
+
+            #expect(Import.readFile).toHaveBeenCalled()
+            #expect(Import.readFile).toHaveBeenCalledWith(scope.file)
+    ###
     afterEach ->
         Import.readFile.calls.reset()
         Table.setDataset.calls.reset()
 
-
-### describe "on upload via browse and drag and drop", ->
-     it 'should read the file via the ImportService', ->
-         scope.file = "test.txt"
-         scope.getFile()
-
-         expect(Import.readFile).toHaveBeenCalled()
-         expect(Import.readFile).toHaveBeenCalledWith(scope.file)
-
+###
      it 'should set the dataset of the table after reading the file', ->
          scope.file = "test.txt"
          scope.getFile()

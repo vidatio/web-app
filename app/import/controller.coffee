@@ -12,7 +12,7 @@ app.controller "ImportCtrl", [
     "TableService"
     ($scope, $http, Import, Table) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
-        $scope.progress = FileReader.progress
+        $scope.progress = Import.progress
 
         # Read via link
         $scope.load = ->
@@ -25,6 +25,6 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            Import.readFile($scope.file, $scope).then (result) ->
+            Import.readFile($scope.file, $scope).then(result) ->
                 Table.setDataset result
 ]

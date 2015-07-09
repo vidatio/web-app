@@ -5,7 +5,7 @@
 
 app = angular.module "app.services"
 
-app.service 'FileReaderService', [
+app.service 'ImportService', [
     "$q"
     ($q) ->
         Reader = ->
@@ -29,7 +29,7 @@ app.service 'FileReaderService', [
                 @progress = event.loaded / event.total
             ).bind(this)
 
-            @reader.readFile file
+            @reader.readAsText file
             @deferred.promise
 
         new Reader
