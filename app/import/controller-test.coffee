@@ -49,6 +49,3 @@ describe "Controller Import", ->
             # TODO: Check if test is necessary, because this it is not testable
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
-
-
-
