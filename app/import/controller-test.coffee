@@ -1,74 +1,54 @@
-# what to test:
-#  load:
-#   - check HTTP request at load
-#   - DataTable set dataset at success HTTP request
-#   - correct data
-
-# getFile
-#   - readFile called
-#   - readFile returns promise
-#   - setDataset called (called when readFile is finished)
-
 "use strict"
 
 describe "Controller Import", ->
-    scope = undefined
-    httpBackend = undefined
-    deferred = undefined
-    Table = undefined
-    Import = undefined
-    rootScope = undefined
-
     beforeEach ->
         module "app"
         inject ($controller, $rootScope, $httpBackend, $q, $http) ->
-            httpBackend = $httpBackend
-            rootScope = $rootScope
-            scope = $rootScope.$new()
+            @httpBackend = $httpBackend
+            @scope = $rootScope.$new()
 
-            deferred = $q.defer()
+            @deferred = $q.defer()
 
-            Table =
-                dataset: []
-                setDataset: ->
-            Import =
+            @Table =
+                setDataset: (result) ->
+            @Import =
                 readFile: (file, scope) ->
 
-            spyOn(Import, 'readFile').and.returnValue(deferred.promise)
-            spyOn(Table, 'setDataset')
+            spyOn(@Import, 'readFile').and.returnValue(@deferred.promise)
+            spyOn(@Table, 'setDataset')
 
-            ImportCtrl = $controller "ImportCtrl", $scope: scope, $http: $http, TableService: Table, ImportService: Import
+            ImportCtrl = $controller "ImportCtrl", $scope: @scope, $http: $http, TableService: @Table, ImportService: @Import
+
+    afterEach ->
+        @Import.readFile.calls.reset()
+        @Table.setDataset.calls.reset()
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
-            httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
-            scope.link = 'test.txt'
-            scope.load()
-            httpBackend.flush()
+            @httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
+            @scope.link = 'test.txt'
+            @scope.load()
+            @httpBackend.flush()
 
-            expect(Table.setDataset).toHaveBeenCalled()
-            expect(Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
-    ###
+            expect(@Table.setDataset).toHaveBeenCalled()
+            expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
+
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
-            scope.file = "test.txt"
-            scope.getFile()
+            @scope.file = "test.txt"
+            @scope.getFile()
 
-            deferred.resolve('resolveData')
+            expect(@Import.readFile).toHaveBeenCalled()
+            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, @scope)
 
-            #expect(Import.readFile).toHaveBeenCalled()
-            #expect(Import.readFile).toHaveBeenCalledWith(scope.file)
-    ###
-    afterEach ->
-        Import.readFile.calls.reset()
-        Table.setDataset.calls.reset()
+        xit 'should set the dataset of the table after reading the file', ->
+            @scope.file = "test.txt"
+            @scope.getFile()
+            @deferred.resolve('test,1\ntest,2\ntest,3')
 
-###
-     it 'should set the dataset of the table after reading the file', ->
-         scope.file = "test.txt"
-         scope.getFile()
-         q.resolve()
+            # TODO: Check if test is necessary, because this it is not testable
+            expect(@Table.setDataset).toHaveBeenCalled()
+            expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
 
-         expect(Table.setDataset).toHaveBeenCalled()
-         expect(Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
- ###
+
+
