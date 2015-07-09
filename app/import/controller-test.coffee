@@ -39,18 +39,18 @@ describe "Controller Import", ->
             ImportCtrl = $controller "ImportCtrl", $scope: scope, TableService: Table, ImportService: Import
 
     describe "on upload via link", ->
-        ###it 'should set the dataset of the table', ->
-            httpBackend.whenGET('http://localhost:9876/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
+        it 'should set the dataset of the table', ->
+            httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             scope.link = 'test.txt'
             scope.load()
             httpBackend.flush()
 
             expect(Table.setDataset).toHaveBeenCalled()
             expect(Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
-        ###
+
     afterEach ->
-        Import.readFile.reset()
-        Table.setDataset.reset()
+        Import.readFile.calls.reset()
+        Table.setDataset.calls.reset()
 
 
 ### describe "on upload via browse and drag and drop", ->

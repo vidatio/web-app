@@ -17,7 +17,7 @@ app.controller "ImportCtrl", [
         # Read via link
         $scope.load = ->
             url = $scope.link
-            $http.get("http://localhost:9876/v0/import"
+            $http.get("/v0/import"
                 params:
                     url: url
             ).success (data) ->
