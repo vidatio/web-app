@@ -39,7 +39,7 @@ describe "Controller Import", ->
             @scope.getFile()
 
             expect(@Import.readFile).toHaveBeenCalled()
-            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, @scope)
+            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file)
 
         xit 'should set the dataset of the table after reading the file', ->
             @scope.file = "test.txt"

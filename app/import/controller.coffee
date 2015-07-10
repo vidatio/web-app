@@ -25,6 +25,6 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            Import.readFile($scope.file, $scope).then (result) ->
+            Import.readFile($scope.file).then (result) ->
                 Table.setDataset result
 ]
