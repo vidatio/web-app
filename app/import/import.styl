@@ -40,46 +40,54 @@
             .hover-wrapper
                 display none
                 background $color-hover-light
-                position absolute
-                z-index 999
-                {overlayParent}
+                {fillParent}
                 padding 10px
-            &:hover
-                .option-icon
-                h3
-                    display none
-                .hover-wrapper
-                    text-align center
-                    line-height 254px
-                    display block
-                    .area
-                        box-shadow none
-                        {fillParent}
-                        border 7px solid white
-                        background none
-                        .glyphicon-plus
-                            vertical-align middle
-                            cursor default
-                            font-size 13em
-                            color $color-white
+            //&:hover
+            .option-icon
+            h3
+                display none
+            .hover-wrapper
+                text-align center
+                line-height 217px
+                display block
+                .area
+                    position relative
+                    box-shadow none
+                    {fillParent}
+                    border 7px solid white
+                    background none
+                    .glyphicon-plus
+                        margin-left 15px
+                        text-align center
+                        vertical-align middle
+                        cursor default
+                        font-size 13em
+                        color $color-white
 
-                        .text
-                            vertical-align middle
-                            cursor default
-                            font-size 16px
+                    .text
+                        position absolute
+                        z-index 999
+                        left 50%
+                        margin-left -54px
+                        cursor default
+                        font-size 16px
+
         #option-link
             #link-submit-button
                 top 0px
             .form-link
                 width 80%
                 margin 0 auto
+
         .other, .file-read
             margin-bottom 56px
+
         .file-read .area a
         .other .area a
             {fillParent}
             display inline-block
             color $color-grey-dark
+
         @media screen and (max-width: 768px)
             #option-empty-table
             #option-browse-data
