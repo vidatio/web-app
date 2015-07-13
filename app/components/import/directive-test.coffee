@@ -23,8 +23,10 @@ describe "Directive Import", ->
             expect(@element).toExist()
 
         it "should listen to the change event", ->
-            element[0].dispatchEvent new CustomEvent('change')
-            expect(scope.getFile).toHaveBeenCalled()
+            event = document.createEvent('CustomEvent')
+            event.initCustomEvent('change', false, false, null)
+            @element[0].dispatchEvent event
+            expect(@scope.getFile).toHaveBeenCalled()
 
     describe "ngFileDropStart", ->
 
