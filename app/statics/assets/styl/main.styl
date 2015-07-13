@@ -1,0 +1,141 @@
+@require "colors"
+
+.thin-font
+    font-family Colaborate-Thin, Arial, Helvetica, sans-serif
+
+.light-font
+    font-family Colaborate-Light, Arial, Helvetica, sans-serif
+
+.bold-font
+    font-family Colaborate-Bold, Arial, Helvetica, sans-serif
+
+h1, h2, h3, h4, h5, h6
+    padding 0
+    margin 0
+    display inline-block
+
+h1
+    font-family Colaborate-Bold, Arial, Helvetica, sans-serif
+    font-size 30px
+
+h2
+    font-family Colaborate-Bold, Arial, Helvetica, sans-serif
+    font-size 16px
+
+h3
+    font-family Colaborate-Light, Arial, Helvetica, sans-serif
+    font-size 16px
+
+.dotgrid
+    background-image url(../images/dotgrid-dunkel-transp.png)
+
+.underline-red
+    border-bottom 3px solid $color-red
+
+.underline-turqoise
+    border-bottom 3px solid $color-green
+
+.font-red
+    color $color-red
+
+.font-cyan
+    color $color-green
+
+.bg-cyan
+    background-color $color-green
+
+.bg-dark
+    background-color $color-grey-dark
+
+.row
+    margin 0
+    padding 0
+
+.col-sm-4, .col-sm-3, .col-sm-6, .col-sm-12
+    margin 0
+
+.container-fluid
+    padding 0
+
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus
+    color $color-white
+    background-color $color-hover-light
+
+html, body
+    padding 0
+    margin 0
+    width 100%
+    min-width 480px
+    height 100%
+    font-family Colaborate, Arial, Helvetica, sans-serif
+    font-size 12px
+    background-color $color-grey-light
+
+.wrapper-content
+    max-width 1024px
+    margin 0 auto
+
+.wrapper
+    min-height 80vh
+
+.layout-3-columns
+    .col-sm-4
+        &:first-child
+            & > div
+                margin-right 17.66px
+            .col-wrapper
+                margin-right 28px
+
+        &:nth-child(2n)
+            & > div
+                margin-right 8.33px
+                margin-left 8.33px
+            .col-wrapper
+                margin-right 14px
+                margin-left 14px
+
+        &:last-child
+            & > div
+                margin-left 17.66px
+            .col-wrapper
+                margin-left 28px
+
+@media(max-width: 768px)
+    .layout-3-columns .col-sm-4 .col-wrapper
+        margin 0 !important
+
+a:link, a:visited
+    color white
+    text-decoration none
+
+a:hover, a:active, a:focus
+  color $color-hover-dark
+
+.button
+    position relative
+    color $color-white
+    background-color $color-green
+    -webkit-box-shadow 0 3px 0 $color-border
+    -moz-box-shadow 0 3px 0 $color-border
+    box-shadow 0 3px 0 $color-border
+
+.button:active,
+.button:active span
+    top 3px
+    -webkit-box-shadow none
+    -moz-box-shadow none
+    box-shadow none
+
+.button:hover,
+.button:hover span
+    background-color $color-hover-dark
+    color $color-white
+
+.border-left
+    border-top-left-radius 3px
+    border-bottom-left-radius 3px
+.border-right
+    border-top-right-radius 3px
+    border-bottom-right-radius 3px

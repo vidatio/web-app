@@ -1,0 +1,5 @@
+{
+  "glob": ["./README.MD", "./app/init-deps.coffee", "./app/app.coffee", "./app/app-controller.coffee", "./app/*/**/*.coffee", "!./app/*/**/*-test.coffee", "!./app/**/*-e2e.coffee"],
+  "out": "./docs",
+  "index": "README.md"
+}

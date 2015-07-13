@@ -1,0 +1,91 @@
+@require "assets/styl/colors"
+@require "assets/styl/helpers"
+
+header
+
+    #line-right
+        background $color-red
+        height 8px
+
+    #line-left
+        background $color-green
+        height 8px
+
+    #navigation
+        clear both
+        max-width 1024px
+        margin 0px auto
+        padding 30px 0 30px 0
+
+    #logo
+        background url(../images/logo.png) no-repeat
+        background-size 105px
+        width 105px
+        height 40px
+        float left
+
+    .menu-buttons
+        height 100%
+        text-align right
+
+        a
+            line-height 40px
+            vertical-align middle
+            text-align center
+            width 40px
+            height 40px
+            display inline-block
+            margin-left 3px
+            background $color-passive
+            border-radius 4px
+
+            &:hover
+                background $color-active
+                color $color-white
+
+        a#user
+            font-size 20px
+
+        a#menu
+            font-size 25px
+
+    .tab
+        display inline-block
+        width 33.33%
+        height 40px
+        line-height 40px
+        background $color-passive
+
+        position relative
+        float left
+
+        color white
+        text-align center
+        font-family Colaborate-Light
+        box-sizing border-box
+
+        &:hover
+            background $color-active
+            border-top 3px solid $color-green
+            line-height 35px
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 0
+                width 0
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+            &::before
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+
+@media(max-width: 767px)
+    .editor-panel
+        margin-top: 20px
