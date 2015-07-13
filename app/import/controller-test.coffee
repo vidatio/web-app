@@ -2,11 +2,12 @@
 
 describe "Controller Import", ->
     beforeEach ->
+
         module "app"
+
         inject ($controller, $rootScope, $httpBackend, $q, $http) ->
             @httpBackend = $httpBackend
             @scope = $rootScope.$new()
-
             @deferred = $q.defer()
 
             @Table =
