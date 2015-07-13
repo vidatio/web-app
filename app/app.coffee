@@ -3,9 +3,8 @@
 "use strict"
 
 app = angular.module "app", [
-    "ngRoute"
-    "ngResource"
     "ngCookies"
+    "ngResource"
     "ngHandsontable"
     "ui.router"
     "app.controllers"
