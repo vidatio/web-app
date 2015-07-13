@@ -46,10 +46,12 @@ module.exports = (config) ->
 
         # preprocess matching files before serving them to the browser
         # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {
+        preprocessors:
             "**/*.coffee": ["coffee"]
-        }
 
+        coffeePreprocessor:
+            options:
+                sourceMap: true
 
         # test results reporter to use
         # possible values: "dots", "progress"
