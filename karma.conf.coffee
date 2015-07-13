@@ -32,10 +32,9 @@ module.exports = (config) ->
             "./app/init-deps.coffee"
             "./app/app.coffee"
             "./app/app-controller.coffee"
-            "./app/*/**/*.coffee"
 
-            # test files
-            "./app/**/*_test.coffee"
+            #includes test files already
+            "./app/*/**/*.coffee"
         ]
 
 
