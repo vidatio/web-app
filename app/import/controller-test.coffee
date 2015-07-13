@@ -24,7 +24,8 @@ describe "Controller Import", ->
         @Table.setDataset.calls.reset()
 
     describe "on upload via link", ->
-        xit 'should set the dataset of the table', ->
+        it 'should set the dataset of the table', ->
+            @httpBackend.expectGET("landing-page/landing-page.html").respond ""
             @httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()
@@ -46,6 +47,5 @@ describe "Controller Import", ->
             @scope.getFile()
             @deferred.resolve('test,1\ntest,2\ntest,3')
 
-            # TODO: Check if test is necessary, because this it is not testable
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'

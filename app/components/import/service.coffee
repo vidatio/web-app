@@ -18,17 +18,14 @@ app.service 'ImportService', [
                 @deferred = $q.defer()
                 @progress = 0
 
-                @reader.onload = (->
+                @reader.onload = =>
                     @deferred.resolve @reader.result
-                ).bind(this)
 
-                @reader.onerror = (->
+                @reader.onerror = =>
                     @deferred.reject @reader.result
-                ).bind(this)
 
-                @reader.onprogress = ((event) ->
+                @reader.onprogress = (event) =>
                     @progress = event.loaded / event.total
-                ).bind(this)
 
                 @reader.readAsText file
                 @deferred.promise

@@ -34,25 +34,25 @@ describe "Directive Import", ->
                 @injector = $injector
                 @scope = $rootScope.$new()
                 @element = $compile('<div id="drop-zone" ng-file-drop-start></div>')(@scope)
+                document.body.appendChild(@element[0])
                 $controller 'ImportCtrl', $scope: @scope
                 spyOn(@scope, 'getFile').and.callFake ->
 
         it "should exist in the injector", ->
-            expect(@injector.has('ngFileDropStartDirective')).toBeTruthy()
+            expect(@injector.has('ngFileSelectDirective')).toBeTruthy()
 
-        # DispatchEvent always returns true, not according to
+        # Drag over event not tested, because DispatchEvent always returns true, not according to
         # https://developer.mozilla.org/de/docs/Web/API/EventTarget/dispatchEvent
-        xit "should listen to the dragover event", ->
-            event = document.createEvent('CustomEvent')
-            event.initCustomEvent('dragover', false, false, null)
-            expect(@element[0].dispatchEvent event).toBeFalsy()
 
         it "should listen to the dragover event", ->
-            document.body.appendChild(@element[0])
             event = document.createEvent('CustomEvent')
             event.initCustomEvent('dragenter', false, false, null)
             @element[0].dispatchEvent event
             expect(@element[0].style.display).toEqual "block"
+
+        afterEach ->
+            element = document.getElementById "drop-zone"
+            element.parentNode.removeChild element
 
     describe "ngFileDropEnd", ->
         beforeEach ->
@@ -61,17 +61,25 @@ describe "Directive Import", ->
                 @injector = $injector
                 @scope = $rootScope.$new()
                 @element = $compile('<div id="drop-zone" ng-file-drop-end></div>')(@scope)
+                document.body.appendChild(@element[0])
+
                 $controller 'ImportCtrl', $scope: @scope
                 spyOn(@scope, 'getFile').and.callFake ->
 
-        xit "should exist in the injector", ->
+        it "should exist in the injector", ->
             expect(@injector.has('ngFileDropEndDirective')).toBeTruthy()
 
-        xit "should listen to the dragleave event", ->
-            console.log document.getElementById("drop-zone")
-            document.body.appendChild(@element[0])
+        it "should listen to the dragleave event", ->
             event = document.createEvent('CustomEvent')
             event.initCustomEvent('dragleave', false, false, null)
             @element[0].dispatchEvent event
             expect(@element[0].style.display).toEqual "none"
 
+        ## DragOver event not tested, because DispatchEvent always returns true, not according to
+        # https://developer.mozilla.org/de/docs/Web/API/EventTarget/dispatchEvent
+
+        ## Drop event not tested, because init event doesn't allow setting dataTransfer attribute
+
+        afterEach ->
+            element = document.getElementById "drop-zone"
+            element.parentNode.removeChild element
