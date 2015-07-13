@@ -13,6 +13,7 @@ app.directive 'ngFileDropStart', ->
 
         #over: cursor currently moves over the drop-zone
         el.bind "dragover", (e) ->
+            console.log "#DRAGOVER"
             e.preventDefault()
             false
 
