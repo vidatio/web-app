@@ -57,7 +57,7 @@ app.config [
     "$locationProvider"
     "$httpProvider"
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider ) ->
-        #$locationProvider.html5Mode true
+        $locationProvider.html5Mode true
 
         #$urlRouterProvider.otherwise "/"
 

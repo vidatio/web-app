@@ -48,7 +48,7 @@ describe "Directive Import", ->
             expect(@element[0].dispatchEvent event).toBeFalsy()
 
         it "should listen to the dragover event", ->
-            document.body.appendChild(@element[0]);
+            document.body.appendChild(@element[0])
             event = document.createEvent('CustomEvent')
             event.initCustomEvent('dragenter', false, false, null)
             @element[0].dispatchEvent event
@@ -64,5 +64,14 @@ describe "Directive Import", ->
                 $controller 'ImportCtrl', $scope: @scope
                 spyOn(@scope, 'getFile').and.callFake ->
 
-        it "should exist in the injector", ->
+        xit "should exist in the injector", ->
             expect(@injector.has('ngFileDropEndDirective')).toBeTruthy()
+
+        xit "should listen to the dragleave event", ->
+            console.log document.getElementById("drop-zone")
+            document.body.appendChild(@element[0])
+            event = document.createEvent('CustomEvent')
+            event.initCustomEvent('dragleave', false, false, null)
+            @element[0].dispatchEvent event
+            expect(@element[0].style.display).toEqual "none"
+
