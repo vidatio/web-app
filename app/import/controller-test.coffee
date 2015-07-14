@@ -25,8 +25,9 @@ describe "Controller Import", ->
         @Table.setDataset.calls.reset()
 
     describe "on upload via link", ->
-        xit 'should set the dataset of the table', ->
-            @httpBackend.expectGET("landing-page/landing-page.html").respond ""
+        it 'should set the dataset of the table', ->
+            @httpBackend.expectGET(/landing-page/).respond ""
+            @httpBackend.expectGET(/editor/).respond ""
             @httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()

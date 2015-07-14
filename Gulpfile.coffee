@@ -1,23 +1,28 @@
 gulp = require("gulp-help")(require("gulp"))
+
 coffee = require "gulp-coffee"
 coffeelint = require "gulp-coffeelint"
+
 jade = require "gulp-jade"
 templateCache = require "gulp-angular-templatecache"
-concat = require "gulp-concat"
-uglify = require "gulp-uglify"
-gif = require "gulp-if"
-karma = require "gulp-karma"
-debug = require "gulp-debug"
-copy = require "gulp-copy"
-del = require "del"
-connect = require "gulp-connect"
+
 stylus = require "gulp-stylus"
-rename = require "gulp-rename"
-shell = require "gulp-shell"
-sourcemaps = require 'gulp-sourcemaps'
-gutil = require "gulp-util"
-cache = require "gulp-cached"
+stylint = require "gulp-stylint"
+
+karma = require "gulp-karma"
 {protractor} = require "gulp-protractor"
+
+browserSync = require('browser-sync').create()
+reload = browserSync.reload
+
+concat = require "gulp-concat"
+gif = require "gulp-if"
+del = require "del"
+sourcemaps = require "gulp-sourcemaps"
+util = require "gulp-util"
+cached = require "gulp-cached"
+shell = require "gulp-shell"
+modRewrite  = require "connect-modrewrite"
 
 DOC_FILES = [
     "./README.MD"
@@ -41,6 +46,7 @@ BASEURL = "http://localhost:3123"
 E2E_FILES = "./app/**/*-e2e.coffee"
 
 APP_FILES = "./app/**/*.coffee"
+STYL_FILES = "./app/**/*.styl"
 
 BUILD =
     source:
@@ -96,24 +102,43 @@ BUILD =
         js: "plugins.js"
         css: "plugins.css"
 
-WATCH = [
-    "./app/init-deps.coffee"
-    "./app/app.coffee"
-    "./app/app-controller.coffee"
-    "./app/**/*.coffee"
-    "!./app/**/*-test.coffee"
-    "!./app/**/*-e2e.coffee"
-    "./app/**/*.jade"
-    "./app/**/*.styl"
-]
+###
+    MAIN TASKS
+###
 
-gulp.task "lint",
-    "Lints all CoffeeScript source files.",
+gulp.task "default",
+    "Runs 'develop' and 'test'.",
+    [
+        "develop"
+    ]
+
+gulp.task "develop",
+    "Watches/Build and Test the source files on change.",
+    [
+        "build"
+        "test"
+        "run"
+    ]
+
+gulp.task "dev",
+    "Shorthand for develop.",
+    [
+        "develop"
+    ]
+
+gulp.task "build",
+    "Lints and builds the project to '#{BUILD.dirs.out}'.",
+    [
+        "copy"
+        "build:plugins:js"
+        "build:plugins:css"
+        "build:source:coffee:watch"
+        "build:source:stylus:watch"
+        "build:source:jade:watch"
+
+    ]
     ->
-        gulp.src APP_FILES
-        .pipe coffeelint()
-        .pipe coffeelint.reporter()
-
+        reload()
 
 gulp.task "test",
     "Starts and reruns all tests on change of test or source files.",
@@ -137,75 +162,80 @@ gulp.task "e2e",
                 BASEURL
             ]
 
-gulp.task "build",
-    "Lints and builds the project to '#{BUILD.dirs.out}'.",
-    [
-        "lint"
-        "copy"
-        "build:cache"
-        "build:copy"
-        "build:source:stylus"
-        "build:source:coffee"
-        "build:plugins:js"
-        "build:plugins:css"
-        "clean:html"
-    ]
+###
+    LINTING
+###
+gulp.task "lint:coffee",
+    "Lints all CoffeeScript source files.",
+    ->
+        gulp.src APP_FILES
+        .pipe cached "lint:coffee"
+        .pipe coffeelint()
+        .pipe coffeelint.reporter()
 
-gulp.task "default",
-    "Runs 'develop' and 'test'.",
-    [
-        "develop"
-    ]
+gulp.task "lint:stylus",
+    "Lints all Stylus source files.",
+    ->
+        gulp.src STYL_FILES
+        .pipe cached "lint:stylus"
+        .pipe stylint()
 
+###
+    BUILDING PLUGINS
+###
 gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        .pipe cache("plugins.js")
+        .pipe cached "plugins.js"
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
-        .pipe connect.reload()
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        .pipe cache("plugins.css")
+        .pipe cached "plugins.css"
         .pipe gif "*.css", concat(BUILD.plugin.css)
         .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
-        .pipe connect.reload()
 
+
+###
+    BUILDING SOURCE
+###
 gulp.task "build:source:coffee",
     "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
+    [
+        "lint:coffee"
+    ]
     ->
         gulp.src BUILD.source.coffee
         .pipe sourcemaps.init()
-        .pipe coffee().on "error", gutil.log
+        .pipe coffee().on "error", util.log
         .pipe concat(BUILD.app)
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
-        .pipe connect.reload()
 
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
+    [
+        "lint:stylus"
+    ]
     ->
         gulp.src BUILD.source.stylus
         .pipe sourcemaps.init()
         .pipe stylus
             compress: true
-            linenos: true
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.css)
-        .pipe connect.reload()
 
 gulp.task "build:source:jade",
     "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'.",
     ->
         gulp.src BUILD.source.jade
-        .pipe jade()
+        .pipe jade
+            pretty: true
         .pipe gulp.dest(BUILD.dirs.html)
-        .pipe connect.reload()
-
 
 gulp.task "build:copy",
     "Copies master.html to '#{BUILD.dirs.out}/static'.",
@@ -215,7 +245,6 @@ gulp.task "build:copy",
     ->
         gulp.src BUILD.source.html
         .pipe gif "**/master.html", gulp.dest ( BUILD.dirs.out )
-        .pipe connect.reload()
 
 gulp.task "build:cache",
     "Caches all angular.js templates in '#{BUILD.dirs.js}'.",
@@ -226,48 +255,34 @@ gulp.task "build:cache",
         gulp.src BUILD.source.html
         .pipe templateCache(module: BUILD.module)
         .pipe gulp.dest ( BUILD.dirs.js )
-        .pipe connect.reload()
 
-gulp.task "build:watch",
-    "Runs 'build' and watches the source files, rebuilds the project on change.",
-    [
-        "build"
-    ],
-    ->
-        gulp.watch WATCH, ["build"]
-
-gulp.task "develop",
-    "Watches/Build and Test the source files on change.",
-    [
-        "build:watch"
-        "test"
-        "run"
-    ]
-
-gulp.task "dev",
-    "Shorthand for develop.",
-    [
-        "develop"
-    ]
-
+###
+    COPY STATICS
+###
 gulp.task "copy",
-    "Copy every assets to '#{BUILD.dirs.out}' dir.",
+    "Copy all assets to '#{BUILD.dirs.out}' dir.",
     [
         "copy:img"
         "copy:fonts"
     ]
 
 gulp.task "copy:img",
-    "Copy images to '#{BUILD.dirs.images}' dir.",
+    false,
     ->
         gulp.src COPY_FILES.img
+        .pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
-    "Copy fonts to '#{BUILD.dirs.fonts}' dir.",
+    false,
     ->
         gulp.src COPY_FILES.fonts
+        .pipe cached "copy:fonts"
         .pipe gulp.dest BUILD.dirs.fonts
+
+###
+    CLEANING
+###
 
 gulp.task "clean",
     "Clear '#{BUILD.dirs.out}' and '#{BUILD.dirs.docs}' folder.",
@@ -275,34 +290,107 @@ gulp.task "clean",
         del [BUILD.dirs.out, BUILD.dirs.docs], -> cb null, []
 
 gulp.task "clean:build",
-    "Cleans the '#{BUILD.dirs.out}' directory",
+    false,
     (cb) ->
         del BUILD.dirs.out, -> cb null, []
 
 gulp.task "clean:docs",
-    "Cleans the '#{BUILD.dirs.docs}' directory",
+    false,
     (cb) ->
         del BUILD.dirs.docs, -> cb null, []
 
 gulp.task "clean:html",
-    "Cleans the '#{BUILD.dirs.html}' directory",
+    false,
     [
         "build:copy"
     ]
     (cb) ->
         del BUILD.dirs.html, -> cb null, []
 
+###
+    DOCS
+###
+
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory.",
     ["clean:docs"], shell.task "groc"
 
-serverStarted = false
-gulp.task "run", "Serves the App.", ->
-    return if serverStarted
-    serverStarted = true
 
-    connect.server
-        root: BUILD.dirs.out
-        livereload: true
+###
+    BROWSERSYNC SERVER
+###
+gulp.task "run", "Serves the App.", ->
+    browserSync.init
+        server:
+            baseDir: BUILD.dirs.out
+            index: "/statics/master.html"
+            middleware: [ modRewrite([ '!\\.\\w+$ /statics/master.html [L]' ]) ]
+        open: false
         port: 3123
-        fallback: BUILD.dirs.out + "/statics/master.html"
+        ui:
+            port: 3124
+            weinre: 3125
+        logLevel: "info"
+        notify: false
+        logPrefix: "VIDATIO"
+
+###
+    LIVE-RELOAD
+###
+
+gulp.task "build:source:coffee:reload",
+    false,
+    [
+        "build:source:coffee"
+    ]
+    ->
+        reload()
+
+
+gulp.task "build:source:stylus:reload",
+    false,
+    [
+        "build:source:stylus"
+    ]
+    ->
+        reload()
+
+
+gulp.task "build:source:jade:reload",
+    false,
+    [
+        "clean:html"
+        "build:cache"
+    ]
+    ->
+        reload()
+
+
+###
+    WATCHER
+###
+
+gulp.task "build:source:jade:watch",
+    "Builds jade files from '#{BUILD.source.jade}' to '#{BUILD.dirs.out}/statics/master.html'.",
+    [
+        "clean:html"
+        "build:cache"
+    ]
+    ->
+        gulp.watch BUILD.source.jade, ["build:source:jade:reload"]
+
+gulp.task "build:source:stylus:watch",
+    "Builds stylus files from '#{BUILD.source.stylus}' to '#{BUILD.dirs.css}'.",
+    [
+        "build:source:stylus"
+    ]
+    ->
+        gulp.watch STYL_FILES, ["build:source:stylus:reload"]
+
+gulp.task "build:source:coffee:watch",
+    "Builds coffeescript files from '#{BUILD.source.coffee}' to '#{BUILD.dirs.js}'.",
+    [
+        "build:source:coffee"
+    ]
+    ->
+        gulp.watch BUILD.source.coffee, ["build:source:coffee:reload"]

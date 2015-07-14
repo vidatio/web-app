@@ -3,10 +3,6 @@
 
 "use strict"
 
-# what to test:
-#   - directive created?
-#   - events at elements?
-
 describe "Directive Import", ->
     describe "ngFileSelect", ->
         beforeEach ->
