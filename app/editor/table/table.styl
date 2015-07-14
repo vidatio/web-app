@@ -6,45 +6,49 @@
         overflow auto
         height 100%
 
-        .ht_master
-            thead
-                tr
-                    &:first-child
-                        th
-                            background $color-hover-light
-                            padding 3px 4px
-                            border 2px solid white
-                            line-height 16px
-            tbody
-                tr
-                    &:nth-child(odd)
-                        td
-                            background $color-table-odd-passive
-                    &:nth-child(even)
-                        td
-                            background $color-table-even-passive
-                    th
-                        &:first-child
-                            min-width 40px !important
-                            width 40px !important
-                            background $color-hover-light
-                            width 30px
 
-            th, td, tbody tr th:first-child
+
+        // Column headers (sticky and non-sticky)
+        .ht_master thead
+        .ht_clone_top thead
+        .ht_clone_left thead
+        .ht_clone_corner thead
+        .ht_clone_left tbody
+            tr
+                th
+                    background $color-hover-light
+                    border 2px solid white
+                    box-sizing border-box
+                    height 16px
+                    padding 5px 4px
+                    line-height 16px
+                    div
+                        padding 0
+
+                &:nth-child(odd) th
+                    &.current-col
+                    &.current-row
+                        background $color-green !important
+                &:nth-child(even) th
+                    &.current-col
+                    &.current-row
+                        background $color-green !important
+        // Body
+        .ht_master
+            th, td
                 border 2px solid $color-white
                 height 16px
                 line-height 16px
                 padding 5px 4px
-            th, td
-                min-width 80px
-            tr:first-child th, tr:first-child td
-                border-top 2px solid $color-white
 
-
-    .current-row
-        background-color #F9F9FB !important
-
-    .current-col
-        background-color #E7E8EF !important
-
-    /* TODO: check text-size, change scroll bars in color and width */
+            tbody tr
+                &:nth-child(odd) td
+                    background $color-table-odd-passive
+                    &.current-col
+                    &.current-row
+                        background $color-table-odd-active !important
+                &:nth-child(even) td
+                    background $color-table-even-passive
+                    &.current-col
+                    &.current-row
+                        background $color-table-even-active !important

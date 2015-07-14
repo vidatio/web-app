@@ -6,7 +6,8 @@ describe "Service Table", ->
             @tableService = TableService
 
     it 'sets dataset', ->
-        expect(@tableService.dataset.length).toEqual 0
+        # handsontable needs for an empty table a object like [[]]
+        expect(@tableService.dataset.length).toEqual 1
 
         fileContent = "90,180,description0\n90,-90,description1\n90,-180,description2"
         @tableService.setDataset fileContent
