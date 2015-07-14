@@ -167,7 +167,6 @@ gulp.task "build:plugins:js",
         .pipe cache("plugins.js")
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
-        #.pipe reload()
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
@@ -176,7 +175,6 @@ gulp.task "build:plugins:css",
         .pipe cache("plugins.css")
         .pipe gif "*.css", concat(BUILD.plugin.css)
         .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
-        #.pipe reload()
 
 gulp.task "build:source:coffee",
     "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
@@ -187,7 +185,6 @@ gulp.task "build:source:coffee",
         .pipe concat(BUILD.app)
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
-        #.pipe reload()
 
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
@@ -198,15 +195,14 @@ gulp.task "build:source:stylus",
             compress: true
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.css)
-        #.pipe reload()
 
 gulp.task "build:source:jade",
     "Compiles and concatenates all jade files to '#{BUILD.dirs.html}'.",
     ->
         gulp.src BUILD.source.jade
-        .pipe jade()
+        .pipe jade
+            pretty: true
         .pipe gulp.dest(BUILD.dirs.html)
-        #.pipe reload()
 
 
 gulp.task "build:copy",
@@ -217,7 +213,6 @@ gulp.task "build:copy",
     ->
         gulp.src BUILD.source.html
         .pipe gif "**/master.html", gulp.dest ( BUILD.dirs.out )
-        #.pipe reload()
 
 gulp.task "build:cache",
     "Caches all angular.js templates in '#{BUILD.dirs.js}'.",
@@ -228,7 +223,6 @@ gulp.task "build:cache",
         gulp.src BUILD.source.html
         .pipe templateCache(module: BUILD.module)
         .pipe gulp.dest ( BUILD.dirs.js )
-        #.pipe reload()
 
 gulp.task "build:watch",
     "Runs 'build' and watches the source files, rebuilds the project on change.",
@@ -297,17 +291,6 @@ gulp.task "clean:html",
 gulp.task "docs",
     "Generates documentation in '#{BUILD.dirs.docs}' directory.",
     ["clean:docs"], shell.task "groc"
-
-# serverStarted = false
-# gulp.task "run", "Serves the App.", ->
-#     return if serverStarted
-#     serverStarted = true
-
-#     connect.server
-#         root: BUILD.dirs.out
-#         livereload: true
-#         port: 3123
-#         fallback: BUILD.dirs.out + "/statics/master.html"
 
 gulp.task "run", "Serves te App.", ->
     browserSync.init
