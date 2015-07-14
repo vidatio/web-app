@@ -319,7 +319,6 @@ gulp.task "build:source:coffee:reload",
         "build:source:coffee"
     ]
     ->
-        gulp.watch BUILD.source.coffee, ["build:source:coffee"]
         reload()
 
 gulp.task "build:source:stylus:watch",
@@ -328,7 +327,7 @@ gulp.task "build:source:stylus:watch",
         "build:source:stylus"
     ]
     ->
-        gulp.watch BUILD.source.stylus, ["build:source:stylus:reload"]
+        gulp.watch STYL_FILES, ["build:source:stylus:reload"]
 
 gulp.task "build:source:stylus:reload",
     false,
