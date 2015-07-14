@@ -19,7 +19,6 @@ app.service 'ImportService', [
                 @progress = 0
 
                 @reader.onload = =>
-                    console.log "finished"
                     @deferred.resolve @reader.result
 
                 @reader.onerror = =>
