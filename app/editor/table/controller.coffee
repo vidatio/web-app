@@ -10,10 +10,15 @@ app.controller "TableCtrl", [
 
         Table.setDataset '47.723955,13.084850\n47.725081,13.087736\n47.724881,13.086685'
 
+        #Table.setDataset ",Kia,Nissan,Toyota,Honda\n2013,10,11,12,13"
+
         $scope.colHeaders = true
         $scope.rowHeaders = true
+
         $scope.minCols = 26
         $scope.minRows = 26
-        $scope.autoColumnSize = true
+
+        $scope.currentRowClassName = 'current-row'
         $scope.currentColClassName = 'current-col'
+
 ]

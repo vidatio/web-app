@@ -8,9 +8,10 @@ app = angular.module "app.controllers"
 app.controller "ImportCtrl", [
     "$scope"
     "$http"
+    "$location"
     "ImportService"
     "TableService"
-    ($scope, $http, Import, Table) ->
+    ($scope, $http, $location, Import, Table) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
@@ -22,9 +23,11 @@ app.controller "ImportCtrl", [
                     url: url
             ).success (data) ->
                 Table.setDataset data
+                $location.path "/editor"
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
             Import.readFile($scope.file).then (result) ->
                 Table.setDataset result
+                $location.path "/editor"
 ]
