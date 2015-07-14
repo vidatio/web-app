@@ -3,8 +3,11 @@
 
     .handsontable
         width 100%
-        overflow hidden
+        overflow auto
         height 100%
+
+        .ht_clone_left, .ht_clone_top, .ht_clone_corner
+            display none
 
         /*.ht_master
             thead
@@ -41,6 +44,10 @@
 */
 
     /* TODO: check why this class doesn't get used */
-    .current-col
-        background blue
+    .current-row {
+        background-color: #F9F9FB !important;
+    }
+    .current-col {
+        background-color: #E7E8EF !important;
+    }
     /* TODO: check text-size, change scroll bars in color and width */
