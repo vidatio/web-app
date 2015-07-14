@@ -16,9 +16,7 @@ app.controller "EditorCtrl", [
         ), true
 
         changeViews = (tabs) ->
-
             [$rootScope.showTableView, $rootScope.showVisualizationView, $rootScope.showShareView] = tabs
-            console.log(tabs)
             $scope.activeViews = 0
             for tab in tabs
                 if tab
