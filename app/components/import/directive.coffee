@@ -1,7 +1,7 @@
 # File Reader Directive
 #
 # User should be allowed to drop a file everywhere, so the file drop directive is split into two parts.
-# Into the directive on which element it should start draggingZ and the directive on which element it should end
+# Into the directive on which element it should start dragging and the directive on which element it should end
 #
 # =================
 
