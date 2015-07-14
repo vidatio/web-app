@@ -6,10 +6,7 @@
         overflow auto
         height 100%
 
-        .ht_clone_left, .ht_clone_top, .ht_clone_corner
-            display none
-
-        /*.ht_master
+        .ht_master
             thead
                 tr
                     &:first-child
@@ -32,6 +29,7 @@
                             width 40px !important
                             background $color-hover-light
                             width 30px
+
             th, td, tbody tr th:first-child
                 border 2px solid $color-white
                 height 16px
@@ -41,13 +39,12 @@
                 min-width 80px
             tr:first-child th, tr:first-child td
                 border-top 2px solid $color-white
-*/
 
-    /* TODO: check why this class doesn't get used */
-    .current-row {
-        background-color: #F9F9FB !important;
-    }
-    .current-col {
-        background-color: #E7E8EF !important;
-    }
+
+    .current-row
+        background-color #F9F9FB !important
+
+    .current-col
+        background-color #E7E8EF !important
+
     /* TODO: check text-size, change scroll bars in color and width */
