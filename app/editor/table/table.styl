@@ -3,15 +3,15 @@
 
     .handsontable
         width 100%
-        overflow auto
         height 100%
+        overflow hidden
 
         // Column headers (sticky and non-sticky)
         .ht_master thead
         .ht_clone_top thead
         .ht_clone_left thead
-        .ht_clone_corner thead
         .ht_clone_left tbody
+        .ht_clone_corner thead
             tr
                 th
                     background $color-hover-light
@@ -53,3 +53,9 @@
 
             tbody tr td.highlight
                 background $color-red !important
+
+        // Input field
+        .handsontableInputHolder
+            padding 2px
+            textarea
+                background $color-grey-light
