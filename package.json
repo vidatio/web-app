@@ -1,6 +1,6 @@
 {
   "name": "vidatio",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Plattform to upload, share and expand datasets and visualizations",
   "main": "index.js",
   "privat": true,
