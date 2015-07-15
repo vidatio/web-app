@@ -6,7 +6,7 @@ app.service 'TableService', [ ->
 
     class Table
         constructor: ->
-            @dataset = []
+            @dataset = [[]]
 
         setDataset: (data) ->
             # safely remove all items, keeps data binding alive
