@@ -145,10 +145,130 @@ a:hover, a:active, a:focus
     border-top-right-radius 3px
     border-bottom-right-radius 3px
 
-.ng-enter
-    z-index 9999
-    animation moveFromRight .7s ease-in-out both
+// .ng-enter
+//     -webkit-animation moveFromRight .7s ease-in-out both
+//     animation moveFromRight .7s ease-in-out both
 
-.ng-leave
-    z-index 9999
-    animation moveToLeft .7s ease-in-out both
+// .ng-leave
+//     -webkit-animation moveToLeft .7s ease-in-out both
+//     animation moveToLeft .7s ease-in-out both
+
+// .slide
+//     position absolute
+//     left 0
+//     top 0
+//     width 100%
+//     height 100%
+
+// .slide.ng-enter, slide.ng-leave
+//     -webkit-transition all 1s ease
+//     transition all 1s ease
+
+// .slide.ng-enter
+//     left 100%
+
+// .slide.ng-enter-active
+//     left 0
+
+// .slide.ng-leave
+//     left 0
+
+// .slide.ng-leave-active
+//     left -100%
+@css{
+
+    @-webkit-keyframes fromRight {
+        from {
+            -webkit-transform: translateX(100%);
+        }
+    }
+
+    @keyframes fromRight {
+        from {
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+    }
+    @-webkit-keyframes toRight {
+        from {}
+        to {
+            -webkit-transform: translateX(100%);
+        }
+    }
+
+    @keyframes toRight {
+        from {}
+        to {
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+        }
+    }
+
+
+    @-webkit-keyframes toLeft {
+        from {}
+        to {
+            -webkit-transform: translateX(-100%);
+        }
+    }
+
+    @keyframes toLeft {
+        from {}
+        to {
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+          }
+    }
+
+    @-webkit-keyframes fromLeft {
+        from {
+            -webkit-transform: translateX(-100%);
+        }
+    }
+    @keyframes fromLeft {
+        from {
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+        }
+    }
+}
+
+// .ng-enter
+//     -webkit-animation fromRight .7s linear both
+//     animation fromRight .7s linear both
+
+// .ng-leave
+//     -webkit-animation toLeft .7s ease-in-out both
+//     animation toLeft .7s ease-in-out both
+
+.container-test
+    position relative
+    min-height  100vh
+
+[ui-view].ng-enter, [ui-view].ng-leave
+  position absolute
+  left 0
+  right 0
+
+[ui-view].ng-enter
+    -webkit-animation fromRight .7s linear both
+    animation fromRight .7s linear both
+
+// [ui-view].ng-enter-active {
+//   opacity: 1;
+//   -webkit-transform:scale3d(1, 1, 1);
+//   -moz-transform:scale3d(1, 1, 1);
+//   transform:scale3d(1, 1, 1);
+// }
+
+[ui-view].ng-leave
+    -webkit-animation toLeft .7s ease-in-out both
+    animation toLeft .7s ease-in-out both
+
+
+// [ui-view].ng-leave-active {
+//   opacity: 0;
+//   -webkit-transform:translate3d(100px, 0, 0);
+//   -moz-transform:translate3d(100px, 0, 0);
+//   transform:translate3d(100px, 0, 0);
+// }
