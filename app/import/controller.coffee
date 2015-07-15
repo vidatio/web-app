@@ -9,16 +9,17 @@ app.controller "ImportCtrl", [
     "$scope"
     "$http"
     "$location"
+    "$rootScope"
     "ImportService"
     "TableService"
-    ($scope, $http, $location, Import, Table) ->
+    ($scope, $http, $location, $rootScope, Import, Table) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
         # Read via link
         $scope.load = ->
             url = $scope.link
-            $http.get("/v0/import"
+            $http.get($rootScope.apiBase  + "/v0/import"
                 params:
                     url: url
             ).success (data) ->
