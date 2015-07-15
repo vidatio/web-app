@@ -1,4 +1,3 @@
-#share.wrapper-content(ng-show="tab === 3")
-    .row
-        .col-sm-12
-            .content "Share"
+ng-view#share.wrapper-content(ng-show="$root.showShareView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
+    .content "Share"
+        p Hallo Welt!
