@@ -1,7 +1,7 @@
 #editor.wrapper-content(ng-controller="EditorCtrl")
-    .row
-        .col-md-12.editor-placeholder(ng-show="activeViews === 0")
+    .editor-placeholder(ng-show="activeViews === 0")
+        div
             img(src="images/logo-without-name.png" )
-        include table/table
-        include visualization/visualization
-        include share/share
+    include table/table
+    include visualization/visualization
+    include share/share
