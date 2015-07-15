@@ -40,7 +40,7 @@ describe "Directive Import", ->
         # Drag over event not tested, because DispatchEvent always returns true, not according to
         # https://developer.mozilla.org/de/docs/Web/API/EventTarget/dispatchEvent
 
-        it "should listen to the dragover event", ->
+        it "should listen to the dragenter event", ->
             event = document.createEvent('CustomEvent')
             event.initCustomEvent('dragenter', false, false, null)
             @element[0].dispatchEvent event
