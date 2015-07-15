@@ -8,6 +8,7 @@ describe "Controller Import", ->
         inject ($controller, $rootScope, $httpBackend, $q, $http) ->
             @httpBackend = $httpBackend
             @scope = $rootScope.$new()
+            @rootScope = $rootScope
             @deferred = $q.defer()
 
             @Table =
@@ -28,7 +29,7 @@ describe "Controller Import", ->
         it 'should set the dataset of the table', ->
             @httpBackend.expectGET(/landing-page/).respond ""
             @httpBackend.expectGET(/editor/).respond ""
-            @httpBackend.whenGET('/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
+            @httpBackend.whenGET(@rootScope.apiBase + '/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()
             @httpBackend.flush()

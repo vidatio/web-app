@@ -27,6 +27,8 @@ app.run [
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
+        $rootScope.apiBase = "http://localhost:3000"
+
         # $rootScope.state = $state
         # $rootScope.stateParams = $stateParams
 
