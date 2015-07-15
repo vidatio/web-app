@@ -33,7 +33,7 @@
     "angular-ui-router": "< 1.0",
     "angular-mocks": "^1.4",
     "nghandsontable": "< 1.0",
-    "jQuery": "*",
+    "jquery": "*",
     "bootstrap": "^3.3",
     "angular-cookies": "^1.3",
     "angular-resource": "^1.4"
