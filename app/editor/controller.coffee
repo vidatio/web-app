@@ -7,6 +7,29 @@ app = angular.module "app.controllers"
 
 app.controller "EditorCtrl", [
     "$scope"
-    ($scope) ->
+    "$rootScope"
+    ($scope, $rootScope) ->
+        # watch if activeViews in change (defined in headerController.coffee)
+        # $watch takes two callbacks (watchExpression and Listener);
+        # see Angular.js Docs for more info!
+        # @method $watch
+        # @param {Function} watchExpression
+        # @param {Function} Listener
+        $rootScope.$watch ( (rootScope) ->
+            rootScope.activeViews
+        ), ((tabs) ->
+            changeViews(tabs)
+        ), true
+
+        # change active views when a tab in the header is clicked
+        # @method changeViews
+        # @param {Array} tabs Array of three bool values, which represent the three tabs in the editor
+        changeViews = (tabs) ->
+            [$rootScope.showTableView, $rootScope.showVisualizationView, $rootScope.showShareView] = tabs
+            # count active editor views to set bootstrap classes for the correct widths
+            $scope.activeViews = 0
+            for tab in tabs
+                if tab
+                    $scope.activeViews++
 
 ]
