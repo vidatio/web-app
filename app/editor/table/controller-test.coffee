@@ -14,7 +14,7 @@ xdescribe "Controller Table", ->
 
             TableCtrl = $controller "TableCtrl", $scope: @scope, TableService: @TableStub
 
-            $rootScope.$digest();
+            $rootScope.$digest()
 
     it 'should resize the handsontable on resize the window', ->
 
