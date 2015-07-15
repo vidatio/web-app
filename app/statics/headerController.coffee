@@ -1,3 +1,6 @@
+# Header Controller
+# ===================
+
 app = angular.module "app.controllers"
 
 app.controller "HeaderCtrl", [
