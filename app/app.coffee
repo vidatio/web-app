@@ -12,6 +12,7 @@ app = angular.module "app", [
     "app.directives"
     "app.filters"
     "leaflet-directive"
+    "ngAnimate"
 ]
 
 app.run [
@@ -26,6 +27,8 @@ app.run [
 
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
+
+        $rootScope.apiBase = "http://localhost:3000"
 
         # $rootScope.state = $state
         # $rootScope.stateParams = $stateParams
