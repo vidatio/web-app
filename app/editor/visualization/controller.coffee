@@ -22,7 +22,6 @@ app.controller "VisualizationCtrl", [
         $scope.$watch (->
             Table.dataset
         ), ((dataset) ->
-            console.log 'data changed'
             Map.setMarkers dataset
         ), true
 
