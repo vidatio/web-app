@@ -5,17 +5,11 @@ app.directive 'hot', [
     "TableService"
     (Table) ->
         restriction: "EA"
-        link: ($scope, $element, attrs) ->
-
-            console.log "start link"
-            console.log attrs
-            console.log attrs.dataSet
-            console.log attrs.activeViews
-
+        link: ($scope, $element) ->
             hot = new Handsontable($element[0],
                 data: Table.dataset
-                minCols: 100
-                minRows: 100
+                minCols: 26
+                minRows: 26
                 rowHeaders: true
                 colHeaders: true
                 currentColClassName: 'current-col'
