@@ -15,26 +15,11 @@ app.directive 'hot',  [
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row')
 
-            $scope.$watch (->
-                attrs.dataSet
-            ), ( ->
-                console.log "dataSet"
+            attrs.$observe 'activeViews', (val) ->
                 hot.render()
-            ), true
 
-            # After changing the visible views the table has to redraw itself
-            $scope.$watch (->
-                attrs.activeViews
-            ), ( ->
-                # Needed to wait for finish rendering the view before rerender the table
-                console.log "activeViews"
-                $timeout( ->
-                    hot.render()
-                , 25)
-            ), true
-
-            # $scope.render = ->
-            #     hot.render()
+            attrs.$observe 'dataSet', (val) ->
+                hot.render()
 
             # Needed for correct displayed table
             Handsontable.Dom.addEvent window, 'resize', ->
