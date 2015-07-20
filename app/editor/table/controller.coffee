@@ -13,16 +13,16 @@ app.controller "TableCtrl", [
         $scope.$watch (->
             Table.dataset
         ), ( ->
-            $scope.render()
+            #$scope.render()
         ), true
 
         # After changing the visible views the table has to redraw itself
         $scope.$watch (->
             $rootScope.activeViews
         ), ( ->
-            # Need a timeout to wait for the rendered scrollbars
-            $timeout( ->
+            # Render when the page is updated
+            $scope.$apply( ->
                 $scope.render()
-            ,25)
+            )
         ), true
 ]

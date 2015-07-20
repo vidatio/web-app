@@ -21,10 +21,10 @@ app.directive 'data-table',
 
         # Needed for correct displayed table
         Handsontable.Dom.addEvent window, 'resize', ->
-            offset = Handsontable.Dom.offset($element)
+            offset = Handsontable.Dom.offset $element
 
-            wrapperWidth = Handsontable.Dom.innerWidth($element.parent)
-            wrapperHeight = Handsontable.Dom.innerHeight($element.parent)
+            wrapperWidth = Handsontable.Dom.innerWidth $element.parent
+            wrapperHeight = Handsontable.Dom.innerHeight $element.parent
             availableWidth = wrapperWidth - offset.left - offset.right
             availableHeight = wrapperHeight - offset.top - offset.bottom
 
