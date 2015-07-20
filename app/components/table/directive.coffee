@@ -5,6 +5,8 @@ app.directive 'datatable', [
     "TableService"
     (Table) ->
         restriction: "EA"
+        template: '<div id="datatable"></div>'
+        replace: true
         link: ($scope, $element) ->
             hot = new Handsontable($element[0],
                 data: Table.dataset
