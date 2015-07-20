@@ -11,7 +11,7 @@ app.controller "TableCtrl", [
 
         #$scope.test= "hallo lukas";
         $scope.dataset = Table.dataset;
-        $scope.views = $rootScope.activeViews;
+        $scope.views = $rootScope.activeViews
 
         # console.log "init"
         # console.log $scope.views
@@ -19,19 +19,19 @@ app.controller "TableCtrl", [
 
         # After the dataset has changed the table has to render the updates
 
-        $scope.$watch (->
-            Table.dataset
-        ), ( ->
-            $scope.render()
-        ), true
+        # $scope.$watch (->
+        #     Table.dataset
+        # ), ( ->
+        #     $scope.render()
+        # ), true
 
-        # After changing the visible views the table has to redraw itself
-        $scope.$watch (->
-            $rootScope.activeViews
-        ), ( ->
-            # Needed to wait for finish rendering the view before rerender the table
-            $timeout( ->
-                $scope.render()
-            , 25)
-        ), true
+        # # After changing the visible views the table has to redraw itself
+        # $scope.$watch (->
+        #     $rootScope.activeViews
+        # ), ( ->
+        #     # Needed to wait for finish rendering the view before rerender the table
+        #     $timeout( ->
+        #         $scope.render()
+        #     , 25)
+        # ), true
 ]
