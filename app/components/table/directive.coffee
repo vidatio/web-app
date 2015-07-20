@@ -16,7 +16,10 @@ app.directive 'hot', ->
             currentRowClassName: 'current-row')
 
         attrs.$observe 'activeViews', (val) ->
-            hot.render()
+            if !$scope.$$phase
+                $scope.$apply(->
+                    hot.render()
+                )
 
         attrs.$observe 'dataSet', (val) ->
             hot.render()
