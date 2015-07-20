@@ -22,7 +22,7 @@ app.controller "TableCtrl", [
         ), ( ->
             # Render when the page is updated
             $scope.$apply( ->
-                $scope.render()
+                #$scope.render()
             )
         ), true
 ]
