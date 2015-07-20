@@ -13,16 +13,16 @@ app.controller "TableCtrl", [
         $scope.$watch (->
             Table.dataset
         ), ( ->
-            #$scope.render()
+            $scope.render()
         ), true
 
         # After changing the visible views the table has to redraw itself
         $scope.$watch (->
             $rootScope.activeViews
         ), ( ->
-            # Render when the page is updated
-           # $scope.$digest( ->
-                #$scope.render()
-           # )
+            # Needed to wait for finish rendering the view before rerender the table
+            $timeout( ->
+                $scope.render()
+            , 25)
         ), true
 ]
