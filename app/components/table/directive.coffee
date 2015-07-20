@@ -1,8 +1,10 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'data-table', ->
-    template: '<div class="data-table"></div>'
+app.directive 'data-table',
+    "Table"
+    (Table) ->
+    restriction: "EA"
     link: ($scope, $element) ->
 
         hot = new Handsontable($element,
@@ -22,7 +24,7 @@ app.directive 'data-table', ->
             offset = Handsontable.Dom.offset($element)
 
             wrapperWidth = Handsontable.Dom.innerWidth($element.parent)
-            wrapperHeight = Handsontable.Dom.innerHeight($element).parent)
+            wrapperHeight = Handsontable.Dom.innerHeight($element.parent)
             availableWidth = wrapperWidth - offset.left - offset.right
             availableHeight = wrapperHeight - offset.top - offset.bottom
 
