@@ -1,13 +1,14 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'data-table', [
-    "Table"
+app.directive 'datatable', [
+    "TableService"
     (Table) ->
         restriction: "EA"
         link: ($scope, $element) ->
-            console.log "test"
-            hot = new Handsontable($element,
+            console.log "asdf"
+
+            hot = new Handsontable($element[0],
                 data: Table.dataset
                 minCols: 100
                 minRows: 100

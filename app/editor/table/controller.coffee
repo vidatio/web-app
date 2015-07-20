@@ -21,8 +21,8 @@ app.controller "TableCtrl", [
             $rootScope.activeViews
         ), ( ->
             # Render when the page is updated
-            $scope.$apply( ->
+           # $scope.$digest( ->
                 #$scope.render()
-            )
+           # )
         ), true
 ]
