@@ -6,8 +6,6 @@ app.directive 'datatable', [
     (Table) ->
         restriction: "EA"
         link: ($scope, $element) ->
-            console.log "asdf"
-
             hot = new Handsontable($element[0],
                 data: Table.dataset
                 minCols: 26
