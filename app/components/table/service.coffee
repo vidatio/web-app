@@ -18,6 +18,8 @@ app.service 'TableService', [ ->
             while i < rows.length
                 @dataset.push rows[i].split(',')
                 ++i
+        getDataset: ->
+            return @dataset
 
     new Table
 ]
