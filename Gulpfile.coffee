@@ -78,7 +78,6 @@ BUILD =
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
-            "./bower_components/nghandsontable/dist/ngHandsontable.js"
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
         ]

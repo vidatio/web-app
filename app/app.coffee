@@ -5,7 +5,6 @@
 app = angular.module "app", [
     "ngCookies"
     "ngResource"
-    "ngHandsontable"
     "ui.router"
     "app.controllers"
     "app.services"
