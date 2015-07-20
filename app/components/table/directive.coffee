@@ -5,6 +5,8 @@ app.directive 'hot',  [
     "$timeout"
     ($timeout) ->
         restriction: "EA"
+        template: '<div id="datatable"></div>'
+        replace: true
         link: ($scope, $element, attrs) ->
             hot = new Handsontable($element[0],
                 data: attrs.dataSet
