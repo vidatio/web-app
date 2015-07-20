@@ -26,13 +26,13 @@ app.directive 'hot', ->
 
         # Needed for correct displayed table
         Handsontable.Dom.addEvent window, 'resize', ->
-            offset = Handsontable.Dom.offset $element
+            offset = Handsontable.Dom.offset $element[0]
 
-            wrapperWidth = Handsontable.Dom.innerWidth $element.parent
-            wrapperHeight = Handsontable.Dom.innerHeight $element.parent
+            wrapperWidth = Handsontable.Dom.innerWidth $element.parent()[0]
+            wrapperHeight = Handsontable.Dom.innerHeight $element.parent()[0]
             availableWidth = wrapperWidth - offset.left - offset.right
             availableHeight = wrapperHeight - offset.top - offset.bottom
 
-            tableTag.style.width = availableWidth + 'px'
-            tableTag.style.height = availableHeight + 'px'
+            $element.parent()[0].style.width = availableWidth + 'px'
+            $element.parent()[0].style.height = availableHeight + 'px'
             hot.render()
