@@ -19,11 +19,12 @@ app.controller "VisualizationCtrl", [
 
         # Watch on the dataset from the data table
         # and update markers on changed data
-        $scope.$watch (->
+        ###$scope.$watch (->
             Table.dataset
         ), ((dataset) ->
+            console.log("set markers because of new dataset")
             Map.setMarkers dataset
-        ), true
+        ), true###
 
         $scope.markers = Map.markers
 ]

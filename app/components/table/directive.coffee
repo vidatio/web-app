@@ -1,38 +1,26 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'hot', ->
+app.directive 'hot', ($timeout, TableService) ->
     restriction: "EA"
     template: '<div id="datatable"></div>'
     replace: true
-    link: ($scope, $element, attrs) ->
+    scope:
+        dataset: '='
+        activeViews: '='
+    link: ($scope, $element) ->
         hot = new Handsontable($element[0],
-            data: attrs.dataSet
+            data: $scope.dataset
             minCols: 26
             minRows: 26
             rowHeaders: true
             colHeaders: true
             currentColClassName: 'current-col'
-            currentRowClassName: 'current-row')
+            currentRowClassName: 'current-row'
+            afterChange: (change, source) ->
+                console.log ("afterChange")
+                if(source == "edit")
+                    TableService.setCell(change[0][0], change[0][1], change[0][3])
+        )
 
-        attrs.$observe 'activeViews', (val) ->
-            if !$scope.$$phase
-                $scope.$apply(->
-                    hot.render()
-                )
 
-        attrs.$observe 'dataSet', (val) ->
-            hot.render()
-
-        # Needed for correct displayed table
-        Handsontable.Dom.addEvent window, 'resize', ->
-            offset = Handsontable.Dom.offset $element[0]
-
-            wrapperWidth = Handsontable.Dom.innerWidth $element.parent()[0]
-            wrapperHeight = Handsontable.Dom.innerHeight $element.parent()[0]
-            availableWidth = wrapperWidth - offset.left - offset.right
-            availableHeight = wrapperHeight - offset.top - offset.bottom
-
-            $element.parent()[0].style.width = availableWidth + 'px'
-            $element.parent()[0].style.height = availableHeight + 'px'
-            hot.render()

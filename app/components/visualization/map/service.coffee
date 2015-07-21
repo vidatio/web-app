@@ -15,13 +15,14 @@ app.service 'MapService', [ ->
             lng == Number(lng) and lng >= -180 and lng <= 180
 
         setMarkers: (data) ->
+            console.log "setmarkers"
             # safely removes all attributes to keep databinding alive
             for property of @markers
                 delete @markers[property]
 
             # update markers
             length = 0
-            data.forEach (element, index, array) =>
+            data.forEach (element) =>
                 lat = parseFloat(element[0])
                 lng = parseFloat(element[1])
                 if @isCoordinate(lat, lng)
