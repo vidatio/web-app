@@ -5,7 +5,7 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get clean && apt-get autoclean && apt-get autoremove && apt-get upgrade -y
-RUN apt-get install -y curl git nginx vim
+RUN apt-get install -y curl git nginx python
 
 # needed for bower github installations
 RUN git config --global url."https://".insteadOf git://
