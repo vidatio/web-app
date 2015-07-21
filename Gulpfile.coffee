@@ -7,7 +7,6 @@ jade = require "gulp-jade"
 templateCache = require "gulp-angular-templatecache"
 
 stylus = require "gulp-stylus"
-stylint = require "gulp-stylint"
 
 karma = require "gulp-karma"
 {protractor} = require "gulp-protractor"
@@ -176,7 +175,6 @@ gulp.task "lint:stylus",
     ->
         gulp.src STYL_FILES
         .pipe cached "lint:stylus"
-        .pipe stylint({config: '.stylintrc'})
 
 ###
     BUILDING PLUGINS
