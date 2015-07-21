@@ -176,7 +176,7 @@ gulp.task "lint:stylus",
     ->
         gulp.src STYL_FILES
         .pipe cached "lint:stylus"
-        .pipe stylint()
+        .pipe stylint({config: '.stylintrc'})
 
 ###
     BUILDING PLUGINS
