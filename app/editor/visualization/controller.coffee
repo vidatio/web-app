@@ -10,21 +10,10 @@ app.controller "VisualizationCtrl", [
     'TableService'
     'MapService'
     ($scope, Table, Map) ->
-
-        #Default settings - Works like scope.center, etc.
         $scope.center =
             lat: 47.723407
             lng: 13.086921
             zoom: 16
-
-        # Watch on the dataset from the data table
-        # and update markers on changed data
-        ###$scope.$watch (->
-            Table.dataset
-        ), ((dataset) ->
-            console.log("set markers because of new dataset")
-            Map.setMarkers dataset
-        ), true###
 
         $scope.markers = Map.markers
 ]

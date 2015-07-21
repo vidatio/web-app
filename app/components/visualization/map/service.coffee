@@ -15,7 +15,6 @@ app.service 'MapService', [ ->
             lng == Number(lng) and lng >= -180 and lng <= 180
 
         setMarkers: (data) ->
-            console.log "setmarkers"
             # safely removes all attributes to keep databinding alive
             for property of @markers
                 delete @markers[property]
