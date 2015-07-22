@@ -5,7 +5,7 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get clean && apt-get autoclean && apt-get autoremove && apt-get upgrade -y
-RUN apt-get install -y curl git nginx python
+RUN apt-get install -y curl git nginx python make
 
 # needed for bower github installations
 RUN git config --global url."https://".insteadOf git://
@@ -28,6 +28,8 @@ ADD nginx_config /etc/nginx/sites-enabled/
 
 #delete default nginx config to run the new one on localhost:80
 RUN rm /etc/nginx/sites-enabled/default
+
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # set bash start directory to /var/www/vidatio
 WORKDIR /var/www/vidatio
