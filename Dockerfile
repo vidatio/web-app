@@ -5,7 +5,7 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get clean && apt-get autoclean && apt-get autoremove && apt-get upgrade -y
-RUN apt-get install -y curl git nginx python make
+RUN apt-get install -y curl git nginx python make build-essential
 
 # needed for bower github installations
 RUN git config --global url."https://".insteadOf git://
@@ -20,7 +20,7 @@ ENV PATH=$PATH:$NODE_PATH
 # install node.js via NVM
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
 RUN echo "nvm install $NODE_VERSION" >> ~/.nvm/installnode.sh
-RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
+RUN echo "npm install -g coffee-script gulp jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
 # copy nginx config
@@ -46,5 +46,5 @@ ADD . /var/www/vidatio/
 # expose 80 to host OS
 EXPOSE 80
 
-CMD nginx && gulp release
+CMD nginx
 
