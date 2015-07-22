@@ -46,5 +46,5 @@ ADD . /var/www/vidatio/
 # expose 80 to host OS
 EXPOSE 80
 
-CMD nginx
+CMD nginx && gulp release
 
