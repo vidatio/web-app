@@ -22,7 +22,7 @@ server {
 	listen [::]:80 default_server ipv6only=on;
 
 	root /var/www/vidatio;
-	index coming-soon.html index.html index.htm;
+	index build/statics/master.html index.html index.htm;
 
 	# Make site accessible from http://localhost/
 	server_name localhost;
@@ -38,41 +38,4 @@ server {
 	location /api {
         proxy_pass http://localhost:5000;
     }
-}
-
-server {
-  server_name api.vidatio.mediacube.at;
-
-  location  / {
-    proxy_pass http://localhost:5000;
-  }
-}
-server {
-  server_name db.vidatio.mediacube.at;
-
-  location  / {
-    proxy_pass http://localhost:6000;
-  }
-}
-server {
-  server_name develop.vidatio.mediacube.at;
-
-  location  / {
-    proxy_pass http://localhost:7000;
-  }
-}
-
-server {
-  server_name log.vidatio.mediacube.at;
-
-  location  / {
-    proxy_pass http://localhost:8000;
-  }
-}
-server {
-  server_name test.vidatio.mediacube.at;
-
-  location  / {
-    proxy_pass http://localhost:9000;
-  }
 }
