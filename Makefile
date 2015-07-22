@@ -10,7 +10,7 @@ build:
 
 # create and start container from image
 run:
-	docker run -d -p 4000:80 -p 5000:5000 --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -d -p 4000:80 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # stop container
 stop:
