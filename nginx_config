@@ -34,8 +34,4 @@ server {
 		# Uncomment to enable naxsi on this location
 		# include /etc/nginx/naxsi.rules
 	}
-
-	location /api {
-        proxy_pass http://localhost:5000;
-    }
 }
