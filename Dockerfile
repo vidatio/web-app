@@ -24,7 +24,7 @@ RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
 # copy nginx config
-ADD nginx_config /etc/nginx/sites-enabled/
+ADD nginx-config /etc/nginx/sites-enabled/
 
 #delete default nginx config to run the new one on localhost:80
 RUN rm /etc/nginx/sites-enabled/default
