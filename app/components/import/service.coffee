@@ -40,6 +40,7 @@ app.service 'ImportService', [
                         @reader.readAsText file
                         @deferred.promise.then (result) ->
                             return result
+                            
                     when "zip"
                         console.log "format : zip"
                         @reader.readAsArrayBuffer file
