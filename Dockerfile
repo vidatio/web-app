@@ -31,17 +31,17 @@ RUN rm /etc/nginx/sites-enabled/default
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# set bash start directory to /usr/share/nginx/html/
-WORKDIR /usr/share/nginx/html/
+# set bash start directory to /usr/share/nginx/html/vidatio/
+WORKDIR /usr/share/nginx/html/vidatio/
 
 # add package.json and bower.json before copying the entire app to use caching
-ADD package.json bower.json /usr/share/nginx/html//
+ADD package.json bower.json /usr/share/nginx/html/vidatio/
 RUN npm install
 RUN bower install --allow-root
 
 # create folder var/www/vidatio and copy the app
-RUN mkdir -p /usr/share/nginx/html/
-ADD . /usr/share/nginx/html//
+RUN mkdir -p /usr/share/nginx/html/vidatio/
+ADD . /usr/share/nginx/html/vidatio/
 
 # expose 80 to host OS
 EXPOSE 80
