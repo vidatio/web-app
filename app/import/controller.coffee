@@ -30,7 +30,6 @@ app.controller "ImportCtrl", [
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
             Import.readFile($scope.file).then (result) ->
-                Parser.zip result
                 Table.setDataset result
                 $location.path "/editor"
 ]

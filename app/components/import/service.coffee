@@ -7,7 +7,8 @@ app = angular.module "app.services"
 
 app.service 'ImportService', [
     "$q"
-    ($q) ->
+    "ParserService"
+    ($q, Parser) ->
         class Reader
             constructor: ->
                 @reader = new FileReader()
@@ -37,9 +38,14 @@ app.service 'ImportService', [
                     when "csv"
                         console.log "format: csv"
                         @reader.readAsText file
+                        @deferred.promise.then (result) ->
+                            return result
                     when "zip"
                         console.log "format : zip"
                         @reader.readAsArrayBuffer file
+                        @deferred.promise.then (result) ->
+                            Parser.zip result
+
                     else
                         console.log "File format is not supported."
 

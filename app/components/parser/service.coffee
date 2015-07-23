@@ -9,6 +9,7 @@ app.service 'ParserService', [ ->
     class Parser
         zip: (buffer) ->
 
+            # not neccessary
             if buffer instanceof ArrayBuffer
                 shp buffer
                 .then (geojson) ->
