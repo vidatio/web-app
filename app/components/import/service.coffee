@@ -44,12 +44,11 @@ app.service 'ImportService', [
                         console.log "format : zip"
                         @reader.readAsArrayBuffer file
                         @deferred.promise.then (result) ->
-                            Parser.zip result
+                            return Parser.zip result
 
                     else
                         console.log "File format is not supported."
-
-                @deferred.promise
+                        return
 
         new Reader
 ]

@@ -14,6 +14,7 @@ app.service 'TableService', [
                 # safely remove all items, keeps data binding alive
                 @dataset.splice 0, @dataset.length
 
+                console.log data
                 rows = data.split('\n')
 
                 i = 0
