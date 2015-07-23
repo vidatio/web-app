@@ -80,6 +80,8 @@ BUILD =
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/shp/dist/shp.js"
+            "./bower_components/shapefile2geojson/dist/browser/shapefile2geojson.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"

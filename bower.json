@@ -1,47 +1,48 @@
 {
-    "name": "vidatio",
-    "homepage": "http://www.vidat.io",
-    "version": "0.0.4",
-    "authors": [
-        "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
-    ],
-    "description": "Plattform to upload, share and expand datasets and visualizations",
-    "main": "assets/js/main.js",
-    "moduleType": [
-        "node"
-    ],
-    "keywords": [
-        "data",
-        "diagram",
-        "visualization",
-        "open",
-        "data",
-        "ogd"
-    ],
-    "license": "MIT",
-    "private": true,
-    "ignore": [
-        "**/.*",
-        "node_modules",
-        "bower_components",
-        "test",
-        "tests"
-    ],
-    "dependencies": {
-        "angular": "^1.4",
-        "angular-leaflet-directive": "< 1.0",
-        "angular-ui-router": "< 1.0",
-        "angular-animate": "~1.4",
-        "handsontable": "< 1.0",
-        "jquery": "*",
-        "bootstrap": "^3.3",
-        "angular-cookies": "^1.4",
-        "angular-resource": "^1.4"
-    },
-    "devDependencies":{
-        "angular-mocks": "^1.4"
-    },
-    "resolutions": {
-        "angular": "^1.4"
-    }
+  "name": "vidatio",
+  "homepage": "http://www.vidat.io",
+  "version": "0.0.4",
+  "authors": [
+    "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
+  ],
+  "description": "Plattform to upload, share and expand datasets and visualizations",
+  "main": "assets/js/main.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "data",
+    "diagram",
+    "visualization",
+    "open",
+    "data",
+    "ogd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4",
+    "angular-leaflet-directive": "< 1.0",
+    "angular-ui-router": "< 1.0",
+    "angular-animate": "~1.4",
+    "handsontable": "< 1.0",
+    "jquery": "*",
+    "bootstrap": "^3.3",
+    "angular-cookies": "^1.4",
+    "angular-resource": "^1.4",
+    "shp": "~3.1.6"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4"
+  },
+  "resolutions": {
+    "angular": "^1.4"
+  }
 }

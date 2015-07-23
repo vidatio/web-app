@@ -12,7 +12,8 @@ app.controller "ImportCtrl", [
     "$rootScope"
     "ImportService"
     "TableService"
-    ($scope, $http, $location, $rootScope, Import, Table) ->
+    "ParserService"
+    ($scope, $http, $location, $rootScope, Import, Table, Parser) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
@@ -29,6 +30,7 @@ app.controller "ImportCtrl", [
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
             Import.readFile($scope.file).then (result) ->
+                Parser.zip result
                 Table.setDataset result
                 $location.path "/editor"
 ]
