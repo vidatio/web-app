@@ -132,7 +132,8 @@ gulp.task "release",
         "build:plugins:css"
         "build:source:coffee"
         "build:source:stylus"
-        "build:source:jade"
+        "clean:html"
+        "build:cache"
     ]
 
 gulp.task "build",
