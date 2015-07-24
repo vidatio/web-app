@@ -5,7 +5,7 @@ MAINTAINER Christian Lehner <lehner.chri@gmail.com>
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get clean && apt-get autoclean && apt-get autoremove && apt-get upgrade -y
-RUN apt-get install -y curl git nginx python make
+RUN apt-get install -y curl git nginx python make build-essential
 
 # needed for bower github installations
 RUN git config --global url."https://".insteadOf git://
@@ -20,7 +20,7 @@ ENV PATH=$PATH:$NODE_PATH
 # install node.js via NVM
 RUN cat ~/.nvm/nvm.sh >> ~/.nvm/installnode.sh
 RUN echo "nvm install $NODE_VERSION" >> ~/.nvm/installnode.sh
-RUN echo "npm install -g coffee-script jasmine bower" >> ~/.nvm/installnode.sh
+RUN echo "npm install -g coffee-script gulp jasmine bower" >> ~/.nvm/installnode.sh
 RUN sh ~/.nvm/installnode.sh
 
 # copy nginx config
@@ -31,20 +31,22 @@ RUN rm /etc/nginx/sites-enabled/default
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-# set bash start directory to /var/www/vidatio
-WORKDIR /var/www/vidatio
+# set bash start directory to /usr/share/nginx/html/vidatio/
+WORKDIR /usr/share/nginx/html/vidatio/
 
 # add package.json and bower.json before copying the entire app to use caching
-ADD package.json bower.json /var/www/vidatio/
+ADD package.json bower.json /usr/share/nginx/html/vidatio/
 RUN npm install
 RUN bower install --allow-root
 
 # create folder var/www/vidatio and copy the app
-RUN mkdir -p /var/www/vidatio
-ADD . /var/www/vidatio/
+RUN mkdir -p /usr/share/nginx/html/vidatio/
+ADD . /usr/share/nginx/html/vidatio/
 
 # expose 80 to host OS
 EXPOSE 80
 
-CMD nginx && gulp release
+RUN gulp release
+
+CMD nginx
 
