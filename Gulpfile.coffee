@@ -178,7 +178,7 @@ gulp.task "lint:coffee",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-        .pipe cached "lint:coffee"
+        #.pipe cached "lint:coffee"
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
