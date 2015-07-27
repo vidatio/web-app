@@ -18,7 +18,6 @@ app.directive 'hot', ($timeout, TableService) ->
             currentColClassName: 'current-col'
             currentRowClassName: 'current-row'
             afterChange: (change, source) ->
-                console.log ("afterChange")
                 if(source == "edit")
                     TableService.setCell(change[0][0], change[0][1], change[0][3])
         )

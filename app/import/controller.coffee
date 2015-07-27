@@ -28,9 +28,7 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-
             Import.readFile($scope.file).then (result) ->
-                Table.setDataset result
                 $location.path "/editor"
             , (error) ->
                 console.log error

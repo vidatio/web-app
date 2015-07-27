@@ -8,7 +8,8 @@ app = angular.module "app.services"
 app.service 'ImportService', [
     "$q"
     "ParserService"
-    ($q, Parser) ->
+    "TableService"
+    ($q, Parser, Table) ->
         class Reader
             constructor: ->
                 @reader = new FileReader()
@@ -33,18 +34,18 @@ app.service 'ImportService', [
 
                 switch fileType
                     when "csv"
-                        console.log "format: csv"
                         @reader.readAsText file
                         @deferred.promise.then (result) =>
+                            Table.setDataset result
                             @deferred.resolve(result)
 
                     when "zip"
-                        console.log "format : zip"
                         @reader.readAsArrayBuffer file
-                        @deferred.promise.then (result) ->
+                        @deferred.promise.then (result) =>
                             Parser.zip result
-                        .then (result) =>
-                            @deferred.resolve(result)
+                                .then (geojson) =>
+                                    Table.setDatasetFromGeojson geojson
+                                    @deferred.resolve(geojson)
 
                     else
                         message = "File format '" + fileType + "' is not supported."
