@@ -36,20 +36,18 @@ app.service 'ImportService', [
 
                 switch type
                     when "csv"
-                        console.log "format: csv"
                         @reader.readAsText file
                         @deferred.promise.then (result) ->
                             return result
                             
                     when "zip"
-                        console.log "format : zip"
                         @reader.readAsArrayBuffer file
                         @deferred.promise.then (result) ->
                             return Parser.zip result
 
                     else
                         console.log "File format is not supported."
-                        return
-
+                        @deferred.promise
+                        
         new Reader
 ]
