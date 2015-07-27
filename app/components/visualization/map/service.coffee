@@ -8,14 +8,13 @@ app = angular.module "app.services"
 app.service 'MapService', [ ->
     class Map
         constructor: ->
-            @markers = {}
+            @layer = {}
 
         isCoordinate: (lat, lng) ->
             lat == Number(lat) and lat >= -90 and lat <= 90 &&
             lng == Number(lng) and lng >= -180 and lng <= 180
 
         setMarkers: (data) ->
-            console.log "setmarkers"
             # safely removes all attributes to keep databinding alive
             for property of @markers
                 delete @markers[property]
@@ -29,5 +28,9 @@ app.service 'MapService', [ ->
                     @markers[length++] =
                         lat: parseFloat(lat)
                         lng: parseFloat(lng)
+
+        setGeoJSON: (data) ->
+
+
     new Map
 ]
