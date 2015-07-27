@@ -28,20 +28,14 @@ app.service 'ImportService', [
                 @reader.onprogress = (event) =>
                     @progress = event.loaded / event.total
 
-                # check file format
-                type = file.name.split "."
-                type = type[type.length - 1]
-
-                console.log "type : ", type
-
-                switch type
-                    when "csv"
+                switch file.type
+                    when "text/csv"
                         console.log "format: csv"
                         @reader.readAsText file
                         @deferred.promise.then (result) ->
                             return result
-                            
-                    when "zip"
+
+                    when "application/zip"
                         console.log "format : zip"
                         @reader.readAsArrayBuffer file
                         @deferred.promise.then (result) ->
@@ -49,7 +43,7 @@ app.service 'ImportService', [
 
                     else
                         console.log "File format is not supported."
-                        return
+                        return @deferred.promise
 
         new Reader
 ]
