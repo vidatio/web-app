@@ -51,6 +51,9 @@ h3
     margin 0
     padding 0
 
+/**
+ * Resetting bootstrap
+ */
 .col-sm-4, .col-sm-3, .col-sm-6, .col-sm-12
     margin 0
 
@@ -107,7 +110,7 @@ html, body
             .col-wrapper
                 margin-left 28px
 
-@media(max-width: 768px)
+@media(max-width 768px)
     .layout-3-columns .col-sm-4 .col-wrapper
         margin 0 !important
 
@@ -144,3 +147,12 @@ a:hover, a:active, a:focus
 .border-right
     border-top-right-radius 3px
     border-bottom-right-radius 3px
+
+[ng\:cloak]
+[ng-cloak]
+[data-ng-cloak]
+[x-ng-cloak]
+.ng-cloak
+.x-ng-cloak
+    display none !important
+

@@ -41,7 +41,7 @@ COPY_FILES =
     ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
-        "./bower_components/bootstrap/dist/fonts/*.*"
+        "./bower_components/bootstrap/dists/fonts/*.*"
     ]
 
 BASEURL = "http://localhost:3123"
@@ -127,6 +127,18 @@ gulp.task "dev",
     "Shorthand for develop.",
     [
         "develop"
+    ]
+
+gulp.task "release",
+    "Building the app for the users.",
+    [
+        "copy"
+        "build:plugins:js"
+        "build:plugins:css"
+        "build:source:coffee"
+        "build:source:stylus"
+        "clean:html"
+        "build:cache"
     ]
 
 gulp.task "build",

@@ -17,7 +17,7 @@ app.controller "VisualizationCtrl", [
             lng: 13.086921
             zoom: 16
 
-        myIcon =
+        icon =
             iconUrl: 'images/marker-icon.png'
             iconSize: [
                 25
@@ -33,7 +33,7 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new (L.marker)(latlng, icon: L.icon(myIcon))
+                new (L.marker)(latlng, icon: L.icon(icon))
             onEachFeature: (feature, layer) ->
                 # use for displaying features
                 # layer.bindPopup 'number: '
