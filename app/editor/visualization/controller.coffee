@@ -17,14 +17,6 @@ app.controller "VisualizationCtrl", [
             lng: 13.086921
             zoom: 16
 
-        # Watch on the dataset from the data table
-        # and update markers on changed data
-        ###$scope.$watch (->
-            Table.dataset
-        ), ((dataset) ->
-            console.log("set markers because of new dataset")
-            Map.setMarkers dataset
-        ), true###
-
         $scope.markers = Map.markers
+        $scope.geojson = Map.geojson
 ]
