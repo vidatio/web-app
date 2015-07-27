@@ -6,7 +6,7 @@ describe "Service Map", ->
         inject (MapService) ->
             mapService = MapService
 
-    it 'sets markers', ->
+    xit 'sets markers', ->
         dataset = [[90, 90], [80, 80], [70, 70]]
         mapService.setMarkers dataset
         markers =

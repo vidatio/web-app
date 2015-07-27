@@ -23,6 +23,31 @@ app.service 'TableService', [
 
                 Map.setGeoJSON(@dataset)
 
+            setDatasetFromGeojson: (geojson) ->
+                # safely remove all items, keeps data binding alive
+                @dataset.splice 0, @dataset.length
+
+                geojson.features.forEach (feature) =>
+                    newRow = []
+                    newRow.push feature.geometry.type
+
+                    # extra array of coordinates
+                    # coordinates = []
+                    # feature.geometry.coordinates.forEach (coordinate) ->
+                    #     coordinates.push coordinate
+                    # newRow.push coordinates
+
+                    feature.geometry.coordinates.forEach (coordinate) ->
+                        newRow.push coordinate
+
+                    for property,value of feature.properties
+                        newRow.push value
+
+                    @dataset.push newRow
+
+                console.log "@dataset", @dataset
+
+
             setCell: (row, cell, data) ->
                 @dataset[row][cell] = data
                 Map.setGeoJSON(@dataset)

@@ -10,8 +10,8 @@ app.service 'ParserService', [ ->
         zip: (buffer) ->
             shp buffer
             .then (geojson) ->
-                console.log geojson
-                console.log JSON.stringify geojson
+                # console.log geojson
+                # console.log JSON.stringify geojson
                 return geojson
 
     new Parser

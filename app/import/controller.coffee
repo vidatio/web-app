@@ -30,7 +30,6 @@ app.controller "ImportCtrl", [
         $scope.getFile = ->
 
             Import.readFile($scope.file).then (result) ->
-                Table.setDataset result
                 $location.path "/editor"
             , (error) ->
                 console.log error
