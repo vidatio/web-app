@@ -17,6 +17,5 @@ app.controller "VisualizationCtrl", [
             lng: 13.086921
             zoom: 16
 
-        $scope.markers = Map.markers
-        $scope.geojson = Map.geojson
+        $scope.geoJSON = Map.geoJSON
 ]
