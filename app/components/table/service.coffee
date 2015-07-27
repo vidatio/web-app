@@ -21,11 +21,11 @@ app.service 'TableService', [
                     @dataset.push rows[i].split(',')
                     ++i
 
-                Map.setMarkers(@dataset)
+                Map.setGeoJSON(@dataset)
 
             setCell: (row, cell, data) ->
                 @dataset[row][cell] = data
-                Map.setMarkers(@dataset)
+                Map.setGeoJSON(@dataset)
 
             getDataset: ->
                 return @dataset
