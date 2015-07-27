@@ -12,11 +12,10 @@ app.service 'ImportService', [
         class Reader
             constructor: ->
                 @reader = new FileReader()
-                @deferred = undefined
+                @deferred = $q.defer()
                 @progress = 0
 
             readFile: (file) ->
-                @deferred = $q.defer()
                 @progress = 0
 
                 @reader.onload = =>
@@ -28,26 +27,25 @@ app.service 'ImportService', [
                 @reader.onprogress = (event) =>
                     @progress = event.loaded / event.total
 
-                # check file format
-                type = file.name.split "."
-                type = type[type.length - 1]
+                fileType = file.name.split "."
+                fileType = fileType[fileType.length - 1]
 
-                console.log "type : ", type
-
-                switch type
+                switch fileType
                     when "csv"
                         @reader.readAsText file
-                        @deferred.promise.then (result) ->
-                            return result
-                            
+                        @deferred.promise.then (result) =>
+                            @deferred.resolve(result)
+
                     when "zip"
                         @reader.readAsArrayBuffer file
-                        @deferred.promise.then (result) ->
-                            return Parser.zip result
+                        @deferred.promise.then (result) =>
+                            result = Parser.zip result
+                            @deferred.resolve(result)
 
                     else
-                        console.log "File format is not supported."
-                        @deferred.promise
-                        
+                        message = "File format '" + fileType + "' is not supported."
+                        @deferred.reject(message)
+
+                return @deferred.promise
         new Reader
 ]

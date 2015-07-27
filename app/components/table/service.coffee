@@ -10,7 +10,6 @@ app.service 'TableService', [
                 @dataset = [[]]
 
             setDataset: (data) ->
-                console.log "set dataset - tableservice"
                 # safely remove all items, keeps data binding alive
                 @dataset.splice 0, @dataset.length
 
@@ -25,7 +24,6 @@ app.service 'TableService', [
                 Map.setMarkers(@dataset)
 
             setCell: (row, cell, data) ->
-                console.log "set cell"
                 @dataset[row][cell] = data
                 Map.setMarkers(@dataset)
 
