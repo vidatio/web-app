@@ -31,12 +31,6 @@ app.service 'TableService', [
                     newRow = []
                     newRow.push feature.geometry.type
 
-                    # extra array of coordinates
-                    # coordinates = []
-                    # feature.geometry.coordinates.forEach (coordinate) ->
-                    #     coordinates.push coordinate
-                    # newRow.push coordinates
-
                     feature.geometry.coordinates.forEach (coordinate) ->
                         newRow.push coordinate
 
