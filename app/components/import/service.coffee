@@ -12,10 +12,11 @@ app.service 'ImportService', [
         class Reader
             constructor: ->
                 @reader = new FileReader()
-                @deferred = $q.defer()
+                @deferred = undefined
                 @progress = 0
 
             readFile: (file) ->
+                @deferred = $q.defer()
                 @progress = 0
 
                 @reader.onload = =>
