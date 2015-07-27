@@ -1,4 +1,4 @@
-describe "Service Map", ->
+xdescribe "Service Map", ->
     mapService = undefined
 
     beforeEach ->

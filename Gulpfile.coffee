@@ -22,7 +22,7 @@ sourcemaps = require "gulp-sourcemaps"
 util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
-modRewrite  = require "connect-modrewrite"
+modRewrite = require "connect-modrewrite"
 
 DOC_FILES = [
     "./README.MD"
@@ -35,7 +35,10 @@ DOC_FILES = [
 ]
 
 COPY_FILES =
-    img: "./app/statics/assets/images/**/*.*"
+    img: [
+        "./app/statics/assets/images/**/*.*"
+        "./bower_components/leaflet/dist/images/marker-icon.png"
+    ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
@@ -324,7 +327,7 @@ gulp.task "run", "Serves the App.", ->
         server:
             baseDir: BUILD.dirs.out
             index: "/statics/master.html"
-            middleware: [ modRewrite([ '!\\.\\w+$ /statics/master.html [L]' ]) ]
+            middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
         open: false
         port: 3123
         ui:

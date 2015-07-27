@@ -41,8 +41,9 @@ app.service 'ImportService', [
                     when "zip"
                         console.log "format : zip"
                         @reader.readAsArrayBuffer file
-                        @deferred.promise.then (result) =>
-                            result = Parser.zip result
+                        @deferred.promise.then (result) ->
+                            Parser.zip result
+                        .then (result) =>
                             @deferred.resolve(result)
 
                     else

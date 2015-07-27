@@ -11,11 +11,30 @@ app.controller "VisualizationCtrl", [
     'MapService'
     ($scope, Table, Map) ->
 
-        #Default settings - Works like scope.center, etc.
+        # Default settings - Works like scope.center, etc.
         $scope.center =
             lat: 47.723407
             lng: 13.086921
             zoom: 16
 
-        $scope.geoJSON = Map.geoJSON
+        myIcon =
+            iconUrl: 'images/marker-icon.png'
+            iconSize: [
+                25
+                41
+            ]
+            iconAnchor: [
+                12
+                0
+            ]
+
+        $scope.geojson =
+            data: Map.geoJSON
+            style: (feature) ->
+                {}
+            pointToLayer: (feature, latlng) ->
+                new (L.marker)(latlng, icon: L.icon(myIcon))
+            onEachFeature: (feature, layer) ->
+                # use for displaying features
+                # layer.bindPopup 'number: '
 ]
