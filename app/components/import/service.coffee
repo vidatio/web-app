@@ -7,9 +7,9 @@ app = angular.module "app.services"
 
 app.service 'ImportService', [
     "$q"
-    "ParserService"
+    "ConverterService"
     "TableService"
-    ($q, Parser, Table) ->
+    ($q, Converter, Table) ->
         class Reader
             constructor: ->
                 @reader = new FileReader()
@@ -42,7 +42,7 @@ app.service 'ImportService', [
                     when "zip"
                         @reader.readAsArrayBuffer file
                         @deferred.promise.then (result) =>
-                            Parser.zip result
+                            Converter.convertSHP2GeoJSON result
                                 .then (geojson) =>
                                     Table.setDatasetFromGeojson geojson
                                     @deferred.resolve(geojson)
