@@ -186,7 +186,7 @@ gulp.task "lint:stylus",
     "Lints all Stylus source files.",
     ->
         gulp.src STYL_FILES
-        .pipe cached "lint:stylus"
+        #.pipe cached "lint:stylus"
 
 ###
     BUILDING PLUGINS
@@ -195,7 +195,7 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        .pipe cached "plugins.js"
+        #.pipe cached "plugins.js"
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
 
@@ -203,7 +203,7 @@ gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        .pipe cached "plugins.css"
+        #.pipe cached "plugins.css"
         .pipe gif "*.css", concat(BUILD.plugin.css)
         .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
 
@@ -278,14 +278,14 @@ gulp.task "copy:img",
     false,
     ->
         gulp.src COPY_FILES.img
-        .pipe cached "copy:img"
+        #.pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     false,
     ->
         gulp.src COPY_FILES.fonts
-        .pipe cached "copy:fonts"
+        #.pipe cached "copy:fonts"
         .pipe gulp.dest BUILD.dirs.fonts
 
 ###
