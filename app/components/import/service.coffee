@@ -36,6 +36,7 @@ app.service 'ImportService', [
                     when "csv"
                         @reader.readAsText file
                         @deferred.promise.then (result) =>
+                            Table.setDataset result
                             @deferred.resolve(result)
 
                     when "zip"

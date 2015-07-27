@@ -28,7 +28,6 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-
             Import.readFile($scope.file).then (result) ->
                 $location.path "/editor"
             , (error) ->
