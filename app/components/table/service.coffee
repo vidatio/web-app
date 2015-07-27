@@ -9,11 +9,15 @@ app.service 'TableService', [
             constructor: ->
                 @dataset = [[]]
 
+            reset: ->
+                @setDataset("")
+
             setDataset: (data) ->
+                console.log(data, @dataset)
                 # safely remove all items, keeps data binding alive
                 @dataset.splice 0, @dataset.length
 
-                console.log data
+                console.log(data, @dataset)
                 rows = data.split('\n')
 
                 i = 0

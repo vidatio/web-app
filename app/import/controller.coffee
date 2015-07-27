@@ -16,6 +16,10 @@ app.controller "ImportCtrl", [
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
+        $scope.continueToEmptyTable = ->
+            Table.reset()
+            $location.path "/editor"
+
         # Read via link
         $scope.load = ->
             url = $scope.link
