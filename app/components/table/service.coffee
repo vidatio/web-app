@@ -13,11 +13,8 @@ app.service 'TableService', [
                 @setDataset("")
 
             setDataset: (data) ->
-                console.log(data, @dataset)
                 # safely remove all items, keeps data binding alive
                 @dataset.splice 0, @dataset.length
-
-                console.log(data, @dataset)
                 rows = data.split('\n')
 
                 i = 0
@@ -42,9 +39,6 @@ app.service 'TableService', [
                         newRow.push value
 
                     @dataset.push newRow
-
-                console.log "@dataset", @dataset
-
 
             setCell: (row, cell, data) ->
                 @dataset[row][cell] = data

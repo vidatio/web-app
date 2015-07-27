@@ -38,7 +38,6 @@ app.service 'MapService', [ ->
                     feature = JSON.parse(JSON.stringify(@featureTemplate))
                     feature.geometry.coordinates = [parseFloat(lng), parseFloat(lat)]
                     feature.geometry.type = "Point"
-                    console.log feature
                     @geoJSON.features.push(feature)
 
     new Map
