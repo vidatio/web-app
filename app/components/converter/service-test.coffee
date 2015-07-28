@@ -3,9 +3,12 @@
 describe "Service Converter", ->
     beforeEach ->
         module "app"
-        inject (ConverterService, $injector) ->
+        inject (ConverterService, $injector, $q) ->
             @injector = $injector
             @Converter = ConverterService
+            @deferred = $q.defer()
+
+            spyOn(@Converter,'convertSHP2GeoJSON').and.returnValue(@deferred.promise)
 
     it 'should be defined and included', ->
         expect(@Converter).toBeDefined()
@@ -40,3 +43,40 @@ describe "Service Converter", ->
                 }
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
+
+    xit 'should convert shp into arrays', ->
+        geoJSON =
+            "type": "FeatureCollection"
+            "features": [{
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [70,90]
+                }, {
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [80,80]
+                }, {
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [90,70]
+                }
+            ]
+
+        result =
+            [
+                [
+                    "Point","70","90"
+                ],
+                [
+                    "Point","70","90"
+                ],
+                [
+                    "Point","90","70"
+                ]
+            ]
+
+        @deferred.resolve(geoJSON)
+        expect(@Converter.convertSHP2GeoJSON(geoJSON)).toEqual(result)
