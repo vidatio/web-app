@@ -4,7 +4,8 @@ app = angular.module "app.services"
 
 app.service 'TableService', [
     "MapService"
-    (Map) ->
+    "ConverterService"
+    (Map, Converter) ->
         class Table
             constructor: ->
                 @dataset = [[]]
@@ -19,11 +20,15 @@ app.service 'TableService', [
                 @reset()
                 data.forEach (row, index) =>
                     @dataset[index] = row
-                Map.setGeoJSON(@dataset)
+
+                geoJSON = Converter.convertArrays2GeoJSON(@dataset)
+                Map.setGeoJSON(geoJSON)
 
             setCell: (row, cell, data) ->
                 @dataset[row][cell] = data
-                Map.setGeoJSON(@dataset)
+
+                geoJSON = Converter.convertArrays2GeoJSON(@dataset)
+                Map.setGeoJSON(geoJSON)
 
             getDataset: ->
                 return @dataset
