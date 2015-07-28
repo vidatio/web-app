@@ -24,6 +24,7 @@ module.exports = (config) ->
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/papa-parse/papaparse.js"
 
             # source files
             "./app/init-deps.coffee"

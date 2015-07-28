@@ -31,13 +31,14 @@
     "angular": "^1.4",
     "angular-leaflet-directive": "< 1.0",
     "angular-ui-router": "< 1.0",
-    "angular-animate": "~1.4",
+    "angular-animate": "^1.4",
     "handsontable": "< 1.0",
     "jquery": "*",
     "bootstrap": "^3.3",
     "angular-cookies": "^1.4",
     "angular-resource": "^1.4",
-    "shp": "https://github.com/MMTLukas/shapefile-js.git#gh-pages"
+    "shp": "https://github.com/MMTLukas/shapefile-js.git#gh-pages",
+    "papa-parse": "^4.1.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

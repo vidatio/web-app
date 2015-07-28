@@ -9,14 +9,7 @@ app.factory 'ConverterService', [ ->
                 return geoJSON
 
         convertCSV2Arrays: (csv) ->
-            # TODO: add here further splitting options
-            # e.g. split with another separator
-
-            dataset = []
-            rows = csv.split('\n')
-            rows.forEach (row, index) ->
-                dataset.push rows[index].split(',')
-            return dataset
+            return Papa.parse(csv).data
 
         convertSHP2Arrays: (shp) ->
             return @convertSHP2GeoJSON(shp).then (geoJSON) ->
