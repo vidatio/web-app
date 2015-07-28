@@ -40,11 +40,11 @@ app.factory 'ConverterService', [ ->
                                         newRow.push coordinate
                                 else if property == "coordinates"
                                     newRow.push "Polygon " + (index + 1)
-                                    polygon.forEach (pair) ->
-                                        console.log "pair", pair
-                                        pair.forEach (coordinate) ->
-                                            console.log "coordinate"
-                                            newRow.push coordinate
+                                    feature.geometry.coordinates.forEach (polygon) ->
+                                        polygon.forEach (pair) ->
+                                            pair.forEach (coordinates) ->
+                                                coordinates.forEach (coordinate) ->
+                                                    newRow.push coordinate
                                 else
                                     newRow.push value
 
@@ -63,25 +63,14 @@ app.factory 'ConverterService', [ ->
 
                             else if property == "coordinates"
                                 if feature.geometry.type == "Point"
-                                    console.log "is point"
                                     feature.geometry.coordinates.forEach (coordinate) ->
                                         newRow.push coordinate
 
-                                else if feature.geometry.type == "MultiPolygon"
-                                    console.log "is multipolygon"
-                                    console.log feature.geometry.coordinates
-                                    feature.geometry.coordinates.forEach (polygon) ->
-                                        console.log "polygon", polygon
-                                        polygon.forEach (pair) ->
-                                            console.log "pair", pair
-                                            pair.forEach (coordinate) ->
-                                                console.log "coordinate"
-                                                newRow.push coordinate
-
                                 else 
                                     feature.geometry.coordinates.forEach (pair) ->
-                                        pair.forEach (coordinate) ->
-                                            newRow.push coordinate
+                                        pair.forEach (coordinates) ->
+                                            coordinates.forEach (coordinate) ->
+                                                    newRow.push coordinate
 
                             else
                                 newRow.push value
