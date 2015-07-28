@@ -15,7 +15,6 @@ describe "Service Converter", ->
         expect(@Converter.isCoordinate(-360, -180)).toBeFalsy()
         expect(@Converter.isCoordinate(-180, -180)).toBeFalsy()
         expect(@Converter.isCoordinate("test", 90)).toBeFalsy()
-
         expect(@Converter.isCoordinate(90, 90)).toBeTruthy()
         expect(@Converter.isCoordinate(-90, -180)).toBeTruthy()
 
@@ -40,5 +39,8 @@ describe "Service Converter", ->
                     "coordinates": [90,70]
                 }
             ]
-
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
+
+    it 'should convert csv into arrays', ->
+        csv = "90,180,description0\n90,-90,description1"
+        expect(@Converter.convertCSV2Arrays(csv)).toEqual([["90", "180", "description0"], ["90", "-90", "description1"]])

@@ -3,17 +3,31 @@ describe "Service Table", ->
     beforeEach ->
         module "app"
         inject (TableService) ->
-            @tableService = TableService
+            @TableService = TableService
 
-    xit 'sets dataset', ->
-        # handsontable needs for an empty table a object like [[]]
-        expect(@tableService.dataset.length).toEqual 1
+    it 'should set the dataset', ->
+        # Needed for data binding
+        expect(@TableService.dataset.length).toEqual 1
+        expect(@TableService.dataset[0].length).toEqual 0
 
-        fileContent = "90,180,description0\n90,-90,description1\n90,-180,description2"
-        @tableService.setDataset fileContent
+        dataset = [[20,90], ["test", "test2"]]
+        @TableService.setDataset dataset
+        expect(@TableService.dataset.length).toEqual 2
 
-        expect(@tableService.dataset.length).toEqual 3
-        expect(parseFloat(@tableService.dataset[0][0])).toEqual 90
-        expect(@tableService.dataset[0][2]).toEqual "description0"
-        expect(parseFloat(@tableService.dataset[2][1])).toEqual -180
-        expect(@tableService.dataset[2][2]).toEqual "description2"
+        @TableService.setDataset []
+        expect(@TableService.dataset.length).toEqual 1
+        expect(@TableService.dataset[0].length).toEqual 0
+
+    it 'should set the dataset', ->
+        dataset = [[20,90], ["test", "test2"]]
+        @TableService.setDataset dataset
+        @TableService.reset()
+
+        expect(@TableService.dataset.length).toEqual 1
+        expect(@TableService.dataset[0].length).toEqual 0
+
+    it 'should set the dataset', ->
+        dataset = [[20,90], ["test", "test2"]]
+        @TableService.setDataset dataset
+        @TableService.setCell(1,1,90)
+        expect(@TableService.dataset[1][1]).toEqual 90
