@@ -26,8 +26,12 @@ describe "Service Table", ->
         expect(@TableService.dataset.length).toEqual 1
         expect(@TableService.dataset[0].length).toEqual 0
 
-    it 'should set the dataset', ->
+        # TODO: tests if MapService and ConverterService gets called
+
+    it 'should set a cell of the dataset', ->
         dataset = [[20,90], ["test", "test2"]]
         @TableService.setDataset dataset
         @TableService.setCell(1,1,90)
         expect(@TableService.dataset[1][1]).toEqual 90
+
+        # TODO: tests if MapService and ConverterService gets called
