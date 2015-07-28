@@ -19,7 +19,7 @@ app.service 'ImportService', [
                 @deferred = undefined
                 @progress = 0
 
-            readFile: (file) ->
+            readFile: (file, fileType) ->
                 @deferred = $q.defer()
                 @progress = 0
 
@@ -32,25 +32,11 @@ app.service 'ImportService', [
                 @reader.onprogress = (event) =>
                     @progress = event.loaded / event.total
 
-                # Can't use file.type because of chromes File API
-                fileType = file.name.split "."
-                fileType = fileType[fileType.length - 1]
                 switch fileType
                     when "csv"
                         @reader.readAsText file
-                        @deferred.promise.then (fileContent) =>
-                            dataset = Converter.convertCSV2Arrays(fileContent)
-                            @deferred.resolve(dataset)
-
                     when "zip"
                         @reader.readAsArrayBuffer file
-                        @deferred.promise.then (result) =>
-                            Converter.convertSHP2Arrays(result).then (dataset) =>
-                                @deferred.resolve(dataset)
-
-                    else
-                        message = "File format '" + fileType + "' is not supported."
-                        @deferred.reject(message)
 
                 return @deferred.promise
         new Reader

@@ -17,8 +17,7 @@ app.service 'TableService', [
 
             setDataset: (data) ->
                 @reset()
-                data.forEach (row, index) ->
-                    console.log @dataset
+                data.forEach (row, index) =>
                     @dataset[index] = row
                 Map.setGeoJSON(@dataset)
 

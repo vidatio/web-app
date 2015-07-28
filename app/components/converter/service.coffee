@@ -8,9 +8,8 @@ app = angular.module "app.services"
 app.factory 'ConverterService', [ ->
     class Converter
         convertSHP2GeoJSON: (buffer) ->
-            shp buffer
-            .then (geojson) ->
-                return geojson
+            shp(buffer).then (geoJSON) ->
+                return geoJSON
 
         convertCSV2Arrays: (csv) ->
             # TODO: add here further splitting options
@@ -23,10 +22,10 @@ app.factory 'ConverterService', [ ->
             return dataset
 
         convertSHP2Arrays: (shp) ->
-            return @convertSHP2GeoJSON(shp).then (geojson) ->
+            return @convertSHP2GeoJSON(shp).then (geoJSON) ->
                 dataset = []
 
-                geojson.features.forEach (feature) ->
+                geoJSON.features.forEach (feature) ->
                     newRow = []
                     newRow.push feature.geometry.type
 

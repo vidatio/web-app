@@ -12,7 +12,8 @@ app.controller "ImportCtrl", [
     "$rootScope"
     "ImportService"
     "TableService"
-    ($scope, $http, $location, $rootScope, Import, Table) ->
+    "ConverterService"
+    ($scope, $http, $location, $rootScope, Import, Table, Converter) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
@@ -32,8 +33,25 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            Import.readFile($scope.file).then (dataset) ->
-                Table.setDataset(dataset)
+
+            # Can't use file.type because of chromes File API
+            fileType = $scope.file.name.split "."
+            fileType = fileType[fileType.length - 1]
+
+            if(fileType != "csv" && fileType != "zip")
+                console.log "File format '" + fileType + "' is not supported."
+                return
+
+            Import.readFile($scope.file, fileType).then (fileContent) ->
+
+                switch fileType
+                    when "csv"
+                        dataset = Converter.convertCSV2Arrays(fileContent)
+                        Table.setDataset(dataset)
+                    when "zip"
+                        Converter.convertSHP2Arrays(fileContent).then (dataset) ->
+                            Table.setDataset(dataset)
+
                 $location.path "/editor"
             , (error) ->
                 console.log error
