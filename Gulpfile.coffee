@@ -41,7 +41,7 @@ COPY_FILES =
     ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
-        "./bower_components/bootstrap/dists/fonts/*.*"
+        "./bower_components/bootstrap/dist/fonts/*.*"
     ]
 
 BASEURL = "http://localhost:3123"

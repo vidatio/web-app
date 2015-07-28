@@ -23,7 +23,7 @@ app.controller "ImportCtrl", [
         # Read via link
         $scope.load = ->
             url = $scope.link
-            $http.get($rootScope.apiBase  + "/v0/import"
+            $http.get($rootScope.apiBase + "/v0/import"
                 params:
                     url: url
             ).success (data) ->
@@ -32,7 +32,8 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            Import.readFile($scope.file).then (result) ->
+            Import.readFile($scope.file).then (dataset) ->
+                Table.setDataset(dataset)
                 $location.path "/editor"
             , (error) ->
                 console.log error

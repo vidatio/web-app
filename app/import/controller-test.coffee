@@ -1,6 +1,6 @@
 "use strict"
 
-describe "Controller Import", ->
+xdescribe "Controller Import", ->
     beforeEach ->
 
         module "app"
