@@ -1,14 +1,13 @@
-xdescribe "Service Map", ->
-    mapService = undefined
-
+describe "Service Map", ->
     beforeEach ->
         module "app"
-        inject (MapService) ->
+        inject (MapService, $injector) ->
+            @injector = $injector
             @Map = MapService
 
     it 'should be defined and included', ->
         expect(@Map).toBeDefined()
-        expect(@injector.has("ConverterService"))
+        expect(@injector.has("MapService"))
 
     it 'should have a geoJSON object', ->
         expect(@Map.geoJSON).toBeDefined()
