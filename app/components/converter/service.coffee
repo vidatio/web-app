@@ -26,7 +26,6 @@ app.factory 'ConverterService', [ ->
                 dataset = []
 
                 geoJSON.features.forEach (feature) ->
-
                     if feature.geometry.type == "MultiPolygon"
                         feature.geometry.coordinates.forEach (polygon, index) ->
                             newRow = []
@@ -78,6 +77,7 @@ app.factory 'ConverterService', [ ->
                         dataset.push newRow
 
                 return dataset
+                
         convertArrays2GeoJSON: (arrays) ->
             geoJSON =
                 "type": "FeatureCollection"
