@@ -43,7 +43,6 @@ app.controller "ImportCtrl", [
                 return
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
-
                 switch fileType
                     when "csv"
                         dataset = Converter.convertCSV2Arrays(fileContent)

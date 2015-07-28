@@ -1,8 +1,4 @@
-# File Reader Service Test
-# =================
-
 "use strict"
-
 
 describe "Service Import", ->
     beforeEach ->
@@ -17,7 +13,7 @@ describe "Service Import", ->
         expect(@Import).toBeDefined()
         expect(@injector.has("ImportService"))
 
-    xit 'should return a promise on readFile', ->
+    it 'should return a promise on readFile', ->
         expect(@Import.readFile()).toBeDefined()
 
     it 'should have a FileReader object', ->

@@ -9,7 +9,6 @@ describe "Editor Controller", ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
-
             EditorCtrl = $controller "EditorCtrl", $scope: @scope, $rootScope: @rootScope
 
     describe "on changed active views", ->

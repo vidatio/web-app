@@ -1,6 +1,3 @@
-# Converter Service
-# ======================
-
 "use strict"
 
 app = angular.module "app.services"
@@ -65,7 +62,7 @@ app.factory 'ConverterService', [ ->
                                     feature.geometry.coordinates.forEach (coordinate) ->
                                         newRow.push coordinate
 
-                                else 
+                                else
                                     feature.geometry.coordinates.forEach (pair) ->
                                         pair.forEach (coordinates) ->
                                             coordinates.forEach (coordinate) ->
