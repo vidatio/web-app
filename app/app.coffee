@@ -12,6 +12,7 @@ app = angular.module "app", [
     "app.filters"
     "leaflet-directive"
     "ngAnimate"
+    "pascalprecht.translate"
 ]
 
 app.run [
@@ -57,26 +58,32 @@ app.config [
     "$stateProvider"
     "$locationProvider"
     "$httpProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider ) ->
+    "$translateProvider"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
         $locationProvider.html5Mode true
 
         #$urlRouterProvider.otherwise "/"
 
         $stateProvider
+        .state "app",
+            abstract: true
+            url: "/{locale}"
+            controller: 'AppCtrl'
+            template: '<ui-view/>'
 # /
-        .state "landingPage",
+        .state "app.landingPage",
             url: "/"
             templateUrl: "landing-page/landing-page.html"
 
 # /import
-        .state "import",
+        .state "app.import",
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
             title: "import"
 
 # /import
-        .state "editor",
+        .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
@@ -112,4 +119,12 @@ app.config [
         #             (PenguinService, $stateParams) ->
         #                 PenguinService.get $stateParams.penguin
         #         ]
+
+        # I18N
+        $translateProvider
+        .useStaticFilesLoader
+            prefix: 'languages/'
+            suffix: '.json'
+        $translateProvider.preferredLanguage('de')
+
 ]
