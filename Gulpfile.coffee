@@ -39,6 +39,7 @@ COPY_FILES =
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dists/fonts/*.*"
     ]
+    lang: "./app/statics/languages/**/*.json"
 
 BASEURL = "http://localhost:3123"
 
@@ -79,6 +80,8 @@ BUILD =
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/angular-translate/angular-translate.js"
+            "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -93,6 +96,7 @@ BUILD =
         html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
+        lang: "./build/languages"
         docs: "./docs"
     module: "app"
     app: "app.js"
@@ -145,6 +149,7 @@ gulp.task "build",
         "build:source:coffee:watch"
         "build:source:stylus:watch"
         "build:source:jade:watch"
+        "copy:languages:watch"
     ]
     ->
         reload()
@@ -272,6 +277,7 @@ gulp.task "copy",
     [
         "copy:img"
         "copy:fonts"
+        "copy:languages"
     ]
 
 gulp.task "copy:img",
@@ -287,6 +293,13 @@ gulp.task "copy:fonts",
         gulp.src COPY_FILES.fonts
         #.pipe cached "copy:fonts"
         .pipe gulp.dest BUILD.dirs.fonts
+
+gulp.task "copy:languages",
+    false,
+    ->
+        gulp.src COPY_FILES.lang
+        .pipe gulp.dest BUILD.dirs.lang
+        .pipe
 
 ###
     CLEANING
@@ -373,6 +386,14 @@ gulp.task "build:source:jade:reload",
     ->
         reload()
 
+gulp.task "copy:languages:reload",
+    false,
+    [
+        "copy:languages"
+    ]
+    ->
+        reload()
+
 
 ###
     WATCHER
@@ -402,3 +423,11 @@ gulp.task "build:source:coffee:watch",
     ]
     ->
         gulp.watch BUILD.source.coffee, ["build:source:coffee:reload"]
+
+gulp.task "copy:languages:watch",
+    "Copies language files to '#{COPY_FILES.lang}' to '#{BUILD.dirs.lang}'.",
+    [
+        "copy:languages"
+    ]
+    ->
+        gulp.watch COPY_FILES.lang, ["copy:languages:reload"]

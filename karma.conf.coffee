@@ -25,6 +25,10 @@ module.exports = (config) ->
             "./bower_components/leaflet/dist/leaflet.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
 
+            # angular-translate
+            "./bower_components/angular-translate/angular-translate.js"
+            "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
+
             # source files
             "./app/init-deps.coffee"
             "./app/app.coffee"
