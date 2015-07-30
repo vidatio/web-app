@@ -12,7 +12,8 @@ app.controller "AppCtrl", [
     "UserService"
     "$state"
     "$stateParams"
-    ($scope, $rootScope, ProgressService, UserService, $state, $stateParams) ->
+    "$translate"
+    ($scope, $rootScope, ProgressService, UserService, $state, $stateParams, $translate) ->
         $scope.progressService = ProgressService
         $scope.userService = UserService
 
@@ -20,6 +21,11 @@ app.controller "AppCtrl", [
             UserService.logout()
             $state.go "home"
 
-        $scope.locale = $stateParams.locale
-        console.log "LOCALE", $scope.locale
+        $translate.use $stateParams.locale
+
+        # switch language at runtime
+        $scope.changeLanguage = (langKey) ->
+            $translate.use langKey
+
+
 ]
