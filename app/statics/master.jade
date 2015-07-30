@@ -8,7 +8,7 @@ html
         include includes/styl
 
     body.container-fluid(ng-app="app" ng-file-drop-start)
-        .wrapper
+        .wrapper(ng-controller="AppCtrl")
             include header
 
             .app-view(ui-view)
