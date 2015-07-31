@@ -15,7 +15,7 @@ app.controller "VisualizationCtrl", [
         $scope.center =
             lat: 47.723407
             lng: 13.086921
-            zoom: 16
+            zoom: 7
 
         icon =
             iconUrl: 'images/marker-icon.png'

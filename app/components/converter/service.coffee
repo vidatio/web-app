@@ -11,8 +11,7 @@ app.factory 'ConverterService', [ ->
         convertCSV2Arrays: (csv) ->
             return Papa.parse(csv).data
 
-        convertSHP2Arrays: (shp) ->
-            return @convertSHP2GeoJSON(shp).then (geoJSON) ->
+        convertGeoJSON2Arrays: (geoJSON) ->
                 dataset = []
 
                 geoJSON.features.forEach (feature) ->
