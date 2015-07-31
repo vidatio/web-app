@@ -79,4 +79,9 @@ describe "Service Converter", ->
             ]
 
         @deferred.resolve(geoJSON)
-        expect(@Converter.convertSHP2GeoJSON(geoJSON)).toEqual(result)
+
+        ######## That is working, but not very usefull?! ######
+        # expect((@Converter.convertSHP2GeoJSON(geoJSON)).$$state.value).toEqual(geoJSON)
+
+        expect(@Converter.convertSHP2Arrays(geoJSON)).toEqual(result)
+

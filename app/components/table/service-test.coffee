@@ -19,8 +19,8 @@ describe "Service Table", ->
             @MapService = MapService
             @ConverterService = ConverterService
 
-            spyOn(@MapService, "setGeoJSON");
-            spyOn(@ConverterService, "convertArrays2GeoJSON");
+            spyOn(@MapService, "setGeoJSON")
+            spyOn(@ConverterService, "convertArrays2GeoJSON")
 
     it 'should set the dataset', ->
         # Needed for data binding
