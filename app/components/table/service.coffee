@@ -21,14 +21,8 @@ app.service 'TableService', [
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
-                geoJSON = Converter.convertArrays2GeoJSON(@dataset)
-                Map.setGeoJSON(geoJSON)
-
-            setCell: (row, cell, data) ->
-                @dataset[row][cell] = data
-
-                geoJSON = Converter.convertArrays2GeoJSON(@dataset)
-                Map.setGeoJSON(geoJSON)
+            setCell: (row, column, data) ->
+                @dataset[row][column] = data
 
             getDataset: ->
                 return @dataset

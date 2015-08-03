@@ -14,7 +14,8 @@ app.controller "ImportCtrl", [
     "TableService"
     "ConverterService"
     "MapService"
-    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map) ->
+    "DataService"
+    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map, Data) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
         $scope.progress = Import.progress
 
@@ -47,10 +48,14 @@ app.controller "ImportCtrl", [
                 switch fileType
                     when "csv"
                         dataset = Converter.convertCSV2Arrays(fileContent)
+                        geoJSON = Converter.convertArrays2GeoJSON(dataset)
+                        Data.setGeoJSON(geoJSON)
                         Table.setDataset(dataset)
+                        Map.setGeoJSON(geoJSON)
                     when "zip"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
+                            Data.setGeoJSON(geoJSON)
                             Table.setDataset(dataset)
                             Map.setGeoJSON(geoJSON)
 

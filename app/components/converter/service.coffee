@@ -28,11 +28,10 @@ app.factory 'ConverterService', [ ->
                                         newRow.push coordinate
                                 else if property == "coordinates"
                                     newRow.push "Polygon " + (index + 1)
-                                    feature.geometry.coordinates.forEach (polygon) ->
-                                        polygon.forEach (pair) ->
-                                            pair.forEach (coordinates) ->
-                                                coordinates.forEach (coordinate) ->
-                                                    newRow.push coordinate
+                                    polygon.forEach (pair) ->
+                                        pair.forEach (coordinates) ->
+                                            coordinates.forEach (coordinate) ->
+                                                newRow.push coordinate
                                 else
                                     newRow.push value
 
