@@ -9,6 +9,10 @@ app.service 'TableService', [
         class Table
             constructor: ->
                 @dataset = [[]]
+                @colHeaders = []
+
+            setColHeaders: (colHeaders) ->
+                @colHeaders = colHeaders
 
             reset: ->
                 # safely remove all items, keeps data binding alive

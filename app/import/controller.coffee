@@ -56,6 +56,8 @@ app.controller "ImportCtrl", [
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
                             Data.setGeoJSON(geoJSON)
+                            colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)
+                            Table.setColHeaders(colHeaders)
                             Table.setDataset(dataset)
                             Map.setGeoJSON(geoJSON)
 

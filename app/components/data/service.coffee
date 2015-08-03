@@ -13,17 +13,17 @@ app.service 'DataService', [
             setGeoJSON: (geoJSON) ->
                 @geoJSON = geoJSON
 
-            updateTableAndMap: (row, column, data) ->
-                Table.setCell(row, column, data)
+            updateTableAndMap: (row, column, oldData, newData) ->
+                Table.setCell(row, column, newData)
 
-                # update geojson
-
+                this.updateGeoJSON(row, column, oldData, newData)
 
                 Map.setGeoJSON(@geoJSON)
 
-            updateGeoJSON: (row, column, data) ->
-                @geoJSON.features[row]
-
+            updateGeoJSON: (row, column, oldData, newData) ->
+                # This funtion should update the geoJSON after table changes
+                # console.log "update"
+                # console.log @geoJSON.features[row]
 
         new Data
 ]

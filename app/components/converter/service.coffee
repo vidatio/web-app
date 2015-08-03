@@ -66,6 +66,35 @@ app.factory 'ConverterService', [ ->
 
                 return dataset
 
+        addSpace: (value, array) =>
+            if Array.isArray value
+                value.forEach (element) =>
+                    array.push ""
+                    array = @addSpace(element, array)
+
+            return array
+
+        convertGeoJSON2ColHeaders: (geoJSON) ->
+            colHeaders = []
+
+            for property, value of geoJSON.features[0].properties
+                colHeaders.push property
+
+            for property, value of geoJSON.features[0].geometry
+                colHeaders.push property
+
+                if property == "bbox"
+                    colHeaders = @addSpace(value, colHeaders)
+                    # The last space has to be deleted, because the name itself uses already one space
+                    colHeaders.pop()
+
+                else if property == "coordinates"
+                    colHeaders = @addSpace(value, colHeaders)
+                    # The last space has to be deleted, because the name itself uses already one space
+                    colHeaders.pop()
+
+            return colHeaders
+
         convertArrays2GeoJSON: (arrays) ->
             geoJSON =
                 "type": "FeatureCollection"

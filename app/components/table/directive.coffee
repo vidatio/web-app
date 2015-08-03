@@ -22,7 +22,7 @@ app.directive 'hot', [
                 currentRowClassName: 'current-row'
                 afterChange: (change, source) ->
                     if(source == "edit")
-                        Data.updateTableAndMap(change[0][0], change[0][1], change[0][3])
+                        Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
 
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
@@ -43,6 +43,7 @@ app.directive 'hot', [
 
             $scope.$watch (->
                 $scope.dataset
+                $scope.colHeaders
             ), ( ->
                 hot.render()
             ), true
