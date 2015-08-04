@@ -67,7 +67,7 @@ app.factory 'ConverterService', [ ->
                         dataset.push newRow
 
                 return dataset
-                
+
         convertArrays2GeoJSON: (arrays) ->
             geoJSON =
                 "type": "FeatureCollection"

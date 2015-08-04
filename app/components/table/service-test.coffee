@@ -1,19 +1,8 @@
 describe "Service Table", ->
-
-
-    beforeEach ->
-        module ($provide) ->
-
-            mapService =
-                setGeoJSON: (data) ->
-                    return data
-            $provide.service "MapService", mapService
-
     beforeEach ->
         module "app"
         inject (TableService) ->
             @TableService = TableService
-
 
     it 'should set the dataset', ->
         # Needed for data binding
