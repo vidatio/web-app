@@ -68,8 +68,8 @@ app.config [
         .state "app",
             abstract: true
             url: "/{locale}"
-            controller: 'AppCtrl'
-            template: '<ui-view/>'
+            controller: "AppCtrl"
+            template: "<ui-view/>"
 # /
         .state "app.landingPage",
             url: "/"
@@ -123,8 +123,8 @@ app.config [
         # I18N
         $translateProvider
         .useStaticFilesLoader
-            prefix: 'languages/'
-            suffix: '.json'
-        $translateProvider.preferredLanguage('de')
+            prefix: "languages/"
+            suffix: ".json"
+        $translateProvider.preferredLanguage("de")
 
 ]
