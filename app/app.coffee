@@ -65,6 +65,12 @@ app.config [
         #$urlRouterProvider.otherwise "/"
 
         $stateProvider
+        # forward user to /de/ if no language is chosen
+        .state "noLanguage",
+            url: "/"
+            onEnter: ($state) ->
+                $state.go "app.landingPage", { locale: "de" }
+
         .state "app",
             abstract: true
             url: "/{locale}"
