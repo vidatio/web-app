@@ -1,3 +1,10 @@
 {
-    "SLOGAN": "Echte Ergebnisse in Echtzeit!"
+    "SLOGAN": "Echte Ergebnisse in Echtzeit!",
+    "UPLOAD_FILE": "Datei hochladen",
+    "GENERATED_AUTOMATICALLY": "Eine Grafik wird automatisch erstellt",
+    "SAVE_OR_SHARE": "Speichern oder Teilen",
+    "FEATURED_VIDATIOS": "Beliebte Vidatios",
+    "SEARCH_VIDATIOS": "Vidatios durchsuchen",
+    "POPULAR_CATEGORIES": "Beliebte Kategorien",
+    "CUSTOMERS": "Unsere Nutzer"
 }

@@ -3,7 +3,7 @@ section#featured-vidatios
     .wrapper-content
         .row
             .col-sm-12
-                h1.underline-turqoise BELIEBTE VIDATIOS
+                h1.underline-turqoise {{ 'FEATURED_VIDATIOS' | translate | uppercase }}
 
         .row.layout-3-columns
             .col-sm-4
@@ -26,5 +26,5 @@ section#featured-vidatios
 
         .browse
             a.light-font.button(href='#')
-                | VIDATIOS DURCHSUCHEN
+                | {{ 'SEARCH_VIDATIOS' | translate | uppercase }}
                 img(src='images/arrow.png', alt='')
