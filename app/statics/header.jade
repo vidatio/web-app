@@ -8,7 +8,7 @@ header
         .switch-container(ng-switch on="$state.current.title")
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
-                    a(href='/')
+                    a(ui-sref='app.landingPage({ locale: locale })')
                         #logo
                 .col-xs-6.middle
                     h1.underline-red IMPORT
@@ -17,7 +17,7 @@ header
 
             #navigation.row(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-3.logo
-                    a(href='/')
+                    a(ui-sref='app.landingPage({ locale: locale })')
                         #logo
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
