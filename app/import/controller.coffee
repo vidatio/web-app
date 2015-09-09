@@ -24,11 +24,11 @@ app.controller "ImportCtrl", [
                     url: url
             ).success (data) ->
                 Table.setDataset data
-                $location.path "/editor"
+                $location.path "/" + $rootScope.locale + "/editor"
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
             Import.readFile($scope.file).then (result) ->
                 Table.setDataset result
-                $location.path "/editor"
+                $location.path "/" + $rootScope.locale + "/editor"
 ]

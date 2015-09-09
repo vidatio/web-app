@@ -6,5 +6,16 @@
     "FEATURED_VIDATIOS": "Beliebte Vidatios",
     "SEARCH_VIDATIOS": "Vidatios durchsuchen",
     "POPULAR_CATEGORIES": "Beliebte Kategorien",
-    "CUSTOMERS": "Unsere Nutzer"
+    "OUR_CUSTOMERS": "Unsere Nutzer",
+    "EMPTY_TABLE": "Leere Tabelle",
+    "ALL_DATASETS": "Alle Datensätze",
+    "CHOOSE_FILE": "Datei auswählen",
+    "DRAG_AND_DROP": "Drag and Drop",
+    "LINK": "Link",
+    "USP": "USP",
+    "API": "API",
+    "LIVE_DATA": "Live Data",
+    "OPEN_DATA": "Open Data",
+    "FILE_DROP": "Datei Landeplatz"
+
 }
