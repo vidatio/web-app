@@ -35,7 +35,7 @@
                     .option-icon.icon-link
                     h3 {{ "LINK" | translate | uppercase }}
                     .input-group.form-link
-                        input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
+                        input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
                         span.input-group-btn
                             button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
 
@@ -44,7 +44,7 @@
             .col-sm-12
                 .area
                     .glyphicon.glyphicon-plus
-                    span.text Datei Landeplatz
+                    span.text {{ "FILE_DROP" | translate }}
 
         .row
             .col-sm-12.drop-area(ng-file-drop-end)

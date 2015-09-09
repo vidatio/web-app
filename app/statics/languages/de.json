@@ -16,6 +16,7 @@
     "API": "API",
     "LIVE_DATA": "Live Data",
     "OPEN_DATA": "Open Data",
-    "FILE_DROP": "Datei Landeplatz"
+    "FILE_DROP": "Datei Landeplatz",
+    "LINK_TO_FILE": "Link zur Datei"
 
 }
