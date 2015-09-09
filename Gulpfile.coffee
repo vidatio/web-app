@@ -37,7 +37,7 @@ COPY_FILES =
     img: "./app/statics/assets/images/**/*.*"
     fonts: [
         "./app/statics/assets/fonts/*.*"
-        "./bower_components/bootstrap/dists/fonts/*.*"
+        "./bower_components/bootstrap/dist/fonts/*.*"
     ]
     lang: "./app/statics/languages/**/*.json"
 
