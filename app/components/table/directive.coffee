@@ -44,7 +44,6 @@ app.directive 'hot', [
 
             $scope.$watch (->
                 $scope.dataset
-                $scope.colHeaders
             ), ( ->
                 hot.render()
             ), true

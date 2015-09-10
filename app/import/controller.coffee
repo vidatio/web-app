@@ -58,6 +58,7 @@ app.controller "ImportCtrl", [
                             Data.setGeoJSON(geoJSON)
                             colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)
 
+                            console.log "impCtrl", Table.dataset
                             Table.setDataset(dataset)
                             Table.setColHeaders(colHeaders)
 
