@@ -1,8 +1,4 @@
-# File Reader Service Test
-# =================
-
 "use strict"
-
 
 describe "Service Import", ->
     beforeEach ->

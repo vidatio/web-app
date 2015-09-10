@@ -4,27 +4,29 @@ app = angular.module "app.services"
 
 app.service 'TableService', [
     "MapService"
-    (Map) ->
+    "ConverterService"
+    (Map, Converter) ->
         class Table
             constructor: ->
                 @dataset = [[]]
+                @colHeaders = []
+
+            setColHeaders: (colHeaders) ->
+                @colHeaders = colHeaders
+
+            reset: ->
+                # safely remove all items, keeps data binding alive
+                # there should be left a 2D array - needed for handsontable
+                @dataset.splice 0, @dataset.length - 1
+                @dataset[0].splice 0, @dataset[0].length
 
             setDataset: (data) ->
-                # safely remove all items, keeps data binding alive
-                @dataset.splice 0, @dataset.length
+                @reset()
+                data.forEach (row, index) =>
+                    @dataset[index] = row
 
-                rows = data.split('\n')
-
-                i = 0
-                while i < rows.length
-                    @dataset.push rows[i].split(',')
-                    ++i
-
-                Map.setMarkers(@dataset)
-
-            setCell: (row, cell, data) ->
-                @dataset[row][cell] = data
-                Map.setMarkers(@dataset)
+            setCell: (row, column, data) ->
+                @dataset[row][column] = data
 
             getDataset: ->
                 return @dataset

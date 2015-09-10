@@ -3,7 +3,8 @@
   "homepage": "http://www.vidat.io",
   "version": "0.0.4",
   "authors": [
-    "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
+    "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>",
+    "Christian Lehner <clehner.mmt-m2014@fh-salzburg.ac.at>"
   ],
   "description": "Plattform to upload, share and expand datasets and visualizations",
   "main": "assets/js/main.js",
@@ -31,14 +32,15 @@
     "angular": "^1.4",
     "angular-leaflet-directive": "< 1.0",
     "angular-ui-router": "< 1.0",
-    "angular-animate": "~1.4",
     "handsontable": "< 1.0",
     "jquery": "*",
     "bootstrap": "^3.3",
     "angular-cookies": "^1.4",
     "angular-resource": "^1.4",
     "angular-translate": "~2.7.2",
-    "angular-translate-loader-static-files": "~2.7.2"
+    "angular-translate-loader-static-files": "~2.7.2",
+    "shp": "^3.2",
+    "papa-parse": "^4.1.1"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

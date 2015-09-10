@@ -8,14 +8,10 @@ app = angular.module "app.controllers"
 app.controller "AppCtrl", [
     "$scope"
     "$rootScope"
-    "ProgressService"
-    "UserService"
     "$state"
     "$stateParams"
     "$translate"
-    ($scope, $rootScope, ProgressService, UserService, $state, $stateParams, $translate) ->
-        $scope.progressService = ProgressService
-        $scope.userService = UserService
+    ($scope, $rootScope, $state, $stateParams, $translate) ->
 
         $scope.logout = ->
             UserService.logout()
@@ -29,6 +25,5 @@ app.controller "AppCtrl", [
         # switch language at runtime
         $scope.changeLanguage = (langKey) ->
             $translate.use langKey
-
 
 ]

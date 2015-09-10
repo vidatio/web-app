@@ -1,4 +1,0 @@
-# Foo
-# ===
-
-# optional module stuff

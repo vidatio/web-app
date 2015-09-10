@@ -11,7 +11,6 @@ app = angular.module "app", [
     "app.directives"
     "app.filters"
     "leaflet-directive"
-    "ngAnimate"
     "pascalprecht.translate"
 ]
 
@@ -21,38 +20,12 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "AuthenticationService"
-    "UserService"
-    ( $rootScope, $state, $stateParams, $http, $location, AuthenticationService, UserService ) ->
-
+    ( $rootScope, $state, $stateParams, $http, $location) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
-
         $rootScope.apiBase = "http://localhost:3000"
-
-        # $rootScope.state = $state
-        # $rootScope.stateParams = $stateParams
-
-        # $rootScope.globals = $cookieStore.get( "globals" ) or {}
-
-        # if $rootScope.globals.currentUser
-        #     AuthenticationService.SetExistingCredentials $rootScope.globals.currentUser
-        #     UserService.init $rootScope.globals.currentUser.name
-
-        # $rootScope.$on "$stateChangeStart", ( event, next, current ) ->
-        #     unless next.name is "landingPage"
-        #         unless $rootScope.globals.currentUser
-        #             event.preventDefault()
-        #             $state.go "landingPage"
 ]
 
-# ***
-# ## Config
-# > contains routing stuff only (atm)
-# >
-# > see
-# > [angular docs](http://docs.angularjs.org/guide/dev_guide.services.$location)
-# > for $locationProvider details
 app.config [
     "$urlRouterProvider"
     "$stateProvider"
@@ -61,8 +34,6 @@ app.config [
     "$translateProvider"
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
         $locationProvider.html5Mode true
-
-        #$urlRouterProvider.otherwise "/"
 
         $stateProvider
         # forward user to /de/ if no language is chosen
@@ -79,7 +50,7 @@ app.config [
 # /
         .state "app.landingPage",
             url: "/"
-            templateUrl: "landing-page/landing-page.html"
+            templateUrl: "index/index.html"
 
 # /import
         .state "app.import",
@@ -132,5 +103,4 @@ app.config [
             prefix: "languages/"
             suffix: ".json"
         $translateProvider.preferredLanguage("de")
-
 ]
