@@ -11,7 +11,6 @@ app = angular.module "app", [
     "app.directives"
     "app.filters"
     "leaflet-directive"
-    "ngAnimate"
 ]
 
 app.run [
