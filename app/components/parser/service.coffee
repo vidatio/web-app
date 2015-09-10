@@ -124,11 +124,11 @@ app.service 'ParserService', [ ->
             # TODO
             return false
 
-        findCoordinates: (dataset) ->
-            indicesCoordinates = _findCoordinatesInHeader.call(this, dataset)
+        findCoordinatesIndices: (dataset) ->
+            indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
 
             if(indicesCoordinates.length != 2)
-                indicesCoordinates = _findCoordinatesInDataset.call(this, dataset)
+                indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
 
             return indicesCoordinates
 
@@ -145,7 +145,7 @@ app.service 'ParserService', [ ->
         ]
 
 
-        _findCoordinatesInDataset = (dataset) ->
+        _findCoordinatesIndicesInDataset = (dataset) ->
             matrixPossibleCoordinates = _createMatrix.call(this, dataset, false)
 
             dataset.forEach (row, indexRow) =>
@@ -169,7 +169,7 @@ app.service 'ParserService', [ ->
 
             return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
-        _findCoordinatesInHeader = (dataset) ->
+        _findCoordinatesIndicesInHeader = (dataset) ->
             indicesCoordinates = []
 
             # Because the header is always in the first row, we only search there for coordinate tags

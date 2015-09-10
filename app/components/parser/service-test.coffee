@@ -163,7 +163,7 @@ describe "Service Parser", ->
             2
             3
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
         dataset = [
             ["47.349", "13.892", "Salzburg", "41,5%"]
@@ -175,64 +175,101 @@ describe "Service Parser", ->
             0
             1
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["47.349,13.892", "Salzburg", "41,5%"]
+            ["46.841,12.348", "Wien", "38,5%"]
+            ["46.323,11.234", "Bregenz", "40,5%"]
+            ["49.823,10.348", "Linz", "39,5%"]
+        ]
+        indexCoordinates = [
+            0
+            0
+        ]
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
         dataset = [
             ["Innsbruck", "41,5%", "49,11"]
             ["Salzburg", "41,5%", "47,13"]
+            ["Gnigl", "41,5%", "48,12"]
+            ["Gneis", "41,5%", "49,13"]
         ]
         indexCoordinates = [
             2
             2
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
         dataset = [
+            ["Innsbruck", "41,5%", "49,12"]
+            ["Salzburg", "41,5%", "49,13"]
             ["Innsbruck", "41,5%", "49,11"]
-            ["Salzburg", "41,5%", "test,13"]
+            ["Salzburg", "41,5%", "word,13"]
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual([])
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual([])
 
         dataset = [
             ["Innsbruck", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
-            ["Salzburg", "41,5%", "N 90 59 59.999, 180° 1 59.999 W"]
+            ["Salzburg", "39,5%", "N 90 59 59.999, 180° 1 59.999 W"]
+            ["Gneis", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
+            ["Gnigl", "40,5%", "N 90 59 0, 0° 1 59.999 W"]
         ]
         indexCoordinates = [
             2
             2
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
     # should be easier to find coordinates via header then via the complete dataset
     it 'should find the columns of the latitude and longitude in dataset with header', ->
         dataset = [
             ["City", "Content", "Lat", "Lng"]
             ["Salzburg", "41,5%", "47", "13"]
+            ["Wien", "38,5%", "46.841", "12.348"]
+            ["Bregenz", "40,5%", "46.323", "11.234"]
         ]
         indexCoordinates = [
             2
             3
         ]
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
         dataset = [
             ["City", "Content", "Lat,Lng"]
-            ["Salzburg", "41,5%", "47,13"]
+            ["Innsbruck", "41,5%", "49,12"]
+            ["Salzburg", "41,5%", "49,13"]
+            ["Innsbruck", "41,5%", "49,11"]
+            ["Salzburg", "41,5%", "50,13"]
         ]
         indexCoordinates = [
             2
             2
         ]
-
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
         dataset = [
             ["City", "Content", "Point(Lat,Lng)"]
-            ["Salzburg", "41,5%", "47,13"]
+            ["Innsbruck", "41,5%", "49,12"]
+            ["Salzburg", "41,5%", "49,13"]
+            ["Innsbruck", "41,5%", "49,11"]
+            ["Salzburg", "41,5%", "50,13"]
         ]
         indexCoordinates = [
             2
             2
         ]
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
 
-        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+        dataset = [
+            ["Lat,Lng", "City", "Content",]
+            ["49,12", "Innsbruck", "41,5%"]
+            ["41,5%", "49,13", "Salzburg"]
+            ["41,5%", "49,11", "Innsbruck"]
+            ["41,5%", "50,13", "Salzburg"]
+        ]
+        indexCoordinates = [
+            0
+            0
+        ]
+        expect(@Parser.findCoordinatesIndices(dataset)).toEqual(indexCoordinates)
