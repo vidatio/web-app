@@ -11,13 +11,14 @@ app.directive 'hot', [
         scope:
             dataset: '='
             activeViews: '='
+            colHeaders: '='
         link: ($scope, $element) ->
             hot = new Handsontable($element[0],
                 data: $scope.dataset
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: true
+                colHeaders: $scope.colHeaders
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 afterChange: (change, source) ->

@@ -57,8 +57,11 @@ app.controller "ImportCtrl", [
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
                             Data.setGeoJSON(geoJSON)
                             colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)
-                            Table.setColHeaders(colHeaders)
+
                             Table.setDataset(dataset)
+                            Table.setColHeaders(colHeaders)
+
+                            console.log Table.colHeaders
                             Map.setGeoJSON(geoJSON)
 
                 $location.path "/editor"
