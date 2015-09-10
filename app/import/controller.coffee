@@ -21,6 +21,7 @@ app.controller "ImportCtrl", [
 
         $scope.continueToEmptyTable = ->
             Table.reset()
+            Table.resetColHeaders()
             $location.path "/editor"
 
         # Read via link
@@ -50,6 +51,7 @@ app.controller "ImportCtrl", [
                         dataset = Converter.convertCSV2Arrays(fileContent)
                         geoJSON = Converter.convertArrays2GeoJSON(dataset)
                         Data.setGeoJSON(geoJSON)
+                        Table.resetColHeaders()
                         Table.setDataset(dataset)
                         Map.setGeoJSON(geoJSON)
                     when "zip"

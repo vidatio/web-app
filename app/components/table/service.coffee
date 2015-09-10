@@ -11,7 +11,11 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
+            resetColHeaders: ->
+                @colHeaders.splice 0, @colHeaders.length
+
             setColHeaders: (colHeaders) ->
+                @resetColHeaders()
                 colHeaders.forEach (item, index) =>
                     @colHeaders[index] = item
 
