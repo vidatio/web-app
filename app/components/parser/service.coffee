@@ -2,7 +2,7 @@
 
 app = angular.module "app.services"
 
-app.service 'ParserService', [->
+app.service 'ParserService', [ ->
     class Parser
         isCoordinate: (coordinate) ->
             coordinate = coordinate.trim()
@@ -125,10 +125,10 @@ app.service 'ParserService', [->
             return false
 
         findCoordinates: (dataset) ->
-            indicesCoordinates = _findCoordinatesInHeader.call(this, [dataset])
+            indicesCoordinates = _findCoordinatesInHeader.call(this, dataset)
 
             if(indicesCoordinates.length != 2)
-                indicesCoordinates = _findCoordinatesInDataset.call(this, [dataset])
+                indicesCoordinates = _findCoordinatesInDataset.call(this, dataset)
 
             return indicesCoordinates
 
@@ -144,8 +144,9 @@ app.service 'ParserService', [->
             "y"
         ]
 
+
         _findCoordinatesInDataset = (dataset) ->
-            matrixPossibleCoordinates = _createMatrix.call(this, [dataset, false])
+            matrixPossibleCoordinates = _createMatrix.call(this, dataset, false)
 
             dataset.forEach (row, indexRow) =>
                 row.forEach (column, indexColumn) =>
@@ -166,7 +167,7 @@ app.service 'ParserService', [->
                 if(indexRow >= _maxNumberOfRowsToCheck)
                     return
 
-            return @getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
+            return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
         _findCoordinatesInHeader = (dataset) ->
             indicesCoordinates = []
@@ -176,13 +177,13 @@ app.service 'ParserService', [->
                 # With splitting the column anyway we can check also if there
                 # is one or if there are two coordinates in one cell
                 column.split(",").forEach (element) =>
-                    if(_checkWhiteList.call(this, [element])
+                    if(_checkWhiteList.call(this, element))
                         indicesCoordinates.push index
 
                         if(indicesCoordinates.length == 2)
                             return
 
-                        return indicesCoordinates
+            return indicesCoordinates
 
         _checkWhiteList = (word) ->
             word = word.trim().toLowerCase()
@@ -201,7 +202,7 @@ app.service 'ParserService', [->
         # @param dataset is used to create a matrix which has the amount of cells row and column wise as the dataset
         _createMatrix = (dataset, initial) ->
             matrix = []
-            dataset.forEach (row, indexRow) =>
+            dataset.forEach (row, indexRow) ->
                 matrix.push([])
                 row.forEach (column, indexColumn) ->
                     matrix[indexRow][indexColumn] = initial
@@ -248,6 +249,5 @@ app.service 'ParserService', [->
                         result.push(indexColumn)
 
             return result
-
     new Parser
 ]

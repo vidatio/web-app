@@ -236,31 +236,3 @@ describe "Service Parser", ->
         ]
 
         expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
-
-    it 'should have a attribute for the max row checks set', ->
-        expect(@Parser.maxNumberOfRowsToCheck).toBeDefined()
-        expect(@Parser.maxNumberOfRowsToCheck).toEqual(Number(@Parser.maxNumberOfRowsToCheck))
-
-    it 'should have a whitelist for the possible coordinate tags in a dataset header', ->
-        expect(@Parser.whiteList).toBeDefined()
-        expect(@Parser.whiteList).toContain("latitude")
-        expect(@Parser.whiteList).toContain("longitude")
-
-    # Notice: this test is obsolete because it is already included in the "findCoordinates" tests
-    # but it shows the process of receiving the indices of the coordinates
-    it 'should get the coordinate indices of a true/false matrix', ->
-        matrix = [
-            [false, true, false, true, false, true, false]
-            [false, false, false, true, false, true, true]
-            [false, true, false, true, false, true, false]
-            [false, true, false, true, false, true, true]
-        ]
-        expect(@Parser.getIndicesOfCoordinateColumns(matrix)).toEqual([3, 5])
-
-        matrix = [
-            [false, [false, true], [true, true], false, true, false]
-            [false, [true, false], [true, true], false, false, true]
-            [false, [false, true], [true, true], false, true, false]
-            [false, [true, false], [true, true], false, true, true]
-        ]
-        expect(@Parser.getIndicesOfCoordinateColumns(matrix)).toEqual([2, 2])
