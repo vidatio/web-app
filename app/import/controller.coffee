@@ -50,14 +50,12 @@ app.controller "ImportCtrl", [
                     when "csv"
                         dataset = Converter.convertCSV2Arrays(fileContent)
                         geoJSON = Converter.convertArrays2GeoJSON(dataset)
-                        Data.setGeoJSON(geoJSON)
                         Table.resetColHeaders()
                         Table.setDataset(dataset)
                         Map.setGeoJSON(geoJSON)
                     when "zip"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
-                            Data.setGeoJSON(geoJSON)
                             colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)
                             Table.setDataset(dataset)
                             Table.setColHeaders(colHeaders)

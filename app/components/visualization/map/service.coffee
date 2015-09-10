@@ -17,5 +17,8 @@ app.service 'MapService', [ ->
             @geoJSON.features.splice 0, @geoJSON.features.length
             @geoJSON.features = data.features
 
+        getGeoJSON: ->
+            return @geoJSON
+
     new Map
 ]
