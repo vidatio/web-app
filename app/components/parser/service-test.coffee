@@ -1,3 +1,9 @@
+# TODO: Adapted parser for use in api
+# TODO: privat/public
+# methoden umbenennen
+# in einer zelle NaN (usw.) behandeln
+# nur noch in zellen nachschauen, in denen in den bisherigen zeilen true (in zelle kommt potentielle coordinate vor) vorkam
+
 "use strict"
 
 describe "Service Parser", ->
@@ -148,12 +154,26 @@ describe "Service Parser", ->
 
     it 'should find columns of the latitude and longitude in dataset', ->
         dataset = [
-            ["Salzburg", "41,5%", "47", "13"]
-            ["Wien", "39,5%", "46", "12"]
+            ["Salzburg", "41,5%", "47.349", "13.892"]
+            ["Wien", "38,5%", "46.841", "12.348"]
+            ["Bregenz", "40,5%", "46.323", "11.234"]
+            ["Linz", "39,5%", "49.823", "10.348"]
         ]
         indexCoordinates = [
             2
             3
+        ]
+        expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["47.349", "13.892", "Salzburg", "41,5%"]
+            ["46.841", "12.348", "Wien", "38,5%"]
+            ["46.323", "11.234", "Bregenz", "40,5%"]
+            ["49.823", "10.348", "Linz", "39,5%"]
+        ]
+        indexCoordinates = [
+            0
+            1
         ]
         expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
 
@@ -215,15 +235,6 @@ describe "Service Parser", ->
             2
         ]
 
-        dataset = [
-            ["City", "Content", "Point(Lat,Lng)"]
-            ["Salzburg", "41,5%", "47,13"]
-        ]
-        indexCoordinates = [
-            2
-            2
-        ]
-
         expect(@Parser.findCoordinates(dataset)).toEqual(indexCoordinates)
 
     it 'should have a attribute for the max row checks set', ->
@@ -234,24 +245,6 @@ describe "Service Parser", ->
         expect(@Parser.whiteList).toBeDefined()
         expect(@Parser.whiteList).toContain("latitude")
         expect(@Parser.whiteList).toContain("longitude")
-
-    it 'should create a matrix according to a dataset', ->
-        dataset = [
-            ["City", "Content", "Point(Lat,Lng)"]
-            ["Salzburg", "41,5%", "47,13"]
-        ]
-
-        result = [
-            [false, false, false]
-            [false, false, false]
-        ]
-        expect(@Parser.createMatrix(dataset)).toEqual(result)
-
-        result = [
-            [true, true, true]
-            [true, true, true]
-        ]
-        expect(@Parser.createMatrix(dataset)).not.toEqual(result)
 
     # Notice: this test is obsolete because it is already included in the "findCoordinates" tests
     # but it shows the process of receiving the indices of the coordinates

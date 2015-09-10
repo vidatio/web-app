@@ -4,7 +4,6 @@ app = angular.module "app.services"
 
 app.service 'ParserService', [->
     class Parser
-        constructor: ->
         isCoordinate: (coordinate) ->
             coordinate = coordinate.trim()
             return @isCoordinateWGS84DegreeDecimal(coordinate) ||
@@ -126,33 +125,27 @@ app.service 'ParserService', [->
             return false
 
         findCoordinates: (dataset) ->
-            indicesCoordinates = @findCoordinatesInHeader(dataset)
+            indicesCoordinates = _findCoordinatesInHeader.call(this, [dataset])
 
             if(indicesCoordinates.length != 2)
-                indicesCoordinates = @findCoordinatesInDataset(dataset)
+                indicesCoordinates = _findCoordinatesInDataset.call(this, [dataset])
 
             return indicesCoordinates
 
-        findCoordinatesInHeader: (dataset) ->
-            indicesCoordinates = []
+        _maxNumberOfRowsToCheck = 100
 
-            # Because the header is always in the first row, we only search there for coordinate tags
-            dataset[0].forEach (column, index) =>
-                # With splitting the column anyway we can check the also if there
-                # is one or if there are two coordinates in one cell
-                column.split(",").forEach (element) =>
-                    if(@checkWhiteList(element))
-                        indicesCoordinates.push index
+        _whiteList = [
+            "lat"
+            "latitude"
+            "lng"
+            "lon"
+            "longitude"
+            "x"
+            "y"
+        ]
 
-                # TODO: Currently we only support datasets with two coordinates (for example lat, lng)
-                if(indicesCoordinates.length == 2)
-                    return
-
-            return indicesCoordinates
-
-        # for each
-        findCoordinatesInDataset: (dataset) ->
-            matrixPossibleCoordinates = @createMatrix(dataset)
+        _findCoordinatesInDataset = (dataset) ->
+            matrixPossibleCoordinates = _createMatrix.call(this, [dataset, false])
 
             dataset.forEach (row, indexRow) =>
                 row.forEach (column, indexColumn) =>
@@ -170,53 +163,57 @@ app.service 'ParserService', [->
                             matrixPossibleCoordinates[indexRow][indexColumn] = [true, true]
 
                 # we don't have to check the hole dataset, only the first 100 rows for example
-                if(indexRow >= @maxNumberOfRowsToCheck)
+                if(indexRow >= _maxNumberOfRowsToCheck)
                     return
 
             return @getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
-        whiteList: [
-            "lat"
-            "latitude"
-            "lng"
-            "lon"
-            "longitude"
-            "x"
-            "y"
-        ]
+        _findCoordinatesInHeader = (dataset) ->
+            indicesCoordinates = []
 
-        checkWhiteList: (word) ->
+            # Because the header is always in the first row, we only search there for coordinate tags
+            dataset[0].forEach (column, index) =>
+                # With splitting the column anyway we can check also if there
+                # is one or if there are two coordinates in one cell
+                column.split(",").forEach (element) =>
+                    if(_checkWhiteList.call(this, [element])
+                        indicesCoordinates.push index
+
+                        if(indicesCoordinates.length == 2)
+                            return
+
+                        return indicesCoordinates
+
+        _checkWhiteList = (word) ->
             word = word.trim().toLowerCase()
             result = false
 
             word = word.replace(/\(/g, "").replace(/\)/g, "")
             word = word.replace("point", "").replace("shape", "")
 
-            @whiteList.forEach (item) ->
+            _whiteList.forEach (item) ->
                 if item.toLowerCase() == word
                     result = true
                     return
 
             return result
 
-        maxNumberOfRowsToCheck: 100
-
         # @param dataset is used to create a matrix which has the amount of cells row and column wise as the dataset
-        createMatrix: (dataset) ->
+        _createMatrix = (dataset, initial) ->
             matrix = []
             dataset.forEach (row, indexRow) =>
                 matrix.push([])
-                row.forEach (column, indexColumn) =>
-                    matrix[indexRow][indexColumn] = false
+                row.forEach (column, indexColumn) ->
+                    matrix[indexRow][indexColumn] = initial
 
-                if(indexRow >= @maxNumberOfRowsToCheck)
+                if(indexRow >= _maxNumberOfRowsToCheck)
                     return
 
             return matrix
 
         # @param matrix the amount of rows and columns of the dataset with a boolean
         #               in each cell if the content is a coordinate like
-        getIndicesOfCoordinateColumns: (matrix) ->
+        _getIndicesOfCoordinateColumns = (matrix) ->
             noCoordinateColumn = []
             result = []
 
