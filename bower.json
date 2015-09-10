@@ -29,14 +29,11 @@
     ],
     "dependencies": {
         "angular": "^1.4",
-        "angular-leaflet-directive": "< 1.0",
+        "angular-leaflet-directive": "0.8.6",
         "angular-ui-router": "< 1.0",
-        "angular-animate": "^1.4",
         "handsontable": "< 1.0",
         "jquery": "*",
         "bootstrap": "^3.3",
-        "angular-cookies": "^1.4",
-        "angular-resource": "^1.4",
         "shp": "^3.2",
         "papa-parse": "^4.1.1"
     },

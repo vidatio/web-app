@@ -3,15 +3,12 @@
 "use strict"
 
 app = angular.module "app", [
-    "ngCookies"
-    "ngResource"
     "ui.router"
+    "leaflet-directive"
     "app.controllers"
     "app.services"
     "app.directives"
     "app.filters"
-    "leaflet-directive"
-    "ngAnimate"
 ]
 
 app.run [
