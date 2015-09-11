@@ -14,13 +14,6 @@ describe "Service Converter", ->
         expect(@Converter).toBeDefined()
         expect(@injector.has("ConverterService"))
 
-    it 'checks if a value is a coordinate', ->
-        expect(@Converter.isCoordinate(-360, -180)).toBeFalsy()
-        expect(@Converter.isCoordinate(-180, -180)).toBeFalsy()
-        expect(@Converter.isCoordinate("test", 90)).toBeFalsy()
-        expect(@Converter.isCoordinate(90, 90)).toBeTruthy()
-        expect(@Converter.isCoordinate(-90, -180)).toBeTruthy()
-
     it 'should convert arrays into geoJSON', ->
         dataset = [["90", "70"], ["80", "80"], ["70", "90"]]
         geoJSON =

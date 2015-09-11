@@ -3,8 +3,9 @@ app = angular.module "app.directives"
 
 app.directive 'hot', [
     "TableService"
+    "ParserService"
     "$timeout"
-    (TableService, $timeout) ->
+    (TableService, Parser, $timeout) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true

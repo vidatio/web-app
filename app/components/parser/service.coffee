@@ -5,7 +5,7 @@ app = angular.module "app.services"
 app.service 'ParserService', [ ->
     class Parser
         isCoordinate: (coordinate) ->
-            coordinate = coordinate.trim()
+            coordinate = String(coordinate).trim()
             return @isCoordinateWGS84DegreeDecimal(coordinate) ||
                     @isCoordinateWGS84DegreeDecimalMinutes(coordinate) ||
                     @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) ||
@@ -124,7 +124,9 @@ app.service 'ParserService', [ ->
             # TODO
             return false
 
-        findCoordinatesIndices: (dataset) ->
+        findCoordinatesColumns: (dataset) ->
+            dataset = _trimDataset(dataset)
+
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
 
             if(indicesCoordinates.length != 2)
@@ -144,24 +146,46 @@ app.service 'ParserService', [ ->
             "y"
         ]
 
+        _trimDataset = (dataset) ->
+            tmp = []
+            minColumns = 0
+            minRows = 0
+
+            # before trim the dataset we have to check the dimensions
+            dataset.forEach (row, indexRow) ->
+                row.forEach (cell, indexCell) ->
+                    if(cell != null && String(cell) != "")
+                        if(minRows < indexRow)
+                            minRows = indexRow
+
+                        if(minColumns < indexCell)
+                            minColumns = indexCell
+
+            # trim dataset with analysed dimensions
+            dataset.forEach (row, indexRow) ->
+                if(indexRow > minRows)
+                    return
+                tmp[indexRow] = row.slice(0, minColumns + 1)
+
+
+            return tmp
 
         _findCoordinatesIndicesInDataset = (dataset) ->
             matrixPossibleCoordinates = _createMatrix.call(this, dataset, false)
-
             dataset.forEach (row, indexRow) =>
-                row.forEach (column, indexColumn) =>
+                row.forEach (cell, indexCell) =>
                     # There can be a single coordinate in a cell like "47.232"
-                    if(@isCoordinate(column))
-                        matrixPossibleCoordinates[indexRow][indexColumn] = true
-                        # But there can also be two coordinates in a single cell like "47.232, 13.854"
+                    if(@isCoordinate(cell))
+                        matrixPossibleCoordinates[indexRow][indexCell] = true
+                    # But there can also be two coordinates in a single cell like "47.232, 13.854"
                     else
                         # at least we need two separated coordinates
-                        potentialCoordinates = column.split(",")
+                        potentialCoordinates = cell.split(",")
                         if(potentialCoordinates.length != 2)
                             return
-                            # two protocol the existence of two coordinates we use array in one cell of the matrix
+                        # too protocol the existence of two coordinates we use array in one cell of the matrix
                         else if(@isCoordinate(potentialCoordinates[0]) && @isCoordinate(potentialCoordinates[1]))
-                            matrixPossibleCoordinates[indexRow][indexColumn] = [true, true]
+                            matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
 
                 # we don't have to check the hole dataset, only the first 100 rows for example
                 if(indexRow >= _maxNumberOfRowsToCheck)
@@ -173,10 +197,10 @@ app.service 'ParserService', [ ->
             indicesCoordinates = []
 
             # Because the header is always in the first row, we only search there for coordinate tags
-            dataset[0].forEach (column, index) =>
+            dataset[0].forEach (cell, index) =>
                 # With splitting the column anyway we can check also if there
                 # is one or if there are two coordinates in one cell
-                column.split(",").forEach (element) =>
+                String(cell).split(",").forEach (element) =>
                     if(_checkWhiteList.call(this, element))
                         indicesCoordinates.push index
 

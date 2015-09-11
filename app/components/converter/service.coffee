@@ -2,22 +2,46 @@
 
 app = angular.module "app.services"
 
-app.factory 'ConverterService', [ ->
-    class Converter
-        convertSHP2GeoJSON: (buffer) ->
-            shp(buffer).then (geoJSON) ->
-                return geoJSON
+app.service 'ConverterService', [
+    "ParserService"
+    (Parser) ->
+        class Converter
+            convertSHP2GeoJSON: (buffer) ->
+                shp(buffer).then (geoJSON) ->
+                    return geoJSON
 
-        convertCSV2Arrays: (csv) ->
-            return Papa.parse(csv).data
+            convertCSV2Arrays: (csv) ->
+                return Papa.parse(csv).data
 
-        convertSHP2Arrays: (shp) ->
-            return @convertSHP2GeoJSON(shp).then (geoJSON) ->
-                dataset = []
+            convertSHP2Arrays: (shp) ->
+                return @convertSHP2GeoJSON(shp).then (geoJSON) ->
+                    dataset = []
 
-                geoJSON.features.forEach (feature) ->
-                    if feature.geometry.type == "MultiPolygon"
-                        feature.geometry.coordinates.forEach (polygon, index) ->
+                    geoJSON.features.forEach (feature) ->
+                        if feature.geometry.type == "MultiPolygon"
+                            feature.geometry.coordinates.forEach (polygon, index) ->
+                                newRow = []
+
+                                for property, value of feature.properties
+                                    newRow.push value
+
+                                for property, value of feature.geometry
+                                    if property == "bbox"
+                                        value.forEach (coordinate) ->
+                                            newRow.push coordinate
+                                    else if property == "coordinates"
+                                        newRow.push "Polygon " + (index + 1)
+                                        feature.geometry.coordinates.forEach (polygon) ->
+                                            polygon.forEach (pair) ->
+                                                pair.forEach (coordinates) ->
+                                                    coordinates.forEach (coordinate) ->
+                                                        newRow.push coordinate
+                                    else
+                                        newRow.push value
+
+                                dataset.push newRow
+
+                        else
                             newRow = []
 
                             for property, value of feature.properties
@@ -27,70 +51,72 @@ app.factory 'ConverterService', [ ->
                                 if property == "bbox"
                                     value.forEach (coordinate) ->
                                         newRow.push coordinate
+
                                 else if property == "coordinates"
-                                    newRow.push "Polygon " + (index + 1)
-                                    feature.geometry.coordinates.forEach (polygon) ->
-                                        polygon.forEach (pair) ->
+                                    if feature.geometry.type == "Point"
+                                        feature.geometry.coordinates.forEach (coordinate) ->
+                                            newRow.push coordinate
+
+                                    else
+                                        feature.geometry.coordinates.forEach (pair) ->
                                             pair.forEach (coordinates) ->
                                                 coordinates.forEach (coordinate) ->
-                                                    newRow.push coordinate
+                                                        newRow.push coordinate
+
                                 else
                                     newRow.push value
 
                             dataset.push newRow
 
-                    else
-                        newRow = []
+                    return dataset
 
-                        for property, value of feature.properties
-                            newRow.push value
+            convertArrays2GeoJSON: (dataset) ->
+                dataset = _trimDataset(dataset)
 
-                        for property, value of feature.geometry
-                            if property == "bbox"
-                                value.forEach (coordinate) ->
-                                    newRow.push coordinate
+                geoJSON =
+                    "type": "FeatureCollection"
+                    "features": []
 
-                            else if property == "coordinates"
-                                if feature.geometry.type == "Point"
-                                    feature.geometry.coordinates.forEach (coordinate) ->
-                                        newRow.push coordinate
+                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
 
-                                else
-                                    feature.geometry.coordinates.forEach (pair) ->
-                                        pair.forEach (coordinates) ->
-                                            coordinates.forEach (coordinate) ->
-                                                    newRow.push coordinate
+                dataset.forEach (row) ->
+                    latitude = parseFloat(row[indicesCoordinates[0]])
+                    longitude = parseFloat(row[indicesCoordinates[1]])
 
-                            else
-                                newRow.push value
-
-                        dataset.push newRow
-
-                return dataset
-
-        convertArrays2GeoJSON: (arrays) ->
-            geoJSON =
-                "type": "FeatureCollection"
-                "features": []
-
-            arrays.forEach (element) =>
-                lat = parseFloat(element[0])
-                lng = parseFloat(element[1])
-                if @isCoordinate(lat, lng)
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
                             "type": undefined
                             "coordinates": []
                     ))
-                    feature.geometry.coordinates = [parseFloat(lng), parseFloat(lat)]
+
+                    feature.geometry.coordinates = [parseFloat(longitude), parseFloat(latitude)]
                     feature.geometry.type = "Point"
                     geoJSON.features.push(feature)
-            return geoJSON
+                return geoJSON
 
-        isCoordinate: (lat, lng) ->
-            lat == Number(lat) and lat >= -90 and lat <= 90 &&
-                lng == Number(lng) and lng >= -180 and lng <= 180
+            # TODO remove this method here or the one in the ParserService
+            _trimDataset = (dataset) ->
+                tmp = []
+                minColumns = 0
+                minRows = 0
 
-    new Converter
+                # before trim the dataset we have to check the dimensions
+                dataset.forEach (row, indexRow) ->
+                    row.forEach (cell, indexCell) ->
+                        if(cell != null && String(cell) != "")
+                            if(minRows < indexRow)
+                                minRows = indexRow
+
+                            if(minColumns < indexCell)
+                                minColumns = indexCell
+
+                # trim dataset with analysed dimensions
+                dataset.forEach (row, indexRow) ->
+                    if(indexRow > minRows)
+                        return
+                    tmp[indexRow] = row.slice(0, minColumns + 1)
+
+                return tmp
+        new Converter
 ]
