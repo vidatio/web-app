@@ -83,6 +83,9 @@ app.service 'ConverterService', [
                     latitude = parseFloat(row[indicesCoordinates[0]])
                     longitude = parseFloat(row[indicesCoordinates[1]])
 
+                    if(!_isNumber(latitude) || !_isNumber(longitude))
+                        return
+
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
@@ -118,5 +121,8 @@ app.service 'ConverterService', [
                     tmp[indexRow] = row.slice(0, minColumns + 1)
 
                 return tmp
+
+            _isNumber = (value) ->
+                return typeof value == "number" && isFinite(value)
         new Converter
 ]

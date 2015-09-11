@@ -6,11 +6,14 @@ app.service 'ParserService', [ ->
     class Parser
         isCoordinate: (coordinate) ->
             coordinate = String(coordinate).trim()
-            return @isCoordinateWGS84DegreeDecimal(coordinate) ||
-                    @isCoordinateWGS84DegreeDecimalMinutes(coordinate) ||
-                    @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) ||
-                    @isCoordinateWGS84UTM(coordinate) ||
-                    @isCoordinateGaussKrueger(coordinate)
+            if(coordinate == "")
+                return
+            else
+                return @isCoordinateWGS84DegreeDecimal(coordinate) ||
+                        @isCoordinateWGS84DegreeDecimalMinutes(coordinate) ||
+                        @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) ||
+                        @isCoordinateWGS84UTM(coordinate) ||
+                        @isCoordinateGaussKrueger(coordinate)
 
         # N 90.123456, E 180.123456 to N -90.123456, E -180.123456
         isCoordinateWGS84DegreeDecimal: (coordinate) ->
@@ -128,10 +131,8 @@ app.service 'ParserService', [ ->
             dataset = _trimDataset(dataset)
 
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
-
             if(indicesCoordinates.length != 2)
                 indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
-
             return indicesCoordinates
 
         _maxNumberOfRowsToCheck = 100
@@ -177,6 +178,16 @@ app.service 'ParserService', [ ->
                     # There can be a single coordinate in a cell like "47.232"
                     if(@isCoordinate(cell))
                         matrixPossibleCoordinates[indexRow][indexCell] = true
+                    # When editing the dataset, it can be that the user need time or forgot the fill up latitude or longitude
+                    # So we have to ignore it, even if it is inside of the trimed dataset, and set its potential to true
+                    # Also if there are rows which are empty (null) we have check the rows before or skip the column and not set it potential to true
+                    else if(cell == null || String(cell) == "")
+                        dataset.forEach (rowBefore, idx) ->
+                            if(rowBefore[indexCell] != null && String(rowBefore[indexCell]) != "")
+                                matrixPossibleCoordinates[indexRow][indexCell] = true
+                                return
+                            if(indexRow == idx)
+                                return
                     # But there can also be two coordinates in a single cell like "47.232, 13.854"
                     else
                         # at least we need two separated coordinates
