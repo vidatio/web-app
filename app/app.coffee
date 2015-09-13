@@ -42,6 +42,7 @@ app.config [
             onEnter: ($state) ->
                 $state.go "app.landingPage", { locale: "de" }
 
+        # abstract state for language as parameter in URL
         .state "app",
             abstract: true
             url: "/{locale}"
