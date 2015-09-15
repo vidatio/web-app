@@ -1,13 +1,12 @@
 "use strict"
 
-describe "Service Converter", ->
+xdescribe "Service Converter", ->
     beforeEach ->
         module "app"
         inject (ConverterService, $injector, $q) ->
             @injector = $injector
             @Converter = ConverterService
             @deferred = $q.defer()
-
             spyOn(@Converter,'convertSHP2GeoJSON').and.returnValue(@deferred.promise)
 
     it 'should be defined and included', ->

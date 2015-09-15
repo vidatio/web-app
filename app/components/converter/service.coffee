@@ -80,8 +80,8 @@ app.service 'ConverterService', [
                 indicesCoordinates = Parser.findCoordinatesColumns(dataset)
 
                 dataset.forEach (row) ->
-                    latitude = parseFloat(row[indicesCoordinates[0]])
-                    longitude = parseFloat(row[indicesCoordinates[1]])
+                    longitude = parseFloat(row[indicesCoordinates["x"]])
+                    latitude = parseFloat(row[indicesCoordinates["y"]])
 
                     if(!_isNumber(latitude) || !_isNumber(longitude))
                         return
