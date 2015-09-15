@@ -133,7 +133,6 @@ app.service 'ParserService', [ ->
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
             if(typeof indicesCoordinates.x == "undefined" || typeof indicesCoordinates.y == "undefined")
                 indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
-                console.log("COORDS IN DATASET", indicesCoordinates)
 
             return indicesCoordinates
 
@@ -209,8 +208,6 @@ app.service 'ParserService', [ ->
                 if(indexRow >= _maxNumberOfRowsToCheck)
                     return
 
-            console.log matrixPossibleCoordinates
-
             return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
         _findCoordinatesIndicesInHeader = (dataset) ->
@@ -266,6 +263,37 @@ app.service 'ParserService', [ ->
         # @param matrix the amount of rows and columns of the dataset with a boolean
         #               in each cell if the content is a coordinate like
         _getIndicesOfCoordinateColumns = (matrix) ->
+            result = {}
+
+            _coordinateColumnIndices = _findPossibleCoordinateColumns(matrix)
+
+            if typeof _coordinateColumnIndices == "number"
+                result["x"] = result["y"] = _coordinateColumnIndices
+            else
+                # find the two largest numbers and their indices
+                _largestNumber = -Infinity
+                _secondLargestNumber = -Infinity
+                _largestNumberIndex = 0
+                _secondLargestNumberIndex = 0
+                _coordinateColumnIndices.forEach (element, index) ->
+                    if element > _largestNumber
+                        _largestNumber = element
+                        _largestNumberIndex = index
+                    else if element <= _largestNumber && element >= _secondLargestNumber
+                        _secondLargestNumber = element
+                        _secondLargestNumberIndex = index
+
+                # smaller index = x and larger index = y (according to convection that x = longitude = first index)
+                #console.log("largest number", _largestNumberIndex)
+                #console.log("second largest number", _secondLargestNumberIndex)
+                if _largestNumberIndex > _secondLargestNumberIndex
+                    result["x"] = _secondLargestNumberIndex
+                    result["y"] = _largestNumberIndex
+                else
+                    result["x"] = _largestNumberIndex
+                    result["y"] = _secondLargestNumberIndex
+
+            ###
             noCoordinateColumn = []
             result = {}
 
@@ -306,5 +334,41 @@ app.service 'ParserService', [ ->
                         result["y"] = indexColumn
 
             return result
+            ###
+
+            return result
+
+
+        _findPossibleCoordinateColumns = (matrix) ->
+            truthyValuesCounters = new Array(matrix[0].length)
+
+            # normal for-loop does not work in CoffeeScript
+            _index = 0
+            while _index < truthyValuesCounters.length
+                truthyValuesCounters[_index] = 0
+                _index++
+
+            # count true values for each column
+            # more true values mean that more possible coordinates are found
+            separateColumns = true
+            combinedColumnIndex = 0
+            matrix.forEach (row, indexRow) ->
+                row.forEach (cell, indexColumn) ->
+                    if cell == true
+                        ++truthyValuesCounters[indexColumn]
+
+                    # in this case the cell contains an array
+                    # this can happen if the coordinates are in the same cell
+                    # only return the index (number) with the array, because then the coordinates should be in one cell
+                    if cell.length == 2
+                        combinedColumnIndex = indexColumn
+                        separateColumns = false
+                        return
+
+            if separateColumns
+                return truthyValuesCounters
+            else
+                return combinedColumnIndex
+
     new Parser
 ]
