@@ -265,88 +265,44 @@ app.service 'ParserService', [ ->
         _getIndicesOfCoordinateColumns = (matrix) ->
             result = {}
 
-            _coordinateColumnIndices = _findPossibleCoordinateColumns(matrix)
+            coordinateColumnIndices = _findPossibleCoordinateColumns(matrix)
 
-            if typeof _coordinateColumnIndices == "number"
-                result["x"] = result["y"] = _coordinateColumnIndices
+            if typeof coordinateColumnIndices == "number"
+                result["x"] = result["y"] = coordinateColumnIndices
             else
                 # find the two largest numbers and their indices
-                _largestNumber = -Infinity
-                _secondLargestNumber = -Infinity
-                _largestNumberIndex = 0
-                _secondLargestNumberIndex = 0
-                _coordinateColumnIndices.forEach (element, index) ->
-                    if element > _largestNumber
-                        _largestNumber = element
-                        _largestNumberIndex = index
-                    else if element <= _largestNumber && element >= _secondLargestNumber
-                        _secondLargestNumber = element
-                        _secondLargestNumberIndex = index
+                largestNumber = -Infinity
+                secondLargestNumber = -Infinity
+                largestNumberIndex = 0
+                secondLargestNumberIndex = 0
+                coordinateColumnIndices.forEach (element, index) ->
+                    if element > largestNumber
+                        largestNumber = element
+                        largestNumberIndex = index
+                    else if element <= largestNumber && element >= secondLargestNumber
+                        secondLargestNumber = element
+                        secondLargestNumberIndex = index
 
                 # smaller index = x and larger index = y (according to convection that x = longitude = first index)
                 #console.log("largest number", _largestNumberIndex)
                 #console.log("second largest number", _secondLargestNumberIndex)
-                if _largestNumberIndex > _secondLargestNumberIndex
-                    result["x"] = _secondLargestNumberIndex
-                    result["y"] = _largestNumberIndex
+                if largestNumberIndex > secondLargestNumberIndex
+                    result["x"] = secondLargestNumberIndex
+                    result["y"] = largestNumberIndex
                 else
-                    result["x"] = _largestNumberIndex
-                    result["y"] = _secondLargestNumberIndex
-
-            ###
-            noCoordinateColumn = []
-            result = {}
-
-            matrix.forEach (row, indexRow) ->
-                row.forEach (column, indexColumn) ->
-                    # if this column is already as a no-coordinate-column listed we can get to the next row
-                    # if there is no further potential column with coordinates we can stop parsing
-                    if(noCoordinateColumn.indexOf(indexColumn) >= 0 || noCoordinateColumn.length == row.length)
-                        return
-
-                    # if one cell of a column is false the whole column can't be filled with coordinates
-                    if(column == false)
-                        noCoordinateColumn.push indexColumn
-
-                    else if(column.length == 2)
-                        # currently if there are two coordinates (lat and lng) in a cell
-                        # we set the first row also to [true, true], so we know later that
-                        # we have to push the index of the column twice into result indices
-                        if(column[0] == true && column[1] == true)
-                            matrix[0][indexColumn] = [true, true]
-                        else
-                            noCoordinateColumn.push indexColumn
-            console.log("noCoordinateColumn", noCoordinateColumn)
-            # each column which has coordinate like content we add them to the result
-            matrix[0].forEach (column, indexColumn) ->
-                # first push if this column is a coordinate column
-                if(noCoordinateColumn.indexOf(indexColumn) < 0)
-                    console.log("COL:", column)
-                    if(column.x == undefined)
-                        result["x"] = indexColumn
-                    else if(column.y == undefined)
-                        result["y"] = indexColumn
-                    else
-                        return
-
-                    # second push if there are two coordinates in one cell
-                    if(column.length == 2 && matrix[0][indexColumn][0] == true && matrix[0][indexColumn][1] == true)
-                        result["y"] = indexColumn
+                    result["x"] = largestNumberIndex
+                    result["y"] = secondLargestNumberIndex
 
             return result
-            ###
-
-            return result
-
 
         _findPossibleCoordinateColumns = (matrix) ->
             truthyValuesCounters = new Array(matrix[0].length)
 
             # normal for-loop does not work in CoffeeScript
-            _index = 0
-            while _index < truthyValuesCounters.length
-                truthyValuesCounters[_index] = 0
-                _index++
+            index = 0
+            while index < truthyValuesCounters.length
+                truthyValuesCounters[index] = 0
+                index++
 
             # count true values for each column
             # more true values mean that more possible coordinates are found
