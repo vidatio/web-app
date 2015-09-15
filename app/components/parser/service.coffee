@@ -133,7 +133,6 @@ app.service 'ParserService', [ ->
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
             if(typeof indicesCoordinates.x == "undefined" || typeof indicesCoordinates.y == "undefined")
                 indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
-                console.log("COORDS IN DATASET", indicesCoordinates)
 
             return indicesCoordinates
 
@@ -190,7 +189,7 @@ app.service 'ParserService', [ ->
                     # Also if there are rows which are empty (null) we have check the rows before or skip the column and not set it potential to true
                     else if(!cell)
                         dataset.forEach (rowBefore, idx) ->
-                            if(rowBefore[indexCell] != null && String(rowBefore[indexCell]) != "")
+                            if(rowBefore[indexCell] != null && rowBefore[indexCell] != "")
                                 matrixPossibleCoordinates[indexRow][indexCell] = true
                                 return
                             if(indexRow == idx)
@@ -208,8 +207,6 @@ app.service 'ParserService', [ ->
                 # we don't have to check the hole dataset, only the first 100 rows for example
                 if(indexRow >= _maxNumberOfRowsToCheck)
                     return
-
-            console.log matrixPossibleCoordinates
 
             return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
@@ -288,15 +285,14 @@ app.service 'ParserService', [ ->
                             matrix[0][indexColumn] = [true, true]
                         else
                             noCoordinateColumn.push indexColumn
-            console.log("noCoordinateColumn", noCoordinateColumn)
+
             # each column which has coordinate like content we add them to the result
             matrix[0].forEach (column, indexColumn) ->
                 # first push if this column is a coordinate column
                 if(noCoordinateColumn.indexOf(indexColumn) < 0)
-                    console.log("COL:", column)
-                    if(column.x == undefined)
+                    if(result["x"] == undefined)
                         result["x"] = indexColumn
-                    else if(column.y == undefined)
+                    else if(result["y"] == undefined)
                         result["y"] = indexColumn
                     else
                         return

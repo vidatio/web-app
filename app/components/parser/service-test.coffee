@@ -161,7 +161,6 @@ describe "Service Parser", ->
             x: 2
             y: 3
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
-        return
 
         dataset = [
             ["47.349", "13.892", "Salzburg", "41,5%"]
@@ -196,6 +195,7 @@ describe "Service Parser", ->
             y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
+
         dataset = [
             ["Innsbruck", "41,5%", "49,12"]
             ["Salzburg", "41,5%", "49,13"]
@@ -212,7 +212,7 @@ describe "Service Parser", ->
         ]
         indexCoordinates =
             x: 2
-            y: 3
+            y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
     # should be easier to find coordinates via header then via the complete dataset

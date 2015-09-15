@@ -1,6 +1,6 @@
 "use strict"
 
-xdescribe "Service Converter", ->
+describe "Service Converter", ->
     beforeEach ->
         module "app"
         inject (ConverterService, $injector, $q) ->
@@ -21,7 +21,7 @@ xdescribe "Service Converter", ->
                 "type": "Feature"
                 "geometry":
                     "type": "Point"
-                    "coordinates": [70,90]
+                    "coordinates": [90,70]
                 }, {
                 "type": "Feature"
                 "geometry":
@@ -31,7 +31,7 @@ xdescribe "Service Converter", ->
                 "type": "Feature"
                 "geometry":
                     "type": "Point"
-                    "coordinates": [90,70]
+                    "coordinates": [70,90]
                 }
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
