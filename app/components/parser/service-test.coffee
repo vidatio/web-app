@@ -150,7 +150,7 @@ describe "Service Parser", ->
         coordinate = "S 180° 59 60"
         expect(@Parser.isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate)).toBeFalsy()
 
-    it 'should find columns of the latitude and longitude in dataset', ->
+    xit 'should find columns of the latitude and longitude in dataset', ->
         dataset = [
             ["Salzburg", "41,5%", "47.349", "13.892"]
             ["Wien", "38,5%", "46.841", "12.348"]
@@ -173,6 +173,7 @@ describe "Service Parser", ->
             y: 1
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
+    it 'should find coordinates, which are stored in one column', ->
         dataset = [
             ["47.349,13.892", "Salzburg", "41,5%"]
             ["46.841,12.348", "Wien", "38,5%"]
@@ -201,7 +202,11 @@ describe "Service Parser", ->
             ["Innsbruck", "41,5%", "49,11"]
             ["Salzburg", "41,5%", "word,13"]
         ]
-        expect(@Parser.findCoordinatesColumns(dataset)).toEqual({})
+        indexCoordinates =
+            x: 2
+            y: 2
+
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
         dataset = [
             ["Innsbruck", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
@@ -211,8 +216,9 @@ describe "Service Parser", ->
         ]
         indexCoordinates =
             x: 2
-            y: 3
+            y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
 
     # should be easier to find coordinates via header then via the complete dataset
     it 'should find the columns of the latitude and longitude in dataset with header', ->
