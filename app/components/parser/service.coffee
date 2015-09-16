@@ -283,6 +283,7 @@ app.service 'ParserService', [ ->
                         secondLargestNumber = element
                         secondLargestNumberIndex = index
 
+                # the most left column should be per default the longitude (x)
                 if largestNumberIndex > secondLargestNumberIndex
                     result["x"] = secondLargestNumberIndex
                     result["y"] = largestNumberIndex
