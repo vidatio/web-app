@@ -13,22 +13,22 @@ app.service 'DataService', [
                 this.updateGeoJSON(row, column, oldData, newData)
 
             updateGeoJSON: (row, column, oldData, newData) ->
-                # This funtion should update the geoJSON after table changes
-                # console.log "row", row
-                # console.log "column", column
-                # console.log "oldData", oldData
-                # console.log "newData", newData
-
+                # This function updates the geoJSON after table changes
                 key = Table.colHeaders[column]
+                keys = key.split(" ")
 
-                geoJSON = Map.geoJSON
+                if keys[0] == "coordinates"
+                    if Map.geoJSON.features[row].geometry.type == "Point"
+                        Map.geoJSON.features[row].geometry.coordinates[keys[1]] = newData
+
+                else if keys[0] == "bbox"
+                    Map.geoJSON.features[row].geometry.bbox[keys[1]] = newData
 
                 # check if colHeader is part of properties
-                for property, value of geoJSON.features[row].properties
-                    if key == property
-                        geoJSON.features[row].properties[key] = newData
-
-                Map.setGeoJSON(geoJSON)
+                else
+                    for property, value of Map.geoJSON.features[row].properties
+                        if key == property
+                            Map.geoJSON.features[row].properties[key] = newData
 
         new Data
 ]
