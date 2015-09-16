@@ -161,7 +161,6 @@ describe "Service Parser", ->
             x: 2
             y: 3
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
-        return
 
         dataset = [
             ["47.349", "13.892", "Salzburg", "41,5%"]

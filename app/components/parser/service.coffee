@@ -283,9 +283,6 @@ app.service 'ParserService', [ ->
                         secondLargestNumber = element
                         secondLargestNumberIndex = index
 
-                # smaller index = x and larger index = y (according to convection that x = longitude = first index)
-                #console.log("largest number", _largestNumberIndex)
-                #console.log("second largest number", _secondLargestNumberIndex)
                 if largestNumberIndex > secondLargestNumberIndex
                     result["x"] = secondLargestNumberIndex
                     result["y"] = largestNumberIndex
@@ -296,22 +293,22 @@ app.service 'ParserService', [ ->
             return result
 
         _findPossibleCoordinateColumns = (matrix) ->
-            truthyValuesCounters = new Array(matrix[0].length)
+            columnScores = new Array(matrix[0].length)
 
             # normal for-loop does not work in CoffeeScript
             index = 0
-            while index < truthyValuesCounters.length
-                truthyValuesCounters[index] = 0
+            while index < columnScores.length
+                columnScores[index] = 0
                 index++
 
             # count true values for each column
             # more true values mean that more possible coordinates are found
             separateColumns = true
             combinedColumnIndex = 0
-            matrix.forEach (row, indexRow) ->
+            matrix.forEach (row) ->
                 row.forEach (cell, indexColumn) ->
                     if cell == true
-                        ++truthyValuesCounters[indexColumn]
+                        ++columnScores[indexColumn]
 
                     # in this case the cell contains an array
                     # this can happen if the coordinates are in the same cell
@@ -322,9 +319,11 @@ app.service 'ParserService', [ ->
                         return
 
             if separateColumns
-                return truthyValuesCounters
+                return columnScores
             else
                 return combinedColumnIndex
+
+
 
     new Parser
 ]
