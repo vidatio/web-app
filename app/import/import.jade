@@ -1,4 +1,5 @@
 #import.wrapper-content(ng-controller="ImportCtrl")
+
     .options
         .row.other
             .col-sm-6
@@ -17,27 +18,34 @@
 
             .col-sm-4
                 #option-browse-filesystem.area
-                    .option-icon.icon-searchfiles
-                    h3 DATEI AUSWÄHLEN
-                    input#input-browse-filesystem(type="file" ng-file-select)
+                    import-progress-bar(progress="{{importService.progress}}" )
+                    .icon-and-text-wrapper
+                        .option-icon.icon-searchfiles
+                        h3 DATEI AUSWÄHLEN
+                        input#input-browse-filesystem(type="file" ng-file-select)
+
             .col-sm-4
                 #option-drag-and-drop.area
-                    .option-icon.icon-draganddrop
-                    h3 DRAG AND DROP
+                    import-progress-bar(progress="{{importService.progress}}" )
+                    .icon-and-text-wrapper
+                        .option-icon.icon-draganddrop
+                        h3 DRAG AND DROP
 
-                    .hover-wrapper
-                        .area
-                            .glyphicon.glyphicon-plus
-                            span.text Datei Landeplatz
+                        .hover-wrapper
+                            .area
+                                .glyphicon.glyphicon-plus
+                                span.text Datei Landeplatz
 
             .col-sm-4
                 #option-link.area
-                    .option-icon.icon-link
-                    h3 LINK
-                    .input-group.form-link
-                        input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
-                        span.input-group-btn
-                            button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
+                    import-progress-bar(progress="{{importService.progress}}" )
+                    .icon-and-text-wrapper
+                        .option-icon.icon-link
+                        h3 LINK
+                        .input-group.form-link
+                            input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
+                            span.input-group-btn
+                                button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
 
     #drop-zone
         .row

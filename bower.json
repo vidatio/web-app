@@ -29,7 +29,7 @@
     ],
     "dependencies": {
         "angular": "^1.4",
-        "angular-leaflet-directive": "< 1.0",
+        "angular-leaflet-directive": "0.8.6",
         "angular-ui-router": "< 1.0",
         "angular-animate": "~1.4",
         "handsontable": "< 1.0",

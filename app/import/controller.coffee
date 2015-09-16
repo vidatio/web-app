@@ -13,8 +13,10 @@ app.controller "ImportCtrl", [
     "ImportService"
     "TableService"
     ($scope, $http, $location, $rootScope, Import, Table) ->
+
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
-        $scope.progress = Import.progress
+
+        $scope.importService = Import
 
         # Read via link
         $scope.load = ->

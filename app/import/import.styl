@@ -12,6 +12,9 @@
             background $color-white
             box-shadow $box-shadow-size $color-shadow
             text-align center
+            .icon-and-text-wrapper
+                position absolute
+                {overlayParent}
         .option-icon
             width 100px
             margin 50px auto 0
@@ -73,6 +76,7 @@
                             font-size 16px
 
         #option-link
+            position relative
             #link-submit-button
                 top 0
             .form-link
@@ -131,3 +135,125 @@
             position fixed
             z-index: 999
             {overlayParent}
+
+
+
+import-progress-bar
+    position absolute
+    top 0
+    left 0
+    height 100%
+    background-color rgba($color-green, 0.5)
+    transition(width .25s ease-in-out)
+
+.progress-button
+    position relative
+    display inline-block
+    padding 0 60px
+    outline none
+    border none
+    background #1d9650
+    color #fff
+    text-transform uppercase
+    letter-spacing 1px
+    font-size 1em
+    line-height 4
+    .content
+        position relative
+        display block
+        &::before
+            content "\e600"
+        &::after
+            content "\e601"
+    .progress
+        background #148544
+    .progress-inner
+        position absolute
+        left 0
+        background #0e7138
+
+.progress-button[disabled],
+.progress-button[disabled].state-loading
+    cursor default
+
+.progress-button .content::before,
+.progress-button .content::after
+    position absolute
+    right 20px
+    color #0e7138
+    font-family "icomoon"
+    opacity 0
+    -webkit-transition opacity 0.3s 0.3s
+    transition opacity 0.3s 0.3s
+
+.progress-button.state-success .content::before,
+.progress-button.state-error .content::after
+    opacity 1
+
+.notransition
+    -webkit-transition none !important
+    transition none !important
+
+.progress-button[data-horizontal]
+    .progress-inner
+        top 0
+        width 0
+        height 100%
+        -webkit-transition width 0.3s, opacity 0.3s
+        transition width 0.3s, opacity 0.3s
+
+.progress-button[data-vertical]
+    .progress-inner
+        bottom 0
+        width 100%
+        height 0
+        -webkit-transition height 0.3s, opacity 0.3s
+        transition height 0.3s, opacity 0.3s
+
+.progress-button[data-perspective]
+    position relative
+    display inline-block
+    padding 0
+    background transparent
+    -webkit-perspective 900px
+    perspective 900px
+    .content
+        padding 0 60px
+        background #1d9650
+    .progress-wrap
+        display block
+        -webkit-transition -webkit-transform 0.2s
+        transition transform 0.2s
+        -webkit-transform-style preserve-3d
+        transform-style preserve-3d
+
+.progress-button[data-perspective] .content,
+.progress-button[data-perspective] .progress
+    outline 1px solid rgba(0,0,0,0)
+
+.progress-button[data-style="fill"][data-horizontal]
+    overflow hidden
+    .content
+        z-index 10
+        -webkit-transition -webkit-transform 0.3s
+        transition transform 0.3s
+
+.progress-button[data-style="fill"][data-horizontal] .content::before,
+.progress-button[data-style="fill"][data-horizontal] .content::after
+    top 100%
+    right auto
+    left 50%
+    -webkit-transition opacity 0.3s
+    transition opacity 0.3s
+    -webkit-transform translateX(-50%)
+    transform translateX(-50%)
+
+.progress-button[data-style="fill"][data-horizontal].state-success .content,
+.progress-button[data-style="fill"][data-horizontal].state-error .content
+    -webkit-transform translateY(-100%)
+    transform translateY(-100%)
+
+
+
+
+

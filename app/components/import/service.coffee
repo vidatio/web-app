@@ -14,7 +14,7 @@ app.service 'ImportService', [
                 @deferred = undefined
                 @progress = 0
 
-            readFile: (file) ->
+            readFile: (file, event) ->
                 @deferred = $q.defer()
                 @progress = 0
 
@@ -25,7 +25,7 @@ app.service 'ImportService', [
                     @deferred.reject @reader.result
 
                 @reader.onprogress = (event) =>
-                    @progress = event.loaded / event.total
+                    @progress = event.loaded / event.total * 100
 
                 @reader.readAsText file
                 @deferred.promise
