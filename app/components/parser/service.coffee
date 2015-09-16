@@ -15,6 +15,7 @@ app.service 'ParserService', [ ->
                         @isCoordinateWGS84UTM(coordinate) ||
                         @isCoordinateGaussKrueger(coordinate)
 
+
         # N 90.123456, E 180.123456 to N -90.123456, E -180.123456
         isCoordinateWGS84DegreeDecimal: (coordinate) ->
             coordinate = coordinate.replace(/°/g, "").toLowerCase()
@@ -247,7 +248,9 @@ app.service 'ParserService', [ ->
 
             return result
 
-        # @param dataset is used to create a matrix which has the amount of cells row and column wise as the dataset
+        ###
+        #    @param {dataset} is used to create a matrix which has the amount of cells row and column wise as the dataset
+        ###
         _createMatrix = (dataset, initial) ->
             matrix = []
             dataset.forEach (row, indexRow) ->
@@ -260,40 +263,27 @@ app.service 'ParserService', [ ->
 
             return matrix
 
-        # @param matrix the amount of rows and columns of the dataset with a boolean
+
+        # @param {matrix} the amount of rows and columns of the dataset with a boolean
         #               in each cell if the content is a coordinate like
         _getIndicesOfCoordinateColumns = (matrix) ->
             result = {}
 
-            coordinateColumnIndices = _findPossibleCoordinateColumns(matrix)
+            [ separateColumns, columnScores ] = _rateColumns(matrix)
+            highestScoreIndices = _findHighestScoreIndices(separateColumns, columnScores)
 
-            if typeof coordinateColumnIndices == "number"
-                result["x"] = result["y"] = coordinateColumnIndices
+            # the most left column should be per default the longitude (x)
+            if highestScoreIndices[0] > highestScoreIndices[1]
+                result["x"] = highestScoreIndices[1]
+                result["y"] = highestScoreIndices[0]
             else
-                # find the two largest numbers and their indices
-                largestNumber = -Infinity
-                secondLargestNumber = -Infinity
-                largestNumberIndex = 0
-                secondLargestNumberIndex = 0
-                coordinateColumnIndices.forEach (element, index) ->
-                    if element > largestNumber
-                        largestNumber = element
-                        largestNumberIndex = index
-                    else if element <= largestNumber && element >= secondLargestNumber
-                        secondLargestNumber = element
-                        secondLargestNumberIndex = index
-
-                # the most left column should be per default the longitude (x)
-                if largestNumberIndex > secondLargestNumberIndex
-                    result["x"] = secondLargestNumberIndex
-                    result["y"] = largestNumberIndex
-                else
-                    result["x"] = largestNumberIndex
-                    result["y"] = secondLargestNumberIndex
+                result["x"] = highestScoreIndices[0]
+                result["y"] = highestScoreIndices[1]
 
             return result
 
-        _findPossibleCoordinateColumns = (matrix) ->
+
+        _rateColumns = (matrix) ->
             columnScores = new Array(matrix[0].length)
 
             # normal for-loop does not work in CoffeeScript
@@ -305,26 +295,40 @@ app.service 'ParserService', [ ->
             # count true values for each column
             # more true values mean that more possible coordinates are found
             separateColumns = true
-            combinedColumnIndex = 0
             matrix.forEach (row) ->
                 row.forEach (cell, indexColumn) ->
                     if cell == true
                         ++columnScores[indexColumn]
-
-                    # in this case the cell contains an array
-                    # this can happen if the coordinates are in the same cell
-                    # only return the index (number) with the array, because then the coordinates should be in one cell
                     if cell.length == 2
-                        combinedColumnIndex = indexColumn
                         separateColumns = false
-                        return
+                        if cell[0] == true
+                            ++columnScores[indexColumn]
+                        if cell[1] == true
+                            ++columnScores[indexColumn]
+
+            return [
+                separateColumns,
+                columnScores
+            ]
+
+        _findHighestScoreIndices = (separateColumns, columnScores) ->
+            # find the two largest numbers and their indices
+            largestNumber = -Infinity
+            secondLargestNumber = -Infinity
+            largestScoreIndex = 0
+            secondLargestScoreIndex = 0
+            columnScores.forEach (element, index) ->
+                if element > largestNumber
+                    largestNumber = element
+                    largestScoreIndex = index
+                else if element <= largestNumber && element >= secondLargestNumber && separateColumns
+                    secondLargestNumber = element
+                    secondLargestScoreIndex = index
 
             if separateColumns
-                return columnScores
+                return [ largestScoreIndex, secondLargestScoreIndex ]
             else
-                return combinedColumnIndex
-
-
+                return [ largestScoreIndex, largestScoreIndex ]
 
     new Parser
 ]
