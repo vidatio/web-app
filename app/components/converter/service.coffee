@@ -74,6 +74,24 @@ app.factory 'ConverterService', [ ->
 
             return array
 
+        addLongLat: (value, array) =>
+            if Array.isArray value
+                value.forEach (element) =>
+                    array.push "Latitude"
+                    array.push "Longitude"
+                    array = @aaddLongLat(element, array)
+
+            return array
+
+        addHeaderCols: (value, array, text, counter) =>
+            if Array.isArray value
+                value.forEach (element) =>
+                    array.push text + " " + counter.toString()
+                    counter++
+                    array = @addHeaderCols(element, array, text, counter)
+
+            return array
+
         convertGeoJSON2ColHeaders: (geoJSON) ->
             colHeaders = []
 
@@ -81,17 +99,12 @@ app.factory 'ConverterService', [ ->
                 colHeaders.push property
 
             for property, value of geoJSON.features[0].geometry
-                colHeaders.push property
 
-                if property == "bbox"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                if property == "bbox" || property == "coordinates"
+                    colHeaders = @addHeaderCols(value, colHeaders, property, 0)
 
-                else if property == "coordinates"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                else
+                    colHeaders.push property
 
             return colHeaders
 
