@@ -150,7 +150,7 @@ describe "Service Parser", ->
         coordinate = "S 180° 59 60"
         expect(@Parser.isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate)).toBeFalsy()
 
-    xit 'should find columns of the latitude and longitude in dataset', ->
+    it 'should find columns of the latitude and longitude in dataset', ->
         dataset = [
             ["Salzburg", "41,5%", "47.349", "13.892"]
             ["Wien", "38,5%", "46.841", "12.348"]
