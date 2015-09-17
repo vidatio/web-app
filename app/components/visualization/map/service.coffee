@@ -37,17 +37,17 @@ app.service 'MapService', [ ->
                             # Array does not exist and can't be updated
                             console.log "Array does not exist and can't be updated"
                             # The table has to be reseted if the array can't be updated
-                            return true
+                            return false
                 else
                     console.log "Value is not a Number"
-                    return true
+                    return false
 
             else if keys[0] == "bbox"
                 if @isNumeric(newData)
                     @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                 else
                     console.log "Value is not a Number"
-                    return true
+                    return false
 
             # check if colHeader is part of properties
             else
@@ -55,7 +55,7 @@ app.service 'MapService', [ ->
                     if key == property
                         @geoJSON.features[row].properties[key] = newData
 
-            return false
+            return true
 
         getGeoJSON: ->
             return @geoJSON

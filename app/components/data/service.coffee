@@ -15,8 +15,6 @@ app.service 'DataService', [
             updateTableAndMap: (row, column, oldData, newData) ->
                 key = Table.colHeaders[column]
 
-                console.log Table.dataset
-
                 if @meta.fileType == "shp"
                     return Map.updateGeoJSONwithSHP(row, column, oldData, newData, key)
 
@@ -24,7 +22,7 @@ app.service 'DataService', [
                     geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
                     Map.setGeoJSON(geoJSON)
 
-                return false
+                return true
 
         new Data
 ]
