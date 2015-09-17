@@ -173,34 +173,24 @@ app.service 'ParserService', [ ->
 
         _trimDataset = (dataset) ->
             tmp = []
+            console.log(dataset)
 
             # before trim the dataset we have to check the dimensions
-            top = -1
-            left = -1
-            right = 0
-            bottom = 0
-            firstElement = false
+            rowCounter = 0
             dataset.forEach (row, indexRow) ->
-                left = -1
+                rowEmpty = true
+                # check if row contains values
                 row.forEach (cell, indexCell) ->
-                    # left and top borders are set correctly when the first element is reached,
-                    # therefore they should not change anymore (ensured by !firstElement)
-                    if(!cell && !firstElement)
-                        left = indexCell
-                        top = indexRow
-                    # when the first element was reached the right and bottom borders can be set
-                    else if(cell)
-                        firstElement = true
-                        bottom = indexRow
-                        right = indexCell
-
-            # trim dataset with analysed dimensions
-            dataset.forEach (row, indexRow) ->
-                if(top == -1 || indexRow >= top && indexRow <= bottom)
-                    if left == -1
-                        tmp.push(row.slice(left + 1, right+ 1))
-                    else
-                        tmp.push(row.slice(left + 1, right+ 1))
+                    if cell
+                        rowEmpty = false
+                # add a new row if it's not empty
+                if !rowEmpty
+                    tmp.push(new Array())
+                    # copy every value to the new array at the corresponding position
+                    row.forEach (cell, indexCell) ->
+                        if cell
+                            tmp[rowCounter].push(cell)
+                    rowCounter++
 
             return tmp
 
