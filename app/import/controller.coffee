@@ -48,12 +48,14 @@ app.controller "ImportCtrl", [
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 switch fileType
                     when "csv"
+                        Data.meta.fileType = "csv"
                         dataset = Converter.convertCSV2Arrays(fileContent)
                         geoJSON = Converter.convertArrays2GeoJSON(dataset)
                         Table.resetColHeaders()
                         Table.setDataset(dataset)
                         Map.setGeoJSON(geoJSON)
                     when "zip"
+                        Data.meta.fileType = "shp"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
                             colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)

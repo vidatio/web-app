@@ -86,9 +86,12 @@ app.factory 'ConverterService', [ ->
         addHeaderCols: (value, array, text, counter) =>
             if Array.isArray value
                 value.forEach (element) =>
-                    array.push text + " " + counter.toString()
-                    counter++
-                    array = @addHeaderCols(element, array, text, counter)
+                    if Array.isArray element
+                        array = @addHeaderCols(element, array, text, counter)
+                        counter = counter + 2
+                    else
+                        array.push text + " " + counter.toString()
+                        counter++
 
             return array
 
