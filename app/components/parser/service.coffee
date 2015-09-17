@@ -137,6 +137,20 @@ app.service 'ParserService', [ ->
 
             return indicesCoordinates
 
+        extractCoordinatesOfOneCell: (cell) ->
+            # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
+
+            # matches the following numbers:
+            #    123.45, 123, -123, -123.45
+            regex = /(?:-)?(?:\d+)(?:\.\d+)?/g
+
+            coordinates = []
+            while((coordinate = regex.exec(cell)) != null)
+                coordinates.push coordinate
+
+            return coordinates
+
+
         _maxNumberOfRowsToCheck = 100
 
         # every coordinate format has a 2d like mapping
@@ -151,28 +165,42 @@ app.service 'ParserService', [ ->
                 "y"
                 "latitude"
             ]
+            "xy": [
+                "Geometrie"
+                "Geometry"
+            ]
+
 
         _trimDataset = (dataset) ->
             tmp = []
-            minColumns = 0
-            minRows = 0
 
             # before trim the dataset we have to check the dimensions
+            top = -1
+            left = -1
+            right = 0
+            bottom = 0
+            firstElement = false
             dataset.forEach (row, indexRow) ->
+                left = -1
                 row.forEach (cell, indexCell) ->
-                    if(cell != null && String(cell) != "")
-                        if(minRows < indexRow)
-                            minRows = indexRow
-
-                        if(minColumns < indexCell)
-                            minColumns = indexCell
+                    # left and top borders are set correctly when the first element is reached,
+                    # therefore they should not change anymore (ensured by !firstElement)
+                    if(!cell && !firstElement)
+                        left = indexCell
+                        top = indexRow
+                    # when the first element was reached the right and bottom borders can be set
+                    else if(cell)
+                        firstElement = true
+                        bottom = indexRow
+                        right = indexCell
 
             # trim dataset with analysed dimensions
             dataset.forEach (row, indexRow) ->
-                if(indexRow > minRows)
-                    return
-                tmp[indexRow] = row.slice(0, minColumns + 1)
-
+                if(top == -1 || indexRow >= top && indexRow <= bottom)
+                    if left == -1
+                        tmp.push(row.slice(left + 1, right+ 1))
+                    else
+                        tmp.push(row.slice(left + 1, right+ 1))
 
             return tmp
 
@@ -216,35 +244,36 @@ app.service 'ParserService', [ ->
 
             # Because the header is always in the first row, we only search there for coordinate tags
             dataset[0].forEach (cell, index) =>
-                # With splitting the column anyway we can check also if there
-                # is one or if there are two coordinates in one cell
-                String(cell).split(",").forEach (element) =>
-                    isCoordinateHeader = _checkWhiteList.call(this, element)
-                    if(isCoordinateHeader)
-                        indicesCoordinates[isCoordinateHeader] = index
-
-                        if(indicesCoordinates.x != undefined && indicesCoordinates.y != undefined)
-                            return
+                if(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy)
+                    return
+                isCoordinateHeader = _checkWhiteList.call(this, cell)
+                if(isCoordinateHeader)
+                    indicesCoordinates[isCoordinateHeader] = index
 
             return indicesCoordinates
 
         _checkWhiteList = (word) ->
-            word = word.trim().toLowerCase()
             result = undefined
+            if(typeof word == String)
+                word = word.trim().toLowerCase()
 
-            word = word.replace(/\(/g, "").replace(/\)/g, "")
-            word = word.replace("point", "").replace("shape", "")
 
-            _whiteList["x"].forEach (item) ->
-                if item.toLowerCase().indexOf(word) >= 0
-                    result = "x"
-                    return
-
-            if(result == undefined)
-                _whiteList["y"].forEach (item) ->
+                _whiteList["x"].forEach (item) ->
                     if item.toLowerCase().indexOf(word) >= 0
-                        result = "y"
+                        result = "x"
                         return
+
+                if(result == undefined)
+                    _whiteList["y"].forEach (item) ->
+                        if item.toLowerCase().indexOf(word) >= 0
+                            result = "y"
+                            return
+
+                if(result == undefined)
+                    _whiteList["xy"].forEach (item) ->
+                        if item.toLowerCase().indexOf(word) >= 0
+                            result = "xy"
+                            return
 
             return result
 
@@ -276,9 +305,11 @@ app.service 'ParserService', [ ->
             if highestScoreIndices[0] > highestScoreIndices[1]
                 result["x"] = highestScoreIndices[1]
                 result["y"] = highestScoreIndices[0]
-            else
+            else if highestScoreIndices[0] < highestScoreIndices[1]
                 result["x"] = highestScoreIndices[0]
                 result["y"] = highestScoreIndices[1]
+            else
+                result["xy"] = highestScoreIndices[0]
 
             return result
 
@@ -329,6 +360,7 @@ app.service 'ParserService', [ ->
                 return [ largestScoreIndex, secondLargestScoreIndex ]
             else
                 return [ largestScoreIndex, largestScoreIndex ]
+
 
     new Parser
 ]
