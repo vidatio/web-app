@@ -6,8 +6,8 @@ describe "Service Table", ->
             @Converter = $injector.get("ConverterService")
             @Map = $injector.get("MapService")
 
-            @Converter.convertArrays2GeoJSON = ->
-            @Map.setGeoJSON = ->
+            @Converter.convertArrays2GeoJSON = jasmine.createSpy("convertArray2GeoJSON")
+            @Map.setGeoJSON = jasmine.createSpy("setGeoJSON")
 
     it 'should set the dataset', ->
         # Needed for data binding
@@ -30,12 +30,14 @@ describe "Service Table", ->
         expect(@TableService.dataset.length).toEqual 1
         expect(@TableService.dataset[0].length).toEqual 0
 
-        # TODO: tests if MapService and ConverterService gets called
-
     it 'should set a cell of the dataset', ->
         dataset = [[20,90], ["test", "test2"]]
         @TableService.setDataset dataset
         @TableService.setCell(1,1,90)
         expect(@TableService.dataset[1][1]).toEqual 90
 
-        # TODO: tests if MapService and ConverterService gets called
+    it 'should call the MapService and ConverterService', ->
+        dataset = [[20,90], ["test", "test2"]]
+        @TableService.setDataset dataset
+        expect(@Map.setGeoJSON).toHaveBeenCalled()
+        expect(@Converter.convertArrays2GeoJSON).toHaveBeenCalled()
