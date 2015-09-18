@@ -282,7 +282,6 @@ app.service 'ParserService', [->
                     return
             return matrix
 
-
         # @param {matrix} the amount of rows and columns of the dataset with a boolean
         #               in each cell if the content is a coordinate like
         _getIndicesOfCoordinateColumns = (matrix) ->
@@ -302,7 +301,6 @@ app.service 'ParserService', [->
                 result["xy"] = highestScoreIndices[0]
 
             return result
-
 
         _rateColumns = (matrix) ->
             columnScores = new Array(matrix[0].length)

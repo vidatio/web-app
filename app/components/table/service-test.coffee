@@ -1,8 +1,13 @@
 describe "Service Table", ->
     beforeEach ->
         module "app"
-        inject (TableService) ->
+        inject (TableService, $injector) ->
             @TableService = TableService
+            @Converter = $injector.get("ConverterService")
+            @Map = $injector.get("MapService")
+
+            @Converter.convertArrays2GeoJSON = ->
+            @Map.setGeoJSON = ->
 
     it 'should set the dataset', ->
         # Needed for data binding
@@ -18,11 +23,6 @@ describe "Service Table", ->
         expect(@TableService.dataset[0].length).toEqual 0
 
     it 'should set the dataset', ->
-
-
-        #console.log mapService
-        #spyOn(mapService, "setGeoJSON");
-
         dataset = [[20,90], ["test", "test2"]]
         @TableService.setDataset dataset
         @TableService.reset()
@@ -30,7 +30,6 @@ describe "Service Table", ->
         expect(@TableService.dataset.length).toEqual 1
         expect(@TableService.dataset[0].length).toEqual 0
 
-        #expect()
         # TODO: tests if MapService and ConverterService gets called
 
     it 'should set a cell of the dataset', ->
