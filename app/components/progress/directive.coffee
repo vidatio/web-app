@@ -9,10 +9,15 @@ app.directive "importProgressBar", ->
     scope:
         progress: "@"
     restrict: "E"
+    template: '<div class="bar"></div><div class="text"><span>{{progress}}%</span></div>'
     link: ( $scope, $element, $attributes ) ->
 
-        $element.width $scope.progress
+        progressBar = $element.find(".bar")
+        progressText = $element.find(".text span")
+
+        progressBar.width $scope.progress
 
         $attributes.$observe "type", ->
             if $attributes.for is $attributes.type
-                $element.width $attributes.progress + "%"
+                progressBar.width $attributes.progress + "%"
+                progressText.show()

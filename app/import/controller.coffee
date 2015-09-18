@@ -27,12 +27,14 @@ app.controller "ImportCtrl", [
                     url: url
             ).success (data) ->
                 Table.setDataset data
-                $location.path "/editor"
+                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
+                    $location.path "/editor"
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = (type) ->
             $scope.type = type
             Import.readFile($scope.file).then (result) ->
-                #Table.setDataset result
-                #$location.path "/editor"
+                Table.setDataset result
+                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
+                    $location.path "/editor"
 ]

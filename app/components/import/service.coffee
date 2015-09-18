@@ -25,7 +25,7 @@ app.service 'ImportService', [
                     @deferred.reject @reader.result
 
                 @reader.onprogress = (event) =>
-                    @progress = event.loaded / event.total * 100
+                    @progress = (event.loaded / event.total).toFixed(2) * 100
 
                 @reader.readAsText file
                 @deferred.promise
