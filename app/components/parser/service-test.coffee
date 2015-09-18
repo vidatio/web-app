@@ -216,7 +216,6 @@ describe "Service Parser", ->
             xy: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
-
     # should be easier to find coordinates via header then via the complete dataset
     it 'should find the columns of the latitude and longitude in dataset with header', ->
 

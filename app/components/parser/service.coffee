@@ -131,7 +131,8 @@ app.service 'ParserService', [->
             dataset = _trimDataset(dataset)
 
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
-            if(typeof indicesCoordinates.x == "undefined" || typeof indicesCoordinates.y == "undefined")
+
+            if(!(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy))
                 indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
 
             return indicesCoordinates
@@ -232,12 +233,13 @@ app.service 'ParserService', [->
 
         _findCoordinatesIndicesInHeader = (dataset) ->
             indicesCoordinates = {}
-
             # Because the header is always in the first row, we only search there for coordinate tags
             dataset[0].forEach (cell, index) =>
                 if(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy)
                     return
+
                 isCoordinateHeader = _checkWhiteList.call(this, cell)
+
                 if(isCoordinateHeader)
                     indicesCoordinates[isCoordinateHeader] = index
 
@@ -245,26 +247,24 @@ app.service 'ParserService', [->
 
         _checkWhiteList = (word) ->
             result = undefined
-            if(typeof word == String)
-                word = word.trim().toLowerCase()
+            word = String(word).trim().toLowerCase()
 
+            _whiteList["x"].forEach (item) ->
+                if item.toLowerCase().indexOf(word) >= 0
+                    result = "x"
+                    return
 
-                _whiteList["x"].forEach (item) ->
+            if(result == undefined)
+                _whiteList["y"].forEach (item) ->
                     if item.toLowerCase().indexOf(word) >= 0
-                        result = "x"
+                        result = "y"
                         return
 
-                if(result == undefined)
-                    _whiteList["y"].forEach (item) ->
-                        if item.toLowerCase().indexOf(word) >= 0
-                            result = "y"
-                            return
-
-                if(result == undefined)
-                    _whiteList["xy"].forEach (item) ->
-                        if item.toLowerCase().indexOf(word) >= 0
-                            result = "xy"
-                            return
+            if(result == undefined)
+                _whiteList["xy"].forEach (item) ->
+                    if item.toLowerCase().indexOf(word) >= 0
+                        result = "xy"
+                        return
 
             return result
 
