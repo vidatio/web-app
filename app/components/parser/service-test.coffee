@@ -173,7 +173,7 @@ describe "Service Parser", ->
             y: 1
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
-    it 'should find coordinates, which are stored in one column', ->
+    it 'should find coordinates (which are stored in one column) in the dataset', ->
         dataset = [
             ["47.349,13.892", "Salzburg", "41,5%"]
             ["46.841,12.348", "Wien", "38,5%"]
@@ -221,11 +221,11 @@ describe "Service Parser", ->
     it 'should find the columns of the latitude and longitude in dataset with header', ->
 
         dataset = [
-            ["City", "Content", "Point(Lat,Lng)"]
-            ["Innsbruck", "41,5%", "49,12"]
-            ["Salzburg", "41,5%", "49,13"]
-            ["Innsbruck", "41,5%", "49,11"]
-            ["Salzburg", "41,5%", "50,13"]
+            ["City", "Content", "GEOMETRIE"]
+            ["Innsbruck", "41,5%", "POINT (49 12)"]
+            ["Salzburg", "41,5%", "POINT (49 12)"]
+            ["Innsbruck", "41,5%", "POINT (49 12)"]
+            ["Salzburg", "41,5%", "POINT (49 12)"]
         ]
         indexCoordinates =
             xy: 2
@@ -241,26 +241,3 @@ describe "Service Parser", ->
             x: 3
             y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
-
-        dataset = [
-            ["City", "Content", "Lat,Lng"]
-            ["Innsbruck", "41,5%", "49,12"]
-            ["Salzburg", "41,5%", "49,13"]
-            ["Innsbruck", "41,5%", "49,11"]
-            ["Salzburg", "41,5%", "50,13"]
-        ]
-        indexCoordinates =
-            xy: 2
-        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
-
-        dataset = [
-            ["Lat,Lng", "City", "Content"]
-            ["49,12", "41,5%", "Innsbruck"]
-            ["41,5%", "49,13", "Salzburg"]
-            ["41,5%", "49,11", "Innsbruck"]
-            ["41,5%", "50,13", "Salzburg"]
-        ]
-        indexCoordinates =
-            xy: 0
-        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
-
