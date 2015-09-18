@@ -6,10 +6,13 @@
 app = angular.module "app.directives"
 
 app.directive "importProgressBar", ->
+    scope:
+        progress: "@"
     restrict: "E"
     link: ( $scope, $element, $attributes ) ->
 
-        $element.width $attributes.progress
+        $element.width $scope.progress
 
-        $attributes.$observe "progress", (newVal, oldVal) ->
-            $element.width newVal + "%"
+        $attributes.$observe "type", ->
+            if $attributes.for is $attributes.type
+                $element.width $attributes.progress + "%"

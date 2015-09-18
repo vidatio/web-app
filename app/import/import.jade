@@ -18,7 +18,7 @@
 
             .col-sm-4
                 #option-browse-filesystem.area
-                    import-progress-bar(progress="{{importService.progress}}" )
+                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}" for="selected")
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
                         h3 DATEI AUSWÄHLEN
@@ -26,7 +26,7 @@
 
             .col-sm-4
                 #option-drag-and-drop.area
-                    import-progress-bar(progress="{{importService.progress}}" )
+                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="dragged" )
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
                         h3 DRAG AND DROP
@@ -38,14 +38,14 @@
 
             .col-sm-4
                 #option-link.area
-                    import-progress-bar(progress="{{importService.progress}}" )
+                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="linked")
                     .icon-and-text-wrapper
                         .option-icon.icon-link
                         h3 LINK
                         .input-group.form-link
                             input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
                             span.input-group-btn
-                                button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
+                                button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click='load("link")')
 
     #drop-zone
         .row

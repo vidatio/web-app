@@ -19,7 +19,8 @@ app.controller "ImportCtrl", [
         $scope.importService = Import
 
         # Read via link
-        $scope.load = ->
+        $scope.load = (type) ->
+            $scope.type = type
             url = $scope.link
             $http.get($rootScope.apiBase  + "/v0/import"
                 params:
@@ -29,8 +30,9 @@ app.controller "ImportCtrl", [
                 $location.path "/editor"
 
         # Read via Browsing and Drag-and-Drop
-        $scope.getFile = ->
+        $scope.getFile = (type) ->
+            $scope.type = type
             Import.readFile($scope.file).then (result) ->
-                Table.setDataset result
-                $location.path "/editor"
+                #Table.setDataset result
+                #$location.path "/editor"
 ]
