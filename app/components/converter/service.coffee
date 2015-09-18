@@ -2,6 +2,8 @@
 
 app = angular.module "app.services"
 
+# TODO: after extracting coordinates they have to be converted to decimal format
+
 app.service 'ConverterService', [
     "ParserService"
     (Parser) ->
@@ -79,13 +81,8 @@ app.service 'ConverterService', [
 
                 indicesCoordinates = Parser.findCoordinatesColumns(dataset)
 
+                coordinates = []
                 dataset.forEach (row) ->
-                    longitude = parseFloat(row[indicesCoordinates["x"]])
-                    latitude = parseFloat(row[indicesCoordinates["y"]])
-
-                    if(!_isNumber(latitude) || !_isNumber(longitude))
-                        return
-
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
@@ -93,9 +90,23 @@ app.service 'ConverterService', [
                             "coordinates": []
                     ))
 
-                    feature.geometry.coordinates = [parseFloat(longitude), parseFloat(latitude)]
-                    feature.geometry.type = "Point"
-                    geoJSON.features.push(feature)
+                    if indicesCoordinates["xy"]
+                        coordinates = Parser.extractCoordinatesOfOneCell(row[indicesCoordinates["xy"]])
+
+                        #coordinates.forEach (coordinate, index) ->
+
+                            # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
+
+                    else
+                        longitude = parseFloat(row[indicesCoordinates["x"]])
+                        latitude = parseFloat(row[indicesCoordinates["y"]])
+
+                        if(!_isNumber(latitude) || !_isNumber(longitude))
+                            return
+
+                        feature.geometry.coordinates = [parseFloat(longitude), parseFloat(latitude)]
+                        feature.geometry.type = "Point"
+                        geoJSON.features.push(feature)
                 return geoJSON
 
             # TODO remove this method here or the one in the ParserService

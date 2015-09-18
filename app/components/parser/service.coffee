@@ -2,7 +2,7 @@
 
 app = angular.module "app.services"
 
-app.service 'ParserService', [ ->
+app.service 'ParserService', [->
     class Parser
         isCoordinate: (coordinate) ->
             coordinate = String(coordinate).trim()
@@ -136,6 +136,19 @@ app.service 'ParserService', [ ->
 
             return indicesCoordinates
 
+        extractCoordinatesOfOneCell: (cell) ->
+            # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
+
+            # matches the following numbers:
+            #    123.45, 123, -123, -123.45
+            regex = /(?:-)?(?:\d+)(?:\.\d+)?/g
+
+            coordinates = []
+            while((coordinate = regex.exec(cell)) != null)
+                coordinates.push coordinate
+
+            return coordinates
+
         _maxNumberOfRowsToCheck = 100
 
         # every coordinate format has a 2d like mapping
@@ -150,89 +163,91 @@ app.service 'ParserService', [ ->
                 "y"
                 "latitude"
             ]
+            "xy": [
+                "Geometrie"
+                "Geometry"
+            ]
 
         _trimDataset = (dataset) ->
             tmp = []
-            minColumns = 0
-            minRows = 0
 
-            # before trim the dataset we have to check the dimensions
+            topRow = undefined
+            leftCell = Infinity
+            rightCell = -Infinity
+            bottomRow = -Infinity
+
             dataset.forEach (row, indexRow) ->
                 row.forEach (cell, indexCell) ->
-                    if(cell != null && String(cell) != "")
-                        if(minRows < indexRow)
-                            minRows = indexRow
+                    if cell
+                        if typeof topRow == 'undefined'
+                            topRow = indexRow
+                        if leftCell > indexCell
+                            leftCell = indexCell
+                        if bottomRow < indexRow
+                            bottomRow = indexRow
+                        if rightCell < indexCell
+                            rightCell = indexCell
 
-                        if(minColumns < indexCell)
-                            minColumns = indexCell
-
-            # trim dataset with analysed dimensions
             dataset.forEach (row, indexRow) ->
-                if(indexRow > minRows)
+                if indexRow < topRow or indexRow > bottomRow
                     return
-                tmp[indexRow] = row.slice(0, minColumns + 1)
-
+                tmp.push row.slice(leftCell, rightCell + 1)
 
             return tmp
 
-        _findCoordinatesIndicesInDataset = (dataset) ->
-            matrixPossibleCoordinates = _createMatrix.call(this, dataset, false)
+    _findCoordinatesIndicesInDataset = (dataset) ->
+        matrixPossibleCoordinates = _createMatrix.call(this, dataset, false)
 
-            dataset.forEach (row, indexRow) =>
-                row.forEach (cell, indexCell) =>
-                    # There can be a single coordinate in a cell like "47.232"
-                    if(@isCoordinate(cell))
-                        matrixPossibleCoordinates[indexRow][indexCell] = true
+        dataset.forEach (row, indexRow) =>
+            row.forEach (cell, indexCell) =>
+                # There can be a single coordinate in a cell like "47.232"
+                if(@isCoordinate(cell))
+                    matrixPossibleCoordinates[indexRow][indexCell] = true
 
                     # When editing the dataset, it can be that the user need time or forgot the fill up latitude or longitude
                     # So we have to ignore it, even if it is inside of the trimed dataset, and set its potential to true
                     # Also if there are rows which are empty (null) we have check the rows before or skip the column and not set it potential to true
-                    else if(!cell)
-                        dataset.forEach (rowBefore, idx) ->
-                            if(rowBefore[indexCell] != null && rowBefore[indexCell] != "")
-                                matrixPossibleCoordinates[indexRow][indexCell] = true
-                                return
-                            if(indexRow == idx)
-                                return
+                else if(!cell)
+                    dataset.forEach (rowBefore, idx) ->
+                        if(rowBefore[indexCell] != null && String(rowBefore[indexCell]) != "")
+                            matrixPossibleCoordinates[indexRow][indexCell] = true
+                            return
+                        if(indexRow == idx)
+                            return
                     # But there can also be two coordinates in a single cell like "47.232, 13.854"
-                    else
-                        # at least we need two separated coordinates
-                        potentialCoordinates = cell.split(",")
-                        if(potentialCoordinates.length != 2)
-                            return
+                else
+                    # at least we need two separated coordinates
+                    potentialCoordinates = cell.split(",")
+                    if(potentialCoordinates.length != 2)
+                        return
                         # too protocol the existence of two coordinates we use array in one cell of the matrix
-                        else if(@isCoordinate(potentialCoordinates[0]) && @isCoordinate(potentialCoordinates[1]))
-                            matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
+                    else if(@isCoordinate(potentialCoordinates[0]) && @isCoordinate(potentialCoordinates[1]))
+                        matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
 
-                # we don't have to check the hole dataset, only the first 100 rows for example
-                if(indexRow >= _maxNumberOfRowsToCheck)
-                    return
+            # we don't have to check the hole dataset, only the first 100 rows for example
+            if(indexRow >= _maxNumberOfRowsToCheck)
+                return
 
-            return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
+        return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
-        _findCoordinatesIndicesInHeader = (dataset) ->
-            indicesCoordinates = {}
+    _findCoordinatesIndicesInHeader = (dataset) ->
+        indicesCoordinates = {}
 
-            # Because the header is always in the first row, we only search there for coordinate tags
-            dataset[0].forEach (cell, index) =>
-                # With splitting the column anyway we can check also if there
-                # is one or if there are two coordinates in one cell
-                String(cell).split(",").forEach (element) =>
-                    isCoordinateHeader = _checkWhiteList.call(this, element)
-                    if(isCoordinateHeader)
-                        indicesCoordinates[isCoordinateHeader] = index
+        # Because the header is always in the first row, we only search there for coordinate tags
+        dataset[0].forEach (cell, index) =>
+            if(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy)
+                return
+            isCoordinateHeader = _checkWhiteList.call(this, cell)
+            if(isCoordinateHeader)
+                indicesCoordinates[isCoordinateHeader] = index
 
-                        if(indicesCoordinates.x != undefined && indicesCoordinates.y != undefined)
-                            return
+        return indicesCoordinates
 
-            return indicesCoordinates
-
-        _checkWhiteList = (word) ->
+    _checkWhiteList = (word) ->
+        result = undefined
+        if(typeof word == String)
             word = word.trim().toLowerCase()
-            result = undefined
 
-            word = word.replace(/\(/g, "").replace(/\)/g, "")
-            word = word.replace("point", "").replace("shape", "")
 
             _whiteList["x"].forEach (item) ->
                 if item.toLowerCase().indexOf(word) >= 0
@@ -245,62 +260,96 @@ app.service 'ParserService', [ ->
                         result = "y"
                         return
 
-            return result
-
-        # @param dataset is used to create a matrix which has the amount of cells row and column wise as the dataset
-        _createMatrix = (dataset, initial) ->
-            matrix = []
-            dataset.forEach (row, indexRow) ->
-                matrix.push([])
-                row.forEach (column, indexColumn) ->
-                    matrix[indexRow][indexColumn] = initial
-
-                if(indexRow >= _maxNumberOfRowsToCheck)
-                    return
-
-            return matrix
-
-        # @param matrix the amount of rows and columns of the dataset with a boolean
-        #               in each cell if the content is a coordinate like
-        _getIndicesOfCoordinateColumns = (matrix) ->
-            noCoordinateColumn = []
-            result = {}
-
-            matrix.forEach (row, indexRow) ->
-                row.forEach (column, indexColumn) ->
-                    # if this column is already as a no-coordinate-column listed we can get to the next row
-                    # if there is no further potential column with coordinates we can stop parsing
-                    if(noCoordinateColumn.indexOf(indexColumn) >= 0 || noCoordinateColumn.length == row.length)
+            if(result == undefined)
+                _whiteList["xy"].forEach (item) ->
+                    if item.toLowerCase().indexOf(word) >= 0
+                        result = "xy"
                         return
 
-                    # if one cell of a column is false the whole column can't be filled with coordinates
-                    if(column == false)
-                        noCoordinateColumn.push indexColumn
+        return result
 
-                    else if(column.length == 2)
-                        # currently if there are two coordinates (lat and lng) in a cell
-                        # we set the first row also to [true, true], so we know later that
-                        # we have to push the index of the column twice into result indices
-                        if(column[0] == true && column[1] == true)
-                            matrix[0][indexColumn] = [true, true]
-                        else
-                            noCoordinateColumn.push indexColumn
+    ###
+    #    @param {dataset} is used to create a matrix which has the amount of cells row and column wise as the dataset
+    ###
+    _createMatrix = (dataset, initial) ->
+        matrix = []
+        dataset.forEach (row, indexRow) ->
+            matrix.push([])
+            row.forEach (column, indexColumn) ->
+                matrix[indexRow][indexColumn] = initial
 
-            # each column which has coordinate like content we add them to the result
-            matrix[0].forEach (column, indexColumn) ->
-                # first push if this column is a coordinate column
-                if(noCoordinateColumn.indexOf(indexColumn) < 0)
-                    if(result["x"] == undefined)
-                        result["x"] = indexColumn
-                    else if(result["y"] == undefined)
-                        result["y"] = indexColumn
-                    else
-                        return
+            if(indexRow >= _maxNumberOfRowsToCheck)
+                return
+        return matrix
 
-                    # second push if there are two coordinates in one cell
-                    if(column.length == 2 && matrix[0][indexColumn][0] == true && matrix[0][indexColumn][1] == true)
-                        result["y"] = indexColumn
 
-            return result
+    # @param {matrix} the amount of rows and columns of the dataset with a boolean
+    #               in each cell if the content is a coordinate like
+    _getIndicesOfCoordinateColumns = (matrix) ->
+        result = {}
+
+        [ separateColumns, columnScores ] = _rateColumns(matrix)
+        highestScoreIndices = _findHighestScoreIndices(separateColumns, columnScores)
+
+        # the most left column should be per default the longitude (x)
+        if highestScoreIndices[0] > highestScoreIndices[1]
+            result["x"] = highestScoreIndices[1]
+            result["y"] = highestScoreIndices[0]
+        else if highestScoreIndices[0] < highestScoreIndices[1]
+            result["x"] = highestScoreIndices[0]
+            result["y"] = highestScoreIndices[1]
+        else
+            result["xy"] = highestScoreIndices[0]
+
+        return result
+
+
+    _rateColumns = (matrix) ->
+        columnScores = new Array(matrix[0].length)
+
+        # normal for-loop does not work in CoffeeScript
+        index = 0
+        while index < columnScores.length
+            columnScores[index] = 0
+            index++
+
+        # count true values for each column
+        # more true values mean that more possible coordinates are found
+        separateColumns = true
+        matrix.forEach (row) ->
+            row.forEach (cell, indexColumn) ->
+                if cell == true
+                    ++columnScores[indexColumn]
+                if cell.length == 2
+                    separateColumns = false
+                    if cell[0] == true
+                        ++columnScores[indexColumn]
+                    if cell[1] == true
+                        ++columnScores[indexColumn]
+
+        return [
+            separateColumns,
+            columnScores
+        ]
+
+    _findHighestScoreIndices = (separateColumns, columnScores) ->
+        # find the two largest numbers and their indices
+        largestNumber = -Infinity
+        secondLargestNumber = -Infinity
+        largestScoreIndex = 0
+        secondLargestScoreIndex = 0
+        columnScores.forEach (element, index) ->
+            if element > largestNumber
+                largestNumber = element
+                largestScoreIndex = index
+            else if element <= largestNumber && element >= secondLargestNumber && separateColumns
+                secondLargestNumber = element
+                secondLargestScoreIndex = index
+
+        if separateColumns
+            return [largestScoreIndex, secondLargestScoreIndex]
+        else
+            return [largestScoreIndex, largestScoreIndex]
+
     new Parser
 ]
