@@ -44,7 +44,7 @@ describe "Service Converter", ->
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
-    xit 'should convert shp into arrays', ->
+    it 'should convert shp into arrays', ->
         geoJSON =
             "type": "FeatureCollection"
             "features": [{
@@ -68,20 +68,17 @@ describe "Service Converter", ->
         result =
             [
                 [
-                    "Point","70","90"
+                    "Point",70,90
                 ],
                 [
-                    "Point","70","90"
+                    "Point",80,80
                 ],
                 [
-                    "Point","90","70"
+                    "Point",90,70
                 ]
             ]
 
         @deferred.resolve(geoJSON)
 
-        ######## That is working, but not very usefull?! ######
-        # expect((@Converter.convertSHP2GeoJSON(geoJSON)).$$state.value).toEqual(geoJSON)
-
-        expect(@Converter.convertSHP2Arrays(geoJSON)).toEqual(result)
+        expect(@Converter.convertGeoJSON2Arrays(geoJSON)).toEqual(result)
 
