@@ -101,6 +101,7 @@ app.service 'ConverterService', [
                         "geometry":
                             "type": undefined
                             "coordinates": []
+                        "properties": {}
                     ))
 
                     if coordinates.length == 2
@@ -120,9 +121,16 @@ app.service 'ConverterService', [
                         # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
                         return
 
-                    geoJSON.features.push(feature)
+                    # All none coordinate cell should be filled into the properties of the feature
+                    row.forEach (cell, indexColumn) ->
+                        if indicesCoordinates.hasOwnProperty("xy")
+                            if(indexColumn != indicesCoordinates["xy"])
+                                feature.properties[indexColumn] = (cell)
+                        else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                            if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
+                                feature.properties[indexColumn] = (cell)
 
-                console.log geoJSON
+                    geoJSON.features.push(feature)
                 return geoJSON
 
             # TODO remove this method here or the one in the ParserService

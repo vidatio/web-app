@@ -15,7 +15,7 @@ app.controller "VisualizationCtrl", [
         $scope.center =
             lat: 47.723407
             lng: 13.086921
-            zoom: 16
+            zoom: 1
 
         icon =
             iconUrl: 'images/marker-icon.png'
@@ -35,6 +35,8 @@ app.controller "VisualizationCtrl", [
             pointToLayer: (feature, latlng) ->
                 new (L.marker)(latlng, icon: L.icon(icon))
             onEachFeature: (feature, layer) ->
-                # use for displaying features
-                # layer.bindPopup 'number: '
+                html = ""
+                for property of feature.properties
+                    html += feature.properties[property] + "<br>"
+                layer.bindPopup(html);
 ]

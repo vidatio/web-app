@@ -7,7 +7,7 @@ describe "Service Converter", ->
             @injector = $injector
             @Converter = ConverterService
             @deferred = $q.defer()
-            spyOn(@Converter,'convertSHP2GeoJSON').and.returnValue(@deferred.promise)
+            spyOn(@Converter, 'convertSHP2GeoJSON').and.returnValue(@deferred.promise)
 
     it 'should be defined and included', ->
         expect(@Converter).toBeDefined()
@@ -21,52 +21,55 @@ describe "Service Converter", ->
                 "type": "Feature"
                 "geometry":
                     "type": "Point"
-                    "coordinates": [90,70]
-                }, {
+                    "coordinates": [90, 70]
+                "properties": {}
+            }, {
                 "type": "Feature"
                 "geometry":
                     "type": "Point"
-                    "coordinates": [80,80]
-                }, {
+                    "coordinates": [80, 80]
+                "properties": {}
+            }, {
                 "type": "Feature"
                 "geometry":
                     "type": "Point"
-                    "coordinates": [70,90]
-                }
+                    "coordinates": [70, 90]
+                "properties": {}
+            }
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
     xit 'should convert shp into arrays', ->
         geoJSON =
             "type": "FeatureCollection"
-            "features": [{
-                "type": "Feature"
-                "geometry":
-                    "type": "Point"
-                    "coordinates": [70,90]
-                }, {
-                "type": "Feature"
-                "geometry":
-                    "type": "Point"
-                    "coordinates": [80,80]
-                }, {
-                "type": "Feature"
-                "geometry":
-                    "type": "Point"
-                    "coordinates": [90,70]
-                }
-            ]
+        "features": [{
+            "type": "Feature"
+            "geometry":
+                "type": "Point"
+                "coordinates": [70, 90]
+        }, {
+            "type": "Feature"
+            "geometry":
+                "type": "Point"
+                "coordinates": [80, 80]
+        }, {
+            "type": "Feature"
+            "geometry":
+                "type": "Point"
+                "coordinates": [90, 70]
+        }
+        ]
 
         result =
             [
                 [
-                    "Point","70","90"
+                    "Point", "70", "90"
                 ],
                 [
-                    "Point","70","90"
+                    "Point", "70", "90"
                 ],
                 [
-                    "Point","90","70"
+                    "Point", "90", "70"
                 ]
             ]
 
