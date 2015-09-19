@@ -2,7 +2,7 @@
 
 app = angular.module "app.services"
 
-app.service 'ParserService', [->
+app.service 'ParserService', [ ->
     class Parser
         isCoordinate: (coordinate) ->
             coordinate = String(coordinate).trim()
@@ -132,7 +132,7 @@ app.service 'ParserService', [->
 
             indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
 
-            if(!(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy))
+            if(!(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy")))
                 indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
 
             return indicesCoordinates
@@ -146,7 +146,7 @@ app.service 'ParserService', [->
 
             coordinates = []
             while((coordinate = regex.exec(cell)) != null)
-                coordinates.push coordinate
+                coordinates.push coordinate[0]
 
             return coordinates
 
@@ -235,7 +235,7 @@ app.service 'ParserService', [->
             indicesCoordinates = {}
             # Because the header is always in the first row, we only search there for coordinate tags
             dataset[0].forEach (cell, index) =>
-                if(indicesCoordinates.x && indicesCoordinates.y || indicesCoordinates.xy)
+                if(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy"))
                     return
 
                 isCoordinateHeader = _checkWhiteList.call(this, cell)
