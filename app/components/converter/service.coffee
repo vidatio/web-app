@@ -63,7 +63,7 @@ app.service 'ConverterService', [
                                         feature.geometry.coordinates.forEach (pair) ->
                                             pair.forEach (coordinates) ->
                                                 coordinates.forEach (coordinate) ->
-                                                        newRow.push coordinate
+                                                    newRow.push coordinate
 
                                 else
                                     newRow.push value
@@ -81,8 +81,21 @@ app.service 'ConverterService', [
 
                 indicesCoordinates = Parser.findCoordinatesColumns(dataset)
 
-                coordinates = []
                 dataset.forEach (row) ->
+                    coordinates = []
+
+                    if indicesCoordinates.hasOwnProperty("xy")
+                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                        coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
+                        coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
+                    else
+                        # TODO print failure to the user
+                        return
+
+                    if coordinates.length == 0
+                        return
+
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
@@ -90,23 +103,26 @@ app.service 'ConverterService', [
                             "coordinates": []
                     ))
 
-                    if indicesCoordinates["xy"]
-                        coordinates = Parser.extractCoordinatesOfOneCell(row[indicesCoordinates["xy"]])
-
-                        #coordinates.forEach (coordinate, index) ->
-
-                            # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
-
-                    else
-                        longitude = parseFloat(row[indicesCoordinates["x"]])
-                        latitude = parseFloat(row[indicesCoordinates["y"]])
-
-                        if(!_isNumber(latitude) || !_isNumber(longitude))
-                            return
-
-                        feature.geometry.coordinates = [parseFloat(longitude), parseFloat(latitude)]
+                    if coordinates.length == 2
+                        longitude = parseFloat(coordinates[1])
+                        latitude = parseFloat(coordinates[0])
+                        feature.geometry.coordinates = [longitude, latitude]
                         feature.geometry.type = "Point"
-                        geoJSON.features.push(feature)
+                    else if coordinates.length == 4
+                        latitude0 = parseFloat(coordinates[0])
+                        longitude0 = parseFloat(coordinates[1])
+                        latitude1 = parseFloat(coordinates[2])
+                        longitude1 = parseFloat(coordinates[3])
+                        feature.geometry.coordinates = [[longitude0, latitude0], [longitude1, latitude1]]
+                        feature.geometry.type = "LineString"
+                    else
+                        #coordinates.forEach (coordinate, index) ->
+                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
+                        return
+
+                    geoJSON.features.push(feature)
+
+                console.log geoJSON
                 return geoJSON
 
             # TODO remove this method here or the one in the ParserService
@@ -135,5 +151,13 @@ app.service 'ConverterService', [
 
             _isNumber = (value) ->
                 return typeof value == "number" && isFinite(value)
+
+            _areCoordinatesNumbers = (coordinates) ->
+                result = true
+                coordinates.forEach (coordinate) ->
+                    if !_isNumber(coordinate)
+                        result = false
+                        return
+                return result
         new Converter
 ]
