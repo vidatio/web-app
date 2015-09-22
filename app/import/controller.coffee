@@ -42,6 +42,7 @@ app.controller "ImportCtrl", [
         $scope.getFile = (type) ->
             $scope.type = type
             # Can't use file.type because of chromes File API
+
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
 
@@ -54,9 +55,9 @@ app.controller "ImportCtrl", [
                     when "csv"
                         dataset = Converter.convertCSV2Arrays(fileContent)
                         geoJSON = Converter.convertArrays2GeoJSON(dataset)
-                        Data.setGeoJSON(geoJSON)
-                        Table.setDataset(dataset)
-                        Map.setGeoJSON(geoJSON)
+                        Data.setGeoJSON geoJSON
+                        Table.setDataset dataset
+                        Map.setGeoJSON geoJSON
                     when "zip"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                             dataset = Converter.convertGeoJSON2Arrays(geoJSON)
@@ -71,7 +72,9 @@ app.controller "ImportCtrl", [
 
                 $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
                     $location.path editorPath
+                    $scope.$apply()
+
+
             , (error) ->
                 console.log error
-
 ]
