@@ -6,7 +6,8 @@ app = angular.module "app.services"
 
 app.service 'ConverterService', [
     "ParserService"
-    (Parser) ->
+    "HelperService"
+    (Parser, Helper) ->
         class Converter
             convertSHP2GeoJSON: (buffer) ->
                 shp(buffer).then (geoJSON) ->
@@ -73,7 +74,7 @@ app.service 'ConverterService', [
                     return dataset
 
             convertArrays2GeoJSON: (dataset) ->
-                dataset = _trimDataset(dataset)
+                dataset = Helper.trimDataset(dataset)
 
                 geoJSON =
                     "type": "FeatureCollection"
@@ -133,39 +134,5 @@ app.service 'ConverterService', [
                     geoJSON.features.push(feature)
                 return geoJSON
 
-            # TODO remove this method here or the one in the ParserService
-            _trimDataset = (dataset) ->
-                tmp = []
-                minColumns = 0
-                minRows = 0
-
-                # before trim the dataset we have to check the dimensions
-                dataset.forEach (row, indexRow) ->
-                    row.forEach (cell, indexCell) ->
-                        if(cell != null && String(cell) != "")
-                            if(minRows < indexRow)
-                                minRows = indexRow
-
-                            if(minColumns < indexCell)
-                                minColumns = indexCell
-
-                # trim dataset with analysed dimensions
-                dataset.forEach (row, indexRow) ->
-                    if(indexRow > minRows)
-                        return
-                    tmp[indexRow] = row.slice(0, minColumns + 1)
-
-                return tmp
-
-            _isNumber = (value) ->
-                return typeof value == "number" && isFinite(value)
-
-            _areCoordinatesNumbers = (coordinates) ->
-                result = true
-                coordinates.forEach (coordinate) ->
-                    if !_isNumber(coordinate)
-                        result = false
-                        return
-                return result
         new Converter
 ]
