@@ -45,7 +45,7 @@ COPY_FILES =
     ]
     lang: "./app/statics/languages/**/*.json"
 
-BASEURL = "http://localhost:3123/de/"
+BASEURL = "http://localhost:3123"
 
 E2E_FILES = "./app/**/*-e2e.coffee"
 
@@ -177,6 +177,10 @@ gulp.task "e2e",
         gulp.src E2E_FILES
         .pipe protractor
             configFile: "./protractor.config.coffee"
+            args: [
+                "--baseUrl"
+                BASEURL
+            ]
 
 ###
     LINTING

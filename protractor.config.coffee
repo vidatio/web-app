@@ -3,6 +3,7 @@ exports.config =
     chromeDriver: "./node_modules/protractor/selenium/chromedriver"
     capabilities:
         browserName: "chrome"
+        name: "Vidatio Selenium"
     troubleshoot: true
     framework: "jasmine2"
     rootElement: "body"
