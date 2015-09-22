@@ -148,7 +148,8 @@ app.service 'ParserService', [
 
                 coordinates = []
                 while((coordinate = regex.exec(cell)) != null)
-                    coordinates.push coordinate[0]
+                    if(@isCoordinate(coordinate[0]))
+                        coordinates.push coordinate[0]
 
                 return coordinates
 

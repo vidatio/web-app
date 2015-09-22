@@ -1,6 +1,8 @@
 # TODO: Adapted parser for use in api
 # in einer zelle NaN (usw.) behandeln
 # nur noch in zellen nachschauen, in denen in den bisherigen zeilen true (in zelle kommt potentielle coordinate vor) vorkam
+# TEST extractCoordinatesFromOneCell
+# Implement GaussKrueger and UTM
 
 "use strict"
 
@@ -218,7 +220,6 @@ describe "Service Parser", ->
 
     # should be easier to find coordinates via header then via the complete dataset
     it 'should find the columns of the latitude and longitude in dataset with header', ->
-
         dataset = [
             ["City", "Content", "GEOMETRIE"]
             ["Innsbruck", "41,5%", "POINT (49 12)"]
@@ -240,3 +241,26 @@ describe "Service Parser", ->
             x: 3
             y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["City", "Content", "Lat,Lng"]
+            ["Salzburg", "41,5%", "47,13"]
+            ["Wien", "38,5%", "46.841,12.348"]
+            ["Bregenz", "40,5%", "46.323,11.234"]
+        ]
+        indexCoordinates =
+            xy: 2
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+    it 'should extract the coordinates from one cell', ->
+        cell = "42.23 23.902 180.001 21 test"
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("42.23")
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("23.902")
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("21")
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).not.toContain("180.001")
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).not.toContain("test")
+
+        cell = "46.323,11.234"
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("46.323")
+        expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("11.234")
+
