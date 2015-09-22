@@ -44,7 +44,7 @@ app.config [
             controller: "ImportCtrl"
             title: "import"
 
-        # /import
+        # /editor
         .state "editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
