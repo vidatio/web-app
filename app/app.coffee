@@ -48,26 +48,26 @@ app.config [
             url: "/{locale}"
             controller: "AppCtrl"
             template: "<ui-view/>"
-# /
+        # /
         .state "app.landingPage",
             url: "/"
             templateUrl: "index/index.html"
 
-# /import
+        # /import
         .state "app.import",
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
             title: "import"
 
-# /import
+        # /editor
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
-# /penguins
+        # /penguins
         # .state "penguins",
         #     url: "/penguins"
         #     templateUrl: "penguins/penguins.html"
@@ -79,13 +79,13 @@ app.config [
         #                 PenguinService.query()
         #         ]
 
-# /penguins/new
+        # /penguins/new
         # .state "penguins.new",
         #     url: "/new"
         #     templateUrl: "penguins/penguins.new.html"
         #     controller: "PenguinCtrl"
 
-# /penguins/:penguin
+        # /penguins/:penguin
         # .state "penguins.detail",
         #     url: "/:penguin"
         #     templateUrl: "penguins/penguin.detail.html"
