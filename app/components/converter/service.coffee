@@ -11,6 +11,10 @@ app.factory 'ConverterService', [ ->
         convertCSV2Arrays: (csv) ->
             return Papa.parse(csv).data
 
+        # converts a geoJSON object into a two dimensional array, which can be used in the data table.
+        # @method convertGeoJSON2Arrays
+        # @param {geoJSON} geoJSON
+        # @return {array}
         convertGeoJSON2Arrays: (geoJSON) ->
                 dataset = []
 
@@ -66,23 +70,13 @@ app.factory 'ConverterService', [ ->
 
                 return dataset
 
-        addSpace: (value, array) =>
-            if Array.isArray value
-                value.forEach (element) =>
-                    array.push ""
-                    array = @addSpace(element, array)
-
-            return array
-
-        addLongLat: (value, array) =>
-            if Array.isArray value
-                value.forEach (element) =>
-                    array.push "Latitude"
-                    array.push "Longitude"
-                    array = @addLongLat(element, array)
-
-            return array
-
+        # adds multiple column headers with the same name and an incrementing counter.
+        # @method addHeaderCols
+        # @param {array} value
+        # @param {array} array The header to add more headers with the same text.
+        # @param {string} text The text to be added.
+        # @param {integer} counter
+        # @return {array}
         addHeaderCols: (value, array, text, counter) =>
             if Array.isArray value
                 value.forEach (element) =>
@@ -95,12 +89,17 @@ app.factory 'ConverterService', [ ->
 
             return array
 
+        # extracts the column headers for the table from a geoJSON object and returns them.
+        # @method convertGeoJSON2ColHeaders
+        # @param {geoJSON} geoJSON
+        # @return {array}
         convertGeoJSON2ColHeaders: (geoJSON) ->
             colHeaders = []
 
             maxIndex = 0
             maxSize = 0
 
+            # Finds the biggest multidimensional array.
             for property, value of geoJSON.features
                 currentSize = @sizeOfMultiArray value.geometry.coordinates
                 if currentSize > maxSize
@@ -120,9 +119,10 @@ app.factory 'ConverterService', [ ->
 
             return colHeaders
 
-
+        # Returns the size of a multidimensional array.
+        # @method sizeOfMultiArray
+        # @param {Array} array
         sizeOfMultiArray: (array) ->
-            # finds the biggest multidimensional array
             size = 0
 
             if Array.isArray array[0]

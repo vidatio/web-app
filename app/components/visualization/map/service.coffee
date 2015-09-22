@@ -20,8 +20,15 @@ app.service 'MapService', [ ->
         isNumeric: (n) ->
             return (!isNaN(parseFloat(n)) && isFinite(n))
 
+        # updates the geoJSON object(generated from shp file) used for the map after data table changes.
+        # @method updateGeoJSONwithSHP
+        # @param {integer} row
+        # @param {integer} column
+        # @param {number or string} oldData
+        # @param {number or string} newData
+        # @param {string} key
+        # @return {boolean}
         updateGeoJSONwithSHP: (row, column, oldData, newData, key) ->
-            # This function updates the geoJSON after table changes
             keys = key.split(" ")
 
             if keys[0] == "coordinates"
