@@ -79,7 +79,7 @@ app.factory 'ConverterService', [ ->
                 value.forEach (element) =>
                     array.push "Latitude"
                     array.push "Longitude"
-                    array = @aaddLongLat(element, array)
+                    array = @addLongLat(element, array)
 
             return array
 
@@ -98,10 +98,19 @@ app.factory 'ConverterService', [ ->
         convertGeoJSON2ColHeaders: (geoJSON) ->
             colHeaders = []
 
-            for property, value of geoJSON.features[0].properties
+            maxIndex = 0
+            maxSize = 0
+
+            for property, value of geoJSON.features
+                currentSize = @sizeOfMultiArray value.geometry.coordinates
+                if currentSize > maxSize
+                    maxSize = currentSize
+                    maxIndex = property
+
+            for property, value of geoJSON.features[maxIndex].properties
                 colHeaders.push property
 
-            for property, value of geoJSON.features[0].geometry
+            for property, value of geoJSON.features[maxIndex].geometry
 
                 if property == "bbox" || property == "coordinates"
                     colHeaders = @addHeaderCols(value, colHeaders, property, 0)
@@ -110,6 +119,19 @@ app.factory 'ConverterService', [ ->
                     colHeaders.push property
 
             return colHeaders
+
+
+        sizeOfMultiArray: (array) ->
+            # finds the biggest multidimensional array
+            size = 0
+
+            if Array.isArray array[0]
+                for property, value of array
+                    size = size + @sizeOfMultiArray(value)
+                return size
+
+            else
+                return array.length
 
         convertArrays2GeoJSON: (arrays) ->
             geoJSON =

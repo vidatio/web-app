@@ -47,11 +47,11 @@ describe "Controller Import", ->
             expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
 
         # Disabled because of promise gets never resolved
-        xit 'should set the dataset of the table after reading the file', ->
-            @scope.file =
-                name: "test.csv"
-            @scope.getFile()
-            @deferred.resolve('test,1\ntest,2\ntest,3')
+        # xit 'should set the dataset of the table after reading the file', ->
+        #     @scope.file =
+        #         name: "test.csv"
+        #     @scope.getFile()
+        #     @deferred.resolve('test,1\ntest,2\ntest,3')
 
-            expect(@Table.setDataset).toHaveBeenCalled()
-            expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
+        #     expect(@Table.setDataset).toHaveBeenCalled()
+        #     expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'

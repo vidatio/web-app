@@ -44,7 +44,7 @@ describe "Service Converter", ->
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
-    it 'should convert shp into arrays', ->
+    it 'should convert GeoJSON into arrays', ->
         geoJSON =
             "type": "FeatureCollection"
             "features": [{
@@ -78,7 +78,39 @@ describe "Service Converter", ->
                 ]
             ]
 
-        @deferred.resolve(geoJSON)
-
         expect(@Converter.convertGeoJSON2Arrays(geoJSON)).toEqual(result)
+
+    it 'should extract Headers from GeoJSON', ->
+        geoJSON =
+        "type": "FeatureCollection"
+        "features": [{
+            "type": "Feature"
+            "geometry":
+                "type": "Point"
+                "coordinates": [70,90]
+            "properties":
+                "prop0": "value0"
+                "prop1": 0.0
+            }, {
+            "type": "Feature"
+            "geometry":
+                "type": "Polygon"
+                "coordinates": [
+                     [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                       [100.0, 1.0], [100.0, 0.0] ]
+                     ]
+            "properties":
+              "prop0": "value1"
+              "prop1": 1.0
+            }
+        ]
+
+        headers =
+            [
+                "prop0", "prop1", "type", "coordinates 0", "coordinates 1",
+                "coordinates 2", "coordinates 3", "coordinates 4", "coordinates 5",
+                "coordinates 6", "coordinates 7", "coordinates 8", "coordinates 9"
+            ]
+
+        expect(@Converter.convertGeoJSON2ColHeaders(geoJSON)).toEqual(headers)
 
