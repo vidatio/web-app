@@ -11,7 +11,7 @@ app = angular.module "app", [
     "app.directives"
     "app.filters"
     "leaflet-directive"
-    "ngAnimate"
+    "pascalprecht.translate"
 ]
 
 app.run [
@@ -20,69 +20,54 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "AuthenticationService"
-    "UserService"
-    ( $rootScope, $state, $stateParams, $http, $location, AuthenticationService, UserService ) ->
-
+    ( $rootScope, $state, $stateParams, $http, $location) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
-
         $rootScope.apiBase = "http://localhost:3000"
-
-        # $rootScope.state = $state
-        # $rootScope.stateParams = $stateParams
-
-        # $rootScope.globals = $cookieStore.get( "globals" ) or {}
-
-        # if $rootScope.globals.currentUser
-        #     AuthenticationService.SetExistingCredentials $rootScope.globals.currentUser
-        #     UserService.init $rootScope.globals.currentUser.name
-
-        # $rootScope.$on "$stateChangeStart", ( event, next, current ) ->
-        #     unless next.name is "landingPage"
-        #         unless $rootScope.globals.currentUser
-        #             event.preventDefault()
-        #             $state.go "landingPage"
 ]
 
-# ***
-# ## Config
-# > contains routing stuff only (atm)
-# >
-# > see
-# > [angular docs](http://docs.angularjs.org/guide/dev_guide.services.$location)
-# > for $locationProvider details
 app.config [
     "$urlRouterProvider"
     "$stateProvider"
     "$locationProvider"
     "$httpProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider ) ->
+    "$translateProvider"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
         $locationProvider.html5Mode true
 
-        #$urlRouterProvider.otherwise "/"
-
         $stateProvider
-# /
-        .state "landingPage",
+        # forward user to /de/ if no language is chosen
+        .state "noLanguage",
             url: "/"
-            templateUrl: "landing-page/landing-page.html"
+            onEnter: ($state) ->
+                $state.go "app.landingPage", { locale: "de" }
 
-# /import
-        .state "import",
+        # abstract state for language as parameter in URL
+        .state "app",
+            abstract: true
+            url: "/{locale}"
+            controller: "AppCtrl"
+            template: "<ui-view/>"
+        # /
+        .state "app.landingPage",
+            url: "/"
+            templateUrl: "index/index.html"
+
+        # /import
+        .state "app.import",
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
             title: "import"
 
-# /import
-        .state "editor",
+        # /editor
+        .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
-# /penguins
+        # /penguins
         # .state "penguins",
         #     url: "/penguins"
         #     templateUrl: "penguins/penguins.html"
@@ -94,13 +79,13 @@ app.config [
         #                 PenguinService.query()
         #         ]
 
-# /penguins/new
+        # /penguins/new
         # .state "penguins.new",
         #     url: "/new"
         #     templateUrl: "penguins/penguins.new.html"
         #     controller: "PenguinCtrl"
 
-# /penguins/:penguin
+        # /penguins/:penguin
         # .state "penguins.detail",
         #     url: "/:penguin"
         #     templateUrl: "penguins/penguin.detail.html"
@@ -112,4 +97,11 @@ app.config [
         #             (PenguinService, $stateParams) ->
         #                 PenguinService.get $stateParams.penguin
         #         ]
+
+        # I18N
+        $translateProvider
+        .useStaticFilesLoader
+            prefix: "languages/"
+            suffix: ".json"
+        $translateProvider.preferredLanguage("de")
 ]

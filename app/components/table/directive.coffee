@@ -2,27 +2,28 @@
 app = angular.module "app.directives"
 
 app.directive 'hot', [
-    "TableService"
     "$timeout"
-    (TableService, $timeout) ->
+    "DataService"
+    ($timeout, Data) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
         scope:
             dataset: '='
             activeViews: '='
+            colHeaders: '='
         link: ($scope, $element) ->
             hot = new Handsontable($element[0],
                 data: $scope.dataset
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: true
+                colHeaders: $scope.colHeaders
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 afterChange: (change, source) ->
                     if(source == "edit")
-                        TableService.setCell(change[0][0], change[0][1], change[0][3])
+                        Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
 
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
@@ -43,6 +44,7 @@ app.directive 'hot', [
 
             $scope.$watch (->
                 $scope.dataset
+                $scope.colHeaders
             ), ( ->
                 hot.render()
             ), true

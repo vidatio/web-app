@@ -1,0 +1,30 @@
+section#intro
+    .wrapper-content
+        .row
+            .col-sm-12
+                aside#slogan.light-font {{ "SLOGAN" | translate }}
+
+        .row
+            .col-sm-7.diagram
+                img(src="images/placeholder-diagram.png", alt="placeholder")
+            .col-sm-5.promo
+                .video awesome promo video here!
+
+                div
+                    p.description.bold-font
+                        | In nur
+                        span.font-red  drei Schritten
+                        |  zur Infografik!
+
+                    ol
+                        li.active {{ "UPLOAD_FILE" | translate }}.
+                        li {{ "GENERATED_AUTOMATICALLY" | translate }}.
+                        li {{ "SAVE_OR_SHARE" | translate }}.
+
+        .get-started
+            //- generate link with correct language
+            a.bold-font.button(ui-sref="app.import({ locale: locale })")
+                | GET
+                br
+                | STARTED
+                span.bg-cyan !

@@ -1,31 +1,41 @@
 describe "Service Map", ->
-    mapService = undefined
-
     beforeEach ->
         module "app"
-        inject (MapService) ->
-            mapService = MapService
+        inject (MapService, $injector) ->
+            @injector = $injector
+            @Map = MapService
 
-    it 'sets markers', ->
-        dataset = [[90, 90], [80, 80], [70, 70]]
-        mapService.setMarkers dataset
-        markers =
-            0:
-                lat: 90
-                lng: 90
-            1:
-                lat: 80
-                lng: 80
-            2:
-                lat: 70
-                lng: 70
+    it 'should be defined and included', ->
+        expect(@Map).toBeDefined()
+        expect(@injector.has("MapService"))
 
-        expect(mapService.markers).toEqual markers
+    it 'should have a geoJSON object', ->
+        expect(@Map.geoJSON).toBeDefined()
+        expect(@Map.geoJSON.type).toEqual("FeatureCollection")
+        expect(@Map.geoJSON.features).toEqual([])
 
-    it 'checks if a value is a coordinate', ->
-        expect(mapService.isCoordinate(-360, -180)).toBeFalsy()
-        expect(mapService.isCoordinate(-180, -180)).toBeFalsy()
-        expect(mapService.isCoordinate("test", 90)).toBeFalsy()
+    it "shouldn't replace the geoJSON object complete", ->
+        geoJSON =
+            "type": "FeatureCollection"
+            "features": [
+                {
+                    "type": "Point"
+                    "geometry": [10,20]
+                },
+                {
+                    "type": "Point"
+                    "geometry": [20,10]
+                }
+            ]
 
-        expect(mapService.isCoordinate(90, 90)).toBeTruthy()
-        expect(mapService.isCoordinate(-90, -180)).toBeTruthy()
+        @Map.setGeoJSON(geoJSON)
+        expect(@Map.geoJSON).toEqual(geoJSON)
+
+        @Map.setGeoJSON(
+            "features": []
+        )
+
+        expect(@Map.geoJSON).toEqual(
+            "type": "FeatureCollection"
+            "features": []
+        )

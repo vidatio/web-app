@@ -4,15 +4,15 @@
         .row.other
             .col-sm-6
                 #option-empty-table.area
-                    a(href="/editor")
+                    a(href="" ng-click="continueToEmptyTable()")
                         .option-icon.icon-table
-                        h3 LEERE TABELLE
+                        h3 {{ "EMPTY_TABLE" | translate | uppercase }}
 
             .col-sm-6
                 #option-browse-data.area
                     a(href="#")
                         .option-icon.icon-opendata
-                        h3 ALLE DATENSÄTZE
+                        h3 {{ "ALL_DATASETS" | translate | uppercase }}
 
         .row.file-read.layout-3-columns
 
@@ -21,7 +21,7 @@
                     import-progress-bar(progress="{{importService.progress}}" type="{{type}}" for="selected")
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
-                        h3 DATEI AUSWÄHLEN
+                        h3 {{ "CHOOSE_FILE" | translate | uppercase }}
                         input#input-browse-filesystem(type="file" ng-file-select)
 
             .col-sm-4
@@ -29,21 +29,21 @@
                     import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="dragged" )
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
-                        h3 DRAG AND DROP
+                        h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
 
                         .hover-wrapper
                             .area
                                 .glyphicon.glyphicon-plus
-                                span.text Datei Landeplatz
+                                span.text {{ "FILE_DROP" | translate }}
 
             .col-sm-4
                 #option-link.area
                     import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="linked")
                     .icon-and-text-wrapper
                         .option-icon.icon-link
-                        h3 LINK
+                        h3 {{ "LINK" | translate | uppercase }}
                         .input-group.form-link
-                            input.form-control(type="text" placeholder="Link zur Datei..." ng-model="link")
+                            input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
                             span.input-group-btn
                                 button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click='load("link")')
 
@@ -52,7 +52,7 @@
             .col-sm-12
                 .area
                     .glyphicon.glyphicon-plus
-                    span.text Datei Landeplatz
+                    span.text {{ "FILE_DROP" | translate }}
 
         .row
             .col-sm-12.drop-area(ng-file-drop-end)

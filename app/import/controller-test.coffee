@@ -27,7 +27,9 @@ describe "Controller Import", ->
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
-            @httpBackend.expectGET(/landing-page/).respond ""
+            @httpBackend.whenGET(/index/).respond ""
+            @httpBackend.whenGET(/editor/).respond ""
+            @httpBackend.expectGET(/languages/).respond ""
             @httpBackend.whenGET(@rootScope.apiBase + '/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()
@@ -39,14 +41,17 @@ describe "Controller Import", ->
 
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
-            @scope.file = "test.txt"
+            @scope.file =
+                name: "test.csv"
             @scope.getFile()
 
             expect(@Import.readFile).toHaveBeenCalled()
-            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file)
+            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
 
+        # Disabled because of promise gets never resolved
         xit 'should set the dataset of the table after reading the file', ->
-            @scope.file = "test.txt"
+            @scope.file =
+                name: "test.csv"
             @scope.getFile()
             @deferred.resolve('test,1\ntest,2\ntest,3')
 

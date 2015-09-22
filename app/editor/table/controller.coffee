@@ -9,4 +9,5 @@ app.controller "TableCtrl", [
     "TableService"
     ($scope, $rootScope, $timeout, Table) ->
         $scope.dataset = Table.dataset
+        $scope.colHeaders = Table.colHeaders
 ]

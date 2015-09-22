@@ -7,6 +7,7 @@ jade = require "gulp-jade"
 templateCache = require "gulp-angular-templatecache"
 
 stylus = require "gulp-stylus"
+stylint = require "gulp-stylint"
 
 karma = require "gulp-karma"
 {protractor} = require "gulp-protractor"
@@ -21,7 +22,7 @@ sourcemaps = require "gulp-sourcemaps"
 util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
-modRewrite  = require "connect-modrewrite"
+modRewrite = require "connect-modrewrite"
 
 DOC_FILES = [
     "./README.MD"
@@ -34,11 +35,15 @@ DOC_FILES = [
 ]
 
 COPY_FILES =
-    img: "./app/statics/assets/images/**/*.*"
+    img: [
+        "./app/statics/assets/images/**/*.*"
+        "./bower_components/leaflet/dist/images/marker-icon.png"
+    ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
-        "./bower_components/bootstrap/dists/fonts/*.*"
+        "./bower_components/bootstrap/dist/fonts/*.*"
     ]
+    lang: "./app/statics/languages/**/*.json"
 
 BASEURL = "http://localhost:3123"
 
@@ -72,13 +77,17 @@ BUILD =
             "./bower_components/angular/angular.js"
             "./bower_components/angular-route/angular-route.js"
             "./bower_components/angular-resource/angular-resource.js"
-            "./bower_components/angular-animate/angular-animate.js"
             "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/angular-translate/angular-translate.js"
+            "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
+            "./bower_components/shp/dist/shp.js"
+            "./bower_components/papa-parse/papaparse.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -93,6 +102,7 @@ BUILD =
         html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
+        lang: "./build/languages"
         docs: "./docs"
     module: "app"
     app: "app.js"
@@ -145,6 +155,7 @@ gulp.task "build",
         "build:source:coffee:watch"
         "build:source:stylus:watch"
         "build:source:jade:watch"
+        "copy:languages:watch"
     ]
     ->
         reload()
@@ -186,7 +197,9 @@ gulp.task "lint:stylus",
     "Lints all Stylus source files.",
     ->
         gulp.src STYL_FILES
-        #.pipe cached "lint:stylus"
+        .pipe cached "lint:stylus"
+        .pipe stylint
+            config: './.stylintrc'
 
 ###
     BUILDING PLUGINS
@@ -272,6 +285,7 @@ gulp.task "copy",
     [
         "copy:img"
         "copy:fonts"
+        "copy:languages"
     ]
 
 gulp.task "copy:img",
@@ -287,6 +301,13 @@ gulp.task "copy:fonts",
         gulp.src COPY_FILES.fonts
         #.pipe cached "copy:fonts"
         .pipe gulp.dest BUILD.dirs.fonts
+
+gulp.task "copy:languages",
+    false,
+    ->
+        gulp.src COPY_FILES.lang
+        .pipe gulp.dest BUILD.dirs.lang
+        .pipe
 
 ###
     CLEANING
@@ -327,20 +348,24 @@ gulp.task "docs",
 ###
     BROWSERSYNC SERVER
 ###
-gulp.task "run", "Serves the App.", ->
-    browserSync.init
-        server:
-            baseDir: BUILD.dirs.out
-            index: "/statics/master.html"
-            middleware: [ modRewrite([ '!\\.\\w+$ /statics/master.html [L]' ]) ]
-        open: false
-        port: 3123
-        ui:
-            port: 3124
-            weinre: 3125
-        logLevel: "info"
-        notify: false
-        logPrefix: "VIDATIO"
+gulp.task "run", "Serves the App.",
+    [
+        "build"
+    ],
+    ->
+        browserSync.init
+            server:
+                baseDir: BUILD.dirs.out
+                index: "/statics/master.html"
+                middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
+            open: false
+            port: 3123
+            ui:
+                port: 3124
+                weinre: 3125
+            logLevel: "info"
+            notify: false
+            logPrefix: "VIDATIO"
 
 ###
     LIVE-RELOAD
@@ -369,6 +394,14 @@ gulp.task "build:source:jade:reload",
     [
         "clean:html"
         "build:cache"
+    ]
+    ->
+        reload()
+
+gulp.task "copy:languages:reload",
+    false,
+    [
+        "copy:languages"
     ]
     ->
         reload()
@@ -402,3 +435,11 @@ gulp.task "build:source:coffee:watch",
     ]
     ->
         gulp.watch BUILD.source.coffee, ["build:source:coffee:reload"]
+
+gulp.task "copy:languages:watch",
+    "Copies language files to '#{COPY_FILES.lang}' to '#{BUILD.dirs.lang}'.",
+    [
+        "copy:languages"
+    ]
+    ->
+        gulp.watch COPY_FILES.lang, ["copy:languages:reload"]
