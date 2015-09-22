@@ -46,13 +46,6 @@ app.service 'ConverterService', [
                         latitude = parseFloat(coordinates[0])
                         feature.geometry.coordinates = [longitude, latitude]
                         feature.geometry.type = "Point"
-                    else if coordinates.length == 4
-                        latitude0 = parseFloat(coordinates[0])
-                        longitude0 = parseFloat(coordinates[1])
-                        latitude1 = parseFloat(coordinates[2])
-                        longitude1 = parseFloat(coordinates[3])
-                        feature.geometry.coordinates = [[longitude0, latitude0], [longitude1, latitude1]]
-                        feature.geometry.type = "LineString"
                     else
                         #coordinates.forEach (coordinate, index) ->
                         # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
