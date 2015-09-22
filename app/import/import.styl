@@ -15,16 +15,6 @@
             .icon-and-text-wrapper
                 position absolute
                 {overlayParent}
-        .progress-disabled
-            border-top 3px solid $color-disabled-hover !important
-            background $color-shadow
-            &:hover
-                background $color-disabled-border
-                cursor not-allowed !important
-                .option-icon, h3
-                    display block !important
-                .hover-wrapper
-                    display none !important
         .option-icon
             width 100px
             margin 50px auto 0
@@ -147,23 +137,3 @@
             {overlayParent}
 
 
-
-import-progress-bar
-    position absolute
-    top 0
-    left 0
-    z-index 0
-    {fillParent}
-    .bar
-        position absolute
-        width 0
-        height 100%
-        transition(width .25s ease-in-out)
-        background-color rgba($color-green, 0.5)
-        z-index 10
-    .text span
-        position absolute
-        bottom -20px
-        font-size 6em
-        right 10px
-        display none
