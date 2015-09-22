@@ -9,9 +9,66 @@ app.service 'ConverterService', [
     "HelperService"
     (Parser, Helper) ->
         class Converter
-            convertSHP2GeoJSON: (buffer) ->
-                shp(buffer).then (geoJSON) ->
-                    return geoJSON
+            convertArrays2GeoJSON: (dataset) ->
+                dataset = Helper.trimDataset(dataset)
+
+                geoJSON =
+                    "type": "FeatureCollection"
+                    "features": []
+
+                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
+
+                dataset.forEach (row) ->
+                    coordinates = []
+
+                    if indicesCoordinates.hasOwnProperty("xy")
+                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                        coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
+                        coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
+                    else
+                        # TODO print failure to the user
+                        return
+
+                    if coordinates.length == 0
+                        return
+
+                    feature = JSON.parse(JSON.stringify(
+                        "type": "Feature"
+                        "geometry":
+                            "type": undefined
+                            "coordinates": []
+                        "properties": {}
+                    ))
+
+                    if coordinates.length == 2
+                        longitude = parseFloat(coordinates[1])
+                        latitude = parseFloat(coordinates[0])
+                        feature.geometry.coordinates = [longitude, latitude]
+                        feature.geometry.type = "Point"
+                    else if coordinates.length == 4
+                        latitude0 = parseFloat(coordinates[0])
+                        longitude0 = parseFloat(coordinates[1])
+                        latitude1 = parseFloat(coordinates[2])
+                        longitude1 = parseFloat(coordinates[3])
+                        feature.geometry.coordinates = [[longitude0, latitude0], [longitude1, latitude1]]
+                        feature.geometry.type = "LineString"
+                    else
+                        #coordinates.forEach (coordinate, index) ->
+                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
+                        return
+
+                    # All none coordinate cell should be filled into the properties of the feature
+                    row.forEach (cell, indexColumn) ->
+                        if indicesCoordinates.hasOwnProperty("xy")
+                            if(indexColumn != indicesCoordinates["xy"])
+                                feature.properties[indexColumn] = (cell)
+                        else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                            if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
+                                feature.properties[indexColumn] = (cell)
+
+                    geoJSON.features.push(feature)
+                return geoJSON
 
             convertCSV2Arrays: (csv) ->
                 return Papa.parse(csv).data
@@ -73,66 +130,9 @@ app.service 'ConverterService', [
 
                     return dataset
 
-            convertArrays2GeoJSON: (dataset) ->
-                dataset = Helper.trimDataset(dataset)
-
-                geoJSON =
-                    "type": "FeatureCollection"
-                    "features": []
-
-                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
-
-                dataset.forEach (row) ->
-                    coordinates = []
-
-                    if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
-                        coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
-                        coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
-                    else
-                        # TODO print failure to the user
-                        return
-
-                    if coordinates.length == 0
-                        return
-
-                    feature = JSON.parse(JSON.stringify(
-                        "type": "Feature"
-                        "geometry":
-                            "type": undefined
-                            "coordinates": []
-                        "properties": {}
-                    ))
-
-                    if coordinates.length == 2
-                        longitude = parseFloat(coordinates[1])
-                        latitude = parseFloat(coordinates[0])
-                        feature.geometry.coordinates = [longitude, latitude]
-                        feature.geometry.type = "Point"
-                    else if coordinates.length == 4
-                        latitude0 = parseFloat(coordinates[0])
-                        longitude0 = parseFloat(coordinates[1])
-                        latitude1 = parseFloat(coordinates[2])
-                        longitude1 = parseFloat(coordinates[3])
-                        feature.geometry.coordinates = [[longitude0, latitude0], [longitude1, latitude1]]
-                        feature.geometry.type = "LineString"
-                    else
-                        #coordinates.forEach (coordinate, index) ->
-                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
-                        return
-
-                    # All none coordinate cell should be filled into the properties of the feature
-                    row.forEach (cell, indexColumn) ->
-                        if indicesCoordinates.hasOwnProperty("xy")
-                            if(indexColumn != indicesCoordinates["xy"])
-                                feature.properties[indexColumn] = (cell)
-                        else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
-                            if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
-                                feature.properties[indexColumn] = (cell)
-
-                    geoJSON.features.push(feature)
-                return geoJSON
+            convertSHP2GeoJSON: (buffer) ->
+                shp(buffer).then (geoJSON) ->
+                    return geoJSON
 
         new Converter
 ]
