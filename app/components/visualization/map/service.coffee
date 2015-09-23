@@ -12,6 +12,11 @@ app.service 'MapService', [ ->
                 "type": "FeatureCollection"
                 "features": []
 
+        resetGeoJSON: ->
+            @geoJSON =
+                "type": "FeatureCollection"
+                "features": []
+
         # @method setGeoJSON
         # @description sets new geoJSON data, which automatically updates the map.
         # @param {geoJSON} data
@@ -40,31 +45,30 @@ app.service 'MapService', [ ->
 
             if keys[0] == "coordinates"
                 if @isNumeric(newData)
-                    if @geoJSON.features[row].geometry.type == "Point"
+                    if @geoJSON.features[row].geometry.type is "Point"
                         if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                             @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
                         else
-                            console.log "Point does not exist"
+                            console.warn "Point does not exist"
                             return false
-                    else if @geoJSON.features[row].geometry.type == "Polygon"
+                    else if @geoJSON.features[row].geometry.type is "Polygon"
                         arrayIndex = Math.floor(keys[1] / 2)
                         index = keys[1] % 2
                         if Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
                             @geoJSON.features[row].geometry.coordinates[0][arrayIndex][index] = newData
                         else
-                            # Array does not exist and can't be updated
-                            console.log "Array does not exist and can't be updated"
+                            console.warn "Array does not exist and can't be updated"
                             # The table has to be reseted if the array can't be updated
                             return false
                 else
-                    console.log "Value is not a Number"
+                    console.warn "Value is not a Number"
                     return false
 
-            else if keys[0] == "bbox"
+            else if keys[0] is "bbox"
                 if @isNumeric(newData)
                     @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                 else
-                    console.log "Value is not a Number"
+                    console.warn "Value is not a Number"
                     return false
 
             # check if colHeader is part of properties

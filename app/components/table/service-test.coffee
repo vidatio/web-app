@@ -38,7 +38,7 @@ describe "Service Table", ->
     it 'should set the dataset', ->
         dataset = [[20,90], ["test", "test2"]]
         @TableService.setDataset dataset
-        @TableService.reset()
+        @TableService.resetDataset()
 
         expect(@TableService.dataset.length).toEqual 1
         expect(@TableService.dataset[0].length).toEqual 0

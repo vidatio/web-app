@@ -22,7 +22,7 @@ app.factory 'ConverterService', [ ->
                 dataset = []
 
                 geoJSON.features.forEach (feature) ->
-                    if feature.geometry.type == "MultiPolygon"
+                    if feature.geometry.type is "MultiPolygon"
                         feature.geometry.coordinates.forEach (polygon, index) ->
                             newRow = []
 
@@ -30,10 +30,10 @@ app.factory 'ConverterService', [ ->
                                 newRow.push value
 
                             for property, value of feature.geometry
-                                if property == "bbox"
+                                if property is "bbox"
                                     value.forEach (coordinate) ->
                                         newRow.push coordinate
-                                else if property == "coordinates"
+                                else if property is "coordinates"
                                     newRow.push "Polygon " + (index + 1)
                                     polygon.forEach (pair) ->
                                         pair.forEach (coordinates) ->
@@ -51,12 +51,12 @@ app.factory 'ConverterService', [ ->
                             newRow.push value
 
                         for property, value of feature.geometry
-                            if property == "bbox"
+                            if property is "bbox"
                                 value.forEach (coordinate) ->
                                     newRow.push coordinate
 
-                            else if property == "coordinates"
-                                if feature.geometry.type == "Point"
+                            else if property is "coordinates"
+                                if feature.geometry.type is "Point"
                                     feature.geometry.coordinates.forEach (coordinate) ->
                                         newRow.push coordinate
 
@@ -114,7 +114,7 @@ app.factory 'ConverterService', [ ->
 
             for property, value of geoJSON.features[maxIndex].geometry
 
-                if property == "bbox" || property == "coordinates"
+                if property is "bbox" or property is "coordinates"
                     colHeaders = @addHeaderCols(value, colHeaders, property, 0)
 
                 else

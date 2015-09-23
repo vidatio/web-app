@@ -20,8 +20,9 @@ app.controller "ImportCtrl", [
         $scope.progress = Import.progress
 
         $scope.continueToEmptyTable = ->
-            Table.reset()
+            Table.resetDataset()
             Table.resetColHeaders()
+            Map.resetGeoJSON()
             $location.path "/editor"
 
         # Read via link
