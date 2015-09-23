@@ -15,7 +15,7 @@ app.directive "importProgressBar", ->
         progressBar = $element.find ".bar"
         progressText = $element.find ".text span"
 
-        progressBar.width $scope.progress
+        progressBar.width 0
 
         $attributes.$observe "type", (newVal, oldVal) ->
             #This ignores the initial load, where newVal is still undefined
