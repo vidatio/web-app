@@ -23,8 +23,9 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
-            Table.reset()
+            Table.resetDataset()
             Table.resetColHeaders()
+            Map.resetGeoJSON()
             $location.path editorPath
 
         # Read via link
