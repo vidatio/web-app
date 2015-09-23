@@ -39,7 +39,6 @@ describe "Service Converter", ->
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
-        #TODO further datasets tests, with more attributes for example
         dataset = [
             ["City", "Content", "GEOMETRIE"]
             ["Innsbruck", "40,5%", "POINT (49 11)"]
