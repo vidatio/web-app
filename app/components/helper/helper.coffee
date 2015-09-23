@@ -37,7 +37,7 @@ app.service 'HelperService', [ ->
         ###
         #    @param {dataset} is used to create a matrix which has the amount of cells row and column wise as the dataset
         ###
-        createMatrix: (dataset, initial, maxRows) ->
+        createMatrix: (dataset, initial) ->
             matrix = []
             dataset.forEach (row, indexRow) ->
                 matrix.push([])
@@ -52,12 +52,12 @@ app.service 'HelperService', [ ->
 
         cutDataset: (dataset) ->
             tmp = []
-            for index in dataset
-                if index >= @rowLimit
-                    return tmp
+            for element, index in dataset
+                if index == @rowLimit
+                    break
+                tmp.push element
 
-                tmp.push dataset[index]
-
+            return tmp
 
     new Helper
 ]
