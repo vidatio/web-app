@@ -130,8 +130,6 @@ app.service 'ParserService', [
                 return false
 
             findCoordinatesColumns: (dataset) ->
-                dataset = Helper.trimDataset(dataset)
-
                 indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
 
                 if(!(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy")))
