@@ -29,6 +29,7 @@ app.directive 'hot', [
                 afterChange: (change, source) ->
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
+                        Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3]) if change
                         $scope.$applyAsync()
             )
 
