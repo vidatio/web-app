@@ -36,7 +36,7 @@ app.controller "VisualizationCtrl", [
                 new (L.marker)(latlng, icon: L.icon(icon))
 
             onEachFeature: (feature, layer) ->
-                # So every markers gets an popup
+                # So every markers gets a popup
                 html = ""
                 for property of feature.properties
                     html += feature.properties[property] + "<br>"
