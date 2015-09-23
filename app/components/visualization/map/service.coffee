@@ -12,16 +12,23 @@ app.service 'MapService', [ ->
                 "type": "FeatureCollection"
                 "features": []
 
+        # @method setGeoJSON
+        # @description sets new geoJSON data, which automatically updates the map.
+        # @param {geoJSON} data
         setGeoJSON: (data) ->
             # safely remove all items, keeps data binding alive
             @geoJSON.features.splice 0, @geoJSON.features.length
             @geoJSON.features = data.features
 
+        # @method isNumeric
+        # @description checks if a value is numeric.
+        # @param {Mixed} n
+        # @return {Boolean}
         isNumeric: (n) ->
             return (!isNaN(parseFloat(n)) && isFinite(n))
 
-        # updates the geoJSON object(generated from shp file) used for the map after data table changes.
         # @method updateGeoJSONwithSHP
+        # @description updates the geoJSON object(generated from shp file) used for the map after data table changes.
         # @param {integer} row
         # @param {integer} column
         # @param {number or string} oldData
