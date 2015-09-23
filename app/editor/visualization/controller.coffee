@@ -13,8 +13,8 @@ app.controller "VisualizationCtrl", [
 
         # Default settings - Works like scope.center, etc.
         $scope.center =
-            lat: 47.723407
-            lng: 13.086921
+            lat: 46.723407
+            lng: 17.086921
             zoom: 7
 
         icon =

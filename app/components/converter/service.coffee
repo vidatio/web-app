@@ -1,3 +1,6 @@
+# # Converter Service
+
+
 "use strict"
 
 app = angular.module "app.services"
@@ -11,6 +14,10 @@ app.factory 'ConverterService', [ ->
         convertCSV2Arrays: (csv) ->
             return Papa.parse(csv).data
 
+        # converts a geoJSON object into a two dimensional array, which can be used in the data table.
+        # @method convertGeoJSON2Arrays
+        # @param {geoJSON} geoJSON
+        # @return {array}
         convertGeoJSON2Arrays: (geoJSON) ->
                 dataset = []
 
@@ -66,34 +73,68 @@ app.factory 'ConverterService', [ ->
 
                 return dataset
 
-        addSpace: (value, array) =>
+        # adds multiple column headers with the same name and an incrementing counter.
+        # @method addHeaderCols
+        # @param {array} value
+        # @param {array} array The header to add more headers with the same text.
+        # @param {string} text The text to be added.
+        # @param {integer} counter
+        # @return {array}
+        addHeaderCols: (value, array, text, counter) =>
             if Array.isArray value
                 value.forEach (element) =>
-                    array.push ""
-                    array = @addSpace(element, array)
+                    if Array.isArray element
+                        array = @addHeaderCols(element, array, text, counter)
+                        counter = counter + 2
+                    else
+                        array.push text + " " + counter.toString()
+                        counter++
 
             return array
 
+        # extracts the column headers for the table from a geoJSON object and returns them.
+        # @method convertGeoJSON2ColHeaders
+        # @param {geoJSON} geoJSON
+        # @return {array}
         convertGeoJSON2ColHeaders: (geoJSON) ->
             colHeaders = []
 
-            for property, value of geoJSON.features[0].properties
+            maxIndex = 0
+            maxSize = 0
+
+            # Finds the biggest multidimensional array.
+            for property, value of geoJSON.features
+                currentSize = @sizeOfMultiArray value.geometry.coordinates
+                if currentSize > maxSize
+                    maxSize = currentSize
+                    maxIndex = property
+
+            for property, value of geoJSON.features[maxIndex].properties
                 colHeaders.push property
 
-            for property, value of geoJSON.features[0].geometry
-                colHeaders.push property
+            for property, value of geoJSON.features[maxIndex].geometry
 
-                if property == "bbox"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                if property == "bbox" || property == "coordinates"
+                    colHeaders = @addHeaderCols(value, colHeaders, property, 0)
 
-                else if property == "coordinates"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                else
+                    colHeaders.push property
 
             return colHeaders
+
+        # Returns the size of a multidimensional array.
+        # @method sizeOfMultiArray
+        # @param {Array} array
+        sizeOfMultiArray: (array) ->
+            size = 0
+
+            if Array.isArray array[0]
+                for property, value of array
+                    size = size + @sizeOfMultiArray(value)
+                return size
+
+            else
+                return array.length
 
         convertArrays2GeoJSON: (arrays) ->
             geoJSON =

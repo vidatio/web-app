@@ -5,25 +5,24 @@ app = angular.module "app.services"
 app.service 'DataService', [
     "MapService"
     "TableService"
-    (Map, Table) ->
+    "ConverterService"
+    (Map, Table, Converter) ->
         class Data
             constructor: ->
-                @geoJSON
-
-            setGeoJSON: (geoJSON) ->
-                @geoJSON = geoJSON
+                @meta =
+                    "fileType": ""
 
             updateTableAndMap: (row, column, oldData, newData) ->
-                Table.setCell(row, column, newData)
+                key = Table.colHeaders[column]
 
-                this.updateGeoJSON(row, column, oldData, newData)
+                if @meta.fileType == "shp"
+                    return Map.updateGeoJSONwithSHP(row, column, oldData, newData, key)
 
-                Map.setGeoJSON(@geoJSON)
+                else if @meta.fileType == "csv"
+                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
+                    Map.setGeoJSON(geoJSON)
 
-            updateGeoJSON: (row, column, oldData, newData) ->
-                # This funtion should update the geoJSON after table changes
-                # console.log "update"
-                # console.log @geoJSON.features[row]
+                return true
 
         new Data
 ]

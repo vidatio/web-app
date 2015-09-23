@@ -24,6 +24,7 @@ app.controller "ImportCtrl", [
 
         $scope.continueToEmptyTable = ->
             Table.reset()
+            Table.resetColHeaders()
             $location.path editorPath
 
         # Read via link
@@ -52,23 +53,23 @@ app.controller "ImportCtrl", [
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 switch fileType
+
                     when "csv"
-                        dataset = Converter.convertCSV2Arrays(fileContent)
-                        geoJSON = Converter.convertArrays2GeoJSON(dataset)
-                        Data.setGeoJSON geoJSON
+                        Data.meta.fileType = "csv"
+                        dataset = Converter.convertCSV2Arrays fileContent
+                        geoJSON = Converter.convertArrays2GeoJSON dataset
+                        Table.resetColHeaders()
                         Table.setDataset dataset
                         Map.setGeoJSON geoJSON
+
                     when "zip"
+                        Data.meta.fileType = "shp"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
-                            dataset = Converter.convertGeoJSON2Arrays(geoJSON)
-                            Data.setGeoJSON(geoJSON)
-                            colHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON)
-
-                            Table.setDataset(dataset)
-                            Table.setColHeaders(colHeaders)
-
-                            console.log Table.colHeaders
-                            Map.setGeoJSON(geoJSON)
+                            dataset = Converter.convertGeoJSON2Arrays geoJSON
+                            colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+                            Table.setDataset dataset
+                            Table.setColHeaders colHeaders
+                            Map.setGeoJSON geoJSON
 
                 $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
                     $location.path editorPath

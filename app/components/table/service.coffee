@@ -11,8 +11,13 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
+            resetColHeaders: ->
+                @colHeaders.splice 0, @colHeaders.length
+
             setColHeaders: (colHeaders) ->
-                @colHeaders = colHeaders
+                @resetColHeaders()
+                colHeaders.forEach (item, index) =>
+                    @colHeaders[index] = item
 
             reset: ->
                 # safely remove all items, keeps data binding alive
