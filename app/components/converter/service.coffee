@@ -2,20 +2,38 @@
 
 app = angular.module "app.services"
 
-app.factory 'ConverterService', [ ->
-    class Converter
-        convertSHP2GeoJSON: (buffer) ->
-            shp(buffer).then (geoJSON) ->
-                return geoJSON
+# TODO: after extracting coordinates they have to be converted to decimal format
 
-        convertCSV2Arrays: (csv) ->
-            return Papa.parse(csv).data
+app.service 'ConverterService', [
+    "ParserService"
+    "HelperService"
+    (Parser, Helper) ->
+        class Converter
 
-        convertGeoJSON2Arrays: (geoJSON) ->
+            # @method convertSHP2GeoJSON
+            # @public
+            # @param {Buffer} buffer
+            # @return {Promise}
+            convertSHP2GeoJSON: (buffer) ->
+                shp(buffer).then (geoJSON) ->
+                    return geoJSON
+
+            # @method convertCSV2Arrays
+            # @public
+            # @param {CSV} csv
+            # @return {Array}
+            convertCSV2Arrays: (csv) ->
+                return Papa.parse(csv).data
+
+            # converts a geoJSON object into a two dimensional array, which can be used in the data table.
+            # @method convertGeoJSON2Arrays
+            # @param {geoJSON} geoJSON
+            # @return {array}
+            convertGeoJSON2Arrays: (geoJSON) ->
                 dataset = []
 
                 geoJSON.features.forEach (feature) ->
-                    if feature.geometry.type == "MultiPolygon"
+                    if feature.geometry.type is "MultiPolygon"
                         feature.geometry.coordinates.forEach (polygon, index) ->
                             newRow = []
 
@@ -23,10 +41,10 @@ app.factory 'ConverterService', [ ->
                                 newRow.push value
 
                             for property, value of feature.geometry
-                                if property == "bbox"
+                                if property is "bbox"
                                     value.forEach (coordinate) ->
                                         newRow.push coordinate
-                                else if property == "coordinates"
+                                else if property is "coordinates"
                                     newRow.push "Polygon " + (index + 1)
                                     polygon.forEach (pair) ->
                                         pair.forEach (coordinates) ->
@@ -44,12 +62,12 @@ app.factory 'ConverterService', [ ->
                             newRow.push value
 
                         for property, value of feature.geometry
-                            if property == "bbox"
+                            if property is "bbox"
                                 value.forEach (coordinate) ->
                                     newRow.push coordinate
 
-                            else if property == "coordinates"
-                                if feature.geometry.type == "Point"
+                            else if property is "coordinates"
+                                if feature.geometry.type is "Point"
                                     feature.geometry.coordinates.forEach (coordinate) ->
                                         newRow.push coordinate
 
@@ -57,7 +75,7 @@ app.factory 'ConverterService', [ ->
                                     feature.geometry.coordinates.forEach (pair) ->
                                         pair.forEach (coordinates) ->
                                             coordinates.forEach (coordinate) ->
-                                                    newRow.push coordinate
+                                                newRow.push coordinate
 
                             else
                                 newRow.push value
@@ -66,58 +84,132 @@ app.factory 'ConverterService', [ ->
 
                 return dataset
 
-        addSpace: (value, array) =>
-            if Array.isArray value
-                value.forEach (element) =>
-                    array.push ""
-                    array = @addSpace(element, array)
+            # adds multiple column headers with the same name and an incrementing counter.
+            # @method addHeaderCols
+            # @param {array} value
+            # @param {array} array The header to add more headers with the same text.
+            # @param {string} text The text to be added.
+            # @param {integer} counter
+            # @return {array}
+            addHeaderCols: (value, array, text, counter) =>
+                if Array.isArray value
+                    value.forEach (element) =>
+                        if Array.isArray element
+                            array = @addHeaderCols(element, array, text, counter)
+                            counter = counter + 2
+                        else
+                            array.push text + " " + counter.toString()
+                            counter++
 
-            return array
+                return array
 
-        convertGeoJSON2ColHeaders: (geoJSON) ->
-            colHeaders = []
+            # extracts the column headers for the table from a geoJSON object and returns them.
+            # @method convertGeoJSON2ColHeaders
+            # @param {geoJSON} geoJSON
+            # @return {array}
+            convertGeoJSON2ColHeaders: (geoJSON) ->
+                colHeaders = []
 
-            for property, value of geoJSON.features[0].properties
-                colHeaders.push property
+                maxIndex = 0
+                maxSize = 0
 
-            for property, value of geoJSON.features[0].geometry
-                colHeaders.push property
+                # Finds the biggest multidimensional array.
+                for property, value of geoJSON.features
+                    currentSize = @sizeOfMultiArray value.geometry.coordinates
+                    if currentSize > maxSize
+                        maxSize = currentSize
+                        maxIndex = property
 
-                if property == "bbox"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                for property, value of geoJSON.features[maxIndex].properties
+                    colHeaders.push property
 
-                else if property == "coordinates"
-                    colHeaders = @addSpace(value, colHeaders)
-                    # The last space has to be deleted, because the name itself uses already one space
-                    colHeaders.pop()
+                for property, value of geoJSON.features[maxIndex].geometry
 
-            return colHeaders
+                    if property is "bbox" or property is "coordinates"
+                        colHeaders = @addHeaderCols(value, colHeaders, property, 0)
 
-        convertArrays2GeoJSON: (arrays) ->
-            geoJSON =
-                "type": "FeatureCollection"
-                "features": []
+                    else
+                        colHeaders.push property
 
-            arrays.forEach (element) =>
-                lat = parseFloat(element[0])
-                lng = parseFloat(element[1])
-                if @isCoordinate(lat, lng)
+                return colHeaders
+
+            # Returns the size of a multidimensional array.
+            # @method sizeOfMultiArray
+            # @param {Array} array
+            sizeOfMultiArray: (array) ->
+                size = 0
+
+                if Array.isArray array[0]
+                    for property, value of array
+                        size = size + @sizeOfMultiArray(value)
+                    return size
+
+                else
+                    return array.length
+
+            # @method convertArrays2GeoJSON
+            # @public
+            # @param {Array} dataset
+            # @return {GeoJSON}
+            convertArrays2GeoJSON: (dataset) ->
+                dataset = Helper.trimDataset(dataset)
+
+                geoJSON =
+                    "type": "FeatureCollection"
+                    "features": []
+
+                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
+
+                dataset.forEach (row) ->
+                    coordinates = []
+
+                    # distinguish if coordinates are in the same column or in two different columns
+                    if indicesCoordinates.hasOwnProperty("xy")
+                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+
+                        if coordinates.length == 0
+                            # TODO print failure to the user
+                            return
+
+                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                        coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
+                        coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
+                    else
+                        # TODO print failure to the user
+                        return
+
+
+                    # JSON.parse(JSON.stringify(...)) deep copy the feature
+                    # that the properties object is not always the same
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
                             "type": undefined
                             "coordinates": []
+                        "properties": {}
                     ))
-                    feature.geometry.coordinates = [parseFloat(lng), parseFloat(lat)]
-                    feature.geometry.type = "Point"
+
+                    if coordinates.length == 2
+                        longitude = parseFloat(coordinates[1])
+                        latitude = parseFloat(coordinates[0])
+                        feature.geometry.coordinates = [longitude, latitude]
+                        feature.geometry.type = "Point"
+                    else
+                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
+                        return
+
+                    # All none coordinate cell should be filled into the properties of the feature
+                    if indicesCoordinates.hasOwnProperty("xy")
+                        row.forEach (cell, indexColumn) ->
+                            if(indexColumn != indicesCoordinates["xy"])
+                                feature.properties[indexColumn] = (cell)
+                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                        row.forEach (cell, indexColumn) ->
+                            if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
+                                feature.properties[indexColumn] = (cell)
+
                     geoJSON.features.push(feature)
-            return geoJSON
+                return geoJSON
 
-        isCoordinate: (lat, lng) ->
-            lat == Number(lat) and lat >= -90 and lat <= 90 &&
-                lng == Number(lng) and lng >= -180 and lng <= 180
-
-    new Converter
+        new Converter
 ]

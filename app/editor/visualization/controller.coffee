@@ -1,5 +1,5 @@
 # Visualization Controller
-# ===================
+# ========================
 
 "use strict"
 
@@ -9,14 +9,8 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    ($scope, Table, Map) ->
-
-        # Default settings - Works like scope.center, etc.
-        $scope.center =
-            lat: 47.723407
-            lng: 13.086921
-            zoom: 7
-
+    'leafletData'
+    ($scope, Table, Map, leafletData) ->
         icon =
             iconUrl: 'images/marker-icon.png'
             iconSize: [
@@ -28,13 +22,23 @@ app.controller "VisualizationCtrl", [
                 0
             ]
 
+        $scope.center = {}
+
+        leafletData.getMap().then (map) ->
+            Map.map = map
+            Map.init()
+
         $scope.geojson =
             data: Map.geoJSON
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
                 new (L.marker)(latlng, icon: L.icon(icon))
+
             onEachFeature: (feature, layer) ->
-                # use for displaying features
-                # layer.bindPopup 'number: '
+                # So every markers gets a popup
+                html = ""
+                for property of feature.properties
+                    html += feature.properties[property] + "<br>"
+                layer.bindPopup(html)
 ]
