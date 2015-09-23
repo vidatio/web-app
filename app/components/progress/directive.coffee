@@ -18,9 +18,9 @@ app.directive "importProgressBar", ->
         progressBar.width 0
 
         $attributes.$observe "type", (newVal, oldVal) ->
-            #This ignores the initial load, where newVal is still undefined
+            # This ignores the initial load, where newVal is still undefined
             if oldVal isnt newVal and !!newVal
-                #All three progress-bars have the same type and therefore it is needed to check if the type is the the same as the for-attribute (the actual use of the progress-bar); thus if it is true, the correct progress-bar is selected
+                # All three progress-bars have the same type and therefore it is needed to check if the type is the the same as the for-attribute (the actual use of the progress-bar); thus if it is true, the correct progress-bar is selected
                 if $attributes.for is $attributes.type
                     progressBar.width $attributes.progress + "%"
                     progressText.show()
