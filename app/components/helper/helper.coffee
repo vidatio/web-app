@@ -5,6 +5,7 @@ app = angular.module "app.services"
 app.service 'HelperService', [ ->
     class Helper
         constructor: ->
+            @rowLimit = 100
 
         trimDataset: (dataset) ->
             tmp = []
@@ -43,20 +44,20 @@ app.service 'HelperService', [ ->
                 row.forEach (column, indexColumn) ->
                     matrix[indexRow][indexColumn] = initial
 
-                if(indexRow >= maxRows)
-                    return
             return matrix
 
         isNumber: (value) ->
             return typeof value == "number" && isFinite(value)
 
-        areCoordinatesNumbers: (coordinates) ->
-            result = true
-            coordinates.forEach (coordinate) ->
-                if !_isNumber(coordinate)
-                    result = false
-                    return
-            return result
+
+        cutDataset: (dataset) ->
+            tmp = []
+            for index in dataset
+                if index >= @rowLimit
+                    return tmp
+
+                tmp.push dataset[index]
+
 
     new Helper
 ]
