@@ -6,6 +6,10 @@ app.service 'ParserService', [
     "HelperService"
     (Helper) ->
         class Parser
+            # @method isCoordinate
+            # @public
+            # @param {All Types} coordinate
+            # @return {Boolean}
             isCoordinate: (coordinate) ->
                 coordinate = String(coordinate).trim()
                 if(coordinate == "")
@@ -17,7 +21,11 @@ app.service 'ParserService', [
                             @isCoordinateWGS84UTM(coordinate) ||
                             @isCoordinateGaussKrueger(coordinate)
 
-            # N 90.123456, E 180.123456 to N -90.123456, E -180.123456
+            # allowed formats: N 90.123456, E 180.123456 to N -90.123456, E -180.123456
+            # @method isCoordinateWGS84DegreeDecimal
+            # @public
+            # @param {String} coordinate
+            # @return {Boolean}
             isCoordinateWGS84DegreeDecimal: (coordinate) ->
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
@@ -47,7 +55,11 @@ app.service 'ParserService', [
                 else
                     return false
 
-            # N 90° 59.999999,E 180° 59.999999 to N 0° 0, E 0° 0
+            # allowed formats: N 90° 59.999999,E 180° 59.999999 to N 0° 0, E 0° 0
+            # @method isCoordinateWGS84DegreeDecimalMinutes
+            # @public
+            # @param {String} coordinate
+            # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutes: (coordinate) ->
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
@@ -83,7 +95,11 @@ app.service 'ParserService', [
                 else
                     return false
 
-            # N 90° 59' 59.999999'',E 180° 59' 59.999999'' to N 0° 0, E 0° 0
+            # allowed formats: N 90° 59' 59.999999'',E 180° 59' 59.999999'' to N 0° 0, E 0° 0
+            # @method isCoordinateWGS84DegreeDecimalMinutesSeconds
+            # @public
+            # @param {String} coordinate
+            # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutesSeconds: (coordinate) ->
                 coordinate = coordinate.replace(/°/g, "").replace(/'/g, "").toLowerCase()
 
@@ -129,14 +145,26 @@ app.service 'ParserService', [
                 # TODO
                 return false
 
+            # first we try to find coordinates columns via the header
+            # if this fails we parse the dataset for coordinates
+            # @method findCoordinatesColumns
+            # @public
+            # @param {Array} dataset
+            # @return {Object}
             findCoordinatesColumns: (dataset) ->
-                indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, dataset)
+                choppedDataset = Helper.cutDataset(dataset)
+
+                indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, choppedDataset)
 
                 if(!(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy")))
-                    indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, dataset)
+                    indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, choppedDataset)
 
                 return indicesCoordinates
 
+            # @method extractCoordinatesOfOneCell
+            # @public
+            # @param {String} cell
+            # @return {Array}
             extractCoordinatesOfOneCell: (cell) ->
                 # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 
@@ -150,8 +178,6 @@ app.service 'ParserService', [
                         coordinates.push coordinate[0]
 
                 return coordinates
-
-            _maxNumberOfRowsToCheck = 100
 
             # every coordinate format has a 2d like mapping
             # so we search for x values and y values
@@ -170,8 +196,12 @@ app.service 'ParserService', [
                     "Geometry"
                 ]
 
+            # @method _findCoordinatesIndicesInDataset
+            # @private
+            # @param {Array} dataset
+            # @return {Object}
             _findCoordinatesIndicesInDataset = (dataset) ->
-                matrixPossibleCoordinates = Helper.createMatrix.call(this, dataset, false, _maxNumberOfRowsToCheck)
+                matrixPossibleCoordinates = Helper.createMatrix.call(this, dataset, false)
 
                 dataset.forEach (row, indexRow) =>
                     row.forEach (cell, indexCell) =>
@@ -189,36 +219,40 @@ app.service 'ParserService', [
                                     return
                                 if(indexRow == idx)
                                     return
-                            # But there can also be two coordinates in a single cell like "47.232, 13.854"
+                        # But there can also be two coordinates in a single cell like "47.232, 13.854"
                         else
                             # at least we need two separated coordinates
                             potentialCoordinates = cell.split(",")
                             if(potentialCoordinates.length != 2)
                                 return
-                                # too protocol the existence of two coordinates we use array in one cell of the matrix
+                            # too protocol the existence of two coordinates we use array in one cell of the matrix
                             else if(@isCoordinate(potentialCoordinates[0]) && @isCoordinate(potentialCoordinates[1]))
                                 matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
 
-                    # we don't have to check the hole dataset, only the first 100 rows for example
-                    if(indexRow >= _maxNumberOfRowsToCheck)
-                        return
-
                 return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
 
+            # @method _findCoordinatesIndicesInHeader
+            # @private
+            # @param {Array} dataset
+            # @return {Object}
             _findCoordinatesIndicesInHeader = (dataset) ->
                 indicesCoordinates = {}
+
                 # Because the header is always in the first row, we only search there for coordinate tags
                 dataset[0].forEach (cell, index) =>
                     if(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy"))
                         return
 
                     isCoordinateHeader = _checkWhiteList.call(this, cell)
-
                     if(isCoordinateHeader)
                         indicesCoordinates[isCoordinateHeader] = index
 
                 return indicesCoordinates
 
+            # @method _checkWhiteList
+            # @private
+            # @param {String} word
+            # @return {String}
             _checkWhiteList = (word) ->
                 result = undefined
                 word = String(word).trim().toLowerCase()
@@ -242,8 +276,10 @@ app.service 'ParserService', [
 
                 return result
 
-            # @param {matrix} the amount of rows and columns of the dataset with a boolean
-            #               in each cell if the content is a coordinate like
+            # @method _getIndicesOfCoordinateColumns
+            # @private
+            # @param {matrix} true/false matrix of each cell (true mean the cell contains a coordinate)
+            # @return {Object}
             _getIndicesOfCoordinateColumns = (matrix) ->
                 result = {}
 
@@ -262,6 +298,14 @@ app.service 'ParserService', [
 
                 return result
 
+            # calculate column scores, which are needed to distinguish the coordinates columns from other columns
+            # counts true values and so increases the score of the separate columns
+            # @method _rateColumns
+            # @private
+            # @param {matrix} true/false matrix of each cell (true mean the cell contains a coordinate)
+            # @return {Array}
+            #       - separateColumns {Boolean} is true if there is only one coordinate in one cell
+            #       - columnScores {Array} contains the scores (amount of possible coordinates per column) for all columns
             _rateColumns = (matrix) ->
                 columnScores = new Array(matrix[0].length)
 
@@ -290,8 +334,13 @@ app.service 'ParserService', [
                     columnScores
                 ]
 
+            # find the two largest numbers and their indices
+            # @method _findHighestScoreIndices
+            # @private
+            # @param {Boolean} separateColumns
+            # @param {Array} columnScores
+            # @return {Array}
             _findHighestScoreIndices = (separateColumns, columnScores) ->
-                # find the two largest numbers and their indices
                 largestNumber = -Infinity
                 secondLargestNumber = -Infinity
                 largestScoreIndex = 0

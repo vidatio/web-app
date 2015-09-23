@@ -7,6 +7,11 @@ app.service 'HelperService', [ ->
         constructor: ->
             @rowLimit = 100
 
+        # remove cells without values
+        # @method trimDataset
+        # @public
+        # @param {Array} dataset
+        # @return {Array}
         trimDataset: (dataset) ->
             tmp = []
 
@@ -34,9 +39,11 @@ app.service 'HelperService', [ ->
 
             return tmp
 
-        ###
-        #    @param {dataset} is used to create a matrix which has the amount of cells row and column wise as the dataset
-        ###
+        # @method trimDataset
+        # @public
+        # @param {Array} dataset is used to create a matrix which has the the same dimensions as the dataset
+        # @param {Number} initial value of each cell
+        # @return {Array}
         createMatrix: (dataset, initial) ->
             matrix = []
             dataset.forEach (row, indexRow) ->
@@ -46,10 +53,19 @@ app.service 'HelperService', [ ->
 
             return matrix
 
+        # @method isNumber
+        # @public
+        # @param {All Types} value
+        # @return {Boolean}
         isNumber: (value) ->
             return typeof value == "number" && isFinite(value)
 
 
+        # copy specified amount of rows
+        # @method cutDataset
+        # @public
+        # @param {Array} dataset
+        # @return {Array}
         cutDataset: (dataset) ->
             tmp = []
             for element, index in dataset

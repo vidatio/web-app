@@ -9,6 +9,11 @@ app.service 'ConverterService', [
     "HelperService"
     (Parser, Helper) ->
         class Converter
+
+            # @method convertArrays2GeoJSON
+            # @public
+            # @param {Array} dataset
+            # @return {GeoJSON}
             convertArrays2GeoJSON: (dataset) ->
                 dataset = Helper.trimDataset(dataset)
 
@@ -21,8 +26,14 @@ app.service 'ConverterService', [
                 dataset.forEach (row) ->
                     coordinates = []
 
+                    # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
                         coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+
+                        if coordinates.length == 0
+                            # TODO print failure to the user
+                            return
+
                     else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
                         coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
                         coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
@@ -30,9 +41,9 @@ app.service 'ConverterService', [
                         # TODO print failure to the user
                         return
 
-                    if coordinates.length == 0
-                        return
 
+                    # JSON.parse(JSON.stringify(...)) deep copy the feature
+                    # that the properties object is not always the same
                     feature = JSON.parse(JSON.stringify(
                         "type": "Feature"
                         "geometry":
@@ -47,22 +58,27 @@ app.service 'ConverterService', [
                         feature.geometry.coordinates = [longitude, latitude]
                         feature.geometry.type = "Point"
                     else
-                        #coordinates.forEach (coordinate, index) ->
                         # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
                         return
 
                     # All none coordinate cell should be filled into the properties of the feature
-                    row.forEach (cell, indexColumn) ->
-                        if indicesCoordinates.hasOwnProperty("xy")
+                    if indicesCoordinates.hasOwnProperty("xy")
+                        row.forEach (cell, indexColumn) ->
                             if(indexColumn != indicesCoordinates["xy"])
                                 feature.properties[indexColumn] = (cell)
-                        else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                        row.forEach (cell, indexColumn) ->
                             if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
                                 feature.properties[indexColumn] = (cell)
 
                     geoJSON.features.push(feature)
                 return geoJSON
 
+
+            # @method convertCSV2Arrays
+            # @public
+            # @param {CSV} csv
+            # @return {Array}
             convertCSV2Arrays: (csv) ->
                 return Papa.parse(csv).data
 
@@ -123,9 +139,12 @@ app.service 'ConverterService', [
 
                     return dataset
 
+            # @method convertSHP2GeoJSON
+            # @public
+            # @param {Buffer} buffer
+            # @return {Promise}
             convertSHP2GeoJSON: (buffer) ->
-                shp(buffer).then (geoJSON) ->
-                    return geoJSON
+                return shp(buffer)
 
         new Converter
 ]
