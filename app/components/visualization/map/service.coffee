@@ -41,8 +41,12 @@ app.service 'MapService', [ ->
             if keys[0] == "coordinates"
                 if @isNumeric(newData)
                     if @geoJSON.features[row].geometry.type == "Point"
-                        @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
-                    if @geoJSON.features[row].geometry.type == "Polygon"
+                        if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
+                            @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
+                        else
+                            console.log "Point does not exist"
+                            return false
+                    else if @geoJSON.features[row].geometry.type == "Polygon"
                         arrayIndex = Math.floor(keys[1] / 2)
                         index = keys[1] % 2
                         if Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
