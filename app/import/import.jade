@@ -1,4 +1,5 @@
 #import.wrapper-content(ng-controller="ImportCtrl")
+
     .options
         .row.other
             .col-sm-6
@@ -17,27 +18,34 @@
 
             .col-sm-4
                 #option-browse-filesystem.area
-                    .option-icon.icon-searchfiles
-                    h3 {{ "CHOOSE_FILE" | translate | uppercase }}
-                    input#input-browse-filesystem(type="file" ng-file-select)
+                    import-progress-bar(progress="{{importService.progress}}" type="{{type}}" for="selected")
+                    .icon-and-text-wrapper
+                        .option-icon.icon-searchfiles
+                        h3 {{ "CHOOSE_FILE" | translate | uppercase }}
+                        input#input-browse-filesystem(type="file" ng-file-select)
+
             .col-sm-4
                 #option-drag-and-drop.area
-                    .option-icon.icon-draganddrop
-                    h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
+                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="dragged" )
+                    .icon-and-text-wrapper
+                        .option-icon.icon-draganddrop
+                        h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
 
-                    .hover-wrapper
-                        .area
-                            .glyphicon.glyphicon-plus
-                            span.text {{ "FILE_DROP" | translate }}
+                        .hover-wrapper
+                            .area
+                                .glyphicon.glyphicon-plus
+                                span.text {{ "FILE_DROP" | translate }}
 
             .col-sm-4
                 #option-link.area
-                    .option-icon.icon-link
-                    h3 {{ "LINK" | translate | uppercase }}
-                    .input-group.form-link
-                        input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
-                        span.input-group-btn
-                            button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click="load()")
+                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="linked")
+                    .icon-and-text-wrapper
+                        .option-icon.icon-link
+                        h3 {{ "LINK" | translate | uppercase }}
+                        .input-group.form-link
+                            input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
+                            span.input-group-btn
+                                button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click='load("link")')
 
     #drop-zone
         .row

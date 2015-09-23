@@ -11,6 +11,13 @@ app.controller "VisualizationCtrl", [
     'MapService'
     'leafletData'
     ($scope, Table, Map, leafletData) ->
+
+        # Default settings - Works like scope.center, etc.
+        $scope.center =
+            lat: 46.723407
+            lng: 17.086921
+            zoom: 7
+
         icon =
             iconUrl: 'images/marker-icon.png'
             iconSize: [

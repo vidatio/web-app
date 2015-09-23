@@ -18,7 +18,7 @@ app.controller "EditorCtrl", [
         $rootScope.$watch ( (rootScope) ->
             rootScope.activeViews
         ), ((tabs) ->
-            changeViews(tabs) if tabs
+            changeViews tabs if tabs
         ), true
 
         # change active views when a tab in the header is clicked

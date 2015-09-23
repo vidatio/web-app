@@ -39,6 +39,8 @@ describe "Service Converter", ->
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
+
+    it 'should convert GeoJSON into arrays', ->
         dataset = [
             ["City", "Content", "GEOMETRIE"]
             ["Innsbruck", "40,5%", "POINT (49 11)"]
@@ -110,13 +112,43 @@ describe "Service Converter", ->
                 ],
                 [
                     "Point", "90", "70"
+
                 ]
             ]
 
-        @deferred.resolve(geoJSON)
+        expect(@Converter.convertGeoJSON2Arrays(geoJSON)).toEqual(result)
 
-        ######## That is working, but not very usefull?! ######
-        # expect((@Converter.convertSHP2GeoJSON(geoJSON)).$$state.value).toEqual(geoJSON)
+    it 'should extract Headers from GeoJSON', ->
+        geoJSON =
+        "type": "FeatureCollection"
+        "features": [{
+            "type": "Feature"
+            "geometry":
+                "type": "Point"
+                "coordinates": [70,90]
+            "properties":
+                "prop0": "value0"
+                "prop1": 0.0
+            }, {
+            "type": "Feature"
+            "geometry":
+                "type": "Polygon"
+                "coordinates": [
+                     [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                       [100.0, 1.0], [100.0, 0.0] ]
+                     ]
+            "properties":
+              "prop0": "value1"
+              "prop1": 1.0
+            }
+        ]
 
-        expect(@Converter.convertSHP2Arrays(geoJSON)).toEqual(result)
+        headers =
+            [
+                "prop0", "prop1", "type", "coordinates 0", "coordinates 1",
+                "coordinates 2", "coordinates 3", "coordinates 4", "coordinates 5",
+                "coordinates 6", "coordinates 7", "coordinates 8", "coordinates 9"
+            ]
+
+        expect(@Converter.convertGeoJSON2ColHeaders(geoJSON)).toEqual(headers)
 

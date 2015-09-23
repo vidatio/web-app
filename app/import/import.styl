@@ -12,6 +12,9 @@
             background $color-white
             box-shadow $box-shadow-size $color-shadow
             text-align center
+            .icon-and-text-wrapper
+                position absolute
+                {overlayParent}
         .option-icon
             width 100px
             margin 50px auto 0
@@ -73,6 +76,7 @@
                             font-size 16px
 
         #option-link
+            position relative
             #link-submit-button
                 top 0
             .form-link
@@ -131,3 +135,5 @@
             position fixed
             z-index: 999
             {overlayParent}
+
+

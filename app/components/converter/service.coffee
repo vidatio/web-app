@@ -1,3 +1,6 @@
+# # Converter Service
+
+
 "use strict"
 
 app = angular.module "app.services"
@@ -15,8 +18,7 @@ app.service 'ConverterService', [
             # @param {Buffer} buffer
             # @return {Promise}
             convertSHP2GeoJSON: (buffer) ->
-                shp(buffer).then (geoJSON) ->
-                    return geoJSON
+                return shp(buffer)
 
             # @method convertCSV2Arrays
             # @public
@@ -143,7 +145,6 @@ app.service 'ConverterService', [
                     for property, value of array
                         size = size + @sizeOfMultiArray(value)
                     return size
-
                 else
                     return array.length
 
@@ -166,18 +167,15 @@ app.service 'ConverterService', [
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
                         coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-
                         if coordinates.length == 0
                             # TODO print failure to the user
                             return
-
                     else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
                         coordinates.push(parseFloat(row[indicesCoordinates["y"]]))
                         coordinates.push(parseFloat(row[indicesCoordinates["x"]]))
                     else
                         # TODO print failure to the user
                         return
-
 
                     # JSON.parse(JSON.stringify(...)) deep copy the feature
                     # that the properties object is not always the same
@@ -209,6 +207,7 @@ app.service 'ConverterService', [
                                 feature.properties[indexColumn] = (cell)
 
                     geoJSON.features.push(feature)
+
                 return geoJSON
 
         new Converter

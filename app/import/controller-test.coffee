@@ -35,6 +35,7 @@ describe "Controller Import", ->
             @scope.load()
             @httpBackend.flush()
 
+
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
 
