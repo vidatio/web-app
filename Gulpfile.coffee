@@ -124,16 +124,6 @@ gulp.task "config:develop",
                 environment: "develop"
         .pipe gulp.dest BUILD.dirs.js
 
-gulp.task "config:production",
-    "Setting up config for production environment", ->
-        gulp.src BUILD.source.config
-        .pipe ngConstant
-            name: "app.config"
-            constants:
-                environment: "production"
-        .pipe gulp.dest BUILD.dirs.js
-
-
 # gulp.task 'constants',
 #     myConfig = require('./config.json')
 #     envConfig = myConfig[process.env]
