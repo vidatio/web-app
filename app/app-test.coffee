@@ -47,12 +47,15 @@
 describe 'me', ->
 
     beforeEach ->
-        module('served/config.json')
+        module('config.json')
 
     it 'should not fail', ->
         testFixture = undefined
-        inject (_servedConfig_) ->
-            testFixture = _servedConfig_
+        inject (_config_) ->
+            testFixture = _config_
 
-        expect(testFixture).toEqual prop: 'val'
+        expect(testFixture).toEqual(
+            config:
+                ENV: ""
+        )
 

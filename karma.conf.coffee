@@ -105,4 +105,4 @@ module.exports = (config) ->
 
         ngJson2JsPreprocessor:
             stripPrefix: "app/statics/constants/"
-            prependPrefix: "served/"
+            prependPrefix: ""
