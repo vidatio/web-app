@@ -154,6 +154,9 @@ app.service 'ParserService', [
             findCoordinatesColumns: (dataset) ->
                 choppedDataset = Helper.cutDataset(dataset)
 
+                if(choppedDataset.length == 0)
+                    return
+
                 indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, choppedDataset)
 
                 if(!(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy")))
@@ -236,6 +239,9 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInHeader = (dataset) ->
+
+                console.log "dataset", dataset
+
                 indicesCoordinates = {}
 
                 # Because the header is always in the first row, we only search there for coordinate tags
