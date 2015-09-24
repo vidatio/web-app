@@ -120,7 +120,7 @@ gulp.task "default",
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
-        "build"
+        "build:develop"
         "test"
         "run"
     ]
@@ -143,7 +143,7 @@ gulp.task "release",
         "build:cache"
     ]
 
-gulp.task "build",
+gulp.task "build:develop",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "copy"
@@ -347,7 +347,7 @@ gulp.task "docs",
 ###
 gulp.task "run", "Serves the App.",
     [
-        "build"
+        "build:develop"
     ],
     ->
         browserSync.init
