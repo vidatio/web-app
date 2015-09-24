@@ -115,14 +115,23 @@ BUILD =
     MAIN TASKS
 ###
 
-gulp.task "config",
-    "Config", ->
+gulp.task "config:develop",
+    "Setting up config for development environment", ->
         gulp.src BUILD.source.config
         .pipe ngConstant
-            name: BUILD.source.config
+            name: "app.config"
             constants:
-                myPropCnt: "Hola"
-        .pipe gulp.dest BUILD.dirs.out
+                environment: "develop"
+        .pipe gulp.dest BUILD.dirs.js
+
+gulp.task "config:production",
+    "Setting up config for production environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                environment: "production"
+        .pipe gulp.dest BUILD.dirs.js
 
 
 # gulp.task 'constants',
@@ -144,7 +153,7 @@ gulp.task "default",
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
-        "build:develop"
+        "build"
         "test"
         "run"
     ]
@@ -167,7 +176,7 @@ gulp.task "release",
         "build:cache"
     ]
 
-gulp.task "build:develop",
+gulp.task "build",
     "Lints and builds the project to '#{BUILD.dirs.out}'.",
     [
         "copy"
@@ -371,7 +380,7 @@ gulp.task "docs",
 ###
 gulp.task "run", "Serves the App.",
     [
-        "build:develop"
+        "build"
     ],
     ->
         browserSync.init

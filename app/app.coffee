@@ -9,6 +9,7 @@ app = angular.module "app", [
     "app.services"
     "app.directives"
     "app.filters"
+    "app.config"
     "pascalprecht.translate"
 ]
 
