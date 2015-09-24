@@ -20,7 +20,7 @@ app.controller "AppCtrl", [
         # save locale in rootScope to build links with correct language
         if $rootScope.locale != $stateParams.locale
             $rootScope.locale = $stateParams.locale
-        $translate.use $stateParams.locale
+            #$translate.use $stateParams.locale
 
         # switch language at runtime
         $scope.changeLanguage = (langKey) ->

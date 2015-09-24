@@ -33,13 +33,15 @@ app.config [
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
         $locationProvider.html5Mode true
 
-        $stateProvider
-        # forward user to /de/ if no language is chosen
-        .state "noLanguage",
-            url: "/"
-            onEnter: ($state) ->
-                $state.go "app.landingPage", { locale: "de" }
+        # I18N
+        $translateProvider.useSanitizeValueStrategy("escape")
+        $translateProvider.preferredLanguage("de")
+        $translateProvider.fallbackLanguage("de")
+        $translateProvider.useStaticFilesLoader
+            prefix: "languages/"
+            suffix: ".json"
 
+        $stateProvider
         # abstract state for language as parameter in URL
         .state "app",
             abstract: true
@@ -65,10 +67,16 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
-        # I18N
-        $translateProvider
-        .useStaticFilesLoader
-            prefix: "languages/"
-            suffix: ".json"
-        $translateProvider.preferredLanguage("de")
+        # not match was found in the states before (e.g. no language was provided in the URL)
+        .state "noMatch",
+            url:'*path',
+            onEnter: ($state, $stateParams) ->
+                locale =
+                    locale: $translateProvider.preferredLanguage()
+
+                # iterate over all states and check if the requested url exists as a state
+                $state.get().forEach (state) ->
+                    if $stateParams.path is state.url
+                        $state.go state.name, locale
+
 ]
