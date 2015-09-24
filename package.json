@@ -31,6 +31,7 @@
     "gulp-if": "^1.2.5",
     "gulp-jade": "^1.0.0",
     "gulp-karma": "0.0.4",
+    "gulp-ng-constant": "^1.1.0",
     "gulp-protractor": "^1.0.0",
     "gulp-shell": "^0.4.2",
     "gulp-sourcemaps": "^1.5.2",
