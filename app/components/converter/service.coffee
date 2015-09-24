@@ -171,7 +171,6 @@ app.service 'ConverterService', [
                             # TODO print failure to the user
                             return
                     else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
-                        console.log("X Y ")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])

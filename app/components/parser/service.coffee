@@ -239,9 +239,6 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInHeader = (dataset) ->
-
-                console.log "dataset", dataset
-
                 indicesCoordinates = {}
 
                 # Because the header is always in the first row, we only search there for coordinate tags

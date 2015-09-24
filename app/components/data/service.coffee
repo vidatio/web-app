@@ -24,8 +24,6 @@ app.service 'DataService', [
 
                 else
                     geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
-                    console.log("GEOJSON", geoJSON)
-                    # TODO: find bug in Converter or Parser, which returns false features in GeoJSON when a coordinate is typed manually
                     Map.setGeoJSON(geoJSON)
 
                 return true
