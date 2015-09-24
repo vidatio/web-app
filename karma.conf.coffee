@@ -14,7 +14,7 @@ module.exports = (config) ->
             "karma-jasmine"
             "karma-coffee-preprocessor"
             "karma-phantomjs-launcher"
-            "karma-ng-json2js-preprocessor"
+            "karma-ng-constant-preprocessor"
         ]
 
 
@@ -58,7 +58,7 @@ module.exports = (config) ->
         # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors:
             "**/*.coffee": ["coffee"]
-            "**/*.json": ["ng-json2js"]
+            "**/*.json": ["ng-constant"]
 
         coffeePreprocessor:
             options:
@@ -103,6 +103,7 @@ module.exports = (config) ->
         # if true, Karma captures browsers, runs the tests and exits
         singleRun: false
 
-        ngJson2JsPreprocessor:
-            stripPrefix: "app/statics/constants/"
-            prependPrefix: ""
+        ngConstantPreprocessor:
+            moduleName: "moduleName"
+            constantName: "constantName"
+

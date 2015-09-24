@@ -119,9 +119,9 @@ gulp.task "config:develop",
     "Setting up config for development environment", ->
         gulp.src BUILD.source.config
         .pipe ngConstant
-            name: "config.json"
+            name: "moduleName"
             constants:
-                config:
+                constantName:
                     ENV: "develop"
         .pipe gulp.dest BUILD.dirs.js
 

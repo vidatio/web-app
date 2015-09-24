@@ -9,7 +9,7 @@ app = angular.module "app", [
     "app.services"
     "app.directives"
     "app.filters"
-    "config.json"
+    "moduleName"
     "pascalprecht.translate"
 ]
 
@@ -19,9 +19,9 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "config"
-    ( $rootScope, $state, $stateParams, $http, $location, config) ->
-        console.log config
+    "constantName"
+    ( $rootScope, $state, $stateParams, $http, $location, constantName) ->
+        console.log constantName
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"

@@ -47,15 +47,15 @@
 describe 'me', ->
 
     beforeEach ->
-        module('config.json')
+        module('moduleName')
 
     it 'should not fail', ->
         testFixture = undefined
-        inject (_config_) ->
-            testFixture = _config_
+        inject (_constantName_) ->
+            testFixture = _constantName_
 
         expect(testFixture).toEqual(
-            config:
+            constantName:
                 ENV: ""
         )
 
