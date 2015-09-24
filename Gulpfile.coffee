@@ -24,6 +24,7 @@ cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
 ngConstant = require "gulp-ng-constant"
+uglify = require "gulp-uglify"
 
 DOC_FILES = [
     "./README.MD"
@@ -157,14 +158,15 @@ gulp.task "dev",
     ]
 
 gulp.task "production",
-    "Building the app for the users.",
+    "Builds the project for production to '#{BUILD.dirs.out}'.",
     [
         "copy"
         "config:production"
-        "build:plugins:js"
+        "build:production:plugins:js"
         "build:plugins:css"
         "build:production:source:coffee"
         "build:production:source:stylus"
+        "clean:html"
         "build:cache"
     ]
 
@@ -234,6 +236,14 @@ gulp.task "build:plugins:js",
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
 
+gulp.task "build:production:plugins:js",
+    "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
+    ->
+        gulp.src BUILD.plugins.js
+        .pipe uglify()
+        .pipe gif "*.js", concat(BUILD.plugin.js)
+        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
@@ -260,11 +270,12 @@ gulp.task "build:source:coffee",
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:production:source:coffee",
-    "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
+    "Compiles, uglifies and concatenates all coffeescript files for production to '#{BUILD.dirs.js}'.",
     []
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
+        .pipe uglify()
         .pipe concat(BUILD.app)
         .pipe gulp.dest(BUILD.dirs.js)
 
@@ -282,7 +293,7 @@ gulp.task "build:source:stylus",
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:production:source:stylus",
-    "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
+    "Compiles and concatenates all stylus files for production to '#{BUILD.dirs.css}'.",
     []
     ->
         gulp.src BUILD.source.stylus
