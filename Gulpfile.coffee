@@ -121,18 +121,19 @@ gulp.task "config:develop",
         .pipe ngConstant
             name: "app.config"
             constants:
-                environment: "develop"
+                ASDF:
+                    ENV: "develop"
         .pipe gulp.dest BUILD.dirs.js
 
-# gulp.task 'constants',
-#     myConfig = require('./config.json')
-#     envConfig = myConfig[process.env]
-#     return ngConstant({
-#       constants: envConfig,
-#       stream: true
-#     })
-#     .pipe(gulp.dest('dist'))
-
+gulp.task "config:production",
+    "Setting up config for development environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                CONST:
+                    ENV: "production"
+        .pipe gulp.dest BUILD.dirs.js
 
 gulp.task "default",
     "Runs 'develop' and 'test'.",
@@ -143,6 +144,7 @@ gulp.task "default",
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
+        "config:develop"
         "build"
         "test"
         "run"

@@ -19,10 +19,12 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ( $rootScope, $state, $stateParams, $http, $location) ->
+    "ASDF"
+    ( $rootScope, $state, $stateParams, $http, $location, ASDF) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
+        console.log ASDF
 ]
 
 app.config [
