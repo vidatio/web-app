@@ -23,6 +23,7 @@ util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
+ngConstant = require "gulp-ng-constant"
 
 DOC_FILES = [
     "./README.MD"
@@ -71,6 +72,9 @@ BUILD =
         html: [
             "./build/html/**/*.html"
         ]
+        config: [
+            "./app/constants/config.json"
+        ]
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
@@ -110,6 +114,26 @@ BUILD =
 ###
     MAIN TASKS
 ###
+
+gulp.task "config",
+    "Config", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: BUILD.source.config
+            constants:
+                myPropCnt: "Hola"
+        .pipe gulp.dest BUILD.dirs.out
+
+
+# gulp.task 'constants',
+#     myConfig = require('./config.json')
+#     envConfig = myConfig[process.env]
+#     return ngConstant({
+#       constants: envConfig,
+#       stream: true
+#     })
+#     .pipe(gulp.dest('dist'))
+
 
 gulp.task "default",
     "Runs 'develop' and 'test'.",
