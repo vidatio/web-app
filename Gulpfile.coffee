@@ -119,9 +119,9 @@ gulp.task "config:develop",
     "Setting up config for development environment", ->
         gulp.src BUILD.source.config
         .pipe ngConstant
-            name: "moduleName"
+            name: "app.config"
             constants:
-                constantName:
+                CONFIG:
                     ENV: "develop"
         .pipe gulp.dest BUILD.dirs.js
 
@@ -129,9 +129,9 @@ gulp.task "config:production",
     "Setting up config for development environment", ->
         gulp.src BUILD.source.config
         .pipe ngConstant
-            name: "config.json"
+            name: "app.config"
             constants:
-                config:
+                CONFIG:
                     ENV: "production"
         .pipe gulp.dest BUILD.dirs.js
 
@@ -156,15 +156,15 @@ gulp.task "dev",
         "develop"
     ]
 
-gulp.task "release",
+gulp.task "production",
     "Building the app for the users.",
     [
         "copy"
+        "config:production"
         "build:plugins:js"
         "build:plugins:css"
-        "build:source:coffee"
-        "build:source:stylus"
-        "clean:html"
+        "build:production:source:coffee"
+        "build:production:source:stylus"
         "build:cache"
     ]
 
@@ -259,6 +259,15 @@ gulp.task "build:source:coffee",
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
 
+gulp.task "build:production:source:coffee",
+    "Compiles and concatenates all coffeescript files to '#{BUILD.dirs.js}'.",
+    []
+    ->
+        gulp.src BUILD.source.coffee
+        .pipe coffee().on "error", util.log
+        .pipe concat(BUILD.app)
+        .pipe gulp.dest(BUILD.dirs.js)
+
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
     [
@@ -270,6 +279,15 @@ gulp.task "build:source:stylus",
         .pipe stylus
             compress: true
         .pipe sourcemaps.write('./map')
+        .pipe gulp.dest(BUILD.dirs.css)
+
+gulp.task "build:production:source:stylus",
+    "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
+    []
+    ->
+        gulp.src BUILD.source.stylus
+        .pipe stylus
+            compress: true
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:source:jade",
@@ -388,6 +406,24 @@ gulp.task "run", "Serves the App.",
             logLevel: "info"
             notify: false
             logPrefix: "VIDATIO"
+
+gulp.task "run:production", "Serves the App.",
+    [],
+    ->
+        browserSync.init
+            server:
+                baseDir: BUILD.dirs.out
+                index: "/statics/master.html"
+                middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
+            open: false
+            port: 3123
+            ui:
+                port: 3124
+                weinre: 3125
+            logLevel: "info"
+            notify: false
+            logPrefix: "VIDATIO"
+
 
 ###
     LIVE-RELOAD

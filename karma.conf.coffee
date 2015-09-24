@@ -104,6 +104,6 @@ module.exports = (config) ->
         singleRun: false
 
         ngConstantPreprocessor:
-            moduleName: "moduleName"
-            constantName: "constantName"
+            moduleName: "app.config"
+            constantName: "CONFIG"
 
