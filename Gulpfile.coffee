@@ -73,7 +73,7 @@ BUILD =
             "./build/html/**/*.html"
         ]
         config: [
-            "./app/constants/config.json"
+            "./app/statics/constants/config.json"
         ]
     plugins:
         js: [
