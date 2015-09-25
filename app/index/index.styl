@@ -147,9 +147,9 @@
 
     #popular-categories
         min-height 500px
-        background url(../images/placeholder-students.jpg)
-        background-size cover
+        background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
+
 
 /* space between live diagram and video in intro section */
 @media(max-width: 767px)
@@ -166,3 +166,11 @@
     #landing-page #intro .get-started
         margin-top 50px
         margin-bottom 140px
+
+@media(max-width: 1400px)
+    #landing-page #popular-categories
+        background-size 100%, cover
+
+@media(min-width: 1401px)
+    #landing-page #popular-categories
+        background-size 75%, cover

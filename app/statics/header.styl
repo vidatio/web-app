@@ -38,19 +38,8 @@ header
         background url(../images/back-to-import-button.png) no-repeat
         width 35px
         height 40px
-        float right
         position relative
-        right 15%
 
-        @media(max-width: 768px)
-            float left
-            left 20%
-
-        @media(min-width: 769px) and (max-width: 850px)
-            right 0
-
-        @media (min-width: 851px) and (max-width: 1024px)
-            right 10%
 
     .menu-buttons
         height 100%
@@ -120,3 +109,23 @@ header
 @media(max-width: 767px)
     .editor-panel
         margin-top: 20px
+
+    #back-to-import-button
+        float left
+        left 20%
+
+@media(min-width: 768px)
+    #back-to-import-button
+        float right
+
+@media(min-width: 768px) and (max-width: 850px)
+    #back-to-import-button
+        right 0
+
+@media (min-width: 851px) and (max-width: 1024px)
+    #back-to-import-button
+        right 10%
+
+@media (min-width: 1025px)
+    #back-to-import-button
+        right 15%
