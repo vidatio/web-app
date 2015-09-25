@@ -9,15 +9,6 @@ module.exports = (config) ->
         # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ["jasmine-jquery", "jasmine"]
 
-        plugins: [
-            "karma-jasmine-jquery"
-            "karma-jasmine"
-            "karma-coffee-preprocessor"
-            "karma-phantomjs-launcher"
-            "karma-ng-constant-preprocessor"
-        ]
-
-
         # list of files / patterns to load in the browser
         files: [
 
