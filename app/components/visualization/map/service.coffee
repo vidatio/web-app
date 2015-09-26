@@ -19,7 +19,7 @@ app.service 'MapService', [ ->
         # like fitting to the bounds of the geoJSON
         init: ->
             @setBoundsToGeoJSON()
-            @map.resizeMap()
+            @resizeMap()
 
         resetGeoJSON: ->
             @geoJSON =
@@ -35,7 +35,6 @@ app.service 'MapService', [ ->
             @geoJSON.features = data.features
 
             @setBoundsToGeoJSON()
-            @map.resizeMap()
 
         # Notifies the leaflet map to resize itself
         # @method resizeMap

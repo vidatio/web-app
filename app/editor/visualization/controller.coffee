@@ -21,7 +21,6 @@ app.controller "VisualizationCtrl", [
             Map.map = map
             $timeout ->
                 Map.init()
-            , 100
 
         $scope.geojson =
             data: Map.geoJSON
