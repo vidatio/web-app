@@ -17,8 +17,9 @@ app.controller "VisualizationCtrl", [
             iconSize: [ 25, 41 ]
             iconAnchor: [ 12.5, 41 ]
 
-        leafletData.getMap().then (map) ->
+        leafletData.getMap("map").then (map) ->
             Map.map = map
+            # Timeout is needed to wait for the view to finish render
             $timeout ->
                 Map.init()
 
