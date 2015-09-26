@@ -10,30 +10,18 @@ app.controller "VisualizationCtrl", [
     'TableService'
     'MapService'
     'leafletData'
-    ($scope, Table, Map, leafletData) ->
-
-        # Default settings - Works like scope.center, etc.
-        $scope.center =
-            lat: 46.723407
-            lng: 17.086921
-            zoom: 7
-
+    "$timeout"
+    ($scope, Table, Map, leafletData, $timeout) ->
         icon =
             iconUrl: 'images/marker-icon.png'
-            iconSize: [
-                25
-                41
-            ]
-            iconAnchor: [
-                12
-                0
-            ]
-
-        $scope.center = {}
+            iconSize: [ 25, 41 ]
+            iconAnchor: [ 12.5, 41 ]
 
         leafletData.getMap().then (map) ->
             Map.map = map
-            Map.init()
+            $timeout ->
+                Map.init()
+            , 100
 
         $scope.geojson =
             data: Map.geoJSON
