@@ -37,8 +37,7 @@ app.controller "ImportCtrl", [
                     url: url
             ).success (data) ->
                 Table.setDataset data
-                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
-                    $location.path editorPath
+                $location.path editorPath
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = (type) ->
@@ -72,9 +71,7 @@ app.controller "ImportCtrl", [
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
 
-                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
-                    $location.path editorPath
-                    $scope.$apply()
+                $location.path editorPath
 
 
             , (error) ->
