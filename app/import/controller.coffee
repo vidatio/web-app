@@ -15,7 +15,9 @@ app.controller "ImportCtrl", [
     "ConverterService"
     "MapService"
     "DataService"
-    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map, Data) ->
+    "ngToast"
+    "$translate"
+    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map, Data, ngToast, $translate) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
 
         $scope.importService = Import
@@ -49,7 +51,13 @@ app.controller "ImportCtrl", [
             fileType = fileType[fileType.length - 1]
 
             if(fileType != "csv" && fileType != "zip")
-                console.log "File format '" + fileType + "' is not supported."
+                $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
+                .then (translation) ->
+                    ngToast.create(
+                        content: translation
+                        className: "danger"
+                    )
+
                 return
 
             Import.readFile($scope.file, fileType).then (fileContent) ->

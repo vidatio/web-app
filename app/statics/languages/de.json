@@ -20,6 +20,10 @@
     "LINK_TO_FILE": "Link zur Datei",
     "DATA": "Daten",
     "VISUALIZATION": "Visualisierung",
-    "SAVE": "Speichern"
-
+    "SAVE": "Speichern",
+    "TOAST_MESSAGES": {
+        "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
+        "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
+        "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden."
+    }
 }

@@ -10,6 +10,7 @@ app = angular.module "app", [
     "app.directives"
     "app.filters"
     "pascalprecht.translate"
+    "ngToast"
 ]
 
 app.run [
@@ -30,7 +31,8 @@ app.config [
     "$locationProvider"
     "$httpProvider"
     "$translateProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
+    "ngToastProvider"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast ) ->
         $locationProvider.html5Mode true
 
         # I18N
@@ -40,6 +42,12 @@ app.config [
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
+
+
+        ngToast.configure(
+            animation: "fade"
+            dismissButton: true
+        )
 
         $stateProvider
         # abstract state for language as parameter in URL
@@ -69,7 +77,7 @@ app.config [
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
-            url:'*path',
+            url: '*path'
             onEnter: ($state, $stateParams) ->
                 locale =
                     locale: $translateProvider.preferredLanguage()
