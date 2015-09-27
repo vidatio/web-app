@@ -23,6 +23,9 @@ module.exports = (config) ->
             "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/papa-parse/papaparse.js"
+            "./bower_components/ngToast/dist/ngToast.min.js"
+            "./bower_components/angular-animate/angular-animate.min.js"
+            "./bower_components/angular-sanitize/angular-sanitize.min.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"

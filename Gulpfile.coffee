@@ -85,12 +85,17 @@ BUILD =
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
             "./bower_components/shp/dist/shp.js"
             "./bower_components/papa-parse/papaparse.js"
+            "./bower_components/angular-animate/angular-animate.min.js"
+            "./bower_components/angular-sanitize/angular-sanitize.min.js"
+            "./bower_components/ngToast/dist/ngToast.min.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/bootstrap/dist/css/bootstrap.min.css"
             "./bower_components/bootstrap/dist/css/bootstrap.css.map"
+            "./bower_components/ngToast/dist/ngToast.min.css"
+            "./bower_components/ngToast/dist/ngToast-animations.min.css"
         ]
     dirs:
         out: "./build"
