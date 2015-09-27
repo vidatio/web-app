@@ -7,7 +7,7 @@
         overflow hidden
 
         // Bugfix for scrollbar
-        // Further check later
+        // TODO: Further check later
         .ht_master .wtHolder
             width 100% !important
 
@@ -21,12 +21,6 @@
                 th
                     background $color-hover-light
                     border 2px solid white
-                    box-sizing border-box
-                    height 16px
-                    padding 5px 4px
-                    line-height 16px
-                    div
-                        padding 0
 
                 &:nth-child(odd) th
                     &.current-col
@@ -40,10 +34,7 @@
         .ht_master
             th, td
                 border 2px solid $color-white
-                height 16px
-                line-height 16px
-                padding 5px 4px
-
+                
             tbody tr
                 &:nth-child(odd) td
                     background $color-table-odd-passive
