@@ -14,8 +14,9 @@ app.controller "VisualizationCtrl", [
     ($scope, Table, Map, leafletData, $timeout) ->
         icon =
             iconUrl: '../images/marker-small.png'
-            iconSize: [25, 41]
-            iconAnchor: [12.5, 41]
+            iconSize: [25, 30]
+            iconAnchor: [12.5, 30]
+            popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
             Map.map = map
@@ -28,7 +29,6 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                console.log "icon!!!"
                 new L.marker(latlng, icon: L.icon(icon))
 
             onEachFeature: (feature, layer) ->
@@ -43,6 +43,10 @@ app.controller "VisualizationCtrl", [
                                 "'>" + feature.properties[property] + "</a><br>"
                     else
                         html += feature.properties[property] + "<br>"
+
+                if(html is "")
+                    html = "Keine Informationen vorhanden"
+
                 layer.bindPopup(html)
 
         phoneNumberCheck = (cell) ->
