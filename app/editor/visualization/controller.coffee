@@ -13,7 +13,7 @@ app.controller "VisualizationCtrl", [
     "$timeout"
     ($scope, Table, Map, leafletData, $timeout) ->
         icon =
-            iconUrl: 'images/marker-icon.png'
+            iconUrl: '../images/marker-small.png'
             iconSize: [25, 41]
             iconAnchor: [12.5, 41]
 
@@ -28,16 +28,17 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new (L.marker)(latlng, icon: L.icon(icon))
+                console.log "icon!!!"
+                new L.marker(latlng, icon: L.icon(icon))
 
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup
                 html = ""
                 for property of feature.properties
-                    if(mailAddressCheck(cell))
+                    if(mailAddressCheck(property))
                         html += "<a href='mailto:" + feature.properties[property] +
                                 "'>" + feature.properties[property] + "</a><br>"
-                    else if(phoneNumberCheck(cell))
+                    else if(phoneNumberCheck(property))
                         html += "<a href='tel:" + feature.properties[property] +
                                 "'>" + feature.properties[property] + "</a><br>"
                     else
@@ -46,9 +47,9 @@ app.controller "VisualizationCtrl", [
 
         phoneNumberCheck = (cell) ->
             regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d*)$/
-            return cell.test(regex)
+            return regex.test(cell)
 
         mailAddressCheck = (cell) ->
             regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-            return cell.test(regex)
+            return regex.test(cell)
 ]
