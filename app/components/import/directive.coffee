@@ -48,4 +48,4 @@ app.directive 'ngFileSelect', ->
     link: ($scope, el) ->
         el.bind "change", (e) ->
             $scope.file = (e.srcElement or e.target).files[0]
-            $scope.getFile("selected")
+            $scope.getFile()

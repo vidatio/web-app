@@ -1,4 +1,4 @@
-# Animals App
+# Vidatio App
 # ===========
 "use strict"
 
@@ -19,7 +19,7 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ( $rootScope, $state, $stateParams, $http, $location) ->
+    ($rootScope, $state, $stateParams, $http, $location) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"

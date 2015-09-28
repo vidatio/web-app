@@ -31,20 +31,17 @@ app.controller "ImportCtrl", [
             $location.path editorPath
 
         # Read via link
-        $scope.load = (type) ->
-            $scope.type = type
+        $scope.load = ->
             url = $scope.link
             $http.get($rootScope.apiBase + "/v0/import"
                 params:
                     url: url
             ).success (data) ->
                 Table.setDataset data
-                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
-                    $location.path editorPath
+                $location.path editorPath
 
         # Read via Browsing and Drag-and-Drop
-        $scope.getFile = (type) ->
-            $scope.type = type
+        $scope.getFile = ->
             # Can't use file.type because of chromes File API
 
             fileType = $scope.file.name.split "."
@@ -80,9 +77,7 @@ app.controller "ImportCtrl", [
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
 
-                $("import-progress-bar[for=" + type + "] .bar").one "transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", ->
-                    $location.path editorPath
-                    $scope.$apply()
+                $location.path editorPath
 
 
             , (error) ->

@@ -10,30 +10,18 @@ app.controller "VisualizationCtrl", [
     'TableService'
     'MapService'
     'leafletData'
-    ($scope, Table, Map, leafletData) ->
-
-        # Default settings - Works like scope.center, etc.
-        $scope.center =
-            lat: 46.723407
-            lng: 17.086921
-            zoom: 7
-
+    "$timeout"
+    ($scope, Table, Map, leafletData, $timeout) ->
         icon =
             iconUrl: 'images/marker-icon.png'
-            iconSize: [
-                25
-                41
-            ]
-            iconAnchor: [
-                12
-                0
-            ]
+            iconSize: [25, 41]
+            iconAnchor: [12.5, 41]
 
-        $scope.center = {}
-
-        leafletData.getMap().then (map) ->
+        leafletData.getMap("map").then (map) ->
             Map.map = map
-            Map.init()
+            # Timeout is needed to wait for the view to finish render
+            $timeout ->
+                Map.init()
 
         $scope.geojson =
             data: Map.geoJSON
@@ -46,6 +34,21 @@ app.controller "VisualizationCtrl", [
                 # So every markers gets a popup
                 html = ""
                 for property of feature.properties
-                    html += feature.properties[property] + "<br>"
+                    if(mailAddressCheck(cell))
+                        html += "<a href='mailto:" + feature.properties[property] +
+                                "'>" + feature.properties[property] + "</a><br>"
+                    else if(phoneNumberCheck(cell))
+                        html += "<a href='tel:" + feature.properties[property] +
+                                "'>" + feature.properties[property] + "</a><br>"
+                    else
+                        html += feature.properties[property] + "<br>"
                 layer.bindPopup(html)
+
+        phoneNumberCheck = (cell) ->
+            regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d*)$/
+            return cell.test(regex)
+
+        mailAddressCheck = (cell) ->
+            regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+            return cell.test(regex)
 ]
