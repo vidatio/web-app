@@ -18,7 +18,6 @@
 
             .col-sm-4
                 #option-browse-filesystem.area
-                    import-progress-bar(progress="{{importService.progress}}" type="{{type}}" for="selected")
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
                         h3 {{ "CHOOSE_FILE" | translate | uppercase }}
@@ -26,7 +25,6 @@
 
             .col-sm-4
                 #option-drag-and-drop.area
-                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="dragged" )
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
                         h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
@@ -38,7 +36,6 @@
 
             .col-sm-4
                 #option-link.area
-                    import-progress-bar(progress="{{importService.progress}}", type="{{type}}", for="linked")
                     .icon-and-text-wrapper
                         .option-icon.icon-link
                         h3 {{ "LINK" | translate | uppercase }}
