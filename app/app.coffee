@@ -18,7 +18,7 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ( $rootScope, $state, $stateParams, $http, $location) ->
+    ($rootScope, $state, $stateParams, $http, $location) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
@@ -30,7 +30,7 @@ app.config [
     "$locationProvider"
     "$httpProvider"
     "$translateProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider ) ->
+    ($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider) ->
         $locationProvider.html5Mode true
 
         # I18N
@@ -69,7 +69,7 @@ app.config [
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
-            url:'*path',
+            url: '*path'
             onEnter: ($state, $stateParams) ->
                 locale =
                     locale: $translateProvider.preferredLanguage()

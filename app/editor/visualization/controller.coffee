@@ -14,8 +14,8 @@ app.controller "VisualizationCtrl", [
     ($scope, Table, Map, leafletData, $timeout) ->
         icon =
             iconUrl: 'images/marker-icon.png'
-            iconSize: [ 25, 41 ]
-            iconAnchor: [ 12.5, 41 ]
+            iconSize: [25, 41]
+            iconAnchor: [12.5, 41]
 
         leafletData.getMap("map").then (map) ->
             Map.map = map
@@ -34,6 +34,21 @@ app.controller "VisualizationCtrl", [
                 # So every markers gets a popup
                 html = ""
                 for property of feature.properties
-                    html += feature.properties[property] + "<br>"
+                    if(mailAddressCheck(cell))
+                        html += "<a href='mailto:" + feature.properties[property] +
+                                "'>" + feature.properties[property] + "</a><br>"
+                    else if(phoneNumberCheck(cell))
+                        html += "<a href='tel:" + feature.properties[property] +
+                                "'>" + feature.properties[property] + "</a><br>"
+                    else
+                        html += feature.properties[property] + "<br>"
                 layer.bindPopup(html)
+
+        phoneNumberCheck = (cell) ->
+            regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d*)$/
+            return cell.test(regex)
+
+        mailAddressCheck = (cell) ->
+            regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+            return cell.test(regex)
 ]
