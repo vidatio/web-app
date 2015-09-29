@@ -51,16 +51,28 @@ app.service 'MapService', [
 
                 coordinates = []
                 @geoJSON.features.forEach (feature) ->
-                    if feature.geometry.type == "Point"
+                    if feature.geometry.type is "Point"
                         latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
                         coordinates.push(latLng)
-                    else if feature.geometry.type == "LineString"
+                    else if feature.geometry.type is "LineString"
                         feature.geometry.coordinates.forEach (latLng) ->
                             latLng = L.GeoJSON.coordsToLatLng(latLng)
                             coordinates.push(latLng)
+                    else if feature.geometry.type is "Polygon"
+                        feature.geometry.coordinates[0].forEach (latLng) ->
+                            latLng = L.GeoJSON.coordsToLatLng(latLng)
+                            coordinates.push(latLng)
+                    else if feature.geometry.type is "MultiPolygon"
+                        feature.geometry.coordinates.forEach (array) ->
+                            array[0].forEach ->
+                                latLng = L.GeoJSON.coordsToLatLng(latLng)
+                                coordinates.push(latLng)
+                    else
+                        console.warn "Geometry type not supported."
 
-                @bounds = L.latLngBounds(coordinates)
-                @map.fitBounds(@bounds)
+                if coordinates.length
+                    @bounds = L.latLngBounds(coordinates)
+                    @map.fitBounds(@bounds)
 
             # @method updateGeoJSONwithSHP
             # @description updates the geoJSON object(generated from shp file) used for the map after data table changes.
