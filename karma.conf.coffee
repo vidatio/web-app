@@ -9,7 +9,6 @@ module.exports = (config) ->
         # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ["jasmine-jquery", "jasmine"]
 
-
         # list of files / patterns to load in the browser
         files: [
 
@@ -35,6 +34,10 @@ module.exports = (config) ->
 
             #includes test files already
             "./app/*/**/*.coffee"
+            "./app/app-test.coffee"
+
+            #config
+            "./app/statics/constants/config.json"
         ]
 
 
@@ -42,11 +45,11 @@ module.exports = (config) ->
         exclude: [
         ]
 
-
         # preprocess matching files before serving them to the browser
         # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors:
             "**/*.coffee": ["coffee"]
+            "**/*.json": ["ng-constant"]
 
         coffeePreprocessor:
             options:
@@ -90,3 +93,8 @@ module.exports = (config) ->
         # Continuous Integration mode
         # if true, Karma captures browsers, runs the tests and exits
         singleRun: false
+
+        ngConstantPreprocessor:
+            moduleName: "app.config"
+            constantName: "CONFIG"
+
