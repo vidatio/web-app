@@ -6,8 +6,9 @@
 app = angular.module "app.services"
 
 app.service 'MapService', [
+    "ParserService"
     "HelperService"
-    (Helper) ->
+    (Parser, Helper) ->
         class Map
             constructor: ->
                 @map = undefined
@@ -52,21 +53,25 @@ app.service 'MapService', [
                 coordinates = []
                 @geoJSON.features.forEach (feature) ->
                     if feature.geometry.type is "Point"
-                        latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
-                        coordinates.push(latLng)
+                        if Parser.isCoordinate(feature.geometry.coordinates[0]) and Parser.isCoordinate(feature.geometry.coordinates[1])
+                            latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
+                            coordinates.push(latLng)
                     else if feature.geometry.type is "LineString"
                         feature.geometry.coordinates.forEach (latLng) ->
-                            latLng = L.GeoJSON.coordsToLatLng(latLng)
-                            coordinates.push(latLng)
-                    else if feature.geometry.type is "Polygon"
-                        feature.geometry.coordinates[0].forEach (latLng) ->
-                            latLng = L.GeoJSON.coordsToLatLng(latLng)
-                            coordinates.push(latLng)
-                    else if feature.geometry.type is "MultiPolygon"
-                        feature.geometry.coordinates.forEach (array) ->
-                            array[0].forEach ->
+                            if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
+                    else if feature.geometry.type is "Polygon"
+                        feature.geometry.coordinates[0].forEach (latLng) ->
+                            if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
+                                latLng = L.GeoJSON.coordsToLatLng(latLng)
+                                coordinates.push(latLng)
+                    else if feature.geometry.type is "MultiPolygon"
+                        feature.geometry.coordinates.forEach (array) ->
+                            array[0].forEach (latLng) ->
+                                if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
+                                    latLng = L.GeoJSON.coordsToLatLng(latLng)
+                                    coordinates.push(latLng)
                     else
                         console.warn "Geometry type not supported."
 
@@ -113,7 +118,7 @@ app.service 'MapService', [
                         console.warn "Value is not a Number"
                         return false
 
-                # check if colHeader is part of properties
+                    # check if colHeader is part of properties
                 else
                     for property, value of @geoJSON.features[row].properties
                         if key == property
