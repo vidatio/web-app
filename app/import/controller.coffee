@@ -29,7 +29,7 @@ app.controller "ImportCtrl", [
             $location.path editorPath
 
         # Read via link
-        $scope.load = () ->
+        $scope.load = ->
             url = $scope.link
             $http.get($rootScope.apiBase + "/v0/import"
                 params:
@@ -39,7 +39,7 @@ app.controller "ImportCtrl", [
                 $location.path editorPath
 
         # Read via Browsing and Drag-and-Drop
-        $scope.getFile = () ->
+        $scope.getFile = ->
             # Can't use file.type because of chromes File API
 
             fileType = $scope.file.name.split "."
