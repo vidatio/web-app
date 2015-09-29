@@ -34,6 +34,7 @@ app.controller "VisualizationCtrl", [
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup
                 html = ""
+
                 for property of feature.properties
                     if mailAddressCheck(property)
                         html += "<a href='mailto:" + feature.properties[property] +
@@ -44,7 +45,7 @@ app.controller "VisualizationCtrl", [
                     else
                         html += feature.properties[property] + "<br>"
 
-                if html?
+                unless html
                     html = "Keine Informationen vorhanden"
 
                 layer.bindPopup(html)
