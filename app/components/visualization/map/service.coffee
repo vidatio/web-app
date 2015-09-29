@@ -7,7 +7,8 @@ app = angular.module "app.services"
 
 app.service 'MapService', [
     "ParserService"
-    (Parser) ->
+    "HelperService"
+    (Parser, Helper) ->
         class Map
             constructor: ->
                 @map = undefined
@@ -61,19 +62,8 @@ app.service 'MapService', [
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
 
-                console.log coordinates
-
                 @bounds = L.latLngBounds(coordinates)
-                console.log @bounds
-
                 @map.fitBounds(@bounds)
-
-            # @method isNumeric
-            # @description checks if a value is numeric.
-            # @param {Mixed} n
-            # @return {Boolean}
-            isNumeric: (n) ->
-                return (!isNaN(parseFloat(n)) && isFinite(n))
 
             # @method updateGeoJSONwithSHP
             # @description updates the geoJSON object(generated from shp file) used for the map after data table changes.
@@ -86,8 +76,8 @@ app.service 'MapService', [
             updateGeoJSONwithSHP: (row, column, oldData, newData, key) ->
                 keys = key.split(" ")
 
-                if keys[0] == "coordinates"
-                    if @isNumeric(newData)
+                if keys[0] is "coordinates"
+                    if Helper.isNumber(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
@@ -108,13 +98,13 @@ app.service 'MapService', [
                         return false
 
                 else if keys[0] is "bbox"
-                    if @isNumeric(newData)
+                    if Helper.isNumber(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
                         console.warn "Value is not a Number"
                         return false
 
-                # check if colHeader is part of properties
+                    # check if colHeader is part of properties
                 else
                     for property, value of @geoJSON.features[row].properties
                         if key == property

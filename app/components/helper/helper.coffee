@@ -58,7 +58,7 @@ app.service 'HelperService', [ ->
         # @param {All Types} value
         # @return {Boolean}
         isNumber: (value) ->
-            return typeof value == "number" && isFinite(value)
+            return typeof value is "number" and isFinite(value)
 
         # cut out specified amount of rows
         # @method cutDataset

@@ -167,9 +167,6 @@ app.service 'ConverterService', [
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
                         coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-                        if coordinates.length == 0
-                            # TODO print failure to the user
-                            return
                     else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
@@ -179,7 +176,10 @@ app.service 'ConverterService', [
                             coordinates.push(latitude)
                             coordinates.push(longitude)
                     else
-                        # TODO print failure to the user
+                        console.info "Keine Koordinaten gefunden."
+                        return
+
+                    if coordinates.length == 0
                         return
 
                     # JSON.parse(JSON.stringify(...)) deep copy the feature
