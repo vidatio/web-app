@@ -148,9 +148,10 @@
 
     #popular-categories
         min-height 500px
+
+        /* first image is in the foreground, second image in the background*/
         background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
-
 
 /* space between live diagram and video in intro section */
 @media(max-width: 767px)
@@ -170,6 +171,7 @@
 
 @media(max-width: 767px)
     #landing-page #popular-categories
+        /* first value concerns always the foreground image, the last value always the background image */
         background-size 95%, cover
 
 @media(min-width: 768px) and (max-width: 1100px)
