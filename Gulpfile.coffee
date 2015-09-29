@@ -23,6 +23,8 @@ util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
+ngConstant = require "gulp-ng-constant"
+uglify = require "gulp-uglify"
 
 DOC_FILES = [
     "./README.MD"
@@ -71,6 +73,9 @@ BUILD =
         html: [
             "./build/html/**/*.html"
         ]
+        config: [
+            "./app/statics/constants/config.json"
+        ]
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
@@ -111,6 +116,26 @@ BUILD =
     MAIN TASKS
 ###
 
+gulp.task "config:develop",
+    "Setting up config for development environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                CONFIG:
+                    ENV: "develop"
+        .pipe gulp.dest BUILD.dirs.js
+
+gulp.task "config:production",
+    "Setting up config for development environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                CONFIG:
+                    ENV: "production"
+        .pipe gulp.dest BUILD.dirs.js
+
 gulp.task "default",
     "Runs 'develop' and 'test'.",
     [
@@ -120,6 +145,7 @@ gulp.task "default",
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
+        "config:develop"
         "build"
         "test"
         "run"
@@ -131,14 +157,15 @@ gulp.task "dev",
         "develop"
     ]
 
-gulp.task "release",
-    "Building the app for the users.",
+gulp.task "production",
+    "Builds the project for production to '#{BUILD.dirs.out}'.",
     [
         "copy"
-        "build:plugins:js"
+        "config:production"
+        "build:production:plugins:js"
         "build:plugins:css"
-        "build:source:coffee"
-        "build:source:stylus"
+        "build:production:source:coffee"
+        "build:production:source:stylus"
         "clean:html"
         "build:cache"
     ]
@@ -209,6 +236,14 @@ gulp.task "build:plugins:js",
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
 
+gulp.task "build:production:plugins:js",
+    "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
+    ->
+        gulp.src BUILD.plugins.js
+        .pipe uglify()
+        .pipe gif "*.js", concat(BUILD.plugin.js)
+        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
@@ -234,6 +269,16 @@ gulp.task "build:source:coffee",
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
 
+gulp.task "build:production:source:coffee",
+    "Compiles, uglifies and concatenates all coffeescript files for production to '#{BUILD.dirs.js}'.",
+    []
+    ->
+        gulp.src BUILD.source.coffee
+        .pipe coffee().on "error", util.log
+        .pipe uglify()
+        .pipe concat(BUILD.app)
+        .pipe gulp.dest(BUILD.dirs.js)
+
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
     [
@@ -245,6 +290,15 @@ gulp.task "build:source:stylus",
         .pipe stylus
             compress: true
         .pipe sourcemaps.write('./map')
+        .pipe gulp.dest(BUILD.dirs.css)
+
+gulp.task "build:production:source:stylus",
+    "Compiles and concatenates all stylus files for production to '#{BUILD.dirs.css}'.",
+    []
+    ->
+        gulp.src BUILD.source.stylus
+        .pipe stylus
+            compress: true
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:source:jade",
@@ -363,6 +417,24 @@ gulp.task "run", "Serves the App.",
             logLevel: "info"
             notify: false
             logPrefix: "VIDATIO"
+
+gulp.task "run:production", "Serves the App.",
+    [],
+    ->
+        browserSync.init
+            server:
+                baseDir: BUILD.dirs.out
+                index: "/statics/master.html"
+                middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
+            open: false
+            port: 3123
+            ui:
+                port: 3124
+                weinre: 3125
+            logLevel: "info"
+            notify: false
+            logPrefix: "VIDATIO"
+
 
 ###
     LIVE-RELOAD

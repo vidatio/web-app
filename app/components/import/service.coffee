@@ -29,9 +29,6 @@ app.service 'ImportService', [
                 @reader.onerror = =>
                     @deferred.reject @reader.result
 
-                @reader.onprogress = (event) =>
-                    @progress = (event.loaded / event.total).toFixed(2) * 100
-
                 switch fileType
                     when "csv"
                         @reader.readAsText file
