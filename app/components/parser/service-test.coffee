@@ -209,7 +209,7 @@ describe "Service Parser", ->
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
         dataset = [
-            ["Innsbruck", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
+            ["Innsbruck", "41,5%", "180° 59' 0 me'', 180° 1 59.999 W"]
             ["Salzburg", "39,5%", "N 90 59 59.999, 180° 1 59.999 W"]
             ["Gneis", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
             ["Gnigl", "40,5%", "N 90 59 0, 0° 1 59.999 W"]
