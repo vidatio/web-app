@@ -44,7 +44,7 @@ app.controller "VisualizationCtrl", [
                     else
                         html += feature.properties[property] + "<br>"
 
-                if html?
+                unless html
                     html = "Keine Informationen vorhanden"
 
                 layer.bindPopup(html)
