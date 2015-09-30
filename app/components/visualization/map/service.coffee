@@ -52,6 +52,7 @@ app.service 'MapService', [
 
                 coordinates = []
                 @geoJSON.features.forEach (feature) ->
+
                     if feature.geometry.type is "Point"
                         if Parser.isCoordinate(feature.geometry.coordinates[0]) and Parser.isCoordinate(feature.geometry.coordinates[1])
                             latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
