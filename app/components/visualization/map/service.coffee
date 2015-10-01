@@ -92,7 +92,7 @@ app.service 'MapService', [
                 keys = key.split(" ")
 
                 if keys[0] is "coordinates"
-                    if Helper.isNumber(newData)
+                    if Helper.isNumeric(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
@@ -113,7 +113,7 @@ app.service 'MapService', [
                         return false
 
                 else if keys[0] is "bbox"
-                    if Helper.isNumber(newData)
+                    if Helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
                         console.warn "Value is not a Number"
@@ -125,6 +125,7 @@ app.service 'MapService', [
                         if key == property
                             @geoJSON.features[row].properties[key] = newData
 
+                @setBoundsToGeoJSON()
                 return true
 
             getGeoJSON: ->

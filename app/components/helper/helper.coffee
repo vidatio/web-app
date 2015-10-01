@@ -60,6 +60,13 @@ app.service 'HelperService', [ ->
         isNumber: (value) ->
             return typeof value is "number" and isFinite(value)
 
+        # @method isNumeric
+        # @description checks if a value is numeric.
+        # @param {Mixed} n
+        # @return {Boolean}
+         isNumeric: (n) ->
+             return (!isNaN(parseFloat(n)) && isFinite(n))
+
         # cut out specified amount of rows
         # @method cutDataset
         # @public
