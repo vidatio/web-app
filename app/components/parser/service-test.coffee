@@ -218,6 +218,40 @@ describe "Service Parser", ->
             xy: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
+        dataset = [
+            [null, "13", "47", null]
+            [null, "13", "47", null]
+            ["11", "13", "47", "48"]
+            ["12", "13", "47", null]
+        ]
+        indexCoordinates =
+            x: 1
+            y: 2
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["10", "13", "47", null]
+            [null, null, null, "18"]
+            ["11", "11", "test", "48"]
+            ["12", "13", "47", null]
+        ]
+        indexCoordinates =
+            x: 0
+            y: 1
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["test", "13", "47", null]
+            ["test", "12", "48", null]
+            [null, "11", "49", null]
+            [null, null, "49", "12"]
+            [null, null, "49", "12"]
+        ]
+        indexCoordinates =
+            x: 1
+            y: 2
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
     # should be easier to find coordinates via header then via the complete dataset
     it 'should find the columns of the latitude and longitude in dataset with header', ->
         dataset = [
