@@ -153,7 +153,6 @@ app.service 'ParserService', [
             # @return {Object}
             findCoordinatesColumns: (dataset) ->
                 choppedDataset = Helper.cutDataset(dataset)
-
                 unless choppedDataset.length
                     return
 

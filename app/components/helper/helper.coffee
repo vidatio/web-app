@@ -68,7 +68,7 @@ app.service 'HelperService', [ ->
         cutDataset: (dataset) ->
             tmp = []
             for element, index in dataset
-                if index == @rowLimit
+                if index is @rowLimit
                     break
                 tmp.push element
 
