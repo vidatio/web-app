@@ -182,6 +182,23 @@ app.service 'ParserService', [
 
                 return coordinates
 
+            # +43 923 89012891, +43-923-89012891, +43.923.89012891
+            # @method isPhoneNumber
+            # @public
+            # @param {String} cell
+            # @return {Boolean}
+            isPhoneNumber: (cell) ->
+                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)$/
+                return regex.test(cell)
+
+            # @method isMailAddress
+            # @public
+            # @param {String} cell
+            # @return {Boolean}
+            isEmailAddress: (cell) ->
+                regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+                return regex.test(cell)
+
             # every coordinate format has a 2d like mapping
             # so we search for x values and y values
             _whiteList =

@@ -298,3 +298,22 @@ describe "Service Parser", ->
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("46.323")
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("11.234")
 
+    it 'should identify phone numbers', ->
+        expect(@Parser.isPhoneNumber "+43 902 128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43-231-128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43.902.128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43-231" ).toBeFalsy()
+        expect(@Parser.isPhoneNumber "+43.128." ).toBeFalsy()
+        expect(@Parser.isPhoneNumber "43 902 128391" ).toBeFalsy()
+
+
+    it 'should identify phone numbers', ->
+        expect(@Parser.isEmailAddress "office.vidatio@vidatio.de" ).toBeTruthy()
+        expect(@Parser.isEmailAddress "office@vidat.io" ).toBeTruthy()
+        expect(@Parser.isEmailAddress "office-vidatio@vidat.io" ).toBeTruthy()
+
+        expect(@Parser.isEmailAddress "@test.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "email@test@.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "@test.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "email@.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "+43 549 198012" ).toBeFalsy()
