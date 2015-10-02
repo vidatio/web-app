@@ -9,9 +9,10 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
+    "ParserService"
     'leafletData'
     "$timeout"
-    ($scope, Table, Map, leafletData, $timeout) ->
+    ($scope, Table, Map, Parser, leafletData, $timeout) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -36,25 +37,17 @@ app.controller "VisualizationCtrl", [
                 html = ""
 
                 for property of feature.properties
-                    if mailAddressCheck(property)
-                        html += "<a href='mailto:" + feature.properties[property] +
-                                "'>" + feature.properties[property] + "</a><br>"
-                    else if phoneNumberCheck(property)
-                        html += "<a href='tel:" + feature.properties[property] +
-                                "'>" + feature.properties[property] + "</a><br>"
+                    value = feature.properties[property]
+
+                    if Parser.isEmailAddress(value)
+                        html += "<a href='mailto:" + value + "'>" + value + "</a><br>"
+                    else if Parser.isPhoneNumber(value)
+                        html += "<a href='tel:" + value + "'>" + value + "</a><br>"
                     else
-                        html += feature.properties[property] + "<br>"
+                        html += value + "<br>"
 
                 unless html
                     html = "Keine Informationen vorhanden"
 
                 layer.bindPopup(html)
-
-        phoneNumberCheck = (cell) ->
-            regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d*)$/
-            return regex.test(cell)
-
-        mailAddressCheck = (cell) ->
-            regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-            return regex.test(cell)
 ]

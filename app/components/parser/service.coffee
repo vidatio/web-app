@@ -12,13 +12,13 @@ app.service 'ParserService', [
             # @return {Boolean}
             isCoordinate: (coordinate) ->
                 coordinate = String(coordinate).trim()
-                if(coordinate == "")
+                if(coordinate is "")
                     return
                 else
-                    return @isCoordinateWGS84DegreeDecimal(coordinate) ||
-                            @isCoordinateWGS84DegreeDecimalMinutes(coordinate) ||
-                            @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) ||
-                            @isCoordinateWGS84UTM(coordinate) ||
+                    return @isCoordinateWGS84DegreeDecimal(coordinate) or
+                            @isCoordinateWGS84DegreeDecimalMinutes(coordinate) or
+                            @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) or
+                            @isCoordinateWGS84UTM(coordinate) or
                             @isCoordinateGaussKrueger(coordinate)
 
             # allowed formats: N 90.123456, E 180.123456 to N -90.123456, E -180.123456
@@ -35,7 +35,7 @@ app.service 'ParserService', [
                     else if coordinate.indexOf("s") >= 0
                         coordinate = coordinate.replace("s", "")
 
-                    if(coordinate >= 0 && coordinate <= 90)
+                    if(coordinate >= 0 and coordinate <= 90)
                         return true
                     else
                         return false
@@ -45,12 +45,12 @@ app.service 'ParserService', [
                     else if coordinate.indexOf("w") >= 0
                         coordinate = coordinate.replace("w", "")
 
-                    if coordinate >= 0 && coordinate <= 180
+                    if coordinate >= 0 and coordinate <= 180
                         return true
                     else
                         return false
 
-                if coordinate >= -180 && coordinate <= 180
+                if coordinate >= -180 and coordinate <= 180
                     return true
                 else
                     return false
@@ -65,32 +65,32 @@ app.service 'ParserService', [
 
                 if coordinate.indexOf("n") >= 0
                     coordinateParts = coordinate.replace("n", "").trim().split(" ")
-                    if coordinateParts.length == 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 90 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
+                    if coordinateParts.length is 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 90 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
                         return true
                     else
                         return false
 
                 else if coordinate.indexOf("s") >= 0
                     coordinateParts = coordinate.replace("s", "").trim().split(" ")
-                    if coordinateParts.length == 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 90 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
+                    if coordinateParts.length is 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 90 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
                         return true
                     else
                         return false
                 else if coordinate.indexOf("e") >= 0
                     coordinateParts = coordinate.replace("e", "").trim().split(" ")
-                    if coordinateParts.length == 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
+                    if coordinateParts.length is 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
                         return true
                     else
                         return false
                 else if coordinate.indexOf("w") >= 0
                     coordinateParts = coordinate.replace("w", "").trim().split(" ")
-                    if coordinateParts.length == 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
+                    if coordinateParts.length is 2 and coordinateParts[0] >= 0 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
                         return true
                     else
                         return false
 
                 coordinateParts = coordinate.trim().split(" ")
-                if coordinateParts.length == 2 and coordinateParts[0] >= -180 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
+                if coordinateParts.length is 2 and coordinateParts[0] >= -180 and coordinateParts[0] <= 180 and coordinateParts[1] >= 0 and coordinateParts[1] < 60
                     return true
                 else
                     return false
@@ -105,32 +105,32 @@ app.service 'ParserService', [
 
                 if coordinate.indexOf("n") >= 0
                     coordinateParts = coordinate.replace("n", "").trim().split(" ")
-                    if coordinateParts.length == 3 and 0 <= coordinateParts[0] <= 90 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
+                    if coordinateParts.length is 3 and 0 <= coordinateParts[0] <= 90 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
                         return true
                     else
                         return false
 
                 else if coordinate.indexOf("s") >= 0
                     coordinateParts = coordinate.replace("s", "").trim().split(" ")
-                    if coordinateParts.length == 3 and 0 <= coordinateParts[0] <= 90 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
+                    if coordinateParts.length is 3 and 0 <= coordinateParts[0] <= 90 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
                         return true
                     else
                         return false
                 else if coordinate.indexOf("e") >= 0
                     coordinateParts = coordinate.replace("e", "").trim().split(" ")
-                    if coordinateParts.length == 3 and 0 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
+                    if coordinateParts.length is 3 and 0 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
                         return true
                     else
                         return false
                 else if coordinate.indexOf("w") >= 0
                     coordinateParts = coordinate.replace("w", "").trim().split(" ")
-                    if coordinateParts.length == 3 and 0 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
+                    if coordinateParts.length is 3 and 0 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
                         return true
                     else
                         return false
 
                 coordinateParts = coordinate.trim().split(" ")
-                if coordinateParts.length == 3 and -180 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
+                if coordinateParts.length is 3 and -180 <= coordinateParts[0] <= 180 and 0 <= coordinateParts[1] <= 59 and 0 <= coordinateParts[2] < 60
                     return true
                 else
                     return false
@@ -153,13 +153,12 @@ app.service 'ParserService', [
             # @return {Object}
             findCoordinatesColumns: (dataset) ->
                 choppedDataset = Helper.cutDataset(dataset)
-
-                if(choppedDataset.length == 0)
+                unless choppedDataset.length
                     return
 
                 indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, choppedDataset)
 
-                if(!(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy")))
+                if(!(indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")))
                     indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, choppedDataset)
 
                 return indicesCoordinates
@@ -181,6 +180,23 @@ app.service 'ParserService', [
                         coordinates.push coordinate[0]
 
                 return coordinates
+
+            # +43 923 89012891, +43-923-89012891, +43.923.89012891
+            # @method isPhoneNumber
+            # @public
+            # @param {String} cell
+            # @return {Boolean}
+            isPhoneNumber: (cell) ->
+                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)$/
+                return regex.test(cell)
+
+            # @method isMailAddress
+            # @public
+            # @param {String} cell
+            # @return {Boolean}
+            isEmailAddress: (cell) ->
+                regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+                return regex.test(cell)
 
             # every coordinate format has a 2d like mapping
             # so we search for x values and y values
@@ -209,27 +225,16 @@ app.service 'ParserService', [
                 dataset.forEach (row, indexRow) =>
                     row.forEach (cell, indexCell) =>
                         # There can be a single coordinate in a cell like "47.232"
-                        if(@isCoordinate(cell))
+                        if @isCoordinate(cell)
                             matrixPossibleCoordinates[indexRow][indexCell] = true
-
-                            # When editing the dataset, it can be that the user need time or forgot the fill up latitude or longitude
-                            # So we have to ignore it, even if it is inside of the trimed dataset, and set its potential to true
-                            # Also if there are rows which are empty (null) we have check the rows before or skip the column and not set it potential to true
-                        else if(!cell)
-                            dataset.forEach (rowBefore, idx) ->
-                                if(rowBefore[indexCell] != null && String(rowBefore[indexCell]) != "")
-                                    matrixPossibleCoordinates[indexRow][indexCell] = true
-                                    return
-                                if(indexRow == idx)
-                                    return
                         # But there can also be two coordinates in a single cell like "47.232, 13.854"
-                        else
+                        else if cell
                             # at least we need two separated coordinates
                             potentialCoordinates = cell.split(",")
                             if(potentialCoordinates.length != 2)
                                 return
                             # too protocol the existence of two coordinates we use array in one cell of the matrix
-                            else if(@isCoordinate(potentialCoordinates[0]) && @isCoordinate(potentialCoordinates[1]))
+                            else if(@isCoordinate(potentialCoordinates[0]) and @isCoordinate(potentialCoordinates[1]))
                                 matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
 
                 return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
@@ -243,7 +248,7 @@ app.service 'ParserService', [
 
                 # Because the header is always in the first row, we only search there for coordinate tags
                 dataset[0].forEach (cell, index) =>
-                    if(indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y") || indicesCoordinates.hasOwnProperty("xy"))
+                    if(indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy"))
                         return
 
                     isCoordinateHeader = _checkWhiteList.call(this, cell)
@@ -265,13 +270,13 @@ app.service 'ParserService', [
                         result = "x"
                         return
 
-                if(result == undefined)
+                if !result
                     _whiteList["y"].forEach (item) ->
                         if item.toLowerCase().indexOf(word) >= 0
                             result = "y"
                             return
 
-                if(result == undefined)
+                if !result
                     _whiteList["xy"].forEach (item) ->
                         if item.toLowerCase().indexOf(word) >= 0
                             result = "xy"
@@ -323,13 +328,14 @@ app.service 'ParserService', [
                 separateColumns = true
                 matrix.forEach (row) ->
                     row.forEach (cell, indexColumn) ->
-                        if cell == true
+                        if cell is true
                             ++columnScores[indexColumn]
-                        if cell.length == 2
+
+                        if cell.length is 2
                             separateColumns = false
-                            if cell[0] == true
+                            if cell[0] is true
                                 ++columnScores[indexColumn]
-                            if cell[1] == true
+                            if cell[1] is true
                                 ++columnScores[indexColumn]
 
                 return [
@@ -348,11 +354,15 @@ app.service 'ParserService', [
                 secondLargestNumber = -Infinity
                 largestScoreIndex = 0
                 secondLargestScoreIndex = 0
+
                 columnScores.forEach (element, index) ->
                     if element > largestNumber
+                        secondLargestNumber = largestNumber
+                        secondLargestScoreIndex = largestScoreIndex
+
                         largestNumber = element
                         largestScoreIndex = index
-                    else if element <= largestNumber && element >= secondLargestNumber && separateColumns
+                    else if element <= largestNumber and element > secondLargestNumber and separateColumns
                         secondLargestNumber = element
                         secondLargestScoreIndex = index
 
