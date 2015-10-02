@@ -187,7 +187,7 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isPhoneNumber: (cell) ->
-                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)$/
+                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)[-. ]?(\d*)$/
                 return regex.test(cell)
 
             # @method isMailAddress
@@ -196,6 +196,14 @@ app.service 'ParserService', [
             # @return {Boolean}
             isEmailAddress: (cell) ->
                 regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+                return regex.test(cell)
+
+            # @method isURL
+            # @public
+            # @param {String} cell
+            # @return {Boolean}
+            isURL: (cell) ->
+                regex = /^(ftp|http|https):\/\/[^ "]+$/i
                 return regex.test(cell)
 
             # every coordinate format has a 2d like mapping

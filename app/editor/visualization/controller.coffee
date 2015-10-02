@@ -35,16 +35,26 @@ app.controller "VisualizationCtrl", [
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup
                 html = ""
+                isFirstAttribute = true
 
                 for property of feature.properties
                     value = feature.properties[property]
 
+                    if isFirstAttribute
+                        html += "<b>"
+
                     if Parser.isEmailAddress(value)
-                        html += "<a href='mailto:" + value + "'>" + value + "</a><br>"
+                        html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
                     else if Parser.isPhoneNumber(value)
-                        html += "<a href='tel:" + value + "'>" + value + "</a><br>"
-                    else
+                        html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if Parser.isURL(value)
+                        html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if value
                         html += value + "<br>"
+
+                    if isFirstAttribute
+                        html += "</b>"
+                        isFirstAttribute = false
 
                 unless html
                     html = "Keine Informationen vorhanden"
