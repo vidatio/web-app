@@ -187,7 +187,7 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isPhoneNumber: (cell) ->
-                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)$/
+                regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)[-. ]?(\d*)$/
                 return regex.test(cell)
 
             # @method isMailAddress
