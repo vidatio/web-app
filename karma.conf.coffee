@@ -9,23 +9,23 @@ module.exports = (config) ->
         # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ["jasmine-jquery", "jasmine"]
 
-
         # list of files / patterns to load in the browser
         files: [
 
             # third party libs
             "./bower_components/jquery/dist/jquery.js"
             "./bower_components/angular/angular.js"
-            "./bower_components/angular-cookies/angular-cookies.js"
-            "./bower_components/angular-resource/angular-resource.js"
-            "./bower_components/angular-animate/angular-animate.js"
             "./bower_components/angular-mocks/angular-mocks.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
-            "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
             "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/papa-parse/papaparse.js"
+
+            # angular-translate
+            "./bower_components/angular-translate/angular-translate.js"
+            "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
 
             # source files
             "./app/init-deps.coffee"
@@ -34,6 +34,10 @@ module.exports = (config) ->
 
             #includes test files already
             "./app/*/**/*.coffee"
+            "./app/app-test.coffee"
+
+            #config
+            "./app/statics/constants/config.json"
         ]
 
 
@@ -41,11 +45,11 @@ module.exports = (config) ->
         exclude: [
         ]
 
-
         # preprocess matching files before serving them to the browser
         # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors:
             "**/*.coffee": ["coffee"]
+            "**/*.json": ["ng-constant"]
 
         coffeePreprocessor:
             options:
@@ -89,3 +93,8 @@ module.exports = (config) ->
         # Continuous Integration mode
         # if true, Karma captures browsers, runs the tests and exits
         singleRun: false
+
+        ngConstantPreprocessor:
+            moduleName: "app.config"
+            constantName: "CONFIG"
+

@@ -30,15 +30,14 @@
   "dependencies": {
     "angular": "^1.4",
     "angular-leaflet-directive": "< 1.0",
+    "angular-translate": "~2.8.0",
+    "angular-translate-loader-static-files": "~2.8.0",
     "angular-ui-router": "< 1.0",
-    "angular-animate": "^1.4",
+    "bootstrap": "^3.3",
     "handsontable": "< 1.0",
     "jquery": "*",
-    "bootstrap": "^3.3",
-    "angular-cookies": "^1.4",
-    "angular-resource": "^1.4",
-    "shp": "^3.2",
-    "papa-parse": "^4.1.1"
+    "papa-parse": "^4.1.1",
+    "shp": "^3.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

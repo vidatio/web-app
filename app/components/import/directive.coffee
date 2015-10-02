@@ -41,7 +41,7 @@ app.directive 'ngFileDropEnd', ->
             e.preventDefault()
             document.getElementById("drop-zone").style.display = "none"
             $scope.file = e.originalEvent.dataTransfer.files[0]
-            $scope.getFile()
+            $scope.getFile("dragged")
             false
 
 app.directive 'ngFileSelect', ->

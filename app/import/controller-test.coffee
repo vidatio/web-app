@@ -2,13 +2,13 @@
 
 describe "Controller Import", ->
     beforeEach ->
-
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, $q, $http) ->
+        inject ($controller, $rootScope, $httpBackend, $q, $http, $location) ->
             @httpBackend = $httpBackend
             @scope = $rootScope.$new()
             @rootScope = $rootScope
+            @location = $location
             @deferred = $q.defer()
 
             @Table =
@@ -27,12 +27,14 @@ describe "Controller Import", ->
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
-            @httpBackend.expectGET(/index/).respond ""
-            @httpBackend.expectGET(/editor/).respond ""
+            @httpBackend.whenGET(/index/).respond ""
+            @httpBackend.whenGET(/editor/).respond ""
+            @httpBackend.expectGET(/languages/).respond ""
             @httpBackend.whenGET(@rootScope.apiBase + '/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()
             @httpBackend.flush()
+
 
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'

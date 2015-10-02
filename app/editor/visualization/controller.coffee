@@ -1,5 +1,5 @@
 # Visualization Controller
-# ===================
+# ========================
 
 "use strict"
 
@@ -9,32 +9,45 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    ($scope, Table, Map) ->
-
-        # Default settings - Works like scope.center, etc.
-        $scope.center =
-            lat: 46.723407
-            lng: 17.086921
-            zoom: 7
-
+    "ParserService"
+    'leafletData'
+    "$timeout"
+    ($scope, Table, Map, Parser, leafletData, $timeout) ->
         icon =
-            iconUrl: 'images/marker-icon.png'
-            iconSize: [
-                25
-                41
-            ]
-            iconAnchor: [
-                12
-                0
-            ]
+            iconUrl: '../images/marker-small.png'
+            iconSize: [25, 30]
+            iconAnchor: [12.5, 30]
+            popupAnchor: [0, -30]
+
+        leafletData.getMap("map").then (map) ->
+            Map.map = map
+            # Timeout is needed to wait for the view to finish render
+            $timeout ->
+                Map.init()
 
         $scope.geojson =
             data: Map.geoJSON
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new (L.marker)(latlng, icon: L.icon(icon))
+                new L.marker(latlng, icon: L.icon(icon))
+
             onEachFeature: (feature, layer) ->
-                # use for displaying features
-                # layer.bindPopup 'number: '
+                # So every markers gets a popup
+                html = ""
+
+                for property of feature.properties
+                    value = feature.properties[property]
+
+                    if Parser.isEmailAddress(value)
+                        html += "<a href='mailto:" + value + "'>" + value + "</a><br>"
+                    else if Parser.isPhoneNumber(value)
+                        html += "<a href='tel:" + value + "'>" + value + "</a><br>"
+                    else
+                        html += value + "<br>"
+
+                unless html
+                    html = "Keine Informationen vorhanden"
+
+                layer.bindPopup(html)
 ]

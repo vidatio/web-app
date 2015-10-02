@@ -2,11 +2,12 @@ section#intro
     .wrapper-content
         .row
             .col-sm-12
-                aside.slogan.light-font Hier steht der Slogan.
+                aside#slogan.light-font {{ "SLOGAN" | translate }}
 
         .row
             .col-sm-7.diagram
                 img(src='images/placeholder-diagramm-tankstatistik.svg', alt='Tankstatistik Österreich')
+
             .col-sm-5.promo
                 .video
                    img(src='images/landing-page-placeholder-promo_video.svg', alt='So funktioniert Vidatio')
@@ -18,12 +19,13 @@ section#intro
                         |  zur Infografik!
 
                     ol
-                        li.active Datei hochladen.
-                        li Eine Grafik wird automatisch erstellt.
-                        li Speichern oder Teilen.
+                        li.active {{ "UPLOAD_FILE" | translate }}.
+                        li {{ "GENERATED_AUTOMATICALLY" | translate }}.
+                        li {{ "SAVE_OR_SHARE" | translate }}.
 
         .get-started
-            a.bold-font.button(href='import')
+            //- generate link with correct language
+            a.bold-font.button(ui-sref="app.import({ locale: locale })")
                 | GET
                 br
                 | STARTED

@@ -23,6 +23,8 @@ util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
+ngConstant = require "gulp-ng-constant"
+uglify = require "gulp-uglify"
 
 DOC_FILES = [
     "./README.MD"
@@ -43,6 +45,7 @@ COPY_FILES =
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
     ]
+    lang: "./app/statics/languages/**/*.json"
 
 BASEURL = "http://localhost:3123"
 
@@ -70,19 +73,21 @@ BUILD =
         html: [
             "./build/html/**/*.html"
         ]
+        config: [
+            "./app/statics/constants/config.json"
+        ]
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
             "./bower_components/angular/angular.js"
-            "./bower_components/angular-route/angular-route.js"
-            "./bower_components/angular-resource/angular-resource.js"
-            "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
-            "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
             "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/angular-translate/angular-translate.js"
+            "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
             "./bower_components/shp/dist/shp.js"
             "./bower_components/papa-parse/papaparse.js"
         ]
@@ -99,6 +104,7 @@ BUILD =
         html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
+        lang: "./build/languages"
         docs: "./docs"
     module: "app"
     app: "app.js"
@@ -110,6 +116,26 @@ BUILD =
     MAIN TASKS
 ###
 
+gulp.task "config:develop",
+    "Setting up config for development environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                CONFIG:
+                    ENV: "develop"
+        .pipe gulp.dest BUILD.dirs.js
+
+gulp.task "config:production",
+    "Setting up config for development environment", ->
+        gulp.src BUILD.source.config
+        .pipe ngConstant
+            name: "app.config"
+            constants:
+                CONFIG:
+                    ENV: "production"
+        .pipe gulp.dest BUILD.dirs.js
+
 gulp.task "default",
     "Runs 'develop' and 'test'.",
     [
@@ -119,6 +145,7 @@ gulp.task "default",
 gulp.task "develop",
     "Watches/Build and Test the source files on change.",
     [
+        "config:develop"
         "build"
         "test"
         "run"
@@ -130,14 +157,15 @@ gulp.task "dev",
         "develop"
     ]
 
-gulp.task "release",
-    "Building the app for the users.",
+gulp.task "production",
+    "Builds the project for production to '#{BUILD.dirs.out}'.",
     [
         "copy"
-        "build:plugins:js"
+        "config:production"
+        "build:production:plugins:js"
         "build:plugins:css"
-        "build:source:coffee"
-        "build:source:stylus"
+        "build:production:source:coffee"
+        "build:production:source:stylus"
         "clean:html"
         "build:cache"
     ]
@@ -151,6 +179,7 @@ gulp.task "build",
         "build:source:coffee:watch"
         "build:source:stylus:watch"
         "build:source:jade:watch"
+        "copy:languages:watch"
     ]
     ->
         reload()
@@ -184,7 +213,7 @@ gulp.task "lint:coffee",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-        .pipe cached "lint:coffee"
+        #.pipe cached "lint:coffee"
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
@@ -203,7 +232,15 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        .pipe cached "plugins.js"
+        #.pipe cached "plugins.js"
+        .pipe gif "*.js", concat(BUILD.plugin.js)
+        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+
+gulp.task "build:production:plugins:js",
+    "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
+    ->
+        gulp.src BUILD.plugins.js
+        .pipe uglify()
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
 
@@ -211,7 +248,7 @@ gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        .pipe cached "plugins.css"
+        #.pipe cached "plugins.css"
         .pipe gif "*.css", concat(BUILD.plugin.css)
         .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
 
@@ -232,6 +269,16 @@ gulp.task "build:source:coffee",
         .pipe sourcemaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
 
+gulp.task "build:production:source:coffee",
+    "Compiles, uglifies and concatenates all coffeescript files for production to '#{BUILD.dirs.js}'.",
+    []
+    ->
+        gulp.src BUILD.source.coffee
+        .pipe coffee().on "error", util.log
+        .pipe uglify()
+        .pipe concat(BUILD.app)
+        .pipe gulp.dest(BUILD.dirs.js)
+
 gulp.task "build:source:stylus",
     "Compiles and concatenates all stylus files to '#{BUILD.dirs.css}'.",
     [
@@ -243,6 +290,15 @@ gulp.task "build:source:stylus",
         .pipe stylus
             compress: true
         .pipe sourcemaps.write('./map')
+        .pipe gulp.dest(BUILD.dirs.css)
+
+gulp.task "build:production:source:stylus",
+    "Compiles and concatenates all stylus files for production to '#{BUILD.dirs.css}'.",
+    []
+    ->
+        gulp.src BUILD.source.stylus
+        .pipe stylus
+            compress: true
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:source:jade",
@@ -280,21 +336,29 @@ gulp.task "copy",
     [
         "copy:img"
         "copy:fonts"
+        "copy:languages"
     ]
 
 gulp.task "copy:img",
     false,
     ->
         gulp.src COPY_FILES.img
-        .pipe cached "copy:img"
+        #.pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     false,
     ->
         gulp.src COPY_FILES.fonts
-        .pipe cached "copy:fonts"
+        #.pipe cached "copy:fonts"
         .pipe gulp.dest BUILD.dirs.fonts
+
+gulp.task "copy:languages",
+    false,
+    ->
+        gulp.src COPY_FILES.lang
+        .pipe gulp.dest BUILD.dirs.lang
+        .pipe
 
 ###
     CLEANING
@@ -335,20 +399,42 @@ gulp.task "docs",
 ###
     BROWSERSYNC SERVER
 ###
-gulp.task "run", "Serves the App.", ->
-    browserSync.init
-        server:
-            baseDir: BUILD.dirs.out
-            index: "/statics/master.html"
-            middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
-        open: false
-        port: 3123
-        ui:
-            port: 3124
-            weinre: 3125
-        logLevel: "info"
-        notify: false
-        logPrefix: "VIDATIO"
+gulp.task "run", "Serves the App.",
+    [
+        "build"
+    ],
+    ->
+        browserSync.init
+            server:
+                baseDir: BUILD.dirs.out
+                index: "/statics/master.html"
+                middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
+            open: false
+            port: 3123
+            ui:
+                port: 3124
+                weinre: 3125
+            logLevel: "info"
+            notify: false
+            logPrefix: "VIDATIO"
+
+gulp.task "run:production", "Serves the App.",
+    [],
+    ->
+        browserSync.init
+            server:
+                baseDir: BUILD.dirs.out
+                index: "/statics/master.html"
+                middleware: [modRewrite(['!\\.\\w+$ /statics/master.html [L]'])]
+            open: false
+            port: 3123
+            ui:
+                port: 3124
+                weinre: 3125
+            logLevel: "info"
+            notify: false
+            logPrefix: "VIDATIO"
+
 
 ###
     LIVE-RELOAD
@@ -377,6 +463,14 @@ gulp.task "build:source:jade:reload",
     [
         "clean:html"
         "build:cache"
+    ]
+    ->
+        reload()
+
+gulp.task "copy:languages:reload",
+    false,
+    [
+        "copy:languages"
     ]
     ->
         reload()
@@ -410,3 +504,11 @@ gulp.task "build:source:coffee:watch",
     ]
     ->
         gulp.watch BUILD.source.coffee, ["build:source:coffee:reload"]
+
+gulp.task "copy:languages:watch",
+    "Copies language files to '#{COPY_FILES.lang}' to '#{BUILD.dirs.lang}'.",
+    [
+        "copy:languages"
+    ]
+    ->
+        gulp.watch COPY_FILES.lang, ["copy:languages:reload"]
