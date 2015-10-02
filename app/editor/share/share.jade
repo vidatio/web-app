@@ -1,13 +1,18 @@
 #share.wrapper-content(ng-show="$root.showShareView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content
-        h1 Speichern
-        p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, geben Sie bitte folgende benötigte Daten zum von Ihnen verwendeten Datensatz ein:
-
-        form
-            input(type="text" placeholder="Autor")
-            input(type="text" placeholder="Urheber")
-            input(type="text" placeholder="Kategorie")
-            input(type="text" placeholder="Lizenz")
-            input(type="text" placeholder="Datum")
-            input(type="submit" value="Absenden")
+        .row
+            .col-md-12
+                h2 Speichern
+        .row
+            .col-md-12 Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, geben Sie bitte folgende benötigte Daten zum von Ihnen verwendeten Datensatz ein:
+        .row
+            .col-md-12
+                form.input-group
+                    input.form-control(type="text" placeholder="Autor")
+                    input.form-control(type="text" placeholder="Urheber")
+                    input.form-control(type="text" placeholder="Kategorie")
+                    input.form-control(type="text" placeholder="Lizenz")
+                    input.form-control(type="text" placeholder="Datum")
+                    button.btn.btn-default(type="submit" value="Speichern")
+                        Speichern
 
