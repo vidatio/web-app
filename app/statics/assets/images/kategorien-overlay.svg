@@ -8,7 +8,7 @@
    <![CDATA[
     @font-face {
         font-family: Colaborate-Medium, sans-serif;
-        src: url(../fonts/colaborate-medium.otf);
+        src: url('../fonts/colaborate-medium.otf#colaborate-medium') format('otf');
     }
    ]]>
  </style>
@@ -21,12 +21,12 @@
 <circle fill="#FF5346" cx="711.354" cy="227.001" r="67.208"/>
 <circle fill="#333333" cx="719.867" cy="75.513" r="30.721"/>
 <circle fill="#12DDC8" cx="824" cy="128.646" r="52.854"/>
-<text transform="matrix(1 0 0 1 60.3555 194.6191)" font-family="'Colaborate-Medium'" font-size="22">Umwelt</text>
-<text transform="matrix(1 0 0 1 505.501 106.2344)"><tspan x="0" y="0" font-family="'Colaborate-Medium'" font-size="24">Rohstoff-</tspan><tspan x="-4.284" y="24" font-family="'Colaborate-Medium'" font-size="24">verbrauch</tspan></text>
-<text transform="matrix(1 0 0 1 662.4238 233.7266)" font-family="'Colaborate-Medium'" font-size="21">Einwohner</text>
-<text transform="matrix(1 0 0 1 327.123 219.4512)" font-family="'Colaborate-Medium'" font-size="21">Population</text>
-<text transform="matrix(1 0 0 1 251.458 117.123)" fill="#FFFFFF" font-family="'Colaborate-Medium'" font-size="19">Luft</text>
-<text transform="matrix(1 0 0 1 372.7148 95.123)" font-family="'Colaborate-Medium'" font-size="17">Eis</text>
-<text transform="matrix(1 0 0 1 701.3672 81.123)" fill="#FFFFFF" font-family="'Colaborate-Medium'" font-size="17">Wien</text>
-<text transform="matrix(1 0 0 1 804.2881 135.646)" font-family="'Colaborate-Medium'" font-size="19">Auto</text>
+<text transform="matrix(1 0 0 1 60.3555 194.6191)" font-family="'Colaborate-Medium','sans-serif'" font-size="22">Umwelt</text>
+<text transform="matrix(1 0 0 1 505.501 106.2344)"><tspan x="0" y="0" font-family="'Colaborate-Medium','sans-serif'" font-size="24">Rohstoff-</tspan><tspan x="-4.284" y="24" font-family="'Colaborate-Medium'" font-size="24">verbrauch</tspan></text>
+<text transform="matrix(1 0 0 1 662.4238 233.7266)" font-family="'Colaborate-Medium','sans-serif'" font-size="21">Einwohner</text>
+<text transform="matrix(1 0 0 1 327.123 219.4512)" font-family="'Colaborate-Medium','sans-serif'" font-size="21">Population</text>
+<text transform="matrix(1 0 0 1 251.458 117.123)" fill="#FFFFFF" font-family="'Colaborate-Medium','sans-serif'" font-size="19">Luft</text>
+<text transform="matrix(1 0 0 1 372.7148 95.123)" font-family="'Colaborate-Medium','sans-serif'" font-size="17">Eis</text>
+<text transform="matrix(1 0 0 1 701.3672 81.123)" fill="#FFFFFF" font-family="'Colaborate-Medium','sans-serif'" font-size="17">Wien</text>
+<text transform="matrix(1 0 0 1 804.2881 135.646)" font-family="'Colaborate-Medium','sans-serif'" font-size="19">Auto</text>
 </svg>
