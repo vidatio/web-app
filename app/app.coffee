@@ -11,6 +11,8 @@ app = angular.module "app", [
     "app.filters"
     "pascalprecht.translate"
     "ngToast"
+    "ngAnimate"
+    "ngSanitize"
 ]
 
 app.run [
@@ -45,8 +47,9 @@ app.config [
 
 
         ngToast.configure(
-            animation: "fade"
+            animation: "slide"
             dismissButton: true
+            additionalClasses: "custom-backgrounds"
         )
 
         $stateProvider
