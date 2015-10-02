@@ -44,9 +44,11 @@ app.controller "VisualizationCtrl", [
                         html += "<b>"
 
                     if Parser.isEmailAddress(value)
-                        html += "<a href='mailto:" + value + "'>" + value + "</a><br>"
+                        html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
                     else if Parser.isPhoneNumber(value)
-                        html += "<a href='tel:" + value + "'>" + value + "</a><br>"
+                        html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if Parser.isURL(value)
+                        html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
                     else if value
                         html += value + "<br>"
 
