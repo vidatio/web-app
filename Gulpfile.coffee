@@ -14,10 +14,12 @@ karma = require "gulp-karma"
 
 browserSync = require('browser-sync').create()
 reload = browserSync.reload
+debug = require "gulp-debug"
 
 concat = require "gulp-concat"
 gif = require "gulp-if"
 del = require "del"
+rename = require "gulp-rename"
 sourcemaps = require "gulp-sourcemaps"
 util = require "gulp-util"
 cached = require "gulp-cached"
@@ -39,11 +41,11 @@ DOC_FILES = [
 COPY_FILES =
     img: [
         "./app/statics/assets/images/**/*.*"
-        "./bower_components/leaflet/dist/images/marker-icon.png"
     ]
     fonts: [
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
+        "./bower_components/flat-ui/dist/fonts/glyphicons/*.*"
     ]
     lang: "./app/statics/languages/**/*.json"
 
@@ -79,6 +81,9 @@ BUILD =
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
+            "./bower_components/bootstrap/dist/js/bootstrap.js"
+            "./bower_components/bootstrap-tagsinput/dist/js/bootstrap-tagsinput.js"
+            "./bower_components/bootstrap-tagsinput/dist/js/bootstrap-tagsinput-angular.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
@@ -94,8 +99,10 @@ BUILD =
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
-            "./bower_components/bootstrap/dist/css/bootstrap.min.css"
-            "./bower_components/bootstrap/dist/css/bootstrap.css.map"
+            "./bower_components/bootstrap/dist/css/bootstrap.css"
+            #"./bower_components/bootstrap-tagsinput/dist/css/bootstrap-tagsinput.css"
+            "./bower_components/flat-ui/dist/css/flat-ui.css.map"
+            "./bower_components/flat-ui/dist/css/flat-ui.css"
         ]
     dirs:
         out: "./build"
@@ -351,6 +358,11 @@ gulp.task "copy:fonts",
     ->
         gulp.src COPY_FILES.fonts
         #.pipe cached "copy:fonts"
+        .pipe debug()
+        .pipe gif "flat-ui-icons-regular.*", rename (path) ->
+            #console.log "#### VIDATIO ####"
+            path.dirname = "/glyphicons"
+            #console.log path
         .pipe gulp.dest BUILD.dirs.fonts
 
 gulp.task "copy:languages",
