@@ -315,3 +315,10 @@ describe "Service Parser", ->
         expect(@Parser.isEmailAddress "@test.de" ).toBeFalsy()
         expect(@Parser.isEmailAddress "email@.de" ).toBeFalsy()
         expect(@Parser.isEmailAddress "+43 549 198012" ).toBeFalsy()
+
+    it 'should identify urls', ->
+        expect(@Parser.isURL "http://vidatio.mediacube.at" ).toBeTruthy()
+        expect(@Parser.isURL "http://www.vidatio.mediacube.at" ).toBeTruthy()
+
+        expect(@Parser.isURL "htt://.mediacube.at" ).toBeFalsy()
+        expect(@Parser.isURL "http:vidatio.mediacube.at/delete?q=test&result=test" ).toBeFalsy()
