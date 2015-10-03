@@ -95,6 +95,9 @@
         color $color-white
         padding-top 0
         background url(../images/dotgrid.png) $color-grey-dark
+        overflow hidden
+        width 100%
+
 
         div
             text-align center
@@ -109,9 +112,13 @@
             font-size 90px
 
         .shape
-            width 100%
+            min-width 100%
             margin-top -1px
             border-style none
+            width calc(100% + 6px)
+            margin-left -3px
+
+
 
     #featured-vidatios
         img.featured
@@ -159,15 +166,15 @@
         margin-top 20px
 
 /* move get-started button and shape that they do not overlap */
-@media(min-width: 701px)
-    #landing-page #intro .get-started
-        margin-top 100px
-        margin-bottom 80px
-
-@media(max-width: 700px)
+@media(max-width: 800px)
     #landing-page #intro .get-started
         margin-top 50px
         margin-bottom 140px
+
+@media(min-width: 801px)
+    #landing-page #intro .get-started
+        margin-top 100px
+        margin-bottom 80px
 
 @media(max-width: 767px)
     #landing-page #popular-categories
