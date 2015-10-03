@@ -21,11 +21,14 @@ header
             display flex
             flex-direction row
             display -webkit-flex /* Safari */
-            -webkit-flex-direction row /* Safari */
+            -webkit-flex-direction row
 
         .separator
             width 1px
             background-color $color-grey-light
+
+    #navigation.editor
+        max-width 98%
 
     #logo
         background url(../images/logo.svg) no-repeat
@@ -39,7 +42,6 @@ header
         width 37px
         height 40px
         position relative
-
 
     .menu-buttons
         height 100%
@@ -117,6 +119,15 @@ header
 @media(min-width: 768px)
     #back-to-import-button
         float right
+
+    #navigation
+        .editor-panel
+            position absolute
+            margin 0 auto
+            left 0
+            right 0
+            max-width 600px
+
 
 @media(min-width: 768px) and (max-width: 850px)
     #back-to-import-button
