@@ -78,7 +78,7 @@ app.service 'MapService', [
 
                 if coordinates.length
                     @bounds = L.latLngBounds(coordinates)
-                    @map.fitBounds(@bounds)
+                    @map.fitBounds(@bounds, {maxZoom: 15})
 
             # @method updateGeoJSONwithSHP
             # @description updates the geoJSON object(generated from shp file) used for the map after data table changes.
