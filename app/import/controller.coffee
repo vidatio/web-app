@@ -10,12 +10,13 @@ app.controller "ImportCtrl", [
     "$http"
     "$location"
     "$rootScope"
+    "$timeout"
     "ImportService"
     "TableService"
     "ConverterService"
     "MapService"
     "DataService"
-    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map, Data) ->
+    ($scope, $http, $location, $rootScope, $timeout, Import, Table, Converter, Map, Data) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
 
         $scope.importService = Import
@@ -26,7 +27,10 @@ app.controller "ImportCtrl", [
             Table.resetDataset()
             Table.resetColHeaders()
             Map.resetGeoJSON()
-            $location.path editorPath
+
+            # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+            $timeout ->
+                $location.path editorPath
 
         # Read via link
         $scope.load = ->
@@ -69,8 +73,9 @@ app.controller "ImportCtrl", [
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
 
-                $location.path editorPath
-
+                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+                $timeout ->
+                    $location.path editorPath
 
             , (error) ->
                 console.log error
