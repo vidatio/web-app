@@ -35,7 +35,6 @@ app.config [
     ($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider) ->
         $locationProvider.html5Mode true
 
-        $(".tagsinput").tagsinput()
         # I18N
         $translateProvider.useSanitizeValueStrategy("escape")
         $translateProvider.preferredLanguage("de")

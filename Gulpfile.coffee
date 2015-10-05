@@ -45,7 +45,7 @@ COPY_FILES =
     fonts: [
         "./app/statics/assets/fonts/*.*"
         "./bower_components/bootstrap/dist/fonts/*.*"
-        "./bower_components/flat-ui/dist/fonts/glyphicons/*.*"
+        "./bower_components/flat-ui/dist/fonts/**/*.*"
     ]
     lang: "./app/statics/languages/**/*.json"
 
@@ -360,6 +360,8 @@ gulp.task "copy:fonts",
         #.pipe cached "copy:fonts"
         .pipe gif "**/flat-ui-icons-regular.*", rename (path) ->
             path.dirname = "/glyphicons"
+        .pipe gif "**/lato*", rename (path) ->
+            path.dirname = "/lato"
         .pipe gulp.dest BUILD.dirs.fonts
 
 gulp.task "copy:languages",
