@@ -2,17 +2,62 @@
     .content
         .row
             .col-md-12
-                h2 Speichern
-        .row
-            .col-md-12 Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, geben Sie bitte folgende benötigte Daten zum von Ihnen verwendeten Datensatz ein:
+                h3 EXPORT
+
+            .col-md-12
+                .form.form-horizontal
+                    .form-group
+                        .col-md-6
+                            label(for="dropdown-visualization") Visualisierung
+                        .col-md-6
+                            .btn-group#dropdown-visualization
+                                button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
+                                    | Auswählen
+                                    span.caret
+                                ul.dropdown-menu(role='menu')
+                                    li
+                                        a(href='#') PNG
+                                    li
+                                        a(href='#') SVG
+
+                    .form-group
+                        .col-md-6
+                            label(for="dropdown-dataset") Datenset
+                        .col-md-6
+                            .btn-group#dropdown-dataset
+                                button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
+                                    | Auswählen
+                                    span.caret
+                                ul.dropdown-menu(role='menu')
+                                    li
+                                        a(href='#') CSV
+                                    li
+                                        a(href='#') SHAPE
+                                    li
+                                        a(href='#') XML
+                                    li
+                                        a(href='#') JSON
+    .content
         .row
             .col-md-12
-                form.input-group
-                    input.form-control(type="text" placeholder="Autor")
-                    input.form-control(type="text" placeholder="Urheber")
-                    input.form-control(type="text" placeholder="Kategorie")
-                    input.form-control(type="text" placeholder="Lizenz")
-                    input.form-control(type="text" placeholder="Datum")
-                    button.btn.btn-default(type="submit" value="Speichern")
-                        Speichern
+                h3 VERÖFFENTLICHUNG
+        .row
+            .col-md-12 Zum dauerhaften Speichern, zum Teilen auf Facebook, Twitter und Google+, zur Verbreitung mit Link und/oder Embedded Code:
+        .row
+            .col-md-12
+                form
+                    .row
+                        .col-md-12
+                            input.form-control.input-sm(type="text" placeholder="Urheber")
+                        .col-md-12
+                            input.tagsinput.form-control.input-sm(name="tagsinput" data-role="tagsinput" value="Clean, Fresh, Modern, Unique")
+                        .col-md-12
+                            input.form-control.input-sm(type="text" placeholder="Lizenz")
+                        .col-md-12.center
+                            button.btn.btn-primary.btn-wide.input-sm(type="submit") Speichern
 
+
+input.tagsinput(name='tagsinput', data-role='tagsinput', value='Clean, Fresh, Modern, Unique')
+
+.tagsinput-primary
+    input.tagsinput(name='tagsinput', data-role='tagsinput', value='School, Teacher, Colleague')

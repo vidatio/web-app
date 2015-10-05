@@ -82,8 +82,7 @@ BUILD =
         js: [
             "./bower_components/jquery/dist/jquery.js"
             "./bower_components/bootstrap/dist/js/bootstrap.js"
-            "./bower_components/bootstrap-tagsinput/dist/js/bootstrap-tagsinput.js"
-            "./bower_components/bootstrap-tagsinput/dist/js/bootstrap-tagsinput-angular.js"
+            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-bootstrap/ui-bootstrap-tpls.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
@@ -100,9 +99,10 @@ BUILD =
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/bootstrap/dist/css/bootstrap.css"
-            #"./bower_components/bootstrap-tagsinput/dist/css/bootstrap-tagsinput.css"
-            "./bower_components/flat-ui/dist/css/flat-ui.css.map"
+            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
+            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css.map"
             "./bower_components/flat-ui/dist/css/flat-ui.css"
+            "./bower_components/flat-ui/dist/css/flat-ui.css.map"
         ]
     dirs:
         out: "./build"
@@ -358,11 +358,8 @@ gulp.task "copy:fonts",
     ->
         gulp.src COPY_FILES.fonts
         #.pipe cached "copy:fonts"
-        .pipe debug()
-        .pipe gif "flat-ui-icons-regular.*", rename (path) ->
-            #console.log "#### VIDATIO ####"
+        .pipe gif "**/flat-ui-icons-regular.*", rename (path) ->
             path.dirname = "/glyphicons"
-            #console.log path
         .pipe gulp.dest BUILD.dirs.fonts
 
 gulp.task "copy:languages",
