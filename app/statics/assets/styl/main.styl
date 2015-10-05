@@ -47,25 +47,6 @@ h3
 .bg-dark
     background-color $color-grey-dark
 
-.row
-    margin 0
-    padding 0
-
-/**
- * Resetting bootstrap
- */
-.col-sm-4, .col-sm-3, .col-sm-6, .col-sm-12
-    margin 0
-
-.container-fluid
-    padding 0
-
-.btn-default:hover,
-.btn-default:active,
-.btn-default:focus
-    color $color-white
-    background-color $color-hover-light
-
 html, body
     padding 0
     margin 0
@@ -151,6 +132,24 @@ a:hover, a:active, a:focus
 .border-right
     border-top-right-radius 3px
     border-bottom-right-radius 3px
+
+.ng-toast
+    .custom-backgrounds
+        .alert
+            color: $color-black
+            border none
+
+            button
+                opacity .3
+
+                &:hover
+                    opacity .6
+
+        .alert-danger
+            background-color $color-red
+
+        .alert-success
+            background-color $color-green
 
 [ng\:cloak]
 [ng-cloak]

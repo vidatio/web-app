@@ -1,4 +1,4 @@
-# Animals App
+# Vidatio App
 # ===========
 "use strict"
 
@@ -11,6 +11,9 @@ app = angular.module "app", [
     "app.filters"
     "app.config"
     "pascalprecht.translate"
+    "ngToast"
+    "ngAnimate"
+    "ngSanitize"
 ]
 
 app.run [
@@ -32,7 +35,8 @@ app.config [
     "$locationProvider"
     "$httpProvider"
     "$translateProvider"
-    ($urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider) ->
+    "ngToastProvider"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast ) ->
         $locationProvider.html5Mode true
 
         # I18N
@@ -42,6 +46,13 @@ app.config [
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
+
+
+        ngToast.configure(
+            animation: "slide"
+            dismissButton: true
+            additionalClasses: "custom-backgrounds"
+        )
 
         $stateProvider
         # abstract state for language as parameter in URL
@@ -82,3 +93,4 @@ app.config [
                         $state.go state.name, locale
 
 ]
+

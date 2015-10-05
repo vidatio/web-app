@@ -25,6 +25,5 @@ section#featured-vidatios
                         a.thin-font(href='#')  {{ "READ_MORE" | translate }}
 
         .browse
-            a.bold-font.button(href='#')
-                | {{ "SEARCH_VIDATIOS" | translate | uppercase }}
-                img(src='images/arrow.png', alt='')
+            button.btn.btn-embossed.btn-primary {{ "SEARCH_VIDATIOS" | translate | uppercase }}
+                span.btn-tip.fui-arrow-right
