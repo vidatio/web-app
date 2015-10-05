@@ -9,13 +9,15 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
+    "ParserService"
     'leafletData'
     "$timeout"
-    ($scope, Table, Map, leafletData, $timeout) ->
+    ($scope, Table, Map, Parser, leafletData, $timeout) ->
         icon =
-            iconUrl: 'images/marker-icon.png'
-            iconSize: [25, 41]
-            iconAnchor: [12.5, 41]
+            iconUrl: '../images/marker-small.png'
+            iconSize: [25, 30]
+            iconAnchor: [12.5, 30]
+            popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
             Map.map = map
@@ -28,27 +30,34 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new (L.marker)(latlng, icon: L.icon(icon))
+                new L.marker(latlng, icon: L.icon(icon))
 
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup
                 html = ""
+                isFirstAttribute = true
+
                 for property of feature.properties
-                    if(mailAddressCheck(cell))
-                        html += "<a href='mailto:" + feature.properties[property] +
-                                "'>" + feature.properties[property] + "</a><br>"
-                    else if(phoneNumberCheck(cell))
-                        html += "<a href='tel:" + feature.properties[property] +
-                                "'>" + feature.properties[property] + "</a><br>"
-                    else
-                        html += feature.properties[property] + "<br>"
+                    value = feature.properties[property]
+
+                    if isFirstAttribute
+                        html += "<b>"
+
+                    if Parser.isEmailAddress(value)
+                        html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if Parser.isPhoneNumber(value)
+                        html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if Parser.isURL(value)
+                        html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                    else if value
+                        html += value + "<br>"
+
+                    if isFirstAttribute
+                        html += "</b>"
+                        isFirstAttribute = false
+
+                unless html
+                    html = "Keine Informationen vorhanden"
+
                 layer.bindPopup(html)
-
-        phoneNumberCheck = (cell) ->
-            regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d*)$/
-            return cell.test(regex)
-
-        mailAddressCheck = (cell) ->
-            regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
-            return cell.test(regex)
 ]

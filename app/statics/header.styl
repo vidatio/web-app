@@ -1,11 +1,11 @@
 header
 
     #line-right
-        background $color-red
+        background $color-green
         height 8px
 
     #line-left
-        background $color-green
+        background $color-red
         height 8px
 
     .middle
@@ -17,12 +17,29 @@ header
         margin 0 auto
         padding 30px 0
 
+        .editor-panel
+            display flex
+            flex-direction row
+            display -webkit-flex /* Safari */
+            -webkit-flex-direction row /* Safari */
+
+        .separator
+            width 1px
+            background-color $color-green
+
     #logo
-        background url(../images/logo.png) no-repeat
-        background-size 105px
-        width 105px
+        background url(../images/logo.svg) no-repeat
+        background-size 111px
+        width 111px
         height 40px
         float left
+
+    #back-to-import-button
+        background url(../images/back-to-import-placeholder.svg) no-repeat
+        width 37px
+        height 40px
+        position relative
+
 
     .menu-buttons
         height 100%
@@ -86,6 +103,29 @@ header
                 border-width 4px
                 margin-left -4px
 
+    .border-right
+        border-right none
+
 @media(max-width: 767px)
     .editor-panel
         margin-top: 20px
+
+    #back-to-import-button
+        float left
+        left 20%
+
+@media(min-width: 768px)
+    #back-to-import-button
+        float right
+
+@media(min-width: 768px) and (max-width: 850px)
+    #back-to-import-button
+        right 0
+
+@media (min-width: 851px) and (max-width: 1024px)
+    #back-to-import-button
+        right 10%
+
+@media (min-width: 1025px)
+    #back-to-import-button
+        right 15%

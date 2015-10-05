@@ -209,13 +209,47 @@ describe "Service Parser", ->
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
         dataset = [
-            ["Innsbruck", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
+            ["Innsbruck", "41,5%", "180° 59' 0 me'', 180° 1 59.999 W"]
             ["Salzburg", "39,5%", "N 90 59 59.999, 180° 1 59.999 W"]
             ["Gneis", "41,5%", "180° 59' 0'', 180° 1 59.999 W"]
             ["Gnigl", "40,5%", "N 90 59 0, 0° 1 59.999 W"]
         ]
         indexCoordinates =
             xy: 2
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            [null, "13", "47", null]
+            [null, "13", "47", null]
+            ["11", "13", "47", "48"]
+            ["12", "13", "47", null]
+        ]
+        indexCoordinates =
+            x: 1
+            y: 2
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["10", "13", "47", null]
+            [null, null, null, "18"]
+            ["11", "11", "test", "48"]
+            ["12", "13", "47", null]
+        ]
+        indexCoordinates =
+            x: 0
+            y: 1
+        expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
+
+        dataset = [
+            ["test", "13", "47", null]
+            ["test", "12", "48", null]
+            [null, "11", "49", null]
+            [null, null, "49", "12"]
+            [null, null, "49", "12"]
+        ]
+        indexCoordinates =
+            x: 1
+            y: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
     # should be easier to find coordinates via header then via the complete dataset
@@ -264,3 +298,27 @@ describe "Service Parser", ->
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("46.323")
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("11.234")
 
+    it 'should identify phone numbers', ->
+        expect(@Parser.isPhoneNumber "+43 902 128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43-231-128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43.902.128391" ).toBeTruthy()
+        expect(@Parser.isPhoneNumber "+43-231" ).toBeFalsy()
+        expect(@Parser.isPhoneNumber "+43.128." ).toBeFalsy()
+        expect(@Parser.isPhoneNumber "43 902 128391" ).toBeFalsy()
+
+    it 'should identify phone numbers', ->
+        expect(@Parser.isEmailAddress "office.vidatio@vidatio.de" ).toBeTruthy()
+        expect(@Parser.isEmailAddress "office@vidat.io" ).toBeTruthy()
+        expect(@Parser.isEmailAddress "office-vidatio@vidat.io" ).toBeTruthy()
+        expect(@Parser.isEmailAddress "@test.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "email@test@.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "@test.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "email@.de" ).toBeFalsy()
+        expect(@Parser.isEmailAddress "+43 549 198012" ).toBeFalsy()
+
+    it 'should identify urls', ->
+        expect(@Parser.isURL "http://vidatio.mediacube.at" ).toBeTruthy()
+        expect(@Parser.isURL "http://www.vidatio.mediacube.at" ).toBeTruthy()
+
+        expect(@Parser.isURL "htt://.mediacube.at" ).toBeFalsy()
+        expect(@Parser.isURL "http:vidatio.mediacube.at/delete?q=test&result=test" ).toBeFalsy()

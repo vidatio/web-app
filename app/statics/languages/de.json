@@ -25,5 +25,9 @@
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden."
-    }
+    },
+    "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
+    "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
+    "DESCRIPTION_VISUALITION_3": "Übernachtungen im Pongau",
+    "READ_MORE": "Mehr"
 }

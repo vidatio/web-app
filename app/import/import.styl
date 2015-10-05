@@ -12,9 +12,14 @@
             background $color-white
             box-shadow $box-shadow-size $color-shadow
             text-align center
+
+            @media(max-width 768px)
+                margin-bottom 25px !important
+
             .icon-and-text-wrapper
                 position absolute
                 {overlayParent}
+
         .option-icon
             width 100px
             margin 50px auto 0
@@ -45,6 +50,8 @@
                 background $color-hover-light
                 {fillParent}
                 padding 10px
+
+
             &:hover
                 .option-icon
                 h3
@@ -59,6 +66,7 @@
                         {fillParent}
                         border 7px solid white
                         background none
+
                         .glyphicon-plus
                             margin-left 15px
                             text-align center
@@ -66,6 +74,7 @@
                             cursor default
                             font-size 13em
                             color $color-white
+                            margin-top -15px
 
                         .text
                             position absolute
@@ -74,6 +83,8 @@
                             margin-left -54px
                             cursor default
                             font-size 16px
+                            height 100%
+                            vertical-align middle
 
         #option-link
             position relative
@@ -85,6 +96,9 @@
 
         .other, .file-read
             margin-bottom 56px
+
+            @media(max-width 768px)
+                margin-bottom 0px
 
         .file-read .area a
         .other .area a
@@ -99,6 +113,8 @@
             #option-drag-and-drop
             #option-link
                 margin: 0
+
+
 
     #drop-zone
         display none
@@ -135,5 +151,3 @@
             position fixed
             z-index: 999
             {overlayParent}
-
-

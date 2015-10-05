@@ -167,19 +167,19 @@ app.service 'ConverterService', [
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
                         coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-                        if coordinates.length == 0
-                            # TODO print failure to the user
-                            return
-                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
                         # TODO check here also maybe with isCoordinate()
-                        if(Helper.isNumber(latitude) && Helper.isNumber(longitude))
+                        if(Helper.isNumber(latitude) and Helper.isNumber(longitude))
                             coordinates.push(latitude)
                             coordinates.push(longitude)
                     else
-                        # TODO print failure to the user
+                        console.info "Keine Koordinaten gefunden."
+                        return
+
+                    unless coordinates.length
                         return
 
                     # JSON.parse(JSON.stringify(...)) deep copy the feature
@@ -192,7 +192,7 @@ app.service 'ConverterService', [
                         "properties": {}
                     ))
 
-                    if coordinates.length == 2
+                    if coordinates.length is 2
                         longitude = parseFloat(coordinates[1])
                         latitude = parseFloat(coordinates[0])
                         feature.geometry.coordinates = [longitude, latitude]
@@ -206,9 +206,9 @@ app.service 'ConverterService', [
                         row.forEach (cell, indexColumn) ->
                             if(indexColumn != indicesCoordinates["xy"])
                                 feature.properties[indexColumn] = (cell)
-                    else if indicesCoordinates.hasOwnProperty("x") && indicesCoordinates.hasOwnProperty("y")
+                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
                         row.forEach (cell, indexColumn) ->
-                            if(indexColumn != indicesCoordinates["x"] && indexColumn != indicesCoordinates["y"])
+                            if(indexColumn != indicesCoordinates["x"] and indexColumn != indicesCoordinates["y"])
                                 feature.properties[indexColumn] = (cell)
 
                     geoJSON.features.push(feature)

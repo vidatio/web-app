@@ -9,7 +9,6 @@ module.exports = (config) ->
         # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ["jasmine-jquery", "jasmine"]
 
-
         # list of files / patterns to load in the browser
         files: [
 
@@ -19,7 +18,7 @@ module.exports = (config) ->
             "./bower_components/angular-mocks/angular-mocks.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
-            "./bower_components/leaflet/dist/leaflet.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
             "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/papa-parse/papaparse.js"
@@ -38,6 +37,10 @@ module.exports = (config) ->
 
             #includes test files already
             "./app/*/**/*.coffee"
+            "./app/app-test.coffee"
+
+            #config
+            "./app/statics/constants/config.json"
         ]
 
 
@@ -45,11 +48,11 @@ module.exports = (config) ->
         exclude: [
         ]
 
-
         # preprocess matching files before serving them to the browser
         # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors:
             "**/*.coffee": ["coffee"]
+            "**/*.json": ["ng-constant"]
 
         coffeePreprocessor:
             options:
@@ -93,3 +96,8 @@ module.exports = (config) ->
         # Continuous Integration mode
         # if true, Karma captures browsers, runs the tests and exits
         singleRun: false
+
+        ngConstantPreprocessor:
+            moduleName: "app.config"
+            constantName: "CONFIG"
+

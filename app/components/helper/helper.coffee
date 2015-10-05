@@ -5,7 +5,7 @@ app = angular.module "app.services"
 app.service 'HelperService', [ ->
     class Helper
         constructor: ->
-            @rowLimit = 100
+            @rowLimit = 30
 
         # remove cells without values
         # @method trimDataset
@@ -58,10 +58,16 @@ app.service 'HelperService', [ ->
         # @param {All Types} value
         # @return {Boolean}
         isNumber: (value) ->
-            return typeof value == "number" && isFinite(value)
+            return typeof value is "number" and isFinite(value)
 
+        # @method isNumeric
+        # @description checks if a value is numeric.
+        # @param {Mixed} n
+        # @return {Boolean}
+         isNumeric: (n) ->
+             return (!isNaN(parseFloat(n)) && isFinite(n))
 
-        # copy specified amount of rows
+        # cut out specified amount of rows
         # @method cutDataset
         # @public
         # @param {Array} dataset
@@ -69,7 +75,7 @@ app.service 'HelperService', [ ->
         cutDataset: (dataset) ->
             tmp = []
             for element, index in dataset
-                if index == @rowLimit
+                if index is @rowLimit
                     break
                 tmp.push element
 

@@ -1,4 +1,5 @@
 # Import Controller
+# check if timeout exits
 # ===================
 
 "use strict"
@@ -10,6 +11,7 @@ app.controller "ImportCtrl", [
     "$http"
     "$location"
     "$rootScope"
+    "$timeout"
     "ImportService"
     "TableService"
     "ConverterService"
@@ -17,7 +19,7 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "$translate"
-    ($scope, $http, $location, $rootScope, Import, Table, Converter, Map, Data, ngToast, $translate) ->
+    ($scope, $http, $location, $rootScope, $timeout, Import, Table, Converter, Map, Data, ngToast, $translate) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
 
         $scope.importService = Import
@@ -28,7 +30,10 @@ app.controller "ImportCtrl", [
             Table.resetDataset()
             Table.resetColHeaders()
             Map.resetGeoJSON()
-            $location.path editorPath
+
+            # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+            $timeout ->
+                $location.path editorPath
 
         # Read via link
         $scope.load = ->
@@ -38,7 +43,10 @@ app.controller "ImportCtrl", [
                     url: url
             ).success (data) ->
                 Table.setDataset data
-                $location.path editorPath
+
+                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+                $timeout ->
+                    $location.path editorPath
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
@@ -47,7 +55,7 @@ app.controller "ImportCtrl", [
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
 
-            if(fileType != "csv" && fileType != "zip")
+            if fileType isnt "csv" and fileType isnt "zip"
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
                     ngToast.create(
@@ -77,8 +85,9 @@ app.controller "ImportCtrl", [
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
 
-                $location.path editorPath
-
+                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+                $timeout ->
+                    $location.path editorPath
 
             , (error) ->
                 console.log error

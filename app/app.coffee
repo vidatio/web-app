@@ -9,6 +9,7 @@ app = angular.module "app", [
     "app.services"
     "app.directives"
     "app.filters"
+    "app.config"
     "pascalprecht.translate"
     "ngToast"
     "ngAnimate"
@@ -21,7 +22,8 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ($rootScope, $state, $stateParams, $http, $location) ->
+    "CONFIG"
+    ( $rootScope, $state, $stateParams, $http, $location, CONFIG) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
