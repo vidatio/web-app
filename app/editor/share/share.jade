@@ -2,17 +2,17 @@
     .content
         .row
             .col-md-12
-                h3 EXPORT
+                h3 {{ "EXPORT" | translate }}
 
             .col-md-12
                 .form.form-horizontal
                     .form-group
                         .col-md-6
-                            label(for="dropdown-visualization") Visualisierung
+                            label(for="dropdown-visualization") {{ "VISUALIZATION" | translate }}
                         .col-md-6
                             .btn-group#dropdown-visualization
                                 button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
-                                    | Auswählen
+                                    | {{ "CHOOSE" | translate }}
                                     span.caret
                                 ul.dropdown-menu(role='menu')
                                     li
@@ -22,11 +22,11 @@
 
                     .form-group
                         .col-md-6
-                            label(for="dropdown-dataset") Datenset
+                            label(for="dropdown-dataset") {{ "DATASET" | translate }}
                         .col-md-6
                             .btn-group#dropdown-dataset
                                 button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
-                                    | Auswählen
+                                    | {{ "CHOOSE" | translate }}
                                     span.caret
                                 ul.dropdown-menu(role='menu')
                                     li
@@ -40,7 +40,7 @@
     .content
         .row
             .col-md-12
-                h3 VERÖFFENTLICHUNG
+                h3 {{ "PUBLICATION" | translate }}
         .row
             .col-md-12 Zum dauerhaften Speichern, zum Teilen auf Facebook, Twitter und Google+, zur Verbreitung mit Link und/oder Embedded Code:
         .row
@@ -48,16 +48,10 @@
                 form
                     .row
                         .col-md-12
-                            input.form-control.input-sm(type="text" placeholder="Urheber")
+                            input.form-control.input-sm(type="text" placeholder="{{ 'AUTHOR' | translate }}")
                         .col-md-12
-                            input.tagsinput.form-control.input-sm(name="tagsinput" data-role="tagsinput" value="Clean, Fresh, Modern, Unique")
+                            input.form-control.input-sm(type="text" placeholder="{{ 'CATEGORY' | translate }}")
                         .col-md-12
-                            input.form-control.input-sm(type="text" placeholder="Lizenz")
+                            input.form-control.input-sm(type="text" placeholder="{{ 'LICENCE' | translate }}")
                         .col-md-12.center
-                            button.btn.btn-primary.btn-wide.input-sm(type="submit") Speichern
-
-
-input.tagsinput(name='tagsinput', data-role='tagsinput', value='Clean, Fresh, Modern, Unique')
-
-.tagsinput-primary
-    input.tagsinput(name='tagsinput', data-role='tagsinput', value='School, Teacher, Colleague')
+                            button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "SAVE" | translate }}

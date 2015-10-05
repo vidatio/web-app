@@ -14,12 +14,18 @@
     "LINK": "Link",
     "USP": "USP",
     "API": "API",
+    "EXPORT": "Export",
     "LIVE_DATA": "Live Data",
     "OPEN_DATA": "Open Data",
     "FILE_DROP": "Datei Landeplatz",
     "LINK_TO_FILE": "Link zur Datei",
     "DATA": "Daten",
+    "DATASET": "Datensatz",
     "VISUALIZATION": "Visualisierung",
-    "SAVE": "Speichern"
-
+    "PUBLICATION": "Veröffentlichung",
+    "SAVE": "Speichern",
+    "CHOOSE": "Auswählen",
+    "AUTHOR": "Urheber",
+    "CATEGORY": "Kategorie",
+    "LICENCE": "Lizenz"
 }
