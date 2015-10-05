@@ -1,5 +1,4 @@
 # Import Controller
-# check if timeout exits
 # ===================
 
 "use strict"
