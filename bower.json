@@ -38,7 +38,7 @@
     "jquery": "*",
     "papa-parse": "^4.1.1",
     "shp": "^3.2",
-    "flat-ui": "~2.2.2"
+    "flat-ui": "~2.2.2",
     "ngToast": "ngtoast#~1.5.6",
     "angular-sanitize": "~1.4.6",
     "angular-animate": "~1.4.6"
