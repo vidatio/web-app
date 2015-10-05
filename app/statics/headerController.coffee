@@ -10,7 +10,7 @@ app.controller "HeaderCtrl", [
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
-        $rootScope.activeViews = [true, true, true]
+        $rootScope.activeViews = [true, true, false]
 
         # Invert the value of the clicked tab to hide or show views in the editor
         # @method tabClicked
