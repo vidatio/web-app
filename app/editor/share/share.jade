@@ -1,57 +1,58 @@
 #share.wrapper-content(ng-show="$root.showShareView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
-    .content
-        .row
-            .col-md-12
-                h3 {{ "EXPORT" | translate }}
+    .content-container
+        .content.export
+            .row
+                .col-md-12
+                    h3 {{ "EXPORT" | translate }}
 
-            .col-md-12
-                .form.form-horizontal
-                    .form-group
-                        .col-md-6
-                            label(for="dropdown-visualization") {{ "VISUALIZATION" | translate }}
-                        .col-md-6
-                            .btn-group#dropdown-visualization
-                                button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
-                                    | {{ "CHOOSE" | translate }}
-                                    span.caret
-                                ul.dropdown-menu(role='menu')
-                                    li
-                                        a(href='#') PNG
-                                    li
-                                        a(href='#') SVG
+                .col-md-12
+                    .form.form-horizontal
+                        .form-group
+                            .col-xs-6
+                                label(for="dropdown-visualization") {{ "VISUALIZATION" | translate }}
+                            .col-xs-6
+                                .btn-group#dropdown-visualization
+                                    button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
+                                        | {{ "CHOOSE" | translate }}
+                                        span.caret
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') PNG
+                                        li
+                                            a(href='#') SVG
 
-                    .form-group
-                        .col-md-6
-                            label(for="dropdown-dataset") {{ "DATASET" | translate }}
-                        .col-md-6
-                            .btn-group#dropdown-dataset
-                                button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
-                                    | {{ "CHOOSE" | translate }}
-                                    span.caret
-                                ul.dropdown-menu(role='menu')
-                                    li
-                                        a(href='#') CSV
-                                    li
-                                        a(href='#') SHAPE
-                                    li
-                                        a(href='#') XML
-                                    li
-                                        a(href='#') JSON
-    .content
-        .row
-            .col-md-12
-                h3 {{ "PUBLICATION" | translate }}
-        .row
-            .col-md-12 Zum dauerhaften Speichern, zum Teilen auf Facebook, Twitter und Google+, zur Verbreitung mit Link und/oder Embedded Code:
-        .row
-            .col-md-12
-                form
-                    .row
-                        .col-md-12
-                            input.form-control.input-sm(type="text" placeholder="{{ 'AUTHOR' | translate }}")
-                        .col-md-12
-                            input.form-control.input-sm(type="text" placeholder="{{ 'CATEGORY' | translate }}")
-                        .col-md-12
-                            input.form-control.input-sm(type="text" placeholder="{{ 'LICENCE' | translate }}")
-                        .col-md-12.center
-                            button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "SAVE" | translate }}
+                        .form-group
+                            .col-xs-6
+                                label(for="dropdown-dataset") {{ "DATASET" | translate }}
+                            .col-xs-6
+                                .btn-group#dropdown-dataset
+                                    button.btn.btn-primary.dropdown-toggle.input-sm(type='button', data-toggle='dropdown')
+                                        | {{ "CHOOSE" | translate }}
+                                        span.caret
+                                    ul.dropdown-menu(role='menu')
+                                        li
+                                            a(href='#') CSV
+                                        li
+                                            a(href='#') SHAPE
+                                        li
+                                            a(href='#') XML
+                                        li
+                                            a(href='#') JSON
+        .content.share-save
+            .row
+                .col-md-12
+                    h3 {{ "PUBLICATION" | translate }}
+            .row
+                .col-md-12 Zum dauerhaften Speichern, zum Teilen auf Facebook, Twitter und Google+, zur Verbreitung mit Link und/oder Embedded Code:
+            .row
+                .col-md-12
+                    form
+                        .row
+                            .col-md-12
+                                input.form-control.input-sm(type="text" placeholder="{{ 'AUTHOR' | translate }}")
+                            .col-md-12
+                                input.form-control.input-sm(type="text" placeholder="{{ 'CATEGORY' | translate }}")
+                            .col-md-12
+                                input.form-control.input-sm(type="text" placeholder="{{ 'LICENCE' | translate }}")
+                            .col-md-12.center
+                                button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "SAVE" | translate }}

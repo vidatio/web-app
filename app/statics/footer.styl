@@ -3,7 +3,7 @@
 footer
     position absolute
     bottom 0
-    height 80px
+    min-height 80px
     color white
     width 100%
     font-size 12px
@@ -12,11 +12,7 @@ footer
 
     a
         display inline-block
-        padding 0 5px
-        height 30px
-
-    .middle
-        text-align center
+        padding 5px 5px
 
         a
             &:link
@@ -35,3 +31,14 @@ footer
             line-height 40px
             vertical-align middle
             float right
+
+    .row div
+        text-align center
+
+@media (min-width: 768px)
+    footer
+        .row div
+            &:first-child
+                text-align left
+            &:last-child
+                text-align right

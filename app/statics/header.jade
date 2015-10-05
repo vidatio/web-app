@@ -15,7 +15,7 @@ header
                 .col-xs-3.menu-buttons
                     a#user.icon-hamburger(href='#')
 
-            #navigation.row(ng-switch-when="editor" ng-controller="HeaderCtrl")
+            #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-3.logo
                     a(ui-sref='app.landingPage({ locale: locale })')
                         #logo
