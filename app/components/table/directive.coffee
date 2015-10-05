@@ -22,11 +22,14 @@ app.directive 'hot', [
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
-                    if !Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
-                        # If Data.updateTableAndMap is true, the value should not be changed -> newValue = oldValue
-                        change[0][3] = change[0][2]
+                    # if !Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
+                    #     # If Data.updateTableAndMap is true, the value should not be changed -> newValue = oldValue
+                    #     change[0][3] = change[0][2]
+                    return
 
                 afterChange: (change, source) ->
+                    console.log change
+                    Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
                     # Needed for updating the map, else the markers are
                     # updating too late from angular refreshing cycle
                     # Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3]) if change
