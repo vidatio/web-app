@@ -14,6 +14,7 @@ app = angular.module "app", [
     "ngToast"
     "ngAnimate"
     "ngSanitize"
+    "logglyLogger"
 ]
 
 app.run [
@@ -23,10 +24,12 @@ app.run [
     "$http"
     "$location"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, CONFIG) ->
+    "$log"
+    ( $rootScope, $state, $stateParams, $http, $location, CONFIG, $log) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
+        $log.info( 'Test Logs to Loggly' )
 ]
 
 app.config [
@@ -36,8 +39,15 @@ app.config [
     "$httpProvider"
     "$translateProvider"
     "ngToastProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast ) ->
+    "LogglyLoggerProvider"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider ) ->
         $locationProvider.html5Mode true
+
+        # Loggly Configuration
+        LogglyLoggerProvider.inputToken('d9a30484-7da3-4358-8054-0a7fe4bd560c')
+        LogglyLoggerProvider.sendConsoleErrors true
+        LogglyLoggerProvider.includeUrl  true
+        #LogglyLoggerProvider.includeTimestamp  true
 
         # I18N
         $translateProvider.useSanitizeValueStrategy("escape")
