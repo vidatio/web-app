@@ -97,6 +97,7 @@ BUILD =
             "./bower_components/angular-animate/angular-animate.min.js"
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
+            "./bower_components/html2canvas/build/html2canvas.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"

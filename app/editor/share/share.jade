@@ -1,4 +1,4 @@
-#share.wrapper-content(ng-show="$root.showShareView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
+#share.wrapper-content(ng-controller="ShareCtrl" ng-show="$root.showShareView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content-container
         .content.export
             .row
@@ -56,3 +56,7 @@
                                 input.form-control.input-sm(type="text" placeholder="{{ 'LICENCE' | translate }}")
                             .col-md-12.center
                                 button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "SAVE" | translate }}
+
+        .test
+            a(href="" ng-click="shareVisualization()")
+                965685898
