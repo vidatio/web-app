@@ -13,11 +13,20 @@ app.controller "VisualizationCtrl", [
     'leafletData'
     "$timeout"
     ($scope, Table, Map, Parser, leafletData, $timeout) ->
-        icon =
-            iconUrl: '../images/marker-small.png'
-            iconSize: [25, 30]
-            iconAnchor: [12.5, 30]
-            popupAnchor: [0, -30]
+
+
+
+        # icon =
+        #     iconUrl: '../images/logo.svg'
+        #     iconSize: [25, 30]
+        #     iconAnchor: [12.5, 30]
+        #     popupAnchor: [0, -30]
+
+        test = L.VectorMarkers.icon
+            icon: 'spinner'
+            prefix: 'fa'
+            markerColor: '#cb4b16'
+            spin: true
 
         leafletData.getMap("map").then (map) ->
             Map.map = map
@@ -30,7 +39,7 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new L.marker(latlng, icon: L.icon(icon))
+                new L.marker(latlng, icon: test)
 
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup

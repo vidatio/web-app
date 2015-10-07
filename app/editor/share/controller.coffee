@@ -18,10 +18,50 @@ app.controller "ShareCtrl", [
             # html2canvas(document.getElementById("map")) (canvas) ->
                 # document.body.appendChild canvas
 
-            html2canvas document.getElementById("map"),
-                useCORS: true
-                onrendered: (canvas) ->
-                    console.log canvas
-                    document.getElementById("editor").appendChild canvas
+            svgToCanvas $("#map")
+
+            # html2canvas document.getElementById("map"),
+            #     useCORS: true
+            #     onrendered: (canvas) ->
+            #         console.log canvas
+            #         # document.getElementById("editor").appendChild canvas
+            #         png = canvas.toDataURL "image/png"
+            #         document.write('<img src="'+png+'"/>')
 
 ]
+
+svgToCanvas = (targetElem) ->
+
+    nodesToRecover = []
+    nodesToRemove = []
+
+    svgElem = targetElem.find 'svg'
+
+    svgElem.each (index, node) ->
+
+        parentNode = node.parentNode
+        svg = parentNode.innerHTML
+
+        canvas = document.createElement('canvas')
+
+        console.log svg
+        canvg canvas, (new XMLSerializer).serializeToString(node)
+        # canvg canvas, svg
+
+        nodesToRecover.push
+            parent: parentNode
+            child: node
+
+        parentNode.removeChild node
+
+        nodesToRemove.push
+            parent: parentNode
+            child: canvas
+
+        parentNode.appendChild canvas
+
+    html2canvas targetElem,
+        useCORS: true
+        onrendered: (canvas) ->
+            png = canvas.toDataURL "image/png"
+            $("body").append '<img src="' + png + '"/>'

@@ -98,6 +98,8 @@ BUILD =
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
+            "./bower_components/canvg/dist/canvg.bundle.js"
+            "./bower_components/Leaflet.vector-markers/dist/Leaflet.vector-markers.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -110,6 +112,7 @@ BUILD =
             "./bower_components/flat-ui/dist/css/flat-ui.css.map"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
+            "./bower_components/Leaflet.vector-markers/dist/Leaflet.vector-markers.css"
         ]
     dirs:
         out: "./build"
