@@ -1,14 +1,13 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'progressScreen', ->
-    link: ($scope, el) ->
+app.directive "progressScreen", [
+    ->
         return {
             restrict: "E"
-            template: "<p>This is my message: {{message}}</p>"
-            controller: ($scope, $element) ->
-                $scope.setMessage = (msg) ->
-                    $scope.message = msg
-            link: (scope, el, attr) ->
-                scope.message = ""
-        }
+            template: "<p>This is my message: {{ Overlay.message }}</p>"
+            controller: "OverlayController"
+            scope:
+                message: "="
+    }
+]
