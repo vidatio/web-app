@@ -10,9 +10,11 @@ app = angular.module "app.services"
 
 app.service 'ImportService', [
     "$q"
+    "$translate"
     "ConverterService"
     "TableService"
-    ($q, Converter, Table) ->
+    "ProgressOverlayService"
+    ($q, $translate, Converter, Table, ProgressOverlay) ->
         class Reader
             constructor: ->
                 @reader = new FileReader()
@@ -20,6 +22,9 @@ app.service 'ImportService', [
                 @progress = 0
 
             readFile: (file, fileType) ->
+                $translate("OVERLAY_MESSAGES.READING_FILE").then( (message) ->
+                    ProgressOverlay.setMessage(message)
+                )
                 @deferred = $q.defer()
                 @progress = 0
 

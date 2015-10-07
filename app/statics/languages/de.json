@@ -36,5 +36,9 @@
     "CHOOSE": "Auswählen",
     "AUTHOR": "Urheber",
     "CATEGORY": "Kategorie",
-    "LICENCE": "Lizenz"
+    "LICENCE": "Lizenz",
+    "OVERLAY_MESSAGES": {
+        "READING_FILE": "Datei wird eingelesen",
+        "PARSING_DATA": "Daten werden analysiert"
+    }
 }

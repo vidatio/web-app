@@ -4,7 +4,9 @@ app = angular.module "app.services"
 
 app.service 'ParserService', [
     "HelperService"
-    (Helper) ->
+    "ProgressOverlayService"
+    "$translate"
+    (Helper, ProgressOverlay, $translate) ->
         class Parser
             # @method isCoordinate
             # @public
@@ -152,6 +154,11 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             findCoordinatesColumns: (dataset) ->
+
+                $translate("OVERLAY_MESSAGES.PARSING_DATA").then( (message) ->
+                    ProgressOverlay.setMessage(message)
+                )
+
                 choppedDataset = Helper.cutDataset(dataset)
                 unless choppedDataset.length
                     return
