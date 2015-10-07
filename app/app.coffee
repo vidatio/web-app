@@ -58,6 +58,7 @@ app.config [
         LogglyLoggerProvider.logToConsole false unless CONFIG.ENV is "develop"
 
         # $location.absUrl() is sent as a "url" key in the message object that's sent to loggly
+        # @method includeUrl
         LogglyLoggerProvider.includeUrl  true
 
 
