@@ -23,16 +23,10 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "$log"
-    ( $rootScope, $state, $stateParams, $http, $location, $log) ->
+    ( $rootScope, $state, $stateParams, $http, $location ) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
-
-        $log.warn( 'Test Logs to Loggly 1' )
-        $log.debug( 'Test Logs to Loggly 2' )
-        $log.info( 'Test Logs to Loggly 3' )
-        $log.error( 'Test Logs to Loggly 4' )
 ]
 
 app.config [
@@ -44,7 +38,7 @@ app.config [
     "ngToastProvider"
     "LogglyLoggerProvider"
     "CONFIG"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG) ->
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
         $locationProvider.html5Mode true
 
         # Loggly Configuration
