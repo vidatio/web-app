@@ -41,3 +41,5 @@ docs/
 
 .idea/
 *lock.*
+
+*/config.json
