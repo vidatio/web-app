@@ -9,22 +9,18 @@
         padding 0
 
         #slogan
+            font-family Colaborate-Thin, $fonts
             font-size 30px
             margin-bottom 10px
 
         .diagram
             img
                 width 100%
-                -webkit-box-shadow 2px 2px 2px 0px $color-shadow
-                -moz-box-shadow 2px 2px 2px 0px $color-shadow
                 box-shadow 2px 2px 2px 0px $color-shadow
                 border-radius 4px
 
-        .promo
-            .description
-                margin-top 10px
-                font-size 16px
-                text-transform uppercase
+        .description
+            margin 20px 0 10px
 
         ol
             counter-reset li-counter
@@ -35,8 +31,7 @@
             & > li
                 position relative
                 margin-left 25px
-                font-size 14px
-                margin-bottom 8px
+                margin-bottom 4px
 
                 &.active
                     &:before
@@ -44,9 +39,11 @@
 
                 &:before
                     position absolute
+                    top 2px
                     left -25px
                     width 20px
                     height 20px
+                    line-height 22px
                     border-radius 50%
                     background-color $color-red
                     color $color-white
@@ -66,7 +63,7 @@
                 text-align center
                 display inline-block
                 line-height 30px
-                border-radius 10px
+                border-radius 5px
 
                 &:visited
                     color $color-white
@@ -81,7 +78,7 @@
                     font-size 50px
                     padding-top 15px
                     padding-bottom 15px
-                    border-radius 10px
+                    border-radius 5px
         .promo
             .video
                 width 100%
@@ -98,12 +95,8 @@
         overflow hidden
         width 100%
 
-
         div
             text-align center
-
-            p
-                font-size 14px
 
         .content
             margin-top 50px
@@ -128,15 +121,14 @@
             box-shadow 2px 2px 2px 0px $color-shadow
             border-radius 4px
 
-        p
+        div
+            font-family Colaborate-Medium, $fonts
             margin-top 10px
-            font-size 16px
 
-            & > a
-                color $color-grey-dark
-
-                &:hover
-                    color $color-green
+        a
+            color $color-grey-dark
+            &:hover
+                color $color-green
 
         .browse
             text-align center
@@ -148,6 +140,12 @@
         /* first image is in the foreground, second image in the background*/
         background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
+
+    #customers
+        h3
+        h4
+            display block
+            margin-bottom 10px
 
 /* space between live diagram and video in intro section */
 @media(max-width: 767px)

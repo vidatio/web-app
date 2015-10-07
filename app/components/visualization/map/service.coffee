@@ -128,6 +128,41 @@ app.service 'MapService', [
                 @setBoundsToGeoJSON()
                 return true
 
+            # @method validateGeoJSONUpdateSHP
+            # @description validates the geoJSON object(generated from shp file) used for the map before data table changes.
+            # @param {integer} row
+            # @param {integer} column
+            # @param {number or string} oldData
+            # @param {number or string} newData
+            # @param {string} key
+            # @return {boolean}
+            validateGeoJSONUpdateSHP: (row, column, oldData, newData, key) ->
+                keys = key.split(" ")
+
+                if keys[0] is "coordinates"
+                    if Helper.isNumeric(newData)
+                        if @geoJSON.features[row].geometry.type is "Point"
+                            unless @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
+                                console.warn "Point does not exist"
+                                return false
+                        else if @geoJSON.features[row].geometry.type is "Polygon"
+                            arrayIndex = Math.floor(keys[1] / 2)
+                            index = keys[1] % 2
+                            unless Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
+                                console.warn "Array does not exist and can't be updated"
+                                # The table has to be reseted if the array can't be updated
+                                return false
+                    else
+                        console.warn "Value is not a Number"
+                        return false
+
+                else if keys[0] is "bbox"
+                    unless Helper.isNumeric(newData)
+                        console.warn "Value is not a Number"
+                        return false
+
+                return true
+
             getGeoJSON: ->
                 return @geoJSON
 
