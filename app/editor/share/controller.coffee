@@ -63,5 +63,14 @@ svgToCanvas = (targetElem) ->
     html2canvas targetElem,
         useCORS: true
         onrendered: (canvas) ->
+
+            ## IF IT IS SHAPE WITH AREA
+            ctx = canvas.getContext('2d');
+            ctx.drawImage($("canvas.leaflet-zoom-animated")[0], 0,0)
             png = canvas.toDataURL "image/png"
             $("body").append '<img src="' + png + '"/>'
+
+            ## IF IT IS FILE WITH MARKERS ONLY
+            # png = canvas.toDataURL "image/png"
+            # $("body").append '<img src="' + png + '"/>'
+
