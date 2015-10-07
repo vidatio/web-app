@@ -49,9 +49,23 @@ app.config [
 
         # Loggly Configuration
         LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY
+
+        # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
+        # @method level
+        LogglyLoggerProvider.level "DEBUG"
+
+        # Send console error stack traces to Loggly.
+        # @method sendConsoleErrors
         LogglyLoggerProvider.sendConsoleErrors true
+
+        # Toggle logging to console. When set to false, messages will not be be passed along to the original $log methods.
+        # This makes it easy to keep sending messages to Loggly in production without also sending them to the console.
+        # @method logToConsole
+        LogglyLoggerProvider.logToConsole false unless CONFIG.ENV is "develop"
+
+        # $location.absUrl() is sent as a "url" key in the message object that's sent to loggly
         LogglyLoggerProvider.includeUrl  true
-        #LogglyLoggerProvider.includeTimestamp  true
+
 
         # I18N
         $translateProvider.useSanitizeValueStrategy "escape"
