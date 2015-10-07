@@ -23,13 +23,16 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "CONFIG"
     "$log"
-    ( $rootScope, $state, $stateParams, $http, $location, CONFIG, $log) ->
+    ( $rootScope, $state, $stateParams, $http, $location, $log) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
-        $log.info( 'Test Logs to Loggly' )
+
+        $log.warn( 'Test Logs to Loggly 1' )
+        $log.debug( 'Test Logs to Loggly 2' )
+        $log.info( 'Test Logs to Loggly 3' )
+        $log.error( 'Test Logs to Loggly 4' )
 ]
 
 app.config [
@@ -40,19 +43,20 @@ app.config [
     "$translateProvider"
     "ngToastProvider"
     "LogglyLoggerProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider ) ->
+    "CONFIG"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG) ->
         $locationProvider.html5Mode true
 
         # Loggly Configuration
-        LogglyLoggerProvider.inputToken('d9a30484-7da3-4358-8054-0a7fe4bd560c')
+        LogglyLoggerProvider.inputToken CONFIG.LOGGLY_TOKEN
         LogglyLoggerProvider.sendConsoleErrors true
         LogglyLoggerProvider.includeUrl  true
         #LogglyLoggerProvider.includeTimestamp  true
 
         # I18N
-        $translateProvider.useSanitizeValueStrategy("escape")
-        $translateProvider.preferredLanguage("de")
-        $translateProvider.fallbackLanguage("de")
+        $translateProvider.useSanitizeValueStrategy "escape"
+        $translateProvider.preferredLanguage "de"
+        $translateProvider.fallbackLanguage "de"
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"

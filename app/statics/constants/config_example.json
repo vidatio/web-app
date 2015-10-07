@@ -1,0 +1,6 @@
+{
+    "CONFIG": {
+        "ENV": "",
+        "LOGGLY_TOKEN": "FILL IN LOGGLY TOKEN"
+    }
+}
