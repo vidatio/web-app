@@ -48,7 +48,7 @@ app.config [
         $locationProvider.html5Mode true
 
         # Loggly Configuration
-        LogglyLoggerProvider.inputToken CONFIG.LOGGLY_TOKEN
+        LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY
         LogglyLoggerProvider.sendConsoleErrors true
         LogglyLoggerProvider.includeUrl  true
         #LogglyLoggerProvider.includeTimestamp  true

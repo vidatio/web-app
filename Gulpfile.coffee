@@ -135,6 +135,7 @@ gulp.task "config:develop",
         gulp.src BUILD.source.config
         .pipe ngConstant
             name: "app.config"
+            merge: true
             constants:
                 CONFIG:
                     ENV: "develop"

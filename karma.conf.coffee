@@ -31,6 +31,9 @@ module.exports = (config) ->
             "./bower_components/angular-translate/angular-translate.js"
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
 
+            #config
+            "./app/statics/constants/config.json"
+
             # source files
             "./app/init-deps.coffee"
             "./app/app.coffee"
@@ -39,9 +42,6 @@ module.exports = (config) ->
             #includes test files already
             "./app/*/**/*.coffee"
             "./app/app-test.coffee"
-
-            #config
-            "./app/statics/constants/config.json"
         ]
 
 
