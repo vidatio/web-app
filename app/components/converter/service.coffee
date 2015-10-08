@@ -8,9 +8,11 @@ app = angular.module "app.services"
 # TODO: after extracting coordinates they have to be converted to decimal format
 
 app.service 'ConverterService', [
+    "$timeout"
     "ParserService"
     "HelperService"
-    (Parser, Helper) ->
+    "ProgressOverlayService"
+    ($timeout, Parser, Helper, ProgressOverlay) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -213,6 +215,9 @@ app.service 'ConverterService', [
 
                     geoJSON.features.push(feature)
 
+                $timeout ->
+                    ProgressOverlay.resetMessage()
+                , 0
                 return geoJSON
 
         new Converter

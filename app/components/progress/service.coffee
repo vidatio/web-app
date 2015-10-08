@@ -9,8 +9,10 @@ app.service "ProgressOverlayService", [
                 @message = ""
 
             setMessage: (msg) ->
-                console.log "MSG:", msg
                 @message = msg
+
+            resetMessage: ->
+                @message = ""
 
         new ProgressOverlay
 ]
