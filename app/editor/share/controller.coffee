@@ -15,37 +15,6 @@ app.controller "ShareCtrl", [
 
 svgToCanvas = (targetElem) ->
 
-    # nodesToRecover = []
-    # nodesToRemove = []
-
-    # svgElem = targetElem.find 'svg'
-
-    # svgElem.each (index, node) ->
-
-    #     parentNode = node.parentNode
-    #     svg = parentNode.innerHTML
-
-    #     canvas = document.createElement('canvas')
-
-    #     dw = $(node).width()
-    #     dh = $(node).height()
-
-    #     canvg canvas, (new XMLSerializer).serializeToString(node),
-    #         scaleWidth: dw
-    #         scaleHeight: dh
-
-    #     nodesToRecover.push
-    #         parent: parentNode
-    #         child: node
-
-    #     parentNode.removeChild node
-
-    #     nodesToRemove.push
-    #         parent: parentNode
-    #         child: canvas
-
-    #     parentNode.appendChild canvas
-
     html2canvas targetElem,
         useCORS: true
         onrendered: (canvas) ->
@@ -72,9 +41,6 @@ svgToCanvas = (targetElem) ->
 
                 ctx.drawSvg((new XMLSerializer).serializeToString(svgElem[0]), dx, dy)
 
-                console.log "dx, dy", dx, dy
-
-                # ctx.drawImage($("canvas.leaflet-zoom-animated")[0], -diffWidth, -diffHeight)
                 png = canvas.toDataURL "image/png"
                 $("body").append '<img src="' + png + '"/>'
             else if $(".leaflet-marker-pane").children().length > 0
@@ -88,12 +54,14 @@ svgToCanvas = (targetElem) ->
                     if $(node).css("transform") != "none"
                         imgArray = matrixToArray $(node).css("transform")
 
-                        # calculate marker position
-                        # console.log imgArray
-                        # console.log mapArray
+                        dxOffset = parseInt $(node).css("margin-left")
+                        dyOffset = parseInt $(node).css("margin-top")
 
                         dx = parseInt(imgArray[4]) + parseInt(mapArray[4])
                         dy = parseInt(imgArray[5]) + parseInt(mapArray[5])
+
+                        dx = dx + dxOffset
+                        dy = dy + dyOffset
 
                         console.log "dx, dy", dx, dy
 
