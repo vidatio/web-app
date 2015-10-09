@@ -9,5 +9,6 @@ app.directive "progressScreen", [
             controller: "OverlayController"
             scope:
                 message: "="
+            replace: true
         }
 ]
