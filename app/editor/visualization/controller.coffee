@@ -51,13 +51,19 @@ app.controller "VisualizationCtrl", [
             </g>
             </svg>
             '
-        vectorIcon = L.VectorMarkers.icon
-            icon: ''
-            iconSize: [128.282, 45.961]
-            prefix: ''
-            markerColor: '#089988'
-            spin: true
-            SVGPath: SVGPath
+        # vectorIcon = L.VectorMarkers.icon
+        #     icon: ''
+        #     iconSize: [128.282, 45.961]
+        #     prefix: ''
+        #     markerColor: '#089988'
+        #     spin: true
+        #     SVGPath: SVGPath
+
+        icon =
+            iconUrl: '../images/marker-small.png'
+            iconSize: [25, 30]
+            iconAnchor: [12.5, 30]
+            popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
             Map.map = map
@@ -70,7 +76,7 @@ app.controller "VisualizationCtrl", [
             style: (feature) ->
                 {}
             pointToLayer: (feature, latlng) ->
-                new L.marker(latlng, icon: vectorIcon)
+                new L.marker(latlng, icon: L.icon(icon))
 
             onEachFeature: (feature, layer) ->
                 # So every markers gets a popup
