@@ -11,8 +11,7 @@ app.service 'ConverterService', [
     "$timeout"
     "ParserService"
     "HelperService"
-    "ProgressOverlayService"
-    ($timeout, Parser, Helper, ProgressOverlay) ->
+    ($timeout, Parser, Helper) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -215,9 +214,6 @@ app.service 'ConverterService', [
 
                     geoJSON.features.push(feature)
 
-                $timeout ->
-                    ProgressOverlay.resetMessage()
-                , 0
                 return geoJSON
 
         new Converter
