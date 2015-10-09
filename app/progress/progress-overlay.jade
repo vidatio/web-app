@@ -1,2 +1,4 @@
-.progress-overlay(ng-class="{ 'active': Overlay.message.length !== 0 }")
-    p {{ Overlay.message }}
+#progress-overlay(ng-class="{ 'active': Overlay.message.length !== 0 }")
+    .progress-overlay-background
+    .progress-overlay-content
+        p {{ Overlay.message }}
