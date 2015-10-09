@@ -38,6 +38,9 @@
                                             a(href='#') XML
                                         li
                                             a(href='#') JSON
+                .col-md-12
+                    button.btn.btn-primary.btn-wide(href="" ng-click="shareVisualization()")
+                        p Share Viz
         .content.share-save
             .row
                 .col-md-12
@@ -56,7 +59,3 @@
                                 input.form-control.input-sm(type="text" placeholder="{{ 'LICENCE' | translate }}")
                             .col-md-12.center
                                 button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "SAVE" | translate }}
-
-        .test
-            a(href="" ng-click="shareVisualization()")
-                965685898

@@ -9,25 +9,8 @@ app.controller "ShareCtrl", [
     "$scope"
     "MapService"
     ($scope, Map) ->
-        console.log "ctrl"
         $scope.shareVisualization = ->
-            console.log "shareVisualization"
-            map = Map.map
-            console.log "map", map
-
-            # html2canvas(document.getElementById("map")) (canvas) ->
-                # document.body.appendChild canvas
-
             svgToCanvas $("#map")
-
-            # html2canvas document.getElementById("map"),
-            #     useCORS: true
-            #     onrendered: (canvas) ->
-            #         console.log canvas
-            #         # document.getElementById("editor").appendChild canvas
-            #         png = canvas.toDataURL "image/png"
-            #         document.write('<img src="'+png+'"/>')
-
 ]
 
 svgToCanvas = (targetElem) ->
@@ -44,9 +27,12 @@ svgToCanvas = (targetElem) ->
 
         canvas = document.createElement('canvas')
 
-        console.log svg
-        canvg canvas, (new XMLSerializer).serializeToString(node)
-        # canvg canvas, svg
+        dw = $(node).width()
+        dh = $(node).height()
+
+        canvg canvas, (new XMLSerializer).serializeToString(node),
+            scaleWidth: dw
+            scaleHeight: dh
 
         nodesToRecover.push
             parent: parentNode
@@ -64,13 +50,32 @@ svgToCanvas = (targetElem) ->
         useCORS: true
         onrendered: (canvas) ->
 
-            ## IF IT IS SHAPE WITH AREA
-            ctx = canvas.getContext('2d');
-            ctx.drawImage($("canvas.leaflet-zoom-animated")[0], 0,0)
-            png = canvas.toDataURL "image/png"
-            $("body").append '<img src="' + png + '"/>'
+            # checks if the map has areas
+            if $("canvas.leaflet-zoom-animated").length > 0
+                ctx = canvas.getContext('2d')
 
-            ## IF IT IS FILE WITH MARKERS ONLY
-            # png = canvas.toDataURL "image/png"
-            # $("body").append '<img src="' + png + '"/>'
+                # calculates the offset to place the areas correct
+                diffHeight = ($("canvas").height() - $("#map").height()) / 2
+                diffWidth = ($("canvas").width() - $("#map").width()) / 2
+
+                ctx.drawImage($("canvas.leaflet-zoom-animated")[0], -diffWidth, -diffHeight)
+                png = canvas.toDataURL "image/png"
+                $("body").append '<img src="' + png + '"/>'
+            else
+                # svgElem = targetElem.find 'svg'
+
+                # ctx = canvas.getContext('2d')
+
+                # svgElem.each (index, node) ->
+
+                #     parentNode = node.parentNode
+                #     svg = parentNode.innerHTML
+
+                #     dw = $(parentNode).width()
+                #     dh = $(parentNode).height()
+
+                #     ctx.drawSvg((new XMLSerializer).serializeToString(node), 0, 0, dw, dh)
+
+                png = canvas.toDataURL "image/png"
+                $("body").append '<img src="' + png + '"/>'
 
