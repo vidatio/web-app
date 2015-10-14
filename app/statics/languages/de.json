@@ -36,5 +36,9 @@
     "CHOOSE": "Auswählen",
     "AUTHOR": "Urheber",
     "CATEGORY": "Kategorie",
-    "LICENCE": "Lizenz"
+    "LICENCE": "Lizenz",
+    "MAIL": "E-Mail/ Nutzername",
+    "PASSWORD": "Passwort",
+    "LOGIN": "Einloggen",
+    "USER_SECTION": "Anmelden"
 }

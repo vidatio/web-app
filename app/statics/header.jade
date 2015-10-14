@@ -13,7 +13,7 @@ header
                 .col-xs-6.middle
                     h1.underline-red IMPORT
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-3.logo
@@ -24,7 +24,7 @@ header
                         #back-to-import-button
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
-                    a#menu.icon-hamburger(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body
 
                 .col-xs-12.col-sm-pull-3.col-sm-6.editor-panel
                     a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
@@ -39,15 +39,23 @@ header
                     a(href='/')
                         #logo
                 .col-xs-6.menu-buttons
-                    a#menu.icon-hamburger.a(href="#").toggle-menu.menu-right.push-body
-                    button.toggle-menu.menu-right.push-body Toggle Right Menu Push
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body
 
     nav
         .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right
-            h3 Menu
-            a(href="#") Celery seakale
-            a(href="#") Dulse daikon
-            a(href="#") Zucchini garlic
-            a(href="#") Catsear azuki bean
-            a(href="#") Dandelion bunya
-            a(href="#") Rutabaga
+            .logo
+                a(ui-sref='app.landingPage({ locale: locale })')
+                    #logo-menu
+            a(href="#") Verfügbare Datensets
+            a(ui-sref='app.import({ locale: locale })') Daten importieren
+            a(href="#") Features
+            a(href="#") Pricing
+            a(href="#") API
+            h3 {{ 'USER_SECTION' | translate }}
+            .login-container
+                p {{ 'MAIL' | translate }}
+                input.form-control.input-sm(type="text" placeholder="{{ 'MAIL' | translate }}")
+                p {{ 'PASSWORD' | translate }}
+                input.form-control.input-sm(type="text" placeholder="{{ 'PASSWORD' | translate }}")
+                button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "LOGIN" | translate }}
+

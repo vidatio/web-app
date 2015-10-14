@@ -107,6 +107,56 @@ header
     .border-right
         border-right none
 
+    /* push menu styles */
+    .cbp-spmenu-right
+        right -350px
+
+    .cbp-spmenu-vertical
+        width 350px
+
+        a
+            border none
+
+    .cbp-spmenu
+        background $color-grey-dark
+        text-align right
+        padding 40px
+        text-transform uppercase
+        overflow scroll
+
+        #logo-menu
+            background url(../images/logo.svg) no-repeat
+            background-size 111px
+            width 111px
+            height 40px
+
+        a
+            font-size 18px
+            padding 15px 0
+
+        a:hover
+            background none
+            color $color-hover-dark
+
+        h3
+            background none
+            color $color-red
+            margin-top 50px
+            text-align right
+            padding 0
+
+        .login-container
+            margin-top 20px
+
+            p
+                color $color-white
+
+            input
+                margin-bottom 20px
+                text-align right
+
+
+
 @media(max-width: 767px)
     .editor-panel
         margin-top: 20px
