@@ -10,21 +10,18 @@ app.controller "ShareCtrl", [
     "MapService"
     ($scope, Map) ->
         $scope.shareVisualization = ->
-            svgToCanvas $("#map")
+            exportCanvas = svgToCanvas($("#map"))
 ]
 
 svgToCanvas = (targetElem) ->
-
-    exportCanvas = null
-
     html2canvas targetElem,
         useCORS: true
         onrendered: (canvas) ->
-
-            exportCanvas = canvas
-
+            mapArray = matrixToArray $(".leaflet-map-pane").css("transform")
+            dyPopupOffset = 0
+            console.log "mapArray", mapArray
             # checks if the map has areas
-            if $(".leaflet-overlay-pane").children().length > 0
+            if targetElem.find('.leaflet-overlay-pane').children().length > 0
                 $svgElem = targetElem.find 'svg'
 
                 $svgElem.find('path').each (index, element) ->
@@ -50,12 +47,10 @@ svgToCanvas = (targetElem) ->
 
                 ctx.drawSvg((new XMLSerializer).serializeToString($svgElem[0]), dx, dy)
 
-            else if $(".leaflet-marker-pane").children().length > 0
+            else if targetElem.find('.leaflet-marker-pane').children().length > 0
                 $imgElem = targetElem.find '.leaflet-marker-icon'
 
                 ctx = canvas.getContext('2d')
-
-                mapArray = matrixToArray $(".leaflet-map-pane").css("transform")
 
                 $imgElem.each (index, node) ->
                     if $(node).css("transform") != "none"
@@ -74,21 +69,41 @@ svgToCanvas = (targetElem) ->
 
                         ctx.drawImage node, dx, dy
 
-            if $(".leaflet-popup").length > 0
-                $popupElem = targetElem.find '.leaflet-popup'
+                        dyPopupOffset = $('.leaflet-marker-icon').height()
 
-                console.log exportCanvas
+            if $('#map').find('.leaflet-popup').children().length > 0
+                $popupElem = $('#map').find '.leaflet-popup'
+
                 html2canvas $popupElem,
                     useCORS: true
                     onrendered: (popupCanvas) ->
-                        ctx = exportCanvas.getContext('2d')
-                        console.log ctx
-                        ctx.drawImage popupCanvas, 0,0
-                        console.log exportCanvas
+                        ctx = canvas.getContext('2d')
 
+                        popupArray = matrixToArray $(".leaflet-popup").css("transform")
 
-            console.log exportCanvas
-            png = exportCanvas.toDataURL "image/png"
+                        dxPopup = parseInt(popupArray[4]) + parseInt(mapArray[4])
+                        dyPopup = parseInt(popupArray[5]) + parseInt(mapArray[5])
+
+                        console.log "Popup: dx, dy", dxPopup, dyPopup
+
+                        dxOffset = parseInt $('.leaflet-popup').css("left")
+                        dyOffset = $(".leaflet-popup").height() + dyPopupOffset
+
+                        if dyPopupOffset == 0
+                            dyOffset += parseInt $('.leaflet-popup').css("bottom")
+
+                        console.log "dxOffset, dyOffset", dxOffset, dyOffset
+
+                        dxPopup += dxOffset
+                        dyPopup -= dyOffset
+
+                        console.log "Popup: dx, dy", dxPopup, dyPopup
+
+                        ctx.drawImage popupCanvas, dxPopup, dyPopup
+                        png2 = canvas.toDataURL "image/png"
+                        $("body").append '<img src="' + png2 + '"/>'
+
+            png = canvas.toDataURL "image/png"
             $("body").append '<img src="' + png + '"/>'
 
 matrixToArray = (str) ->
