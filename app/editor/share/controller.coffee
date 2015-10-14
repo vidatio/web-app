@@ -68,7 +68,9 @@ svgToCanvas = ($targetElem) ->
                 # popupElemClone = $popupElem.clone()[0]
                 popupElemClone = {}
                 $.extend true, popupElemClone, $popupElem
-                # popupElemClone.removeChild popupElemClone.lastChild
+                # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip')
+                # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip-container')
+                popupElemClone.find('.leaflet-popup-tip').remove()
 
                 triangleWidth = 40
                 triangleHeight = 20
@@ -81,9 +83,9 @@ svgToCanvas = ($targetElem) ->
                 html2canvas popupElemClone,
                     useCORS: true
                     onrendered: (popupCanvas) ->
-                        console.log "popupCanvas", popupCanvas.getContext "2d"
-                        popupContext = popupCanvas.getContext "2d"
-                        finder popupContext.canvas.ownerDocument.all
+                        # console.log "popupCanvas", popupCanvas.getContext "2d"
+                        # popupContext = popupCanvas.getContext "2d"
+                        # finder popupContext.canvas.ownerDocument.all
 
                         popupArray = matrixToArray $popupElem.css "transform"
 
