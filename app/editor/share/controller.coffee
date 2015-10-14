@@ -73,24 +73,33 @@ svgToCanvas = (targetElem) ->
 
             if $('#map').find('.leaflet-popup').children().length > 0
                 $popupElem = $('#map').find '.leaflet-popup'
+                popupElem = $popupElem.clone()[0]
 
-                html2canvas $popupElem,
+                console.log popupElem
+                popupElem.removeChild popupElem.lastChild
+
+                console.log $popupElem
+                console.log popupElem
+
+                html2canvas popupElem,
                     useCORS: true
                     onrendered: (popupCanvas) ->
                         ctx = canvas.getContext('2d')
 
-                        popupArray = matrixToArray $(".leaflet-popup").css("transform")
+                        popupArray = matrixToArray $(popupElem).css("transform")
+                        console.log "$(popupElem)", $(popupElem)
+                        console.log "popupArray", popupArray
 
-                        dxPopup = parseInt(popupArray[4]) + parseInt(mapArray[4])
-                        dyPopup = parseInt(popupArray[5]) + parseInt(mapArray[5])
+                        dxPopup = parseInt(popupArray[0]) + parseInt(mapArray[4])
+                        dyPopup = parseInt(popupArray[1]) + parseInt(mapArray[5])
 
                         console.log "Popup: dx, dy", dxPopup, dyPopup
 
-                        dxOffset = parseInt $('.leaflet-popup').css("left")
-                        dyOffset = $(".leaflet-popup").height() + dyPopupOffset
+                        dxOffset = parseInt $(popupElem).css("left")
+                        dyOffset = $popupElem.height() + dyPopupOffset
 
                         if dyPopupOffset == 0
-                            dyOffset += parseInt $('.leaflet-popup').css("bottom")
+                            dyOffset += parseInt $(popupElem).css("bottom")
 
                         console.log "dxOffset, dyOffset", dxOffset, dyOffset
 
@@ -100,6 +109,22 @@ svgToCanvas = (targetElem) ->
                         console.log "Popup: dx, dy", dxPopup, dyPopup
 
                         ctx.drawImage popupCanvas, dxPopup, dyPopup
+
+                        console.log $popupElem.width()
+                        console.log $popupElem.find('.leaflet-popup-content-wrapper').css("background-color")
+
+                        dxTriangle = dxPopup + ($popupElem.width() / 2) - 20
+                        dyTriangle = dyPopup + $popupElem.height() - 20
+                        console.log dxTriangle
+                        console.log dyTriangle
+                        ctx.beginPath()
+                        ctx.moveTo dxTriangle, dyTriangle
+                        ctx.lineTo dxTriangle + 40, dyTriangle
+                        ctx.lineTo dxTriangle + 20, dyTriangle + 20
+                        ctx.fillStyle = $popupElem.find('.leaflet-popup-content-wrapper').css("background-color")
+                        ctx.fill()
+
+
                         png2 = canvas.toDataURL "image/png"
                         $("body").append '<img src="' + png2 + '"/>'
 
