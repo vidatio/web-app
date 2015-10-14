@@ -7,5 +7,5 @@ app.controller "OverlayController", [
     "ProgressOverlayService"
     ($scope, ProgressOverlay) ->
 
-        $scope.Overlay = ProgressOverlay
+        $scope.overlay = ProgressOverlay
 ]
