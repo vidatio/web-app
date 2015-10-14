@@ -26,4 +26,9 @@ app.controller "AppCtrl", [
         $scope.changeLanguage = (langKey) ->
             $translate.use langKey
 
+
+        $('.toggle-menu').jPushMenu()
+        console.log $('.toggle-menu')
+        console.log $.jPushMenu
+
 ]

@@ -98,6 +98,7 @@ BUILD =
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
+            "./bower_components/jPushMenu/js/jPushMenu.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -110,6 +111,7 @@ BUILD =
             "./bower_components/flat-ui/dist/css/flat-ui.css.map"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
+            "./bower_components/jPushMenu/css/jPushMenu.css"
         ]
     dirs:
         out: "./build"
