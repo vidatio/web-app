@@ -7,8 +7,6 @@ app.directive "progressScreen", [
             restrict: "EA"
             templateUrl: "progress/progress-overlay.html"
             controller: "OverlayController"
-            scope:
-                message: "="
             replace: true
         }
 ]
