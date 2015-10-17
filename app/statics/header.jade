@@ -41,21 +41,5 @@ header
                 .col-xs-6.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body
 
-    nav
-        .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right
-            .menu-header
-                a(ui-sref='app.landingPage({ locale: locale })')
-                    #logo-menu
-            a(href="#") Verfügbare Datensets
-            a(ui-sref='app.import({ locale: locale })') Daten importieren
-            a(href="#") Features
-            a(href="#") Pricing
-            a(href="#") API
-            h3 {{ 'USER_SECTION' | translate }}
-            .login-container
-                p {{ 'MAIL' | translate }}
-                input.form-control.input-sm(type="text" placeholder="{{ 'MAIL' | translate }}")
-                p {{ 'PASSWORD' | translate }}
-                input.form-control.input-sm(type="text" placeholder="{{ 'PASSWORD' | translate }}")
-                button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ "LOGIN" | translate }}
+
 

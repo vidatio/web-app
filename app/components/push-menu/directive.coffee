@@ -1,4 +1,5 @@
 "use strict"
+
 app = angular.module "app.directives"
 
 app.directive "pushMenu", [
