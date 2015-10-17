@@ -1,8 +1,13 @@
 nav
     .cbp-spmenu.cbp-spmenu-vertical.cbp-spmenu-right
         .menu-header
-            #logo-menu
-                a(ui-sref='app.landingPage({ locale: locale })').toggle-menu.menu-right.push-body
+            .col-md-6
+                .menu-close-button
+                    a.toggle-menu.menu-right.push-body X
+
+            .col-md-6
+                #logo-menu
+                    a(ui-sref='app.landingPage({ locale: locale })').toggle-menu.menu-right.push-body
 
         .toggle-menu.menu-right.push-body
             a(href="#") Verfügbare Datensets

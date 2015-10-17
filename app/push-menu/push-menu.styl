@@ -17,15 +17,30 @@ nav
 
         .menu-header
             margin-top -2px
-            height 70px
+            height 40px
             width 100%
+            margin-bottom 30px
+
+            .menu-close-button
+                a
+                    position absolute
+                    left 0
+                    font-size 50px
+                    line-height 43px
+                    color $color-red
+                    cursor pointer
+                    padding 0
+
+                a:hover
+                    color $color-green
 
             #logo-menu
                 background url(../images/logo-text-white-align-right.svg) no-repeat
                 background-size 111px
                 width 111px
                 height 40px
-                float right
+                position absolute
+                right 0
 
                 a
                     padding 0
