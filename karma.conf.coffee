@@ -19,16 +19,20 @@ module.exports = (config) ->
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet-src.js"
-            "./bower_components/angular-simple-logger/dist/index.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/angular-animate/angular-animate.min.js"
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
+            "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
+            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
+
+            #config
+            "./app/statics/constants/config.json"
 
             # source files
             "./app/init-deps.coffee"
@@ -38,9 +42,6 @@ module.exports = (config) ->
             #includes test files already
             "./app/*/**/*.coffee"
             "./app/app-test.coffee"
-
-            #config
-            "./app/statics/constants/config.json"
         ]
 
 

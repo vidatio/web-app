@@ -88,7 +88,7 @@ BUILD =
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet-src.js"
-            "./bower_components/angular-simple-logger/dist/index.js"
+            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/angular-translate/angular-translate.js"
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
@@ -100,6 +100,8 @@ BUILD =
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/Leaflet.vector-markers/dist/Leaflet.vector-markers.js"
+            "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
+
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -138,6 +140,7 @@ gulp.task "config:develop",
         gulp.src BUILD.source.config
         .pipe ngConstant
             name: "app.config"
+            merge: true
             constants:
                 CONFIG:
                     ENV: "develop"

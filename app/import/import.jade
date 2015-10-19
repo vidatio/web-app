@@ -6,13 +6,13 @@
                 #option-empty-table.area
                     a(href="" ng-click="continueToEmptyTable()")
                         .option-icon.icon-table
-                        h3 {{ "EMPTY_TABLE" | translate | uppercase }}
+                        h4 {{ "EMPTY_TABLE" | translate | uppercase }}
 
             .col-sm-6
                 #option-browse-data.area
                     a(href="#")
                         .option-icon.icon-opendata
-                        h3 {{ "ALL_DATASETS" | translate | uppercase }}
+                        h4 {{ "ALL_DATASETS" | translate | uppercase }}
 
         .row.file-read.layout-3-columns
 
@@ -20,14 +20,14 @@
                 #option-browse-filesystem.area
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
-                        h3 {{ "CHOOSE_FILE" | translate | uppercase }}
+                        h4 {{ "CHOOSE_FILE" | translate | uppercase }}
                         input#input-browse-filesystem(type="file" ng-file-select)
 
             .col-sm-4
                 #option-drag-and-drop.area
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
-                        h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
+                        h4 {{ "DRAG_AND_DROP" | translate | uppercase }}
 
                         .hover-wrapper
                             .area
@@ -38,7 +38,7 @@
                 #option-link.area
                     .icon-and-text-wrapper
                         .option-icon.icon-link
-                        h3 {{ "LINK" | translate | uppercase }}
+                        h4 {{ "LINK" | translate | uppercase }}
                         .input-group.form-link
                             input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
                             span.input-group-btn
