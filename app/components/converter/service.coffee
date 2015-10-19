@@ -215,5 +215,13 @@ app.service 'ConverterService', [
 
                 return geoJSON
 
+            # @method matrixToArray
+            # @description converts a string to an array (used for converting css matrix to array)
+            # @public
+            # @param {sring} str
+            # @return {array}
+            matrixToArray: (str) ->
+                return str.split('(')[1].split(')')[0].split(',')
+
         new Converter
 ]
