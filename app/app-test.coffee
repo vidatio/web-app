@@ -42,8 +42,5 @@ describe "should check app.config module", ->
         inject (_CONFIG_) ->
             testFixture = _CONFIG_
 
-        expect(testFixture).toEqual(
-            CONFIG:
-                ENV: ""
-        )
+        expect(testFixture).toEqual jasmine.any Object
 

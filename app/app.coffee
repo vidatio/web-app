@@ -14,6 +14,7 @@ app = angular.module "app", [
     "ngToast"
     "ngAnimate"
     "ngSanitize"
+    "logglyLogger"
 ]
 
 app.run [
@@ -22,8 +23,7 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, CONFIG) ->
+    ( $rootScope, $state, $stateParams, $http, $location ) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
@@ -36,13 +36,36 @@ app.config [
     "$httpProvider"
     "$translateProvider"
     "ngToastProvider"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast ) ->
+    "LogglyLoggerProvider"
+    "CONFIG"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
         $locationProvider.html5Mode true
 
+        # Loggly Configuration
+        LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY
+
+        # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
+        # @method level
+        LogglyLoggerProvider.level "DEBUG"
+
+        # Send console error stack traces to Loggly.
+        # @method sendConsoleErrors
+        LogglyLoggerProvider.sendConsoleErrors true
+
+        # Toggle logging to console. When set to false, messages will not be be passed along to the original $log methods.
+        # This makes it easy to keep sending messages to Loggly in production without also sending them to the console.
+        # @method logToConsole
+        LogglyLoggerProvider.logToConsole false unless CONFIG.ENV is "develop"
+
+        # $location.absUrl() is sent as a "url" key in the message object that's sent to loggly
+        # @method includeUrl
+        LogglyLoggerProvider.includeUrl  true
+
+
         # I18N
-        $translateProvider.useSanitizeValueStrategy("escape")
-        $translateProvider.preferredLanguage("de")
-        $translateProvider.fallbackLanguage("de")
+        $translateProvider.useSanitizeValueStrategy "escape"
+        $translateProvider.preferredLanguage "de"
+        $translateProvider.fallbackLanguage "de"
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
