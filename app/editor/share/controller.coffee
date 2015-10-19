@@ -42,6 +42,7 @@ svgToCanvas = ($targetElem) ->
 
                 ctx.drawSvg (new XMLSerializer).serializeToString($svgElem[0]), dx, dy
 
+            # checks if map has markers
             else if $targetElem.find(".leaflet-marker-pane").children().length > 0
                 $imgElem = $targetElem.find ".leaflet-marker-icon"
 
@@ -62,42 +63,23 @@ svgToCanvas = ($targetElem) ->
 
                         dyPopupOffset = $targetElem.find(".leaflet-marker-icon").height()
 
+            # checks if map has a popup
             if $targetElem.find(".leaflet-popup").children().length > 0
                 $popupElem = $targetElem.find '.leaflet-popup'
-                # $test = $targetElem.find '.leaflet-popup'
-                # popupElemClone = $popupElem.clone()[0]
-                # popupElemClone = {}
-                # $.extend true, popupElemClone, $popupElem
-                # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip')
-                # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip-container')
-                # popupElemClone.find('.leaflet-popup-tip').remove()
 
                 triangleWidth = 40
                 triangleHeight = 20
 
-                # $(popupElemClone).css(
-                #     position: "absolute"
-                #     left: "-10000px"
-                #     ).appendTo("body")
-
                 html2canvas $popupElem,
                     useCORS: true
                     onrendered: (popupCanvas) ->
-                        # console.log "popupCanvas", popupCanvas.getContext "2d"
-                        # popupContext = popupCanvas.getContext "2d"
-                        # finder popupContext.canvas.ownerDocument.all
-
                         popupArray = matrixToArray $popupElem.css "transform"
 
                         dxPopup = parseInt(popupArray[4]) + parseInt(mapArray[4])
                         dyPopup = parseInt(popupArray[5]) + parseInt(mapArray[5])
 
-                        console.log "dxPopup, dyPopup", dxPopup, dyPopup
-
                         dxOffset = parseInt $popupElem.css "left"
                         dyOffset = $popupElem.height() + dyPopupOffset
-
-                        console.log "dxOffset, dyOffset", dxOffset, dyOffset
 
                         if dyPopupOffset == 0
                             dyOffset += parseInt($popupElem.css("bottom"))
@@ -106,8 +88,6 @@ svgToCanvas = ($targetElem) ->
                         dyPopup -= dyOffset
 
                         rectangleHeight = $popupElem.height() - $popupElem.find('.leaflet-popup-content-wrapper').height()
-                        console.log 'top height', $popupElem.find('.leaflet-popup-tip-container').height()
-                        console.log 'rectangleHeight', rectangleHeight
                         rectangleWidth = $popupElem.width()
 
                         popupTipHeight = $popupElem.find('.leaflet-popup-tip-container').height()
@@ -116,6 +96,7 @@ svgToCanvas = ($targetElem) ->
                         dxTriangle = dxPopup + ($popupElem.width() / 2) - (triangleWidth / 2)
                         dyTriangle = dyPopup + $popupElem.height() - triangleHeight
 
+                        # Draw Triangle / Popup Tip
                         ctx.beginPath()
                         ctx.moveTo dxTriangle, dyTriangle
                         ctx.lineTo dxTriangle + triangleWidth, dyTriangle
@@ -128,29 +109,30 @@ svgToCanvas = ($targetElem) ->
 
                         ctx.beginPath()
                         ctx.rect(dxRectangle, dyRectangle, rectangleWidth, rectangleHeight)
-                        console.log $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
                         ctx.fillStyle = $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
                         ctx.fill()
 
-                        png2 = canvas.toDataURL "image/png"
-                        $("body").append '<img src="' + png2 + '"/>'
+                        png = canvas.toDataURL "image/png"
+                        # $("body").append '<img src="' + png2 + '"/>'
+                        download "Vidatio_Visualization", png
 
-            png = canvas.toDataURL "image/png"
-            $("body").append '<img src="' + png + '"/>'
+            else
+                png = canvas.toDataURL "image/png"
+                # $("body").append '<img src="' + png + '"/>'
+                download "Vidatio_Visualization", png
 
 matrixToArray = (str) ->
     return str.split('(')[1].split(')')[0].split(',')
 
-finder = (array) ->
-    # console.log array.length
-    # for i in [0..array.length - 1]
-    #     if array[i].getAttribute("class") == "leaflet-popup-tip-container" or array[i].getAttribute("class") == "leaflet-popup-tip"
-    #         console.log "found class", i
+download = (filename, text) ->
+    pom = document.createElement 'a'
+    pom.setAttribute('href', text)
+    pom.setAttribute('download', filename)
 
-    #         array[i].remove()
+    if document.createEvent
+        event = document.createEvent 'MouseEvents'
+        event.initEvent 'click', true, true
+        pom.dispatchEvent event
+    else
+        pom.click()
 
-    #         return
-    x = Array.prototype.slice.call array, 0
-    for d, i in x
-        if d.getAttribute("class") == "leaflet-popup-tip-container" or d.getAttribute("class") == "leaflet-popup-tip"
-            x.splice i, 1
