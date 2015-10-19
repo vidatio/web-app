@@ -16,5 +16,4 @@ app.directive "menu", [
             $scope.toggleMenu = ->
                 $('#menu,body,.cbp-spmenu').removeClass "disabled active cbp-spmenu-open cbp-spmenu-push-toleft cbp-spmenu-push-toright"
                 return true
-
 ]
