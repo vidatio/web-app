@@ -64,23 +64,23 @@ svgToCanvas = ($targetElem) ->
 
             if $targetElem.find(".leaflet-popup").children().length > 0
                 $popupElem = $targetElem.find '.leaflet-popup'
-                $test = $targetElem.find '.leaflet-popup'
+                # $test = $targetElem.find '.leaflet-popup'
                 # popupElemClone = $popupElem.clone()[0]
-                popupElemClone = {}
-                $.extend true, popupElemClone, $popupElem
+                # popupElemClone = {}
+                # $.extend true, popupElemClone, $popupElem
                 # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip')
                 # popupElemClone[0].removeChild popupElemClone.find('.leaflet-popup-tip-container')
-                popupElemClone.find('.leaflet-popup-tip').remove()
+                # popupElemClone.find('.leaflet-popup-tip').remove()
 
                 triangleWidth = 40
                 triangleHeight = 20
 
-                $(popupElemClone).css(
-                    position: "absolute"
-                    left: "-10000px"
-                    ).appendTo("body")
+                # $(popupElemClone).css(
+                #     position: "absolute"
+                #     left: "-10000px"
+                #     ).appendTo("body")
 
-                html2canvas popupElemClone,
+                html2canvas $popupElem,
                     useCORS: true
                     onrendered: (popupCanvas) ->
                         # console.log "popupCanvas", popupCanvas.getContext "2d"
@@ -105,13 +105,13 @@ svgToCanvas = ($targetElem) ->
                         dxPopup += dxOffset
                         dyPopup -= dyOffset
 
-                        console.log "dxPopup, dyPopup", dxPopup, dyPopup
-                        console.log popupCanvas
+                        rectangleHeight = $popupElem.height() - $popupElem.find('.leaflet-popup-content-wrapper').height()
+                        console.log 'top height', $popupElem.find('.leaflet-popup-tip-container').height()
+                        console.log 'rectangleHeight', rectangleHeight
+                        rectangleWidth = $popupElem.width()
 
-                        console.log ctx
-                        ctx = canvas.getContext "2d"
-                        console.log ctx
-                        ctx.drawImage popupCanvas, dxPopup, dyPopup
+                        popupTipHeight = $popupElem.find('.leaflet-popup-tip-container').height()
+                        ctx.drawImage popupCanvas, dxPopup, dyPopup - popupTipHeight
 
                         dxTriangle = dxPopup + ($popupElem.width() / 2) - (triangleWidth / 2)
                         dyTriangle = dyPopup + $popupElem.height() - triangleHeight
@@ -123,6 +123,14 @@ svgToCanvas = ($targetElem) ->
                         ctx.fillStyle = $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
                         ctx.fill()
 
+                        dxRectangle = dxPopup
+                        dyRectangle = dyPopup + $popupElem.find('.leaflet-popup-content-wrapper').outerHeight() - popupTipHeight
+
+                        ctx.beginPath()
+                        ctx.rect(dxRectangle, dyRectangle, rectangleWidth, rectangleHeight)
+                        console.log $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
+                        ctx.fillStyle = $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
+                        ctx.fill()
 
                         png2 = canvas.toDataURL "image/png"
                         $("body").append '<img src="' + png2 + '"/>'
