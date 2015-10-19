@@ -8,6 +8,10 @@ app.service "ShareService", [
     "ConverterService"
     (Converter) ->
         class Share
+            # @method mapToPNG
+            # @description converts the map visualization to a PNG and automatically starts a download.
+            # @public
+            # @param {jQuery object} $targetElem
             mapToPNG: ($targetElem) ->
                 download = @download
                 html2canvas $targetElem,
@@ -110,17 +114,24 @@ app.service "ShareService", [
                                 ctx.fill()
 
                                 png = canvas.toDataURL "image/png"
-                                # $("body").append '<img src="' + png2 + '"/>'
+
+                                # first parameter has to be changed to a meaningfull file name
                                 download "Vidatio_Visualization", png
 
                     else
                         png = canvas.toDataURL "image/png"
-                        # $("body").append '<img src="' + png + '"/>'
+
+                        # first parameter has to be changed to a meaningfull file name
                         download "Vidatio_Visualization", png
 
-            download: (filename, text) ->
+            # @method download
+            # @description creates a link element and automatically starts a download
+            # @public
+            # @param {sring} filename
+            # @param {dataURL} dataURL
+            download: (filename, dataURL) ->
                 pom = document.createElement 'a'
-                pom.setAttribute('href', text)
+                pom.setAttribute('href', dataURL)
                 pom.setAttribute('download', filename)
 
                 if document.createEvent
