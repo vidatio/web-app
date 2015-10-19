@@ -1,7 +1,7 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive "progressScreen", [
+app.directive "progressOverlay", [
     ->
         return {
             restrict: "EA"
