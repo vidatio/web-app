@@ -14,8 +14,8 @@ describe "Service Progress", ->
 
     it "should be possible to set messages", ->
         @overlay.setMessage "This is a test!"
-        expect(@overlay.message).toEqual "This is a test!"
+        expect(@overlay.getMessage()).toEqual "This is a test!"
 
     it "should be possible to reset messages", ->
-        @overlay.resetMessage()
-        expect(@overlay.message).toEqual ""
+        @overlay.setMessage("")
+        expect(@overlay.getMessage()).toEqual ""

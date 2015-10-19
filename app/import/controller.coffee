@@ -65,14 +65,12 @@ app.controller "ImportCtrl", [
 
                 return
 
-            $translate("OVERLAY_MESSAGES.READING_FILE").then( (message) ->
-                ProgressOverlay.setMessage(message)
-            )
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                ProgressOverlay.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
-                $translate("OVERLAY_MESSAGES.PARSING_DATA").then( (message) ->
-                    ProgressOverlay.setMessage(message)
-                )
+                $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                    ProgressOverlay.setMessage message
 
                 switch fileType
 
@@ -95,7 +93,7 @@ app.controller "ImportCtrl", [
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
-                    ProgressOverlay.resetMessage()
+                    ProgressOverlay.setMessage ""
                     $location.path editorPath
 
             , (error) ->

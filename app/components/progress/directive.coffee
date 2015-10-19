@@ -4,9 +4,10 @@ app = angular.module "app.directives"
 app.directive "progressOverlay", [
     ->
         return {
-            restrict: "EA"
+            restrict: "E"
             templateUrl: "progress/progress-overlay.html"
-            controller: "OverlayController"
+            controller: "OverlayCtrl"
             replace: true
         }
+
 ]

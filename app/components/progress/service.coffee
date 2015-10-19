@@ -5,14 +5,17 @@ app = angular.module "app.services"
 app.service "ProgressOverlayService", [
     ->
         class ProgressOverlay
+
+            _message = null
+
             constructor: ->
-                @message = ""
+                _message = ""
+
+            getMessage: ->
+                _message
 
             setMessage: (msg) ->
-                @message = msg
-
-            resetMessage: ->
-                @message = ""
+                _message = msg
 
         new ProgressOverlay
 ]
