@@ -2,7 +2,7 @@
 
 app = angular.module "app.services"
 
-app.service "PushMenuService", [
+app.service "MenuService", [
     ->
 
 ]

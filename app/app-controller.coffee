@@ -28,6 +28,6 @@ app.controller "AppCtrl", [
 
 
         # handler for push-menu
-        $('.toggle-menu').jPushMenu()
+        #$('.toggle-menu').jPushMenu()
 
 ]
