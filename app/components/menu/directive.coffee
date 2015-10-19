@@ -9,13 +9,12 @@ app.directive "menu", [
         templateUrl: "menu/menu.html"
         replace: true
         link: ($scope, $element) ->
-            $scope.$on '$stateChangeSuccess', ->
-                console.log "heyho"
+            $scope.$on "$stateChangeSuccess", ->
                 $timeout ->
-                    console.log "timeout 1"
-                    $('.toggle-menu').jPushMenu()
+                    $("#menu").jPushMenu()
 
-            $timeout ->
-                console.log "timeout 2"
-                $('.toggle-menu').jPushMenu()
+            $scope.toggleMenu = ->
+                $('#menu,body,.cbp-spmenu').removeClass "disabled active cbp-spmenu-open cbp-spmenu-push-toleft cbp-spmenu-push-toright"
+                return true
+
 ]

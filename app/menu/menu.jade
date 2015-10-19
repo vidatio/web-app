@@ -3,18 +3,18 @@ nav
         .menu-header
             .col-md-6
                 .menu-close-button
-                    a.toggle-menu.menu-right.push-body X
+                    a(ng-click="toggleMenu()") &times;
 
             .col-md-6
                 #logo-menu
-                    a(ui-sref='app.landingPage({ locale: locale })').toggle-menu.menu-right.push-body
+                    a(ui-sref="app.landingPage({ locale: locale })", ng-click="toggleMenu()")
 
-        .toggle-menu.menu-right.push-body
-            a(href="#") Verfügbare Datensets
-            a(ui-sref='app.import({ locale: locale })') Daten importieren
-            a(href="#") Features
-            a(href="#") Pricing
-            a(href="#") API
+        div
+            a(href="") Verfügbare Datensets
+            a(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") Daten importieren
+            a(href="") Features
+            a(href="") Pricing
+            a(href="") API
 
         h3 {{ 'USER_SECTION' | translate }}
         .login-container
