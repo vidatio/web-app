@@ -6,5 +6,4 @@ app.controller "MenuCtrl", [
     "$scope"
     "MenuService"
     ($scope, MenuService) ->
-
 ]
