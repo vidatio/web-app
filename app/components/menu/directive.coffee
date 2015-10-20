@@ -14,6 +14,7 @@ app.directive "menu", [
                     $("#menu").jPushMenu()
 
             $scope.toggleMenu = ->
-                $('#menu,body,.cbp-spmenu').removeClass "disabled active cbp-spmenu-open cbp-spmenu-push-toleft cbp-spmenu-push-toright"
+                $('#menu,body,.cbp-spmenu').removeClass "disabled active cbp-spmenu-open cbp-spmenu-push-toleft cbp-spmenu-push-toright menu-active"
+                console.log $scope
                 return true
 ]
