@@ -53,6 +53,7 @@ app.controller "ImportCtrl", [
 
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
+            Data.meta.fileName = $scope.file.name
 
             if fileType isnt "csv" and fileType isnt "zip"
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })

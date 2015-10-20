@@ -11,6 +11,7 @@ app.service 'DataService', [
             constructor: ->
                 @meta =
                     "fileType": ""
+                    "fileName": ""
 
             updateTableAndMap: (row, column, oldData, newData) ->
                 key = Table.colHeaders[column]

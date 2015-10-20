@@ -8,7 +8,12 @@ app = angular.module "app.controllers"
 app.controller "ShareCtrl", [
     "$scope"
     "ShareService"
-    ($scope, Share) ->
+    "DataService"
+    "HelperService"
+    ($scope, Share, Data, Helper) ->
+        #@method $scope.shareVisualization
+        #@description exports a
+        #@params {string} type
         $scope.shareVisualization = (type) ->
             $map = $("#map")
 
@@ -16,7 +21,13 @@ app.controller "ShareCtrl", [
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
-                Share.download "obj_" + type, obj[type]
+                console.log Data.meta.fileName
+                if Data.meta.fileName == ""
+                    fileName = Helper.dateToString(new Date())
+                else
+                    fileName = Data.meta.fileName
+
+                Share.download fileName, obj[type]
 
 
 ]

@@ -81,5 +81,14 @@ app.service 'HelperService', [ ->
 
             return tmp
 
+        dateToString: (date) ->
+            yyyy = date.getFullYear().toString()
+            mm = (date.getMonth() + 1).toString()
+            dd = date.getDate().toString()
+            hh = date.getHours().toString()
+            min = date.getMinutes().toString()
+            sec = date.getSeconds().toString()
+            return dd + "-" + mm + "-" + yyyy + "_" + hh + "-" + min + "-" + sec
+
     new Helper
 ]
