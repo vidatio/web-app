@@ -28,6 +28,7 @@ module.exports = (config) ->
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
 
+
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
