@@ -26,4 +26,8 @@ app.controller "AppCtrl", [
         $scope.changeLanguage = (langKey) ->
             $translate.use langKey
 
+        # Closing the menu on click of body should remove the active class
+        $scope.disableMenuActive = ->
+            $('#menu').removeClass "menu-active"
+            return true
 ]

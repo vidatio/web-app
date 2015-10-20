@@ -19,13 +19,15 @@ module.exports = (config) ->
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet-src.js"
+            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/angular-animate/angular-animate.min.js"
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
-            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
+            "./bower_components/jPushMenu/js/jPushMenu.js"
+
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"

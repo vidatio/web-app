@@ -40,5 +40,13 @@
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert"
-    }
+    },
+    "MAIL": "E-Mail/ Nutzername",
+    "AVAILABLE_DATASETS": "Verfügbare Datensets",
+    "IMPORT_DATA": "Daten importieren",
+    "PRICING": "Pricing",
+    "FEATURES": "Features",
+    "PASSWORD": "Passwort",
+    "LOGIN": "Einloggen",
+    "USER_SECTION": "Anmelden"
 }
