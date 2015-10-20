@@ -43,6 +43,9 @@ RUN bower install --allow-root
 RUN mkdir -p /usr/share/nginx/html/vidatio/
 ADD . /usr/share/nginx/html/vidatio/
 
+# move loggly config from server to app
+RUN cp /etc/loggly/config.json /usr/share/nginx/html/vidatio/app/statics/constants/config.json
+
 # expose 80 to host OS
 EXPOSE 80
 
