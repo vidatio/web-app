@@ -14,7 +14,7 @@ app.service "ShareService", [
             # @description converts the map visualization to a PNG / JPEG with a given quality measurement.
             # @public
             # @param {jQuery object} $targetElem
-            # @param {integer} quality Quality is betwee 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
+            # @param {integer} quality Quality is between 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
             # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
             mapToImg: ($targetElem, quality = 1.0) ->
 
@@ -27,7 +27,7 @@ app.service "ShareService", [
                     dyPopupOffset = 0
                     ctx = canvas.getContext "2d"
 
-                    # checks if the map has areas
+                    # checks if the map has areas (tiles)
                     if $targetElem.find(".leaflet-overlay-pane").children().length > 0
                         $svgElem = $targetElem.find "svg"
 
