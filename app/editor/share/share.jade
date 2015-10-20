@@ -17,9 +17,9 @@
                                         span.caret
                                     ul.dropdown-menu(role='menu')
                                         li
-                                            a(href='#') PNG
+                                            a(ng-click='shareVisualization("png")') PNG
                                         li
-                                            a(href='#') SVG
+                                            a(ng-click='shareVisualization("jpg")') JPG
 
                         .form-group
                             .col-xs-6
@@ -38,9 +38,7 @@
                                             a(href='#') XML
                                         li
                                             a(href='#') JSON
-                .col-md-12
-                    button.btn.btn-primary.btn-wide(href="" ng-click="shareVisualization()")
-                        p Share Viz
+
         .content.share-save
             .row
                 .col-md-12

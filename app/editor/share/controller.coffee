@@ -9,13 +9,14 @@ app.controller "ShareCtrl", [
     "$scope"
     "ShareService"
     ($scope, Share) ->
-        $scope.shareVisualization = ->
+        $scope.shareVisualization = (type) ->
             $map = $("#map")
 
+            # Check Share.mapToImg for quality reduction if needed
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
-                Share.download "obj_png", obj.png
-                Share.download "obj_jpg", obj.jpg
+                Share.download "obj_" + type, obj[type]
+
 
 ]

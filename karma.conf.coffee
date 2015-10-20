@@ -26,6 +26,7 @@ module.exports = (config) ->
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
             "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
+            "./bower_components/html2canvas/build/html2canvas.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
