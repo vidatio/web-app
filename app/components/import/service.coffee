@@ -10,9 +10,7 @@ app = angular.module "app.services"
 
 app.service 'ImportService', [
     "$q"
-    "ConverterService"
-    "TableService"
-    ($q, Converter, Table) ->
+    ($q) ->
         class Reader
             constructor: ->
                 @reader = new FileReader()

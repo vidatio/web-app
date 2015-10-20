@@ -8,12 +8,12 @@ header
         .switch-container(ng-switch on="$state.current.title")
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
-                    a(ui-sref='app.landingPage({ locale: locale })')
+                    a(ui-sref="app.landingPage({ locale: locale })")
                         #logo
                 .col-xs-6.middle
                     h1.underline-red IMPORT
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-3.logo
@@ -24,7 +24,7 @@ header
                         #back-to-import-button
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
-                    a#menu.icon-hamburger(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
                 .col-xs-12.col-sm-pull-3.col-sm-6.editor-panel
                     a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
@@ -36,7 +36,10 @@ header
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
-                    a(href='/')
+                    a(ui-sref="app.landingPage({ locale: locale })")
                         #logo
                 .col-xs-6.menu-buttons
-                    a#menu.icon-hamburger(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+
+
+

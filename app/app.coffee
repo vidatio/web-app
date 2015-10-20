@@ -42,7 +42,7 @@ app.config [
         $locationProvider.html5Mode true
 
         # Loggly Configuration
-        LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY
+        LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY if CONFIG.TOKEN.LOGGLY
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level

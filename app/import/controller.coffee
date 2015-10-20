@@ -11,14 +11,15 @@ app.controller "ImportCtrl", [
     "$location"
     "$rootScope"
     "$timeout"
+    "$translate"
     "ImportService"
     "TableService"
     "ConverterService"
     "MapService"
     "DataService"
     "ngToast"
-    "$translate"
-    ($scope, $http, $location, $rootScope, $timeout, Import, Table, Converter, Map, Data, ngToast, $translate) ->
+    "ProgressOverlayService"
+    ($scope, $http, $location, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, ProgressOverlay) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
 
         $scope.importService = Import
@@ -65,7 +66,13 @@ app.controller "ImportCtrl", [
 
                 return
 
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                ProgressOverlay.setMessage message
+
             Import.readFile($scope.file, fileType).then (fileContent) ->
+                $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                    ProgressOverlay.setMessage message
+
                 switch fileType
 
                     when "csv"
@@ -87,6 +94,7 @@ app.controller "ImportCtrl", [
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
+                    ProgressOverlay.setMessage ""
                     $location.path editorPath
 
             , (error) ->

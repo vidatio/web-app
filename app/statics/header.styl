@@ -31,7 +31,7 @@ header
         max-width 98%
 
     #logo
-        background url(../images/logo.svg) no-repeat
+        background url(../images/logo-text-black.svg) no-repeat
         background-size 111px
         width 111px
         height 40px
@@ -57,13 +57,20 @@ header
             margin-left 3px
             background $color-passive
             border-radius 4px
+            color $color-grey-light
 
             &:hover
-                background $color-active
-                color $color-white
+                color $color-green
+
+        .menu-active
+            color $color-green
+
+            &:hover
+                color $color-grey-light
 
         a#menu
             font-size 20px
+
 
     .tab
         border-top 3px solid $color-passive
@@ -106,6 +113,7 @@ header
 
     .border-right
         border-right none
+
 
 @media(max-width: 767px)
     .editor-panel
