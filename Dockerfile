@@ -46,7 +46,7 @@ ADD . /usr/share/nginx/html/vidatio/
 # expose 80 to host OS
 EXPOSE 80
 
-RUN gulp release
+RUN gulp production
 
 CMD nginx
 
