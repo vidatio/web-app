@@ -8,7 +8,7 @@ html
         include includes/styl
 
     body.container-fluid(ng-app="app" ng-file-drop-start)
-        .wrapper(ng-controller="AppCtrl")
+        .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
             include header
             toast
             menu

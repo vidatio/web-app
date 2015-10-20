@@ -25,4 +25,9 @@ app.controller "AppCtrl", [
         # switch language at runtime
         $scope.changeLanguage = (langKey) ->
             $translate.use langKey
+
+        # if the menu is closed via click on body, the menu-button shouldn't stay active
+        $scope.disableMenuActive = ->
+            $('#menu').removeClass "menu-active"
+            return true
 ]
