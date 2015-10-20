@@ -9,6 +9,8 @@ app.directive "menu", [
         templateUrl: "menu/menu.html"
         replace: true
         link: ($scope, $element) ->
+
+            # Menu can have 3 different layouts so init in on every state change
             $scope.$on "$stateChangeSuccess", ->
                 $timeout ->
                     $("#menu").jPushMenu()
