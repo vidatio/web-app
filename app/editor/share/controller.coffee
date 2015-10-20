@@ -7,10 +7,15 @@ app = angular.module "app.controllers"
 
 app.controller "ShareCtrl", [
     "$scope"
-    "MapService"
     "ShareService"
-    ($scope, Map, Share) ->
+    ($scope, Share) ->
         $scope.shareVisualization = ->
             $map = $("#map")
-            Share.mapToPNG $map
+
+            promise = Share.mapToImg $map
+
+            promise.then (obj) ->
+                Share.download "obj_png", obj.png
+                Share.download "obj_jpg", obj.jpg
+
 ]

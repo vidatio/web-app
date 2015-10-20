@@ -6,14 +6,20 @@ app = angular.module "app.services"
 
 app.service "ShareService", [
     "ConverterService"
-    (Converter) ->
+    "$q"
+    (Converter, $q) ->
         class Share
-            # @method mapToPNG
-            # @description converts the map visualization to a PNG and automatically starts a download.
+
+            # @method mapToImg
+            # @description converts the map visualization to a PNG / JPEG with a given quality measurement.
             # @public
             # @param {jQuery object} $targetElem
-            mapToPNG: ($targetElem) ->
-                download = @download
+            # @param {integer} quality Quality is betwee 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
+            # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
+            mapToImg: ($targetElem, quality = 1.0) ->
+
+                deferred  = $q.defer()
+
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
@@ -45,6 +51,7 @@ app.service "ShareService", [
                     else if $targetElem.find(".leaflet-marker-pane").children().length > 0
                         $imgElem = $targetElem.find ".leaflet-marker-icon"
 
+                        # insert every marker in canvas
                         $imgElem.each (index, node) ->
                             if $(node).css("transform") isnt "none"
                                 imgArray = Converter.matrixToArray $(node).css "transform"
@@ -64,11 +71,14 @@ app.service "ShareService", [
 
                     # checks if map has a popup
                     if $targetElem.find(".leaflet-popup").children().length > 0
+
                         $popupElem = $targetElem.find '.leaflet-popup'
 
+                        # values for directional triangle to marker which belongs to the popup
                         triangleWidth = 40
                         triangleHeight = 20
 
+                        # redraw popup on canvas because else the markers would be on top of the popup
                         html2canvas $popupElem,
                             useCORS: true
                             onrendered: (popupCanvas) ->
@@ -113,16 +123,17 @@ app.service "ShareService", [
                                 ctx.fillStyle = $popupElem.find('.leaflet-popup-content-wrapper').css "background-color"
                                 ctx.fill()
 
-                                png = canvas.toDataURL "image/png"
+                                deferred.resolve
+                                    png: canvas.toDataURL "image/png"
+                                    jpg: canvas.toDataURL "image/jpeg", quality
 
-                                # first parameter has to be changed to a meaningfull file name
-                                download "Vidatio_Visualization", png
-
+                    # map has no popup
                     else
-                        png = canvas.toDataURL "image/png"
+                        deferred.resolve
+                            png: canvas.toDataURL "image/png"
+                            jpg: canvas.toDataURL "image/jpeg", quality
 
-                        # first parameter has to be changed to a meaningfull file name
-                        download "Vidatio_Visualization", png
+                return deferred.promise
 
             # @method download
             # @description creates a link element and automatically starts a download
@@ -130,16 +141,16 @@ app.service "ShareService", [
             # @param {sring} filename
             # @param {dataURL} dataURL
             download: (filename, dataURL) ->
-                pom = document.createElement 'a'
-                pom.setAttribute('href', dataURL)
-                pom.setAttribute('download', filename)
+                aTag = document.createElement "a"
+                aTag.setAttribute "href", dataURL
+                aTag.setAttribute "download", filename
 
                 if document.createEvent
-                    event = document.createEvent 'MouseEvents'
-                    event.initEvent 'click', true, true
-                    pom.dispatchEvent event
+                    mouseEvent = document.createEvent "MouseEvents"
+                    mouseEvent.initEvent "click", true, true
+                    aTag.dispatchEvent mouseEvent
                 else
-                    pom.click()
+                    aTag.click()
 
         new Share
 ]
