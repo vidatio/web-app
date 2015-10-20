@@ -22,6 +22,9 @@ nav
         overflow-y scroll
         overflow-x hidden
 
+        .btn-primary
+            font-size 16px
+
         .menu-header
             margin-top -2px
             height 40px
@@ -38,8 +41,10 @@ nav
                     cursor pointer
                     padding 0
 
-                a:hover
-                    color $color-green
+                    &:hover
+                        color $color-green
+
+
 
             #logo-menu
                 background url(../images/logo-text-white-align-right.svg) no-repeat
@@ -59,9 +64,9 @@ nav
             padding 15px 0
             clear both
 
-        a:hover
-            background none
-            color $color-hover-dark
+            &:hover
+                background none
+                color $color-hover-dark
 
         h3
             background none
@@ -98,7 +103,4 @@ nav
 
         .login-container
             p
-                font-size 16px
-
-            .btn-primary
                 font-size 16px
