@@ -28,7 +28,6 @@
     "tests"
   ],
   "dependencies": {
-    "Leaflet.vector-markers": "leaflet.vector-markers#~0.0.3",
     "angular": "^1.4",
     "angular-animate": "~1.4.6",
     "angular-leaflet-directive": "< 1.0",

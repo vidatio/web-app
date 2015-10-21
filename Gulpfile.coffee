@@ -99,7 +99,6 @@ BUILD =
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
-            "./bower_components/Leaflet.vector-markers/dist/Leaflet.vector-markers.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
         ]
@@ -114,7 +113,6 @@ BUILD =
             "./bower_components/flat-ui/dist/css/flat-ui.css.map"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
-            "./bower_components/Leaflet.vector-markers/dist/Leaflet.vector-markers.css"
             "./bower_components/jPushMenu/css/jPushMenu.css"
         ]
     dirs:
