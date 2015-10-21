@@ -21,7 +21,6 @@ app.controller "ShareCtrl", [
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
-                console.log Data.meta.fileName
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
                 else
