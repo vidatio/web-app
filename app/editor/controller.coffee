@@ -25,7 +25,7 @@ app.controller "EditorCtrl", [
         # @method changeViews
         # @param {Array} tabs Array of three bool values, which represent the three tabs in the editor
         changeViews = (tabs) ->
-            [$rootScope.showTableView, $rootScope.showVisualizationView, $rootScope.showShareView] = tabs
+            [$rootScope.showTableView, $rootScope.showVisualizationView] = tabs
             # count active editor views to set bootstrap classes for the correct widths
             $scope.activeViews = 0
             for tab in tabs
