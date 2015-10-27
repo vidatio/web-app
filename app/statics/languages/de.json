@@ -26,7 +26,11 @@
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
-        "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden."
+        "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
+        "SHARE_SERVICE": {
+            "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
+            "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
+        }
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -39,7 +43,10 @@
     "LICENCE": "Lizenz",
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
-        "PARSING_DATA": "Daten werden analysiert"
+        "PARSING_DATA": "Daten werden analysiert",
+        "SHARE_SERVICE": {
+            "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
+        }
     },
     "MAIL": "E-Mail/ Nutzername",
     "AVAILABLE_DATASETS": "Verfügbare Datensets",

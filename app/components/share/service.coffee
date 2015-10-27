@@ -22,8 +22,7 @@ app.service "ShareService", [
                 deferred  = $q.defer()
 
                 unless $targetElem.is ":visible"
-                    $translate("TESTASDF").then (translation) ->
-                        console.log translation
+                    $translate("TOAST_MESSAGES.SHARE_SERVICE.MAP_NOT_VISIBLE").then (translation) ->
                         deferred.reject translation
                     return deferred.promise
 
@@ -31,8 +30,7 @@ app.service "ShareService", [
                 useCORS: true
                 onrendered: (canvas) ->
 
-                    $translate('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS').then (translation) ->
-                        deferred.notify translation
+                    deferred.notify $translate.instant('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS')
 
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
                     dyPopupOffset = 0
@@ -92,7 +90,7 @@ app.service "ShareService", [
                         unless $popupElem.is ":visible"
                             $translate('TOAST_MESSAGES.SHARE_SERVICE.POPUP_NOT_VISIBLE').then (translation) ->
                                 deferred.reject translation
-                            return
+                            return deferred.promise
 
                         # redraw popup on canvas because else the markers would be on top of the popup
                         html2canvas $popupElem,

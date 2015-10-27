@@ -23,19 +23,19 @@ app.controller "ShareCtrl", [
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
+                ProgressOverlay.setMessage ""
+
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
                 else
                     fileName = Data.meta.fileName
 
-                    Share.download fileName, obj[type]
+                Share.download fileName, obj[type]
             , (error) ->
                 ngToast.create
                     content: error
                     className: "danger"
-
             , (notify) ->
-                console.log "notify should appear"
                 ProgressOverlay.setMessage notify
 ]
 
