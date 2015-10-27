@@ -3,17 +3,28 @@
 app = angular.module "app.services"
 
 app.service 'DataService', [
+    "$log"
     "MapService"
     "TableService"
     "ConverterService"
-    (Map, Table, Converter) ->
+    ($log, Map, Table, Converter) ->
         class Data
             constructor: ->
+                $log.info "DataService constructor called"
+
                 @meta =
                     "fileType": ""
                     "fileName": ""
 
             updateTableAndMap: (row, column, oldData, newData) ->
+                $log.info "DataService updateTableAndMap called"
+                $log.debug
+                    message: "DataService validateInput called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
+
                 key = Table.colHeaders[column]
 
                 if @meta.fileType is "shp"
@@ -27,6 +38,13 @@ app.service 'DataService', [
                     Map.setGeoJSON(geoJSON)
 
             validateInput: (row, column, oldData, newData) ->
+                $log.info "DataService validateInput called"
+                $log.debug
+                    message: "DataService validateInput called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
 
                 if @meta.fileType is "shp"
                     key = Table.colHeaders[column]

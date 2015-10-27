@@ -6,11 +6,14 @@
 app = angular.module "app.services"
 
 app.service 'MapService', [
+    "$log"
     "ParserService"
     "HelperService"
-    (Parser, Helper) ->
+    ($log, Parser, Helper) ->
         class Map
             constructor: ->
+                $log.info "MapService constructor called"
+
                 @map = undefined
                 @geoJSON =
                     "type": "FeatureCollection"
@@ -21,10 +24,14 @@ app.service 'MapService', [
             # we need init function to do initial actions
             # like fitting to the bounds of the geoJSON
             init: ->
+                $log.info "MapService init called"
+
                 @setBoundsToGeoJSON()
                 @resizeMap()
 
             resetGeoJSON: ->
+                $log.info "MapService resetGeoJSON called"
+
                 @geoJSON =
                     "type": "FeatureCollection"
                     "features": []
@@ -33,6 +40,11 @@ app.service 'MapService', [
             # @description sets new geoJSON data, which automatically updates the map.
             # @param {geoJSON} data
             setGeoJSON: (data) ->
+                $log.info "MapService setGeoJSON called"
+                $log.debug
+                    message: "MapService setGeoJSON called"
+                    data: data
+
                 # safely remove all items, keeps data binding alive
                 @geoJSON.features.splice 0, @geoJSON.features.length
                 @geoJSON.features = data.features
@@ -43,10 +55,14 @@ app.service 'MapService', [
             # @method resizeMap
             # @public
             resizeMap: ->
+                $log.info "MapService resizeMap called"
+
                 if(@map)
                     @map.invalidateSize()
 
             setBoundsToGeoJSON: ->
+                $log.info "MapService setBoundsToGeoJSON called"
+
                 if(!@geoJSON.features.length || !@map)
                     return
 
@@ -74,7 +90,7 @@ app.service 'MapService', [
                                     latLng = L.GeoJSON.coordsToLatLng(latLng)
                                     coordinates.push(latLng)
                     else
-                        console.warn "Geometry type not supported."
+                        $log.warn "Geometry type not supported."
 
                 if coordinates.length
                     @bounds = L.latLngBounds(coordinates)
@@ -89,6 +105,15 @@ app.service 'MapService', [
             # @param {string} key
             # @return {boolean}
             updateGeoJSONwithSHP: (row, column, oldData, newData, key) ->
+                $log.info "MapService updateGeoJSONwithSHP called"
+                $log.debug
+                    message: "MapService updateGeoJSONwithSHP called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
+                    key: key
+
                 keys = key.split(" ")
 
                 if keys[0] is "coordinates"
@@ -97,7 +122,7 @@ app.service 'MapService', [
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
                             else
-                                console.warn "Point does not exist"
+                                $log.warn "Point does not exist"
                                 return false
                         else if @geoJSON.features[row].geometry.type is "Polygon"
                             arrayIndex = Math.floor(keys[1] / 2)
@@ -105,18 +130,18 @@ app.service 'MapService', [
                             if Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
                                 @geoJSON.features[row].geometry.coordinates[0][arrayIndex][index] = newData
                             else
-                                console.warn "Array does not exist and can't be updated"
+                                $log.warn "Array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        console.warn "Value is not a Number"
+                        $log.warn "Value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     if Helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
-                        console.warn "Value is not a Number"
+                        $log.warn "Value is not a Number"
                         return false
 
                     # check if colHeader is part of properties
@@ -137,33 +162,44 @@ app.service 'MapService', [
             # @param {string} key
             # @return {boolean}
             validateGeoJSONUpdateSHP: (row, column, oldData, newData, key) ->
+                $log.info "MapService validateGeoJSONUpdateSHP called"
+                $log.debug
+                    message: "MapService validateGeoJSONUpdateSHP called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
+                    key: key
+
                 keys = key.split(" ")
 
                 if keys[0] is "coordinates"
                     if Helper.isNumeric(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             unless @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
-                                console.warn "Point does not exist"
+                                $log.warn "Point does not exist"
                                 return false
                         else if @geoJSON.features[row].geometry.type is "Polygon"
                             arrayIndex = Math.floor(keys[1] / 2)
                             index = keys[1] % 2
                             unless Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
-                                console.warn "Array does not exist and can't be updated"
+                                $log.warn "Array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        console.warn "Value is not a Number"
+                        $log.warn "Value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     unless Helper.isNumeric(newData)
-                        console.warn "Value is not a Number"
+                        $log.warn "Value is not a Number"
                         return false
 
                 return true
 
             getGeoJSON: ->
+                $log.info "MapService getGeoJSON called"
+
                 return @geoJSON
 
         new Map

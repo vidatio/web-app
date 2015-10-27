@@ -5,10 +5,10 @@
 app = angular.module "app.services"
 
 app.service "ShareService", [
-    "ConverterService"
     "$q"
     "$log"
-    (Converter, $q, $log) ->
+    "ConverterService"
+    ($q, $log, Converter) ->
         class Share
 
             # @method mapToImg
@@ -155,7 +155,6 @@ app.service "ShareService", [
             # @param {sring} filename
             # @param {dataURL} dataURL
             download: (filename, dataURL) ->
-
                 $log.info "ShareService download called"
                 $log.debug
                     message: "ShareService download called"

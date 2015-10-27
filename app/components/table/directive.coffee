@@ -3,9 +3,10 @@ app = angular.module "app.directives"
 
 app.directive 'hot', [
     "$timeout"
+    "$log"
     "DataService"
     "MapService"
-    ($timeout, Data, Map) ->
+    ($timeout, $log, Data, Map) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -54,6 +55,8 @@ app.directive 'hot', [
 
             # Needed for correct displayed table
             Handsontable.Dom.addEvent window, 'resize', ->
+                $log.info "hot directive resize called"
+
                 offset = Handsontable.Dom.offset $element[0]
 
                 wrapperWidth = Handsontable.Dom.innerWidth $element.parent()[0]

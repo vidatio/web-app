@@ -3,14 +3,20 @@
 app = angular.module "app.services"
 
 app.service 'ParserService', [
+    "$log"
     "HelperService"
-    (Helper) ->
+    ($log, Helper) ->
         class Parser
             # @method isCoordinate
             # @public
             # @param {All Types} coordinate
             # @return {Boolean}
             isCoordinate: (coordinate) ->
+                $log.info "ParserService isCoordinate called"
+                $log.debug
+                    message: "ParserService isCoordinate called"
+                    coordinate: coordinate
+
                 coordinate = String(coordinate).trim()
                 if(coordinate is "")
                     return
@@ -27,6 +33,11 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimal: (coordinate) ->
+                $log.info "ParserService isCoordinateWGS84DegreeDecimal called"
+                $log.debug
+                    message: "ParserService isCoordinateWGS84DegreeDecimal called"
+                    coordinate: coordinate
+
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0 or coordinate.indexOf("s") >= 0
@@ -61,6 +72,11 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutes: (coordinate) ->
+                $log.info "ParserService isCoordinateWGS84DegreeDecimalMinutes called"
+                $log.debug
+                    message: "ParserService isCoordinateWGS84DegreeDecimalMinutes called"
+                    coordinate: coordinate
+
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0
@@ -101,6 +117,11 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutesSeconds: (coordinate) ->
+                $log.info "ParserService isCoordinateWGS84DegreeDecimalMinutesSeconds called"
+                $log.debug
+                    message: "ParserService isCoordinateWGS84DegreeDecimalMinutesSeconds called"
+                    coordinate: coordinate
+
                 coordinate = coordinate.replace(/°/g, "").replace(/'/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0
@@ -152,6 +173,10 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             findCoordinatesColumns: (dataset) ->
+                $log.info "ParserService findCoordinatesColumns called"
+                $log.debug
+                    message: "ParserService findCoordinatesColumns called"
+                    dataset: dataset
 
                 choppedDataset = Helper.cutDataset(dataset)
                 unless choppedDataset.length
@@ -169,6 +194,11 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Array}
             extractCoordinatesOfOneCell: (cell) ->
+                $log.info "ParserService extractCoordinatesOfOneCell called"
+                $log.debug
+                    message: "ParserService extractCoordinatesOfOneCell called"
+                    cell: cell
+
                 # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 
                 # matches the following numbers:
@@ -188,6 +218,11 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isPhoneNumber: (cell) ->
+                $log.info "ParserService isPhoneNumber called"
+                $log.debug
+                    message: "ParserService isPhoneNumber called"
+                    cell: cell
+
                 regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)[-. ]?(\d*)$/
                 return regex.test(cell)
 
@@ -196,6 +231,11 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isEmailAddress: (cell) ->
+                $log.info "ParserService isEmailAddress called"
+                $log.debug
+                    message: "ParserService isEmailAddress called"
+                    cell: cell
+
                 regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
                 return regex.test(cell)
 
@@ -204,6 +244,11 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isURL: (cell) ->
+                $log.info "ParserService isURL called"
+                $log.debug
+                    message: "ParserService isURL called"
+                    cell: cell
+
                 regex = /^(ftp|http|https):\/\/[^ "]+$/i
                 return regex.test(cell)
 
@@ -229,6 +274,11 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInDataset = (dataset) ->
+                $log.info "ParserService _findCoordinatesIndicesInDataset called"
+                $log.debug
+                    message: "ParserService _findCoordinatesIndicesInDataset called"
+                    dataset: dataset
+
                 matrixPossibleCoordinates = Helper.createMatrix.call(this, dataset, false)
 
                 dataset.forEach (row, indexRow) =>
@@ -253,6 +303,11 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInHeader = (dataset) ->
+                $log.info "ParserService _findCoordinatesIndicesInHeader called"
+                $log.debug
+                    message: "ParserService _findCoordinatesIndicesInHeader called"
+                    dataset: dataset
+
                 indicesCoordinates = {}
 
                 # Because the header is always in the first row, we only search there for coordinate tags
@@ -271,6 +326,11 @@ app.service 'ParserService', [
             # @param {String} word
             # @return {String}
             _checkWhiteList = (word) ->
+                $log.info "ParserService _checkWhiteList called"
+                $log.debug
+                    message: "ParserService _checkWhiteList called"
+                    word: word
+
                 result = undefined
                 word = String(word).trim().toLowerCase()
 
@@ -298,6 +358,11 @@ app.service 'ParserService', [
             # @param {matrix} true/false matrix of each cell (true mean the cell contains a coordinate)
             # @return {Object}
             _getIndicesOfCoordinateColumns = (matrix) ->
+                $log.info "ParserService _getIndicesOfCoordinateColumns called"
+                $log.debug
+                    message: "ParserService _getIndicesOfCoordinateColumns called"
+                    matrix: matrix
+
                 result = {}
 
                 [ separateColumns, columnScores ] = _rateColumns(matrix)
@@ -324,6 +389,11 @@ app.service 'ParserService', [
             #       - separateColumns {Boolean} is true if there is only one coordinate in one cell
             #       - columnScores {Array} contains the scores (amount of possible coordinates per column) for all columns
             _rateColumns = (matrix) ->
+                $log.info "ParserService _rateColumns called"
+                $log.debug
+                    message: "ParserService _rateColumns called"
+                    matrix: matrix
+
                 columnScores = new Array(matrix[0].length)
 
                 # normal for-loop does not work in CoffeeScript
@@ -359,6 +429,12 @@ app.service 'ParserService', [
             # @param {Array} columnScores
             # @return {Array}
             _findHighestScoreIndices = (separateColumns, columnScores) ->
+                $log.info "ParserService _findHighestScoreIndices called"
+                $log.debug
+                    message: "ParserService _findHighestScoreIndices called"
+                    separateColumns: separateColumns
+                    columnScores: columnScores
+
                 largestNumber = -Infinity
                 secondLargestNumber = -Infinity
                 largestScoreIndex = 0

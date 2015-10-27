@@ -24,7 +24,6 @@ app.controller "VisualizationCtrl", [
             $log.info "VisualizationCtrl leafletData.getMap called"
             $log.debug
                 message: "VisualizationCtrl leafletData.getMap called"
-                map: map
 
             Map.map = map
             # Timeout is needed to wait for the view to finish render

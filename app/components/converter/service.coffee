@@ -9,9 +9,10 @@ app = angular.module "app.services"
 
 app.service 'ConverterService', [
     "$timeout"
+    "$log"
     "ParserService"
     "HelperService"
-    ($timeout, Parser, Helper) ->
+    ($timeout, $log, Parser, Helper) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -19,6 +20,11 @@ app.service 'ConverterService', [
             # @param {Buffer} buffer
             # @return {Promise}
             convertSHP2GeoJSON: (buffer) ->
+                $log.info "ConverterService convertSHP2GeoJSON called"
+                $log.debug
+                    message: "ConverterService convertSHP2GeoJSON called"
+                    buffer: buffer
+
                 return shp(buffer)
 
             # @method convertCSV2Arrays
@@ -26,6 +32,11 @@ app.service 'ConverterService', [
             # @param {CSV} csv
             # @return {Array}
             convertCSV2Arrays: (csv) ->
+                $log.info "ConverterService convertCSV2Arrays called"
+                $log.debug
+                    message: "ConverterService convertCSV2Arrays called"
+                    csv: csv
+
                 return Papa.parse(csv).data
 
             # converts a geoJSON object into a two dimensional array, which can be used in the data table.
@@ -33,6 +44,11 @@ app.service 'ConverterService', [
             # @param {geoJSON} geoJSON
             # @return {array}
             convertGeoJSON2Arrays: (geoJSON) ->
+                $log.info "ConverterService convertGeoJSON2Arrays called"
+                $log.debug
+                    message: "ConverterService convertGeoJSON2Arrays called"
+                    geoJSON: geoJSON
+
                 dataset = []
 
                 geoJSON.features.forEach (feature) ->
@@ -95,6 +111,14 @@ app.service 'ConverterService', [
             # @param {integer} counter
             # @return {array}
             addHeaderCols: (value, array, text, counter) =>
+                $log.info "ConverterService addHeaderCols called"
+                $log.debug
+                    message: "ConverterService addHeaderCols called"
+                    value: value
+                    array: array
+                    text: text
+                    counter: counter
+
                 if Array.isArray value
                     value.forEach (element) =>
                         if Array.isArray element
@@ -111,6 +135,11 @@ app.service 'ConverterService', [
             # @param {geoJSON} geoJSON
             # @return {array}
             convertGeoJSON2ColHeaders: (geoJSON) ->
+                $log.info "ConverterService convertGeoJSON2ColHeaders called"
+                $log.debug
+                    message: "ConverterService convertGeoJSON2ColHeaders called"
+                    geoJSON: geoJSON
+
                 colHeaders = []
 
                 maxIndex = 0
@@ -140,6 +169,11 @@ app.service 'ConverterService', [
             # @method sizeOfMultiArray
             # @param {Array} array
             sizeOfMultiArray: (array) ->
+                $log.info "ConverterService sizeOfMultiArray called"
+                $log.debug
+                    message: "ConverterService sizeOfMultiArray called"
+                    array: array
+
                 size = 0
 
                 if Array.isArray array[0]
@@ -154,6 +188,11 @@ app.service 'ConverterService', [
             # @param {Array} dataset
             # @return {GeoJSON}
             convertArrays2GeoJSON: (dataset) ->
+                $log.info "ConverterService convertArrays2GeoJSON called"
+                $log.debug
+                    message: "ConverterService convertArrays2GeoJSON called"
+                    dataset: dataset
+
                 dataset = Helper.trimDataset(dataset)
 
                 geoJSON =
@@ -177,7 +216,7 @@ app.service 'ConverterService', [
                             coordinates.push(latitude)
                             coordinates.push(longitude)
                     else
-                        console.info "Keine Koordinaten gefunden."
+                        $log.info "Keine Koordinaten gefunden."
                         return
 
                     unless coordinates.length
@@ -222,6 +261,11 @@ app.service 'ConverterService', [
             # @param {sring} str
             # @return {array}
             matrixToArray: (str) ->
+                $log.info "ConverterService matrixToArray called"
+                $log.debug
+                    message: "ConverterService matrixToArray called"
+                    str: str
+
                 return str.split('(')[1].split(')')[0].split(',')
 
         new Converter
