@@ -7,7 +7,8 @@ app = angular.module "app.services"
 app.service "ShareService", [
     "ConverterService"
     "$q"
-    (Converter, $q) ->
+    "$log"
+    (Converter, $q, $log) ->
         class Share
 
             # @method mapToImg
@@ -17,12 +18,19 @@ app.service "ShareService", [
             # @param {integer} quality Quality is between 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
             # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
             mapToImg: ($targetElem, quality = 1.0) ->
+                $log.info "ShareService mapToImg called"
+                $log.debug
+                    message: "ShareService mapToImg got called"
+                    targetElem: $targetElem
+                    quality: quality
 
                 deferred  = $q.defer()
 
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
+                    $log.info "html2canvas on targetElem onrendered callback called"
+
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
                     dyPopupOffset = 0
                     ctx = canvas.getContext "2d"
@@ -78,10 +86,16 @@ app.service "ShareService", [
                         triangleWidth = 40
                         triangleHeight = 20
 
+
+                        $log.debug
+                            message: "ShareService html2canvas on popupElem gets called"
+                            popupElem: $popupElem
                         # redraw popup on canvas because else the markers would be on top of the popup
                         html2canvas $popupElem,
                             useCORS: true
                             onrendered: (popupCanvas) ->
+                                $log.info "html2canvas on popupElem onrendered callback called"
+
                                 popupArray = Converter.matrixToArray $popupElem.css "transform"
 
                                 dxPopup = parseInt(popupArray[4]) + parseInt(mapArray[4])
@@ -141,6 +155,13 @@ app.service "ShareService", [
             # @param {sring} filename
             # @param {dataURL} dataURL
             download: (filename, dataURL) ->
+
+                $log.info "ShareService download called"
+                $log.debug
+                    message: "ShareService download called"
+                    filename: filename
+                    dataURL: dataURL
+
                 aTag = document.createElement "a"
                 aTag.setAttribute "href", dataURL
                 aTag.setAttribute "download", filename
