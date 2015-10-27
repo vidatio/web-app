@@ -29,7 +29,7 @@ app.controller "ShareCtrl", [
             promise.then (obj) ->
                 $log.info "ShareCtrl shareVisualization promise success called"
                 $log.debug
-                    message: "ShareCtrl shareVisualization promise success called"
+                    message: "Share mapToImg success callback"
                     obj: obj
 
                 if Data.meta.fileName == ""
