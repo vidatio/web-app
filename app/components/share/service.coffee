@@ -7,7 +7,8 @@ app = angular.module "app.services"
 app.service "ShareService", [
     "ConverterService"
     "$q"
-    (Converter, $q) ->
+    "$translate"
+    (Converter, $q, $translate) ->
         class Share
 
             # @method mapToImg
@@ -20,9 +21,19 @@ app.service "ShareService", [
 
                 deferred  = $q.defer()
 
+                unless $targetElem.is ":visible"
+                    $translate("TESTASDF").then (translation) ->
+                        console.log translation
+                        deferred.reject translation
+                    return deferred.promise
+
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
+
+                    $translate('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS').then (translation) ->
+                        deferred.notify translation
+
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
                     dyPopupOffset = 0
                     ctx = canvas.getContext "2d"
@@ -77,6 +88,11 @@ app.service "ShareService", [
                         # values for directional triangle to marker which belongs to the popup
                         triangleWidth = 40
                         triangleHeight = 20
+
+                        unless $popupElem.is ":visible"
+                            $translate('TOAST_MESSAGES.SHARE_SERVICE.POPUP_NOT_VISIBLE').then (translation) ->
+                                deferred.reject translation
+                            return
 
                         # redraw popup on canvas because else the markers would be on top of the popup
                         html2canvas $popupElem,

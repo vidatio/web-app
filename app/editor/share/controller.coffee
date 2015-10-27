@@ -10,7 +10,9 @@ app.controller "ShareCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
-    ($scope, Share, Data, Helper) ->
+    "ProgressOverlayService"
+    "ngToast"
+    ($scope, Share, Data, Helper, ProgressOverlay, ngToast) ->
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type
@@ -26,7 +28,14 @@ app.controller "ShareCtrl", [
                 else
                     fileName = Data.meta.fileName
 
-                Share.download fileName, obj[type]
+                    Share.download fileName, obj[type]
+            , (error) ->
+                ngToast.create
+                    content: error
+                    className: "danger"
 
-
+            , (notify) ->
+                console.log "notify should appear"
+                ProgressOverlay.setMessage notify
 ]
+
