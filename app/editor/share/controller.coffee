@@ -10,17 +10,28 @@ app.controller "ShareCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
-    ($scope, Share, Data, Helper) ->
+    "$log"
+    ($scope, Share, Data, Helper, $log) ->
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type
         $scope.shareVisualization = (type) ->
+            $log.info "ShareCtrl shareVisualization called"
+            $log.debug
+                message: "ShareCtrl shareVisualization called"
+                type: type
+
             $map = $("#map")
 
             # Check Share.mapToImg for quality reduction if needed
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
+                $log.info "ShareCtrl shareVisualization promise success called"
+                $log.debug
+                    message: "ShareCtrl shareVisualization promise success called"
+                    obj: obj
+
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
                 else

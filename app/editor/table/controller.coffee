@@ -7,7 +7,8 @@ app.controller "TableCtrl", [
     "$rootScope"
     "$timeout"
     "TableService"
-    ($scope, $rootScope, $timeout, Table) ->
+    "$log"
+    ($scope, $rootScope, $timeout, Table, $log) ->
         $scope.dataset = Table.dataset
         $scope.colHeaders = Table.colHeaders
 ]

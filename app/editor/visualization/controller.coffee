@@ -12,7 +12,8 @@ app.controller "VisualizationCtrl", [
     "ParserService"
     'leafletData'
     "$timeout"
-    ($scope, Table, Map, Parser, leafletData, $timeout) ->
+    "$log"
+    ($scope, Table, Map, Parser, leafletData, $timeout, $log) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -20,6 +21,11 @@ app.controller "VisualizationCtrl", [
             popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
+            $log.info "VisualizationCtrl leafletData.getMap called"
+            $log.debug
+                message: "VisualizationCtrl leafletData.getMap called"
+                map: map
+
             Map.map = map
             # Timeout is needed to wait for the view to finish render
             $timeout ->
