@@ -111,14 +111,6 @@ app.service 'ConverterService', [
             # @param {integer} counter
             # @return {array}
             addHeaderCols: (value, array, text, counter) =>
-                $log.info "ConverterService addHeaderCols called"
-                $log.debug
-                    message: "ConverterService addHeaderCols called"
-                    value: value
-                    array: array
-                    text: text
-                    counter: counter
-
                 if Array.isArray value
                     value.forEach (element) =>
                         if Array.isArray element
