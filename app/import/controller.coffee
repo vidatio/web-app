@@ -65,7 +65,6 @@ app.controller "ImportCtrl", [
                         content: translation
                         className: "danger"
                     )
-
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->

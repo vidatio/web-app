@@ -20,6 +20,8 @@ app.controller "VisualizationCtrl", [
             popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
+            $log.info "VisualizationCtrl map created"
+
             Map.map = map
             # Timeout is needed to wait for the view to finish render
             $timeout ->
