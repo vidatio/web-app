@@ -80,9 +80,10 @@ app.controller "ImportCtrl", [
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
             Data.meta.fileName = fileName
 
-            maxFileSize = 50000000
+            maxFileSize = 52428800
+            console.log $scope.file.size
             if $scope.file.size > maxFileSize
-                $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1000000})
+                $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
                     ngToast.create(
                         content: translation
