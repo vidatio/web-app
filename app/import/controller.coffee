@@ -80,6 +80,16 @@ app.controller "ImportCtrl", [
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
             Data.meta.fileName = fileName
 
+            maxFileSize = 50000000
+            if $scope.file.size > maxFileSize
+                $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1000000})
+                .then (translation) ->
+                    ngToast.create(
+                        content: translation
+                        className: "danger"
+                    )
+                return
+
             if fileType isnt "csv" and fileType isnt "zip"
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
@@ -110,6 +120,7 @@ app.controller "ImportCtrl", [
                         Table.resetColHeaders()
                         Table.setDataset dataset
                         Map.setGeoJSON geoJSON
+                        $location.path editorPath
 
                     when "zip"
                         Data.meta.fileType = "shp"
@@ -124,12 +135,25 @@ app.controller "ImportCtrl", [
                             Table.setDataset dataset
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
+                            $location.path editorPath
+
+                        , (error) ->
+                            $log.info "Converter convertSHP2GeoJSON promise error called"
+                            $log.debug
+                                message: "Converter convertSHP2GeoJSON promise error called"
+                                error: error
+                            $log.error "Converter convertSHP2GeoJSON promise error called"
+
+                            $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
+                                .then (translation) ->
+                                    ngToast.create
+                                        content: translation
+                                        className: "danger"
 
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     ProgressOverlay.setMessage ""
-                    $location.path editorPath
 
             , (error) ->
                 $log.info "ImportCtrl Import readFile promise error called"
@@ -137,12 +161,10 @@ app.controller "ImportCtrl", [
                     message: "ImportCtrl Import readFile promise error called"
                     error: error
                 $log.error "ImportCtrl Import.readFile error"
-                $log.debug error: error
 
                 $translate('TOAST_MESSAGES.READ_ERROR')
                     .then (translation) ->
-                        ngToast.create(
+                        ngToast.create
                             content: translation
                             className: "danger"
-                        )
 ]

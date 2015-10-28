@@ -27,6 +27,8 @@
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
+        "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
+        "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
         "SHARE_SERVICE": {
             "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
             "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
