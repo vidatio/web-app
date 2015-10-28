@@ -1,6 +1,7 @@
 #table.wrapper-content(ng-controller='TableCtrl' ng-show="$root.showTableView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content
         .settings-bar
-            .save-bottom
+            #table-settings-container
+                .save-button
 
         hot(dataset="dataset" active-views="activeViews" col-headers="colHeaders")

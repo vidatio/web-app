@@ -1,7 +1,16 @@
 #visualization
 
+    .settings-bar
+        #visu-settings-container
+            float right
+
+        .save-button
+            background url(../images/back-to-import-placeholder.svg) no-repeat
+            height 40px
+            width 40px
+
     .angular-leaflet-map
-        height calc(100% - 60px)
+        height calc(100% - 60px) /* -60px according to the settings-bars' height + 20px margin */
         width 100%
 
         a:link, a:visited
