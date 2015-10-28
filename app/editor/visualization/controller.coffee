@@ -7,12 +7,13 @@ app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
     '$scope'
+    "$log"
     'TableService'
     'MapService'
     "ParserService"
     'leafletData'
     "$timeout"
-    ($scope, Table, Map, Parser, leafletData, $timeout) ->
+    ($scope, $log, Table, Map, Parser, leafletData, $timeout) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -26,6 +27,13 @@ app.controller "VisualizationCtrl", [
             # Timeout is needed to wait for the view to finish render
             $timeout ->
                 Map.init()
+        , (error) ->
+            $log.error "VisualizationCtrl error on map create"
+            $log.debug error: error
+
+            ngToast.create
+                content: error
+                className: "danger"
 
         $scope.geojson =
             data: Map.geoJSON
