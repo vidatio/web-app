@@ -24,10 +24,22 @@ app.directive 'hot', [
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
+                    $log.info "hot beforeChange called"
+                    $log.debug
+                        message: "hot beforeChange called"
+                        change: change
+                        source: source
+
                     if !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                         change[0][3] = change[0][2]
 
                 afterChange: (change, source) ->
+                    $log.info "hot afterChange called"
+                    $log.debug
+                        message: "hot afterChange called"
+                        change: change
+                        source: source
+
                     if change and change[0][3] != change[0][2]
                         Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are
