@@ -12,11 +12,6 @@ app.service 'ParserService', [
             # @param {All Types} coordinate
             # @return {Boolean}
             isCoordinate: (coordinate) ->
-                $log.info "ParserService isCoordinate called"
-                $log.debug
-                    message: "ParserService isCoordinate called"
-                    coordinate: coordinate
-
                 coordinate = String(coordinate).trim()
                 if(coordinate is "")
                     return
@@ -33,11 +28,6 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimal: (coordinate) ->
-                $log.info "ParserService isCoordinateWGS84DegreeDecimal called"
-                $log.debug
-                    message: "ParserService isCoordinateWGS84DegreeDecimal called"
-                    coordinate: coordinate
-
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0 or coordinate.indexOf("s") >= 0
@@ -72,11 +62,6 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutes: (coordinate) ->
-                $log.info "ParserService isCoordinateWGS84DegreeDecimalMinutes called"
-                $log.debug
-                    message: "ParserService isCoordinateWGS84DegreeDecimalMinutes called"
-                    coordinate: coordinate
-
                 coordinate = coordinate.replace(/°/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0
@@ -117,11 +102,6 @@ app.service 'ParserService', [
             # @param {String} coordinate
             # @return {Boolean}
             isCoordinateWGS84DegreeDecimalMinutesSeconds: (coordinate) ->
-                $log.info "ParserService isCoordinateWGS84DegreeDecimalMinutesSeconds called"
-                $log.debug
-                    message: "ParserService isCoordinateWGS84DegreeDecimalMinutesSeconds called"
-                    coordinate: coordinate
-
                 coordinate = coordinate.replace(/°/g, "").replace(/'/g, "").toLowerCase()
 
                 if coordinate.indexOf("n") >= 0
@@ -218,11 +198,6 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isPhoneNumber: (cell) ->
-                $log.info "ParserService isPhoneNumber called"
-                $log.debug
-                    message: "ParserService isPhoneNumber called"
-                    cell: cell
-
                 regex = /^\+(\d{2})[-. ]?(\d{3})[-. ]?(\d+)[-. ]?(\d*)$/
                 return regex.test(cell)
 
@@ -231,11 +206,6 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isEmailAddress: (cell) ->
-                $log.info "ParserService isEmailAddress called"
-                $log.debug
-                    message: "ParserService isEmailAddress called"
-                    cell: cell
-
                 regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
                 return regex.test(cell)
 
@@ -244,11 +214,6 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Boolean}
             isURL: (cell) ->
-                $log.info "ParserService isURL called"
-                $log.debug
-                    message: "ParserService isURL called"
-                    cell: cell
-
                 regex = /^(ftp|http|https):\/\/[^ "]+$/i
                 return regex.test(cell)
 

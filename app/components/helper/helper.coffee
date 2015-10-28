@@ -72,11 +72,6 @@ app.service 'HelperService', [
             # @param {All Types} value
             # @return {Boolean}
             isNumber: (value) ->
-                $log.info "HelperService isNumber called"
-                $log.debug
-                    message: "HelperService isNumber called"
-                    value: value
-
                 return typeof value is "number" and isFinite(value)
 
             # @method isNumeric
@@ -84,11 +79,6 @@ app.service 'HelperService', [
             # @param {Mixed} n
             # @return {Boolean}
             isNumeric: (value) ->
-                $log.info "HelperService isNumeric called"
-                $log.debug
-                    message: "HelperService isNumeric called"
-                    value: value
-
                 return (!isNaN(parseFloat(value)) && isFinite(value))
 
             # cut out specified amount of rows

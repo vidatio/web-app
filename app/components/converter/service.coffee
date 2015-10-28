@@ -156,24 +156,16 @@ app.service 'ConverterService', [
                     colHeaders.push property
 
                 for property, value of geoJSON.features[maxIndex].geometry
-
                     if property is "bbox" or property is "coordinates"
                         colHeaders = @addHeaderCols(value, colHeaders, property, 0)
-
                     else
                         colHeaders.push property
-
                 return colHeaders
 
             # Returns the size of a multidimensional array.
             # @method sizeOfMultiArray
             # @param {Array} array
             sizeOfMultiArray: (array) ->
-                $log.info "ConverterService sizeOfMultiArray called"
-                $log.debug
-                    message: "ConverterService sizeOfMultiArray called"
-                    array: array
-
                 size = 0
 
                 if Array.isArray array[0]
