@@ -10,8 +10,10 @@ app.controller "ShareCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
+    "ProgressOverlayService"
+    "ngToast"
     "$log"
-    ($scope, Share, Data, Helper, $log) ->
+    ($scope, Share, Data, Helper, ProgressOverlay, ngToast, $log) ->
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type
@@ -32,12 +34,19 @@ app.controller "ShareCtrl", [
                     message: "Share mapToImg success callback"
                     obj: obj
 
+                ProgressOverlay.setMessage ""
+
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
                 else
                     fileName = Data.meta.fileName
 
                 Share.download fileName, obj[type]
-
-
+            , (error) ->
+                ngToast.create
+                    content: error
+                    className: "danger"
+            , (notify) ->
+                ProgressOverlay.setMessage notify
 ]
+

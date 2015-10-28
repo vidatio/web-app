@@ -8,7 +8,8 @@ app.service "ShareService", [
     "$q"
     "$log"
     "ConverterService"
-    ($q, $log, Converter) ->
+    "$translate"
+    ($q, $log, Converter, $translate) ->
         class Share
 
             # @method mapToImg
@@ -26,10 +27,18 @@ app.service "ShareService", [
 
                 deferred  = $q.defer()
 
+                unless $targetElem.is ":visible"
+                    $translate("TOAST_MESSAGES.SHARE_SERVICE.MAP_NOT_VISIBLE").then (translation) ->
+                        deferred.reject translation
+                    return deferred.promise
+
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
+
                     $log.info "html2canvas on targetElem onrendered callback called"
+                    deferred.notify $translate.instant('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS')
+
 
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
                     dyPopupOffset = 0
@@ -86,10 +95,15 @@ app.service "ShareService", [
                         triangleWidth = 40
                         triangleHeight = 20
 
-
                         $log.debug
                             message: "ShareService html2canvas on popupElem gets called"
                             popupElem: $popupElem
+
+                        unless $popupElem.is ":visible"
+                            $translate('TOAST_MESSAGES.SHARE_SERVICE.POPUP_NOT_VISIBLE').then (translation) ->
+                                deferred.reject translation
+                            return deferred.promise
+
                         # redraw popup on canvas because else the markers would be on top of the popup
                         html2canvas $popupElem,
                             useCORS: true

@@ -21,7 +21,9 @@ app.controller "ImportCtrl", [
     "ngToast"
     "ProgressOverlayService"
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, ProgressOverlay) ->
-        $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
+        $scope.link = "http://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&"+
+                "srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=csv&typeName=ogdsbg:volksschule"
+
         $scope.importService = Import
         editorPath = "/" + $rootScope.locale + "/editor"
 
@@ -45,6 +47,7 @@ app.controller "ImportCtrl", [
                 params:
                     url: url
             ).success (data) ->
+
                 $log.info "ImportCtrl load success called"
                 $log.debug
                     message: "ImportCtrl load success called"
@@ -55,6 +58,16 @@ app.controller "ImportCtrl", [
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
+            .error (data) ->
+                $log.error "ImportCtrl load file by url error called"
+                $log.debug error: error
+
+                $translate('TOAST_MESSAGES.READ_ERROR_LINK')
+                .then (translation) ->
+                    ngToast.create(
+                        content: translation
+                        className: "danger"
+                    )
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
@@ -74,7 +87,6 @@ app.controller "ImportCtrl", [
                         content: translation
                         className: "danger"
                     )
-
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
@@ -113,6 +125,7 @@ app.controller "ImportCtrl", [
                             Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
 
+
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     ProgressOverlay.setMessage ""
@@ -123,4 +136,13 @@ app.controller "ImportCtrl", [
                 $log.debug
                     message: "ImportCtrl Import readFile promise error called"
                     error: error
+                $log.error "ImportCtrl Import.readFile error"
+                $log.debug error: error
+
+                $translate('TOAST_MESSAGES.READ_ERROR')
+                    .then (translation) ->
+                        ngToast.create(
+                            content: translation
+                            className: "danger"
+                        )
 ]
