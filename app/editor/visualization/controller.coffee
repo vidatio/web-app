@@ -50,24 +50,24 @@ app.controller "VisualizationCtrl", [
                 html = ""
                 isFirstAttribute = true
 
-                for property of feature.properties
-                    value = feature.properties[property]
+                for property, value of feature.properties
 
-                    if isFirstAttribute
-                        html += "<b>"
+                    if value?
+                        if isFirstAttribute
+                            html += "<b>"
 
-                    if Parser.isEmailAddress(value)
-                        html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if Parser.isPhoneNumber(value)
-                        html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if Parser.isURL(value)
-                        html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if value
-                        html += value + "<br>"
+                        if Parser.isEmailAddress(value)
+                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if Parser.isPhoneNumber(value)
+                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if Parser.isURL(value)
+                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if value
+                            html += value + "<br>"
 
-                    if isFirstAttribute
-                        html += "</b>"
-                        isFirstAttribute = false
+                        if isFirstAttribute
+                            html += "</b>"
+                            isFirstAttribute = false
 
                 unless html
                     html = "Keine Informationen vorhanden"
