@@ -38,10 +38,65 @@ header
         float left
 
     #back-to-import-button
-        background url(../images/back-to-import-placeholder.svg) no-repeat
-        width 37px
-        height 40px
         position relative
+        height 40px
+        text-align center
+
+        button.btn
+            padding 0 10px
+
+        button.btn-primary
+            font-size 16px
+            height 40px
+
+            .btn-tip
+                padding-left 0
+                padding-right 10px
+
+
+
+    .tab
+        border-top 3px solid $color-passive
+        display inline-block
+        width 50%
+        height 40px
+        line-height 34px
+        background $color-passive
+
+        position relative
+        float left
+
+        color white
+        text-align center
+        font-family Colaborate, $fonts
+        font-size 16px
+        box-sizing border-box
+
+        &.active
+            border-top 3px solid $color-green
+            line-height 34px
+            background $color-active
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 0
+                width 0
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+            &::before
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+
+    .border-right
+        border-right none
+
 
     .menu-buttons
         height 100%
@@ -72,52 +127,10 @@ header
             font-size 20px
 
 
-    .tab
-        border-top 3px solid $color-passive
-        display inline-block
-        width 50%
-        height 40px
-        line-height 34px
-        background $color-passive
-
-        position relative
-        float left
-
-        color white
-        text-align center
-        font-family Colaborate, $fonts
-        font-size 14px
-        box-sizing border-box
-
-        &.active
-            border-top 3px solid $color-green
-            line-height 34px
-            background $color-active
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 0
-                width 0
-                border-top-color $color-green
-                border-width 4px
-                margin-left -4px
-            &::before
-                border-top-color $color-green
-                border-width 4px
-                margin-left -4px
-
-    .border-right
-        border-right none
-
-
 @media(max-width: 767px)
-    .editor-panel
-        margin-top: 20px
+    #navigation
+        .editor-panel
+            margin-top: 20px
 
     #back-to-import-button
         float left

@@ -22,6 +22,9 @@ header
 
                     a(ui-sref='app.import({ locale: locale })')
                         #back-to-import-button
+                            button.btn.btn-embossed.btn-primary
+                                span.btn-tip.fui-arrow-left
+                                {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -38,6 +41,4 @@ header
                         #logo
                 .col-xs-6.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
-
-
 
