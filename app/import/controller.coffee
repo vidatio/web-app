@@ -119,8 +119,8 @@ app.controller "ImportCtrl", [
                     $location.path editorPath
 
             , (error) ->
-                $log.info "ImportCtrl Import readFIle promise error called"
+                $log.info "ImportCtrl Import readFile promise error called"
                 $log.debug
-                    message: "ImportCtrl Import readFIle promise error called"
+                    message: "ImportCtrl Import readFile promise error called"
                     error: error
 ]
