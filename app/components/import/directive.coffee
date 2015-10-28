@@ -20,7 +20,7 @@ app.directive 'ngFileDropStart', [
 
             #enter: cursor enters the drop-zone
             el.bind "dragenter", (e) ->
-                $log.info "ngFileDropEnd dragenter called"
+                $log.info "ngFileDropStart dragenter called"
 
                 document.getElementById("drop-zone").style.display = "block"
                 e.preventDefault()
