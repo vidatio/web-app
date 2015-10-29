@@ -5,8 +5,6 @@ RUN apk update
 RUN apk upgrade
 RUN apk add nginx git python make g++
 
-
-
 WORKDIR /var/www/
 
 # add package.json and bower.json before copying the entire app to use caching
@@ -24,8 +22,8 @@ ADD . /var/www/
 # expose 80 to host OS
 EXPOSE 80
 
-ADD nginx-config /etc/nginx/sites-available/default
-
 RUN gulp production
+
+ADD nginx-config /etc/nginx/nginx.conf
 
 CMD ["nginx", "-g", "daemon off;"]
