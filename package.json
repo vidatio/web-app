@@ -6,7 +6,6 @@
   "privat": true,
   "dependencies": {
     "coffee-script": "^1.9.2",
-    "bower": "~1.4.1",
     "express": "^4.12.3",
     "request": "^2.55.0"
   },
