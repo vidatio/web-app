@@ -150,6 +150,7 @@ gulp.task "config:production",
         gulp.src BUILD.source.config
         .pipe ngConstant
             name: "app.config"
+            merge: true
             constants:
                 CONFIG:
                     ENV: "production"
