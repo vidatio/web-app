@@ -9,15 +9,16 @@ WORKDIR /var/www/
 
 # add package.json and bower.json before copying the entire app to use caching
 ADD package.json bower.json /var/www/
+
+# needed for bower/npm github installations
+RUN git config --global url."https://".insteadOf git://
+
 RUN npm install
 RUN npm install -g bower gulp
 RUN bower install --allow-root
 
 # create folder var/www/vidatio and copy the app
 ADD . /var/www/
-
-# move loggly config from server to app
-# RUN cp /etc/loggly/config.json /usr/share/nginx/html/vidatio/app/statics/constants/config.json
 
 # expose 80 to host OS
 EXPOSE 80
