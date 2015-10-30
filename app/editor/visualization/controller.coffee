@@ -52,7 +52,7 @@ app.controller "VisualizationCtrl", [
 
                 for property, value of feature.properties
 
-                    if value?
+                    if value
                         if isFirstAttribute
                             html += "<b>"
 
