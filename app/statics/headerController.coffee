@@ -9,7 +9,7 @@ app.controller "HeaderCtrl", [
     "$timeout"
     "MapService"
     ($scope, $rootScope, $timeout, Map) ->
-        # The three bool values represent the three tabs in the header
+        # The two bool values represent the two tabs in the header
         # @property activeViews
         # @type {Array}
         $rootScope.activeViews = [true, true]

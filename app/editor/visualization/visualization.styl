@@ -5,11 +5,96 @@
             float right
 
         .save-button
-            background url(../images/back-to-import-placeholder.svg) no-repeat
+            //background url(../images/back-to-import-placeholder.svg) no-repeat
             height 40px
             width 40px
+            background red
+            opacity 0.5
+            z-index 2
+            position absolute
+            transition opacity 0.5s ease-out 0s
+            right 100px
+            top 10px
 
-    .angular-leaflet-map
+            ul
+                list-style outside none none
+                padding 0
+                margin 0
+
+                li
+                    display block
+                    position relative
+                    z-index 1
+
+                    & > ul
+                        background #fff none repeat scroll 0 0
+                        border 1px solid #e2e2e2
+                        display none
+                        margin-top -1px
+                        position absolute
+
+                    &:hover
+                        & > ul
+                            display block
+
+                .save-main
+                    & > a
+                        background-color #fff
+                        background-position center center
+                        background-repeat ne-repeat
+                        border-radius 18px
+                        display block
+                        height 36px
+                        margin 8px 8px 0 10px
+                        overflow hidden
+                        padding 0
+                        text-indent -1.33333e+7px
+                        width 36px
+
+                    ul
+                        li
+                            & > a
+                                color blue
+                                position relative
+                                text-decoration none
+                                white-space nowrap
+                                z-index 2
+
+                            &:hover
+                                & > a
+                                    color #fff
+                                    background red
+
+
+            & > ul
+                & > li
+                    & > ul
+                        &::after
+                            border-color transparent transparent transparent #fff
+                            border-style solid
+                            border-width 7px
+                            content ""
+                            left 100%
+                            position absolute
+                            top 13px
+                            z-index 1000
+
+                        & > li
+                            &:first-child
+                                & > a
+                                    &::after
+                                        border-color transparent transparent transparent #e2e2e2
+                                        border-style solid
+                                        border-width 8px
+                                        content ""
+                                        left 100%
+                                        position absolute
+                                        top 12px
+                                        z-index 1001
+
+
+
+.angular-leaflet-map
         height calc(100% - 60px) /* -60px according to the settings-bars' height + 20px margin */
         width 100%
 
