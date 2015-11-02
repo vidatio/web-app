@@ -3,7 +3,8 @@
 app = angular.module "app.services"
 
 app.service "ProgressOverlayService", [
-    ->
+    "$log"
+    ($log) ->
         class ProgressOverlay
 
             _message = null
@@ -15,6 +16,9 @@ app.service "ProgressOverlayService", [
                 _message
 
             setMessage: (msg) ->
+                $log.info "Progress Overlay setMessage function called"
+                $log.debug
+                    message: msg
                 _message = msg
 
         new ProgressOverlay
