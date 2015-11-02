@@ -102,8 +102,6 @@ app.controller "ImportCtrl", [
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 ProgressOverlay.setMessage message
 
-            ProgressOverlay.setMessage $translate.instant("OVERLAY_MESSAGES.READING_FILE")
-
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $log.info "ImportCtrl Import readFile promise success called"
                 $log.debug
