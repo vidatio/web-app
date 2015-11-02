@@ -41,13 +41,14 @@ header
         position relative
         height 40px
         text-align center
+        float right
 
         button.btn
-            padding 0 10px
+            padding-top 8px
 
         button.btn-primary
-            font-size 18px
             height 40px
+            font-size 16px
 
             .btn-tip
                 padding-left 0
@@ -93,6 +94,7 @@ header
                 border-top-color $color-green
                 border-width 4px
                 margin-left -4px
+
             &::before
                 border-top-color $color-green
                 border-width 4px
@@ -131,18 +133,33 @@ header
             font-size 20px
 
 
+@media(max-width: 550px)
+    #back-to-import-button
+        display none
+
 @media(max-width: 767px)
     #navigation
         .editor-panel
             margin-top: 20px
 
+@media(min-width: 768px) and (max-width: 849px)
     #back-to-import-button
-        float left
-        left 20%
+        margin-right -10px
 
-@media(min-width: 768px)
+        button.btn-primary
+            font-size 14px !important
+
+            .fui-arrow-left
+                &::before
+                    font-size 12px !important
+
+    header
+        .tab
+            font-size 14px
+
+@media(min-width: 850px)
     #back-to-import-button
-        float right
+        margin-right 10px
 
     #navigation
         .editor-panel
@@ -151,16 +168,3 @@ header
             left 0
             right 0
             max-width 600px
-
-
-@media(min-width: 768px) and (max-width: 850px)
-    #back-to-import-button
-        right 0
-
-@media (min-width: 851px) and (max-width: 1024px)
-    #back-to-import-button
-        right 10%
-
-@media (min-width: 1025px)
-    #back-to-import-button
-        right 15%

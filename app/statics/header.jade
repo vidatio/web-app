@@ -16,7 +16,7 @@ header
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
-                .col-xs-6.col-sm-3.logo
+                .col-xs-6.col-sm-4.logo
                     a(ui-sref='app.landingPage({ locale: locale })')
                         #logo
 
@@ -24,12 +24,12 @@ header
                         #back-to-import-button
                             button.btn.btn-embossed.btn-primary
                                 span.btn-tip.fui-arrow-left
-                                    {{ "IMPORT" | translate | uppercase }}
+                                span {{ "IMPORT" | translate | uppercase }}
 
-                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
+                .col-xs-6.col-sm-push-4.col-sm-4.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
-                .col-xs-12.col-sm-pull-3.col-sm-6.editor-panel
+                .col-xs-12.col-sm-pull-4.col-sm-4.editor-panel
                     a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
                     .separator
                     a.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
