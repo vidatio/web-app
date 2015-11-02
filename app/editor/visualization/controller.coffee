@@ -12,7 +12,10 @@ app.controller "VisualizationCtrl", [
     "ParserService"
     'leafletData'
     "$timeout"
-    ($scope, Table, Map, Parser, leafletData, $timeout) ->
+    "ShareService"
+    "DataService"
+    "HelperService"
+    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -60,4 +63,21 @@ app.controller "VisualizationCtrl", [
                     html = "Keine Informationen vorhanden"
 
                 layer.bindPopup(html)
+
+        #@method $scope.shareVisualization
+        #@description exports a
+        #@params {string} type
+        $scope.shareVisualization = (type) ->
+            $map = $("#map")
+
+            # Check Share.mapToImg for quality reduction if needed
+            promise = Share.mapToImg $map
+
+            promise.then (obj) ->
+                if Data.meta.fileName == ""
+                    fileName = Helper.dateToString(new Date())
+                else
+                    fileName = Data.meta.fileName
+
+                Share.download fileName, obj[type]
 ]
