@@ -12,7 +12,8 @@ app.service 'ConverterService', [
     "$log"
     "ParserService"
     "HelperService"
-    ($timeout, $log, Parser, Helper) ->
+    "$q"
+    ($timeout, $log, Parser, Helper, $q) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -50,6 +51,7 @@ app.service 'ConverterService', [
                     geoJSON: geoJSON
 
                 dataset = []
+                deferred = $q.defer()
 
                 geoJSON.features.forEach (feature) ->
                     if feature.geometry.type is "MultiPolygon"
@@ -90,18 +92,23 @@ app.service 'ConverterService', [
                                     feature.geometry.coordinates.forEach (coordinate) ->
                                         newRow.push coordinate
 
-                                else
+                                else if feature.geometry.type is "Polygon"
                                     feature.geometry.coordinates.forEach (pair) ->
                                         pair.forEach (coordinates) ->
                                             coordinates.forEach (coordinate) ->
                                                 newRow.push coordinate
+
+                                else
+                                    deferred.reject "Coordinate type in SHP-file not supported"
+                                    return deferred.promise
 
                             else
                                 newRow.push value
 
                         dataset.push newRow
 
-                return dataset
+                deferred.resolve dataset
+                return deferred.promise
 
             # adds multiple column headers with the same name and an incrementing counter.
             # @method addHeaderCols
