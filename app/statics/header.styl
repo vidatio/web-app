@@ -77,6 +77,31 @@ header
         font-size 16px
         box-sizing border-box
 
+        &:hover
+            background $color-active
+            border-top-color $color-green
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 0
+                width 0
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+
+
+            &::before
+                border-top-color $color-green
+                border-width 4px
+                margin-left -4px
+
+
+
         &.active
             border-top 3px solid $color-green
             line-height 34px
@@ -95,10 +120,21 @@ header
                 border-width 4px
                 margin-left -4px
 
+
             &::before
                 border-top-color $color-green
                 border-width 4px
                 margin-left -4px
+
+
+            &:hover
+                background $color-passive
+                border-top-color $color-red
+
+                &::after
+                &::before
+                    border-top-color $color-red
+
 
     .border-right
         border-right none
