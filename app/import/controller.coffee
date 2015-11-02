@@ -81,7 +81,6 @@ app.controller "ImportCtrl", [
             Data.meta.fileName = fileName
 
             maxFileSize = 52428800
-            console.log $scope.file.size
             if $scope.file.size > maxFileSize
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
@@ -131,12 +130,24 @@ app.controller "ImportCtrl", [
                                 message: "ImportCtrl Converter convertSHP2GeoJSON promise success called"
                                 fileContent: fileContent
 
-                            dataset = Converter.convertGeoJSON2Arrays geoJSON
-                            colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
-                            Table.setDataset dataset
-                            Table.setColHeaders colHeaders
-                            Map.setGeoJSON geoJSON
-                            $location.path editorPath
+                            Converter.convertGeoJSON2Arrays(geoJSON).then (dataset) ->
+                                colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+                                Table.setDataset dataset
+                                Table.setColHeaders colHeaders
+                                Map.setGeoJSON geoJSON
+                                $location.path editorPath
+                            , (error) ->
+                                $log.info "Converter convertGeoJSON2Arrays promise error called"
+                                $log.debug
+                                    message: "Converter convertGeoJSON2Arrays promise error called"
+                                    error: error
+                                $log.error "Converter convertGeoJSON2Arrays promise error called"
+
+                                $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
+                                    .then (translation) ->
+                                        ngToast.create
+                                            content: translation
+                                            className: "danger"
 
                         , (error) ->
                             $log.info "Converter convertSHP2GeoJSON promise error called"

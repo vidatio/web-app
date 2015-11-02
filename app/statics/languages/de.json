@@ -28,6 +28,7 @@
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
+        "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
         "SHARE_SERVICE": {
             "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
