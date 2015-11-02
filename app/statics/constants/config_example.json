@@ -1,0 +1,8 @@
+{
+    "CONFIG": {
+        "ENV": "",
+        "TOKEN": {
+            "LOGGLY": "FILL IN TOKEN HERE"
+        }
+    }
+}
