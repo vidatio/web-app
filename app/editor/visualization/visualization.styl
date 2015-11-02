@@ -1,140 +1,42 @@
 #visualization
 
-    .settings-bar
-        #visu-settings-container
-            float right
 
-        .save-button
-            height 40px
-            width 40px
-            opacity 1.0
-            z-index 2
-            position relative
-            transition opacity 0.5s ease-out 0s
-            right 10px
-            top -8px
-            cursor pointer
+    .angular-leaflet-map
+            height calc(100% - 60px) /* -60px according to the settings-bars' height + 20px margin */
+            width 100%
 
+            a:link, a:visited
+                color $color-black
 
-            .save-main
-                padding 2px
-                margin-top 8px
+        .leaflet-container
+            a.leaflet-popup-close-button
+                top 5px
+                right 2px
 
+            .leaflet-popup-content-wrapper
+                min-width 140px
+                border-top 5px solid $color-red
+                border-radius 0px
 
-                & > a
-                    background-color $color-grey-light
-                    background-image url(../images/download-button.svg)
-                    background-position center center
-                    background-repeat no-repeat
-                    border-radius 18px
-                    display block
-                    height 36px
-                    overflow hidden
-                    padding 0
-                    text-indent -1.33333e+7px
-                    width 36px
+                .leaflet-popup-content
+                    padding-right 15px
+                    overflow-wrap break-word
 
-                &:hover
-                    & > a
-                        color $color-white
-                        background-color $color-active
+                    a:link, a:visited
+                        color $color-active
+                    a:hover, a:active
+                        color $color-black
 
-                    & > ul
-                        display block
+            .leaflet-popup-tip
+                width 20px
+                height 20px
 
-                ul
-                    background $color-white none repeat scroll 0 0
-                    border 1px solid $color-border
-                    display none
-                    position absolute
-                    width 50px
-                    left -5px
-                    text-align center
-                    list-style outside none none
-                    padding 0
-                    margin-top 12px
-
-
-                    &::after
-                        border-color transparent transparent $color-white transparent
-                        border-style solid
-                        border-width 10px
-                        content ""
-                        left 14px
-                        position absolute
-                        top -20px
-                        z-index 1000
-
-
-                    li
-                        display block
-                        position relative
-                        z-index 1
-
-                        &:first-child
-                            border-bottom 1px solid $color-border
-
-                            &::after
-                                border-color transparent transparent $color-border transparent
-                                border-style solid
-                                border-width 11px
-                                content ""
-                                left 13px
-                                position absolute
-                                top -23px
-                                z-index 1001
-
-                        & > a
-                            color $color-black
-                            position relative
-                            text-decoration none
-                            white-space nowrap
-                            z-index 2
-                            line-height 30px
-
-
-                        &:hover
-                            & > a
-                                color $color-white
-                                background $color-active
-
-
-.angular-leaflet-map
-        height calc(100% - 60px) /* -60px according to the settings-bars' height + 20px margin */
-        width 100%
-
-        a:link, a:visited
-            color $color-black
-
-    .leaflet-container
-        a.leaflet-popup-close-button
-            top 5px
-            right 2px
-
-        .leaflet-popup-content-wrapper
-            min-width 140px
-            border-top 5px solid $color-red
-            border-radius 0px
-
-            .leaflet-popup-content
-                padding-right 15px
-                overflow-wrap break-word
-
-                a:link, a:visited
-                    color $color-active
-                a:hover, a:active
-                    color $color-black
-
-        .leaflet-popup-tip
-            width 20px
-            height 20px
-
-        path.leaflet-clickable
-            stroke $color-passive
-            stroke-opacity 1
-            fill $color-green
-            fill-opacity 0.25
-            stroke-width 3px
-            stroke-dasharray 5
+            path.leaflet-clickable
+                stroke $color-passive
+                stroke-opacity 1
+                fill $color-green
+                fill-opacity 0.25
+                stroke-width 3px
+                stroke-dasharray 5
 
 

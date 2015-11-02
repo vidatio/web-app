@@ -4,7 +4,7 @@
     .content
         height calc(100vh - 228px)
         min-height 400px
-        padding 20px
+        padding 10px 20px 20px 20px
         border-top 3px solid $color-red
         background $color-white
         box-shadow $box-shadow-size $color-shadow
@@ -13,9 +13,102 @@
 
         .settings-bar
             height 40px
-            margin-bottom 20px
-            background $color-hover-light
+            margin-bottom 10px
             border-radius 10px
+
+            #visualization-settings-container
+            #table-settings-container
+                float right
+
+                .save-button
+                    height 40px
+                    width 40px
+                    opacity 1.0
+                    z-index 2
+                    position relative
+                    transition opacity 0.5s ease-out 0s
+                    top -8px
+                    cursor pointer
+                    padding 2px
+                    margin-top 8px
+
+                    & > a
+                        background-color $color-grey-light
+                        background-image url(../images/download-button.svg)
+                        background-position center center
+                        background-repeat no-repeat
+                        border 1px solid $color-green
+                        border-radius 4px
+                        display block
+                        height 36px
+                        overflow hidden
+                        //text-indent -1.33333e+7px
+                        width 36px
+
+                    &:hover
+                        & > ul
+                            display block
+
+                        & > a
+                            color $color-white
+                            background-color $color-green
+
+                    ul
+                        background $color-white none repeat scroll 0 0
+                        border 1px solid $color-green
+                        display none
+                        position absolute
+                        width 50px
+                        left -5px
+                        text-align center
+                        list-style outside none none
+                        padding 0
+                        margin-top 12px
+                        border-radius 4px
+                        box-shadow $box-shadow-size $color-active
+
+
+                        &::after
+                            border-color transparent transparent $color-white transparent
+                            border-style solid
+                            border-width 10px
+                            content ""
+                            left 14px
+                            position absolute
+                            top -20px
+                            z-index 1000
+
+
+                        li
+                            display block
+                            position relative
+                            z-index 1
+
+                            &:first-child
+                                border-bottom 1px solid $color-green
+
+                                &::after
+                                    border-color transparent transparent $color-green transparent
+                                    border-style solid
+                                    border-width 11px
+                                    content ""
+                                    left 13px
+                                    position absolute
+                                    top -23px
+                                    z-index 1001
+
+                            & > a
+                                color $color-black
+                                position relative
+                                text-decoration none
+                                white-space nowrap
+                                z-index 2
+                                line-height 30px
+
+                            &:hover
+                                & > a
+                                    color $color-white
+                                    background-color $color-active
 
 
     .wrapper-content
