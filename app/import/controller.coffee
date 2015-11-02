@@ -130,18 +130,21 @@ app.controller "ImportCtrl", [
                                 message: "ImportCtrl Converter convertSHP2GeoJSON promise success called"
                                 fileContent: fileContent
 
-                            Converter.convertGeoJSON2Arrays(geoJSON).then (dataset) ->
+                            dataset = Converter.convertGeoJSON2Arrays geoJSON
+
+                            if dataset.length
                                 colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                                 Table.setDataset dataset
                                 Table.setColHeaders colHeaders
                                 Map.setGeoJSON geoJSON
                                 $location.path editorPath
-                            , (error) ->
-                                $log.info "Converter convertGeoJSON2Arrays promise error called"
+
+                            else
+                                $log.info "Converter convertGeoJSON2Arrays error"
                                 $log.debug
-                                    message: "Converter convertGeoJSON2Arrays promise error called"
-                                    error: error
-                                $log.error "Converter convertGeoJSON2Arrays promise error called"
+                                    message: "Converter convertGeoJSON2Arrays error"
+                                    geoJSON: geoJSON
+                                $log.error "Converter convertGeoJSON2Arrays error"
 
                                 $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
                                     .then (translation) ->

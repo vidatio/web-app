@@ -51,7 +51,6 @@ app.service 'ConverterService', [
                     geoJSON: geoJSON
 
                 dataset = []
-                deferred = $q.defer()
 
                 geoJSON.features.forEach (feature) ->
                     if feature.geometry.type is "MultiPolygon"
@@ -99,16 +98,14 @@ app.service 'ConverterService', [
                                                 newRow.push coordinate
 
                                 else
-                                    deferred.reject "Coordinate type in SHP-file not supported"
-                                    return deferred.promise
+                                    return false
 
                             else
                                 newRow.push value
 
                         dataset.push newRow
 
-                deferred.resolve dataset
-                return deferred.promise
+                return dataset
 
             # adds multiple column headers with the same name and an incrementing counter.
             # @method addHeaderCols
