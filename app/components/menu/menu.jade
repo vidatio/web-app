@@ -9,17 +9,12 @@ nav
                 #logo-menu
                     a(ui-sref="app.landingPage({ locale: locale })", ng-click="toggleMenu()")
 
-        div
+        .menu-list
             a(href="") {{ 'AVAILABLE_DATASETS' | translate }}
             a(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ 'IMPORT_DATA' | translate }}
             a(href="") {{ 'FEATURES' | translate }}
             a(href="") {{ 'PRICING' | translate }}
             a(href="") {{ 'API' | translate }}
 
-        h3 {{ 'USER_SECTION' | translate }}
-        .login-container
-            p {{ 'MAIL' | translate }}
-            input.form-control.input-sm(type="text" placeholder="{{ 'MAIL' | translate }}")
-            p {{ 'PASSWORD' | translate }}
-            input.form-control.input-sm(type="text" placeholder="{{ 'PASSWORD' | translate }}")
-            button.btn.btn-primary.btn-wide.input-sm(type="submit") {{ 'LOGIN' | translate }}
+        registration
+        login
