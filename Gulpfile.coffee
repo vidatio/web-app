@@ -95,12 +95,14 @@ BUILD =
             "./bower_components/shp/dist/shp.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/angular-animate/angular-animate.min.js"
+            "./bower_components/angular-resource/angular-resource.js"
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
+            "./bower_components/flat-ui/dist/js/flat-ui.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"

@@ -13,6 +13,7 @@ app = angular.module "app", [
     "pascalprecht.translate"
     "ngToast"
     "ngAnimate"
+    "ngResource"
     "ngSanitize"
     "logglyLogger"
 ]

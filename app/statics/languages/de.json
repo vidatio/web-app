@@ -42,12 +42,17 @@
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert"
     },
-    "MAIL": "E-Mail/ Nutzername",
     "AVAILABLE_DATASETS": "Verfügbare Datensets",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
+    "MAIL": "E-Mail",
+    "USERNAME": "Benutzername",
     "PASSWORD": "Passwort",
-    "LOGIN": "Einloggen",
-    "USER_SECTION": "Anmelden"
+    "FORGOT_PASSWORD": "Passwort vergessen",
+    "LOGIN": "Anmeldung",
+    "LOG_ON": "Anmelden",
+    "REGISTRATION": "Registrierung",
+    "REGISTER": "Registrieren"
+
 }

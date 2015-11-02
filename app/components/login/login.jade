@@ -1,0 +1,25 @@
+#login
+    h3 {{ 'LOGIN' | translate }}
+
+    form(name="loginForm" ng-submit="logon()")
+        .row
+            .col-xs-12
+                .input-group
+                    span.input-group-addon.fui-user
+                    input.form-control(type="email" name="mail" ng-model="user.mail" placeholder="{{ 'MAIL' | translate }}" required ng-minlength=10 ng-maxlength=128 ng-focus)
+                    span.error(ng-show="loginForm.mail.$dirty && loginForm.mail.$invalid && !loginForm.mail.$focused") {{ RESPONSE.ERROR | translate }}
+        .row
+            .col-xs-12
+                .input-group
+                    span.input-group-addon.fui-lock
+                    input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128 ng-focus)
+                    span.error(ng-show="loginForm.password.$dirty && loginForm.password.$invalid && !loginForm.password.$focused") {{ RESPONSE.ERROR | translate }}
+        .row
+            .col-xs-12.middle
+                button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid") {{ 'LOG_ON' | translate }}
+
+    .row
+        .col-xs-6.left
+            a(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
+        .col-xs-6.right
+            a(href="#") {{ 'REGISTER' | translate }}
