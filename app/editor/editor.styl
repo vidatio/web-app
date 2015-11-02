@@ -23,21 +23,17 @@
                 .save-button
                     height 40px
                     width 40px
-                    opacity 1.0
-                    z-index 2
+                    z-index 300
                     position relative
-                    transition opacity 0.5s ease-out 0s
-                    top -8px
                     cursor pointer
                     padding 2px
-                    margin-top 8px
 
                     & > a
                         background-color $color-grey-light
                         background-image url(../images/download-button.svg)
                         background-position center center
                         background-repeat no-repeat
-                        border 1px solid $color-green
+                        border 2px solid $color-green
                         border-radius 4px
                         display block
                         height 36px
@@ -45,12 +41,7 @@
                         //text-indent -1.33333e+7px
                         width 36px
 
-                    &:hover
-                        & > ul
-                            display block
-
-                        & > a
-                            color $color-white
+                        &:hover
                             background-color $color-green
 
                     ul
@@ -67,7 +58,6 @@
                         border-radius 4px
                         box-shadow $box-shadow-size $color-active
 
-
                         &::after
                             border-color transparent transparent $color-white transparent
                             border-style solid
@@ -78,11 +68,10 @@
                             top -20px
                             z-index 1000
 
-
                         li
                             display block
                             position relative
-                            z-index 1
+                            z-index 301
 
                             &:first-child
                                 border-bottom 1px solid $color-green
@@ -102,13 +91,14 @@
                                 position relative
                                 text-decoration none
                                 white-space nowrap
-                                z-index 2
+                                z-index 302
                                 line-height 30px
 
-                            &:hover
-                                & > a
-                                    color $color-white
-                                    background-color $color-active
+                                &:hover
+                                    color $color-green
+                    &:hover
+                        & > ul
+                         display block
 
 
     .wrapper-content
