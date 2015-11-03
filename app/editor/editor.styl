@@ -40,9 +40,6 @@
                         overflow hidden
                         width 36px
 
-                        &:hover
-                            background-color $color-green
-
                     ul
                         background $color-white none repeat scroll 0 0
                         border 1px solid $color-green
@@ -92,12 +89,18 @@
                                 white-space nowrap
                                 z-index 302
                                 line-height 30px
+                                font-size 16px
 
-                                &:hover
+                            &:hover
+                                & > a
                                     color $color-green
+
                     &:hover
                         & > ul
                          display block
+
+                        & > a
+                            background-color $color-green
 
 
     .wrapper-content
