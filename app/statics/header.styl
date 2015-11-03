@@ -65,18 +65,18 @@ header
         display inline-block
         width 50%
         height 40px
-        line-height 40px
+        line-height 41px
         background $color-passive
         position relative
         float left
-        color $color-white
+        color $color-table-even-active
         text-align center
         font-family Colaborate, $fonts
         font-size 16px
         box-sizing border-box
 
         &:hover
-            color $color-green
+            color $color-white
             border-bottom-color $color-green
 
             &::after
@@ -86,24 +86,21 @@ header
                 left 50%
                 pointer-events none
                 position absolute
-                top 40px
+                top 39px
                 width 0
                 border-top-color $color-green
                 border-width 10px
                 margin-left -10px
-
 
             &::before
                 border-top-color $color-green
                 border-width 10px
                 margin-left -10px
 
-
-
         &.active
             border-bottom 4px solid $color-green
-            line-height 40px
-            color $color-green
+            line-height 41px
+            color $color-white
 
             &::after
                 border medium solid transparent
@@ -112,27 +109,16 @@ header
                 left 50%
                 pointer-events none
                 position absolute
-                top 40px
+                top 39px
                 width 0
                 border-top-color $color-green
                 border-width 10px
                 margin-left -10px
 
-
             &::before
                 border-top-color $color-green
                 border-width 10px
                 margin-left -10px
-
-
-            &:hover
-                color $color-white
-                border-bottom-color $color-passive
-
-                &::after
-                &::before
-                    border-top-color $color-passive
-                    display none
 
 
     .border-right
@@ -160,9 +146,6 @@ header
 
         .menu-active
             color $color-green
-
-            &:hover
-                color $color-grey-light
 
         a#menu
             font-size 20px
