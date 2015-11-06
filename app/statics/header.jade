@@ -24,8 +24,7 @@ header
                     a(ui-sref='app.import({ locale: locale })')
                         #back-to-import-button
                             button.btn.btn-embossed.btn-primary
-                                span.btn-tip.fui-arrow-left
-                                {{ "IMPORT" | translate | uppercase }}
+                                span.btn-tip.fui-arrow-left {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
                     a#login-button.fui-user(ui-sref="app.login({ locale: locale})")

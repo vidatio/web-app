@@ -15,13 +15,13 @@ app.service 'UserService', [
                     key: key
                     value: value
 
-                url = $rootScope.apiBase + "/user/check?" + key + '=' + escape(value)
+                url = $rootScope.apiBase + "/v0/users/check?" + key + '=' + escape(value)
                 $http.get(url).then (results) ->
                     $log.error "UserService checkUniqueness success (user already exist)"
                     $log.debug
                         results: results
 
-                    results.data.status
+                    console.log results.data.status
 
                     # Because at finding the user in the db it is not allowed to take this name by another user
                     $q.reject(results)

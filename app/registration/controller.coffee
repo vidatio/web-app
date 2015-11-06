@@ -12,14 +12,15 @@ app.controller "RegistrationCtrl", [
         $scope.register = ->
             $log.info "RegistrationCtrl register called"
 
-            UserFactory.save
+            UserFactory.save({
                 "email": $scope.user.email
                 "name": $scope.user.name
                 "password": $scope.user.password
-            , (response) ->
+            }, (response) ->
                 $log.info "RegistrationCtrl register success called"
                 $log.debug
                     response: response
+            );
 
         #Needed for flat UI prepend tags
         $('.input-group').on('focus', '.form-control', ->

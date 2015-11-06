@@ -6,5 +6,5 @@ app.factory 'UserFactory', [
     "$resource"
     "$rootScope"
     ($resource, $rootScope) ->
-        $resource $rootScope.apiBase + "/user/:id"
+        $resource $rootScope.apiBase + "/v0/users/:id"
 ]
