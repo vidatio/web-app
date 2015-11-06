@@ -6,7 +6,7 @@ app.directive "menu", [
     "$timeout"
     ($timeout) ->
         restrict: "E"
-        templateUrl: "menu/menu.html"
+        templateUrl: "components/menu/menu.html"
         replace: true
         link: ($scope, $element) ->
 
