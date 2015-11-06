@@ -2,11 +2,11 @@
 
 app = angular.module("app.controllers")
 
-app.controller "RegistrationCtrl", [
+app.controller "LoginCtrl", [
     "$scope"
     ($scope, UserFactory) ->
-        $scope.register = ->
-            UserFactory.save {"mail": user.mail, "name": user.name, "password": user.password }
+        $scope.logon = ->
+            # TODO
 
         #Needed for flat UI prepend tags
         $('.input-group').on('focus', '.form-control', ->
