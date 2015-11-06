@@ -2,11 +2,11 @@
 
 app = angular.module("app.controllers")
 
-app.controller "OverlayCtrl", [
+app.controller "ProgressCtrl", [
     "$scope"
-    "ProgressOverlayService"
-    ($scope, ProgressOverlay) ->
+    "ProgressService"
+    ($scope, Progress) ->
 
-        $scope.overlay = ProgressOverlay
+        $scope.progress = Progress
 
 ]

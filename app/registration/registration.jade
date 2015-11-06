@@ -1,0 +1,40 @@
+#registration
+    h3 {{ 'REGISTRATION' | translate }}
+
+    form(name="form" ng-submit="scope.register()" ng-controller="RegistrationCtrl")
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : form.email.$invalid && !form.email.$pristine }")
+                    span.input-group-addon.fui-mail
+                    input.form-control(type="email" name="email" ng-model="user.email" placeholder="{{ 'MAIL' | translate }}" required ng-minlength=10 ng-maxlength=128 validate-uniqueness="email")
+                    span.form-control-feedback.fui-check(ng-show="form.email.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="form.email.$invalid && !form.email.$pristine")
+                span.error(ng-show="form.email.$invalid && !form.email.$pristine && !form.email.$error.uniqueness") Keine gültige E-Mail (10-128 Zeichen)!
+                span.error(ng-show="form.email.$error.uniqueness") E-Mail bereits vergeben!
+
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : form.name.$invalid && !form.name.$pristine }")
+                    span.input-group-addon.fui-user
+                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }}" required ng-minlength=3 ng-maxlength=128 validate-uniqueness="name")
+                    span.form-control-feedback.fui-check(ng-show="form.name.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="form.name.$invalid && !form.name.$pristine")
+                span.error(ng-show="form.name.$invalid && !form.name.$pristine && !form.name.$error.uniqueness") Kein gültiger Benutzername (3-128 Zeichen)!
+                span.error(ng-show="form.name.$error.uniqueness") Benutzername bereits vergeben!
+
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : form.password.$invalid && !form.password.$pristine }")
+                    span.input-group-addon.fui-lock
+                    input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
+                    span.form-control-feedback.fui-check(ng-show="form.password.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="form.password.$invalid && !form.password.$pristine")
+                span.error(ng-show="form.password.$invalid && !form.password.$pristine && !form.password.$error.uniqueness") Kein gültiges Passwort (8-128 Zeichen)!
+
+        .row
+            .col-xs-12
+                button.btn.btn-block.btn-primary(type="submit" ng-disabled="form.$invalid || form.$pending") {{ 'REGISTER' | translate }}
+
+    .row
+        .col-xs-12.right
+            a(href="#") {{ 'LOG_ON' | translate }}

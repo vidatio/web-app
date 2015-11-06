@@ -2,9 +2,9 @@
 
 app = angular.module "app.services"
 
-app.service "ProgressOverlayService", [
+app.service "ProgressService", [
     ->
-        class ProgressOverlay
+        class Progress
 
             _message = null
 
@@ -17,5 +17,5 @@ app.service "ProgressOverlayService", [
             setMessage: (msg) ->
                 _message = msg
 
-        new ProgressOverlay
+        new Progress
 ]
