@@ -7,6 +7,7 @@ app = angular.module "app", [
     "leaflet-directive"
     "app.controllers"
     "app.services"
+    "app.factories"
     "app.directives"
     "app.filters"
     "app.config"

@@ -13,6 +13,7 @@ header
                 .col-xs-6.middle
                     h1.underline-red IMPORT
                 .col-xs-3.menu-buttons
+                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
@@ -27,6 +28,7 @@ header
                                 {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
+                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
                 .col-xs-12.col-sm-pull-3.col-sm-6.editor-panel
@@ -34,11 +36,29 @@ header
                     .separator
                     a.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
 
+            #navigation.row(ng-switch-when="login")
+                .col-xs-3.logo
+                    a(ui-sref="app.landingPage({ locale: locale })")
+                        #logo
+                .col-xs-6.middle
+                    h1.underline-red ANMELDUNG
+                .col-xs-3.menu-buttons
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+
+            #navigation.row(ng-switch-when="login")
+                .col-xs-3.logo
+                    a(ui-sref="app.landingPage({ locale: locale })")
+                        #logo
+                .col-xs-6.middle
+                    h1.underline-red REGISTRIERUNG
+                .col-xs-3.menu-buttons
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
                     a(ui-sref="app.landingPage({ locale: locale })")
                         #logo
                 .col-xs-6.menu-buttons
+                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
