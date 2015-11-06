@@ -1,6 +1,22 @@
 #registration
 #login
-    background $color-grey-dark
+
+    border-top 3px solid $color-green
+    background $color-white
+    box-shadow $box-shadow-size $color-shadow
+    padding 30px
+    width 500px
+    margin 0 auto
+    color $color-grey-dark
+
+    a:link
+    a:visited
+        color $color-green
+
+    a:focus
+    a:hover
+    a:active
+        color $color-active
 
     .form-group
         margin-bottom 0
@@ -20,9 +36,6 @@
     .right
         text-align right
 
-    a
-        font-size 12px
-
     h3
         width 100%
         margin 40px 0px 10px 0px
@@ -35,59 +48,60 @@
     span.error
         width 100%
         background $color-red
-        padding 5px
+        padding 5px 10px
         display block
         border-radius 4px
         margin-bottom 10px
 
+        &.ng-hide-add
+            animation: 0.5s fadeOut ease;
+
+        &.ng-hide-remove
+            animation: 0.5s fadeIn ease;
+
     .form-control
         border-left none
 
-    .form-control-feedback
-        color $color-green
-
-    .input-group-addon
-        color $color-green
-        background white
-
-    .has-error
+    // VALID
+    .input-group.form-group
         .input-group-addon
+        .form-control-feedback
+            color $color-green
+            background white
+
+    // VALID WITH FOCUS
+    .input-group.form-group
+        &.focus .input-group-addon
+        .input-group-addon.focus
+        input.form-control:focus
+        .form-control-feedback
+            color $color-green
+            border-color $color-green
+
+    //INVALID
+    .has-error.input-group.form-group
+        .input-group-addon
+        input.form-control
+        .form-control-feedback
             color $color-red
             border-color $color-red
 
-        .form-control-feedback
-            color $color-red
-
-    .ng-hide-add
-        animation: 0.5s fadeOut ease;
-
-    .ng-hide-remove
-        animation: 0.5s fadeIn ease;
-
-    @-webkit-keyframes fadeIn {
-        from
-            opacity 0
-        to
-            opacity 1
+@keyframes fadeIn {
+    from {
+        opacity: 0
     }
-
-    @keyframes fadeIn {
-        from
-            opacity 0
-        to
-            opacity 1
+    to {
+        opacity: 1
     }
+}
 
-    @-webkit-keyframes fadeOut {
-        from
-            opacity 1
-        to
-            opacity 0
+@keyframes fadeOut {
+    from {
+        opacity: 1
     }
+    to {
+        opacity: 0
+    }
+}
 
-    @keyframes fadeOut {
-        from
-            opacity 1
-        to
-            opacity 0
-    }
+
