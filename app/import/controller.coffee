@@ -18,8 +18,8 @@ app.controller "ImportCtrl", [
     "MapService"
     "DataService"
     "ngToast"
-    "ProgressOverlayService"
-    ($scope, $http, $location, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, ProgressOverlay) ->
+    "ProgressService"
+    ($scope, $http, $location, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
         $scope.link = "http://www.wolfsberg.at/fileadmin/user_upload/Downloads/Haushalt2015.csv"
 
         $scope.importService = Import
