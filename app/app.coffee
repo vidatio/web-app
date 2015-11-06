@@ -90,6 +90,18 @@ app.config [
             url: "/"
             templateUrl: "index/index.html"
 
+        # /registration
+        .state "app.registration",
+            url: "/registration"
+            controller: "RegistrationCtrl"
+            templateUrl: "registration/registration.html"
+
+        # /registration
+        .state "app.login",
+            url: "/login"
+            controller: "LoginCtrl"
+            templateUrl: "login/login.html"
+
         # /import
         .state "app.import",
             url: "/import"
