@@ -53,6 +53,14 @@
     "LOGIN": "Anmeldung",
     "LOG_ON": "Anmelden",
     "REGISTRATION": "Registrierung",
-    "REGISTER": "Registrieren"
-
+    "REGISTER": "Registrieren",
+    "FORM": {
+        "ERROR": {
+            "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
+            "UNIQUENESS_USERNAME": "Benutzername bereits vergeben!",
+            "INVALID_EMAIL": "Keine gültige E-Mail (10-128 Zeichen)!",
+            "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
+            "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
+        }
+    }
 }
