@@ -8,7 +8,7 @@ header
         .switch-container(ng-switch on="$state.current.title")
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
-                    a(ui-sref="app.landingPage({ locale: locale })")
+                    a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
                     h1.underline-red IMPORT
@@ -18,7 +18,7 @@ header
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-3.logo
-                    a(ui-sref='app.landingPage({ locale: locale })')
+                    a(ui-sref='app.index({ locale: locale })')
                         #logo
 
                     a(ui-sref='app.import({ locale: locale })')
@@ -37,7 +37,7 @@ header
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
-                    a(ui-sref="app.landingPage({ locale: locale })")
+                    a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
                     h1.underline-red ANMELDUNG
@@ -46,7 +46,7 @@ header
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
-                    a(ui-sref="app.landingPage({ locale: locale })")
+                    a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
                     h1.underline-red REGISTRIERUNG
@@ -55,7 +55,7 @@ header
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
-                    a(ui-sref="app.landingPage({ locale: locale })")
+                    a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.menu-buttons
                     a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
