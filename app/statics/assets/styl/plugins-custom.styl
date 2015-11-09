@@ -57,3 +57,46 @@
         border-color $color-green
         background $color-green
 
+// Registration specific styles
+.form-control
+    border-left none
+    border-radius 4px
+
+.input-group
+    &:hover
+        .input-group-addon
+            border-color $color-green
+
+// VALID
+.input-group.form-group
+    .input-group-addon
+    .form-control-feedback
+        color $color-green
+        background white
+
+// VALID WITH FOCUS
+.input-group.form-group
+    &.focus .input-group-addon
+    .input-group-addon.focus
+    input.form-control:focus
+    .form-control-feedback
+        border-color $color-green
+
+//INVALID
+.has-error.input-group.form-group
+    .input-group-addon
+    input.form-control
+    .form-control-feedback
+        color $color-red
+        border-color $color-red
+
+.input-group.form-group
+input.form-control
+    &:focus
+        color $color-black
+
+.input-group .form-control:not(:first-child):not(:last-child)
+    border-radius 0 4px 4px 0
+
+.input-group-addon
+    border-radius 4px
