@@ -32,19 +32,20 @@ app.run [
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
+        $rootScope.apiVersion = "/v0"
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
-        $rootScope.history = []
+        if Object.keys($rootScope.globals).length > 0
+            $rootScope.globals.authorized = true
 
+        $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-            $log.info "UserCtrl current user does exist"
+            $log.info "App run stateChangeSuccess called"
             $log.debug
                 toState: toState
                 toParams: toParams
                 fromState: fromState
                 fromParams: fromParams
-
-            console.log @
 
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
@@ -109,22 +110,31 @@ app.config [
             url: "/{locale}"
             controller: "AppCtrl"
             template: "<ui-view/>"
+
         # /
         .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
+
+        # /profile
+        .state "app.profile",
+            url: "/profile"
+            templateUrl: "profile/profile.html"
+            title: "profile"
 
         # /registration
         .state "app.registration",
             url: "/registration"
             controller: "RegistrationCtrl"
             templateUrl: "registration/registration.html"
+            title: "registration"
 
-        # /registration
+        # /login
         .state "app.login",
             url: "/login"
             controller: "LoginCtrl"
             templateUrl: "login/login.html"
+            title: "login"
 
         # /import
         .state "app.import",

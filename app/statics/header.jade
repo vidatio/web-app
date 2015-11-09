@@ -11,9 +11,12 @@ header
                     a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
-                    h1.underline-red IMPORT
+                    h1.underline-red {{ "IMPORT" | translate | uppercase }}
                 .col-xs-3.menu-buttons
-                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
+                    div(ng-if="globals.authorized")
+                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
@@ -27,7 +30,10 @@ header
                                 span.btn-tip.fui-arrow-left {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
-                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
+                    div(ng-if="globals.authorized")
+                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
                 .col-xs-12.col-sm-pull-3.col-sm-6.editor-panel
@@ -40,16 +46,16 @@ header
                     a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
-                    h1.underline-red ANMELDUNG
+                    h1.underline-red {{ "LOGIN" | translate | uppercase }}
                 .col-xs-3.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
-            #navigation.row(ng-switch-when="login")
+            #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
                     a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.middle
-                    h1.underline-red REGISTRIERUNG
+                    h1.underline-red {{ "REGISTRATION" | translate | uppercase }}
                 .col-xs-3.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
@@ -58,6 +64,9 @@ header
                     a(ui-sref="app.index({ locale: locale })")
                         #logo
                 .col-xs-6.menu-buttons
-                    a#login-button.fui-user(ui-sref="app.login({ locale: locale})")
+                    div(ng-if="globals.authorized")
+                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 

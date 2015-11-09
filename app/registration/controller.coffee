@@ -22,6 +22,14 @@ app.controller "RegistrationCtrl", [
                     response: response
             , (error) ->
                 #TODO Error message über formular
+
+                $translate('TOAST_MESSAGES.')
+                .then (translation) ->
+                    ngToast.create(
+                        content: translation
+                        className: "danger"
+                    )
+
                 $log.error "RegistrationCtrl register error called"
                 $log.debug
                     error: error

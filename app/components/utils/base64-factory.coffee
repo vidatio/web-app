@@ -3,7 +3,7 @@
 
 "use strict"
 
-app = angular.module "app.services"
+app = angular.module "app.factories"
 
 app.factory "Base64", ->
     keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="

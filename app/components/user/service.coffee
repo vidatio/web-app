@@ -4,15 +4,16 @@ app = angular.module "app.services"
 
 app.service 'UserService', [
     "$http"
-    "AuthenticationService"
+    "AuthenticationFactory"
     "UserAuthFactory"
     "$rootScope"
     "$log"
     "$q"
-    ($http, AuthenticationService, UserAuthFactory, $rootScope, $log, $q) ->
+    ($http, AuthenticationFactory, UserAuthFactory, $rootScope, $log, $q) ->
         class User
             constructor: ->
-                @user = name: ""
+                @user =
+                    name: ""
             checkUniqueness: (key, value) ->
                 $log.info "UserService checkUniqueness called"
                 $log.debug
@@ -24,8 +25,6 @@ app.service 'UserService', [
                     $log.info "UserService checkUniqueness success (user does not exist)"
                     $log.debug
                         results: results
-
-                    console.log results.data.status
 
                     if results.data.available
                         $q.resolve(results)
@@ -59,7 +58,7 @@ app.service 'UserService', [
                         error: error
 
                     $rootScope.globals.authorized = false
-                    AuthenticationService.ClearCredentials()
+                    AuthenticationFactory.clearCredentials()
                     deferred.reject error
                 )
 
@@ -68,41 +67,10 @@ app.service 'UserService', [
             logout: ->
                 $log.info "UserService logout called"
 
-                @user = name: ""
+                @user =
+                    name: ""
                 $rootScope.globals.authorized = undefined
-                AuthenticationService.ClearCredentials()
+                AuthenticationFactory.clearCredentials()
 
         new User
-]
-
-app.factory "AuthenticationService", [
-    "Base64"
-    "$http"
-    "$cookieStore"
-    "$rootScope"
-    ( Base64, $http, $cookieStore, $rootScope ) ->
-        service = {}
-
-        service.SetCredentials = ( name, password ) ->
-            authdata = Base64.encode name + ":" + password
-
-            $rootScope.globals =
-                currentUser:
-                    name: name
-                    authdata: authdata
-
-            $http.defaults.headers.common["Authorization"] = "Basic " + authdata
-            $cookieStore.put "globals", $rootScope.globals
-
-        service.SetExistingCredentials = ( user ) ->
-            $rootScope.globals.currentUser = user
-            $http.defaults.headers.common["Authorization"] = "Basic " + user.authdata
-            $cookieStore.put "globals", $rootScope.globals
-
-        service.ClearCredentials = ->
-            delete $rootScope.globals
-            $cookieStore.remove "globals"
-            $http.defaults.headers.common.Authorization = "Basic "
-
-        return service
 ]

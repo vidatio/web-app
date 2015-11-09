@@ -27,7 +27,8 @@
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
-        "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden."
+        "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
+        "SERVER_ERROR": "Momentan "
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -52,6 +53,7 @@
     "FORGOT_PASSWORD": "Passwort vergessen",
     "LOGIN": "Anmeldung",
     "LOG_ON": "Anmelden",
+    "LOG_OUT": "Abmelden",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
     "FORM": {

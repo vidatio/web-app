@@ -4,23 +4,23 @@ app = angular.module("app.controllers")
 
 app.controller "LoginCtrl", [
     "$scope"
-    "AuthenticationService"
+    "AuthenticationFactory"
     "UserService"
     "$rootScope"
     "$state"
     "$log"
-    ($scope, AuthenticationService, UserService, $rootScope, $state, $log) ->
+    ($scope, AuthenticationFactory, UserService, $rootScope, $state, $log) ->
         $scope.logon = ->
             $log.info "UserCtrl logon called"
 
             if $rootScope.globals.currentUser
                 $log.info "UserCtrl current user does exist"
 
-                AuthenticationService.SetExistingCredentials $rootScope.globals.currentUser
+                AuthenticationFactory.setExistingCredentials $rootScope.globals.currentUser
                 UserService.init $rootScope.globals.currentUser.name
                 return
 
-            AuthenticationService.ClearCredentials()
+            AuthenticationFactory.clearCredentials()
 
             if $scope.loginForm.$invalid
                 if $scope.loginForm.name.$error.required
@@ -31,7 +31,7 @@ app.controller "LoginCtrl", [
                     return
 
             # proceed login
-            AuthenticationService.SetCredentials(
+            AuthenticationFactory.setCredentials(
                 $scope.user.name, $scope.user.password
             )
 
@@ -41,6 +41,7 @@ app.controller "LoginCtrl", [
                     $log.debug
                         value: value
 
+                    # TODO refactor
                     unless $rootScope.history.length
                         $log.info "UserCtrl redirect to app.index"
 
@@ -48,15 +49,16 @@ app.controller "LoginCtrl", [
                         $state.go "app.index"
                         return
 
-                    $rootScope.history.forEach (element, index, history) ->
-                        console.log "UserCtrl forEach history"
-
-                        element = history[history.length - 1]
-
-                        if element != "app.login" or element != "app.registration"
+                    # TODO refactor
+                    for element in $rootScope.history
+                        element = $rootScope.history[$rootScope.history.length - 1]
+                        if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                             $log.info "UserCtrl redirect to " + element.name
 
                             $state.go element.name, element.params.locale
+                            return
+
+                    $state.go "app.index"
 
                 (error) ->
                     $log.info "UserCtrl error on login"
