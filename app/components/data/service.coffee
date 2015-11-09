@@ -6,12 +6,12 @@ app.service 'DataService', [
     "MapService"
     "TableService"
     "ConverterService"
-    "$http"
     "$rootScope"
     "ngToast"
     "$translate"
     "$log"
-    (Map, Table, Converter, $http, $rootScope, ngToast, $translate, $log) ->
+    "DataFactory"
+    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory) ->
         class Data
             constructor: ->
                 @meta =
@@ -39,7 +39,12 @@ app.service 'DataService', [
 
                 return true
 
-            # UserId and Name have to be set by the user
+            # TODO: UserId and Name have to be set by the user
+            # Sends the dataset to the API, which saves it in the database.
+            # @method saveViaAPI
+            # @param {Object} dataset
+            # @param {String} userId
+            # @param {String} name
             saveViaAPI: (dataset, userId = "123456781234567812345678", name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
                 $log.debug
@@ -47,26 +52,28 @@ app.service 'DataService', [
                     userId: userId
                     name: name
 
-                request =
-                    method: 'POST'
-                    url: $rootScope.apiBase + "/v0/dataset"
-                    data:
-                        userId: userId
-                        name: name
-                        data: dataset
-
-                $http(request).then (result) ->
+                DataFactory.save
+                    userId: userId
+                    name: name
+                    data: dataset
+                , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
-                        _id: result.data._id
-                        name: result.data.name
-                        userId: result.data.userId
-                        createdAt: result.data.createdAt
+                        response: response
 
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
-                        .then (translation) ->
-                            ngToast.create
-                                content: translation
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                , (error) ->
+                    $log.info("Dataset couldn't be saved")
+                    $log.error
+                        error: error
 
+                    $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
         new Data
 ]
