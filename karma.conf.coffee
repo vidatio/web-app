@@ -17,6 +17,7 @@ module.exports = (config) ->
             "./bower_components/angular/angular.js"
             "./bower_components/angular-mocks/angular-mocks.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
+            "./bower_components/angular-resource/angular-resource.min.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/leaflet/dist/leaflet-src.js"
             "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"

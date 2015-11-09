@@ -101,6 +101,7 @@ BUILD =
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
+            "./bower_components/angular-resource/angular-resource.min.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"

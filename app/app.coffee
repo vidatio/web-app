@@ -6,6 +6,7 @@ app = angular.module "app", [
     "ui.router"
     "leaflet-directive"
     "app.controllers"
+    "app.factories"
     "app.services"
     "app.directives"
     "app.filters"
@@ -13,6 +14,7 @@ app = angular.module "app", [
     "pascalprecht.translate"
     "ngToast"
     "ngAnimate"
+    "ngResource"
     "ngSanitize"
     "logglyLogger"
 ]
