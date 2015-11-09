@@ -9,7 +9,9 @@ app.service 'UserService', [
     "$rootScope"
     "$log"
     "$q"
-    ($http, AuthenticationFactory, UserAuthFactory, $rootScope, $log, $q) ->
+    "$translate"
+    "ngToast"
+    ($http, AuthenticationFactory, UserAuthFactory, $rootScope, $log, $q, $translate, ngToast) ->
         class User
             constructor: ->
                 @user =
@@ -53,7 +55,7 @@ app.service 'UserService', [
                         deferred.resolve @user
 
                 , (error) ->
-                    $log.info "UserService init error called"
+                    $log.info "UserService init error of authorization called (401)"
                     $log.debug
                         error: error
 

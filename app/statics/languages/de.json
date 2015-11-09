@@ -28,7 +28,8 @@
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
-        "SERVER_ERROR": "Momentan "
+        "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+        "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!"
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",

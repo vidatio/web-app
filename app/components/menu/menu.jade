@@ -16,7 +16,8 @@ nav
             a(href="") {{ 'PRICING' | translate }}
             a(href="") {{ 'API' | translate }}
             br
-            a(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ 'LOGOUT' | translate }}
+            a(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()") {{ 'LOG_ON' | translate }}
+            a(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ 'LOG_OUT' | translate }}
 
         registration
         login

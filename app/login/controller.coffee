@@ -41,20 +41,15 @@ app.controller "LoginCtrl", [
                     $log.debug
                         value: value
 
-                    # TODO refactor
                     unless $rootScope.history.length
                         $log.info "UserCtrl redirect to app.index"
-
-                        # TODO current locale instead of preferredLanguage
                         $state.go "app.index"
                         return
 
-                    # TODO refactor
                     for element in $rootScope.history
                         element = $rootScope.history[$rootScope.history.length - 1]
                         if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                             $log.info "UserCtrl redirect to " + element.name
-
                             $state.go element.name, element.params.locale
                             return
 
@@ -62,6 +57,11 @@ app.controller "LoginCtrl", [
 
                 (error) ->
                     $log.info "UserCtrl error on login"
+
+                    $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
             )
 
         #Needed for flat UI prepend tags

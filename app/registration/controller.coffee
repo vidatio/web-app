@@ -6,7 +6,9 @@ app.controller "RegistrationCtrl", [
     "$scope"
     "UserFactory"
     "$log"
-    ($scope, UserFactory, $log) ->
+    "$translate"
+    "ngToast"
+    ($scope, UserFactory, $log, $translate, ngToast) ->
         $log.info "RegistrationCtrl called"
 
         $scope.register = ->
@@ -21,18 +23,14 @@ app.controller "RegistrationCtrl", [
                 $log.debug
                     response: response
             , (error) ->
-                #TODO Error message über formular
-
-                $translate('TOAST_MESSAGES.')
-                .then (translation) ->
-                    ngToast.create(
-                        content: translation
-                        className: "danger"
-                    )
-
                 $log.error "RegistrationCtrl register error called"
                 $log.debug
                     error: error
+
+                $translate('TOAST_MESSAGES.SERVER_ERROR').then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 
             $('.input-group').on 'focus', '.form-control', ->
                 $(this).closest('.input-group, .form-group').addClass 'focus'

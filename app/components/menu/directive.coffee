@@ -14,25 +14,21 @@ app.directive "menu", [
         templateUrl: "components/menu/menu.html"
         replace: true
         link: ($scope, $element) ->
-            $scope.logout = ->
-                UserService.logout()
-                console.log "1"
-                # TODO refactor
-                unless $rootScope.history.length
-                    console.log "2"
-                    $log.info "UserCtrl redirect to app.index"
 
-                    # TODO current locale instead of preferredLanguage
+            $scope.logout = ->
+                $log.info "Menu directive logout called"
+
+                UserService.logout()
+
+                unless $rootScope.history.length
+                    $log.info "UserCtrl redirect to app.index"
                     $state.go "app.index"
                     return
 
-                # TODO refactor
                 for element in $rootScope.history
-                    console.log "3"
                     element = $rootScope.history[$rootScope.history.length - 1]
 
                     if element.name is "app.profile" or $state.$current.name is "app.profile"
-                        console.log "4"
                         $log.info "UserCtrl redirect to app.index"
                         $state.go "app.index"
                         break
