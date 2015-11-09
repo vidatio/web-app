@@ -37,12 +37,17 @@
     min-width 0
     width 104px
 
-.form-control:focus,
-.form-control:hover
-    border-color $color-green
+.form-control
+    &:focus
+    &:hover
+        border-color $color-green
+
 
 .form-control.input-sm
     font-size 14px
+
+    &:focus
+        color $color-black
 
 .input-group-btn .btn
     background $color-passive
