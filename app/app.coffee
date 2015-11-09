@@ -16,6 +16,7 @@ app = angular.module "app", [
     "ngAnimate"
     "ngResource"
     "ngSanitize"
+    "ngCookies"
     "logglyLogger"
 ]
 
@@ -25,10 +26,32 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ( $rootScope, $state, $stateParams, $http, $location ) ->
+    "$cookieStore"
+    "$log"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
+
+        $rootScope.globals = $cookieStore.get( "globals" ) or {}
+        $rootScope.history = []
+
+        $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            $log.info "UserCtrl current user does exist"
+            $log.debug
+                toState: toState
+                toParams: toParams
+                fromState: fromState
+                fromParams: fromParams
+
+            console.log @
+
+            if $rootScope.history.length > 20
+                $rootScope.history.splice(0, 1)
+
+            $rootScope.history.push
+                name: fromState.name
+                params: fromParams
 ]
 
 app.config [
@@ -87,7 +110,7 @@ app.config [
             controller: "AppCtrl"
             template: "<ui-view/>"
         # /
-        .state "app.landingPage",
+        .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
 
