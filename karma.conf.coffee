@@ -25,6 +25,7 @@ module.exports = (config) ->
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/angular-resource/angular-resource.js"
             "./bower_components/angular-animate/angular-animate.min.js"
+            "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/angular-sanitize/angular-sanitize.min.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
