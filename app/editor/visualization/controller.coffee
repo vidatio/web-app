@@ -15,7 +15,10 @@ app.controller "VisualizationCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
-    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper) ->
+    "ProgressOverlayService"
+    "ngToast"
+    "$log"
+    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, ProgressOverlay, ngToast, $log) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -68,16 +71,34 @@ app.controller "VisualizationCtrl", [
         #@description exports a
         #@params {string} type
         $scope.shareVisualization = (type) ->
+            $log.info "ShareCtrl shareVisualization called"
+            $log.debug
+                message: "ShareCtrl shareVisualization called"
+                type: type
+
             $map = $("#map")
 
             # Check Share.mapToImg for quality reduction if needed
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
+                $log.info "ShareCtrl shareVisualization promise success called"
+                $log.debug
+                    message: "Share mapToImg success callback"
+                    obj: obj
+
+                ProgressOverlay.setMessage ""
+
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
                 else
                     fileName = Data.meta.fileName
 
                 Share.download fileName, obj[type]
+            , (error) ->
+                ngToast.create
+                    content: error
+                    className: "danger"
+            , (notify) ->
+                ProgressOverlay.setMessage notify
 ]
