@@ -7,9 +7,10 @@ app.factory "AuthenticationFactory", [
     "$http"
     "$cookieStore"
     "$rootScope"
-    (Base64, $http, $cookieStore, $rootScope) ->
+    "$log"
+    (Base64, $http, $cookieStore, $rootScope, $log) ->
 
-        setCredentials: (name, password) ->#
+        setCredentials: (name, password) ->
             $log.info "AuthenticationFactory setCredentials called"
             $log.debug
                 name: name
