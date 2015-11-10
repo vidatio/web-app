@@ -101,6 +101,7 @@ BUILD =
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
+            "./bower_components/angular-resource/angular-resource.min.js"
         ]
         css: [
             "./bower_components/handsontable/dist/handsontable.full.css"
@@ -150,6 +151,7 @@ gulp.task "config:production",
         gulp.src BUILD.source.config
         .pipe ngConstant
             name: "app.config"
+            merge: true
             constants:
                 CONFIG:
                     ENV: "production"
@@ -259,7 +261,7 @@ gulp.task "build:production:plugins:js",
     "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        .pipe uglify()
+        #.pipe uglify()
         .pipe gif "*.js", concat(BUILD.plugin.js)
         .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
 
@@ -294,7 +296,7 @@ gulp.task "build:production:source:coffee",
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
-        .pipe uglify()
+        #.pipe uglify()
         .pipe concat(BUILD.app)
         .pipe gulp.dest(BUILD.dirs.js)
 

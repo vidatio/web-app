@@ -140,10 +140,17 @@ a:hover, a:active, a:focus
     border-bottom-right-radius 3px
 
 .ng-toast
+
     .custom-backgrounds
         .alert
-            color: $color-black
+            background: $color-white
+            color: $color-grey-dark
+            border-radius 0
+            box-shadow $box-shadow-size $color-shadow
             border none
+
+            div
+                border-radius none
 
             button
                 opacity .3
@@ -152,10 +159,10 @@ a:hover, a:active, a:focus
                     opacity .6
 
         .alert-danger
-            background-color $color-red
+            border-top 3px solid $color-red
 
         .alert-success
-            background-color $color-green
+            border-top 3px solid $color-green
 
 [ng\:cloak]
 [ng-cloak]

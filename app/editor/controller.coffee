@@ -8,7 +8,9 @@ app = angular.module "app.controllers"
 app.controller "EditorCtrl", [
     "$scope"
     "$rootScope"
-    ($scope, $rootScope) ->
+    "DataService"
+    "MapService"
+    ($scope, $rootScope, Data, Map) ->
         # watch if activeViews in change (defined in headerController.coffee)
         # $watch takes two callbacks (watchExpression and Listener);
         # see Angular.js Docs for more info!
@@ -31,5 +33,9 @@ app.controller "EditorCtrl", [
             for tab in tabs
                 if tab
                     $scope.activeViews++
+
+        $scope.saveDataset = ->
+            geoJSON = Map.getGeoJSON()
+            Data.saveViaAPI(geoJSON)
 
 ]

@@ -1,4 +1,16 @@
 #progress-overlay(ng-show="overlay.getMessage().length")
     .progress-overlay-background
     .progress-overlay-content
-        p {{ overlay.getMessage() }}
+
+        .logo-animation-container
+            .logo-marker-container
+                .logo-marker
+            .pie.right
+            .pie.left-fix
+            .mask.one
+            .pie.right-rotating-second
+            .mask.two
+            .pie.right-fix-second
+            .circle-mask
+
+        h4 {{ overlay.getMessage() }}
