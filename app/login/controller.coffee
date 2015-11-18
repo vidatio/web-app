@@ -20,13 +20,13 @@ app.controller "LoginCtrl", [
                     $log.debug
                         value: value
 
-                    # TODO for multiple use move this maybe to a helper function
+                    # Default routing for user at logout success
                     unless $rootScope.history.length
                         $log.info "UserCtrl redirect to app.index"
                         $state.go "app.index"
                         return
 
-                    # TODO for multiple use move this maybe to a helper function
+                    # After login success we want to route the user to the last page except login and registration
                     for element in $rootScope.history
                         element = $rootScope.history[$rootScope.history.length - 1]
                         if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""

@@ -16,13 +16,13 @@ app.directive "menu", [
         link: ($scope, $element) ->
 
             # @method logout
-            # @describe logout the user and route the user to another site
+            # @describe logout and route the user to another site
             $scope.logout = ->
                 $log.info "Menu directive logout called"
 
                 UserService.logout()
 
-                # TODO for multiple use move this maybe to a helper function
+                # Default routing for user at logout success
                 unless $rootScope.history.length
                     $log.info "UserCtrl redirect to app.index"
                     $state.go "app.index"
@@ -31,6 +31,7 @@ app.directive "menu", [
                 for element in $rootScope.history
                     element = $rootScope.history[$rootScope.history.length - 1]
 
+                    # Because the user may started at profile, after logout success we route the user to index
                     if element.name is "app.profile" or $state.$current.name is "app.profile"
                         $log.info "UserCtrl redirect to app.index"
                         $state.go "app.index"

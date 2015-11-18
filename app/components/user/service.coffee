@@ -66,7 +66,6 @@ app.service 'UserService', [
                     @user = result
                     $rootScope.globals.authorized = true
                     deferred.resolve @user
-
                 , (error) =>
                     $log.info "UserService init error of authorization called (401)"
                     $log.debug
