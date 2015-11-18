@@ -7,10 +7,17 @@
         a:link, a:visited
             color $color-black
 
+        .leaflet-bar a
+            &:hover
+                background-color $color-hover-light
+
     .leaflet-container
         a.leaflet-popup-close-button
             top 5px
             right 2px
+
+            &:hover
+                color $color-red !important
 
         .leaflet-popup-content-wrapper
             min-width 140px
@@ -37,5 +44,4 @@
             fill-opacity 0.25
             stroke-width 3px
             stroke-dasharray 5
-
 

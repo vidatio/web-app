@@ -1,7 +1,7 @@
 @require "colors"
 
 /**
- * Resetting bootstrap and flatUI
+ * Resetting bootstrap & flatUI
  */
 
 .row
@@ -57,7 +57,7 @@
         border-color $color-green
         background $color-green
 
-// Arrows in our buttons
+/* Arrows in our buttons */
 .fui-arrow-left
     &::before
         margin-right 10px
@@ -67,7 +67,16 @@
     &::before
         font-size 14px
 
-// Registration specific styles
+/* deactivate FlatUIs hover transitions */
+a
+.btn
+.form-control
+    transition none
+    -webkit-transition none
+
+
+/* Registration specific styles */
+
 .form-control
     border-radius 4px
 
@@ -76,14 +85,14 @@
         .input-group-addon
             border-color $color-green
 
-// VALID
+/* VALID */
 .input-group.form-group
     .input-group-addon
     .form-control-feedback
         color $color-green
         background white
 
-// VALID WITH FOCUS
+/* VALID WITH FOCUS */
 .input-group.form-group
     &.focus .input-group-addon
     .input-group-addon.focus
@@ -91,7 +100,7 @@
     .form-control-feedback
         border-color $color-green
 
-//INVALID
+/* INVALID */
 .has-error.input-group.form-group
     .input-group-addon
     input.form-control
@@ -109,3 +118,4 @@ input.form-control
 
 .input-group-addon
     border-radius 4px
+
