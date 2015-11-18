@@ -4,48 +4,29 @@ app = angular.module("app.controllers")
 
 app.controller "LoginCtrl", [
     "$scope"
-    "AuthenticationFactory"
     "UserService"
     "$rootScope"
     "$state"
     "$log"
-    ($scope, AuthenticationFactory, UserService, $rootScope, $state, $log) ->
+    "$translate"
+    "ngToast"
+    ($scope, UserService, $rootScope, $state, $log, $translate, ngToast) ->
         $scope.logon = ->
             $log.info "UserCtrl logon called"
 
-            if $rootScope.globals.currentUser
-                $log.info "UserCtrl current user does exist"
-
-                AuthenticationFactory.setExistingCredentials $rootScope.globals.currentUser
-                UserService.init $rootScope.globals.currentUser.name
-                return
-
-            AuthenticationFactory.clearCredentials()
-
-            if $scope.loginForm.$invalid
-                if $scope.loginForm.name.$error.required
-                    console.log "name required"
-                    return
-                if $scope.loginForm.password.$error.required
-                    console.log "password required"
-                    return
-
-            # proceed login
-            AuthenticationFactory.setCredentials(
-                $scope.user.name, $scope.user.password
-            )
-
-            UserService.init($scope.user).then(
+            UserService.logon($scope.user.name, $scope.user.password).then(
                 (value) ->
                     $log.info "UserCtrl successfully logged in"
                     $log.debug
                         value: value
 
+                    # TODO for multiple use move this maybe to a helper function
                     unless $rootScope.history.length
                         $log.info "UserCtrl redirect to app.index"
                         $state.go "app.index"
                         return
 
+                    # TODO for multiple use move this maybe to a helper function
                     for element in $rootScope.history
                         element = $rootScope.history[$rootScope.history.length - 1]
                         if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
@@ -59,12 +40,12 @@ app.controller "LoginCtrl", [
                     $log.info "UserCtrl error on login"
 
                     $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+                        ngToast.create
+                            content: translation
+                            className: "danger"
             )
 
-        #Needed for flat UI prepend tags
+        # To give the prepends tags of flat ui the correct focus style
         $('.input-group').on('focus', '.form-control', ->
             $(this).closest('.input-group, .form-group').addClass 'focus'
         ).on 'blur', '.form-control', ->

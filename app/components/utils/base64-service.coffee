@@ -1,11 +1,11 @@
-# Base64 Factory
-# ==============
+# Base64
+# ======
 
 "use strict"
 
-app = angular.module "app.factories"
+app = angular.module "app.services"
 
-app.factory "Base64", ->
+app.service "Base64", ->
     keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
     encode: ( input ) ->
         output = ""

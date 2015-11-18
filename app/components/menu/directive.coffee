@@ -15,11 +15,14 @@ app.directive "menu", [
         replace: true
         link: ($scope, $element) ->
 
+            # @method logout
+            # @describe logout the user and route the user to another site
             $scope.logout = ->
                 $log.info "Menu directive logout called"
 
                 UserService.logout()
 
+                # TODO for multiple use move this maybe to a helper function
                 unless $rootScope.history.length
                     $log.info "UserCtrl redirect to app.index"
                     $state.go "app.index"
