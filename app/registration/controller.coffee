@@ -9,7 +9,8 @@ app.controller "RegistrationCtrl", [
     "$log"
     "$translate"
     "ngToast"
-    ($scope, UserFactory, UserService, $log, $translate, ngToast) ->
+    "$state"
+    ($scope, UserFactory, UserService, $log, $translate, ngToast, $state) ->
         $log.info "RegistrationCtrl called"
 
         $scope.register = ->
@@ -23,6 +24,10 @@ app.controller "RegistrationCtrl", [
                 $log.info "RegistrationCtrl register success called"
                 $log.debug
                     response: response
+
+                $translate('TOAST_MESSAGES.REGISTRATION_SUCCESS').then (translation) ->
+                    ngToast.create
+                        content: translation
 
                 $state.go "app.login"
             , (error) ->
