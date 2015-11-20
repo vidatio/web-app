@@ -8,7 +8,8 @@ app.controller "HeaderCtrl", [
     "$rootScope"
     "$timeout"
     "MapService"
-    ($scope, $rootScope, $timeout, Map) ->
+    "DataService"
+    ($scope, $rootScope, $timeout, Map, Data) ->
         # The two bool values represent the two tabs in the header
         # @property activeViews
         # @type {Array}
@@ -24,5 +25,7 @@ app.controller "HeaderCtrl", [
             $timeout ->
                 Map.resizeMap()
 
-
+        $scope.saveDataset = ->
+            geoJSON = Map.getGeoJSON()
+            Data.saveViaAPI(geoJSON)
 ]

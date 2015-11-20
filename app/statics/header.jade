@@ -21,12 +21,12 @@ header
                         #logo
 
                     a(ui-sref='app.import({ locale: locale })')
-                        #back-to-import-button
-                            button.btn.btn-embossed.btn-primary
-                                span.btn-tip.fui-arrow-left
-                                span {{ "IMPORT" | translate | uppercase }}
+                        button#back-to-import.btn.btn-embossed.btn-primary
+                            span.btn-tip.fui-arrow-left
+                            span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-4.col-sm-4.menu-buttons
+                    button#save-dataset.btn.btn-embossed.btn-primary(type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
 
