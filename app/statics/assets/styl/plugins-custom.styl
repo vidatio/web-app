@@ -57,6 +57,9 @@
         border-color $color-green
         background $color-green
 
+.fui-check
+    color $color-green
+
 /* Arrows in our buttons */
 .fui-arrow-left
     &::before
@@ -71,6 +74,7 @@
 a
 .btn
 .form-control
+.input-group-addon
     transition none
     -webkit-transition none
 
@@ -83,6 +87,7 @@ a
 .input-group
     &:hover
         .input-group-addon
+        input.form-control
             border-color $color-green
 
 /* VALID */
@@ -108,6 +113,7 @@ a
         color $color-red
         border-color $color-red
 
+
 .input-group.form-group
 input.form-control
     &:focus
@@ -119,3 +125,37 @@ input.form-control
 .input-group-addon
     border-radius 4px
 
+span.error
+    width 100%
+    color $color-grey-light
+    text-align center
+    background $color-red
+    padding 5px 10px
+    display block
+    border-radius 4px
+    margin-bottom 10px
+
+    &.ng-hide-add
+        animation: 0.5s fadeOut ease;
+
+    &.ng-hide-remove
+        animation: 0.5s fadeIn ease;
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+}
