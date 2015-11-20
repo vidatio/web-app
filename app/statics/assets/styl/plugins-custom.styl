@@ -37,11 +37,10 @@
     min-width 0
     width 104px
 
-.form-control
-    &:focus
+.dropdown-menu > li > a
     &:hover
-        border-color $color-green
-
+        background-color $color-hover-dark
+        color $color-white
 
 .form-control.input-sm
     font-size 14px
@@ -78,11 +77,13 @@ a
     transition none
     -webkit-transition none
 
-
 /* Registration specific styles */
-
 .form-control
     border-radius 4px
+
+    &:focus
+    &:hover
+        border-color $color-green
 
 .input-group
     &:hover
@@ -112,7 +113,6 @@ a
     .form-control-feedback
         color $color-red
         border-color $color-red
-
 
 .input-group.form-group
 input.form-control
