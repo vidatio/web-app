@@ -122,7 +122,7 @@ app.service 'MapService', [
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
                             else
-                                $log.warn "Point does not exist"
+                                $log.warn "MapService updateGeoJSONwithSHP Point does not exist"
                                 return false
                         else if @geoJSON.features[row].geometry.type is "Polygon"
                             arrayIndex = Math.floor(keys[1] / 2)
@@ -130,18 +130,18 @@ app.service 'MapService', [
                             if Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
                                 @geoJSON.features[row].geometry.coordinates[0][arrayIndex][index] = newData
                             else
-                                $log.warn "Array does not exist and can't be updated"
+                                $log.warn "MapService updateGeoJSONwithSHP Array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        $log.warn "Value is not a Number"
+                        $log.warn "MapService updateGeoJSONwithSHP Value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     if Helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
-                        $log.warn "Value is not a Number"
+                        $log.warn "MapService updateGeoJSONwithSHP Value is not a Number"
                         return false
 
                     # check if colHeader is part of properties
@@ -177,22 +177,22 @@ app.service 'MapService', [
                     if Helper.isNumeric(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             unless @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
-                                $log.warn "Point does not exist"
+                                $log.warn "MapService validateGeoJSONUpdateSHP Point does not exist"
                                 return false
                         else if @geoJSON.features[row].geometry.type is "Polygon"
                             arrayIndex = Math.floor(keys[1] / 2)
                             index = keys[1] % 2
                             unless Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
-                                $log.warn "Array does not exist and can't be updated"
+                                $log.warn "MapService validateGeoJSONUpdateSHP Array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        $log.warn "Value is not a Number"
+                        $log.warn "MapService validateGeoJSONUpdateSHP Value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     unless Helper.isNumeric(newData)
-                        $log.warn "Value is not a Number"
+                        $log.warn "MapService validateGeoJSONUpdateSHP Value is not a Number"
                         return false
 
                 return true

@@ -19,7 +19,7 @@ app.service 'DataService', [
             updateTableAndMap: (row, column, oldData, newData) ->
                 $log.info "DataService updateTableAndMap called"
                 $log.debug
-                    message: "DataService validateInput called"
+                    message: "DataService updateTableAndMap called"
                     row: row
                     column: column
                     oldData: oldData

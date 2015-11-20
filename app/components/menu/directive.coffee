@@ -13,8 +13,9 @@ app.directive "menu", [
 
             # Menu can have 3 different layouts so init it on every state change
             $scope.$on "$stateChangeSuccess", (event, toState, toParams, fromState, fromParams) ->
-                $log.info "Site state changed"
+                $log.info "MenuDirective Site state changed"
                 $log.debug
+                    message: "MenuDirective Site state changed"
                     event: event
                     toState: toState
                     toParams: toParams
@@ -24,11 +25,11 @@ app.directive "menu", [
                 $timeout ->
                     $("#menu").jPushMenu()
 
-                    $log.info "Menu Menu initialized"
+                    $log.info "MenuDirective Menu initialized"
 
 
             $scope.toggleMenu = ->
-                $log.info "Menu toogleMenu called"
+                $log.info "MenuDirective toogleMenu called"
 
                 $('#menu,body,.cbp-spmenu').removeClass "disabled active cbp-spmenu-open cbp-spmenu-push-toleft cbp-spmenu-push-toright menu-active"
                 return true

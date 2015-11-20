@@ -32,7 +32,9 @@ app.controller "VisualizationCtrl", [
                 Map.init()
         , (error) ->
             $log.error "VisualizationCtrl error on map create"
-            $log.debug error: error
+            $log.debug
+                message: "VisualizationCtrl error on map create"
+                error: error
 
             ngToast.create
                 content: error

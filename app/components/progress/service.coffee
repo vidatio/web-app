@@ -16,7 +16,7 @@ app.service "ProgressOverlayService", [
                 _message
 
             setMessage: (msg) ->
-                $log.info "Progress Overlay setMessage function called"
+                $log.info "ProgressOverlay setMessage function called"
                 $log.debug
                     message: msg
                 _message = msg

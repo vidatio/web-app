@@ -21,7 +21,7 @@ app.service "ShareService", [
             mapToImg: ($targetElem, quality = 1.0) ->
                 $log.info "ShareService mapToImg called"
                 $log.debug
-                    message: "ShareService mapToImg got called"
+                    message: "ShareService mapToImg called"
                     targetElem: $targetElem
                     quality: quality
 
@@ -36,7 +36,7 @@ app.service "ShareService", [
                 useCORS: true
                 onrendered: (canvas) ->
 
-                    $log.info "html2canvas on targetElem onrendered callback called"
+                    $log.info "ShareService html2canvas on targetElem onrendered callback called"
                     deferred.notify $translate.instant('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS')
 
 
@@ -108,7 +108,7 @@ app.service "ShareService", [
                         html2canvas $popupElem,
                             useCORS: true
                             onrendered: (popupCanvas) ->
-                                $log.info "html2canvas on popupElem onrendered callback called"
+                                $log.info "ShareService html2canvas on popupElem onrendered callback called"
 
                                 popupArray = Converter.matrixToArray $popupElem.css "transform"
 

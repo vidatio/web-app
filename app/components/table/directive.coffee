@@ -24,9 +24,9 @@ app.directive 'hot', [
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
-                    $log.info "hot beforeChange called"
+                    $log.info "HotDirective beforeChange called"
                     $log.debug
-                        message: "hot beforeChange called"
+                        message: "HotDirective beforeChange called"
                         change: change
                         source: source
 
@@ -34,9 +34,9 @@ app.directive 'hot', [
                         change[0][3] = change[0][2]
 
                 afterChange: (change, source) ->
-                    $log.info "hot afterChange called"
+                    $log.info "HotDirective afterChange called"
                     $log.debug
-                        message: "hot afterChange called"
+                        message: "HotDirective afterChange called"
                         change: change
                         source: source
 
@@ -67,7 +67,7 @@ app.directive 'hot', [
 
             # Needed for correct displayed table
             Handsontable.Dom.addEvent window, 'resize', ->
-                $log.info "hot directive resize called"
+                $log.info "HotDirective resize called"
 
                 offset = Handsontable.Dom.offset $element[0]
 

@@ -60,7 +60,9 @@ app.controller "ImportCtrl", [
                     $location.path editorPath
             .error (data) ->
                 $log.error "ImportCtrl load file by url error called"
-                $log.debug error: error
+                $log.debug
+                    message: "ImportCtrl load file by url error called"
+                    error: error
 
                 $translate('TOAST_MESSAGES.READ_ERROR_LINK')
                 .then (translation) ->
@@ -82,6 +84,10 @@ app.controller "ImportCtrl", [
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
+                $log.info
+                    message: "ImportCtrl maxFileSize exceeded"
+                    FileSize: $scope.file.size
+
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
                     ngToast.create(
@@ -91,6 +97,10 @@ app.controller "ImportCtrl", [
                 return
 
             if fileType isnt "csv" and fileType isnt "zip"
+                $log.info
+                    message: "ImportCtrl data format not supported"
+                    Format: fileType
+
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
                     ngToast.create(
@@ -103,9 +113,9 @@ app.controller "ImportCtrl", [
                 ProgressOverlay.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
-                $log.info "ImportCtrl Import readFile promise success called"
+                $log.info "ImportCtrl Import.readFile promise success called"
                 $log.debug
-                    message: "ImportCtrl Import readFile promise success called"
+                    message: "ImportCtrl Import.readFile promise success called"
                     fileContent: fileContent
 
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
@@ -125,9 +135,9 @@ app.controller "ImportCtrl", [
                     when "zip"
                         Data.meta.fileType = "shp"
                         Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
-                            $log.info "ImportCtrl Converter convertSHP2GeoJSON promise success called"
+                            $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                             $log.debug
-                                message: "ImportCtrl Converter convertSHP2GeoJSON promise success called"
+                                message: "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                                 fileContent: fileContent
 
                             dataset = Converter.convertGeoJSON2Arrays geoJSON
@@ -140,11 +150,11 @@ app.controller "ImportCtrl", [
                                 $location.path editorPath
 
                             else
-                                $log.info "Converter convertGeoJSON2Arrays error"
+                                $log.info "ImportCtrl Converter.convertGeoJSON2Arrays error"
                                 $log.debug
-                                    message: "Converter convertGeoJSON2Arrays error"
+                                    message: "ImportCtrl Converter.convertGeoJSON2Arrays error"
                                     geoJSON: geoJSON
-                                $log.error "Converter convertGeoJSON2Arrays error"
+                                $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
 
                                 $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
                                     .then (translation) ->
@@ -153,11 +163,11 @@ app.controller "ImportCtrl", [
                                             className: "danger"
 
                         , (error) ->
-                            $log.info "Converter convertSHP2GeoJSON promise error called"
+                            $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                             $log.debug
-                                message: "Converter convertSHP2GeoJSON promise error called"
+                                message: "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                                 error: error
-                            $log.error "Converter convertSHP2GeoJSON promise error called"
+                            $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
 
                             $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
                                 .then (translation) ->
@@ -171,9 +181,9 @@ app.controller "ImportCtrl", [
                     ProgressOverlay.setMessage ""
 
             , (error) ->
-                $log.info "ImportCtrl Import readFile promise error called"
+                $log.info "ImportCtrl Import.readFile promise error called"
                 $log.debug
-                    message: "ImportCtrl Import readFile promise error called"
+                    message: "ImportCtrl Import.readFile promise error called"
                     error: error
                 $log.error "ImportCtrl Import.readFile error"
 

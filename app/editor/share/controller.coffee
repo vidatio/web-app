@@ -31,7 +31,7 @@ app.controller "ShareCtrl", [
             promise.then (obj) ->
                 $log.info "ShareCtrl shareVisualization promise success called"
                 $log.debug
-                    message: "Share mapToImg success callback"
+                    message: "ShareCtrl mapToImg success callback"
                     obj: obj
 
                 ProgressOverlay.setMessage ""
