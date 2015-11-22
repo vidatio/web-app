@@ -36,6 +36,7 @@ header
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     button#save-dataset.btn.btn-embossed.btn-primary(type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
+                    include ../editor/link/link
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
                 .col-xs-12.col-sm-pull-4.col-sm-4.editor-panel
