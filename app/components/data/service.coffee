@@ -65,6 +65,10 @@ app.service 'DataService', [
                     .then (translation) ->
                         ngToast.create
                             content: translation
+
+                    # TODO: Add proper Link + ID
+                    $rootScope.showLink = true
+                    $rootScope.link = response
                 , (error) ->
                     $log.info("Dataset couldn't be saved")
                     $log.error
@@ -75,5 +79,9 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
                             className: "danger"
+
+                    # TODO: Delete showLink and Link
+                    $rootScope.showLink = true
+                    $rootScope.link = "http://widaschio.com/datasets/123456"
         new Data
 ]
