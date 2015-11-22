@@ -5,7 +5,7 @@
             .col-xs-12
                 .input-group.form-group(ng-class="{ 'has-error' : registrationForm.email.$invalid && !registrationForm.email.$pristine }")
                     span.input-group-addon.fui-mail
-                    input.form-control(type="email" name="email" ng-model="user.email" placeholder="{{ 'MAIL' | translate }}" required ng-minlength=10 ng-maxlength=128 validate-uniqueness="email")
+                    input.form-control(type="email" name="email" ng-model="user.email" placeholder="{{ 'EMAIL' | translate }}" required ng-minlength=10 ng-maxlength=128 validate-uniqueness="email")
                     span.form-control-feedback.fui-check(ng-show="registrationForm.email.$valid")
                     span.form-control-feedback.fui-cross(ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine")
                 span.error(ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine && !registrationForm.email.$error.uniqueness") {{ 'FORM.ERROR.INVALID_EMAIL' | translate }}

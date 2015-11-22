@@ -49,13 +49,13 @@ app.service 'UserService', [
             # @public
             # @param {String} name
             # @param {String} password
-            logon: (name, password) =>
+            logon: (user) =>
                 $log.info "UserService logon called"
                 $log.debug
-                    name: name
-                    password: password
+                    name: user.name
+                    password: user.password
 
-                @setCredentials(name, password)
+                @setCredentials(user.name, user.password)
                 deferred = $q.defer()
 
                 UserAuthFactory.get().$promise.then (result) =>
@@ -72,7 +72,7 @@ app.service 'UserService', [
                         error: error
 
                     $rootScope.globals.authorized = false
-                    @clearCredentials()
+                    @logout()
                     deferred.reject error
 
                 deferred.promise
@@ -85,7 +85,9 @@ app.service 'UserService', [
                 @user =
                     name: ""
                 $rootScope.globals.authorized = undefined
-                @clearCredentials()
+                delete $rootScope.globals.currentUser
+                $cookieStore.remove "globals"
+                $http.defaults.headers.common.Authorization = "Basic "
 
             # @method setCredentials
             # @public
@@ -106,15 +108,6 @@ app.service 'UserService', [
 
                 $http.defaults.headers.common["Authorization"] = "Basic " + authData
                 $cookieStore.put "globals", $rootScope.globals
-
-            # @method clearCredentials
-            # @public
-            clearCredentials: ->
-                $log.info "UserService clearCredentials called"
-
-                delete $rootScope.globals.currentUser
-                $cookieStore.remove "globals"
-                $http.defaults.headers.common.Authorization = "Basic "
 
         new User
 ]

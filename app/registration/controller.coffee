@@ -5,22 +5,17 @@ app = angular.module("app.controllers")
 app.controller "RegistrationCtrl", [
     "$scope"
     "UserFactory"
-    "UserService"
     "$log"
     "$translate"
     "ngToast"
     "$state"
-    ($scope, UserFactory, UserService, $log, $translate, ngToast, $state) ->
+    ($scope, UserFactory, $log, $translate, ngToast, $state) ->
         $log.info "RegistrationCtrl called"
 
         $scope.register = ->
             $log.info "RegistrationCtrl register called"
 
-            UserFactory.save
-                "email": $scope.user.email
-                "name": $scope.user.name
-                "password": $scope.user.password
-            , (response) ->
+            UserFactory.save $scope.user, (response) ->
                 $log.info "RegistrationCtrl register success called"
                 $log.debug
                     response: response

@@ -53,21 +53,6 @@ app.run [
             $rootScope.history.push
                 name: fromState.name
                 params: fromParams
-
-        $rootScope.forward = (forbiddenRoutes) =>
-            unless $rootScope.history.length
-                $log.info "UserCtrl redirect to app.index"
-                $state.go "app.index"
-                return
-
-            for element in $rootScope.history
-                element = $rootScope.history[$rootScope.history.length - 1]
-
-                if element.name is "app.profile" or $state.$current.name is "app.profile"
-                    $log.info "UserCtrl redirect to app.index"
-                    $state.go "app.index"
-                    break
-
 ]
 
 app.config [
