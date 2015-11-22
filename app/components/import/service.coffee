@@ -10,14 +10,23 @@ app = angular.module "app.services"
 
 app.service 'ImportService', [
     "$q"
-    ($q) ->
+    "$log"
+    ($q, $log) ->
         class Reader
             constructor: ->
+                $log.info "ImportService constructor called"
+
                 @reader = new FileReader()
                 @deferred = undefined
                 @progress = 0
 
             readFile: (file, fileType) ->
+                $log.info "ImportService readFile called"
+                $log.debug
+                    message: "ImportService readFile called"
+                    file: file
+                    fileType: fileType
+
                 @deferred = $q.defer()
                 @progress = 0
 

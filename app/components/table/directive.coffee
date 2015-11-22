@@ -3,9 +3,10 @@ app = angular.module "app.directives"
 
 app.directive 'hot', [
     "$timeout"
+    "$log"
     "DataService"
     "MapService"
-    ($timeout, Data, Map) ->
+    ($timeout, $log, Data, Map) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -14,6 +15,8 @@ app.directive 'hot', [
             activeViews: '='
             colHeaders: '='
         link: ($scope, $element) ->
+            $log.info "HotDirective link called"
+
             hot = new Handsontable($element[0],
                 data: $scope.dataset
                 minCols: 26
@@ -23,10 +26,22 @@ app.directive 'hot', [
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
+                    $log.info "HotDirective beforeChange called"
+                    $log.debug
+                        message: "HotDirective beforeChange called"
+                        change: change
+                        source: source
+
                     if !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                         change[0][3] = change[0][2]
 
                 afterChange: (change, source) ->
+                    $log.info "HotDirective afterChange called"
+                    $log.debug
+                        message: "HotDirective afterChange called"
+                        change: change
+                        source: source
+
                     if change and change[0][3] != change[0][2]
                         Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are
@@ -54,6 +69,8 @@ app.directive 'hot', [
 
             # Needed for correct displayed table
             Handsontable.Dom.addEvent window, 'resize', ->
+                $log.info "HotDirective resize called"
+
                 offset = Handsontable.Dom.offset $element[0]
 
                 wrapperWidth = Handsontable.Dom.innerWidth $element.parent()[0]

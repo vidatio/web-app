@@ -29,7 +29,15 @@
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
-        "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden."
+        "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
+        "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
+        "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
+        "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
+        "READ_ERROR_LINK": "Der Link konnte leider nicht verwendet werden.",
+        "SHARE_SERVICE": {
+            "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
+            "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
+        }
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -42,7 +50,10 @@
     "LICENCE": "Lizenz",
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
-        "PARSING_DATA": "Daten werden analysiert"
+        "PARSING_DATA": "Daten werden analysiert",
+        "SHARE_SERVICE": {
+            "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
+        }
     },
     "MAIL": "E-Mail/ Nutzername",
     "AVAILABLE_DATASETS": "Verfügbare Datensets",
