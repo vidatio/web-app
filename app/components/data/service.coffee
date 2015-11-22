@@ -11,7 +11,8 @@ app.service 'DataService', [
     "$translate"
     "$log"
     "DataFactory"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory) ->
+    "$location"
+    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location) ->
         class Data
             constructor: ->
                 @meta =
@@ -66,9 +67,12 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
 
-                    # TODO: Add proper Link + ID
+                    # extracts the current URL
+                    absUrl = $location.$$absUrl
+                    url = absUrl.substring 0, absUrl.indexOf("/" + $rootScope.locale + "/")
+                    link = url + "/" + $rootScope.locale + "/datasets/" + response._id
+                    $rootScope.link = link
                     $rootScope.showLink = true
-                    $rootScope.link = response
                 , (error) ->
                     $log.info("Dataset couldn't be saved")
                     $log.error
@@ -80,8 +84,5 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
-                    # TODO: Delete showLink and Link
-                    $rootScope.showLink = true
-                    $rootScope.link = "http://widaschio.com/datasets/123456"
         new Data
 ]
