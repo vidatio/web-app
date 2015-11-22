@@ -2,7 +2,6 @@
 
 describe "Editor Controller", ->
     beforeEach ->
-
         module "app"
 
         inject ($controller, $rootScope, $httpBackend) ->

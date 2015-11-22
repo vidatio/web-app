@@ -15,6 +15,8 @@ app.directive 'hot', [
             activeViews: '='
             colHeaders: '='
         link: ($scope, $element) ->
+            $log.info "HotDirective link called"
+
             hot = new Handsontable($element[0],
                 data: $scope.dataset
                 minCols: 26
