@@ -91,14 +91,14 @@ a
         input.form-control
             border-color $color-green
 
-/* VALID */
+/* STATE VALID */
 .input-group.form-group
     .input-group-addon
     .form-control-feedback
         color $color-green
         background white
 
-/* VALID WITH FOCUS */
+/* STATE VALID WITH FOCUS */
 .input-group.form-group
     &.focus .input-group-addon
     .input-group-addon.focus
@@ -106,7 +106,7 @@ a
     .form-control-feedback
         border-color $color-green
 
-/* INVALID */
+/* STATE INVALID */
 .has-error.input-group.form-group
     .input-group-addon
     input.form-control
@@ -140,22 +140,3 @@ span.error
 
     &.ng-hide-remove
         animation: 0.5s fadeIn ease;
-
-
-@keyframes fadeIn {
-    from {
-        opacity: 0
-    }
-    to {
-        opacity: 1
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
