@@ -5,7 +5,7 @@
             .col-xs-12
                 .input-group.form-group(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
                     span.input-group-addon.fui-user
-                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
                 span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") Kein gültiger Benutzername!
         .row
             .col-xs-12

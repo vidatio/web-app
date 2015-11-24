@@ -5,12 +5,13 @@ app = angular.module "app.services"
 app.service 'UserService', [
     "$http"
     "UserAuthFactory"
+    "UserUniquenessFactory"
     "$rootScope"
     "$log"
     "$q"
     "Base64"
     "$cookieStore"
-    ($http, UserAuthFactory, $rootScope, $log, $q, Base64, $cookieStore) ->
+    ($http, UserAuthFactory, UserUniquenessFactory, $rootScope, $log, $q, Base64, $cookieStore) ->
         class User
             # @method constructor
             # @public
@@ -28,13 +29,17 @@ app.service 'UserService', [
                     key: key
                     value: value
 
-                url = $rootScope.apiBase + $rootScope.apiVersion + "/users/check?" + key + '=' + escape(value)
-                $http.get(url).then (results) ->
+                params = {}
+                params[key] = escape(value)
+
+                console.log UserUniquenessFactory
+
+                UserUniquenessFactory.check(params).$promise.then (results) ->
                     $log.info "UserService checkUniqueness success (user does not exist)"
                     $log.debug
                         results: results
 
-                    if results.data["available"]
+                    if results["available"]
                         $q.resolve(results)
                     else
                         $q.reject(results)

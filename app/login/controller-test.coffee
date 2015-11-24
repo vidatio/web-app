@@ -28,4 +28,4 @@ describe "Controller Login", ->
             @scope.logon()
 
             expect(@UserService.logon).toHaveBeenCalled()
-            expect(@UserService.logon).toHaveBeenCalledWith(@scope.user.name, @scope.user.password)
+            expect(@UserService.logon).toHaveBeenCalledWith(@scope.user)

@@ -14,7 +14,7 @@ app.controller "LoginCtrl", [
         $scope.logon = ->
             $log.info "UserCtrl logon called"
 
-            UserService.logon($scope.user.name, $scope.user.password).then(
+            UserService.logon($scope.user).then(
                 (value) ->
                     $log.info "UserCtrl successfully logged in"
                     $log.debug

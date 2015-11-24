@@ -1,19 +1,4 @@
 describe "Service User", ->
-
-    ###
-    beforeEach ->
-        module "app"
-
-        inject($provide) ->
-            $provide.provider '$cookieStore', {
-                $get: () ->
-                put: (key, value) ->
-                    @[key] = value
-                remove: (key) =>
-                    return @[key]
-            }
-    ###
-
     beforeEach ->
         module "app"
 
@@ -24,9 +9,6 @@ describe "Service User", ->
 
             @http = $http
             @http.defaults.headers.common["Authorization"] = "Basic "
-
-            #spyOn(@cookieStore, 'put')
-            #spyOn(@cookieStore, 'remove')
 
     it 'should have a user without name', ->
         expect(@UserService.user.name).toEqual("")
@@ -43,9 +25,6 @@ describe "Service User", ->
 
         expect(@http.defaults.headers.common.Authorization).toBeTruthy()
         expect(@http.defaults.headers.common.Authorization).toEqual("Basic " + authData)
-
-        #expect(@cookieStore.put).toHaveBeenCalled()
-        #expect(@cookieStore.put).toHaveBeenCalledWith("globals", @rootScope.globals)
 
     it 'should clear credentials on logout', ->
         @UserService.logout()
