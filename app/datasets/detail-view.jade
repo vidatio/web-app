@@ -1,0 +1,38 @@
+#detail-view.wrapper-content(ng-controller="DetailCtrl")
+    .row
+        .col-sm-2
+            a
+                button#back-to-datasets-overview.btn.btn-embossed.btn-primary
+                    span.btn-tip.fui-arrow-left
+                    span {{ "OVERVIEW" | translate | uppercase }}
+
+        .col-sm-10
+            h1.underline-turqoise Titel des Datensatzes
+
+    .row
+        .col-sm-2
+
+        .col-sm-8
+            .visualization-container Visualization-Placeholder
+
+            .row.buttons
+                .col-sm-4.middle
+                    button#edit-dataset.btn.btn-embossed.btn-primary Edit
+
+                .col-sm-4.middle
+                    button#share-dataset.btn.btn-embossed.btn-primary Share
+
+                .col-sm-4.middle
+                    button#download-dataset.btn.btn-embossed.btn-primary Download
+
+    .row
+        .col-sm-2
+
+        .col-sm-8
+            .gallery-container Gallery-Placeholder
+
+    .row
+        .col-sm-2
+
+        .col-sm-10
+            h1.underline-turqoise Informationen zum Datensatz

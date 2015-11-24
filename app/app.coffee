@@ -123,6 +123,13 @@ app.config [
             templateUrl: "profile/profile.html"
             title: "profile"
 
+        # /dataset detail-view
+        .state "app.dataset-detail",
+            url: "/dataset-detail"
+            controller: "DetailCtrl"
+            templateUrl: "datasets/detail-view.html"
+            title: "detail-view"
+
         # /registration
         .state "app.registration",
             url: "/registration"
