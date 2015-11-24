@@ -14,10 +14,6 @@ app.controller "AppCtrl", [
     "$log"
     ($scope, $rootScope, $state, $stateParams, $translate, $log) ->
 
-        $scope.logout = ->
-            UserService.logout()
-            $state.go "home"
-
         # save locale in rootScope to build links with correct language
         if $rootScope.locale != $stateParams.locale
             $rootScope.locale = $stateParams.locale

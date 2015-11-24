@@ -8,6 +8,7 @@ app = angular.module "app", [
     "app.controllers"
     "app.factories"
     "app.services"
+    "app.factories"
     "app.directives"
     "app.filters"
     "app.config"
@@ -16,6 +17,7 @@ app = angular.module "app", [
     "ngAnimate"
     "ngResource"
     "ngSanitize"
+    "ngCookies"
     "logglyLogger"
 ]
 
@@ -25,10 +27,33 @@ app.run [
     "$stateParams"
     "$http"
     "$location"
-    ( $rootScope, $state, $stateParams, $http, $location ) ->
+    "$cookieStore"
+    "$log"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
+        $rootScope.apiVersion = "/v0"
+
+        $rootScope.globals = $cookieStore.get( "globals" ) or {}
+        if Object.keys($rootScope.globals).length > 0
+            $rootScope.globals.authorized = true
+
+        $rootScope.history = []
+        $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            $log.info "App run stateChangeSuccess called"
+            $log.debug
+                toState: toState
+                toParams: toParams
+                fromState: fromState
+                fromParams: fromParams
+
+            if $rootScope.history.length > 20
+                $rootScope.history.splice(0, 1)
+
+            $rootScope.history.push
+                name: fromState.name
+                params: fromParams
 ]
 
 app.config [
@@ -86,10 +111,31 @@ app.config [
             url: "/{locale}"
             controller: "AppCtrl"
             template: "<ui-view/>"
+
         # /
-        .state "app.landingPage",
+        .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
+
+        # /profile
+        .state "app.profile",
+            url: "/profile"
+            templateUrl: "profile/profile.html"
+            title: "profile"
+
+        # /registration
+        .state "app.registration",
+            url: "/registration"
+            controller: "RegistrationCtrl"
+            templateUrl: "registration/registration.html"
+            title: "registration"
+
+        # /login
+        .state "app.login",
+            url: "/login"
+            controller: "LoginCtrl"
+            templateUrl: "login/login.html"
+            title: "login"
 
         # /import
         .state "app.import",

@@ -19,8 +19,8 @@ app.controller "ImportCtrl", [
     "MapService"
     "DataService"
     "ngToast"
-    "ProgressOverlayService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, ProgressOverlay) ->
+    "ProgressService"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
         $scope.link = "http://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&"+
                 "srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=csv&typeName=ogdsbg:volksschule"
 
@@ -110,7 +110,7 @@ app.controller "ImportCtrl", [
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                ProgressOverlay.setMessage message
+                Progress.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $log.info "ImportCtrl Import.readFile promise success called"
@@ -119,7 +119,7 @@ app.controller "ImportCtrl", [
                     fileContent: fileContent
 
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                    ProgressOverlay.setMessage message
+                    Progress.setMessage message
 
                 switch fileType
 
@@ -178,7 +178,8 @@ app.controller "ImportCtrl", [
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
-                    ProgressOverlay.setMessage ""
+                    Progress.setMessage ""
+                    $location.path editorPath
 
             , (error) ->
                 $log.info "ImportCtrl Import.readFile promise error called"

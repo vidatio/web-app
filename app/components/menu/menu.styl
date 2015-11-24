@@ -16,11 +16,14 @@ nav
 
     .cbp-spmenu
         background url(../images/dotgrid.png) $color-grey-dark
-        text-align right
-        padding 40px
+
+        padding 40px 20px 20px 20px
         text-transform uppercase
         overflow-y scroll
         overflow-x hidden
+
+        .menu-list
+            text-align right
 
         .btn-primary
             font-size 16px
@@ -61,7 +64,7 @@ nav
 
         a
             font-size 18px
-            padding 15px 0
+            padding 5px 0
             clear both
 
             &:hover
@@ -74,19 +77,6 @@ nav
             margin-top 50px
             text-align right
             padding 0
-
-        .login-container
-            margin-top 20px
-            text-align center
-
-            p
-                color $color-white
-                text-align right
-
-            input
-                margin-bottom 20px
-                text-align right
-
 
 @media(max-width: 500px)
     nav

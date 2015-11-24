@@ -11,6 +11,7 @@ describe "Directive Import", ->
                 @injector = $injector
                 @scope = $rootScope.$new()
                 @element = $compile('<input type="file" ng-file-select>')(@scope)
+
                 $controller 'ImportCtrl', $scope: @scope
                 spyOn(@scope, 'getFile').and.callFake ->
 
@@ -35,7 +36,7 @@ describe "Directive Import", ->
                 spyOn(@scope, 'getFile').and.callFake ->
 
         it "should exist in the injector", ->
-            expect(@injector.has('ngFileSelectDirective')).toBeTruthy()
+            expect(@injector.has('ngFileDropStartDirective')).toBeTruthy()
 
         # Drag over event not tested, because DispatchEvent always returns true, not according to
         # https://developer.mozilla.org/de/docs/Web/API/EventTarget/dispatchEvent

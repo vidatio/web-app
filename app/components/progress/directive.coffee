@@ -1,9 +1,9 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive "progressOverlay", [->
+app.directive "progress", [ ->
     restrict: "E"
-    templateUrl: "progress/progress-overlay.html"
-    controller: "OverlayCtrl"
+    templateUrl: "components/progress/progress.html"
+    controller: "ProgressCtrl"
     replace: true
 ]
