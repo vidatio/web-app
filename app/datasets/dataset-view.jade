@@ -1,39 +1,60 @@
 #dataset-view.wrapper-content(ng-controller="DatasetCtrl")
     .row
         .col-sm-2
-            a
+            a(ui-sref='app.index({ locale: locale })')
                 button#back-to-datasets-overview.btn.btn-embossed.btn-primary
                     span.btn-tip.fui-arrow-left
                     span {{ "OVERVIEW" | translate | uppercase }}
 
         .col-sm-10
-            h1.underline-turqoise Titel des Datensatzes
+            h1.underline-turqoise.dataset-title Titel des Datensatzes
 
     .row
         .col-sm-2
 
-        .col-sm-8
+        .col-xs-12.col-sm-8
             .visualization-container Visualization-Placeholder
 
-            .row.buttons
-                .col-sm-4.middle
-                    button#edit-dataset.btn.btn-embossed.btn-primary
-                        a(ui-sref="app.editor({ locale: locale})" ng-click="continueToEditor()") {{ "EDIT" | translate | uppercase }}
+            .row.buttons-below-visualization
+                .col-xs-4.col-sm-4.middle
+                    a(ui-sref="app.editor({ locale: locale})" ng-click="editDataset()")
+                        button#edit-dataset.btn.btn-embossed.btn-primary {{ "EDIT" | translate | uppercase }}
 
-                .col-sm-4.middle
-                    button#share-dataset.btn.btn-embossed.btn-primary {{ "SHARE" | translate | uppercase }}
+                .col-xs-4.col-sm-4.middle
+                    a(href='#' ng-click='shareDataset()')
+                        button#share-dataset.btn.btn-embossed.btn-primary {{ "SHARE" | translate | uppercase }}
 
-                .col-sm-4.middle
-                    button#download-dataset.btn.btn-embossed.btn-primary {{ "DOWNLOAD" | translate | uppercase }}
+                .col-xs-4.col-sm-4.middle
+                    a(href='#' ng-click='downloadDataset()')
+                        button#download-dataset.btn.btn-embossed.btn-primary {{ "DOWNLOAD" | translate | uppercase }}
 
     .row
         .col-sm-2
 
-        .col-sm-8
+        .col-xs-12.col-sm-8
             .gallery-container Gallery-Placeholder
+
+            .row.buttons-below-gallery
+                .col-xs-4.col-sm-4.middle
+                    a(href='#' ng-click='getLinkDataset()')
+                        button#link-dataset.btn.btn-embossed.btn-primary {{ "LINK" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    a(href='#' ng-click='getCodeDataset()')
+                        button#code-dataset.btn.btn-embossed.btn-primary {{ "CODE" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    a(href='#' ng-click='getMetadataDataset()')
+                        button#metadata-dataset.btn.btn-embossed.btn-primary {{ "METADATA" | translate | uppercase }}
 
     .row
         .col-sm-2
 
         .col-sm-10
-            h1.underline-turqoise Informationen zum Datensatz
+            h1.underline-turqoise {{ "INFORMATION-DATASET" | translate | uppercase }}
+
+    .row
+        .col-sm-2
+
+        .col-sm-8
+            .metadata-container Metadata-Placeholder

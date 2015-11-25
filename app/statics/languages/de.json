@@ -75,6 +75,10 @@
     "EDIT": "Bearbeiten",
     "SHARE": "Teilen",
     "DOWNLOAD": "Download",
+    "LINK": "Link",
+    "METADATA": "Metadaten",
+    "CODE": "Code",
+    "INFORMATION-DATASET": "Informationen zum Datensatz",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
