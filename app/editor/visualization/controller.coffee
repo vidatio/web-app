@@ -15,7 +15,7 @@ app.controller "VisualizationCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
-    "ProgressOverlayService"
+    "ProgressService"
     "ngToast"
     "$log"
     ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, ProgressOverlay, ngToast, $log) ->
