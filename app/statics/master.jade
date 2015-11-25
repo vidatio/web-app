@@ -7,13 +7,14 @@ html.ng-cloak(ng-app="app")
         title Vidatio
         include includes/styl
 
-
     body.container-fluid(ng-file-drop-start)
+
         .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
             include header
             toast
-            progress-overlay
+            progress
             menu
+
             .app-view(ui-view)
 
             include footer

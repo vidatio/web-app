@@ -15,7 +15,7 @@ app.controller "VisualizationCtrl", [
     "ShareService"
     "DataService"
     "HelperService"
-    "ProgressOverlayService"
+    "ProgressService"
     "ngToast"
     "$log"
     ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, ProgressOverlay, ngToast, $log) ->
@@ -26,10 +26,23 @@ app.controller "VisualizationCtrl", [
             popupAnchor: [0, -30]
 
         leafletData.getMap("map").then (map) ->
+            $log.info "VisualizationCtrl leafletData.getMap called"
+            $log.debug
+                message: "VisualizationCtrl leafletData.getMap called"
+
             Map.map = map
             # Timeout is needed to wait for the view to finish render
             $timeout ->
                 Map.init()
+        , (error) ->
+            $log.error "VisualizationCtrl error on map create"
+            $log.debug
+                message: "VisualizationCtrl error on map create"
+                error: error
+
+            ngToast.create
+                content: error
+                className: "danger"
 
         $scope.geojson =
             data: Map.geoJSON
@@ -43,24 +56,24 @@ app.controller "VisualizationCtrl", [
                 html = ""
                 isFirstAttribute = true
 
-                for property of feature.properties
-                    value = feature.properties[property]
+                for property, value of feature.properties
 
-                    if isFirstAttribute
-                        html += "<b>"
+                    if value
+                        if isFirstAttribute
+                            html += "<b>"
 
-                    if Parser.isEmailAddress(value)
-                        html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if Parser.isPhoneNumber(value)
-                        html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if Parser.isURL(value)
-                        html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                    else if value
-                        html += value + "<br>"
+                        if Parser.isEmailAddress(value)
+                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if Parser.isPhoneNumber(value)
+                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if Parser.isURL(value)
+                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if value
+                            html += value + "<br>"
 
-                    if isFirstAttribute
-                        html += "</b>"
-                        isFirstAttribute = false
+                        if isFirstAttribute
+                            html += "</b>"
+                            isFirstAttribute = false
 
                 unless html
                     html = "Keine Informationen vorhanden"

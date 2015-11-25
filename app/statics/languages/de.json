@@ -29,7 +29,18 @@
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
-        "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden."
+        "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
+        "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
+        "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
+        "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
+        "READ_ERROR_LINK": "Der Link konnte leider nicht verwendet werden.",
+        "SHARE_SERVICE": {
+            "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
+            "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
+        },
+        "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+        "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
+        "REGISTRATION_SUCCESS": "Registrierung erfolgreich!"
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -42,14 +53,31 @@
     "LICENCE": "Lizenz",
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
-        "PARSING_DATA": "Daten werden analysiert"
+        "PARSING_DATA": "Daten werden analysiert",
+        "SHARE_SERVICE": {
+            "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
+        }
     },
-    "MAIL": "E-Mail/ Nutzername",
     "AVAILABLE_DATASETS": "Verfügbare Datensets",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
+    "EMAIL": "E-Mail",
+    "USERNAME": "Benutzername",
     "PASSWORD": "Passwort",
-    "LOGIN": "Einloggen",
-    "USER_SECTION": "Anmelden"
+    "FORGOT_PASSWORD": "Passwort vergessen",
+    "LOGIN": "Anmeldung",
+    "LOG_ON": "Anmelden",
+    "LOG_OUT": "Abmelden",
+    "REGISTRATION": "Registrierung",
+    "REGISTER": "Registrieren",
+    "FORM": {
+        "ERROR": {
+            "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
+            "UNIQUENESS_USERNAME": "Benutzername bereits vergeben!",
+            "INVALID_EMAIL": "Keine gültige E-Mail (10-128 Zeichen)!",
+            "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
+            "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
+        }
+    }
 }
