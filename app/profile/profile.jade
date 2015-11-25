@@ -1,5 +1,22 @@
-#profile.wrapper-content
+#profile.wrapper-content(ng-controller="ProfileCtrl")
     .row
         .col-md-12
             .area
                 h2 Profile
+                br
+                br
+
+                .vidatios(ng-show="vidatios.length")
+                    h3 Meine Vidatios
+
+                    .row
+                        .col-xs-3.vidatio(ng-repeat="vidatio in vidatios")
+                            img(src="{{ vidatio.image }}")
+                            h4 {{ vidatio.title }}
+                            p {{ vidatio.description | limitTo: 55}} ...
+
+                    .row
+                        .col-xs-12
+                            a(ui-sref='app.catalog({ locale: locale })' )
+                                button.btn.btn-embossed.btn-primary Weitere
+
