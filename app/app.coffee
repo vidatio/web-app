@@ -105,6 +105,12 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
+        .state "app.catalog",
+            url: "/catalog"
+            templateUrl: "catalog/catalog.html"
+            controller: "CatalogCtrl"
+            title: "catalog"
+
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
             url: '*path'
