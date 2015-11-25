@@ -1,4 +1,4 @@
-#detail-view.wrapper-content(ng-controller="DetailCtrl")
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl")
     .row
         .col-sm-2
             a
@@ -17,13 +17,14 @@
 
             .row.buttons
                 .col-sm-4.middle
-                    button#edit-dataset.btn.btn-embossed.btn-primary Edit
+                    button#edit-dataset.btn.btn-embossed.btn-primary
+                        a(ui-sref="app.editor({ locale: locale})" ng-click="continueToEditor()") {{ "EDIT" | translate | uppercase }}
 
                 .col-sm-4.middle
-                    button#share-dataset.btn.btn-embossed.btn-primary Share
+                    button#share-dataset.btn.btn-embossed.btn-primary {{ "SHARE" | translate | uppercase }}
 
                 .col-sm-4.middle
-                    button#download-dataset.btn.btn-embossed.btn-primary Download
+                    button#download-dataset.btn.btn-embossed.btn-primary {{ "DOWNLOAD" | translate | uppercase }}
 
     .row
         .col-sm-2

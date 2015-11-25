@@ -72,6 +72,9 @@
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
     "OVERVIEW": "zur Übersicht",
+    "EDIT": "Bearbeiten",
+    "SHARE": "Teilen",
+    "DOWNLOAD": "Download",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",

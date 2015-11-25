@@ -124,11 +124,11 @@ app.config [
             title: "profile"
 
         # /dataset detail-view
-        .state "app.dataset-detail",
-            url: "/dataset-detail"
-            controller: "DetailCtrl"
-            templateUrl: "datasets/detail-view.html"
-            title: "detail-view"
+        .state "app.dataset-view",
+            url: "/dataset"
+            controller: "DatasetCtrl"
+            templateUrl: "datasets/dataset-view.html"
+            title: "dataset-view"
 
         # /registration
         .state "app.registration",
