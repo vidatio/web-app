@@ -2,22 +2,24 @@
 
 app = angular.module "app.services"
 
-app.service "CatalogService", [
-    "$scope"
+app.service 'CatalogService', [
     "$log"
+    "$q"
     "CatalogFactory"
-    ($scope, $log, CatalogFactory) ->
+    ($log, $q, CatalogFactory) ->
 
         class Catalog
 
-            constructor: ->
-
-
             fetchData: ->
+                deferred = $q.defer()
+
                 CatalogFactory.query (response) ->
-                    console.log(response)
+                    deferred.resolve(response)
                 , (error) ->
                     console.error error
+                    deferred.reject(error)
+
+                return deferred.promise
 
         new Catalog
 ]
