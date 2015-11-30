@@ -9,4 +9,5 @@ app.controller "CatalogCtrl", [
 
         Catalog.fetchData().then (data) ->
             $scope.data = data
+            console.log $scope.data
 ]

@@ -1,5 +1,5 @@
 #catalog(ng-controller="CatalogCtrl")
     h1 Wähle ein Datenset aus
 
-    ul
-        li(ng-repeat="item in data") {{ item.name }}
+    ul.row
+        li.col-xs-4.col-sm-4.col-md-4.col-lg-4(ng-repeat="item in data") {{ item.name }}
