@@ -42,22 +42,15 @@ header
         height 40px
         text-align center
         float right
+        line-height 17px
 
-        button.btn
-            padding-top 8px
+        .btn-tip
+            padding-left 0px
 
-        button.btn-primary
-            height 40px
-            font-size 16px
-
-            .btn-tip
-                padding-left 0
-                padding-right 1px
-
-            .fui-arrow-left
-                &::before
-                    margin-right 10px
-                    font-size 14px
+        .fui-arrow-left
+            &::before
+                margin-right 10px
+                font-size 14px
 
     #save-dataset
         float left
@@ -125,6 +118,12 @@ header
                 margin-left -10px
 
 
+    .tab
+    a#login-button.btn-embossed, a#menu.btn-embossed, a#logo.btn-embossed
+        -webkit-box-shadow none
+        -moz-box-shadow none
+        box-shadow none
+
     .border-right
         border-right none
 
@@ -132,11 +131,12 @@ header
     .menu-buttons
         height 100%
         text-align right
+        color $color-grey-light
 
         div
             display inline
 
-        a
+        a#login-button, a#menu
             line-height 40px
             vertical-align middle
             text-align center
@@ -146,7 +146,7 @@ header
             margin-left 3px
             background $color-passive
             border-radius 4px
-            color $color-grey-light
+
 
             &:hover
                 color $color-green
