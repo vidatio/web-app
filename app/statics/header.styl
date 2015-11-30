@@ -37,15 +37,109 @@ header
         height 40px
         float left
 
-    #back-to-import-button
-        background url(../images/back-to-import-placeholder.svg) no-repeat
-        width 37px
-        height 40px
+    #back-to-import
         position relative
+        height 40px
+        text-align center
+        float right
+
+        button.btn
+            padding-top 8px
+
+        button.btn-primary
+            height 40px
+            font-size 16px
+
+            .btn-tip
+                padding-left 0
+                padding-right 1px
+
+            .fui-arrow-left
+                &::before
+                    margin-right 10px
+                    font-size 14px
+
+    #save-dataset
+        float left
+        height 40px
+
+
+    .tab
+        border-bottom 4px solid $color-passive
+        display inline-block
+        width 50%
+        height 40px
+        line-height 41px
+        background $color-passive
+        position relative
+        float left
+        color $color-table-even-active
+        text-align center
+        font-family Colaborate, $fonts
+        font-size 16px
+        box-sizing border-box
+
+        &:hover
+            color $color-white
+            border-bottom-color $color-green
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 39px
+                width 0
+                border-top-color $color-green
+                border-width 10px
+                margin-left -10px
+
+            &::before
+                border-top-color $color-green
+                border-width 10px
+                margin-left -10px
+
+        &.active
+            border-bottom 4px solid $color-green
+            line-height 41px
+            color $color-white
+
+            &::after
+                border medium solid transparent
+                content " "
+                height 0
+                left 50%
+                pointer-events none
+                position absolute
+                top 39px
+                width 0
+                border-top-color $color-green
+<<<<<<< HEAD
+                border-width 4px
+                margin-left -4px
+=======
+                border-width 10px
+                margin-left -10px
+>>>>>>> develop
+
+            &::before
+                border-top-color $color-green
+                border-width 10px
+                margin-left -10px
+
+
+    .border-right
+        border-right none
+
 
     .menu-buttons
         height 100%
         text-align right
+
+        div
+            display inline
 
         a
             line-height 40px
@@ -65,68 +159,41 @@ header
         .menu-active
             color $color-green
 
-            &:hover
-                color $color-grey-light
-
         a#menu
             font-size 20px
 
+        a#login-button
+            font-size 23px
+            padding-left 2px
 
-    .tab
-        border-top 3px solid $color-passive
-        display inline-block
-        width 33.33%
-        height 40px
-        line-height 34px
-        background $color-passive
 
-        position relative
-        float left
-
-        color white
-        text-align center
-        font-family Colaborate, $fonts
-        font-size 14px
-        box-sizing border-box
-
-        &.active
-            border-top 3px solid $color-green
-            line-height 34px
-            background $color-active
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 0
-                width 0
-                border-top-color $color-green
-                border-width 4px
-                margin-left -4px
-
-            &::before
-                border-top-color $color-green
-                border-width 4px
-                margin-left -4px
-
-    .border-right
-        border-right none
-
+@media(max-width: 550px)
+    #back-to-import-button
+        display none
 
 @media(max-width: 767px)
-    .editor-panel
-        margin-top: 20px
+    #navigation
+        .editor-panel
+            margin-top: 20px
 
+@media(min-width: 768px) and (max-width: 849px)
     #back-to-import-button
-        float left
-        left 20%
+        margin-right -10px
 
-@media(min-width: 768px)
+        button.btn-primary
+            font-size 14px !important
+
+            .fui-arrow-left
+                &::before
+                    font-size 12px !important
+
+    header
+        .tab
+            font-size 14px
+
+@media(min-width: 850px)
     #back-to-import-button
-        float right
+        margin-right 10px
 
     #navigation
         .editor-panel
@@ -135,16 +202,3 @@ header
             left 0
             right 0
             max-width 600px
-
-
-@media(min-width: 768px) and (max-width: 850px)
-    #back-to-import-button
-        right 0
-
-@media (min-width: 851px) and (max-width: 1024px)
-    #back-to-import-button
-        right 10%
-
-@media (min-width: 1025px)
-    #back-to-import-button
-        right 15%

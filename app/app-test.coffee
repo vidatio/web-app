@@ -26,6 +26,9 @@ describe "testing app modules: ", ->
         it "should have a registered 'app.services' dependency", ->
             expect( hasModule("app.services") ).toBeTruthy()
 
+        it "should have a registered 'app.factories' dependency", ->
+            expect( hasModule("app.factories") ).toBeTruthy()
+
         it "should have a registered 'app.directives' dependency", ->
             expect( hasModule("app.directives") ).toBeTruthy()
 

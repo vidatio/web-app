@@ -3,8 +3,9 @@
 app = angular.module "app.services"
 
 app.service 'ParserService', [
+    "$log"
     "HelperService"
-    (Helper) ->
+    ($log, Helper) ->
         class Parser
             # @method isCoordinate
             # @public
@@ -152,6 +153,10 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             findCoordinatesColumns: (dataset) ->
+                $log.info "ParserService findCoordinatesColumns called"
+                $log.debug
+                    message: "ParserService findCoordinatesColumns called"
+                    dataset: dataset
 
                 choppedDataset = Helper.cutDataset(dataset)
                 unless choppedDataset.length
@@ -169,6 +174,11 @@ app.service 'ParserService', [
             # @param {String} cell
             # @return {Array}
             extractCoordinatesOfOneCell: (cell) ->
+                $log.info "ParserService extractCoordinatesOfOneCell called"
+                $log.debug
+                    message: "ParserService extractCoordinatesOfOneCell called"
+                    cell: cell
+
                 # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 
                 # matches the following numbers:
@@ -229,6 +239,11 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInDataset = (dataset) ->
+                $log.info "ParserService _findCoordinatesIndicesInDataset called"
+                $log.debug
+                    message: "ParserService _findCoordinatesIndicesInDataset called"
+                    dataset: dataset
+
                 matrixPossibleCoordinates = Helper.createMatrix.call(this, dataset, false)
 
                 dataset.forEach (row, indexRow) =>
@@ -253,6 +268,11 @@ app.service 'ParserService', [
             # @param {Array} dataset
             # @return {Object}
             _findCoordinatesIndicesInHeader = (dataset) ->
+                $log.info "ParserService _findCoordinatesIndicesInHeader called"
+                $log.debug
+                    message: "ParserService _findCoordinatesIndicesInHeader called"
+                    dataset: dataset
+
                 indicesCoordinates = {}
 
                 # Because the header is always in the first row, we only search there for coordinate tags
@@ -271,6 +291,11 @@ app.service 'ParserService', [
             # @param {String} word
             # @return {String}
             _checkWhiteList = (word) ->
+                $log.info "ParserService _checkWhiteList called"
+                $log.debug
+                    message: "ParserService _checkWhiteList called"
+                    word: word
+
                 result = undefined
                 word = String(word).trim().toLowerCase()
 
@@ -298,6 +323,11 @@ app.service 'ParserService', [
             # @param {matrix} true/false matrix of each cell (true mean the cell contains a coordinate)
             # @return {Object}
             _getIndicesOfCoordinateColumns = (matrix) ->
+                $log.info "ParserService _getIndicesOfCoordinateColumns called"
+                $log.debug
+                    message: "ParserService _getIndicesOfCoordinateColumns called"
+                    matrix: matrix
+
                 result = {}
 
                 [ separateColumns, columnScores ] = _rateColumns(matrix)
@@ -324,6 +354,11 @@ app.service 'ParserService', [
             #       - separateColumns {Boolean} is true if there is only one coordinate in one cell
             #       - columnScores {Array} contains the scores (amount of possible coordinates per column) for all columns
             _rateColumns = (matrix) ->
+                $log.info "ParserService _rateColumns called"
+                $log.debug
+                    message: "ParserService _rateColumns called"
+                    matrix: matrix
+
                 columnScores = new Array(matrix[0].length)
 
                 # normal for-loop does not work in CoffeeScript
@@ -359,6 +394,12 @@ app.service 'ParserService', [
             # @param {Array} columnScores
             # @return {Array}
             _findHighestScoreIndices = (separateColumns, columnScores) ->
+                $log.info "ParserService _findHighestScoreIndices called"
+                $log.debug
+                    message: "ParserService _findHighestScoreIndices called"
+                    separateColumns: separateColumns
+                    columnScores: columnScores
+
                 largestNumber = -Infinity
                 secondLargestNumber = -Infinity
                 largestScoreIndex = 0

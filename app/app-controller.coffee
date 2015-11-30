@@ -11,11 +11,8 @@ app.controller "AppCtrl", [
     "$state"
     "$stateParams"
     "$translate"
-    ($scope, $rootScope, $state, $stateParams, $translate) ->
-
-        $scope.logout = ->
-            UserService.logout()
-            $state.go "home"
+    "$log"
+    ($scope, $rootScope, $state, $stateParams, $translate, $log) ->
 
         # save locale in rootScope to build links with correct language
         if $rootScope.locale != $stateParams.locale
@@ -28,6 +25,7 @@ app.controller "AppCtrl", [
 
         # Closing the menu on click of body should remove the active class
         $scope.disableMenuActive = ->
+
             $('#menu').removeClass "menu-active"
             return true
 ]

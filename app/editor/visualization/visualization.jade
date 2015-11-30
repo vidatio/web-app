@@ -1,3 +1,16 @@
-#visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-4': $parent.activeViews === 3, 'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
+#visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
+        .settings-bar
+            #visualization-settings-container
+                .save-button
+                    a(href='#')
+
+                    ul
+                        li
+                            a(ng-click='shareVisualization("png")') PNG
+
+                        li
+                            a(ng-click='shareVisualization("jpg")') JPG
+
+
         leaflet(geojson="geojson" id="map")

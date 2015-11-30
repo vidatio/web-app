@@ -4,18 +4,18 @@
 describe "Service Progress", ->
     beforeEach ->
         module "app"
-        inject (ProgressOverlayService, $injector) ->
+        inject (ProgressService, $injector) ->
             @injector = $injector
-            @overlay = ProgressOverlayService
+            @progress = ProgressService
 
     it "should be defined and included", ->
-        expect(@overlay).toBeDefined()
-        expect(@injector.has("ProgressOverlayService"))
+        expect(@progress).toBeDefined()
+        expect(@injector.has("ProgressService"))
 
     it "should be possible to set messages", ->
-        @overlay.setMessage "This is a test!"
-        expect(@overlay.getMessage()).toEqual "This is a test!"
+        @progress.setMessage "This is a test!"
+        expect(@progress.getMessage()).toEqual "This is a test!"
 
     it "should be possible to reset messages", ->
-        @overlay.setMessage("")
-        expect(@overlay.getMessage()).toEqual ""
+        @progress.setMessage("")
+        expect(@progress.getMessage()).toEqual ""

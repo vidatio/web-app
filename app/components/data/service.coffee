@@ -6,14 +6,29 @@ app.service 'DataService', [
     "MapService"
     "TableService"
     "ConverterService"
-    (Map, Table, Converter) ->
+    "$rootScope"
+    "ngToast"
+    "$translate"
+    "$log"
+    "DataFactory"
+    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory) ->
         class Data
             constructor: ->
+                $log.info "DataService constructor called"
+
                 @meta =
                     "fileType": ""
                     "fileName": ""
 
             updateTableAndMap: (row, column, oldData, newData) ->
+                $log.info "DataService updateTableAndMap called"
+                $log.debug
+                    message: "DataService updateTableAndMap called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
+
                 key = Table.colHeaders[column]
 
                 if @meta.fileType is "shp"
@@ -27,6 +42,13 @@ app.service 'DataService', [
                     Map.setGeoJSON(geoJSON)
 
             validateInput: (row, column, oldData, newData) ->
+                $log.info "DataService validateInput called"
+                $log.debug
+                    message: "DataService validateInput called"
+                    row: row
+                    column: column
+                    oldData: oldData
+                    newData: newData
 
                 if @meta.fileType is "shp"
                     key = Table.colHeaders[column]
@@ -34,5 +56,41 @@ app.service 'DataService', [
 
                 return true
 
+            # TODO: UserId and Name have to be set by the user
+            # Sends the dataset to the API, which saves it in the database.
+            # @method saveViaAPI
+            # @param {Object} dataset
+            # @param {String} userId
+            # @param {String} name
+            saveViaAPI: (dataset, userId = "123456781234567812345678", name = "Neues Vidatio") ->
+                $log.info("saveViaAPI called")
+                $log.debug
+                    dataset: dataset
+                    userId: userId
+                    name: name
+
+                DataFactory.save
+                    userId: userId
+                    name: name
+                    data: dataset
+                , (response) ->
+                    $log.info("Dataset successfully saved")
+                    $log.debug
+                        response: response
+
+                    $translate('TOAST_MESSAGES.DATASET_SAVED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                , (error) ->
+                    $log.info("Dataset couldn't be saved")
+                    $log.error
+                        error: error
+
+                    $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
         new Data
 ]
