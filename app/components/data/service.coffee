@@ -70,7 +70,7 @@ app.service 'DataService', [
                     # extracts the current URL
                     absUrl = $location.$$absUrl
                     url = absUrl.substring 0, absUrl.indexOf("/" + $rootScope.locale + "/")
-                    link = url + "/" + $rootScope.locale + "/datasets/" + response._id
+                    link = url + "/" + $rootScope.locale + "/dataset/" + response._id
                     $rootScope.link = link
                     $rootScope.showLink = true
                 , (error) ->
