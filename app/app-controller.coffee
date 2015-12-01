@@ -25,7 +25,6 @@ app.controller "AppCtrl", [
 
         # Closing the menu on click of body should remove the active class
         $scope.disableMenuActive = ->
-            $log.info "AppCtrl disableMenuActive called"
 
             $('#menu').removeClass "menu-active"
             return true
