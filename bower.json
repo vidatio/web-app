@@ -47,7 +47,7 @@
     "papa-parse": "^4.1.1",
     "shp": "^3.2",
     "jPushMenu": "~1.1.1",
-    "angular-simple-logger": "~0.1.5"
+    "angular-simple-logger": "~0.1.5",
     "angular-resource": "~1.4.7",
     "angular-cookies": "~1.4.7"
   },
