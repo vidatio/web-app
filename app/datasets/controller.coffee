@@ -9,7 +9,8 @@ app.controller "DatasetCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    ($scope, $rootScope, $log) ->
+    "DataFactory"
+    ($scope, $rootScope, $log, DataFactory) ->
 
         $scope.editDataset = ->
             $log.info "DatasetCtrl editDataset called"
@@ -28,4 +29,11 @@ app.controller "DatasetCtrl", [
 
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
+
+        $scope.vidatios = []
+
+        DataFactory.query null, (response) ->
+            for dataset in response
+                    console.log dataset.name
+
 ]
