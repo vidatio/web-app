@@ -30,10 +30,17 @@ app.controller "DatasetCtrl", [
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
 
-        $scope.vidatios = []
 
         DataFactory.query null, (response) ->
+            counter = 0
             for dataset in response
-                    console.log dataset.name
+                counter += 1
+
+                if counter > 2
+                    break
+
+                console.log dataset.name + "\n# " + counter
+                console.log dataset._id
+
 
 ]
