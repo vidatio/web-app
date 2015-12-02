@@ -18,7 +18,7 @@ app.controller "VisualizationCtrl", [
     "ProgressService"
     "ngToast"
     "$log"
-    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, ProgressOverlay, ngToast, $log) ->
+    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, Progress, ngToast, $log) ->
         icon =
             iconUrl: '../images/marker-small.png'
             iconSize: [25, 30]
@@ -100,7 +100,7 @@ app.controller "VisualizationCtrl", [
                     message: "Share mapToImg success callback"
                     obj: obj
 
-                ProgressOverlay.setMessage ""
+                Progress.setMessage ""
 
                 if Data.meta.fileName == ""
                     fileName = Helper.dateToString(new Date())
@@ -113,5 +113,5 @@ app.controller "VisualizationCtrl", [
                     content: error
                     className: "danger"
             , (notify) ->
-                ProgressOverlay.setMessage notify
+                Progress.setMessage notify
 ]

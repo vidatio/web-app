@@ -11,12 +11,22 @@ footer
     background url(../images/dotgrid.png) $color-grey-dark
     text-align center
 
-    a
+    a.button
         display inline-block
         padding 8px 10px
+        background none
+
+        &:hover
+        &:active
+        &:focus
+            color $color-green
+
+            span
+                color $color-green
 
         span
             margin-right 5px
+
 
 @media (min-width: 768px)
     footer
