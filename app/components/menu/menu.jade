@@ -3,20 +3,20 @@ nav
         .menu-header
             .col-md-6
                 .menu-close-button
-                    a.button.btn-embossed(ng-click="toggleMenu()") &times;
+                    a.button(ng-click="toggleMenu()") &times;
 
             .col-md-6
-                a#logo-menu.button.btn-embossed(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
+                a#logo-menu.button(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
 
         .menu-list
-            a.button.btn-embossed(href="") {{ 'AVAILABLE_DATASETS' | translate }}
-            a.button.btn-embossed(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ 'IMPORT_DATA' | translate }}
-            a.button.btn-embossed(href="") {{ 'FEATURES' | translate }}
-            a.button.btn-embossed(href="") {{ 'PRICING' | translate }}
-            a.button.btn-embossed(href="") {{ 'API' | translate }}
+            a.button(href="") {{ 'AVAILABLE_DATASETS' | translate }}
+            a.button(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ 'IMPORT_DATA' | translate }}
+            a.button(href="") {{ 'FEATURES' | translate }}
+            a.button(href="") {{ 'PRICING' | translate }}
+            a.button(href="") {{ 'API' | translate }}
             br
-            a.button.btn-embossed(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()") {{ 'LOG_ON' | translate }}
-            a.button.btn-embossed(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ 'LOG_OUT' | translate }}
+            a.button(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()") {{ 'LOG_ON' | translate }}
+            a.button(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ 'LOG_OUT' | translate }}
 
         registration
         login

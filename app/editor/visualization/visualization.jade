@@ -7,10 +7,10 @@
 
                     ul
                         li
-                            a(ng-click='shareVisualization("png")') PNG
+                            a.button(ng-click='shareVisualization("png")') PNG
 
                         li
-                            a(ng-click='shareVisualization("jpg")') JPG
+                            a.button(ng-click='shareVisualization("jpg")') JPG
 
 
         leaflet(geojson="geojson" id="map")
