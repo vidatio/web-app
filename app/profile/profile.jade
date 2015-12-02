@@ -17,10 +17,9 @@
                                 .text
                                     h4 {{ vidatio.title }}
                                     p {{ vidatio.description | limitTo: 45}} ...
-                                    a(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
+                                    a.button(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
 
                     .row
                         .col-xs-12.has-link
-                            a(ui-sref="app.catalog({ locale: locale })" )
-                                button.btn.btn-embossed.btn-primary Weitere
+                            a.button.btn.btn-embossed.btn-primary(ui-sref="app.catalog({ locale: locale })" ) Weitere
 
