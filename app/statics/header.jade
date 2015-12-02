@@ -30,18 +30,18 @@ header
                         span.btn-tip.fui-arrow-left
                         span {{ "IMPORT" | translate | uppercase }}
 
-                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
-                    div(ng-if="globals.authorized")
-                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
-                    div(ng-if="!globals.authorized")
-                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a.button#save-dataset.btn.btn-embossed.btn-primary(href='#' type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
-
                 .col-xs-12.col-sm-pull-4.col-sm-4.editor-panel
                     a.button.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
                     .separator
                     a.button.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
+
+                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
+                    a.button#save-dataset.btn.btn-embossed.btn-primary(href='#' type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
+                    div(ng-if="globals.authorized")
+                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
+                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
