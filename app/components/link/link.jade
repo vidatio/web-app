@@ -1,6 +1,5 @@
-#link-overlay.wrapper-content(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
-    .content
-        a.fui-cross(href="#" ng-click="hideLink()")
-        form
-            input#link.form-control(ng-model="link" onClick="this.select();")
+#link-overlay.wrapper-content.col-xs-10.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
+    a.fui-cross(href="#" ng-click="hideLink()")
+    form
+        input#link.form-control(ng-model="link" onClick="this.select();")
 

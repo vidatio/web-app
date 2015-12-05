@@ -30,19 +30,21 @@ header
                             span.btn-tip.fui-arrow-left
                             span {{ "IMPORT" | translate | uppercase }}
 
-                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
-                    div(ng-if="globals.authorized")
-                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
-                    div(ng-if="!globals.authorized")
-                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    button#save-dataset.btn.btn-embossed.btn-primary(type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
-                    include ../components/link/link
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
-
                 .col-xs-12.col-sm-pull-4.col-sm-4.editor-panel
                     a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
                     .separator
                     a.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
+
+                include ../components/link/link
+
+                .col-xs-6.col-sm-push-6.col-sm-3.menu-buttons
+                    button#save-dataset.btn.btn-embossed.btn-primary(type="submit" ng-click="saveDataset()") {{"SAVE" | translate | uppercase}}
+                    div(ng-if="globals.authorized")
+                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo

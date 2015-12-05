@@ -101,5 +101,9 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
+                    # TEMP
+                    $rootScope.link = "www.widaschio.com/dataset/123456789"
+                    $rootScope.showLink = true
+
         new Data
 ]
