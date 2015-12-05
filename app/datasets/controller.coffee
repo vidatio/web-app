@@ -10,10 +10,46 @@ app.controller "DatasetCtrl", [
     "$rootScope"
     "$log"
     "DataFactory"
-    ($scope, $rootScope, $log, DataFactory) ->
+    "UserFactory"
+    ($scope, $rootScope, $log, DataFactory, UserFactory) ->
+
+        testId = "565b48985b4c70ae2a34242b"
+        dataAll = {}
+
+        DataFactory.get { id: testId }, (data) ->
+            console.log data
+            dataAll = data
+            $log.info("DataFactory.get called")
+            $log.debug
+                id: testId
+                name: data.name
+
+            created = new Date dataAll.createdAt
+            updated = "-"
+
+            if dataAll.updatedAt
+                updated = new Date dataAll.updatedAt
+                updated = updated.toLocaleString()
+
+
+            $(document).ready ->
+                $('.dataset-title').text dataAll.name
+                $('.dataset-creator').text dataAll.userId
+                $('.dataset-created').text created.toLocaleString()
+                $('.dataset-update').text updated
+
+
+        #DataFactory.get { id: dataAll.userId }, (data) ->
+        #    console.log "user " + data
+
 
         $scope.editDataset = ->
             $log.info "DatasetCtrl editDataset called"
+            $log.debug
+                id: testId
+                name: dataAll.name
+                data: dataAll.data
+
 
         $scope.shareDataset = ->
             $log.info "DatasetCtrl shareDataset called"
@@ -29,18 +65,6 @@ app.controller "DatasetCtrl", [
 
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
-
-
-        DataFactory.query null, (response) ->
-            counter = 0
-            for dataset in response
-                counter += 1
-
-                if counter > 2
-                    break
-
-                console.log dataset.name + "\n# " + counter
-                console.log dataset._id
 
 
 ]
