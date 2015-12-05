@@ -17,30 +17,36 @@ app.controller "DatasetCtrl", [
         dataAll = {}
 
         DataFactory.get { id: testId }, (data) ->
-            console.log data
             dataAll = data
             $log.info("DataFactory.get called")
             $log.debug
                 id: testId
                 name: data.name
 
-            created = new Date dataAll.createdAt
             updated = "-"
+            created = "-"
+
+            convertDates = (current) ->
+                current = new Date dataAll.createdAt
+                current = current.toLocaleString()
+                current = current.split ','
+                return current[0]
+
+            if dataAll.createdAt
+                created = convertDates(dataAll.createdAt)
 
             if dataAll.updatedAt
-                updated = new Date dataAll.updatedAt
-                updated = updated.toLocaleString()
-
+                updated convertDates(dataAll.updatedAt)
 
             $(document).ready ->
                 $('.dataset-title').text dataAll.name
                 $('.dataset-creator').text dataAll.userId
-                $('.dataset-created').text created.toLocaleString()
+                $('.dataset-created').text created
                 $('.dataset-update').text updated
 
 
-        #DataFactory.get { id: dataAll.userId }, (data) ->
-        #    console.log "user " + data
+        #UserFactory.query null, (response) ->
+        #   console.log response
 
 
         $scope.editDataset = ->
