@@ -11,11 +11,13 @@ app.controller "DatasetCtrl", [
     "$log"
     "DataFactory"
     "UserFactory"
-    ($scope, $rootScope, $log, DataFactory, UserFactory) ->
+    "DatasetService"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService) ->
 
         testId = "565b48985b4c70ae2a34242b"
         $scope.information = []
         dataAll = {}
+        link = "-"
 
         DataFactory.get { id: testId }, (data) ->
             dataAll = data
@@ -64,6 +66,9 @@ app.controller "DatasetCtrl", [
             if dataAll.data
                 format = "JSON"
 
+            if dataAll.link
+                link = dataAll.link
+
             $scope.information.push
                 title: title
                 image: image
@@ -96,21 +101,37 @@ app.controller "DatasetCtrl", [
                 name: dataAll.name
                 data: dataAll.data
 
+            DatasetService.goToEditor(dataAll.data)
+
 
         $scope.shareDataset = ->
             $log.info "DatasetCtrl shareDataset called"
 
+            DatasetService.share(dataAll.data)
+
         $scope.downloadDataset = ->
             $log.info "DatasetCtrl downloadDataset called"
+
+            DatasetService.downloadDataset(dataAll.data)
+
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
 
+            DatasetService.getLink(link)
+
+
         $scope.getCodeDataset = ->
             $log.info "DatasetCtrl getCodeDataset called"
 
+            DatasetService.downloadCode(dataAll)
+
+
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
+
+            DatasetService.downloadMetadata(dataAll)
+
 
         convertDates = (current) ->
             current = new Date dataAll.createdAt
