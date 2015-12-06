@@ -14,36 +14,76 @@ app.controller "DatasetCtrl", [
     ($scope, $rootScope, $log, DataFactory, UserFactory) ->
 
         testId = "565b48985b4c70ae2a34242b"
+        $scope.information = []
         dataAll = {}
 
         DataFactory.get { id: testId }, (data) ->
             dataAll = data
-            $log.info("DataFactory.get called")
-            $log.debug
-                id: testId
-                name: data.name
-
             updated = "-"
             created = "-"
+            datasetId = "-"
+            tags = "-"
+            format = "-"
+            category = "-"
+            userName = "-"
+            title = "Vidatio"
+            parent = "-"
+            image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
-            convertDates = (current) ->
-                current = new Date dataAll.createdAt
-                current = current.toLocaleString()
-                current = current.split ','
-                return current[0]
+            if dataAll.name
+                title = dataAll.name
 
             if dataAll.createdAt
                 created = convertDates(dataAll.createdAt)
 
             if dataAll.updatedAt
-                updated convertDates(dataAll.updatedAt)
+                updated = convertDates(dataAll.updatedAt)
 
-            $(document).ready ->
-                $('.dataset-title').text dataAll.name
-                $('.dataset-creator').text dataAll.userId
-                $('.dataset-created').text created
-                $('.dataset-update').text updated
+            if dataAll.description
+                description = dataAll.description
 
+            if dataAll.image
+                image = dataAll.image
+
+            if dataAll.userId
+                userName = dataAll.userId
+
+            if dataAll._id
+                datasetId = dataAll._id
+
+            if dataAll.parentId
+                parent = dataAll.parentId
+
+            if dataAll.category
+                category = dataAll.category
+
+            if dataAll.tags
+                tags = dataAll.tags
+
+            if dataAll.data
+                format = "JSON"
+
+            $scope.information.push
+                title: title
+                image: image
+                id: datasetId
+                created: created
+                creator: userName
+                updated: updated
+                description: description
+                parent: parent
+                category: category
+                tags: tags
+                format: format
+
+
+            #(document).ready ->
+            #   $('.dataset-title').text dataAll.name
+            #   $('.description').text description
+            #   $('.dataset-creator').text dataAll.userId
+            #   $('.dataset-created').text created
+            #   $('.dataset-update').text updated
 
         #UserFactory.query null, (response) ->
         #   console.log response
@@ -71,6 +111,12 @@ app.controller "DatasetCtrl", [
 
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
+
+        convertDates = (current) ->
+            current = new Date dataAll.createdAt
+            current = current.toLocaleString()
+            current = current.split ','
+            return current[0]
 
 
 ]

@@ -6,5 +6,5 @@ app.factory "DataFactory", [
     "$resource"
     "$rootScope"
     ($resource, $rootScope) ->
-        $resource $rootScope.apiBase + "/v0/datasets/:id"
+        $resource $rootScope.apiBase + $rootScope.apiVersion + "/datasets/:id"
 ]

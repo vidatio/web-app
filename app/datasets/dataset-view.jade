@@ -1,15 +1,16 @@
-#dataset-view.wrapper-content(ng-controller="DatasetCtrl")
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
     .row
         .col-sm-1
 
         .col-sm-10
-            h1.underline-turqoise.dataset-title Titel des Datensatzes
+            h1.underline-turqoise.dataset-title {{ info.title }}
 
     .row
         .col-sm-1
 
         .col-xs-12.col-sm-10
-            .visualization-container Visualization-Placeholder
+            .visualization-container
+                img(src="{{ info.image }}")
 
             .row.buttons-below-visualization
                 .col-xs-4.col-sm-4.middle
@@ -49,11 +50,31 @@
         .col-sm-10
             .metadata-container
                 .one-row
-                    .text Urheber:
-                    .dataset-creator.info User
+                    .description {{ info.description }}
                 .one-row
-                    .text Erstellt am:
-                    .dataset-created.info Datum
+                    .text {{ "DATASET-ORIGIN" | translate }}:
+                    .dataset-creator.info {{ info.creator }}
                 .one-row
-                    .text Letztes Update:
-                    .dataset-update.info Last Update
+                    .text {{ "DATASET-FORMAT" | translate }}:
+                    .dataset-creator.info {{ info.format }}
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET-ID" | translate }}:
+                    .dataset-creator.info {{ info.id }}
+                .one-row
+                    .text {{ "DATASET-PARENT" | translate }}:
+                    .dataset-creator.info {{ info.parent }}
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET-CREATED" | translate }}:
+                    .dataset-created.info {{ info.created }}
+                .one-row
+                    .text {{ "DATASET-UPDATED" | translate }}:
+                    .dataset-update.info {{ info.updated }}
+                .one-row.space
+                .one-row
+                    .text {{ "CATEGORY" | translate }}:
+                    .dataset-creator.info {{ info.category }}
+                .one-row
+                    .text {{ "DATASET-TAGS" | translate }}:
+                    .dataset-creator.info {{ info.tags }}

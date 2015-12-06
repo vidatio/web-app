@@ -80,6 +80,14 @@
     "METADATA": "Metadaten",
     "CODE": "Code",
     "INFORMATION-DATASET": "Informationen zum Datensatz",
+    "DATASET-DESCRIPTION": "Beschreibung des Datensatzes",
+    "DATASET-ORIGIN": "Urheber",
+    "DATASET-CREATED": "Erstellt am",
+    "DATASET-UPDATED": "Letztes Update",
+    "DATASET-ID": "ID des Datensatzes",
+    "DATASET-PARENT": "Original Datensatz",
+    "DATASET-TAGS": "Tags",
+    "DATASET-FORMAT": "Datentyp",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
