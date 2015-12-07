@@ -10,17 +10,17 @@
                     h3 Meine Vidatios
 
                     .row
-                        .col-xs-6.col-sm-4.col-md-3(ng-repeat="vidatio in vidatios")
+                        .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
-                                .img
+                                a.img(ui-sref="/vidatio/{{vidatio.id}}" href="#")
                                     img(src="{{ vidatio.image }}")
                                 .text
-                                    h4 {{ vidatio.title }}
+                                    .title
+                                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#")
+                                            h4 {{ vidatio.title }}
                                     p {{ vidatio.description | limitTo: 45}} ...
-                                    a(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
+                                    a.right(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
 
                     .row
                         .col-xs-12.has-link
-                            a(ui-sref="app.catalog({ locale: locale })" )
-                                button.btn.btn-embossed.btn-primary Weitere
-
+                            a.button.btn.btn-embossed.btn-primary(ui-sref="app.catalog({ locale: locale })" ) Weitere
