@@ -46,46 +46,11 @@
     .col-xs-6
         padding 0
 
-    span.error
-        width 100%
-        background $color-red
-        padding 5px 10px
-        display block
-        border-radius 4px
-        margin-bottom 10px
-
-        &.ng-hide-add
-            animation: 0.5s fadeOut ease;
-
-        &.ng-hide-remove
-            animation: 0.5s fadeIn ease;
-
     .form-control
         border-left none
 
-    // VALID
-    .input-group.form-group
-        .input-group-addon
-        .form-control-feedback
-            color $color-green
-            background white
-
-    // VALID WITH FOCUS
-    .input-group.form-group
-        &.focus .input-group-addon
-        .input-group-addon.focus
-        input.form-control:focus
-        .form-control-feedback
-            color $color-green
-            border-color $color-green
-
-    //INVALID
-    .has-error.input-group.form-group
-        .input-group-addon
-        input.form-control
-        .form-control-feedback
-            color $color-red
-            border-color $color-red
+    a.button
+        background none
 
 @keyframes fadeIn {
     from {
