@@ -27,7 +27,7 @@ describe "Service Data", ->
         it "with file type csv", ->
             @Data.meta.fileType = "csv"
 
-            @Data.updateTableAndMap 0, 0, "oldData", "newData"
+            @Data.updateMap 0, 0, "oldData", "newData"
 
             expect(@Converter.convertArrays2GeoJSON).toHaveBeenCalled()
             expect(@Map.setGeoJSON).toHaveBeenCalled()
@@ -35,7 +35,7 @@ describe "Service Data", ->
         it "with file type shp", ->
             @Data.meta.fileType = "shp"
 
-            @Data.updateTableAndMap(0, 0, "oldData", "newData")
+            @Data.updateMap(0, 0, "oldData", "newData")
             expect(@Map.updateGeoJSONwithSHP).toHaveBeenCalled()
 
 

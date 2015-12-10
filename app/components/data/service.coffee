@@ -20,10 +20,10 @@ app.service 'DataService', [
                     "fileType": ""
                     "fileName": ""
 
-            updateTableAndMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateTableAndMap called"
+            updateMap: (row, column, oldData, newData) ->
+                $log.info "DataService updateMap called"
                 $log.debug
-                    message: "DataService updateTableAndMap called"
+                    message: "DataService updateMap called"
                     row: row
                     column: column
                     oldData: oldData

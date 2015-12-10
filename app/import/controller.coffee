@@ -125,11 +125,39 @@ app.controller "ImportCtrl", [
 
                     when "csv"
                         Data.meta.fileType = "csv"
+
                         dataset = Converter.convertCSV2Arrays fileContent
-                        geoJSON = Converter.convertArrays2GeoJSON dataset
+                        subDataset = Helper.cutDataset(dataset)
+
+                        schema = Analyser.getSchema(subDataset)
+                        variances = Analyser.getVariances(subDataset)
+
+                        { recommendedDiagram, xColumn, yColumn } = Analyser.getRecommendedDiagram(schema, variances)
+
+                        switch recommendedDiagram
+                            when "scatter"
+                                $log.info "ImportCtrl decided to draw a scatter plot"
+
+                            when "map"
+                                $log.info "ImportCtrl decided to draw a map"
+                                geoJSON = Converter.convertArrays2GeoJSON dataset
+                                Map.setGeoJSON geoJSON
+
+                            when "parallel"
+                                $log.info "ImportCtrl decided to draw parallel coordinates"
+
+                            when "bar"
+                                $log.info "ImportCtrl decided to draw a bar chart"
+
+                            when "line"
+                                $log.info "ImportCtrl decided to draw a line chart"
+
+                            else
+                                $log.error "ImportCtrl recommend diagram failed, dataset isn't usable with vidatio"
+
                         Table.resetColHeaders()
                         Table.setDataset dataset
-                        Map.setGeoJSON geoJSON
+
                         $location.path editorPath
 
                     when "zip"
