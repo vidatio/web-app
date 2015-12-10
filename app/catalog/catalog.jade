@@ -1,5 +1,14 @@
-#catalog(ng-controller="CatalogCtrl")
-    h1 Wähle ein Datenset aus
+#profile.wrapper-content(ng-controller="CatalogCtrl")
+    .vidatios(ng-show="vidatios.length")
+        h3 Catalog
 
-    ul.row
-        li.col-xs-4.col-sm-4.col-md-4.col-lg-4(ng-repeat="item in data") {{ item.name }}
+        .row
+            .col-xs-12.col-sm-6.col-md-4(ng-repeat="vidatio in vidatios")
+                .vidatio
+                    .img
+                        img(src="{{ vidatio.image }}")
+                    .text
+                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#")
+                            h4 {{ vidatio.name }}
+                        p {{ vidatio.description | limitTo: 45}} ...
+                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
