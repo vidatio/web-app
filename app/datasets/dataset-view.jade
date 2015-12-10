@@ -1,4 +1,4 @@
-#dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl as Dataset" ng-repeat="info in information")
     .row
         .col-sm-1
 
@@ -14,7 +14,7 @@
 
             .row.buttons-below-visualization
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.button.btn.btn-embossed.btn-primary(ui-sref="app.editor({ locale: locale})" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+                    a#edit-dataset.button.btn.btn-embossed.btn-primary(ui-sref="app.editor.id({ locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     a#share-dataset.button.btn.btn-embossed.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}

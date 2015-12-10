@@ -158,6 +158,12 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
+        .state "app.editor.id",
+            url: "/:id",
+            templateUrl: "editor/editor.html"
+            controller: "EditorCtrl"
+            title: "editor"
+
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
             url: '*path'
