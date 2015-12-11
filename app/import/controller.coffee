@@ -129,10 +129,7 @@ app.controller "ImportCtrl", [
                         dataset = Converter.convertCSV2Arrays fileContent
                         subDataset = Helper.cutDataset(dataset)
 
-                        schema = Analyser.getSchema(subDataset)
-                        variances = Analyser.getVariances(subDataset)
-
-                        { recommendedDiagram, xColumn, yColumn } = Analyser.getRecommendedDiagram(schema, variances)
+                        { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram(subDataset)
 
                         switch recommendedDiagram
                             when "scatter"
