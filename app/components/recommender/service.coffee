@@ -11,31 +11,22 @@ class Recommender
     getSchema: (dataset) ->
         $log.info "Recommender getSchema called"
 
-    isQuantitative: (column) ->
-        counter = 0
-
+    isNumeric: (column) ->
         for key, value of column
-            if typeof value is "number"
-                counter++
+            if typeof parseFloat(value) is not "number" || value is not isFinite(value)
+                return false
 
-        return column.length is counter
+        return true
 
     isNominal: (column) ->
-        counter = 0
-
         for key, value of column
-            if typeof value is "string"
-                counter++
+            if typeof value is not "string"
+                return false
 
-        return column.length is counter
+        return true
 
     isOrdinal: (column) ->
-        counter = 0
 
-        for key, value of column
-            # TODO
-
-        return column.length is counter
 
     # @method getVariances
     # @public
