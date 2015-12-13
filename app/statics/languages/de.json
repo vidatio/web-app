@@ -71,6 +71,7 @@
     "LOG_OUT": "Abmelden",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
+    "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
