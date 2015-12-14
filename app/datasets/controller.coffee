@@ -22,8 +22,8 @@ app.controller "DatasetCtrl", [
 
         DataFactory.get { id: testId }, (data) ->
             $scope.data = data
-            updated = $scope.data.updatedAt || "-"
-            created = $scope.data.createdAt || "-"
+            updated = convertDates($scope.data.updatedAt) || "-"
+            created = convertDates($scope.data.createdAt) || "-"
             datasetId = $scope.data._id || "-"
             tags = $scope.data.tags || "-"
             format = "JSON"
@@ -47,7 +47,7 @@ app.controller "DatasetCtrl", [
                 parent: parent
                 category: category
                 tags: tags
-                data: dataAll
+                data: $scope.data
                 format: format
 
 
@@ -66,8 +66,8 @@ app.controller "DatasetCtrl", [
             $log.info "DatasetCtrl editDataset called"
             $log.debug
                 id: testId
-                name: dataAll.name
-                data: dataAll.data
+                name: $scope.data.name
+                data: $scope.data.data
 
             dataset = Converter.convertGeoJSON2Arrays $scope.data.data
             #console.log "dataset", dataset
@@ -104,10 +104,13 @@ app.controller "DatasetCtrl", [
             DatasetService.downloadMetadata($scope.data)
 
 
-        convertDates = (current) ->
-            current = new Date $scope.data.createdAt
-            current = current.toLocaleString()
+        convertDates = (date) ->
+            if date == undefined
+                return
+
+            current = date.toLocaleString()
             current = current.split ','
+            console.log current[0]
             return current[0]
 
 
