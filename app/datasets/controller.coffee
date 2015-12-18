@@ -15,15 +15,16 @@ app.controller "DatasetCtrl", [
     "TableService"
     "MapService"
     "ConverterService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService, Table, Map, Converter) ->
+    "$timeout"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService, Table, Map, Converter, $timeout) ->
 
         testId = "565b48985b4c70ae2a34242b"
         $scope.information = []
 
         DataFactory.get { id: testId }, (data) ->
             $scope.data = data
-            updated = convertDates($scope.data.updatedAt) || "-"
-            created = convertDates($scope.data.createdAt) || "-"
+            updated = convertDates($scope.data.updatedAt)
+            created = convertDates($scope.data.createdAt)
             datasetId = $scope.data._id || "-"
             tags = $scope.data.tags || "-"
             format = "JSON"
@@ -71,8 +72,13 @@ app.controller "DatasetCtrl", [
 
             dataset = Converter.convertGeoJSON2Arrays $scope.data.data
             #console.log "dataset", dataset
+
+            Table.resetColHeaders()
             Table.setDataset dataset
             Map.setGeoJSON $scope.data.data
+
+            $timeout ->
+                Progress.setMessage ""
 
 
         $scope.shareDataset = ->
@@ -105,13 +111,12 @@ app.controller "DatasetCtrl", [
 
 
         convertDates = (date) ->
+
             if date == undefined
-                return
+                return "-"
 
-            current = date.toLocaleString()
-            current = current.split ','
-            console.log current[0]
-            return current[0]
-
-
+            current = new Date date.toLocaleString()
+            #current = current.split ','
+            #console.log current[0]
+            return current
 ]
