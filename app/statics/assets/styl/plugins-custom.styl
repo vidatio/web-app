@@ -1,8 +1,16 @@
 @require "colors"
+@require "helpers"
 
 /**
  * Resetting bootstrap & flatUI
  */
+
+/* deactivate FlatUIs hover transitions */
+a
+.btn
+.form-control
+.input-group-addon
+    transition none
 
 .row
     margin 0
@@ -25,14 +33,11 @@
     color $color-white
     font-size 16px
 
-    &:focus
-        background-color $color-green
-
-.btn-primary:hover
-.btn-primary:active:hover
-.open > .dropdown-toggle.btn-primary:focus
-    background-color $color-hover-dark
-    color $color-white
+    &:hover
+    &:focus,
+    &:active,
+    &:active:hover
+        background-color $color-hover-dark
 
 .btn-group .dropdown-menu
     margin-top 3px
@@ -40,25 +45,30 @@
     width 104px
 
 .btn-embossed
-    box-shadow inset 0 -3px 0 $color-border
-    -webkit-box-shadow inset 0 -3px 0 $color-border
-    -moz-box-shadow inset 0 -3px 0 $color-border
+    box-shadow inset 0 -4px 0 $color-border
+    position relative
+    top 0
+    padding-bottom 14px
 
-    &:active
     &:hover
-    &:focus
-        background-color $color-hover-dark
-        -webkit-box-shadow none
-        -moz-box-shadow none
-        box-shadow none
-        color $color-white
+        background-color $color-green
+        box-shadow inset 0 -3px 0 $color-border
+        top 1px
 
         span
-            background-color $color-hover-dark
-            -webkit-box-shadow none
-            -moz-box-shadow none
+            top: 1px
             box-shadow none
-            color $color-white
+
+    &:focus,
+    &:active,
+    &:active:hover
+        top: 2px
+        background-color $color-green
+        box-shadow none
+
+        span
+            background-color $color-green
+
 
 .dropdown-menu > li > a
     &:hover
@@ -88,20 +98,17 @@
 /* Arrows in our buttons */
 .fui-arrow-left
     &::before
-        margin-right 10px
+        margin-right 7px
+
+.fui-arrow-right
+    &::before
+        margin-left 7px
 
 .fui-arrow-left
 .fui-arrow-right
     &::before
         font-size 14px
 
-/* deactivate FlatUIs hover transitions */
-a
-.btn
-.form-control
-.input-group-addon
-    transition none
-    -webkit-transition none
 
 /* Registration specific styles */
 .form-control

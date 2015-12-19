@@ -99,15 +99,29 @@
         #option-link
             position relative
 
-            #link-submit-button
-                top 0
-
             .form-link
                 width 80%
                 margin 0 auto
 
-        #option-empty-table a.button, #option-browse-data a.button, #option-browse-filesystem a.button
-            background none
+
+                .form-control:focus ~ .input-group-btn #link-submit-button,
+                &:hover #link-submit-button,
+                &:focus #link-submit-button
+                    background-color $color-green
+                    border-color $color-green
+
+                #link-submit-button
+                    background-color #BDC3C7
+                    border-color #BDC3C7
+                    top 0
+
+                    &:hover
+                        background-color $color-hover-dark
+                        border-color $color-hover-dark
+
+                .form-control:focus ~ .input-group-btn #link-submit-button:hover
+                    background-color $color-hover-dark
+                    border-color $color-hover-dark
 
         .other, .file-read
             margin-bottom 56px

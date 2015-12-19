@@ -24,7 +24,7 @@ header
             -webkit-flex-direction row
 
         .separator
-            width 1px
+            width 2px
             background-color $color-green
 
     #navigation.editor
@@ -39,29 +39,18 @@ header
 
     #back-to-import
         position relative
-        height 40px
         text-align center
         float right
-        line-height 17px
-
-        .btn-tip
-            padding-left 0px
-
-        .fui-arrow-left
-            &::before
-                margin-right 10px
-                font-size 14px
 
     #save-dataset
         float left
-        height 40px
 
 
     .tab
         border-bottom 4px solid $color-passive
         display inline-block
         width 50%
-        height 40px
+        height 42px
         line-height 41px
         background $color-passive
         position relative
@@ -74,25 +63,6 @@ header
 
         &:hover
             color $color-white
-            border-bottom-color $color-green
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 39px
-                width 0
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
-
-            &::before
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
 
         &.active
             border-bottom 4px solid $color-green
@@ -117,8 +87,6 @@ header
                 border-width 10px
                 margin-left -10px
 
-    .border-right
-        border-right none
 
     .menu-buttons
         height 100%
@@ -129,6 +97,7 @@ header
             display inline
 
         a#login-button, a#menu
+            color $color-black
             line-height 40px
             vertical-align middle
             text-align center
@@ -136,11 +105,13 @@ header
             height 40px
             display inline-block
             margin-left 3px
-            background $color-passive
             border-radius 4px
 
+            &:hover, &:focus
+                color $color-grey-light
+                background-color $color-passive
 
-            &:hover
+            &:active
                 color $color-green
 
         .menu-active
@@ -170,9 +141,9 @@ header
         button.btn-primary
             font-size 14px !important
 
-            .fui-arrow-left
-                &::before
-                    font-size 12px !important
+            // .fui-arrow-left
+            //     &::before
+            //         font-size 12px !important
 
     header
         .tab
