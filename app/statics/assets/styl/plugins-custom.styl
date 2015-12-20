@@ -33,12 +33,15 @@ a
     color $color-white
     font-size 16px
 
-    &:hover
-    &:focus,
+    &:hover,
+    &:focus
+        background-color $color-hover-dark
+
     &:active,
     &:active:hover,
     &:active:focus
-        background-color $color-hover-dark
+        background-color $color-active
+
 
 .btn-group .dropdown-menu
     margin-top 3px
