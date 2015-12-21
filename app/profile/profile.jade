@@ -15,12 +15,10 @@
                                 a.img(ui-sref="/vidatio/{{vidatio.id}}" href="#")
                                     img(src="{{ vidatio.image }}")
                                 .text
-                                    .title
-                                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#")
-                                            h4 {{ vidatio.title }}
-                                    p {{ vidatio.description | limitTo: 45}} ...
-                                    a.right(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
+                                    a.inverse(ui-sref="/vidatio/{{vidatio.id}}" href="#")
+                                        h4.title {{ vidatio.title }}
+                                    p {{ vidatio.description | limitTo: 120}} ...
 
                     .row
                         .col-xs-12.has-link
-                            a.button.btn.btn-embossed.btn-primary(ui-sref="app.catalog({ locale: locale })" ) Weitere
+                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale })" ) Weitere
