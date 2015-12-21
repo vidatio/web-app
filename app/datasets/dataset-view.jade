@@ -14,13 +14,13 @@
 
             .row.buttons-below-visualization
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.button.btn.btn-embossed.btn-primary(ui-sref="app.editor.id({ locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#share-dataset.button.btn.btn-embossed.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}
+                    a#share-dataset.btn.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                   a#download-dataset.button.btn.btn-embossed.btn-primary(href='#' ng-click='downloadDataset()') {{ "DOWNLOAD" | translate | uppercase }}
+                   a#download-dataset.btn.btn-primary(href='#' ng-click='downloadDataset()') {{ "DOWNLOAD" | translate | uppercase }}
 
     .row
         .col-sm-1
@@ -30,13 +30,13 @@
 
             .row.buttons-below-gallery
                 .col-xs-4.col-sm-4.middle
-                    a#link-dataset.button.btn.btn-embossed.btn-primarya(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
+                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#code-dataset.button.btn.btn-embossed.btn-primary(href='#' ng-click='getCodeDataset()') {{ "CODE" | translate | uppercase }}
+                    a#code-dataset.btn.btn-primary(href='#' ng-click='getCodeDataset()') {{ "CODE" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#metadata-dataset.button.btn.btn-embossed.btn-primarya(href='#' ng-click='getMetadataDataset()') {{ "METADATA" | translate | uppercase }}
+                    a#metadata-dataset.btn.btn-primary(href='#' ng-click='getMetadataDataset()') {{ "METADATA" | translate | uppercase }}
 
     .row
         .col-sm-1
