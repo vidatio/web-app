@@ -1,12 +1,11 @@
 #catalog.wrapper-content(ng-controller="CatalogCtrl")
     .vidatios(ng-show="vidatios.length")
         .row
-            .col-xs-12.col-sm-6.col-md-4(ng-repeat="vidatio in vidatios")
+            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
                 .vidatio
-                    .img
+                    a.img(ui-sref="/vidatio/{{vidatio.id}}" href="#")
                         img(src="{{ vidatio.image }}")
                     .text
-                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#")
-                            h4 {{ vidatio.name }}
-                        p {{ vidatio.description | limitTo: 45}} ...
-                        a(ui-sref="/vidatio/{{vidatio.id}}" href="#") Mehr
+                        a.inverse(ui-sref="/vidatio/{{vidatio.id}}" href="#")
+                            h4.title {{ vidatio.title }}
+                        p {{ vidatio.description | limitTo: 120}} ...

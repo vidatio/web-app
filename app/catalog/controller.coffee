@@ -10,8 +10,8 @@ app.controller "CatalogCtrl", [
             $scope.vidatios = response
 
             for vidatio in $scope.vidatios
-                console.log(vidatio)
                 vidatio.description = "Hello world, this is a test!"
+                vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
         , (error) ->
             console.error error
