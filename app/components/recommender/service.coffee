@@ -2,7 +2,7 @@ class Recommender
     constructor: ->
         console.info "Recommender constructor called"
 
-        @types = [ "quantitative", "nominal", "ordinal" ]
+        @types = ["numeric", "nominal", "unknown"]
 
     # @method getSchema
     # @public
@@ -14,23 +14,14 @@ class Recommender
             dataset: dataset
 
         schema = []
-        columns = []
 
-        dataset.forEach (row, i, dataset) ->
-            row.forEach (cell, j, row) ->
-                if(columns[j])
-                    columns[j].push(cell)
-                else
-                    columns.push([])
-
-        columns.forEach (column) =>
-            console.log(column)
-            if(@isNumeric(column))
-                schema.push("numeric")
-            else if @isNominal(column)
-                schema.push("nominal")
+        dataset.forEach (column) =>
+            if @isNumeric column
+                schema.push @types[0]
+            else if @isNominal column
+                schema.push @types[1]
             else
-                schema.push("unknown")
+                schema.push @types[2]
 
         return schema
 
@@ -40,9 +31,7 @@ class Recommender
     # @return {Boolean} are all cells numeric?
     isNumeric: (column) ->
         for key, value of column
-            console.log(typeof value)
-            console.log(value is not isFinite(value))
-            if typeof parseFloat(value) is not "number" || value is not isFinite(value)
+            if not isFinite value
                 return false
         return true
 
@@ -52,7 +41,7 @@ class Recommender
     # @return {Boolean} are all cells strings?
     isNominal: (column) ->
         for key, value of column
-            if typeof value is not "string"
+            if isFinite value
                 return false
         return true
 
@@ -62,6 +51,42 @@ class Recommender
     # @return {Array} variances of the values of each column
     getVariances: (dataset) ->
         console.info "Recommender getVariances called"
+        console.log JSON.stringify
+            dataset: dataset
+
+        variances = []
+
+        dataset.forEach (column, idx, array) =>
+            differentValues = {}
+            column.forEach (cell, idx, array) =>
+                differentValues[cell] = true
+
+            count = 0
+            for own key of differentValues
+                count++
+
+            variances.push count / column.length
+
+        return variances
+
+    # @method rotateDataset
+    # @public
+    # @param {Array} dataset with rows and columns
+    # @return {Array} dataset but rows are now columns and vice versa
+    rotateDataset: (dataset) ->
+        console.info "Recommender rotateDataset called"
+        console.log
+            dataset: dataset
+
+        rotatedDataset = []
+
+        dataset.forEach (row, i, dataset) ->
+            row.forEach (cell, j, row) ->
+                if not rotatedDataset[j]
+                    rotatedDataset.push []
+                rotatedDataset[j].push cell
+
+        return rotatedDataset
 
     # @method getRecommendedDiagram
     # @public
@@ -75,5 +100,11 @@ class Recommender
             schema: schema
             variances: variances
 
-        schema = @getSchema(dataset)
-        variances = @getVariances(dataset)
+        rotatedDataset = rotateDataset(dataset)
+
+        schema = @getSchema(rotatedDataset)
+        variances = @getVariances(rotatedDataset)
+
+
+
+
