@@ -16,7 +16,8 @@ app.controller "DatasetCtrl", [
     "MapService"
     "ConverterService"
     "$timeout"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService, Table, Map, Converter, $timeout) ->
+    "ProgressService"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService, Table, Map, Converter, $timeout, Progress) ->
 
         testId = "565b48985b4c70ae2a34242b"
         $scope.information = []
@@ -35,7 +36,6 @@ app.controller "DatasetCtrl", [
             image = $scope.data.image || "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
-            # category = dataAll.category || "-"
 
             $scope.information.push
                 title: title
@@ -51,14 +51,6 @@ app.controller "DatasetCtrl", [
                 data: $scope.data
                 format: format
 
-
-            #(document).ready ->
-            #   $('.dataset-title').text dataAll.name
-            #   $('.description').text description
-            #   $('.dataset-creator').text dataAll.userId
-            #   $('.dataset-created').text created
-            #   $('.dataset-update').text updated
-
         #UserFactory.query null, (response) ->
         #   console.log response
 
@@ -70,9 +62,11 @@ app.controller "DatasetCtrl", [
                 name: $scope.data.name
                 data: $scope.data.data
 
+            # the API-call receives gata in GeoJSON, so convert it back in array-format
             dataset = Converter.convertGeoJSON2Arrays $scope.data.data
-            #console.log "dataset", dataset
 
+            # call necessary Table- and Map-functions to display dataset in editor
+            Table.resetDataset()
             Table.resetColHeaders()
             Table.setDataset dataset
             Map.setGeoJSON $scope.data.data
@@ -115,8 +109,7 @@ app.controller "DatasetCtrl", [
             if date == undefined
                 return "-"
 
-            current = new Date date.toLocaleString()
-            #current = current.split ','
-            #console.log current[0]
-            return current
+            current = (new Date date).toLocaleString()
+            current = current.split ','
+            return current[0]
 ]

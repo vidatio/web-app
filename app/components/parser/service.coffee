@@ -253,8 +253,10 @@ app.service 'ParserService', [
                             matrixPossibleCoordinates[indexRow][indexCell] = true
                         # But there can also be two coordinates in a single cell like "47.232, 13.854"
                         else if cell
+                            console.log "cell: ", cell.toString()
                             # at least we need two separated coordinates
-                            potentialCoordinates = cell.split(",")
+                            # we have to ensure that the cell content is in string-format, otherwise .cell() doesn't work
+                            potentialCoordinates = cell.toString().split(",")
                             if(potentialCoordinates.length != 2)
                                 return
                             # too protocol the existence of two coordinates we use array in one cell of the matrix
