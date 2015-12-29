@@ -255,7 +255,7 @@ app.service 'ParserService', [
                         else if cell
                             console.log "cell: ", cell.toString()
                             # at least we need two separated coordinates
-                            # we have to ensure that the cell content is in string-format, otherwise .cell() doesn't work
+                            # we have to ensure that the cell content is in string-format, otherwise cell.split() doesn't work
                             potentialCoordinates = cell.toString().split(",")
                             if(potentialCoordinates.length != 2)
                                 return
