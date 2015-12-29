@@ -11,13 +11,12 @@ app.controller "DatasetCtrl", [
     "$log"
     "DataFactory"
     "UserFactory"
-    "DatasetService"
     "TableService"
     "MapService"
     "ConverterService"
     "$timeout"
     "ProgressService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, DatasetService, Table, Map, Converter, $timeout, Progress) ->
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress) ->
 
         testId = "565b48985b4c70ae2a34242b"
         $scope.information = []
@@ -78,30 +77,24 @@ app.controller "DatasetCtrl", [
         $scope.shareDataset = ->
             $log.info "DatasetCtrl shareDataset called"
 
-            DatasetService.share($scope.data.data)
 
         $scope.downloadDataset = ->
             $log.info "DatasetCtrl downloadDataset called"
 
-            DatasetService.downloadDataset($scope.data.data)
+        $scope.downloadImage = ->
+            $log.info "DatasetCtrl downloadImage called"
 
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
 
-            DatasetService.getLink($scope.data.link)
-
 
         $scope.getCodeDataset = ->
             $log.info "DatasetCtrl getCodeDataset called"
 
-            DatasetService.downloadCode($scope.data)
-
 
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
-
-            DatasetService.downloadMetadata($scope.data)
 
 
         convertDates = (date) ->

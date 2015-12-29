@@ -37,6 +37,88 @@
         #metadata-dataset
             width 120px
 
+
+        #download-dataset
+            position relative
+            cursor pointer
+            margin 0 auto
+
+            & > a
+                display block
+                width 120px
+
+            ul
+                background $color-white none repeat scroll 0 0
+                border 2px solid $color-green
+                display none
+                position absolute
+                width 120px
+                list-style outside none none
+                padding 0
+                margin-top 12px
+                border-radius 4px
+                z-index 300
+
+                &::after
+                    border-color transparent transparent $color-white transparent
+                    border-style solid
+                    border-width 10px
+                    content ""
+                    left 48px
+                    position absolute
+                    top -20px
+                    z-index 1000
+
+                li
+                    display block
+                    position relative
+                    z-index 301
+
+                    &:first-child
+                        border-bottom 2px solid $color-green
+
+                        &::before
+                            border-color transparent
+                            border-style solid
+                            border-width 11px
+                            content ""
+                            left -2px
+                            position absolute
+                            top -20px
+                            z-index 1001
+                            width 120px
+
+                        &::after
+                            border-color transparent transparent $color-green transparent
+                            border-style solid
+                            border-width 11px
+                            content ""
+                            left 47px
+                            position absolute
+                            top -24px
+                            z-index 1001
+
+                    & > a
+                        color $color-black
+                        position relative
+                        text-decoration none
+                        white-space nowrap
+                        z-index 302
+                        line-height 30px
+                        font-size 16px
+                        font-weight 700
+
+                    &:hover
+                        & > a
+                            color $color-green
+
+            &:hover
+                & > ul
+                    display block
+
+                & > a
+                    background-color $color-hover-dark
+
     .buttons-below-visualization
         margin-top -20px
 
@@ -63,6 +145,9 @@
             .text
                 font-weight bold
                 width 250px
+
+
+
 
 
 

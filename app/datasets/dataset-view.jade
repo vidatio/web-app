@@ -20,7 +20,15 @@
                     a#share-dataset.btn.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#download-dataset.btn.btn-primary(href='#' ng-click='downloadDataset()') {{ "DOWNLOAD" | translate | uppercase }}
+                    #download-dataset
+                        a.btn.btn-primary(href='#') {{ "DOWNLOAD" | translate | uppercase }}
+
+                        ul
+                            li
+                                a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
+
+                            li
+                                a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
 
 
             .row.buttons-below-gallery
