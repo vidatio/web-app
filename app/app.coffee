@@ -124,8 +124,8 @@ app.config [
             title: "profile"
 
         # /dataset detail-view
-        .state "app.dataset-view",
-            url: "/dataset"
+        .state "app.dataset-detail-view",
+            url: "/vidatio/:id"
             controller: "DatasetCtrl"
             templateUrl: "datasets/dataset-view.html"
             title: "dataset-view"
@@ -158,12 +158,14 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
+        # /editor for saved vidatio
         .state "app.editor.id",
-            url: "/:id",
+            url: "/vidatio_:id",
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
+        # /dataset catalog
         .state "app.catalog",
             url: "/catalog"
             templateUrl: "catalog/catalog.html"

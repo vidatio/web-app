@@ -9,7 +9,7 @@ nav
                 a#logo-menu(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
 
         .menu-list
-            a.item(href="") {{ 'AVAILABLE_DATASETS' | translate }}
+            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()") {{ 'AVAILABLE_DATASETS' | translate }}
             a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ 'IMPORT_DATA' | translate }}
             a.item(href="") {{ 'FEATURES' | translate }}
             a.item(href="") {{ 'PRICING' | translate }}

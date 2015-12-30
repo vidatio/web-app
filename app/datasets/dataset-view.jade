@@ -14,7 +14,7 @@
 
             .row.buttons-below-visualization
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     a#share-dataset.btn.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}

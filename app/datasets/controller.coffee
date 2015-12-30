@@ -16,16 +16,16 @@ app.controller "DatasetCtrl", [
     "ConverterService"
     "$timeout"
     "ProgressService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress) ->
+    "$stateParams"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams) ->
 
-        testId = "565b48985b4c70ae2a34242b"
+        datasetId = $stateParams.id
         $scope.information = []
 
-        DataFactory.get { id: testId }, (data) ->
+        DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
             updated = convertDates($scope.data.updatedAt)
             created = convertDates($scope.data.createdAt)
-            datasetId = $scope.data._id || "-"
             tags = $scope.data.tags || "-"
             format = "JSON"
             category = $scope.data.category || "-"
@@ -34,7 +34,6 @@ app.controller "DatasetCtrl", [
             parent = $scope.data.parentId || "-"
             image = $scope.data.image || "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
-
 
             $scope.information.push
                 title: title
@@ -50,6 +49,10 @@ app.controller "DatasetCtrl", [
                 data: $scope.data
                 format: format
 
+        , (error) ->
+            console.error error
+
+
         #UserFactory.query null, (response) ->
         #   console.log response
 
@@ -57,11 +60,11 @@ app.controller "DatasetCtrl", [
         $scope.editDataset = ->
             $log.info "DatasetCtrl editDataset called"
             $log.debug
-                id: testId
+                id: datasetId
                 name: $scope.data.name
                 data: $scope.data.data
 
-            # the API-call receives gata in GeoJSON, so convert it back in array-format
+            # the API-call receives data in GeoJSON, so convert it back in array-format
             dataset = Converter.convertGeoJSON2Arrays $scope.data.data
 
             # call necessary Table- and Map-functions to display dataset in editor
@@ -96,9 +99,8 @@ app.controller "DatasetCtrl", [
         $scope.getMetadataDataset = ->
             $log.info "DatasetCtrl getMetadataDataset called"
 
-
+        # convert available dates to locale date-format and display only the date without time
         convertDates = (date) ->
-
             if date == undefined
                 return "-"
 

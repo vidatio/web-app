@@ -147,10 +147,6 @@
                 width 250px
 
 
-
-
-
-
 @media (max-width: 767px)
     #dataset-view
         .buttons-below-visualization
@@ -163,6 +159,24 @@
             #metadata-dataset
                 width 100px
                 font-size 13px
+
+            #download-dataset
+                a
+                    width 100px
+                    font-size 13px
+
+                ul
+                    width 100px
+
+                    &::after
+                        left 37px
+                        top -19px
+
+                    li
+                        &:first-child
+                            &::after
+                                left 36px
+                                top -23px
 
         .dataset-title
             margin-top 30px
