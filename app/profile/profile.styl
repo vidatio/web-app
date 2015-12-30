@@ -30,28 +30,28 @@
         box-shadow $box-shadow-size $color-shadow
 
         h4, img
+            font-size 18px
             width 100%
 
         .img
             background #F2F2F2
+
         .text
-            background #E5E5E5
-            padding 10px
-            .title
-                height 40px
+            padding 10px 10px 25px
+
+        .title
+            margin-bottom 15px
+
+        a.img:hover ~ .text a
+            color $color-hover-dark
 
         p
-            height 40px
-            line-height 1
-            font-size 16px
+            line-height 1.2
+            font-size 14px
         a
             display block
             padding 0
             width 100%
-            color $color-grey-dark
-
-            &:hover
-                color $color-white
 
         a.right
             padding 0 8px
