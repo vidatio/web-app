@@ -19,6 +19,7 @@ app = angular.module "app", [
     "ngSanitize"
     "ngCookies"
     "logglyLogger"
+    "angular-c3-simple"
 ]
 
 app.run [

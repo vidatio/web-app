@@ -102,6 +102,9 @@ BUILD =
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/d3/d3.js"
+            "./bower_components/c3/c3.js"
+            "./bower_components/angular-c3-simple/dist/angular_c3_simple.min.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"

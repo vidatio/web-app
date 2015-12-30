@@ -1,7 +1,6 @@
 class Recommender
     constructor: ->
         console.info "Recommender constructor called"
-
         @types = ["numeric", "nominal", "unknown"]
 
     # @method getSchema
@@ -56,9 +55,9 @@ class Recommender
 
         variances = []
 
-        dataset.forEach (column, idx, array) =>
+        dataset.forEach (column, idx, array) ->
             differentValues = {}
-            column.forEach (cell, idx, array) =>
+            column.forEach (cell, idx, array) ->
                 differentValues[cell] = true
 
             count = 0
@@ -92,19 +91,43 @@ class Recommender
     # @public
     # @param {Array} dataset
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
-    #   the id of the column for the x value,
-    #   the id of the column for the y value
+    #   the index of the column for the x value,
+    #   the index of the column for the y value
     getRecommendedDiagram: (dataset) ->
         console.info "Recommender getRecommendedDiagram called"
         console.log
             schema: schema
             variances: variances
+        xIndex = null
+        yIndex = null
+        recommendedDiagram = null
 
-        rotatedDataset = rotateDataset(dataset)
+        xVariance = 0
+        yVariance = 0
+
+        rotatedDataset = @rotateDataset(dataset)
 
         schema = @getSchema(rotatedDataset)
         variances = @getVariances(rotatedDataset)
 
+        for variance, index in variances
+            if variance > xVariance
+                xIndex = index
+                xVariance = variance
 
+            else if variance > yVariance
+                yIndex = index
+                yVariance = variance
 
+        type = schema[xIndex] + " " + schema[yIndex]
+        switch type
+            when "numeric numeric" then recommendedDiagram = "scatter"
+            when "nominal numeric" then recommendedDiagram = "scatter"
+            when "numeric nominal" then recommendedDiagram = "scatter"
+            when "nominal nominal" then recommendedDiagram = "scatter"
 
+        return {
+        recommendedDiagram: recommendedDiagram
+        xColumn: xIndex
+        yColumn: yIndex
+        }

@@ -8,9 +8,8 @@
                     ul
                         li
                             a.button(ng-click='shareVisualization("png")') PNG
-
                         li
                             a.button(ng-click='shareVisualization("jpg")') JPG
 
-
-        leaflet(geojson="geojson" id="map")
+        leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
+        #chart(c3-simple config="chart" ng-show="recommendedDiagram == 'scatter'")

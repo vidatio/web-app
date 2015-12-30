@@ -18,12 +18,12 @@ describe "Service Recommender", ->
         expect(@recommender.getSchema(dataset)).toEqual(schema)
 
     it "should analyse the variances of the columns of the dataset", ->
-        variances = [0.5, 0.5, 0.25, 0.5]
+        variances = [0.5, 0.5, 0.25, 1]
         dataset = [
             ["47.349", "13.892", "Salzburg", "2%"]
             ["47.349", "13.892", "Salzburg", "3%"]
-            ["46.323", "13.892", "Salzburg", "3%"]
-            ["46.323", "10.348", "Salzburg", "3%"]
+            ["46.323", "13.892", "Salzburg", "4%"]
+            ["46.323", "10.348", "Salzburg", "5%"]
         ]
 
         dataset = @recommender.rotateDataset(dataset)
@@ -36,15 +36,23 @@ describe "Service Recommender", ->
             ["400", "12", "Salzburg", "3%"]
             ["500", "13", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual("scatter")
+        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )
 
         dataset = [
-            ["200", "Linz", "Salzburg", "2%"]
-            ["300", "Innsbruck", "Salzburg", "3%"]
-            ["400", "Salzburg", "Salzburg", "3%"]
-            ["500", "Wien", "Salzburg", "3%"]
+            ["200", "Salzburg", "2%"]
+            ["300", "Salzburg", "3%"]
+            ["400", "Salzburg", "3%"]
+            ["500", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual("scatter")
+        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 2
+        )
 
         dataset = [
             ["Apfelsaft", "Linz", "Salzburg", "2%"]
@@ -52,4 +60,8 @@ describe "Service Recommender", ->
             ["Croissants", "Salzburg", "Salzburg", "3%"]
             ["Kaffee", "Wien", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual("scatter")
+        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )
