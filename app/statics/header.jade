@@ -79,6 +79,15 @@ header.ng-cloak
                 .col-xs-3.menu-buttons
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
+            #navigation.row(ng-switch-when="catalog")
+                .col-xs-3.logo
+                    a#logo.button(ui-sref="app.index({ locale: locale })")
+
+                .col-xs-6.middle
+                    h1.underline-red {{ "CATALOG" | translate | uppercase }}
+                .col-xs-3.menu-buttons
+                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")

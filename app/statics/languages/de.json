@@ -88,6 +88,7 @@
     "DATASET-PARENT": "Original Datensatz",
     "DATASET-TAGS": "Tags",
     "DATASET-FORMAT": "Datentyp",
+    "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
