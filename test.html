@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="bower_components/c3/c3.css" rel="stylesheet"/>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="bower_components/c3/c3.js"></script>
+</head>
+<body>
+<div id="parent">
+    <div id="chart"></div>
+</div>
+<button onclick="resizeParent()">Resize parent</button>
+<button onclick="resizeChart()">Resize chart</button>
+<script>
+    var chart = c3.generate({
+        bindto: '#chart',
+        data: {
+            columns: [
+                ['data1', 30, 200, 100, 400, 150, 250],
+                ['data2', 50, 20, 10, 40, 15, 25]
+            ]
+        }
+    });
+
+    var resizeParent = function(){
+        document.querySelector("#parent").style.width = "300px"
+    }
+
+    var resizeChart = function(){
+        chart.resize()
+    }
+</script>
+</body>
+</html>

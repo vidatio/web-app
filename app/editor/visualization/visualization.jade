@@ -12,4 +12,4 @@
                             a(ng-click='shareVisualization("jpg")') JPG
 
         leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
-        #chart(c3-simple config="chart" ng-show="recommendedDiagram == 'scatter'")
+        #chart(ng-show="recommendedDiagram == 'scatter'")

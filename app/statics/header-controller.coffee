@@ -10,7 +10,8 @@ app.controller "HeaderCtrl", [
     "MapService"
     "DataService"
     "$log"
-    ($scope, $rootScope, $timeout, Map, Data, $log) ->
+    "ScatterPlotService"
+    ($scope, $rootScope, $timeout, Map, Data, $log, ScatterPlot) ->
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
@@ -29,7 +30,9 @@ app.controller "HeaderCtrl", [
 
             # REFACTOR Needed to wait for leaflet directive to render
             $timeout ->
+                # TODO: Only resize what is currently visible or used
                 Map.resizeMap()
+                ScatterPlot.getChart().resize()
 
         $scope.saveDataset = ->
             geoJSON = Map.getGeoJSON()
