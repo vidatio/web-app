@@ -19,9 +19,11 @@ app.controller "DetailviewCtrl", [
     "$stateParams"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams) ->
 
+        # use datasetId from $stateParams
         datasetId = $stateParams.id
         $scope.information = []
 
+        # get dataset according to datasetId (if possible) and set necessary metadata
         DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
             updated = convertDates($scope.data.updatedAt)
@@ -35,6 +37,7 @@ app.controller "DetailviewCtrl", [
             image = $scope.data.image || "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
+            # fill up detail-view with metadata
             $scope.information.push
                 title: title
                 image: image
@@ -92,7 +95,7 @@ app.controller "DetailviewCtrl", [
         $scope.getMetadataDataset = ->
             $log.info "DetailviewCtrl getMetadataDataset called"
 
-        # convert available dates to locale date-format and display only the date without time
+        # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->
             if date == undefined
                 return "-"
