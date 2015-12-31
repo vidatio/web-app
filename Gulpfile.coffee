@@ -104,7 +104,6 @@ BUILD =
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
-            "./bower_components/angular-c3-simple/dist/angular_c3_simple.min.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -115,6 +114,7 @@ BUILD =
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
+            "./bower_components/c3/c3.css"
         ]
     dirs:
         out: "./build"

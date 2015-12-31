@@ -33,7 +33,6 @@ module.exports = (config) ->
             "./bower_components/jPushMenu/js/jPushMenu.js"
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
-            "./bower_components/angular-c3-simple/dist/angular_c3_simple.min.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
