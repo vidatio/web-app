@@ -122,12 +122,12 @@ app.config [
             templateUrl: "profile/profile.html"
             title: "profile"
 
-        # /dataset detail-view
-        .state "app.dataset-detail-view",
+        # /dataset
+        .state "app.dataset",
             url: "/vidatio/:id"
-            controller: "DetailviewCtrl"
-            templateUrl: "dataset-detail-view/detail-view.html"
-            title: "dataset-detail-view"
+            controller: "DatasetCtrl"
+            templateUrl: "dataset/dataset.html"
+            title: "dataset"
 
         # /registration
         .state "app.registration",

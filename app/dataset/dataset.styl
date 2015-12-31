@@ -1,10 +1,9 @@
 #dataset-view
     .visualization-container
-    .gallery-container
         text-align center
         vertical-align middle
         width 100%
-        height 350px
+        height 450px
         line-height 350px
         background $color-white
         margin-top 20px
@@ -18,14 +17,11 @@
             width 100%
             height 90%
 
-    .gallery-container
-        margin 50px 0
-
     .middle
         text-align center
 
-    .buttons-below-visualization
-    .buttons-below-gallery
+    .buttons-first-row
+    .buttons-second-row
         margin-right -15px
         margin-left -15px
 
@@ -42,9 +38,15 @@
             cursor pointer
             margin 0 auto
 
+            a.btn-primary:focus
+                background $color-white
+                color $color-hover-dark
+                border 2px solid $color-green
+
             & > a
                 display block
                 width 120px
+                border 2px solid transparent
 
             ul
                 background $color-white none repeat scroll 0 0
@@ -112,16 +114,21 @@
                             color $color-hover-dark
 
             &:hover
+                a.btn-primary
+                    background $color-white
+                    color $color-hover-dark
+                    border 2px solid $color-green
+
                 & > ul
                     display block
 
                 & > a
                     background-color $color-hover-dark
 
-    .buttons-below-visualization
+    .buttons-first-row
         margin-top -20px
 
-    .buttons-below-gallery
+    .buttons-second-row
         margin-top 30px
         margin-bottom 50px
 
@@ -148,8 +155,8 @@
 
 @media (max-width: 767px)
     #dataset-view
-        .buttons-below-visualization
-        .buttons-below-gallery
+        .buttons-first-row
+        .buttons-second-row
             #edit-dataset
             #share-dataset
             #download-dataset

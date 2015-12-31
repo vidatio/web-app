@@ -1,18 +1,14 @@
-#dataset-view.wrapper-content(ng-controller="DetailviewCtrl as Detailview" ng-repeat="info in information")
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
     .row
-        .col-sm-1
-
-        .col-sm-10
+        .col-sm-12
             h1.underline-turqoise.dataset-title {{ info.title }}
 
     .row
-        .col-sm-1
-
-        .col-xs-12.col-sm-10
+        .col-sm-12
             .visualization-container
                 img(src="{{ info.image }}")
 
-            .row.buttons-below-visualization
+            .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
                     a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
 
@@ -29,7 +25,7 @@
                                 a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
 
 
-            .row.buttons-below-gallery
+            .row.buttons-second-row
                 .col-xs-4.col-sm-4.middle
                     a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
 
@@ -40,15 +36,11 @@
                     a#metadata-dataset.btn.btn-primary(href='#' ng-click='getMetadataDataset()') {{ "METADATA" | translate | uppercase }}
 
     .row
-        .col-sm-1
-
-        .col-sm-10
+        .col-sm-12
             h1.underline-turqoise {{ "INFORMATION-DATASET" | translate | uppercase }}
 
     .row
-        .col-sm-1
-
-        .col-sm-10
+        .col-sm-12
             .metadata-container
                 .one-row
                     .description {{ info.description }}

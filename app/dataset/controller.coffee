@@ -5,7 +5,7 @@
 
 app = angular.module "app.controllers"
 
-app.controller "DetailviewCtrl", [
+app.controller "DatasetCtrl", [
     "$scope"
     "$rootScope"
     "$log"
@@ -59,7 +59,7 @@ app.controller "DetailviewCtrl", [
         #   console.log response
 
         $scope.editDataset = ->
-            $log.info "DetailviewCtrl editDataset called"
+            $log.info "DatasetCtrl editDataset called"
             $log.debug
                 id: datasetId
                 name: $scope.data.name
@@ -78,22 +78,22 @@ app.controller "DetailviewCtrl", [
                 Progress.setMessage ""
 
         $scope.shareDataset = ->
-            $log.info "DetailviewCtrl shareDataset called"
+            $log.info "DatasetCtrl shareDataset called"
 
         $scope.downloadDataset = ->
-            $log.info "DetailviewCtrl downloadDataset called"
+            $log.info "DatasetCtrl downloadDataset called"
 
         $scope.downloadImage = ->
-            $log.info "DetailviewCtrl downloadImage called"
+            $log.info "DatasetCtrl downloadImage called"
 
         $scope.getLinkDataset = ->
-            $log.info "DetailviewCtrl getLinkDataset called"
+            $log.info "DatasetCtrl getLinkDataset called"
 
         $scope.getCodeDataset = ->
-            $log.info "DetailviewCtrl getCodeDataset called"
+            $log.info "DatasetCtrl getCodeDataset called"
 
         $scope.getMetadataDataset = ->
-            $log.info "DetailviewCtrl getMetadataDataset called"
+            $log.info "DatasetCtrl getMetadataDataset called"
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->

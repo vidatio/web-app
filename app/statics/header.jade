@@ -7,7 +7,7 @@ header.ng-cloak
     div
         .switch-container(ng-switch on="$state.current.title")
 
-            #navigation.row(ng-switch-when="dataset-view")
+            #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
                     a#back-to-datasets-overview.btn.btn-primary(ui-sref='app.catalog({ locale: locale })')
