@@ -1,4 +1,4 @@
-#dataset-view.wrapper-content(ng-controller="DatasetCtrl as Dataset" ng-repeat="info in information")
+#dataset-view.wrapper-content(ng-controller="DetailviewCtrl as Detailview" ng-repeat="info in information")
     .row
         .col-sm-1
 
@@ -22,11 +22,9 @@
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.btn.btn-primary(href='#') {{ "DOWNLOAD" | translate | uppercase }}
-
                         ul
                             li
                                 a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
-
                             li
                                 a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
 

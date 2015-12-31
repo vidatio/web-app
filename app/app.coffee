@@ -88,7 +88,6 @@ app.config [
         # @method includeUrl
         LogglyLoggerProvider.includeUrl  true
 
-
         # I18N
         $translateProvider.useSanitizeValueStrategy "escape"
         $translateProvider.preferredLanguage "de"
@@ -126,9 +125,9 @@ app.config [
         # /dataset detail-view
         .state "app.dataset-detail-view",
             url: "/vidatio/:id"
-            controller: "DatasetCtrl"
-            templateUrl: "datasets/dataset-view.html"
-            title: "dataset-view"
+            controller: "DetailviewCtrl"
+            templateUrl: "dataset-detail-view/detail-view.html"
+            title: "dataset-detail-view"
 
         # /registration
         .state "app.registration",

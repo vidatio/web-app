@@ -1,11 +1,11 @@
-# Dataset-view Controller
+# Dataset detail-view Controller
 # ===================
 
 "use strict"
 
 app = angular.module "app.controllers"
 
-app.controller "DatasetCtrl", [
+app.controller "DetailviewCtrl", [
     "$scope"
     "$rootScope"
     "$log"
@@ -52,13 +52,11 @@ app.controller "DatasetCtrl", [
         , (error) ->
             console.error error
 
-
         #UserFactory.query null, (response) ->
         #   console.log response
 
-
         $scope.editDataset = ->
-            $log.info "DatasetCtrl editDataset called"
+            $log.info "DetailviewCtrl editDataset called"
             $log.debug
                 id: datasetId
                 name: $scope.data.name
@@ -76,28 +74,23 @@ app.controller "DatasetCtrl", [
             $timeout ->
                 Progress.setMessage ""
 
-
         $scope.shareDataset = ->
-            $log.info "DatasetCtrl shareDataset called"
-
+            $log.info "DetailviewCtrl shareDataset called"
 
         $scope.downloadDataset = ->
-            $log.info "DatasetCtrl downloadDataset called"
+            $log.info "DetailviewCtrl downloadDataset called"
 
         $scope.downloadImage = ->
-            $log.info "DatasetCtrl downloadImage called"
-
+            $log.info "DetailviewCtrl downloadImage called"
 
         $scope.getLinkDataset = ->
-            $log.info "DatasetCtrl getLinkDataset called"
-
+            $log.info "DetailviewCtrl getLinkDataset called"
 
         $scope.getCodeDataset = ->
-            $log.info "DatasetCtrl getCodeDataset called"
-
+            $log.info "DetailviewCtrl getCodeDataset called"
 
         $scope.getMetadataDataset = ->
-            $log.info "DatasetCtrl getMetadataDataset called"
+            $log.info "DetailviewCtrl getMetadataDataset called"
 
         # convert available dates to locale date-format and display only the date without time
         convertDates = (date) ->
