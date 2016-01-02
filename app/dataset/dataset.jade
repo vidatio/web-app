@@ -17,7 +17,9 @@
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
-                        a.btn.btn-primary(href='#') {{ "DOWNLOAD" | translate | uppercase }}
+                        a.title.btn.btn-primary(href='#')
+                            span.download
+                            | {{ "DOWNLOAD" | translate | uppercase }}
                         ul
                             li
                                 a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}

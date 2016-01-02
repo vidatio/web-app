@@ -21,39 +21,66 @@
         text-align center
 
     .buttons-first-row
+        margin-top -23px
+
+    .buttons-second-row
+        margin-top 30px
+        margin-bottom 50px
+
+    .buttons-first-row
     .buttons-second-row
         margin-right -15px
         margin-left -15px
 
         #edit-dataset
         #share-dataset
-        #download-dataset
         #link-dataset
         #code-dataset
+        #download-dataset
         #metadata-dataset
-            width 120px
+            width 150px
+            height 45px
+            line-height 28px
 
         #download-dataset
             position relative
             cursor pointer
             margin 0 auto
 
-            a.btn-primary:focus
+            a.title
+                color $color-black
                 background $color-white
-                color $color-hover-dark
                 border 2px solid $color-green
+                width 150px
+                height 45px
+                line-height 23px
+
+                span.download
+                    &::before
+                        content ''
+                        background-image url('../images/download-button.svg')
+                        background-repeat no-repeat
+                        background-size 15px
+                        margin-top 0.5px
+                        margin-left 5px
+                        float left
+                        width 15px
+                        height 20px
+
+                &:focus
+                    background $color-hover-light
+                    border-color $color-hover-light
 
             & > a
                 display block
-                width 120px
-                border 2px solid transparent
+                width 150px
 
             ul
                 background $color-white none repeat scroll 0 0
                 border 2px solid $color-green
                 display none
                 position absolute
-                width 120px
+                width 150px
                 list-style outside none none
                 padding 0
                 margin-top 12px
@@ -65,7 +92,7 @@
                     border-style solid
                     border-width 10px
                     content ""
-                    left 48px
+                    left 63px
                     position absolute
                     top -20px
                     z-index 1000
@@ -87,14 +114,14 @@
                             position absolute
                             top -20px
                             z-index 1001
-                            width 120px
+                            width 150px
 
                         &::after
                             border-color transparent transparent $color-green transparent
                             border-style solid
                             border-width 11px
                             content ""
-                            left 47px
+                            left 62px
                             position absolute
                             top -24px
                             z-index 1001
@@ -107,30 +134,22 @@
                         z-index 302
                         line-height 30px
                         font-size 16px
-                        font-weight 700
+                        font-weight 500
 
                     &:hover
                         & > a
-                            color $color-hover-dark
+                            color $color-green
 
             &:hover
-                a.btn-primary
-                    background $color-white
-                    color $color-hover-dark
-                    border 2px solid $color-green
+                a.title
+                    background $color-hover-light
+                    border-color $color-hover-light
 
                 & > ul
                     display block
 
                 & > a
                     background-color $color-hover-dark
-
-    .buttons-first-row
-        margin-top -20px
-
-    .buttons-second-row
-        margin-top 30px
-        margin-bottom 50px
 
     a.button
         width 132px
@@ -165,11 +184,18 @@
             #metadata-dataset
                 width 100px
                 font-size 13px
+                line-height 26px
 
             #download-dataset
-                a
+                a.title
                     width 100px
                     font-size 13px
+
+                    span.download
+                        &::before
+                            margin-left -10px
+                            background-size 13px
+                            margin-top 3px
 
                 ul
                     width 100px
