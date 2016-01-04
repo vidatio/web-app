@@ -2,10 +2,7 @@
 
 describe "Service Helper", ->
     beforeEach ->
-        module "app"
-        inject (HelperService, $injector) ->
-            @injector = $injector
-            @Helper = HelperService
+        @Helper = window.Helper
 
     it "should remove null values of a two dimensional array", ->
         dataset = [

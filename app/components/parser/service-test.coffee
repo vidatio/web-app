@@ -8,14 +8,7 @@
 
 describe "Service Parser", ->
     beforeEach ->
-        module "app"
-        inject (ParserService, $injector) ->
-            @injector = $injector
-            @Parser = ParserService
-
-    it 'should be defined and included', ->
-        expect(@Parser).toBeDefined()
-        expect(@injector.has("ParserService"))
+        @Parser = window.Parser
 
     it 'should recognize wgs84 degree decimal coordinates correctly', ->
 

@@ -9,16 +9,14 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    "ParserService"
     'leafletData'
     "$timeout"
     "ShareService"
     "DataService"
-    "HelperService"
     "ProgressService"
     "ngToast"
     "$log"
-    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, Progress, ngToast, $log) ->
+    ($scope, Table, Map, leafletData, $timeout, Share, Data, Progress, ngToast, $log) ->
         # CHART VISUALIZATIONS #
         $scope.recommendedDiagram = "scatter"
 

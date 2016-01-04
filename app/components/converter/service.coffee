@@ -10,10 +10,8 @@ app = angular.module "app.services"
 app.service 'ConverterService', [
     "$timeout"
     "$log"
-    "ParserService"
-    "HelperService"
     "$q"
-    ($timeout, $log, Parser, Helper, $q) ->
+    ($timeout, $log, $q) ->
         class Converter
 
             # @method convertSHP2GeoJSON

@@ -1,3 +1,5 @@
+"use strict"
+
 class Recommender
     constructor: ->
         console.info "Recommender constructor called"

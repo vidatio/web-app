@@ -20,8 +20,7 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "ProgressService"
-    "HelperService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Helper) ->
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
         $scope.link = "http://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&"+
                 "srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=csv&typeName=ogdsbg:volksschule"
 

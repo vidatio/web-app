@@ -7,9 +7,7 @@ app = angular.module "app.services"
 
 app.service 'MapService', [
     "$log"
-    "ParserService"
-    "HelperService"
-    ($log, Parser, Helper) ->
+    ($log) ->
         class Map
             constructor: ->
                 $log.info "MapService constructor called"
