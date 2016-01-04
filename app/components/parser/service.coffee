@@ -18,9 +18,7 @@ app.service 'ParserService', [
                 else
                     return @isCoordinateWGS84DegreeDecimal(coordinate) or
                             @isCoordinateWGS84DegreeDecimalMinutes(coordinate) or
-                            @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate) or
-                            @isCoordinateWGS84UTM(coordinate) or
-                            @isCoordinateGaussKrueger(coordinate)
+                            @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate)
 
             # allowed formats: N 90.123456, E 180.123456 to N -90.123456, E -180.123456
             # @method isCoordinateWGS84DegreeDecimal
@@ -135,16 +133,6 @@ app.service 'ParserService', [
                     return true
                 else
                     return false
-
-            # 60X 448304 5413670 to 1C 0000000 0000000
-            isCoordinateWGS84UTM: (coordinate) ->
-                # TODO
-                return false
-
-            # R 5435433.633 H 5100411.939
-            isCoordinateGaussKrueger: (coordinate) ->
-                # TODO
-                return false
 
             # first we try to find coordinates columns via the header
             # if this fails we parse the dataset for coordinates

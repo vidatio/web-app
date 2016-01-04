@@ -20,7 +20,8 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "ProgressService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
+    "HelperService"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Helper) ->
         $scope.link = "http://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&"+
                 "srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=csv&typeName=ogdsbg:volksschule"
 
@@ -130,6 +131,8 @@ app.controller "ImportCtrl", [
                         subDataset = Helper.cutDataset(dataset)
 
                         { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram(subDataset)
+                        console.log "#######################################"
+                        console.log recommendedDiagram
 
                         switch recommendedDiagram
                             when "scatter"

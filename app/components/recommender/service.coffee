@@ -1,7 +1,7 @@
 class Recommender
     constructor: ->
         console.info "Recommender constructor called"
-        @types = ["numeric", "nominal", "unknown"]
+        @types = ["numeric", "nominal", "unknown", "coordinate", "date"]
 
     # @method getSchema
     # @public
@@ -15,7 +15,11 @@ class Recommender
         schema = []
 
         dataset.forEach (column) =>
-            if @isNumeric column
+            if @isCoordinate column
+                schema.push @types[3]
+            else if @isDate column
+                schema.push @types[4]
+            else if @isNumeric column
                 schema.push @types[0]
             else if @isNominal column
                 schema.push @types[1]
@@ -23,6 +27,10 @@ class Recommender
                 schema.push @types[2]
 
         return schema
+
+    isCoordinate: (column) ->
+
+    isDate: (column) ->
 
     # @method isNumeric
     # @public
@@ -98,6 +106,7 @@ class Recommender
         console.log
             schema: schema
             variances: variances
+
         xIndex = null
         yIndex = null
         recommendedDiagram = null
@@ -120,6 +129,7 @@ class Recommender
                 yVariance = variance
 
         type = schema[xIndex] + " " + schema[yIndex]
+
         switch type
             when "numeric numeric" then recommendedDiagram = "scatter"
             when "nominal numeric" then recommendedDiagram = "scatter"
@@ -131,3 +141,5 @@ class Recommender
         xColumn: xIndex
         yColumn: yIndex
         }
+
+window.Recommender = new Recommender()

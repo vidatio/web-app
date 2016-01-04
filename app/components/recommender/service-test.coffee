@@ -2,7 +2,7 @@
 
 describe "Service Recommender", ->
     beforeEach ->
-        @recommender = new Recommender()
+        @recommender = window.Recommender
 
     it "should analyse type of the columns and so the schema of the dataset", ->
         schema = ["numeric", "numeric", "nominal", "nominal", "numeric"]
