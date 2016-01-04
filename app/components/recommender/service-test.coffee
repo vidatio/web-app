@@ -5,7 +5,7 @@ describe "Service Recommender", ->
         @recommender = window.Recommender
 
     it "should analyse type of the columns and so the schema of the dataset", ->
-        schema = ["numeric", "numeric", "nominal", "nominal", "numeric"]
+        schema = ["coordinate", "coordinate", "nominal", "nominal", "coordinate"]
         dataset = [
             ["47", "13", "Salzburg", "41,5%", "2"]
             ["46", "12", "Wien", "38,5%", "2"]
@@ -14,7 +14,7 @@ describe "Service Recommender", ->
             ["49", "10", "Linz", "39,5%", "2"]
         ]
 
-        dataset = @recommender.rotateDataset(dataset)
+        dataset = Helper.rotateDataset(dataset)
         expect(@recommender.getSchema(dataset)).toEqual(schema)
 
     it "should analyse the variances of the columns of the dataset", ->
@@ -26,7 +26,7 @@ describe "Service Recommender", ->
             ["46.323", "10.348", "Salzburg", "5%"]
         ]
 
-        dataset = @recommender.rotateDataset(dataset)
+        dataset = Helper.rotateDataset(dataset)
         expect(@recommender.getVariances dataset).toEqual(variances)
 
     it "should analyse the best diagram type for a given dataset system", ->

@@ -17,42 +17,18 @@ class Recommender
         schema = []
 
         dataset.forEach (column) =>
-            if @isCoordinate column
+            if Helper.isCoordinateColumn column
                 schema.push @types[3]
-            else if @isDate column
+            else if Helper.isDateColumn column
                 schema.push @types[4]
-            else if @isNumeric column
+            else if Helper.isNumericColumn column
                 schema.push @types[0]
-            else if @isNominal column
+            else if Helper.isNominalColumn column
                 schema.push @types[1]
             else
                 schema.push @types[2]
 
         return schema
-
-    isCoordinate: (column) ->
-
-    isDate: (column) ->
-
-    # @method isNumeric
-    # @public
-    # @param {Array} column with all cells
-    # @return {Boolean} are all cells numeric?
-    isNumeric: (column) ->
-        for key, value of column
-            if not isFinite value
-                return false
-        return true
-
-    # @method isNominal
-    # @public
-    # @param {Array} column with all cells
-    # @return {Boolean} are all cells strings?
-    isNominal: (column) ->
-        for key, value of column
-            if isFinite value
-                return false
-        return true
 
     # @method getVariances
     # @public
@@ -78,25 +54,6 @@ class Recommender
 
         return variances
 
-    # @method rotateDataset
-    # @public
-    # @param {Array} dataset with rows and columns
-    # @return {Array} dataset but rows are now columns and vice versa
-    rotateDataset: (dataset) ->
-        console.info "Recommender rotateDataset called"
-        console.log
-            dataset: dataset
-
-        rotatedDataset = []
-
-        dataset.forEach (row, i, dataset) ->
-            row.forEach (cell, j, row) ->
-                if not rotatedDataset[j]
-                    rotatedDataset.push []
-                rotatedDataset[j].push cell
-
-        return rotatedDataset
-
     # @method getRecommendedDiagram
     # @public
     # @param {Array} dataset
@@ -116,7 +73,7 @@ class Recommender
         xVariance = 0
         yVariance = 0
 
-        rotatedDataset = @rotateDataset(dataset)
+        rotatedDataset = Helper.rotateDataset(dataset)
 
         schema = @getSchema(rotatedDataset)
         variances = @getVariances(rotatedDataset)
@@ -137,6 +94,7 @@ class Recommender
             when "nominal numeric" then recommendedDiagram = "scatter"
             when "numeric nominal" then recommendedDiagram = "scatter"
             when "nominal nominal" then recommendedDiagram = "scatter"
+            else recommendedDiagram = "scatter"
 
         return {
         recommendedDiagram: recommendedDiagram
