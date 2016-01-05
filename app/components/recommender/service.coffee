@@ -60,7 +60,7 @@ class Recommender
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
-    getRecommendedDiagram: (dataset) ->
+    getRecommendedDiagram: (dataset = []) ->
         console.info "Recommender getRecommendedDiagram called"
         console.log
             schema: schema
@@ -88,12 +88,15 @@ class Recommender
                 yVariance = variance
 
         type = schema[xIndex] + " " + schema[yIndex]
-
+        console.log type
         switch type
             when "numeric numeric" then recommendedDiagram = "scatter"
             when "nominal numeric" then recommendedDiagram = "scatter"
+            # "numeric nominal" --> if distinct dataset  --> bar else scatter
             when "numeric nominal" then recommendedDiagram = "scatter"
+            # "nominal nominal" --> if length of dataset > X --> parallel coordinates else scatter
             when "nominal nominal" then recommendedDiagram = "scatter"
+            when "unknown unknown" then recommendedDiagram = undefined
             else recommendedDiagram = "scatter"
 
         return {

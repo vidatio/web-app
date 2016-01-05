@@ -282,7 +282,7 @@ class Helper
     # @return {Boolean} are all cells numeric?
     isNumericColumn: (column) ->
         for key, value of column
-            if not isFinite value
+            if not @isNumeric value
                 return false
         return true
 

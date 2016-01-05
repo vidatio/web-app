@@ -16,9 +16,48 @@ app.controller "VisualizationCtrl", [
     "ProgressService"
     "ngToast"
     "$log"
-    ($scope, Table, Map, leafletData, $timeout, Share, Data, Progress, ngToast, $log) ->
+    "BarChartService"
+    "ScatterPlotService"
+    "ParallelCoordinatesService"
+    "LineChartService"
+    ($scope, Table, Map, leafletData, $timeout, Share, Data, Progress, ngToast, $log, BarChart, ScatterPlot, ParallelCoordinates, LineChart) ->
         # CHART VISUALIZATIONS #
-        $scope.recommendedDiagram = "scatter"
+
+        dataset = Table.getDataset()
+
+        subDataset = Helper.cutDataset(dataset)
+
+        { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram subDataset
+        $scope.recommendedDiagram = recommendedDiagram
+
+        chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
+
+        $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
+        recommendedDiagram = "parallel"
+        switch recommendedDiagram
+
+            when "scatter"
+                new ScatterPlot(chartData)
+
+            when "map"
+                geoJSON = Converter.convertArrays2GeoJSON dataset
+                Map.setGeoJSON geoJSON
+
+            when "parallel"
+                new ParallelCoordinates(chartData)
+
+            when "bar"
+                new BarChart(chartData)
+
+            when "line"
+                new LineChart(chartData)
+
+            else
+                # TODO: show a default image here
+                $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
+
+
+
 
         # MAP VISUALIZATION #
         icon =
