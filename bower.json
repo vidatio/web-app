@@ -50,7 +50,9 @@
     "angular-simple-logger": "~0.1.5",
     "angular-cookies": "~1.4.7",
     "d3": "~3.5.12",
-    "c3": "~0.4.10"
+    "c3": "~0.4.10",
+    "d3.parcoords.js": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js",
+    "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

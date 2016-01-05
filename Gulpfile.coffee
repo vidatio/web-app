@@ -104,6 +104,7 @@ BUILD =
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
+            "./bower_components/d3.parcoords.js/index.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -115,6 +116,7 @@ BUILD =
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/c3/c3.css"
+            "./bower_components/d3.parcoords.css/index.css"
         ]
     dirs:
         out: "./build"
