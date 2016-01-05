@@ -97,9 +97,9 @@ class Recommender
             else recommendedDiagram = "scatter"
 
         return {
-        recommendedDiagram: recommendedDiagram
-        xColumn: xIndex
-        yColumn: yIndex
+            recommendedDiagram: recommendedDiagram
+            xColumn: xIndex
+            yColumn: yIndex
         }
 
 window.Recommender = new Recommender()
