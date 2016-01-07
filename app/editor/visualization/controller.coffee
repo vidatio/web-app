@@ -53,7 +53,7 @@ app.controller "VisualizationCtrl", [
 
             when "shp"
                 $scope.recommendedDiagram = "map"
-                new Map(subDataset, $scope)
+                new Map($scope)
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
