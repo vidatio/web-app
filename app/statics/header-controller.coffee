@@ -10,8 +10,7 @@ app.controller "HeaderCtrl", [
     "MapService"
     "DataService"
     "$log"
-    "ScatterPlotService"
-    ($scope, $rootScope, $timeout, Map, Data, $log, ScatterPlot) ->
+    ($scope, $rootScope, $timeout, Map, Data, $log) ->
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
