@@ -2,15 +2,13 @@
 
 class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataset) ->
-        console.log "barchart constructor"
+        console.log "Barchart constructor called"
 
-        dataset = [
-            ['data1', 30, 200, 100, 400, 150, 250]
-            ['data2', 130, 100, 140, 200, 150, 50]
-        ]
+        # dataset = [
+        #     ['data1', 30, 200, 100, 400, 150, 250]
+        #     ['data2', 130, 100, 140, 200, 150, 50]
+        # ]
 
-
-        # chart = null
         $ ->
             chart = c3.generate
                 bindto: "#chart"
@@ -24,4 +22,3 @@ class vidatio.BarChart extends vidatio.Visualization
                     width: $("#chart").parent().width()
 
             super(dataset, chart)
-            console.log super
