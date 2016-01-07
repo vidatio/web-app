@@ -33,24 +33,28 @@ app.controller "VisualizationCtrl", [
 
             else
                 { recommendedDiagram, xColumn, yColumn } = Recommender.run subDataset
+
+                # DEBUG
                 recommendedDiagram = "bar"
+                # /DEBUG
+
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
 
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
                     when "scatter"
-                        new ScatterPlot(chartData)
+                        new vidatio.ScatterPlot chartData
                     when "map"
                         map = new Map($scope)
                         geoJSON = Converter.convertArrays2GeoJSON dataset
                         map.setGeoJSON geoJSON
                     when "parallel"
-                        new ParallelCoordinates(chartData)
+                        new vidatio.ParallelCoordinates chartData
                     when "bar"
-                        new vidatio.BarChart(chartData)
+                        new vidatio.BarChart chartData
                     when "line"
-                        new LineChart(chartData)
+                        new vidatio.LineChart chartData
                     else
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
