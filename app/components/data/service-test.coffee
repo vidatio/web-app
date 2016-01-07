@@ -10,7 +10,7 @@ describe "Service Data", ->
 
             @Data = DataService
             @Converter = ConverterService
-            @Map = MapService
+            @Map = new MapService(@scope)
 
             spyOn(@Converter, "convertArrays2GeoJSON")
             spyOn(@Map, "setGeoJSON")

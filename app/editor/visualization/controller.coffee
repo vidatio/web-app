@@ -15,12 +15,11 @@ app.controller "VisualizationCtrl", [
     "ProgressService"
     "ngToast"
     "$log"
-    "BarChartService"
     "ScatterPlotService"
     "ParallelCoordinatesService"
     "LineChartService"
     "ConverterService"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, BarChart, ScatterPlot, ParallelCoordinates, LineChart, Converter) ->
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, ScatterPlot, ParallelCoordinates, LineChart, Converter) ->
 
         dataset = Table.getDataset()
         subDataset = vidatio.helper.trimDataset(dataset)
@@ -33,8 +32,8 @@ app.controller "VisualizationCtrl", [
                 new Map($scope)
 
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset
-                recommendedDiagram = "parallel"
+                { recommendedDiagram, xColumn, yColumn } = Recommender.run subDataset
+                recommendedDiagram = "bar"
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
 
@@ -49,7 +48,7 @@ app.controller "VisualizationCtrl", [
                     when "parallel"
                         new ParallelCoordinates(chartData)
                     when "bar"
-                        new BarChart(chartData)
+                        new vidatio.BarChart(chartData)
                     when "line"
                         new LineChart(chartData)
                     else
