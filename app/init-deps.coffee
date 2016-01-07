@@ -10,4 +10,4 @@ angular.module "app.controllers", []
 angular.module "app.directives", []
 
 # Namespace for standalone Javascripts in the App
-window.Vidatio or= {}
+window.vidatio or= {}
