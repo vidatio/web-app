@@ -36,7 +36,7 @@ describe "Service Recommender", ->
             ["400", "12", "Salzburg", "3%"]
             ["500", "13", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+        expect(@recommender.run dataset).toEqual(
             "recommendedDiagram": "scatter"
             "xColumn": 0
             "yColumn": 1
@@ -48,7 +48,7 @@ describe "Service Recommender", ->
             ["400", "Salzburg", "3%"]
             ["500", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+        expect(@recommender.run dataset).toEqual(
             "recommendedDiagram": "scatter"
             "xColumn": 0
             "yColumn": 2
@@ -60,7 +60,7 @@ describe "Service Recommender", ->
             ["Croissants", "Salzburg", "Salzburg", "3%"]
             ["Kaffee", "Wien", "Salzburg", "3%"]
         ]
-        expect(@recommender.getRecommendedDiagram dataset).toEqual(
+        expect(@recommender.run dataset).toEqual(
             "recommendedDiagram": "scatter"
             "xColumn": 0
             "yColumn": 1
