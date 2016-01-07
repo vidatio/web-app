@@ -54,13 +54,13 @@ class Recommender
 
         return variances
 
-    # @method getRecommendedDiagram
+    # @method run
     # @public
     # @param {Array} dataset
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
-    getRecommendedDiagram: (dataset = []) ->
+    run: (dataset = []) ->
         console.info "Recommender getRecommendedDiagram called"
         console.log
             dataset: dataset
@@ -72,10 +72,10 @@ class Recommender
         xVariance = 0
         yVariance = 0
 
-        rotatedDataset = Helper.rotateDataset(dataset)
+        transposedDataset = Helper.transposeDataset(dataset)
 
-        schema = @getSchema(rotatedDataset)
-        variances = @getVariances(rotatedDataset)
+        schema = @getSchema(transposedDataset)
+        variances = @getVariances(transposedDataset)
 
         for variance, index in variances
             if variance > xVariance
