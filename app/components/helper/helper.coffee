@@ -61,24 +61,24 @@ class Helper
 
         return tmp
 
-    # @method rotateDataset
+    # @method transposeDataset
     # @public
     # @param {Array} dataset with rows and columns
     # @return {Array} dataset but rows are now columns and vice versa
-    rotateDataset: (dataset) ->
-        console.info "Recommender rotateDataset called"
+    transposeDataset: (dataset) ->
+        console.info "Recommender transposeDataset called"
         console.log
             dataset: dataset
 
-        rotatedDataset = []
+        transposedDataset = []
 
         dataset.forEach (row, i, dataset) ->
             row.forEach (cell, j, row) ->
-                if not rotatedDataset[j]
-                    rotatedDataset.push []
-                rotatedDataset[j].push cell
+                if not transposedDataset[j]
+                    transposedDataset.push []
+                transposedDataset[j].push cell
 
-        return rotatedDataset
+        return transposedDataset
 
     # @method trimDataset
     # @public

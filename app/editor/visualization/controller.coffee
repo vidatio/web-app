@@ -27,8 +27,13 @@ app.controller "VisualizationCtrl", [
         subDataset = Helper.cutDataset(subDataset)
 
         switch Data.meta.fileType
-            when "csv"
-                { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram subDataset
+
+            when "shp"
+                $scope.recommendedDiagram = "map"
+                new Map($scope)
+
+            else
+                { recommendedDiagram, xColumn, yColumn } = Recommender.run subDataset
                 recommendedDiagram = "parallel"
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
@@ -50,11 +55,6 @@ app.controller "VisualizationCtrl", [
                     else
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
-
-            when "shp"
-                $scope.recommendedDiagram = "map"
-                new Map(subDataset, $scope)
-
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
         #@description exports a

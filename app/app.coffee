@@ -164,4 +164,3 @@ app.config [
                         $state.go state.name, locale
 
 ]
-

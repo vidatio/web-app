@@ -14,7 +14,7 @@ describe "Service Recommender", ->
             ["49", "10", "Linz", "39,5%", "2"]
         ]
 
-        dataset = Helper.rotateDataset(dataset)
+        dataset = Helper.transposeDataset(dataset)
         expect(@recommender.getSchema(dataset)).toEqual(schema)
 
     it "should analyse the variances of the columns of the dataset", ->
@@ -26,7 +26,7 @@ describe "Service Recommender", ->
             ["46.323", "10.348", "Salzburg", "5%"]
         ]
 
-        dataset = Helper.rotateDataset(dataset)
+        dataset = Helper.transposeDataset(dataset)
         expect(@recommender.getVariances dataset).toEqual(variances)
 
     it "should analyse the best diagram type for a given dataset system", ->
