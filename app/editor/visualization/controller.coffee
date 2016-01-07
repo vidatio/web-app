@@ -9,7 +9,6 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    'leafletData'
     "$timeout"
     "ShareService"
     "DataService"
@@ -20,107 +19,43 @@ app.controller "VisualizationCtrl", [
     "ScatterPlotService"
     "ParallelCoordinatesService"
     "LineChartService"
-    ($scope, Table, Map, leafletData, $timeout, Share, Data, Progress, ngToast, $log, BarChart, ScatterPlot, ParallelCoordinates, LineChart) ->
-        # CHART VISUALIZATIONS #
+    "ConverterService"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, BarChart, ScatterPlot, ParallelCoordinates, LineChart, Converter) ->
 
         dataset = Table.getDataset()
+        subDataset = Helper.trimDataset(dataset)
+        subDataset = Helper.cutDataset(subDataset)
 
-        subDataset = Helper.cutDataset(dataset)
+        switch Data.meta.fileType
+            when "csv"
+                { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram subDataset
+                recommendedDiagram = "parallel"
+                $scope.recommendedDiagram = recommendedDiagram
+                chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
 
-        { recommendedDiagram, xColumn, yColumn } = Recommender.getRecommendedDiagram subDataset
-        $scope.recommendedDiagram = recommendedDiagram
+                $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
+                switch recommendedDiagram
+                    when "scatter"
+                        new ScatterPlot(chartData)
+                    when "map"
+                        map = new Map($scope)
+                        geoJSON = Converter.convertArrays2GeoJSON dataset
+                        map.setGeoJSON geoJSON
+                    when "parallel"
+                        new ParallelCoordinates(chartData)
+                    when "bar"
+                        new BarChart(chartData)
+                    when "line"
+                        new LineChart(chartData)
+                    else
+                        # TODO: show a default image here
+                        $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
-        chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
+            when "shp"
+                $scope.recommendedDiagram = "map"
+                new Map(subDataset, $scope)
 
-        $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
-        recommendedDiagram = "parallel"
-        switch recommendedDiagram
-
-            when "scatter"
-                new ScatterPlot(chartData)
-
-            when "map"
-                geoJSON = Converter.convertArrays2GeoJSON dataset
-                Map.setGeoJSON geoJSON
-
-            when "parallel"
-                new ParallelCoordinates(chartData)
-
-            when "bar"
-                new BarChart(chartData)
-
-            when "line"
-                new LineChart(chartData)
-
-            else
-                # TODO: show a default image here
-                $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
-
-
-
-
-        # MAP VISUALIZATION #
-        icon =
-            iconUrl: '../images/marker-small.png'
-            iconSize: [25, 30]
-            iconAnchor: [12.5, 30]
-            popupAnchor: [0, -30]
-
-        leafletData.getMap("map").then (map) ->
-            $log.info "VisualizationCtrl leafletData.getMap called"
-            $log.debug
-                message: "VisualizationCtrl leafletData.getMap called"
-
-            Map.map = map
-            # Timeout is needed to wait for the view to finish render
-            $timeout ->
-                Map.init()
-        , (error) ->
-            $log.error "VisualizationCtrl error on map create"
-            $log.debug
-                message: "VisualizationCtrl error on map create"
-                error: error
-
-            ngToast.create
-                content: error
-                className: "danger"
-
-        $scope.geojson =
-            data: Map.geoJSON
-            style: ->
-                {}
-            pointToLayer: (feature, latlng) ->
-                new L.marker(latlng, icon: L.icon(icon))
-
-            onEachFeature: (feature, layer) ->
-                # So every markers gets a popup
-                html = ""
-                isFirstAttribute = true
-
-                for property, value of feature.properties
-
-                    if value
-                        if isFirstAttribute
-                            html += "<b>"
-
-                        if Parser.isEmailAddress(value)
-                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if Parser.isPhoneNumber(value)
-                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if Parser.isURL(value)
-                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if value
-                            html += value + "<br>"
-
-                        if isFirstAttribute
-                            html += "</b>"
-                            isFirstAttribute = false
-
-                unless html
-                    html = "Keine Informationen vorhanden"
-
-                layer.bindPopup(html)
-
+        #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type

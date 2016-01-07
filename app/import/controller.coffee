@@ -127,7 +127,6 @@ app.controller "ImportCtrl", [
                         Data.meta.fileType = "csv"
 
                         dataset = Converter.convertCSV2Arrays fileContent
-
                         Table.resetColHeaders()
                         Table.setDataset dataset
 

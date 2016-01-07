@@ -7,9 +7,11 @@ app = angular.module "app.services"
 
 app.service 'MapService', [
     "$log"
-    ($log) ->
+    "$timeout"
+    "leafletData"
+    ($log, $timeout, leafletData) ->
         class Map
-            constructor: ->
+            constructor: ($scope) ->
                 $log.info "MapService constructor called"
 
                 @map = undefined
@@ -17,6 +19,68 @@ app.service 'MapService', [
                     "type": "FeatureCollection"
                     "features": []
                 @bounds = undefined
+
+                icon =
+                    iconUrl: '../images/marker-small.png'
+                    iconSize: [25, 30]
+                    iconAnchor: [12.5, 30]
+                    popupAnchor: [0, -30]
+
+                leafletData.getMap("map").then (mapInstance) =>
+                    $log.info "MapService leafletData.getMap called"
+                    $log.debug
+                        message: "MapService leafletData.getMap called"
+
+                    @map = mapInstance
+                    # Timeout is needed to wait for the view to finish render
+                    $timeout =>
+                        @init()
+
+                , (error) ->
+                    $log.error "MapService error on map create"
+                    $log.debug
+                        message: "MapService error on map create"
+                        error: error
+
+                    ngToast.create
+                        content: error
+                        className: "danger"
+
+                $scope.geojson =
+                    data: @geoJSON
+                    style: ->
+                        {}
+                    pointToLayer: (feature, latlng) ->
+                        new L.marker(latlng, icon: L.icon(icon))
+
+                    onEachFeature: (feature, layer) ->
+                        # So every markers gets a popup
+                        html = ""
+                        isFirstAttribute = true
+
+                        for property, value of feature.properties
+
+                            if value
+                                if isFirstAttribute
+                                    html += "<b>"
+
+                                if Helper.isEmailAddress(value)
+                                    html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if Helper.isPhoneNumber(value)
+                                    html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if Helper.isURL(value)
+                                    html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if value
+                                    html += value + "<br>"
+
+                                if isFirstAttribute
+                                    html += "</b>"
+                                    isFirstAttribute = false
+
+                        unless html
+                            html = "Keine Informationen vorhanden"
+
+                        layer.bindPopup(html)
 
             # Because the map gets set later than the geoJSON
             # we need init function to do initial actions
@@ -68,23 +132,23 @@ app.service 'MapService', [
                 @geoJSON.features.forEach (feature) ->
 
                     if feature.geometry.type is "Point"
-                        if Parser.isCoordinate(feature.geometry.coordinates[0]) and Parser.isCoordinate(feature.geometry.coordinates[1])
+                        if Helper.isCoordinate(feature.geometry.coordinates[0]) and Helper.isCoordinate(feature.geometry.coordinates[1])
                             latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
                             coordinates.push(latLng)
                     else if feature.geometry.type is "LineString"
                         feature.geometry.coordinates.forEach (latLng) ->
-                            if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
+                            if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
                     else if feature.geometry.type is "Polygon"
                         feature.geometry.coordinates[0].forEach (latLng) ->
-                            if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
+                            if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
                     else if feature.geometry.type is "MultiPolygon"
                         feature.geometry.coordinates.forEach (array) ->
                             array[0].forEach (latLng) ->
-                                if Parser.isCoordinate(latLng[0]) and Parser.isCoordinate(latLng[1])
+                                if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
                                     latLng = L.GeoJSON.coordsToLatLng(latLng)
                                     coordinates.push(latLng)
                     else
@@ -199,6 +263,4 @@ app.service 'MapService', [
                 $log.info "MapService getGeoJSON called"
 
                 return @geoJSON
-
-        new Map
 ]

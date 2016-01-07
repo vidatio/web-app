@@ -63,8 +63,7 @@ class Recommender
     getRecommendedDiagram: (dataset = []) ->
         console.info "Recommender getRecommendedDiagram called"
         console.log
-            schema: schema
-            variances: variances
+            dataset: dataset
 
         xIndex = null
         yIndex = null
@@ -96,8 +95,7 @@ class Recommender
             when "numeric nominal" then recommendedDiagram = "scatter"
             # "nominal nominal" --> if length of dataset > X --> parallel coordinates else scatter
             when "nominal nominal" then recommendedDiagram = "scatter"
-            when "unknown unknown" then recommendedDiagram = undefined
-            else recommendedDiagram = "scatter"
+            when "coordinate coordinate" then recommendedDiagram = "map"
 
         return {
             recommendedDiagram: recommendedDiagram

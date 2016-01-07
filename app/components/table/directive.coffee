@@ -43,6 +43,8 @@ app.directive 'hot', [
                         source: source
 
                     if change and change[0][3] != change[0][2]
+                        # TODO add commands for other chart types
+
                         Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
