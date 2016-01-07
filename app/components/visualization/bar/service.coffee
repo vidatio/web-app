@@ -9,17 +9,19 @@ class vidatio.BarChart extends vidatio.Visualization
             ['data2', 130, 100, 140, 200, 150, 50]
         ]
 
-        console.log $(".content").first().width()
 
-        chart = c3.generate
-            bindto: "#chart"
-            data:
-                columns: dataset,
-                type: "bar"
-            bar: width: ratio: 0.5
-            padding:
-                right: 30
-            size:
-                width: $("#chart").parent().width()
+        # chart = null
+        $ ->
+            chart = c3.generate
+                bindto: "#chart"
+                data:
+                    columns: dataset,
+                    type: "bar"
+                bar: width: ratio: 0.5
+                padding:
+                    right: 30
+                size:
+                    width: $("#chart").parent().width()
 
-        super(dataset, chart)
+            super(dataset, chart)
+            console.log super
