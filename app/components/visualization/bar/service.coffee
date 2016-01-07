@@ -1,33 +1,25 @@
 "use strict"
 
-app = angular.module "app.services"
+class vidatio.BarChart extends vidatio.Visualization
+    constructor: (dataset) ->
+        console.log "barchart constructor"
 
-app.service "BarChartService", [
-    "$log"
-    "$timeout"
-    ($log, $timeout) ->
-        class BarChart
-            constructor: (@dataset) ->
-                $log.info "BarChartService constructor called"
+        dataset = [
+            ['data1', 30, 200, 100, 400, 150, 250]
+            ['data2', 130, 100, 140, 200, 150, 50]
+        ]
 
+        console.log $(".content").first().width()
 
-                ###
-                columns: [
-                    ["data1", 30, 200, 100, 400, 150, 250]
-                    ["data2", 130, 100, 140, 200, 150, 50]
-                ]
-                ###
+        chart = c3.generate
+            bindto: "#chart"
+            data:
+                columns: dataset,
+                type: "bar"
+            bar: width: ratio: 0.5
+            padding:
+                right: 30
+            size:
+                width: $("#chart").parent().width()
 
-                $timeout =>
-                    @chart = c3.generate
-                        bindto: "#chart"
-                        data:
-                            columns: @dataset,
-                            type: "bar"
-                        bar: width: ratio: 0.5
-                        padding:
-                            right: 30
-
-            getChart: ->
-                return @chart
-]
+        super(dataset, chart)
