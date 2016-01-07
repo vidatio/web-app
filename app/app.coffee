@@ -69,7 +69,10 @@ app.config [
         $locationProvider.html5Mode true
 
         # Loggly Configuration
+        # $log for angular
         LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY if CONFIG.TOKEN.LOGGLY
+
+
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level
@@ -164,4 +167,3 @@ app.config [
                         $state.go state.name, locale
 
 ]
-

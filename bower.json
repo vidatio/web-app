@@ -52,7 +52,8 @@
     "d3": "~3.5.12",
     "c3": "~0.4.10",
     "d3.parcoords.js": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js",
-    "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css"
+    "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css",
+    "loggly-logger": "http://cloudfront.loggly.com/js/loggly.tracker-2.1.min.js"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"
