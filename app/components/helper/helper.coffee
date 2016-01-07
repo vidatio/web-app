@@ -1,8 +1,8 @@
 "use strict"
 
-class Helper
+class window.vidatio.Helper
     constructor: ->
-        console.info "HelperService constructor called"
+        vidatio.log.info "HelperService constructor called"
         @rowLimit = 30
 
     # remove cells without values
@@ -11,8 +11,8 @@ class Helper
     # @param {Array} dataset
     # @return {Array}
     trimDataset: (dataset) ->
-        console.info "HelperService trimDataset called"
-        console.log
+        vidatio.log.info "HelperService trimDataset called"
+        vidatio.log.debug
             message: "HelperService trimDataset called"
             dataset: dataset
 
@@ -48,8 +48,8 @@ class Helper
     # @param {Array} dataset
     # @return {Array}
     cutDataset: (dataset) ->
-        console.info "HelperService cutDataset called"
-        console.log
+        vidatio.log.info "HelperService cutDataset called"
+        vidatio.log.debug
             message: "HelperService cutDataset called"
             dataset: dataset
 
@@ -66,8 +66,8 @@ class Helper
     # @param {Array} dataset with rows and columns
     # @return {Array} dataset but rows are now columns and vice versa
     transposeDataset: (dataset) ->
-        console.info "Recommender transposeDataset called"
-        console.log
+        vidatio.log.info "Recommender transposeDataset called"
+        vidatio.log.debug
             dataset: dataset
 
         transposedDataset = []
@@ -86,8 +86,8 @@ class Helper
     # @param {Number} initial value of each cell
     # @return {Array}
     createMatrix: (dataset, initial) ->
-        console.info "HelperService createMatrix called"
-        console.log
+        vidatio.log.info "HelperService createMatrix called"
+        vidatio.log.debug
             message: "HelperService createMatrix called"
             dataset: dataset
             initial: initial
@@ -101,8 +101,8 @@ class Helper
         return matrix
 
     dateToString: (date) ->
-        console.info "HelperService dateToString called"
-        console.log
+        vidatio.log.info "HelperService dateToString called"
+        vidatio.log.debug
             message: "HelperService dateToString called"
             date: date
 
@@ -332,5 +332,3 @@ class Helper
     isDate: (cell) ->
         regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
         return regex.test(cell)
-
-window.Helper = new Helper

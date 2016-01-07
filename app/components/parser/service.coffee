@@ -1,6 +1,6 @@
 "use strict"
 
-class Parser
+class window.vidatio.Parser
     # first we try to find coordinates columns via the header
     # if this fails we parse the dataset for coordinates
     # @method findCoordinatesColumns
@@ -8,12 +8,12 @@ class Parser
     # @param {Array} dataset
     # @return {Object}
     findCoordinatesColumns: (dataset) ->
-        console.info "ParserService findCoordinatesColumns called"
-        console.log
+        vidatio.log.info "ParserService findCoordinatesColumns called"
+        vidatio.log.debug
             message: "ParserService findCoordinatesColumns called"
             dataset: dataset
 
-        choppedDataset = Helper.cutDataset(dataset)
+        choppedDataset = vidatio.helper.cutDataset(dataset)
         unless choppedDataset.length
             return
 
@@ -29,8 +29,8 @@ class Parser
     # @param {String} cell
     # @return {Array}
     extractCoordinatesOfOneCell: (cell) ->
-        console.info "ParserService extractCoordinatesOfOneCell called"
-        console.log
+        vidatio.log.info "ParserService extractCoordinatesOfOneCell called"
+        vidatio.log.debug
             message: "ParserService extractCoordinatesOfOneCell called"
             cell: cell
 
@@ -42,7 +42,7 @@ class Parser
 
         coordinates = []
         while((coordinate = regex.exec(cell)) != null)
-            if(Helper.isCoordinate(coordinate[0]))
+            if(vidatio.helper.isCoordinate(coordinate[0]))
                 coordinates.push coordinate[0]
 
         return coordinates
@@ -69,17 +69,17 @@ class Parser
     # @param {Array} dataset
     # @return {Object}
     _findCoordinatesIndicesInDataset = (dataset) ->
-        console.info "ParserService _findCoordinatesIndicesInDataset called"
-        console.log
+        vidatio.log.info "ParserService _findCoordinatesIndicesInDataset called"
+        vidatio.log.debug
             message: "ParserService _findCoordinatesIndicesInDataset called"
             dataset: dataset
 
-        matrixPossibleCoordinates = Helper.createMatrix.call(this, dataset, false)
+        matrixPossibleCoordinates = vidatio.helper.createMatrix.call(this, dataset, false)
 
         dataset.forEach (row, indexRow) ->
             row.forEach (cell, indexCell) ->
                 # There can be a single coordinate in a cell like "47.232"
-                if Helper.isCoordinate(cell)
+                if vidatio.helper.isCoordinate(cell)
                     matrixPossibleCoordinates[indexRow][indexCell] = true
                     # But there can also be two coordinates in a single cell like "47.232, 13.854"
                 else if cell
@@ -88,7 +88,7 @@ class Parser
                     if(potentialCoordinates.length != 2)
                         return
                         # too protocol the existence of two coordinates we use array in one cell of the matrix
-                    else if(Helper.isCoordinate(potentialCoordinates[0]) and Helper.isCoordinate(potentialCoordinates[1]))
+                    else if(vidatio.helper.isCoordinate(potentialCoordinates[0]) and vidatio.helper.isCoordinate(potentialCoordinates[1]))
                         matrixPossibleCoordinates[indexRow][indexCell] = [true, true]
 
         return _getIndicesOfCoordinateColumns(matrixPossibleCoordinates)
@@ -98,8 +98,8 @@ class Parser
     # @param {Array} dataset
     # @return {Object}
     _findCoordinatesIndicesInHeader = (dataset) ->
-        console.info "ParserService _findCoordinatesIndicesInHeader called"
-        console.log
+        vidatio.log.info "ParserService _findCoordinatesIndicesInHeader called"
+        vidatio.log.debug
             message: "ParserService _findCoordinatesIndicesInHeader called"
             dataset: dataset
 
@@ -121,8 +121,8 @@ class Parser
     # @param {String} word
     # @return {String}
     _checkWhiteList = (word) ->
-        console.info "ParserService _checkWhiteList called"
-        console.log
+        vidatio.log.info "ParserService _checkWhiteList called"
+        vidatio.log.debug
             message: "ParserService _checkWhiteList called"
             word: word
 
@@ -153,8 +153,8 @@ class Parser
     # @param {matrix} true/false matrix of each cell (true mean the cell contains a coordinate)
     # @return {Object}
     _getIndicesOfCoordinateColumns = (matrix) ->
-        console.info "ParserService _getIndicesOfCoordinateColumns called"
-        console.log
+        vidatio.log.info "ParserService _getIndicesOfCoordinateColumns called"
+        vidatio.log.debug
             message: "ParserService _getIndicesOfCoordinateColumns called"
             matrix: matrix
 
@@ -184,8 +184,8 @@ class Parser
     #       - separateColumns {Boolean} is true if there is only one coordinate in one cell
     #       - columnScores {Array} contains the scores (amount of possible coordinates per column) for all columns
     _rateColumns = (matrix) ->
-        console.info "ParserService _rateColumns called"
-        console.log
+        vidatio.log.info "ParserService _rateColumns called"
+        vidatio.log.debug
             message: "ParserService _rateColumns called"
             matrix: matrix
 
@@ -224,8 +224,8 @@ class Parser
     # @param {Array} columnScores
     # @return {Array}
     _findHighestScoreIndices = (separateColumns, columnScores) ->
-        console.info "ParserService _findHighestScoreIndices called"
-        console.log
+        vidatio.log.info "ParserService _findHighestScoreIndices called"
+        vidatio.log.debug
             message: "ParserService _findHighestScoreIndices called"
             separateColumns: separateColumns
             columnScores: columnScores
@@ -250,5 +250,3 @@ class Parser
             return [largestScoreIndex, secondLargestScoreIndex]
         else
             return [largestScoreIndex, largestScoreIndex]
-
-window.Parser = new Parser()

@@ -32,7 +32,7 @@ app.controller "HeaderCtrl", [
             # REFACTOR Needed to wait for leaflet directive to render
             # $timeout ->
             #     # TODO: Only resize what is currently visible or used
-            #     switch Recommender.recommendedDiagram()
+            #     switch vidatio.Recommender.recommendedDiagram
             #         when "scatter"
             #             new ScatterPlot.getChart().resize()
             #         when "bar"

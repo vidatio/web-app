@@ -179,26 +179,26 @@ app.service 'ConverterService', [
                     message: "ConverterService convertArrays2GeoJSON called"
                     dataset: dataset
 
-                dataset = Helper.trimDataset(dataset)
+                dataset = vidatio.helper.trimDataset(dataset)
 
                 geoJSON =
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
+                indicesCoordinates = vidatio.parser.findCoordinatesColumns(dataset)
 
                 dataset.forEach (row) ->
                     coordinates = []
 
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+                        coordinates = vidatio.parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
                     else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
                         # TODO check here also maybe with isCoordinate()
-                        if(Helper.isNumber(latitude) and Helper.isNumber(longitude))
+                        if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
                             coordinates.push(latitude)
                             coordinates.push(longitude)
                     else

@@ -64,11 +64,11 @@ app.service 'MapService', [
                                 if isFirstAttribute
                                     html += "<b>"
 
-                                if Helper.isEmailAddress(value)
+                                if vidatio.helper.isEmailAddress(value)
                                     html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                                else if Helper.isPhoneNumber(value)
+                                else if vidatio.helper.isPhoneNumber(value)
                                     html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                                else if Helper.isURL(value)
+                                else if vidatio.helper.isURL(value)
                                     html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
                                 else if value
                                     html += value + "<br>"
@@ -132,23 +132,23 @@ app.service 'MapService', [
                 @geoJSON.features.forEach (feature) ->
 
                     if feature.geometry.type is "Point"
-                        if Helper.isCoordinate(feature.geometry.coordinates[0]) and Helper.isCoordinate(feature.geometry.coordinates[1])
+                        if vidatio.helper.isCoordinate(feature.geometry.coordinates[0]) and vidatio.helper.isCoordinate(feature.geometry.coordinates[1])
                             latLng = L.GeoJSON.coordsToLatLng(feature.geometry.coordinates)
                             coordinates.push(latLng)
                     else if feature.geometry.type is "LineString"
                         feature.geometry.coordinates.forEach (latLng) ->
-                            if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
+                            if vidatio.helper.isCoordinate(latLng[0]) and vidatio.helper.isCoordinate(latLng[1])
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
                     else if feature.geometry.type is "Polygon"
                         feature.geometry.coordinates[0].forEach (latLng) ->
-                            if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
+                            if vidatio.helper.isCoordinate(latLng[0]) and vidatio.helper.isCoordinate(latLng[1])
                                 latLng = L.GeoJSON.coordsToLatLng(latLng)
                                 coordinates.push(latLng)
                     else if feature.geometry.type is "MultiPolygon"
                         feature.geometry.coordinates.forEach (array) ->
                             array[0].forEach (latLng) ->
-                                if Helper.isCoordinate(latLng[0]) and Helper.isCoordinate(latLng[1])
+                                if vidatio.helper.isCoordinate(latLng[0]) and vidatio.helper.isCoordinate(latLng[1])
                                     latLng = L.GeoJSON.coordsToLatLng(latLng)
                                     coordinates.push(latLng)
                     else
@@ -179,7 +179,7 @@ app.service 'MapService', [
                 keys = key.split(" ")
 
                 if keys[0] is "coordinates"
-                    if Helper.isNumeric(newData)
+                    if vidatio.helper.isNumeric(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
@@ -200,7 +200,7 @@ app.service 'MapService', [
                         return false
 
                 else if keys[0] is "bbox"
-                    if Helper.isNumeric(newData)
+                    if vidatio.helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
                         $log.warn "MapService updateGeoJSONwithSHP Value is not a Number"
@@ -236,7 +236,7 @@ app.service 'MapService', [
                 keys = key.split(" ")
 
                 if keys[0] is "coordinates"
-                    if Helper.isNumeric(newData)
+                    if vidatio.helper.isNumeric(newData)
                         if @geoJSON.features[row].geometry.type is "Point"
                             unless @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 $log.warn "MapService validateGeoJSONUpdateSHP Point does not exist"
@@ -253,7 +253,7 @@ app.service 'MapService', [
                         return false
 
                 else if keys[0] is "bbox"
-                    unless Helper.isNumeric(newData)
+                    unless vidatio.helper.isNumeric(newData)
                         $log.warn "MapService validateGeoJSONUpdateSHP Value is not a Number"
                         return false
 

@@ -8,7 +8,7 @@
 
 describe "Service Parser", ->
     beforeEach ->
-        @Parser = window.Parser
+        @Parser = new window.vidatio.Parser()
 
     xit 'should find columns of the latitude and longitude in dataset', ->
         dataset = [

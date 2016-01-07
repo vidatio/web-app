@@ -2,7 +2,7 @@
 
 describe "Service Helper", ->
     beforeEach ->
-        @Helper = window.Helper
+        @Helper = new window.vidatio.Helper()
 
     it 'should recognize wgs84 degree decimal coordinates correctly', ->
 

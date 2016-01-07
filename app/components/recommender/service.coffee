@@ -1,8 +1,9 @@
 "use strict"
 
-class Recommender
+class window.vidatio.Recommender
     constructor: ->
-        console.info "Recommender constructor called"
+        vidatio.log.info "Recommender constructor called"
+        @recommendedDiagram = null
         @types = ["numeric", "nominal", "unknown", "coordinate", "date"]
 
     # @method getSchema
@@ -10,20 +11,20 @@ class Recommender
     # @param {Array} dataset with rows and columns
     # @return {Array} schema, types of the columns
     getSchema: (dataset) ->
-        console.info "Recommender getSchema called"
-        console.log
+        vidatio.log.info "Recommender getSchema called"
+        vidatio.log.debug
             dataset: dataset
 
         schema = []
 
         dataset.forEach (column) =>
-            if Helper.isCoordinateColumn column
+            if vidatio.helper.isCoordinateColumn column
                 schema.push @types[3]
-            else if Helper.isDateColumn column
+            else if vidatio.helper.isDateColumn column
                 schema.push @types[4]
-            else if Helper.isNumericColumn column
+            else if vidatio.helper.isNumericColumn column
                 schema.push @types[0]
-            else if Helper.isNominalColumn column
+            else if vidatio.helper.isNominalColumn column
                 schema.push @types[1]
             else
                 schema.push @types[2]
@@ -35,8 +36,8 @@ class Recommender
     # @param {Array} dataset with rows and columns
     # @return {Array} variances of the values of each column
     getVariances: (dataset) ->
-        console.info "Recommender getVariances called"
-        console.log JSON.stringify
+        vidatio.log.info "Recommender getVariances called"
+        vidatio.log.debug JSON.stringify
             dataset: dataset
 
         variances = []
@@ -61,18 +62,18 @@ class Recommender
     #   the index of the column for the x value,
     #   the index of the column for the y value
     run: (dataset = []) ->
-        console.info "Recommender getRecommendedDiagram called"
-        console.log
+        vidatio.log.info "Recommender getRecommendedDiagram called"
+        vidatio.log.debug
             dataset: dataset
 
         xIndex = null
         yIndex = null
-        recommendedDiagram = null
+        @recommendedDiagram = null
 
         xVariance = 0
         yVariance = 0
 
-        transposedDataset = Helper.transposeDataset(dataset)
+        transposedDataset = vidatio.helper.transposeDataset(dataset)
 
         schema = @getSchema(transposedDataset)
         variances = @getVariances(transposedDataset)
@@ -87,20 +88,17 @@ class Recommender
                 yVariance = variance
 
         type = schema[xIndex] + " " + schema[yIndex]
-        console.log type
         switch type
-            when "numeric numeric" then recommendedDiagram = "scatter"
-            when "nominal numeric" then recommendedDiagram = "scatter"
+            when "numeric numeric" then @recommendedDiagram = "scatter"
+            when "nominal numeric" then @recommendedDiagram = "scatter"
             # "numeric nominal" --> if distinct dataset  --> bar else scatter
-            when "numeric nominal" then recommendedDiagram = "scatter"
+            when "numeric nominal" then @recommendedDiagram = "scatter"
             # "nominal nominal" --> if length of dataset > X --> parallel coordinates else scatter
-            when "nominal nominal" then recommendedDiagram = "scatter"
-            when "coordinate coordinate" then recommendedDiagram = "map"
+            when "nominal nominal" then @recommendedDiagram = "scatter"
+            when "coordinate coordinate" then @recommendedDiagram = "map"
 
         return {
-            recommendedDiagram: recommendedDiagram
+            recommendedDiagram: @recommendedDiagram
             xColumn: xIndex
             yColumn: yIndex
         }
-
-window.Recommender = new Recommender()
