@@ -11,4 +11,3 @@ angular.module "app.directives", []
 
 # Namespace for standalone Javascripts in the App
 window.vidatio or= {}
-console.log "INIT"
