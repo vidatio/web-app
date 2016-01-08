@@ -2,7 +2,7 @@
 
 class vidatio.LineChart extends vidatio.Visualization
     constructor: (dataset) ->
-        console.log "LineChart constructor called"
+        vidatio.log.info "LineChart constructor called"
 
         # dataset = [
         #     ['data1', 30, 200, 100, 400, 150, 250]

@@ -2,7 +2,7 @@
 
 class vidatio.ParallelCoordinates extends vidatio.Visualization
     constructor: (dataset) ->
-        console.log "ParallelCoordinates constructor called"
+        vidatio.log.info "ParallelCoordinates constructor called"
 
         dataset = [
             [0,-0,0,0,0,3 ]

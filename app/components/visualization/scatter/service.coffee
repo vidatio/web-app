@@ -2,7 +2,7 @@
 
 class vidatio.ScatterPlot extends vidatio.Visualization
     constructor: (dataset) ->
-        console.log "ScatterPlot constructor called"
+        vidatio.log.info "ScatterPlot constructor called"
 
         # dataset = [
         #     ['data1', 30, 200, 100, 400, 150, 250]

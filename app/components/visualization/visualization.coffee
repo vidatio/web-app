@@ -3,8 +3,10 @@
 class window.vidatio.Visualization
 
     constructor: (@dataset, @chart) ->
-        console.log "Visualization constructor called"
-
+        vidatio.log.info "Visualization constructor called"
+        vidatio.log.debug
+            dataset: @dataset
+            chart: @chart
     getChart: ->
-        console.log "Visualization getChart called"
+        vidatio.log.info "Visualization getChart called"
         return @chart
