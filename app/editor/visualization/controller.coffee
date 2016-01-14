@@ -27,7 +27,6 @@ app.controller "VisualizationCtrl", [
         subDataset = vidatio.helper.cutDataset(subDataset)
 
         switch Data.meta.fileType
-
             when "shp"
                 $scope.recommendedDiagram = "map"
                 new Map($scope)
@@ -36,11 +35,12 @@ app.controller "VisualizationCtrl", [
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset
 
                 # DEBUG
-                recommendedDiagram = "parallel"
+                recommendedDiagram = "line"
                 # /DEBUG
 
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
+                chartdata = vidatio.helper.trimDataset chartData
 
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram

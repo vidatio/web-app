@@ -73,7 +73,6 @@ app.config [
     "CONFIG"
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
         $locationProvider.html5Mode true
-        console.log "CONFIG"
         # Loggly Configuration
         # $log for angular
         LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY if CONFIG.TOKEN.LOGGLY

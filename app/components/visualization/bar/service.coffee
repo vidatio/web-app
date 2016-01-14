@@ -2,7 +2,7 @@
 
 class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataset) ->
-        console.log "Barchart constructor called"
+        vidatio.log.info "Barchart constructor called"
 
         # dataset = [
         #     ['data1', 30, 200, 100, 400, 150, 250]
