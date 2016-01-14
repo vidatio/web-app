@@ -44,6 +44,7 @@ app.directive 'hot', [
 
                     if change and change[0][3] != change[0][2]
                         # TODO add commands for other chart types
+                        # use a variable "recommendDiagramm" to choose the right update function
 
                         Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are

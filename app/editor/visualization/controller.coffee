@@ -18,6 +18,9 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
 
+        Table.resetColHeaders()
+        Table.setDataset [[200, 500], [300, 600], [400, 700]]
+
         dataset = Table.getDataset()
 
         subDataset = vidatio.helper.trimDataset(dataset)
