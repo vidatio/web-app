@@ -22,12 +22,6 @@ nav
         overflow-y scroll
         overflow-x hidden
 
-        .menu-list
-            text-align right
-
-        .btn-primary
-            font-size 16px
-
         .menu-header
             margin-top -2px
             height 40px
@@ -69,6 +63,9 @@ nav
 
             &:hover
                 background none
+                color $color-green
+
+            &:active
                 color $color-hover-dark
 
         h3
@@ -77,6 +74,7 @@ nav
             margin-top 50px
             text-align right
             padding 0
+
 
 @media(max-width: 500px)
     nav

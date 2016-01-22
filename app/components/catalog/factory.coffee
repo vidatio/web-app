@@ -2,9 +2,10 @@
 
 app = angular.module "app.factories"
 
-app.factory "DataFactory", [
+app.factory "CatalogFactory", [
     "$resource"
     "$rootScope"
     ($resource, $rootScope) ->
-        $resource $rootScope.apiBase + $rootScope.apiVersion + "/datasets/:id"
+        $resource $rootScope.apiBase + "/v0/datasets/"
+
 ]

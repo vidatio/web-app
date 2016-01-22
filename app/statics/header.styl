@@ -24,7 +24,7 @@ header
             -webkit-flex-direction row
 
         .separator
-            width 1px
+            width 2px
             background-color $color-green
 
     #navigation.editor
@@ -38,26 +38,33 @@ header
         float left
 
     #back-to-import
+        float right
+
+    #back-to-datasets-overview
+        float left
+        margin-left 60px
+
+    #back-to-import
+    #back-to-datasets-overview
         position relative
         height 40px
         text-align center
-        float right
+        line-height 17px
 
-        button.btn
-            padding-top 8px
+        .btn-tip
+            padding-left 0
 
-        button.btn-primary
-            height 40px
-            font-size 16px
+        .fui-arrow-left
+            &::before
+                margin-right 5px
+                font-size 14px
 
-            .btn-tip
-                padding-left 0
-                padding-right 1px
+        span
+            margin-right 1px
 
-            .fui-arrow-left
-                &::before
-                    margin-right 10px
-                    font-size 14px
+    #back-to-import
+    #save-dataset
+        width 112px
 
     #save-dataset
         float left
@@ -67,7 +74,7 @@ header
         border-bottom 4px solid $color-passive
         display inline-block
         width 50%
-        height 40px
+        height 42px
         line-height 41px
         background $color-passive
         position relative
@@ -80,25 +87,6 @@ header
 
         &:hover
             color $color-white
-            border-bottom-color $color-green
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 39px
-                width 0
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
-
-            &::before
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
 
         &.active
             border-bottom 4px solid $color-green
@@ -124,34 +112,33 @@ header
                 margin-left -10px
 
 
-    .border-right
-        border-right none
-
-
     .menu-buttons
-        height 100%
+        height 42px
         text-align right
 
         div
             display inline
 
-        a
-            line-height 40px
+        a#login-button, a#menu
+            color $color-black
+            line-height 42px
             vertical-align middle
             text-align center
-            width 40px
-            height 40px
+            width 42px
+            height 42px
             display inline-block
             margin-left 3px
-            background $color-passive
             border-radius 4px
-            color $color-grey-light
 
-            &:hover
+            &:hover, &:focus
+                color $color-grey-light
+                background-color $color-passive
+
+            &:active
                 color $color-green
 
-        .menu-active
-            color $color-green
+            &.menu-active
+                color $color-green !important
 
         a#menu
             font-size 20px
@@ -160,39 +147,14 @@ header
             font-size 23px
             padding-left 2px
 
-
-@media(max-width: 550px)
-    #back-to-import-button
-        display none
-
 @media(max-width: 767px)
     #navigation
         .editor-panel
-            margin-top: 20px
+        a#save-dataset
+        a#back-to-import
+            margin-top 10px
 
-@media(min-width: 768px) and (max-width: 849px)
-    #back-to-import-button
-        margin-right -10px
-
-        button.btn-primary
-            font-size 14px !important
-
-            .fui-arrow-left
-                &::before
-                    font-size 12px !important
-
-    header
-        .tab
-            font-size 14px
-
-@media(min-width: 850px)
-    #back-to-import-button
-        margin-right 10px
-
-    #navigation
-        .editor-panel
-            position absolute
-            margin 0 auto
-            left 0
-            right 0
-            max-width 600px
+        a#save-dataset
+            float right
+        a#back-to-import
+            float left

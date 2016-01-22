@@ -5,18 +5,28 @@ footer
     position absolute
     bottom 0
     min-height 80px
-    color white
+    color $color-grey-light
     width 100%
     padding 20px 0
     background url(../images/dotgrid.png) $color-grey-dark
     text-align center
 
-    a
+    a.link
+        color $color-grey-light
         display inline-block
+        font-weight 400
         padding 8px 10px
 
-        span
+        &:hover
+        &:focus
+            color $color-green
+
+        &:active
+            color $color-hover-dark
+
+        .icon
             margin-right 5px
+
 
 @media (min-width: 768px)
     footer

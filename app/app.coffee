@@ -88,7 +88,6 @@ app.config [
         # @method includeUrl
         LogglyLoggerProvider.includeUrl  true
 
-
         # I18N
         $translateProvider.useSanitizeValueStrategy "escape"
         $translateProvider.preferredLanguage "de"
@@ -123,19 +122,22 @@ app.config [
             templateUrl: "profile/profile.html"
             title: "profile"
 
+        # /dataset
+        .state "app.dataset",
+            url: "/vidatio/:id"
+            controller: "DatasetCtrl"
+            templateUrl: "dataset/dataset.html"
+            title: "dataset"
+
         # /registration
         .state "app.registration",
-            url: "/registration"
-            controller: "RegistrationCtrl"
-            templateUrl: "registration/registration.html"
-            title: "registration"
+            url: "/"
+            templateUrl: "index/index.html"
 
         # /login
         .state "app.login",
-            url: "/login"
-            controller: "LoginCtrl"
-            templateUrl: "login/login.html"
-            title: "login"
+            url: "/"
+            templateUrl: "index/index.html"
 
         # /import
         .state "app.import",
@@ -150,6 +152,20 @@ app.config [
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
+
+        # /editor for saved vidatio
+        .state "app.editor.id",
+            url: "/vidatio_:id",
+            templateUrl: "editor/editor.html"
+            controller: "EditorCtrl"
+            title: "editor"
+
+        # /dataset catalog
+        .state "app.catalog",
+            url: "/catalog"
+            templateUrl: "catalog/catalog.html"
+            controller: "CatalogCtrl"
+            title: "catalog"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",

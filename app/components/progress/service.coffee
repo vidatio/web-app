@@ -16,9 +16,10 @@ app.service "ProgressService", [
                 _message
 
             setMessage: (msg) ->
-                $log.info "ProgressOverlay setMessage function called"
+                $log.info "Progress setMessage function called"
                 $log.debug
                     message: msg
+
                 _message = msg
 
         new Progress

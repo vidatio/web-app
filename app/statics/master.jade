@@ -1,10 +1,12 @@
 doctype html
-html.ng-cloak(ng-app="app")
+html(ng-app="app")
     head
         base(href="/")
         include includes/meta
 
         title Vidatio
+
+        include includes/js
         include includes/styl
 
     body.container-fluid(ng-file-drop-start)
@@ -18,4 +20,3 @@ html.ng-cloak(ng-app="app")
             .app-view(ui-view)
 
             include footer
-            include includes/js
