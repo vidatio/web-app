@@ -5,6 +5,8 @@ class window.vidatio.Recommender
         vidatio.log.info "Recommender constructor called"
         @recommendedDiagram = null
         @types = ["numeric", "nominal", "unknown", "coordinate", "date"]
+        @thresholdPC = 500
+        @thresholdBar = 10
 
     # @method getSchema
     # @public
@@ -19,15 +21,15 @@ class window.vidatio.Recommender
 
         dataset.forEach (column) =>
             if vidatio.helper.isCoordinateColumn column
-                schema.push @types[3]
+                schema.push @types["coordinate"]
             else if vidatio.helper.isDateColumn column
-                schema.push @types[4]
+                schema.push @types["date"]
             else if vidatio.helper.isNumericColumn column
-                schema.push @types[0]
+                schema.push @types["numeric"]
             else if vidatio.helper.isNominalColumn column
-                schema.push @types[1]
+                schema.push @types["nominal"]
             else
-                schema.push @types[2]
+                schema.push @types["unknown"]
 
         return schema
 
@@ -61,9 +63,10 @@ class window.vidatio.Recommender
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
-    run: (dataset = []) ->
+    run: (subset = [], dataset) ->
         vidatio.log.info "Recommender getRecommendedDiagram called"
         vidatio.log.debug
+            subset: subset
             dataset: dataset
 
         xIndex = null
@@ -73,7 +76,7 @@ class window.vidatio.Recommender
         xVariance = 0
         yVariance = 0
 
-        transposedDataset = vidatio.helper.transposeDataset(dataset)
+        transposedDataset = vidatio.helper.transposeDataset subset
 
         schema = @getSchema(transposedDataset)
         variances = @getVariances(transposedDataset)
@@ -89,13 +92,33 @@ class window.vidatio.Recommender
 
         type = schema[xIndex] + " " + schema[yIndex]
         switch type
-            when "numeric numeric" then @recommendedDiagram = "scatter"
-            when "nominal numeric" then @recommendedDiagram = "scatter"
-            # "numeric nominal" --> if distinct dataset  --> bar else scatter
-            when "numeric nominal" then @recommendedDiagram = "scatter"
-            # "nominal nominal" --> if length of dataset > X --> parallel coordinates else scatter
-            when "nominal nominal" then @recommendedDiagram = "scatter"
-            when "coordinate coordinate" then @recommendedDiagram = "map"
+
+            when "numeric numeric", "numeric nominal", "nominal nominal"
+                if dataset.length > @thresholdPC
+                    @recommendedDiagram = "pc"
+                else
+                    @recommendedDiagram = "scatter"
+
+            when "nominal numeric"
+                if dataset.length > @thresholdPC
+                    @recommendedDiagram = "pc"
+                else if dataset[xIndex].length > @thresholdBar
+                    @recommendedDiagram = "scatter"
+                else
+                    @recommendedDiagram = "bar"
+
+            when "coordinate coordinate"
+                @recommendedDiagram = "map"
+
+            when "date numeric"
+                @recommendedDiagram = "line"
+
+            else
+                if type.indexOf "unknown" isnt -1 and dataset.length > @thresholdPC
+                    @recommendedDiagram = "pc"
+                else
+                    @recommendedDiagram = "scatter"
+
 
         return {
             recommendedDiagram: @recommendedDiagram
