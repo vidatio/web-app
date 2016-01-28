@@ -90,10 +90,12 @@ class window.vidatio.Recommender
                 yIndex = index
                 yVariance = variance
 
+        nominals  = dataset[xIndex].filter (value, index) ->
+            index == dataset[xIndex.lastIndexOf(value)
         type = schema[xIndex] + " " + schema[yIndex]
         switch type
 
-            when "numeric numeric", "numeric nominal", "nominal nominal"
+            when "numeric numeric", "nominal nominal"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "pc"
                 else
@@ -102,16 +104,34 @@ class window.vidatio.Recommender
             when "nominal numeric"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "pc"
-                else if dataset[xIndex].length > @thresholdBar
+                else if nominals.length > @thresholdBar
                     @recommendedDiagram = "scatter"
                 else
                     @recommendedDiagram = "bar"
+
+            when "numeric nominal"
+                if dataset.length > @thresholdPC
+                    @recommendedDiagram = "pc"
+                else if nominals.length > @thresholdBar
+                    @recommendedDiagram = "scatter"
+                else
+                    @recommendedDiagram = "bar"
+
+                tmp = xIndex
+                xIndex = yIndex
+                yIndex = tmp
 
             when "coordinate coordinate"
                 @recommendedDiagram = "map"
 
             when "date numeric"
                 @recommendedDiagram = "line"
+
+            when "numeric date "
+                @recommendedDiagram = "line"
+                tmp = xIndex
+                xIndex = yIndex
+                yIndex = tmp
 
             else
                 if type.indexOf "unknown" isnt -1 and dataset.length > @thresholdPC
