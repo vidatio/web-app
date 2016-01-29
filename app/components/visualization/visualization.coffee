@@ -1,6 +1,6 @@
 "use strict"
 
-class window.vidatio.Visualization
+class vidatio.Visualization
 
     constructor: (@dataset, @chart) ->
         vidatio.log.info "Visualization constructor called"

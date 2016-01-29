@@ -4,11 +4,6 @@ class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataset) ->
         vidatio.log.info "Barchart constructor called"
 
-        # dataset = [
-        #     ['data1', 30, 200, 100, 400, 150, 250]
-        #     ['data2', 130, 100, 140, 200, 150, 50]
-        # ]
-
         $ ->
             chart = c3.generate
                 bindto: "#chart"

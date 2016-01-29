@@ -19,7 +19,8 @@ app.controller "VisualizationCtrl", [
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
 
         Table.resetColHeaders()
-        Table.setDataset [[200, 500], [300, 600], [400, 700]]
+        #Table.setDataset [[200, 500], [300, 600], [400, 700]] #Line
+        Table.setDataset [[200, "Apfel"], [300, "Banane"], [400, "Orange"]] #Bar
 
         dataset = Table.getDataset()
 
@@ -35,12 +36,13 @@ app.controller "VisualizationCtrl", [
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset
 
                 # DEBUG
-                recommendedDiagram = "line"
+                recommendedDiagram = "bar"
                 # /DEBUG
+
+                console.log xColumn, yColumn
 
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [dataset.map((value, index) -> value[xColumn]), dataset.map((value, index) -> value[yColumn])]
-                chartdata = vidatio.helper.trimDataset chartData
 
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
@@ -53,8 +55,13 @@ app.controller "VisualizationCtrl", [
                     when "parallel"
                         new vidatio.ParallelCoordinates chartData
                     when "bar"
+                        chartData = vidatio.helper.transposeDataset chartData
                         new vidatio.BarChart chartData
                     when "line"
+                        # Column-Headers as the first element in the columns - TODO
+                        chartData[0].unshift "A"
+                        chartData[1].unshift "B"
+
                         new vidatio.LineChart chartData
                     else
                         # TODO: show a default image here
