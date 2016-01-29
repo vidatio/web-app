@@ -33,7 +33,7 @@ app.controller "VisualizationCtrl", [
                 new Map($scope)
 
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset, dataset
 
                 # DEBUG
                 recommendedDiagram = "bar"
@@ -52,7 +52,7 @@ app.controller "VisualizationCtrl", [
                         map = new Map($scope)
                         geoJSON = Converter.convertArrays2GeoJSON dataset
                         map.setGeoJSON geoJSON
-                    when "parallel"
+                    when "pc"
                         new vidatio.ParallelCoordinates chartData
                     when "bar"
                         chartData = vidatio.helper.transposeDataset chartData
