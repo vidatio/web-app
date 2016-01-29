@@ -91,7 +91,7 @@ class window.vidatio.Recommender
                 yVariance = variance
 
         nominals  = dataset[xIndex].filter (value, index) ->
-            index == dataset[xIndex.lastIndexOf(value)]
+            index == dataset[xIndex].lastIndexOf(value)
         type = schema[xIndex] + " " + schema[yIndex]
         switch type
 
