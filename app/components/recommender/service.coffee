@@ -4,7 +4,7 @@ class window.vidatio.Recommender
     constructor: ->
         vidatio.log.info "Recommender constructor called"
         @recommendedDiagram = null
-        @types = ["numeric", "nominal", "unknown", "coordinate", "date"]
+        @types = ["coordinate", "date", "nominal", "numeric", "unknown"]
         @thresholdPC = 500
         @thresholdBar = 10
 
@@ -21,15 +21,15 @@ class window.vidatio.Recommender
 
         dataset.forEach (column) =>
             if vidatio.helper.isCoordinateColumn column
-                schema.push @types["coordinate"]
+                schema.push @types[0]
             else if vidatio.helper.isDateColumn column
-                schema.push @types["date"]
-            else if vidatio.helper.isNumericColumn column
-                schema.push @types["numeric"]
+                schema.push @types[1]
             else if vidatio.helper.isNominalColumn column
-                schema.push @types["nominal"]
+                schema.push @types[2]
+            else if vidatio.helper.isNumericColumn column
+                schema.push @types[3]
             else
-                schema.push @types["unknown"]
+                schema.push @types[4]
 
         return schema
 
@@ -63,7 +63,7 @@ class window.vidatio.Recommender
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
-    run: (subset = [], dataset) ->
+    run: (subset = [], dataset = subset) ->
         vidatio.log.info "Recommender getRecommendedDiagram called"
         vidatio.log.debug
             subset: subset
@@ -90,9 +90,11 @@ class window.vidatio.Recommender
                 yIndex = index
                 yVariance = variance
 
-        nominals  = dataset[xIndex].filter (value, index) ->
-            index == dataset[xIndex.lastIndexOf(value)
+        nominals = dataset[xIndex].filter (value, index) ->
+            index == dataset[xIndex].lastIndexOf(value)
+
         type = schema[xIndex] + " " + schema[yIndex]
+
         switch type
 
             when "numeric numeric", "nominal nominal"
@@ -141,7 +143,7 @@ class window.vidatio.Recommender
 
 
         return {
-            recommendedDiagram: @recommendedDiagram
-            xColumn: xIndex
-            yColumn: yIndex
+        recommendedDiagram: @recommendedDiagram
+        xColumn: xIndex
+        yColumn: yIndex
         }

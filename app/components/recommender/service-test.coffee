@@ -15,7 +15,8 @@ describe "Service Recommender", ->
             ["49", "10", "Linz", "39,5%", "2"]
         ]
 
-        dataset = helper.transposeDataset(dataset)
+        dataset = @helper.transposeDataset(dataset)
+
         expect(@recommender.getSchema(dataset)).toEqual(schema)
 
     it "should analyse the variances of the columns of the dataset", ->
@@ -26,8 +27,17 @@ describe "Service Recommender", ->
             ["46.323", "13.892", "Salzburg", "4%"]
             ["46.323", "10.348", "Salzburg", "5%"]
         ]
+        dataset = @helper.transposeDataset(dataset)
+        expect(@recommender.getVariances dataset).toEqual(variances)
 
-        dataset = helper.transposeDataset(dataset)
+        variances = [1, 1]
+        dataset = [
+            ["200", "Apfel"]
+            ["300", "Banane"]
+            ["400", "Kiwi"]
+            ["500", "Orange"]
+        ]
+        dataset = @helper.transposeDataset(dataset)
         expect(@recommender.getVariances dataset).toEqual(variances)
 
     it "should analyse the best diagram type for a given dataset system", ->
@@ -38,7 +48,7 @@ describe "Service Recommender", ->
             ["500", "13", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "recommendedDiagram": "pc"
             "xColumn": 0
             "yColumn": 1
         )
@@ -50,9 +60,21 @@ describe "Service Recommender", ->
             ["500", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
-            "xColumn": 0
-            "yColumn": 2
+            "recommendedDiagram": "bar"
+            "xColumn": 2
+            "yColumn": 0
+        )
+
+        dataset = [
+            ["200", "Apfel"]
+            ["300", "Banane"]
+            ["400", "Kiwi"]
+            ["500", "Orange"]
+        ]
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "bar"
+            "xColumn": 1
+            "yColumn": 0
         )
 
         dataset = [
@@ -66,3 +88,5 @@ describe "Service Recommender", ->
             "xColumn": 0
             "yColumn": 1
         )
+
+

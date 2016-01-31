@@ -1,6 +1,6 @@
 "use strict"
 
-class vidatio.ScatterPlot extends vidatio.Visualization
+class window.vidatio.ScatterPlot extends window.vidatio.Visualization
     constructor: (dataset) ->
         vidatio.log.info "ScatterPlot constructor called"
 

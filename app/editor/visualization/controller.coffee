@@ -36,7 +36,7 @@ app.controller "VisualizationCtrl", [
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset, dataset
 
                 # DEBUG
-                recommendedDiagram = "bar"
+                # recommendedDiagram = "bar"
                 # /DEBUG
 
                 console.log xColumn, yColumn

@@ -1,4 +1,4 @@
-describe "Service Map", ->
+xdescribe "Service Map", ->
     beforeEach ->
         module "app"
         inject (MapService, $injector) ->
