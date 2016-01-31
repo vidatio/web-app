@@ -89,4 +89,16 @@ describe "Service Recommender", ->
             "yColumn": 1
         )
 
+        dataset = [
+            [100, "01.01.2015"]
+            [200, "01.01.2016"]
+            [300, "01.01.2014"]
+        ]
+        console.log "+ + - - * * - - + +"
+        # expect(@recommender.run dataset).toEqual(
+        #     "recommendedDiagram": "line"
+        #     "xColumn": 1
+        #     "yColumn": 0
+        # )
+
 

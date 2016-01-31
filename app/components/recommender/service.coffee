@@ -95,6 +95,8 @@ class window.vidatio.Recommender
 
         type = schema[xIndex] + " " + schema[yIndex]
 
+        console.log type
+
         switch type
 
             when "numeric numeric", "nominal nominal"
@@ -129,16 +131,18 @@ class window.vidatio.Recommender
             when "date numeric"
                 @recommendedDiagram = "line"
 
-            when "numeric date "
+            when "numeric date"
                 @recommendedDiagram = "line"
                 tmp = xIndex
                 xIndex = yIndex
                 yIndex = tmp
 
             else
-                if type.indexOf "unknown" isnt -1 and dataset.length > @thresholdPC
+                console.log "DEFAULT"
+                if (type.indexOf "unknown" isnt -1) and (dataset.length > @thresholdPC)
                     @recommendedDiagram = "parallel"
                 else
+                    console.log "if scatter"
                     @recommendedDiagram = "scatter"
 
 
