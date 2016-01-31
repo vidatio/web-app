@@ -99,13 +99,13 @@ class window.vidatio.Recommender
 
             when "numeric numeric", "nominal nominal"
                 if dataset.length > @thresholdPC
-                    @recommendedDiagram = "pc"
+                    @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 
             when "nominal numeric"
                 if dataset.length > @thresholdPC
-                    @recommendedDiagram = "pc"
+                    @recommendedDiagram = "parallel"
                 else if nominals.length > @thresholdBar
                     @recommendedDiagram = "scatter"
                 else
@@ -113,7 +113,7 @@ class window.vidatio.Recommender
 
             when "numeric nominal"
                 if dataset.length > @thresholdPC
-                    @recommendedDiagram = "pc"
+                    @recommendedDiagram = "parallel"
                 else if nominals.length > @thresholdBar
                     @recommendedDiagram = "scatter"
                 else
@@ -137,7 +137,7 @@ class window.vidatio.Recommender
 
             else
                 if type.indexOf "unknown" isnt -1 and dataset.length > @thresholdPC
-                    @recommendedDiagram = "pc"
+                    @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 

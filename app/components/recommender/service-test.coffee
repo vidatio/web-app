@@ -48,7 +48,7 @@ describe "Service Recommender", ->
             ["500", "13", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "pc"
+            "recommendedDiagram": "parallel"
             "xColumn": 0
             "yColumn": 1
         )
