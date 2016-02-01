@@ -1,8 +1,10 @@
 "use strict"
 
-xdescribe "Service Data", ->
+describe "Service Data", ->
+
     beforeEach ->
         module "app"
+
         inject (DataService, ConverterService, MapService, $rootScope, $q, $injector) ->
             @injector = $injector
             @scope = $rootScope.$new()
@@ -10,11 +12,13 @@ xdescribe "Service Data", ->
 
             @Data = DataService
             @Converter = ConverterService
-            @Map = new MapService(@scope)
+            @Map = new MapService @scope
 
             spyOn(@Converter, "convertArrays2GeoJSON")
             spyOn(@Map, "setGeoJSON")
-            spyOn(@Map, "updateGeoJSONwithSHP")
+            spyOn(@Map, "updateGeoJSONWithSHP")
+
+            console.log @Map
 
     it "should be defined and included", ->
         expect(@Data).toBeDefined()
@@ -36,7 +40,7 @@ xdescribe "Service Data", ->
             @Data.meta.fileType = "shp"
 
             @Data.updateMap(0, 0, "oldData", "newData")
-            expect(@Map.updateGeoJSONwithSHP).toHaveBeenCalled()
+            expect(@Map.updateGeoJSONWithSHP).toHaveBeenCalled()
 
 
 

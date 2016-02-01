@@ -32,7 +32,7 @@ app.service 'DataService', [
                 key = Table.colHeaders[column]
 
                 if @meta.fileType is "shp"
-                    Map.updateGeoJSONwithSHP(row, column, oldData, newData, key)
+                    Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
                 else if @meta.fileType is "csv"
                     geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
                     Map.setGeoJSON(geoJSON)

@@ -87,7 +87,7 @@ xdescribe "Service Map", ->
             @Map.setGeoJSON(geoJSON)
             expect(@Map.geoJSON).toEqual(geoJSON)
 
-            expect(@Map.updateGeoJSONwithSHP(0, 0, 20, 99, "coordinates 1")).toEqual(true)
+            expect(@Map.updateGeoJSONWithSHP(0, 0, 20, 99, "coordinates 1")).toEqual(true)
             expect(@Map.geoJSON).toEqual(updatedGeoJSON)
 
         it "with a new property", ->
@@ -115,7 +115,7 @@ xdescribe "Service Map", ->
             @Map.setGeoJSON(geoJSON)
             expect(@Map.geoJSON).toEqual(geoJSON)
 
-            expect(@Map.updateGeoJSONwithSHP(0, 0, "value0", "newValue", "prop0")).toEqual(true)
+            expect(@Map.updateGeoJSONWithSHP(0, 0, "value0", "newValue", "prop0")).toEqual(true)
             expect(@Map.geoJSON).toEqual(updatedGeoJSON)
 
     describe "should not update the geoJSON object (generated from shp)", ->
@@ -140,17 +140,17 @@ xdescribe "Service Map", ->
             @Map.setGeoJSON(geoJSON)
             expect(@Map.geoJSON).toEqual(geoJSON)
 
-            expect(@Map.updateGeoJSONwithSHP(0, 0, 10, "NAN", "coordinates 0")).toEqual(false)
+            expect(@Map.updateGeoJSONWithSHP(0, 0, 10, "NAN", "coordinates 0")).toEqual(false)
 
         it "with a non existing point", ->
             @Map.setGeoJSON(geoJSON)
             expect(@Map.geoJSON).toEqual(geoJSON)
 
-            expect(@Map.updateGeoJSONwithSHP(1, 1, 10, 99, "coordinates 99")).toEqual(false)
+            expect(@Map.updateGeoJSONWithSHP(1, 1, 10, 99, "coordinates 99")).toEqual(false)
 
         it "with a non existing polygon", ->
             @Map.setGeoJSON(geoJSON)
             expect(@Map.geoJSON).toEqual(geoJSON)
 
-            expect(@Map.updateGeoJSONwithSHP(1, 5, 10, 99, "coordinates 99")).toEqual(false)
+            expect(@Map.updateGeoJSONWithSHP(1, 5, 10, 99, "coordinates 99")).toEqual(false)
 

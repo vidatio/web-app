@@ -166,10 +166,10 @@ app.service 'MapService', [
             # @param {number or string} newData
             # @param {string} key
             # @return {boolean}
-            updateGeoJSONwithSHP: (row, column, oldData, newData, key) ->
-                $log.info "MapService updateGeoJSONwithSHP called"
+            updateGeoJSONWithSHP: (row, column, oldData, newData, key) ->
+                $log.info "MapService updateGeoJSONWithSHP called"
                 $log.debug
-                    message: "MapService updateGeoJSONwithSHP called"
+                    message: "MapService updateGeoJSONWithSHP called"
                     row: row
                     column: column
                     oldData: oldData
@@ -184,7 +184,7 @@ app.service 'MapService', [
                             if @geoJSON.features[row].geometry.coordinates[keys[1]] == oldData
                                 @geoJSON.features[row].geometry.coordinates[keys[1]] = newData
                             else
-                                $log.warn "MapService updateGeoJSONwithSHP Point does not exist"
+                                $log.warn "MapService updateGeoJSONWithSHP Point does not exist"
                                 return false
                         else if @geoJSON.features[row].geometry.type is "Polygon"
                             arrayIndex = Math.floor(keys[1] / 2)
@@ -192,18 +192,18 @@ app.service 'MapService', [
                             if Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
                                 @geoJSON.features[row].geometry.coordinates[0][arrayIndex][index] = newData
                             else
-                                $log.warn "MapService updateGeoJSONwithSHP Array does not exist and can't be updated"
+                                $log.warn "MapService updateGeoJSONWithSHP Array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        $log.warn "MapService updateGeoJSONwithSHP Value is not a Number"
+                        $log.warn "MapService updateGeoJSONWithSHP Value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     if vidatio.helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
-                        $log.warn "MapService updateGeoJSONwithSHP Value is not a Number"
+                        $log.warn "MapService updateGeoJSONWithSHP Value is not a Number"
                         return false
 
                     # check if colHeader is part of properties
