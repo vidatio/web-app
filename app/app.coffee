@@ -131,13 +131,19 @@ app.config [
 
         # /registration
         .state "app.registration",
-            url: "/"
-            templateUrl: "index/index.html"
+            url: "/registration"
+            controller: "RegistrationCtrl"
+            templateUrl: "registration/registration.html"
+            title: "registration"
+            templateUrl: "registration/index.html"
 
         # /login
         .state "app.login",
-            url: "/"
-            templateUrl: "index/index.html"
+            url: "/login"
+            controller: "LoginCtrl"
+            templateUrl: "login/login.html"
+            title: "login"
+            templateUrl: "login/index.html"
 
         # /import
         .state "app.import",
