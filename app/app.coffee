@@ -38,6 +38,7 @@ app.run [
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
             $rootScope.globals.authorized = true
+            $http.defaults.headers.common["Authorization"] = "Basic " + $rootScope.globals.currentUser.authData
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
