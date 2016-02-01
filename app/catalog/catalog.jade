@@ -1,7 +1,7 @@
 #catalog.wrapper-content(ng-controller="CatalogCtrl")
     .vidatios(ng-show="vidatios.length")
         .row
-            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
+            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios | dateFilter: from : to")
                 .vidatio
                     a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                         img(src="{{ vidatio.image }}")

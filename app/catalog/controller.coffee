@@ -6,6 +6,9 @@ app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
     ($scope, CatalogFactory) ->
+        $scope.from = "2012-03-14"
+        $scope.to = undefined
+
         CatalogFactory.query (response) ->
             $scope.vidatios = response
 
@@ -13,6 +16,8 @@ app.controller "CatalogCtrl", [
                 vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+                vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
             console.error error
+
 ]
