@@ -90,10 +90,22 @@ class window.vidatio.Recommender
                 yIndex = index
                 yVariance = variance
 
-        nominals = dataset[xIndex].filter (value, index) ->
-            index == dataset[xIndex].lastIndexOf(value)
 
         type = schema[xIndex] + " " + schema[yIndex]
+
+        nominalIdx = xIndex if schema[xIndex] is "nominal"
+        nominalIdx = yIndex if schema[yIndex] is "nominal"
+
+        uniqueNominals = {}
+        for row in dataset
+            if row[nominalIdx] in uniqueNominals
+                continue
+
+            uniqueNominals[row[nominalIdx]] = true
+
+            numberOfNominals = Object.keys(uniqueNominals).length
+            if numberOfNominals > @thresholdBar
+                break
 
         console.log type
 
@@ -108,7 +120,7 @@ class window.vidatio.Recommender
             when "nominal numeric"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
-                else if nominals.length > @thresholdBar
+                else if numberOfNominals > @thresholdBar
                     @recommendedDiagram = "scatter"
                 else
                     @recommendedDiagram = "bar"
@@ -116,7 +128,7 @@ class window.vidatio.Recommender
             when "numeric nominal"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
-                else if nominals.length > @thresholdBar
+                else if numberOfNominals > @thresholdBar
                     @recommendedDiagram = "scatter"
                 else
                     @recommendedDiagram = "bar"
@@ -138,11 +150,9 @@ class window.vidatio.Recommender
                 yIndex = tmp
 
             else
-                console.log "DEFAULT"
                 if (type.indexOf "unknown" isnt -1) and (dataset.length > @thresholdPC)
                     @recommendedDiagram = "parallel"
                 else
-                    console.log "if scatter"
                     @recommendedDiagram = "scatter"
 
 
