@@ -2,8 +2,6 @@
 
 app = angular.module "app.filters"
 
-console.log "FILTER"
-
 app.filter "dateFilter", ->
     return (input, from, to) ->
         return input if not from and not to
