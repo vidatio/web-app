@@ -135,7 +135,6 @@ app.config [
             controller: "RegistrationCtrl"
             templateUrl: "registration/registration.html"
             title: "registration"
-            templateUrl: "registration/index.html"
 
         # /login
         .state "app.login",
@@ -143,7 +142,6 @@ app.config [
             controller: "LoginCtrl"
             templateUrl: "login/login.html"
             title: "login"
-            templateUrl: "login/index.html"
 
         # /import
         .state "app.import",
