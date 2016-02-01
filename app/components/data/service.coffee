@@ -57,13 +57,14 @@ app.service 'DataService', [
 
                 return true
 
-            # TODO: UserId and Name have to be set by the user
+            # TODO: Name has to be set by the user
+
             # Sends the dataset to the API, which saves it in the database.
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} userId
             # @param {String} name
-            saveViaAPI: (dataset, userId = "123456781234567812345678", name = "Neues Vidatio") ->
+            saveViaAPI: (dataset, userId, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset

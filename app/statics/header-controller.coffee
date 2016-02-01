@@ -33,7 +33,8 @@ app.controller "HeaderCtrl", [
 
         $scope.saveDataset = ->
             geoJSON = Map.getGeoJSON()
-            Data.saveViaAPI(geoJSON)
+            userId = $rootScope.globals.currentUser.id
+            Data.saveViaAPI geoJSON, userId
 
         $scope.hideLink = ->
             $rootScope.showLink = false
