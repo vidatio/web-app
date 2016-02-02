@@ -143,6 +143,32 @@ header
             font-size 23px
             padding-left 2px
 
+    #link-overlay
+        position absolute
+        top 90px
+        right calc(100vw * 0.01)
+        z-index 310
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 0px 20px 20px 20px
+        text-align right
+        max-width 98%
+
+        p
+            float left
+            margin 0
+
+        .fui-cross
+            background $color-white
+            color $color-grey-dark
+            text-align right
+            &:hover
+                color $color-red
+
+        .form-control
+            border-color $color-green
+
 @media(max-width: 767px)
     #navigation
         .editor-panel
