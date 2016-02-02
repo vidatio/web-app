@@ -21,8 +21,7 @@ app.controller "ImportCtrl", [
     "ngToast"
     "ProgressService"
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
-        $scope.link = "http://data.stadt-salzburg.at/geodaten/wfs?service=WFS&version=1.1.0&request=GetFeature&"+
-                "srsName=urn:x-ogc:def:crs:EPSG:4326&outputFormat=csv&typeName=ogdsbg:volksschule"
+        $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
         editorPath = "/" + $rootScope.locale + "/editor"
@@ -43,22 +42,29 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl load called"
 
             url = $scope.link
-            $http.get($rootScope.apiBase + "/v0/import"
+            $http.get($rootScope.apiBase + "/v0/forward"
                 params:
                     url: url
-            ).success (data) ->
+            ).success (resp) ->
 
                 $log.info "ImportCtrl load success called"
                 $log.debug
                     message: "ImportCtrl load success called"
-                    data: data
+                    data: resp.body
 
-                Table.setDataset data
+                fileContent = resp.body
+
+                if resp.fileType is 'zip'
+                    fileContent = fileContent.data
+
+                initTableAndMap resp.fileType, fileContent
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
+                    Progress.setMessage ""
                     $location.path editorPath
-            .error (data) ->
+
+            .error (resp) ->
                 $log.error "ImportCtrl load file by url error called"
                 $log.debug
                     message: "ImportCtrl load file by url error called"
@@ -121,60 +127,7 @@ app.controller "ImportCtrl", [
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                     Progress.setMessage message
 
-                switch fileType
-
-                    when "csv"
-                        Data.meta.fileType = "csv"
-                        dataset = Converter.convertCSV2Arrays fileContent
-                        geoJSON = Converter.convertArrays2GeoJSON dataset
-                        Table.resetColHeaders()
-                        Table.setDataset dataset
-                        Map.setGeoJSON geoJSON
-                        $location.path editorPath
-
-                    when "zip"
-                        Data.meta.fileType = "shp"
-                        Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
-                            $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
-                            $log.debug
-                                message: "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
-                                fileContent: fileContent
-
-                            dataset = Converter.convertGeoJSON2Arrays geoJSON
-
-                            if dataset.length
-                                colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
-                                Table.setDataset dataset
-                                Table.setColHeaders colHeaders
-                                Map.setGeoJSON geoJSON
-                                $location.path editorPath
-
-                            else
-                                $log.info "ImportCtrl Converter.convertGeoJSON2Arrays error"
-                                $log.debug
-                                    message: "ImportCtrl Converter.convertGeoJSON2Arrays error"
-                                    geoJSON: geoJSON
-                                $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
-
-                                $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
-                                    .then (translation) ->
-                                        ngToast.create
-                                            content: translation
-                                            className: "danger"
-
-                        , (error) ->
-                            $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
-                            $log.debug
-                                message: "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
-                                error: error
-                            $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
-
-                            $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
-                                .then (translation) ->
-                                    ngToast.create
-                                        content: translation
-                                        className: "danger"
-
+                    initTableAndMap fileType, fileContent
 
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
@@ -193,4 +146,60 @@ app.controller "ImportCtrl", [
                         ngToast.create
                             content: translation
                             className: "danger"
+
+        initTableAndMap = (fileType, fileContent) ->
+            switch fileType
+
+                when "csv"
+                    Data.meta.fileType = "csv"
+                    dataset = Converter.convertCSV2Arrays fileContent
+                    geoJSON = Converter.convertArrays2GeoJSON dataset
+                    Table.resetColHeaders()
+                    Table.setDataset dataset
+                    Map.setGeoJSON geoJSON
+                    $location.path editorPath
+
+                when "zip"
+                    Data.meta.fileType = "shp"
+                    Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
+                        $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
+                        $log.debug
+                            message: "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
+                            fileContent: fileContent
+
+                        dataset = Converter.convertGeoJSON2Arrays geoJSON
+
+                        if dataset.length
+                            colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+                            Table.setDataset dataset
+                            Table.setColHeaders colHeaders
+                            # Table.resetColHeaders()
+                            Map.setGeoJSON geoJSON
+                            $location.path editorPath
+
+                        else
+                            $log.info "ImportCtrl Converter.convertGeoJSON2Arrays error"
+                            $log.debug
+                                message: "ImportCtrl Converter.convertGeoJSON2Arrays error"
+                                geoJSON: geoJSON
+                            $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
+
+                            $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
+                                .then (translation) ->
+                                    ngToast.create
+                                        content: translation
+                                        className: "danger"
+
+                    , (error) ->
+                        $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                        $log.debug
+                            message: "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                            error: error
+                        $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+
+                        $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
+                            .then (translation) ->
+                                ngToast.create
+                                    content: translation
+                                    className: "danger"
 ]

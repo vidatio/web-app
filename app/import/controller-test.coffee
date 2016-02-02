@@ -25,12 +25,12 @@ describe "Controller Import", ->
         @Import.readFile.calls.reset()
         @Table.setDataset.calls.reset()
 
-    describe "on upload via link", ->
+    xdescribe "on upload via link", ->
         it 'should set the dataset of the table', ->
             @httpBackend.whenGET(/index/).respond ""
             @httpBackend.whenGET(/editor/).respond ""
             @httpBackend.expectGET(/languages/).respond ""
-            @httpBackend.whenGET(@rootScope.apiBase + '/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
+            @httpBackend.whenGET(@rootScope.apiBase + '/v0/forward?url=test.txt').respond 'test,1\ntest,2\ntest,3'
             @scope.link = 'test.txt'
             @scope.load()
             @httpBackend.flush()
