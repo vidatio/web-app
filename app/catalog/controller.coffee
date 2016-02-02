@@ -6,8 +6,12 @@ app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
     ($scope, CatalogFactory) ->
-        $scope.from = "2012-03-14"
-        $scope.to = undefined
+        $scope.dates =
+            from: undefined
+            to: undefined
+            maxDate: moment.tz('UTC').hour(12).startOf('h')
+
+        $scope.maxDate = $scope.dates.maxDate
 
         CatalogFactory.query (response) ->
             $scope.vidatios = response

@@ -102,6 +102,9 @@ BUILD =
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/moment/min/moment.min.js"
+            "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -112,6 +115,7 @@ BUILD =
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.css"
         ]
     dirs:
         out: "./build"

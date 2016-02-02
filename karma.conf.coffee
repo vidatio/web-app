@@ -31,6 +31,10 @@ module.exports = (config) ->
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
+            "./bower_components/moment/min/moment.min.js"
+            "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.js"
+
 
 
             # angular-translate

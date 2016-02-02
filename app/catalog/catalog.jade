@@ -1,7 +1,8 @@
 #catalog.wrapper-content(ng-controller="CatalogCtrl")
+    input(date-time ng-model="dates.from" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
     .vidatios(ng-show="vidatios.length")
         .row
-            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios | dateFilter: from : to")
+            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios | dateFilter: dates.from : dates.to")
                 .vidatio
                     a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                         img(src="{{ vidatio.image }}")

@@ -19,6 +19,7 @@ app = angular.module "app", [
     "ngSanitize"
     "ngCookies"
     "logglyLogger"
+    "datePicker"
 ]
 
 app.run [
