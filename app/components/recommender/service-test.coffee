@@ -100,8 +100,6 @@ describe "Service Recommender", ->
             "yColumn": 0
         )
 
-        console.log "---------------------------------------------------------------------------"
-
         # NUMERIC, NUMERIC WITH SCATTER
         dataset = [
             [100, 200, "True", "11.222"]
@@ -143,7 +141,7 @@ describe "Service Recommender", ->
         # NOMINAL, NOMINAL WITH PC
         tmp = dataset.length
         while dataset.length < 1000
-            for i in [0...tmp]
+            for i in [ 0...tmp ]
                 dataset.push [dataset[i]]
 
         expect(@recommender.run dataset).toEqual(
@@ -181,13 +179,13 @@ describe "Service Recommender", ->
 
         # NOMINAL, NUMERIC WITH PC
         # current problem: if dataset.length < 23 --> yColumn is going to be Null
-        # tmp = dataset.length
-        # while dataset.length < 22
-        #     for i in [0...tmp]
-        #         dataset.push [dataset[i]]
+        tmp = dataset.length
+        while dataset.length < 50
+            for i in [ 0...tmp ]
+                dataset.push [dataset[i]]
 
-        # expect(@recommender.run dataset).toEqual(
-        #     "recommendedDiagram": "parallel"
-        #     "xColumn": 0
-        #     "yColumn": 1
-        # )
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )

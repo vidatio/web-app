@@ -1,6 +1,6 @@
 "use strict"
 
-describe "Service Data", ->
+xdescribe "Service Data", ->
 
     beforeEach ->
         module "app"

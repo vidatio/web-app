@@ -63,18 +63,23 @@ class window.vidatio.Recommender
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
+    # OR {error} Message with occurred error
     run: (subset = [], dataset = subset) ->
         vidatio.log.info "Recommender getRecommendedDiagram called"
         vidatio.log.debug
             subset: subset
             dataset: dataset
 
+        if subset[0].length < 2
+            message = "Dataset have not enough dimensions!"
+            return { error: errorMessage }
+
         xIndex = null
         yIndex = null
         @recommendedDiagram = null
 
-        xVariance = 0
-        yVariance = 0
+        xVariance = null
+        yVariance = null
 
         transposedDataset = vidatio.helper.transposeDataset subset
 
@@ -83,13 +88,17 @@ class window.vidatio.Recommender
 
         for variance, index in variances
             if variance > xVariance
+
+                if xIndex?
+                    yIndex = xIndex
+                    yVariance = xVariance
+
                 xIndex = index
                 xVariance = variance
 
             else if variance > yVariance
                 yIndex = index
                 yVariance = variance
-
 
         type = schema[xIndex] + " " + schema[yIndex]
 
@@ -106,8 +115,6 @@ class window.vidatio.Recommender
             numberOfNominals = Object.keys(uniqueNominals).length
             if numberOfNominals > @thresholdBar
                 break
-
-        console.log type
 
         switch type
 
