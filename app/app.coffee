@@ -66,7 +66,8 @@ app.config [
     "ngToastProvider"
     "LogglyLoggerProvider"
     "CONFIG"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
+    "$provide"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG, $provide) ->
         $locationProvider.html5Mode true
 
         # Loggly Configuration
@@ -183,6 +184,13 @@ app.config [
                 $state.get().forEach (state) ->
                     if $stateParams.path is state.url
                         $state.go state.name, locale
+
+        # overwrite default mFormat filter of datepicker module
+        $provide.decorator 'mFormatFilter', ->
+            (m, format, tz) ->
+                if !moment.isMoment(m)
+                    return ''
+                if tz then moment.tz(m, tz).format(format) else m.format(format)
 
 ]
 

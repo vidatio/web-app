@@ -10,6 +10,10 @@ app.filter "dateFilter", ->
         toDate = new Date(to)
         output = []
 
+        toDate.setHours(23)
+        toDate.setMinutes(59)
+        toDate.setSeconds(59)
+
         for element in input
             output.push(element) if isNaN(toDate) and element.createdAt >= fromDate
             output.push(element) if isNaN(fromDate) and element.createdAt <= toDate
