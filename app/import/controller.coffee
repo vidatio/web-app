@@ -173,7 +173,6 @@ app.controller "ImportCtrl", [
                             colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                             Table.setDataset dataset
                             Table.setColHeaders colHeaders
-                            # Table.resetColHeaders()
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 
