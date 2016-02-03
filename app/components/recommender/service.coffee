@@ -72,7 +72,7 @@ class window.vidatio.Recommender
 
         if subset[0].length < 2
             message = "Dataset have not enough dimensions!"
-            return { error: errorMessage }
+            return { error: message }
 
         xIndex = null
         yIndex = null

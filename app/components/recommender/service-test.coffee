@@ -140,14 +140,14 @@ describe "Service Recommender", ->
 
         # NOMINAL, NOMINAL WITH PC
         tmp = dataset.length
-        while dataset.length < 1000
+        while dataset.length < 501
             for i in [ 0...tmp ]
-                dataset.push [dataset[i]]
+                dataset.push dataset[i]
 
         expect(@recommender.run dataset).toEqual(
             "recommendedDiagram": "parallel"
-            "xColumn": 1
-            "yColumn": 3
+            "xColumn": 0
+            "yColumn": 1
         )
 
         # NOMINAL, NUMERIC WITH SCATTER
