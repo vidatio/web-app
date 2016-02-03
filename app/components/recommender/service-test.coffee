@@ -48,7 +48,7 @@ describe "Service Recommender", ->
             ["500", "13", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "parallel"
+            "recommendedDiagram": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
@@ -89,4 +89,105 @@ describe "Service Recommender", ->
             "yColumn": 1
         )
 
+        dataset = [
+            [100, "01.01.2015"]
+            [200, "01.01.2016"]
+            [300, "01.01.2014"]
+        ]
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "line"
+            "xColumn": 1
+            "yColumn": 0
+        )
 
+        console.log "---------------------------------------------------------------------------"
+
+        # NUMERIC, NUMERIC WITH SCATTER
+        dataset = [
+            [100, 200, "True", "11.222"]
+            [10, 20, "True", "11.222"]
+            [231, 132, "True", "11.222"]
+            [144, 876, "True", "11.222"]
+        ]
+
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        # NUMERIC, NUMERIC WITH PC
+        while dataset.length < 1000
+            dataset.push [Math.random(), Math.random(), "True", "11.222"]
+
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "parallel"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        # NOMINAL, NOMINAL WITH SCATTER
+        dataset = [
+            ["Apfelsaft", "Linz", "Salzburg", "2%"]
+            ["Apfelkuchen", "Innsbruck", "Salzburg", "3.213%"]
+            ["Croissants", "Salzburg", "Salzburg", "3.122%"]
+            ["Kaffee", "Wien", "Salzburg", "1.0%"]
+        ]
+
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        # NOMINAL, NOMINAL WITH PC
+        tmp = dataset.length
+        while dataset.length < 1000
+            for i in [0...tmp]
+                dataset.push [dataset[i]]
+
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "parallel"
+            "xColumn": 1
+            "yColumn": 3
+        )
+
+        # NOMINAL, NUMERIC WITH SCATTER
+        dataset = [
+            ["Apfel", 100]
+            ["Birne", 200]
+            ["Banane", 12]
+            ["Orange", 123]
+            ["Balsamico", 213123]
+            ["Olivenöl", 4]
+            ["Erdbeeren", 10000]
+            ["Fisch", 1]
+            ["Pflaumen", 200]
+            ["Wurst", 1]
+        ]
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "bar"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        # NOMINAL, NUMERIC WITH SCATTER
+        dataset.push ["Mango", 100]
+        expect(@recommender.run dataset).toEqual(
+            "recommendedDiagram": "scatter"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        # NOMINAL, NUMERIC WITH PC
+        # current problem: if dataset.length < 23 --> yColumn is going to be Null
+        # tmp = dataset.length
+        # while dataset.length < 22
+        #     for i in [0...tmp]
+        #         dataset.push [dataset[i]]
+
+        # expect(@recommender.run dataset).toEqual(
+        #     "recommendedDiagram": "parallel"
+        #     "xColumn": 0
+        #     "yColumn": 1
+        # )
