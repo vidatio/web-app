@@ -97,5 +97,11 @@
             "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
+    },
+    "DATE": "Datum",
+    "FROM": "von",
+    "TO": "bis",
+    "FILTER": {
+        "BY_TIME": "Filtern nach Zeit"
     }
 }
