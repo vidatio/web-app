@@ -98,6 +98,16 @@ app.config [
             prefix: "languages/"
             suffix: ".json"
 
+        # I18N for datepicker
+        moment().locale "de"
+
+        # overwrite default mFormat filter of datepicker module
+        $provide.decorator 'mFormatFilter', ->
+            (m, format, tz) ->
+                if !moment.isMoment(m)
+                    return ''
+                if tz then moment.tz(m, tz).format(format) else m.format(format)
+
 
         ngToast.configure(
             animation: "slide"
@@ -184,13 +194,6 @@ app.config [
                 $state.get().forEach (state) ->
                     if $stateParams.path is state.url
                         $state.go state.name, locale
-
-        # overwrite default mFormat filter of datepicker module
-        $provide.decorator 'mFormatFilter', ->
-            (m, format, tz) ->
-                if !moment.isMoment(m)
-                    return ''
-                if tz then moment.tz(m, tz).format(format) else m.format(format)
 
 ]
 

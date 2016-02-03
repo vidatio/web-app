@@ -33,6 +33,7 @@ module.exports = (config) ->
             "./bower_components/jPushMenu/js/jPushMenu.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/moment/locale/de-at.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
 
 

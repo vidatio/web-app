@@ -104,6 +104,7 @@ BUILD =
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/moment/locale/de.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
         ]
         css: [
