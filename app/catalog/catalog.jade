@@ -1,13 +1,19 @@
 #catalog.wrapper-content(ng-controller="CatalogCtrl")
-    input(date-time ng-model="dates.from" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
-    .vidatios(ng-show="vidatios.length")
-        .row
-            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios | dateFilter: dates.from : dates.to")
-                .vidatio
-                    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
-                        img(src="{{ vidatio.image }}")
+    .row
+        #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
+            #time-filter
+                h2 Filter by Time
+                input(date-time ng-model="dates.from" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+                input(date-time ng-model="dates.to" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+        .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
+            .row
+                .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios | dateFilter: dates.from : dates.to")
+                    .vidatio
+                        a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                            img(src="{{ vidatio.image }}")
 
-                    .text
-                        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
-                            h4.title {{ vidatio.title }}
-                        p {{ vidatio.description | limitTo: 120}} ...
+                        .text
+                            a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                                h4.title {{ vidatio.title }}
+                            p {{ vidatio.description | limitTo: 120}} ...
+                            p {{ vidatio.createdAt }}
