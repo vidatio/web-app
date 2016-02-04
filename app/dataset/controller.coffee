@@ -34,7 +34,7 @@ app.controller "DatasetCtrl", [
             userName = $scope.data.userId || "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
-            image = $scope.data.image || "images/logo_greyscale.svg"
+            image = $scope.data.image || "images/logo-greyscale.svg"
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
             # fill up detail-view with metadata

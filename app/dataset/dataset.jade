@@ -10,22 +10,27 @@
 
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()")
+                        i.fa.fa-plus
+                        |   {{ "EDIT" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
+                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()')
+                        i.fa.fa-link
+                        |   {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
-                            span.download
-                            | {{ "DOWNLOAD" | translate | uppercase }}
+                            i.fa.fa-download
+                            |   {{ "DOWNLOAD" | translate | uppercase }}
+
                         ul
                             li
                                 a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
                             li
                                 a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
-                                
+
     .row
         .col-sm-12
             h1.underline-turqoise {{ "INFORMATION-DATASET" | translate | uppercase }}
