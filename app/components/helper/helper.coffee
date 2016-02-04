@@ -330,5 +330,5 @@ class window.vidatio.Helper
     # @param {String} cell
     # @return {Boolean}
     isDate: (cell) ->
-        regex = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
+        regex = /^\d{4}[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])$/
         return regex.test(cell)

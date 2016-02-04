@@ -4,7 +4,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
     constructor: (dataset) ->
         vidatio.log.info "ParallelCoordinates constructor called"
 
-        $ ->
+        setTimeout( ->
             $chart = $("#chart")
 
             width = $chart.parent().width()
@@ -15,3 +15,4 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             chart.width(width).height(height).render().render().ticks(3).createAxes()
 
             super(dataset, chart)
+        , 500)

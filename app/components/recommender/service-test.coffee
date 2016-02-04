@@ -90,9 +90,9 @@ describe "Service Recommender", ->
         )
 
         dataset = [
-            [100, "01.01.2015"]
-            [200, "01.01.2016"]
-            [300, "01.01.2014"]
+            [100, "2015-01-01"]
+            [200, "2014-01-01"]
+            [300, "2013-01-01"]
         ]
         expect(@recommender.run dataset).toEqual(
             "recommendedDiagram": "line"

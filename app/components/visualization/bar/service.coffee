@@ -4,7 +4,7 @@ class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataset) ->
         vidatio.log.info "Barchart constructor called"
 
-        $ ->
+        setTimeout( ->
             chart = c3.generate
                 bindto: "#chart"
                 data:
@@ -17,3 +17,4 @@ class vidatio.BarChart extends vidatio.Visualization
                     width: $("#chart").parent().width()
 
             super(dataset, chart)
+        , 500)

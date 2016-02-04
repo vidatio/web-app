@@ -17,14 +17,9 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
-        Table.resetColHeaders()
-        Table.setDataset [[200, 500], [300, 600], [400, 700]] #Line
-        #Table.setDataset [[200, "Apfel"], [300, "Banane"], [400, "Orange"]] #Bar
-
         dataset = Table.getDataset()
-
-        subDataset = vidatio.helper.trimDataset(dataset)
-        subDataset = vidatio.helper.cutDataset(subDataset)
+        trimmedDataset = vidatio.helper.trimDataset(dataset)
+        cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
 
         switch Data.meta.fileType
             when "shp"
@@ -32,15 +27,10 @@ app.controller "VisualizationCtrl", [
                 new Map($scope)
 
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subDataset, dataset
-
-                # DEBUG
-                # recommendedDiagram = "parallel"
-                # /DEBUG
-
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
                 $scope.recommendedDiagram = recommendedDiagram
-                chartData = [dataset.map((value, index) -> value[xColumn]),
-                    dataset.map((value, index) -> value[yColumn])]
+                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
+                    trimmedDataset.map((value, index) -> value[yColumn])]
 
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
@@ -59,11 +49,11 @@ app.controller "VisualizationCtrl", [
                         chartData = vidatio.helper.transposeDataset chartData
                         new vidatio.BarChart chartData
                     when "line"
-                        chartData[0].unshift "A"
-                        chartData[1].unshift "B"
+                        chartData[0].unshift "x"
+                        chartData[1].unshift "A"
                         new vidatio.LineChart chartData
                     else
-                        # TODO: show a default image here
+                    # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         #TODO: Extend sharing visualization for other diagrams

@@ -14,7 +14,7 @@ class window.vidatio.Recommender
     # @return {Array} schema, types of the columns
     getSchema: (dataset) ->
         vidatio.log.info "Recommender getSchema called"
-        vidatio.log.debug
+        vidatio.log.debug JSON.stringify
             dataset: dataset
 
         schema = []
@@ -70,7 +70,7 @@ class window.vidatio.Recommender
             subset: subset
             dataset: dataset
 
-        if subset[0].length < 2
+        if subset.length < 1 or subset[0].length < 2
             message = "Dataset have not enough dimensions!"
             return { error: message }
 

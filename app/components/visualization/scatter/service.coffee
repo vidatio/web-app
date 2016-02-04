@@ -6,7 +6,10 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
         vidatio.log.debug
             dataset: dataset
 
-        $ ->
+        # TODO: Add something like this
+        # http://stackoverflow.com/questions/23044338/window-resize-directive
+
+        setTimeout( ->
             chart = c3.generate
                 bindto: "#chart"
                 data:
@@ -20,3 +23,4 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
                     width: $("#chart").parent().width()
 
             super(dataset, chart)
+        , 500)
