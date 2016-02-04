@@ -43,9 +43,22 @@ header
     #back-to-datasets-overview
         float left
         margin-left 60px
+        height 35px
+        margin-top 3px
+        text-align center
+        color $color-black
+
+        .back-icon
+            display block
+            font-size 24px
+
+        span
+            font-size 10px
+            position relative
+            top -2px
+            font-family Colaborate,Arial,Helvetica,sans-serif
 
     #back-to-import
-    #back-to-datasets-overview
         position relative
         height 40px
         text-align center
@@ -118,6 +131,8 @@ header
 
         div
             display inline
+            position relative
+            top -7px
 
         a#login-button, a#menu
             color $color-black
@@ -139,6 +154,25 @@ header
 
             &.menu-active
                 color $color-green !important
+
+        #menu
+        #login-button
+        #logout-button
+            span
+                display block
+                position relative
+                font-size 10px
+                font-family Colaborate,Arial,Helvetica,sans-serif
+
+        #menu
+            span
+                top -17px
+
+        #login-button
+        #logout-button
+            span
+                top -16px
+
 
         a#menu
             font-size 20px

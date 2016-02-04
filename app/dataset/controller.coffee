@@ -34,7 +34,7 @@ app.controller "DatasetCtrl", [
             userName = $scope.data.userId || "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
-            image = $scope.data.image || "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+            image = $scope.data.image || "images/logo_greyscale.svg"
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
             # fill up detail-view with metadata
@@ -77,9 +77,6 @@ app.controller "DatasetCtrl", [
             $timeout ->
                 Progress.setMessage ""
 
-        $scope.shareDataset = ->
-            $log.info "DatasetCtrl shareDataset called"
-
         $scope.downloadDataset = ->
             $log.info "DatasetCtrl downloadDataset called"
 
@@ -88,12 +85,6 @@ app.controller "DatasetCtrl", [
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
-
-        $scope.getCodeDataset = ->
-            $log.info "DatasetCtrl getCodeDataset called"
-
-        $scope.getMetadataDataset = ->
-            $log.info "DatasetCtrl getMetadataDataset called"
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->

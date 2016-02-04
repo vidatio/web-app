@@ -10,16 +10,20 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview.btn.btn-primary(ui-sref='app.catalog({ locale: locale })')
-                        span.btn-tip.fui-arrow-left
+                    a#back-to-datasets-overview(ui-sref='app.catalog({ locale: locale })')
+                        i.fa.fa-reply.back-icon
                         span {{ "OVERVIEW" | translate | uppercase }}
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
@@ -27,11 +31,14 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
                 .col-xs-6.col-sm-pull-2.col-sm-2
                     a#back-to-import.btn.btn-primary(ui-sref='app.import({ locale: locale })')
@@ -56,9 +63,13 @@ header.ng-cloak
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
 
             #navigation.row(ng-switch-when="login")
@@ -88,9 +99,13 @@ header.ng-cloak
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
@@ -98,8 +113,12 @@ header.ng-cloak
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
+                            span {{ "LOGIN_DETAILVIEW" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
