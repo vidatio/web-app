@@ -27,9 +27,13 @@
 
                         ul
                             li
-                                a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
+                                a(href="#" ng-click='downloadDataset()')
+                                    i.fa.fa-file-text-o
+                                    |   {{ "DATASET" | translate }}
                             li
-                                a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
+                                a(href="#" ng-click='downloadImage()')
+                                    i.fa.fa-file-image-o
+                                    |   {{ "VISUALIZATION" | translate }}
 
     .row
         .col-sm-12

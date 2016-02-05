@@ -41,6 +41,7 @@
             position relative
             cursor pointer
             margin 0 auto
+            text-align left
 
             a.title
                 color $color-black
@@ -118,6 +119,7 @@
                         line-height 30px
                         font-size 16px
                         font-weight 500
+                        margin-left 25px
 
                     &:hover
                         & > a
@@ -158,18 +160,24 @@
 @media (max-width: 767px)
     #dataset-view
         .buttons-first-row
-        .buttons-second-row
+            margin-left -28px
+            margin-right -1px
+
             #edit-dataset
             #download-dataset
             #link-dataset
-                width 100px
-                font-size 13px
+                width 117px
+                font-size 12px
                 line-height 26px
+
+            #edit-dataset
+                .fa
+                    margin-left -9px
 
             #download-dataset
                 a.title
-                    width 100px
-                    font-size 13px
+                    width 117px
+                    font-size 11px
 
                     span.download
                         &::before
@@ -178,20 +186,28 @@
                             margin-top 3px
 
                 ul
-                    width 100px
+                    width 117px
 
                     &::after
-                        left 37px
+                        left 45px
                         top -19px
 
                     li
                         &:first-child
                             &::after
-                                left 36px
+                                left 44px
                                 top -23px
+
+                        & > a
+                            margin-left 10px
+                            font-size 13px
 
         .dataset-title
             margin-top 30px
+
+        .metadata-container
+            margin-bottom 100px
+
 
 @media (min-width: 768px) and (max-width: 1012px)
     #dataset-view
