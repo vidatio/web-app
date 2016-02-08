@@ -326,6 +326,12 @@ class window.vidatio.Helper
     #   YYYY.MM.DD
     #   YYYY-MM-DD
     #   YYYY/MM/DD
+    #   DD.MM.YYYY
+    #   DD-MM-YYYY
+    #   DD/MM/YYYY
+    #   MM.DD.YYYY
+    #   MM-DD-YYYY
+    #   MM/DD/YYYY
     # @public
     # @param {String} cell
     # @return {Boolean}
