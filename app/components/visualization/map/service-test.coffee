@@ -1,9 +1,12 @@
-xdescribe "Service Map", ->
+describe "Service Map", ->
     beforeEach ->
         module "app"
-        inject (MapService, $injector) ->
+        inject (MapService, $injector, $rootScope) ->
+            @scope = $rootScope.$new()
             @injector = $injector
+
             @Map = MapService
+            @Map.init @scope
 
     it 'should be defined and included', ->
         expect(@Map).toBeDefined()

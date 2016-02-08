@@ -19,8 +19,6 @@ class vidatio.LineChart extends vidatio.Visualization
                             format: "%Y-%m-%d"
                 padding:
                     right: 30
-                size:
-                    width: $("#chart").parent().width()
 
             super(dataset, chart)
         , 500)

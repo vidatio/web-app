@@ -19,8 +19,6 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
                     type: "scatter"
                 padding:
                     right: 30
-                size:
-                    width: $("#chart").parent().width()
 
             super(dataset, chart)
         , 500)

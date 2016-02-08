@@ -11,14 +11,16 @@ app.service 'MapService', [
     "leafletData"
     ($log, $timeout, leafletData) ->
         class Map
-            constructor: ($scope) ->
+            constructor: () ->
                 $log.info "MapService constructor called"
-
                 @map = undefined
                 @geoJSON =
                     "type": "FeatureCollection"
                     "features": []
                 @bounds = undefined
+
+            init: ($scope) ->
+                $log.info "MapService init called"
 
                 icon =
                     iconUrl: '../images/marker-small.png'
@@ -263,4 +265,6 @@ app.service 'MapService', [
                 $log.info "MapService getGeoJSON called"
 
                 return @geoJSON
+
+        new Map
 ]

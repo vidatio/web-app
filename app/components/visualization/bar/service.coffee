@@ -13,8 +13,6 @@ class vidatio.BarChart extends vidatio.Visualization
                 bar: width: ratio: 0.5
                 padding:
                     right: 30
-                size:
-                    width: $("#chart").parent().width()
 
             super(dataset, chart)
         , 500)
