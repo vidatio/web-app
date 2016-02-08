@@ -17,11 +17,7 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
-        dataset = []
-        while dataset.length < 501
-            dataset.push [Math.random() * 200, Math.random() * 200, "True", "11.222"]
-
-        #dataset = Table.getDataset()
+        dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
         cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
 
@@ -56,7 +52,7 @@ app.controller "VisualizationCtrl", [
                         chartData[1].unshift "A"
                         new vidatio.LineChart chartData
                     else
-                    # TODO: show a default image here
+                        # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         #TODO: Extend sharing visualization for other diagrams
