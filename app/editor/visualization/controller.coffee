@@ -17,15 +17,18 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
-        dataset = Table.getDataset()
+        dataset = []
+        while dataset.length < 501
+            dataset.push [Math.random() * 200, Math.random() * 200, "True", "11.222"]
+
+        #dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
         cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
 
         switch Data.meta.fileType
             when "shp"
                 $scope.recommendedDiagram = "map"
-                new Map($scope)
-
+                Map.init $scope
             else
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
                 $scope.recommendedDiagram = recommendedDiagram
@@ -39,8 +42,8 @@ app.controller "VisualizationCtrl", [
                         chartData[1].unshift "A"
                         new vidatio.ScatterPlot chartData
                     when "map"
-                        map = new Map($scope)
-                        geoJSON = Converter.convertArrays2GeoJSON dataset
+                        Map.init $scope
+                        geoJSON = Converter.convertArrays2GeoJSON chartData
                         map.setGeoJSON geoJSON
                     when "parallel"
                         chartData = vidatio.helper.transposeDataset chartData

@@ -1,6 +1,6 @@
 "use strict"
 
-xdescribe "Service Data", ->
+describe "Service Data", ->
 
     beforeEach ->
         module "app"
@@ -12,13 +12,13 @@ xdescribe "Service Data", ->
 
             @Data = DataService
             @Converter = ConverterService
-            @Map = new MapService @scope
+
+            @Map = MapService
+            @Map.init @scope
 
             spyOn(@Converter, "convertArrays2GeoJSON")
             spyOn(@Map, "setGeoJSON")
             spyOn(@Map, "updateGeoJSONWithSHP")
-
-            console.log @Map
 
     it "should be defined and included", ->
         expect(@Data).toBeDefined()

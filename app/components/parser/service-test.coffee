@@ -10,7 +10,7 @@ describe "Service Parser", ->
     beforeEach ->
         @Parser = new window.vidatio.Parser()
 
-    xit 'should find columns of the latitude and longitude in dataset', ->
+    it 'should find columns of the latitude and longitude in dataset', ->
         dataset = [
             ["Salzburg", "41,5%", "47.349", "13.892"]
             ["Wien", "38,5%", "46.841", "12.348"]
@@ -33,7 +33,7 @@ describe "Service Parser", ->
             y: 1
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
-    xit 'should find coordinates (which are stored in one column) in the dataset', ->
+    it 'should find coordinates (which are stored in one column) in the dataset', ->
         dataset = [
             ["47.349,13.892", "Salzburg", "41,5%"]
             ["46.841,12.348", "Wien", "38,5%"]
@@ -111,7 +111,7 @@ describe "Service Parser", ->
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
     # should be easier to find coordinates via header then via the complete dataset
-    xit 'should find the columns of the latitude and longitude in dataset with header', ->
+    it 'should find the columns of the latitude and longitude in dataset with header', ->
         dataset = [
             ["City", "Content", "GEOMETRIE"]
             ["Innsbruck", "41,5%", "POINT (49 12)"]
@@ -144,7 +144,7 @@ describe "Service Parser", ->
             xy: 2
         expect(@Parser.findCoordinatesColumns(dataset)).toEqual(indexCoordinates)
 
-    xit 'should extract the coordinates from one cell', ->
+    it 'should extract the coordinates from one cell', ->
         cell = "42.23 23.902 180.001 21 test"
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("42.23")
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("23.902")

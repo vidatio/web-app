@@ -1,33 +1,32 @@
-# File Reader Directive Test
-# =================
-
 "use strict"
+
+# TODO
+# Because the $scope.logout functions contains state.go calls this should be a e2e test
 
 xdescribe "Directive Menu", ->
     describe "menu", ->
         beforeEach ->
             module "app"
-            inject ($rootScope, $controller, $compile, $injector) ->
+            inject ($rootScope, $controller, $compile, $injector, UserService, $httpBackend) ->
                 @injector = $injector
                 @scope = $rootScope.$new()
+                @httpBackend = $httpBackend
+
                 @element = $compile('<menu></menu>')(@scope)
+                @scope.$digest()
 
-                @UserService =
-                    logout: ->
+                @User = UserService
 
-                #@scope = @element.scope()
-                #console.log(@element.isolateScope())
-
-                spyOn(@scope, "logout")
+                spyOn(@element.scope(), "logout")
                 spyOn(@UserService, 'logout')
 
         it "should exist in the injector", ->
             expect(@injector.has('menuDirective')).toBeTruthy()
 
         it "should listen to the change event", ->
-            @scope.logout()
-            expect(@UserService.logout).toHaveBeenCalled()
+            @element.scope().logout()
+            expect(@User.logout).toHaveBeenCalled()
 
         afterEach ->
-            @UserService.logout.calls.reset()
-            #@scope.logout.calls.reset()
+            @User.logout.calls.reset()
+            @element.scope().logout.calls.reset()
