@@ -24,7 +24,7 @@ app.controller "VisualizationCtrl", [
         switch Data.meta.fileType
             when "shp"
                 $scope.recommendedDiagram = "map"
-                Map.init $scope
+                Map.setScope $scope
             else
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
                 $scope.recommendedDiagram = recommendedDiagram
@@ -39,9 +39,9 @@ app.controller "VisualizationCtrl", [
                         chartData[1].unshift "A"
                         new vidatio.ScatterPlot chartData
                     when "map"
-                        Map.init $scope
+                        Map.setScope $scope
                         geoJSON = Converter.convertArrays2GeoJSON chartData
-                        map.setGeoJSON geoJSON
+                        Map.setGeoJSON geoJSON
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData

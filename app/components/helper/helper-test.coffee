@@ -253,6 +253,23 @@ describe "Service Helper", ->
         expect(@Helper.isURL "htt://.mediacube.at" ).toBeFalsy()
         expect(@Helper.isURL "http:vidatio.mediacube.at/delete?q=test&result=test" ).toBeFalsy()
 
+    it 'should identify dates', ->
+        expect(@Helper.isDate "01.01.2000" ).toBeTruthy()
+        expect(@Helper.isDate "31.12.2000" ).toBeTruthy()
+        expect(@Helper.isDate "12.31.2000" ).toBeTruthy()
+
+        expect(@Helper.isDate "31.13.2000" ).toBeFalsy()
+        expect(@Helper.isDate "32.12.2000" ).toBeFalsy()
+        expect(@Helper.isDate "13/31/2000" ).toBeFalsy()
+        expect(@Helper.isDate "12-32-2000" ).toBeFalsy()
+
+        expect(@Helper.isDate "2016-01-13" ).toBeTruthy()
+        expect(@Helper.isDate "2016-12-31" ).toBeTruthy()
+        expect(@Helper.isDate "2016/12/31" ).toBeTruthy()
+        expect(@Helper.isDate "2016/12/31" ).toBeTruthy()
+
+        expect(@Helper.isDate "2016/00/31" ).toBeFalsy()
+        expect(@Helper.isDate "2016/12/32" ).toBeFalsy()
 
 
 

@@ -11,7 +11,7 @@ app.service 'MapService', [
     "leafletData"
     ($log, $timeout, leafletData) ->
         class Map
-            constructor: () ->
+            constructor: ->
                 $log.info "MapService constructor called"
                 @map = undefined
                 @geoJSON =
@@ -19,7 +19,9 @@ app.service 'MapService', [
                     "features": []
                 @bounds = undefined
 
-            init: ($scope) ->
+            # Because we add some objects to the scope we need this function
+            # has to be called before the init function
+            setScope: ($scope) ->
                 $log.info "MapService init called"
 
                 icon =
