@@ -1,0 +1,219 @@
+#dataset-view
+    .visualization-container
+        text-align center
+        vertical-align middle
+        width 100%
+        height 450px
+        line-height 350px
+        background $color-white
+        margin-top 20px
+        box-shadow 2px 2px 2px 0px $color-shadow
+        border-radius 4xp
+
+    .visualization-container
+        margin-top 20px
+
+        img
+            width 100%
+            height 90%
+
+    .middle
+        text-align center
+
+    .buttons-first-row
+        margin-top -23px
+
+    .buttons-second-row
+        margin-top 30px
+        margin-bottom 50px
+
+    .buttons-first-row
+    .buttons-second-row
+        margin-right -15px
+        margin-left -15px
+
+        #edit-dataset
+        #share-dataset
+        #link-dataset
+        #code-dataset
+        #download-dataset
+        #metadata-dataset
+            width 150px
+            height 45px
+            line-height 28px
+
+        #download-dataset
+            position relative
+            cursor pointer
+            margin 0 auto
+
+            a.title
+                color $color-black
+                background $color-white
+                border 2px solid $color-green
+                width 150px
+                height 45px
+                line-height 23px
+
+                span.download
+                    &::before
+                        content ''
+                        background-image url('../images/download-button.svg')
+                        background-repeat no-repeat
+                        background-size 15px
+                        margin-top 0.5px
+                        margin-left 5px
+                        float left
+                        width 15px
+                        height 20px
+
+                &:focus
+                    background $color-hover-light
+                    border-color $color-hover-light
+
+            & > a
+                display block
+                width 150px
+
+            ul
+                background $color-white none repeat scroll 0 0
+                border 2px solid $color-green
+                display none
+                position absolute
+                width 150px
+                list-style outside none none
+                padding 0
+                margin-top 12px
+                border-radius 4px
+                z-index 300
+
+                &::after
+                    border-color transparent transparent $color-white transparent
+                    border-style solid
+                    border-width 10px
+                    content ""
+                    left 63px
+                    position absolute
+                    top -20px
+                    z-index 1000
+
+                li
+                    display block
+                    position relative
+                    z-index 301
+
+                    &:first-child
+                        border-bottom 2px solid $color-green
+
+                        &::before
+                            border-color transparent
+                            border-style solid
+                            border-width 11px
+                            content ""
+                            left -2px
+                            position absolute
+                            top -20px
+                            z-index 1001
+                            width 150px
+
+                        &::after
+                            border-color transparent transparent $color-green transparent
+                            border-style solid
+                            border-width 11px
+                            content ""
+                            left 62px
+                            position absolute
+                            top -24px
+                            z-index 1001
+
+                    & > a
+                        color $color-black
+                        position relative
+                        text-decoration none
+                        white-space nowrap
+                        z-index 302
+                        line-height 30px
+                        font-size 16px
+                        font-weight 500
+
+                    &:hover
+                        & > a
+                            color $color-green
+
+            &:hover
+                a.title
+                    background $color-hover-light
+                    border-color $color-hover-light
+
+                & > ul
+                    display block
+
+                & > a
+                    background-color $color-hover-dark
+
+    a.button
+        width 132px
+
+    .metadata-container
+        margin-bottom 20px
+
+        .space
+            margin 15px 0
+
+        .one-row
+            display flex
+            flex-direction row
+
+            .description
+                margin 20px 0
+
+            .text
+                font-weight bold
+                width 250px
+
+
+@media (max-width: 767px)
+    #dataset-view
+        .buttons-first-row
+        .buttons-second-row
+            #edit-dataset
+            #share-dataset
+            #download-dataset
+            #link-dataset
+            #code-dataset
+            #metadata-dataset
+                width 100px
+                font-size 13px
+                line-height 26px
+
+            #download-dataset
+                a.title
+                    width 100px
+                    font-size 13px
+
+                    span.download
+                        &::before
+                            margin-left -10px
+                            background-size 13px
+                            margin-top 3px
+
+                ul
+                    width 100px
+
+                    &::after
+                        left 37px
+                        top -19px
+
+                    li
+                        &:first-child
+                            &::after
+                                left 36px
+                                top -23px
+
+        .dataset-title
+            margin-top 30px
+
+@media (min-width: 768px) and (max-width: 1012px)
+    #dataset-view
+        .dataset-title
+            margin-left 30px

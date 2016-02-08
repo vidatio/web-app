@@ -62,15 +62,13 @@ app.service 'DataService', [
             # @param {Object} dataset
             # @param {String} userId
             # @param {String} name
-            saveViaAPI: (dataset, userId = "123456781234567812345678", name = "Neues Vidatio") ->
+            saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    userId: userId
                     name: name
 
                 DataFactory.save
-                    userId: userId
                     name: name
                     data: dataset
                 , (response) ->

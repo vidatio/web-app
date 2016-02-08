@@ -1,0 +1,75 @@
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
+    .row
+        .col-sm-12
+            h1.underline-turqoise.dataset-title {{ info.title }}
+
+    .row
+        .col-sm-12
+            .visualization-container
+                img(src="{{ info.image }}")
+
+            .row.buttons-first-row
+                .col-xs-4.col-sm-4.middle
+                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    a#share-dataset.btn.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    #download-dataset
+                        a.title.btn.btn-primary(href='#')
+                            span.download
+                            | {{ "DOWNLOAD" | translate | uppercase }}
+                        ul
+                            li
+                                a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
+                            li
+                                a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
+
+
+            .row.buttons-second-row
+                .col-xs-4.col-sm-4.middle
+                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    a#code-dataset.btn.btn-primary(href='#' ng-click='getCodeDataset()') {{ "CODE" | translate | uppercase }}
+
+                .col-xs-4.col-sm-4.middle
+                    a#metadata-dataset.btn.btn-primary(href='#' ng-click='getMetadataDataset()') {{ "METADATA" | translate | uppercase }}
+
+    .row
+        .col-sm-12
+            h1.underline-turqoise {{ "INFORMATION-DATASET" | translate | uppercase }}
+
+    .row
+        .col-sm-12
+            .metadata-container
+                .one-row
+                    .description {{ info.description }}
+                .one-row
+                    .text {{ "DATASET-ORIGIN" | translate }}:
+                    .dataset-creator.info {{ info.creator }}
+                .one-row
+                    .text {{ "DATASET-FORMAT" | translate }}:
+                    .dataset-creator.info {{ info.format }}
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET-ID" | translate }}:
+                    .dataset-creator.info {{ info.id }}
+                .one-row
+                    .text {{ "DATASET-PARENT" | translate }}:
+                    .dataset-creator.info {{ info.parent }}
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET-CREATED" | translate }}:
+                    .dataset-created.info {{ info.created }}
+                .one-row
+                    .text {{ "DATASET-UPDATED" | translate }}:
+                    .dataset-update.info {{ info.updated }}
+                .one-row.space
+                .one-row
+                    .text {{ "CATEGORY" | translate }}:
+                    .dataset-creator.info {{ info.category }}
+                .one-row
+                    .text {{ "DATASET-TAGS" | translate }}:
+                    .dataset-creator.info {{ info.tags }}
