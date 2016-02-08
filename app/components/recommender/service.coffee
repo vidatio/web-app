@@ -148,10 +148,10 @@ class window.vidatio.Recommender
                 @recommendedDiagram = "map"
 
             when "date numeric"
-                @recommendedDiagram = "line"
+                @recommendedDiagram = "timeseries"
 
             when "numeric date"
-                @recommendedDiagram = "line"
+                @recommendedDiagram = "timeseries"
                 tmp = xIndex
                 xIndex = yIndex
                 yIndex = tmp

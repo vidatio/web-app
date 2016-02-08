@@ -105,6 +105,7 @@ BUILD =
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
             "./bower_components/d3.parcoords.js/index.js"
+            "./bower_components/moment/moment.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"

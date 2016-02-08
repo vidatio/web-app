@@ -50,11 +50,11 @@ app.controller "VisualizationCtrl", [
                         # Bar chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
                         new vidatio.BarChart chartData
-                    when "line"
+                    when "timeseries"
                         # Currently default labels for the bars are used
                         chartData[0].unshift "x"
                         chartData[1].unshift "A"
-                        new vidatio.LineChart chartData
+                        new vidatio.TimeseriesChart chartData
                     else
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
