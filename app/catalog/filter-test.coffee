@@ -29,7 +29,7 @@ describe "Filter Catalog", ->
                 }
             ]
 
-            expect(@filter('dateFilter')(input, "2016-02-06", "2016-02-06")).toEqual(result)
+            expect(@filter('dateFilter')(input, "2016-02-05", "2016-02-07")).toEqual(result)
 
         it "should filter input correctly from minimum date", ->
             input = [
