@@ -42,6 +42,7 @@ app.controller "HeaderCtrl", [
 
         $scope.copyLink = ->
             $log.info "HeaderCtrl copyLink called"
+            window.getSelection().removeAllRanges()
             link = document.querySelector '#link'
             range = document.createRange()
             range.selectNode link
