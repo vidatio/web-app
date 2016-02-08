@@ -323,12 +323,12 @@ class window.vidatio.Helper
 
     # @method isDate
     # @description possible formats:
-    #   DD.MM.YYYY
-    #   DD-MM-YYYY
-    #   DD/MM/YYYY
+    #   YYYY.MM.DD
+    #   YYYY-MM-DD
+    #   YYYY/MM/DD
     # @public
     # @param {String} cell
     # @return {Boolean}
     isDate: (cell) ->
-        regex = /^\d{4}[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])$/
+        regex = /^\d{4}[\/\-.](0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])$/
         return regex.test(cell)
