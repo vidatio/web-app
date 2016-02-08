@@ -10,7 +10,9 @@ app.controller "HeaderCtrl", [
     "MapService"
     "DataService"
     "$log"
-    ($scope, $rootScope, $timeout, Map, Data, $log) ->
+    "ngToast"
+    "$translate"
+    ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate) ->
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
@@ -33,8 +35,7 @@ app.controller "HeaderCtrl", [
 
         $scope.saveDataset = ->
             geoJSON = Map.getGeoJSON()
-            userId = $rootScope.globals.currentUser.id
-            Data.saveViaAPI geoJSON, userId
+            Data.saveViaAPI geoJSON
 
         $scope.hideLink = ->
             $rootScope.showLink = false
@@ -48,9 +49,15 @@ app.controller "HeaderCtrl", [
 
             try
                 successful = document.execCommand 'copy'
+
                 $log.debug
                     message: "HeaderCtrl copyLink copy link to clipboard"
                     successful: successful
+
+                $translate('TOAST_MESSAGES.LINK_COPIED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
             catch err
                 $log.info "Link could not be copied"
                 $log.error

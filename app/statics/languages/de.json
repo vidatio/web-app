@@ -31,6 +31,7 @@
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
+        "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
         "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",

@@ -65,15 +65,13 @@ app.service 'DataService', [
             # @param {Object} dataset
             # @param {String} userId
             # @param {String} name
-            saveViaAPI: (dataset, userId, name = "Neues Vidatio") ->
+            saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    userId: userId
                     name: name
 
                 DataFactory.save
-                    userId: userId
                     name: name
                     data: dataset
                 , (response) ->
@@ -86,8 +84,7 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
 
-                    absUrl = $state.href($state.get("app.dataset"), $state.params, {absolute: true})
-                    link = absUrl + response._id
+                    link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
                     $rootScope.showLink = true
                 , (error) ->
