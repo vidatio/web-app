@@ -12,7 +12,8 @@ app.service 'DataService', [
     "$log"
     "DataFactory"
     "$location"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location) ->
+    "$state"
+    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -85,10 +86,8 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
 
-                    # extracts the current URL
-                    absUrl = $location.$$absUrl
-                    url = absUrl.substring 0, absUrl.indexOf("/" + $rootScope.locale + "/")
-                    link = url + "/" + $rootScope.locale + "/vidatio/" + response._id
+                    absUrl = $state.href($state.get("app.dataset"), $state.params, {absolute: true})
+                    link = absUrl + response._id
                     $rootScope.link = link
                     $rootScope.showLink = true
                 , (error) ->
