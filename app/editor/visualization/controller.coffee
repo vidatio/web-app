@@ -34,6 +34,7 @@ app.controller "VisualizationCtrl", [
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
                     when "scatter"
+                        # Currently default labels for the points are used
                         chartData[0].unshift "A_x"
                         chartData[1].unshift "A"
                         new vidatio.ScatterPlot chartData
@@ -42,12 +43,15 @@ app.controller "VisualizationCtrl", [
                         geoJSON = Converter.convertArrays2GeoJSON chartData
                         map.setGeoJSON geoJSON
                     when "parallel"
+                        # Parallel coordinate chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
                         new vidatio.ParallelCoordinates chartData
                     when "bar"
+                        # Bar chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
                         new vidatio.BarChart chartData
                     when "line"
+                        # Currently default labels for the bars are used
                         chartData[0].unshift "x"
                         chartData[1].unshift "A"
                         new vidatio.LineChart chartData
