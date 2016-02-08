@@ -80,6 +80,7 @@
     "LINK": "Link",
     "METADATA": "Metadaten",
     "CODE": "Code",
+    "COPY_LINK": "Link kopieren",
     "INFORMATION-DATASET": "Informationen zum Datensatz",
     "DATASET-DESCRIPTION": "Beschreibung des Datensatzes",
     "DATASET-ORIGIN": "Urheber",

@@ -38,4 +38,23 @@ app.controller "HeaderCtrl", [
 
         $scope.hideLink = ->
             $rootScope.showLink = false
+
+        $scope.copyLink = ->
+            $log.info "HeaderCtrl copyLink called"
+            link = document.querySelector '#link'
+            range = document.createRange()
+            range.selectNode link
+            window.getSelection().addRange(range)
+
+            try
+                successful = document.execCommand 'copy'
+                $log.debug
+                    message: "HeaderCtrl copyLink copy link to clipboard"
+                    successful: successful
+            catch err
+                $log.info "Link could not be copied"
+                $log.error
+                    error: error
+
+            window.getSelection().removeAllRanges()
 ]
