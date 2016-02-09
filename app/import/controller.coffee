@@ -41,41 +41,44 @@ app.controller "ImportCtrl", [
         $scope.load = ->
             $log.info "ImportCtrl load called"
 
-            url = $scope.link
-            $http.get($rootScope.apiBase + "/v0/forward"
-                params:
-                    url: url
-            ).success (resp) ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                Progress.setMessage message
 
-                $log.info "ImportCtrl load success called"
-                $log.debug
-                    message: "ImportCtrl load success called"
-                    data: resp.body
+                url = $scope.link
+                $http.get($rootScope.apiBase + "/v0/forward"
+                    params:
+                        url: url
+                ).success (resp) ->
 
-                fileContent = resp.body
+                    $log.info "ImportCtrl load success called"
+                    $log.debug
+                        message: "ImportCtrl load success called"
+                        data: resp.body
 
-                if resp.fileType is 'zip'
-                    fileContent = fileContent.data
+                    fileContent = resp.body
 
-                initTableAndMap resp.fileType, fileContent
+                    if resp.fileType is 'zip'
+                        fileContent = fileContent.data
 
-                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
-                $timeout ->
-                    Progress.setMessage ""
-                    $location.path editorPath
+                    initTableAndMap resp.fileType, fileContent
 
-            .error (resp) ->
-                $log.error "ImportCtrl load file by url error called"
-                $log.debug
-                    message: "ImportCtrl load file by url error called"
-                    error: error
+                    # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+                    $timeout ->
+                        Progress.setMessage ""
+                        $location.path editorPath
 
-                $translate('TOAST_MESSAGES.READ_ERROR_LINK')
-                .then (translation) ->
-                    ngToast.create(
-                        content: translation
-                        className: "danger"
-                    )
+                .error (resp) ->
+                    $log.error "ImportCtrl load file by url error called"
+                    $log.debug
+                        message: "ImportCtrl load file by url error called"
+                        error: error
+
+                    $translate('TOAST_MESSAGES.READ_ERROR_LINK')
+                    .then (translation) ->
+                        ngToast.create(
+                            content: translation
+                            className: "danger"
+                        )
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
