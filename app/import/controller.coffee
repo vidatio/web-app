@@ -31,7 +31,7 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl continueToEmptyTable called"
 
             Table.resetDataset()
-            Table.resetColHeaders()
+            Table.resetColumnHeaders()
             Map.resetGeoJSON()
 
             # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
@@ -125,11 +125,8 @@ app.controller "ImportCtrl", [
 
                     when "csv"
                         Data.meta.fileType = "csv"
-
                         dataset = Converter.convertCSV2Arrays fileContent
-                        Table.resetColHeaders()
                         Table.setDataset dataset
-
                         $location.path editorPath
 
                     when "zip"
@@ -145,7 +142,7 @@ app.controller "ImportCtrl", [
                             if dataset.length
                                 colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                                 Table.setDataset dataset
-                                Table.setColHeaders colHeaders
+                                Table.setColumnHeaders columnHeaders
                                 Map.setGeoJSON geoJSON
                                 $location.path editorPath
 

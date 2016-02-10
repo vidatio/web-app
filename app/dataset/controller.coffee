@@ -70,7 +70,7 @@ app.controller "DatasetCtrl", [
 
             # call necessary Table- and Map-functions to display dataset in editor
             Table.resetDataset()
-            Table.resetColHeaders()
+            Table.resetColumnHeaders()
             Table.setDataset dataset
             Map.setGeoJSON $scope.data.data
 

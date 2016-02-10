@@ -5,15 +5,14 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
-    "MapService"
-    ($timeout, $log, Data, Map) ->
+    ($timeout, $log, Data) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
         scope:
             dataset: '='
             activeViews: '='
-            colHeaders: '='
+            columnHeaders: '='
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
@@ -22,7 +21,7 @@ app.directive 'hot', [
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: $scope.colHeaders
+                colHeaders: $scope.columnHeaders
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
@@ -51,6 +50,8 @@ app.directive 'hot', [
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
             )
+
+            window.hot = hot
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible
