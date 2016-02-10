@@ -13,6 +13,8 @@ app.service 'TableService', [
                 @columnHeaders = []
                 @columnHeadersFromDataset = true
 
+            # @method resetColumnHeaders
+            # @public
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
                 @columnHeaders.splice 0, @columnHeaders.length
@@ -24,6 +26,9 @@ app.service 'TableService', [
                     for element in [ 0..25 ]
                         @columnHeaders[element] = String.fromCharCode(65 + element)
 
+            # @method setColumnHeaders
+            # @public
+            # @param {Array} columnHeaders
             setColumnHeaders: (columnHeaders) ->
                 $log.info "TableService setColumnHeaders called"
                 $log.debug
@@ -37,12 +42,16 @@ app.service 'TableService', [
                 columnHeaders.forEach (item, index) =>
                     @columnHeaders[index] = item
 
+            # @method takeColumnHeadersFromDataset
+            # @public
             takeColumnHeadersFromDataset: ->
                 $log.info "TableService takeColumnHeadersFromDataset called"
                 columnHeaders = @dataset.splice(0, 1)[0]
                 @setColumnHeaders columnHeaders
                 @columnHeadersFromDataset = true
 
+            # @method putColumnHeadersBackToDataset
+            # @public
             putColumnHeadersBackToDataset: ->
                 $log.info "TableService putColumnHeadersBackToDataset called"
 
