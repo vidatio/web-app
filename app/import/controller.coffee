@@ -93,7 +93,8 @@ app.controller "ImportCtrl", [
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
-                $log.info
+                $log.info "ImportCtrl maxFileSize exceeded"
+                $log.debug
                     message: "ImportCtrl maxFileSize exceeded"
                     FileSize: $scope.file.size
 
@@ -106,7 +107,8 @@ app.controller "ImportCtrl", [
                 return
 
             if fileType isnt "csv" and fileType isnt "zip"
-                $log.info
+                $log.info "ImportCtrl data format not supported"
+                $log.debug
                     message: "ImportCtrl data format not supported"
                     Format: fileType
 
@@ -138,11 +140,10 @@ app.controller "ImportCtrl", [
                     $location.path editorPath
 
             , (error) ->
-                $log.info "ImportCtrl Import.readFile promise error called"
+                $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug
                     message: "ImportCtrl Import.readFile promise error called"
                     error: error
-                $log.error "ImportCtrl Import.readFile error"
 
                 $translate('TOAST_MESSAGES.READ_ERROR')
                     .then (translation) ->
@@ -180,11 +181,10 @@ app.controller "ImportCtrl", [
                             $location.path editorPath
 
                         else
-                            $log.info "ImportCtrl Converter.convertGeoJSON2Arrays error"
+                            $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
                             $log.debug
                                 message: "ImportCtrl Converter.convertGeoJSON2Arrays error"
                                 geoJSON: geoJSON
-                            $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
 
                             $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
                                 .then (translation) ->
@@ -193,11 +193,10 @@ app.controller "ImportCtrl", [
                                         className: "danger"
 
                     , (error) ->
-                        $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                        $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                         $log.debug
                             message: "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                             error: error
-                        $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
 
                         $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
                             .then (translation) ->

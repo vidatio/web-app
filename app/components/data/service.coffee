@@ -83,8 +83,8 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
                 , (error) ->
-                    $log.info("Dataset couldn't be saved")
-                    $log.error
+                    $log.error("Dataset couldn't be saved")
+                    $log.debug
                         error: error
 
                     $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')
