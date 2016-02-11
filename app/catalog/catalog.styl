@@ -7,17 +7,22 @@
         list-style-type none
 
     #filter
+        position relative
         padding 15px
         background $color-table-odd-passive
         border-top 3px solid $color-green
 
         #time-filter
             input
-                width 100px
+                width 105px
+                display inline
+
+            [date-picker-wrapper]
+                position absolute
+                top 38px
 
             input + [date-picker-wrapper]
-                margin-top -37px
-                margin-left 20px
+                right 0
 
 
     [date-picker] .active, [date-picker] .active.now
