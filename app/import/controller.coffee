@@ -69,7 +69,10 @@ app.controller "ImportCtrl", [
                 .error (resp) ->
                     $log.error "ImportCtrl load file by url error called"
                     $log.debug
-                        error: error
+                        resp: resp
+
+                    $timeout ->
+                        Progress.setMessage ""
 
                     $translate('TOAST_MESSAGES.READ_ERROR_LINK')
                     .then (translation) ->
