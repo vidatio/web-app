@@ -14,6 +14,17 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
+                @xAxis = undefined
+                @yAxis = undefined
+
+            setXAxis: (xAxis) ->
+                $log.info "TableService setXAxis called"
+                @xAxis = xAxis
+
+            setYAxis: (yAxis) ->
+                $log.info "TableService setYAxis called"
+                @yAxis = yAxis
+
             resetColHeaders: ->
                 $log.info "TableService resetColHeaders called"
 

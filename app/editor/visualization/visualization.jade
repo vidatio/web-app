@@ -3,8 +3,9 @@
         .settings-bar
 
             .x-axis
+                p {{ $scope.xAxis }}
                 p X-Axis
-                select.btn.btn-default.dropdown-toggle(name="singleSelect" ng-model="data.singleSelect")
+                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxis")
                     each diagram in ["Scatter", "Line", "Bar"]
                         option= diagram
 
