@@ -52,7 +52,6 @@ app.controller "ImportCtrl", [
 
                     $log.info "ImportCtrl load success called"
                     $log.debug
-                        message: "ImportCtrl load success called"
                         data: resp.body
 
                     fileContent = resp.body
@@ -70,7 +69,6 @@ app.controller "ImportCtrl", [
                 .error (resp) ->
                     $log.error "ImportCtrl load file by url error called"
                     $log.debug
-                        message: "ImportCtrl load file by url error called"
                         error: error
 
                     $translate('TOAST_MESSAGES.READ_ERROR_LINK')
@@ -95,7 +93,6 @@ app.controller "ImportCtrl", [
             if $scope.file.size > maxFileSize
                 $log.info "ImportCtrl maxFileSize exceeded"
                 $log.debug
-                    message: "ImportCtrl maxFileSize exceeded"
                     FileSize: $scope.file.size
 
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
@@ -109,7 +106,6 @@ app.controller "ImportCtrl", [
             if fileType isnt "csv" and fileType isnt "zip"
                 $log.info "ImportCtrl data format not supported"
                 $log.debug
-                    message: "ImportCtrl data format not supported"
                     Format: fileType
 
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
@@ -126,7 +122,6 @@ app.controller "ImportCtrl", [
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $log.info "ImportCtrl Import.readFile promise success called"
                 $log.debug
-                    message: "ImportCtrl Import.readFile promise success called"
                     fileContent: fileContent
 
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
@@ -142,7 +137,6 @@ app.controller "ImportCtrl", [
             , (error) ->
                 $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug
-                    message: "ImportCtrl Import.readFile promise error called"
                     error: error
 
                 $translate('TOAST_MESSAGES.READ_ERROR')
@@ -168,7 +162,6 @@ app.controller "ImportCtrl", [
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                         $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                         $log.debug
-                            message: "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                             fileContent: fileContent
 
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
@@ -183,7 +176,6 @@ app.controller "ImportCtrl", [
                         else
                             $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
                             $log.debug
-                                message: "ImportCtrl Converter.convertGeoJSON2Arrays error"
                                 geoJSON: geoJSON
 
                             $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
@@ -195,7 +187,6 @@ app.controller "ImportCtrl", [
                     , (error) ->
                         $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                         $log.debug
-                            message: "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                             error: error
 
                         $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
