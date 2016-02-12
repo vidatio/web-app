@@ -5,7 +5,9 @@ app = angular.module "app.controllers"
 app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
-    ($scope, CatalogFactory) ->
+    "$log"
+    ($scope, CatalogFactory, $log) ->
+
         $scope.dates =
             from: undefined
             to: undefined
@@ -14,6 +16,8 @@ app.controller "CatalogCtrl", [
         $scope.maxDate = $scope.dates.maxDate
 
         CatalogFactory.query (response) ->
+            $log.info "CatalogCtrl successfully queried datasets"
+
             $scope.vidatios = response
 
             for vidatio in $scope.vidatios
@@ -22,6 +26,7 @@ app.controller "CatalogCtrl", [
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
-            console.error error
+            $log.info "CatalogCtrl error on query datasets"
+            $log.error error
 
 ]
