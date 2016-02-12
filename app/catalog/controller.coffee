@@ -6,7 +6,9 @@ app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
     "$log"
-    ($scope, CatalogFactory, $log) ->
+    "$translate"
+    "ngToast"
+    ($scope, CatalogFactory, $log, $translate, ngToast) ->
 
         $scope.dates =
             from: undefined
@@ -28,5 +30,10 @@ app.controller "CatalogCtrl", [
         , (error) ->
             $log.info "CatalogCtrl error on query datasets"
             $log.error error
+
+            $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
+                ngToast.create
+                    content: translation
+                    className: "danger"
 
 ]
