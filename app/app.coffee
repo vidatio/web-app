@@ -19,6 +19,7 @@ app = angular.module "app", [
     "ngSanitize"
     "ngCookies"
     "logglyLogger"
+    "datePicker"
 ]
 
 app.run [
@@ -66,7 +67,8 @@ app.config [
     "ngToastProvider"
     "LogglyLoggerProvider"
     "CONFIG"
-    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
+    "$provide"
+    ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG, $provide) ->
         $locationProvider.html5Mode true
 
         # Loggly Configuration
@@ -96,6 +98,16 @@ app.config [
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
+
+        # I18N for datepicker
+        moment().locale "de"
+
+        # overwrite default mFormat filter of datepicker module
+        $provide.decorator 'mFormatFilter', ->
+            (m, format, tz) ->
+                if !moment.isMoment(m)
+                    return ''
+                if tz then moment.tz(m, tz).format(format) else m.format(format)
 
 
         ngToast.configure(
