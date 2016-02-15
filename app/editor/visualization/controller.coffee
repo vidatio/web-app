@@ -40,7 +40,7 @@ app.controller "VisualizationCtrl", [
                         new vidatio.ScatterPlot chartData
                     when "map"
                         Map.setScope $scope
-                        geoJSON = Converter.convertArrays2GeoJSON chartData
+                        geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
                         Map.setGeoJSON geoJSON
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose
