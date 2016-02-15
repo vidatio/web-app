@@ -48,8 +48,13 @@
     "shp": "^3.2",
     "jPushMenu": "~1.1.1",
     "angular-simple-logger": "~0.1.5",
-    "angular-resource": "~1.4.7",
-    "angular-cookies": "~1.4.7"
+    "angular-cookies": "~1.4.7",
+    "d3": "~3.5.12",
+    "c3": "~0.4.10",
+    "d3.parcoords.js": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js",
+    "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css",
+    "loggly-logger": "http://cloudfront.loggly.com/js/loggly.tracker-2.1.min.js",
+    "moment": "^2.11.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

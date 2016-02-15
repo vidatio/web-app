@@ -102,6 +102,10 @@ BUILD =
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/d3/d3.js"
+            "./bower_components/c3/c3.js"
+            "./bower_components/d3.parcoords.js/index.js"
+            "./bower_components/moment/moment.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -112,6 +116,8 @@ BUILD =
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
+            "./bower_components/c3/c3.css"
+            "./bower_components/d3.parcoords.css/index.css"
         ]
     dirs:
         out: "./build"

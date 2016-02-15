@@ -125,11 +125,11 @@ app.controller "ImportCtrl", [
 
                     when "csv"
                         Data.meta.fileType = "csv"
+
                         dataset = Converter.convertCSV2Arrays fileContent
-                        geoJSON = Converter.convertArrays2GeoJSON dataset
                         Table.resetColHeaders()
                         Table.setDataset dataset
-                        Map.setGeoJSON geoJSON
+
                         $location.path editorPath
 
                     when "zip"

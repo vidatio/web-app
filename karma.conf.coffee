@@ -31,7 +31,9 @@ module.exports = (config) ->
             "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
-
+            "./bower_components/d3/d3.js"
+            "./bower_components/c3/c3.js"
+            "./bower_components/d3.parcoords.js/index.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
@@ -48,11 +50,17 @@ module.exports = (config) ->
             #includes test files already
             "./app/*/**/*.coffee"
             "./app/app-test.coffee"
-        ]
 
+        ]
 
         # list of files to exclude
         exclude: [
+            # Bugfix PhantomJS
+            # TypeError: 'undefined' is not an object (evaluating 'parent.prototype')
+            "./app/components/visualization/bar/*.coffee"
+            "./app/components/visualization/timeserie/*.coffee"
+            "./app/components/visualization/parallel/*.coffee"
+            "./app/components/visualization/scatter/*.coffee"
         ]
 
         # preprocess matching files before serving them to the browser
@@ -70,14 +78,11 @@ module.exports = (config) ->
         # available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ["progress"]
 
-
         # web server port
         port: 9876
 
-
         # enable / disable colors in the output (reporters and logs)
         colors: true
-
 
         # level of logging
         # possible values:
@@ -88,17 +93,14 @@ module.exports = (config) ->
         # - config.LOG_DEBUG
         logLevel: config.LOG_INFO
 
-
         # enable / disable watching file and executing tests whenever any file changes
         # autoWatch: true
-
 
         # start these browsers
         # available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
             "PhantomJS"
         ]
-
 
         # Continuous Integration mode
         # if true, Karma captures browsers, runs the tests and exits

@@ -29,11 +29,17 @@ app.run [
     "$location"
     "$cookieStore"
     "$log"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log) ->
+    "CONFIG"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
         $rootScope.apiBase = "http://localhost:3000"
         $rootScope.apiVersion = "/v0"
+
+        window.vidatio.log = new vidatio.Logger(CONFIG.TOKEN.LOGGLY, CONFIG.ENV is "develop")
+        window.vidatio.helper = new window.vidatio.Helper()
+        window.vidatio.recommender = new window.vidatio.Recommender()
+        window.vidatio.parser = new window.vidatio.Parser()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
@@ -68,8 +74,8 @@ app.config [
     "CONFIG"
     ( $urlRouterProvider, $stateProvider, $locationProvider, $httpProvider, $translateProvider, ngToast, LogglyLoggerProvider , CONFIG ) ->
         $locationProvider.html5Mode true
-
         # Loggly Configuration
+        # $log for angular
         LogglyLoggerProvider.inputToken CONFIG.TOKEN.LOGGLY if CONFIG.TOKEN.LOGGLY
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
@@ -185,4 +191,3 @@ app.config [
                         $state.go state.name, locale
 
 ]
-

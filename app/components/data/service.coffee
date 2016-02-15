@@ -22,10 +22,10 @@ app.service 'DataService', [
                     "fileType": ""
                     "fileName": ""
 
-            updateTableAndMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateTableAndMap called"
+            updateMap: (row, column, oldData, newData) ->
+                $log.info "DataService updateMap called"
                 $log.debug
-                    message: "DataService updateTableAndMap called"
+                    message: "DataService updateMap called"
                     row: row
                     column: column
                     oldData: oldData
@@ -34,7 +34,7 @@ app.service 'DataService', [
                 key = Table.colHeaders[column]
 
                 if @meta.fileType is "shp"
-                    Map.updateGeoJSONwithSHP(row, column, oldData, newData, key)
+                    Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
                 else if @meta.fileType is "csv"
                     geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
                     Map.setGeoJSON(geoJSON)

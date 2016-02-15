@@ -7,8 +7,8 @@
                     ul
                         li
                             a(ng-click='shareVisualization("png")') PNG
-
                         li
                             a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map")
+        leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
+        #chart(ng-hide="recommendedDiagram == 'map'")
