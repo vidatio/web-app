@@ -13,14 +13,11 @@ describe "Controller Import", ->
 
             @Table =
                 setDataset: (result) ->
-                resetColHeaders: ->
             @Import =
                 readFile: (file, scope) ->
 
             spyOn(@Import, 'readFile').and.returnValue(@deferred.promise)
             spyOn(@Table, 'setDataset')
-            spyOn(@Table, 'resetColHeaders')
-
 
             ImportCtrl = $controller "ImportCtrl", $scope: @scope, $http: $http, TableService: @Table, ImportService: @Import
 
@@ -40,9 +37,7 @@ describe "Controller Import", ->
             @scope.load()
             @httpBackend.flush()
 
-            expect(@Table.resetColHeaders).toHaveBeenCalled()
             expect(@Table.setDataset).toHaveBeenCalled()
-
 
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->

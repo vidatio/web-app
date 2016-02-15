@@ -9,9 +9,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
         # handle different date formats and parse them for c3.js charts
         for date, index in dataset[0]
             if index != 0
-                console.log date, "DATE"
                 tmp = moment(date, ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
-                console.log tmp, "TMP"
                 dataset[0][index] = tmp
 
         setTimeout(->

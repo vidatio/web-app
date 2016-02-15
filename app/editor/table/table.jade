@@ -1,14 +1,17 @@
-#table.wrapper-content(ng-controller='TableCtrl' ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
+#table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content
         .settings-bar
-            #visualization-settings-container
-                .download-button
-                    a(href='#')
-                    ul
-                        li
-                            a(href="#") CSV
+            #header-button
+                label.checkbox(for="column-headers-checkbox")
+                    input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset")
+                    | Header
 
-                        li
-                            a(href="#") SHP
+            .download-button
+                a(href="#")
+                ul
+                    li
+                        a(href="#") CSV
+                    li
+                        a(href="#") SHP
 
-        hot(dataset="dataset" active-views="activeViews" col-headers="colHeaders")
+        hot(dataset="dataset" active-views="activeViews" column-headers="columnHeaders")

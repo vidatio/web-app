@@ -39,6 +39,7 @@ app.controller "VisualizationCtrl", [
                         chartData[1].unshift "A"
                         new vidatio.ScatterPlot chartData
                     when "map"
+                        # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
                         # Use the hole dataset because we want the other attributes inside the popups
                         geoJSON = Converter.convertArrays2GeoJSON trimmedDataset

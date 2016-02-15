@@ -134,7 +134,7 @@ app.service 'ConverterService', [
                     message: "ConverterService convertGeoJSON2ColHeaders called"
                     geoJSON: geoJSON
 
-                colHeaders = []
+                columnHeaders = []
 
                 maxIndex = 0
                 maxSize = 0
@@ -147,14 +147,14 @@ app.service 'ConverterService', [
                         maxIndex = property
 
                 for property, value of geoJSON.features[maxIndex].properties
-                    colHeaders.push property
+                    columnHeaders.push property
 
                 for property, value of geoJSON.features[maxIndex].geometry
                     if property is "bbox" or property is "coordinates"
-                        colHeaders = @addHeaderCols(value, colHeaders, property, 0)
+                        columnHeaders = @addHeaderCols(value, columnHeaders, property, 0)
                     else
-                        colHeaders.push property
-                return colHeaders
+                        columnHeaders.push property
+                return columnHeaders
 
             # Returns the size of a multidimensional array.
             # @method sizeOfMultiArray

@@ -29,11 +29,11 @@ app.controller "ImportCtrl", [
         $scope.continueToEmptyTable = ->
             $log.info "ImportCtrl continueToEmptyTable called"
 
-            Table.resetDataset()
-            Table.resetColHeaders()
+            Data.meta.fileType = "csv"
+            Table.reset false
             Map.resetGeoJSON()
 
-            # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+            # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
                 $location.path editorPath
 
@@ -49,16 +49,11 @@ app.controller "ImportCtrl", [
                     params:
                         url: url
                 ).success (resp) ->
-
                     $log.info "ImportCtrl load success called"
                     $log.debug
                         data: resp.body
 
-                    fileContent = resp.body
-
-                    if resp.fileType is 'zip'
-                        fileContent = fileContent.data
-
+                    fileContent = if resp.fileType is 'zip' then resp.body.data else resp.body
                     initTableAndMap resp.fileType, fileContent
 
                     # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
@@ -130,8 +125,6 @@ app.controller "ImportCtrl", [
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                     Progress.setMessage message
 
-                initTableAndMap fileType, fileContent
-
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
@@ -153,7 +146,6 @@ app.controller "ImportCtrl", [
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
-                    Table.resetColHeaders()
                     Table.setDataset dataset
                     $location.path editorPath
 
@@ -165,11 +157,8 @@ app.controller "ImportCtrl", [
                             fileContent: fileContent
 
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
-
                         if dataset.length
-                            colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                             Table.setDataset dataset
-                            Table.setColHeaders colHeaders
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 
