@@ -49,6 +49,8 @@ app.directive 'hot', [
                         $scope.$applyAsync()
             )
 
+            console.log "\n\n HERE : ", hot.getColHeader()
+
             # Render of table is even then called, when table
             # view is not active, refactoring possible
             $scope.$watch (->

@@ -13,6 +13,7 @@ app.controller "EditorCtrl", [
     ($scope, $rootScope, $log, Table) ->
         $scope.xAxis = Table.xAxis
         $scope.yAxis = Table.yAxis
+        $scope.colHeaders = Table.colHeaders
 
         # watch if activeViews in change (defined in headerController.coffee)
         # $watch takes two callbacks (watchExpression and Listener);

@@ -2,12 +2,18 @@
     .content.height-500
         .settings-bar
 
-            .x-axis
-                p {{ $scope.xAxis }}
+            .x-axiss
+                p {{ colHeaders }}
+                p {{ xAxis }}
                 p X-Axis
                 select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxis")
-                    each diagram in ["Scatter", "Line", "Bar"]
-                        option= diagram
+                    option(ng-repeat="header in colHeaders" value="{{header}}") {{ header }}
+
+                    //- .test(ng-repeat="header in colHeaders")
+                    //-     option(value="{{ header }}") {{ header }}
+
+                    //- each option in {{ colHeaders }}
+                    //-     option= option
 
             #visualization-settings-container
                 .download-button

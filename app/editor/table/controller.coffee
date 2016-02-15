@@ -7,5 +7,4 @@ app.controller "TableCtrl", [
     "TableService"
     ($scope, Table) ->
         $scope.dataset = Table.dataset
-        $scope.colHeaders = Table.colHeaders
 ]
