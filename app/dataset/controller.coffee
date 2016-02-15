@@ -19,7 +19,7 @@ app.controller "DatasetCtrl", [
     "$stateParams"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams) ->
 
-        # use datasetId from $stateParams
+# use datasetId from $stateParams
         datasetId = $stateParams.id
         $scope.information = []
 
@@ -49,30 +49,26 @@ app.controller "DatasetCtrl", [
                 parent: parent
                 category: category
                 tags: tags
-                data: $scope.data
                 format: format
 
         , (error) ->
             console.error error
-
-        #UserFactory.query null, (response) ->
-        #   console.log response
 
         $scope.editDataset = ->
             $log.info "DatasetCtrl editDataset called"
             $log.debug
                 id: datasetId
                 name: $scope.data.name
-                data: $scope.data.data
+                data: $scope.data.data[0]
 
             # the API-call receives data in GeoJSON, so convert it back in array-format
-            dataset = Converter.convertGeoJSON2Arrays $scope.data.data
+            dataset = Converter.convertGeoJSON2Arrays $scope.data.data[0]
 
             # call necessary Table- and Map-functions to display dataset in editor
             Table.resetDataset()
             Table.resetColHeaders()
             Table.setDataset dataset
-            Map.setGeoJSON $scope.data.data
+            Map.setGeoJSON $scope.data.data[0]
 
             $timeout ->
                 Progress.setMessage ""

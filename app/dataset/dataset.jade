@@ -1,7 +1,7 @@
 #dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
-    .row
+    .row.dataset-title
         .col-sm-12
-            h1.underline-turqoise.dataset-title {{ info.title }}
+            h1.underline-turqoise.dataset-title-text {{ info.title }}
 
     .row
         .col-sm-12
@@ -11,29 +11,29 @@
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
                     a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()")
-                        i.fa.fa-plus
-                        |   {{ "EDIT" | translate | uppercase }}
+                        i.fa.fa-plus.edit-icon
+                        |   {{ "EDIT" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()')
                         i.fa.fa-link
-                        |   {{ "LINK" | translate | uppercase }}
+                        |   {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
                             i.fa.fa-download
-                            |   {{ "DOWNLOAD" | translate | uppercase }}
+                            |   {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
                             li
                                 a(href="#" ng-click='downloadDataset()')
                                     i.fa.fa-file-text-o
-                                    |   {{ "DATASET" | translate }}
+                                    |   {{ "DATASET" | translate }}
                             li
                                 a(href="#" ng-click='downloadImage()')
                                     i.fa.fa-file-image-o
-                                    |   {{ "VISUALIZATION" | translate }}
+                                    |   {{ "VISUALIZATION" | translate }}
 
     .row
         .col-sm-12
