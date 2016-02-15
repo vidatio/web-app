@@ -51,8 +51,6 @@ app.directive 'hot', [
                         $scope.$applyAsync()
             )
 
-            window.hot = hot
-
             # Render of table is even then called, when table
             # view is not active, refactoring possible
             $scope.$watch (->

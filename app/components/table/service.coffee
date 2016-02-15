@@ -11,7 +11,16 @@ app.service 'TableService', [
 
                 @dataset = [[]]
                 @columnHeaders = []
-                @columnHeadersFromDataset = true
+                @useColumnHeadersFromDataset = true
+
+            # @method reset
+            # @public
+            # @param {Boolean} useColumnHeadersFromDataset
+            reset: (useColumnHeadersFromDataset) ->
+                $log.info "TableService reset called"
+                @resetDataset()
+                @useColumnHeadersFromDataset = useColumnHeadersFromDataset
+                @resetColumnHeaders()
 
             # @method resetColumnHeaders
             # @public
@@ -19,7 +28,7 @@ app.service 'TableService', [
                 $log.info "TableService resetColumnHeaders called"
                 @columnHeaders.splice 0, @columnHeaders.length
 
-                if !@columnHeadersFromDataset
+                if !@useColumnHeadersFromDataset
                     # Because we want at least 26 columns we fill up the column headers
                     # TODO whats about datasets with more then 26 columns?
                     # Maybe use the width of the dataset + 1 for further free fields
@@ -48,7 +57,7 @@ app.service 'TableService', [
                 $log.info "TableService takeColumnHeadersFromDataset called"
                 columnHeaders = @dataset.splice(0, 1)[0]
                 @setColumnHeaders columnHeaders
-                @columnHeadersFromDataset = true
+                @useColumnHeadersFromDataset = true
 
             # @method putColumnHeadersBackToDataset
             # @public
@@ -57,14 +66,14 @@ app.service 'TableService', [
 
                 # Before removing column headers delivered by the dataset
                 # we want to set them back to the rows inside the table
-                if @columnHeadersFromDataset
+                if @useColumnHeadersFromDataset
                     # because we use data binding we can't unshift the array
                     # but we can push a new array with the items
                     tmp = []
                     @columnHeaders.forEach (item, index) ->
                         tmp[index] = item
                     @dataset.unshift tmp
-                    @columnHeadersFromDataset = false
+                    @useColumnHeadersFromDataset = false
 
                 @resetColumnHeaders()
 
@@ -82,7 +91,7 @@ app.service 'TableService', [
                     message: "TableService setDataset called"
                     data: data
 
-                @resetDataset()
+                @reset true
                 data.forEach (row, index) =>
                     @dataset[index] = row
 

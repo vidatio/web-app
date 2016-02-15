@@ -40,13 +40,13 @@ describe "Service Table", ->
         expect(@Table.columnHeaders).not.toBe []
 
         @Table.columnHeaders = ["A", "B"]
-        @Table.columnHeadersFromDataset = true
+        @Table.useColumnHeadersFromDataset = true
         @Table.resetColumnHeaders()
 
         expect(@Table.columnHeaders).toEqual []
 
         @Table.columnHeaders = ["test", "test"]
-        @Table.columnHeadersFromDataset = false
+        @Table.useColumnHeadersFromDataset = false
         @Table.resetColumnHeaders()
 
         expect(@Table.columnHeaders).toContain "A"

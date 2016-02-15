@@ -30,11 +30,11 @@ app.controller "ImportCtrl", [
         $scope.continueToEmptyTable = ->
             $log.info "ImportCtrl continueToEmptyTable called"
 
-            Table.resetDataset()
-            Table.resetColumnHeaders()
+            Data.meta.fileType = "csv"
+            Table.reset false
             Map.resetGeoJSON()
 
-            # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+            # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
                 $location.path editorPath
 
@@ -140,9 +140,7 @@ app.controller "ImportCtrl", [
                             dataset = Converter.convertGeoJSON2Arrays geoJSON
 
                             if dataset.length
-                                colHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                                 Table.setDataset dataset
-                                Table.setColumnHeaders columnHeaders
                                 Map.setGeoJSON geoJSON
                                 $location.path editorPath
 

@@ -6,25 +6,30 @@ app.controller "TableCtrl", [
     "$scope"
     "TableService"
     "DataService"
-    ($scope, Table, Data) ->
+    "MapService"
+    "ConverterService"
+    ($scope, Table, Data, Map, Converter) ->
         $scope.dataset = Table.dataset
         $scope.columnHeaders = Table.columnHeaders
-
-        $scope.columnHeadersFlag = true
+        $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
         $('#column-headers-checkbox').radiocheck()
 
-        # When SHP is imported we always use the column headers
+        # If the imported file is a shp file we always use the column headers
         if Data.meta.fileType is "shp"
-            $('#column-headers-checkbox').radiocheck('disable')
+            geoJSON = Map.getGeoJSON()
+            columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+            Table.setColumnHeaders columnHeaders
+            $('#header-button').hide()
         else
-            $('#column-headers-checkbox').radiocheck('enable')
+            $('#header-button').show()
 
         $scope.$watch ->
-            $scope.columnHeadersFlag
+            $scope.useColumnHeadersFromDataset
         , ->
-            if $scope.columnHeadersFlag
-                Table.takeColumnHeadersFromDataset()
-            else
-                Table.putColumnHeadersBackToDataset()
+            if Data.meta.fileType != "shp"
+                if $scope.useColumnHeadersFromDataset
+                    Table.takeColumnHeadersFromDataset()
+                else
+                    Table.putColumnHeadersBackToDataset()
         , true
 ]

@@ -39,6 +39,7 @@ app.controller "VisualizationCtrl", [
                         chartData[1].unshift "A"
                         new vidatio.ScatterPlot chartData
                     when "map"
+                        # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
                         geoJSON = Converter.convertArrays2GeoJSON chartData
                         Map.setGeoJSON geoJSON
