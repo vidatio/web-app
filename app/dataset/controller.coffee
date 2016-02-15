@@ -54,9 +54,6 @@ app.controller "DatasetCtrl", [
         , (error) ->
             console.error error
 
-        #UserFactory.query null, (response) ->
-        #   console.log response
-
         $scope.editDataset = ->
             $log.info "DatasetCtrl editDataset called"
             $log.debug
