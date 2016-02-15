@@ -6,7 +6,8 @@ app.directive 'hot', [
     "$log"
     "DataService"
     "MapService"
-    ($timeout, $log, Data, Map) ->
+    "TableService"
+    ($timeout, $log, Data, Map, Table) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -49,7 +50,8 @@ app.directive 'hot', [
                         $scope.$applyAsync()
             )
 
-            console.log "\n\n HERE : ", hot.getColHeader()
+            Table.setInstance hot
+            Table.initAxisSelection()
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible
