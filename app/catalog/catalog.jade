@@ -3,10 +3,10 @@
         .row
             .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
                 .vidatio
-                    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
                         img(src="{{ vidatio.image }}")
 
                     .text
-                        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
                             h4.title {{ vidatio.title }}
                         p {{ vidatio.description | limitTo: 120}} ...
