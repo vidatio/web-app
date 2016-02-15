@@ -1,19 +1,13 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
-
-            .x-axiss
-                p {{ colHeaders }}
-                p {{ xAxis }}
-                p X-Axis
-                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxis")
-                    option(ng-repeat="header in colHeaders" value="{{header}}") {{ header }}
-
-                    //- .test(ng-repeat="header in colHeaders")
-                    //-     option(value="{{ header }}") {{ header }}
-
-                    //- each option in {{ colHeaders }}
-                    //-     option= option
+            .axis-selection
+                p {{ "X_AXIS" | translate }}
+                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxisSelection")
+                    option(ng-repeat="header in xAxis" value="{{header}}") {{ header }}
+                p {{ "Y_AXIS" | translate }}
+                select.btn.btn-default.dropdown-toggle(name="yAxisSelect" ng-model="yAxisSelection")
+                    option(ng-repeat="header in yAxis" value="{{header}}") {{ header }}
 
             #visualization-settings-container
                 .download-button
