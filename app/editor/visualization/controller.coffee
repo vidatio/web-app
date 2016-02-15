@@ -40,6 +40,7 @@ app.controller "VisualizationCtrl", [
                         new vidatio.ScatterPlot chartData
                     when "map"
                         Map.setScope $scope
+                        # Use the hole dataset because we want the other attributes inside the popups
                         geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
                         Map.setGeoJSON geoJSON
                     when "parallel"
@@ -58,6 +59,8 @@ app.controller "VisualizationCtrl", [
                     else
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
+
+        Progress.setMessage ""
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization

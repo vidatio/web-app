@@ -34,6 +34,10 @@ module.exports = (config) ->
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
             "./bower_components/d3.parcoords.js/index.js"
+            "./bower_components/moment/min/moment.min.js"
+            "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/moment/locale/de-at.js"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"

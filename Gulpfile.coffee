@@ -105,7 +105,10 @@ BUILD =
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
             "./bower_components/d3.parcoords.js/index.js"
-            "./bower_components/moment/moment.js"
+            "./bower_components/moment/min/moment.min.js"
+            "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/moment/locale/de.js"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -118,6 +121,7 @@ BUILD =
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/c3/c3.css"
             "./bower_components/d3.parcoords.css/index.css"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.css"
         ]
     dirs:
         out: "./build"
@@ -501,7 +505,6 @@ gulp.task "copy:languages:reload",
     ]
     ->
         reload()
-
 
 ###
     WATCHER
