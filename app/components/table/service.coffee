@@ -14,16 +14,45 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
-                @xAxis = undefined
-                @yAxis = undefined
+                @xAxis = []
+                @yAxis = []
+                @instanceTable = {}
 
-            setXAxis: (xAxis) ->
+            initAxisSelection: ->
+                $log.info "TableService initAxis called"
+
+                hot = @getInstance()
+                colHeaders = hot.getColHeader()
+
+                $log.debug
+                    colHeaders: colHeaders
+
+                @setXAxis colHeaders
+                @setYAxis colHeaders
+
+            setXAxis: (colHeaders) ->
                 $log.info "TableService setXAxis called"
-                @xAxis = xAxis
 
-            setYAxis: (yAxis) ->
+                @xAxis.splice 0, @xAxis.length
+                colHeaders.forEach (item, index) =>
+                    @xAxis[index] = item
+
+            setYAxis: (colHeaders) ->
                 $log.info "TableService setYAxis called"
-                @yAxis = yAxis
+
+                @yAxis.splice 0, @yAxis.length
+                colHeaders.forEach (item, index) =>
+                    @yAxis[index] = item
+
+            setInstance: (hot) ->
+                $log.info "TableService setInstance called"
+
+                @instanceTable = hot
+
+            getInstance: ->
+                $log.info "TableService getInstance called"
+
+                return @instanceTable
 
             resetColHeaders: ->
                 $log.info "TableService resetColHeaders called"
