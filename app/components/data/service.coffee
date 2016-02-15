@@ -11,7 +11,9 @@ app.service 'DataService', [
     "$translate"
     "$log"
     "DataFactory"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory) ->
+    "$location"
+    "$state"
+    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -56,21 +58,20 @@ app.service 'DataService', [
 
                 return true
 
-            # TODO: UserId and Name have to be set by the user
+            # TODO: Name has to be set by the user
+
             # Sends the dataset to the API, which saves it in the database.
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} userId
             # @param {String} name
-            saveViaAPI: (dataset, userId = "123456781234567812345678", name = "Neues Vidatio") ->
+            saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    userId: userId
                     name: name
 
                 DataFactory.save
-                    userId: userId
                     name: name
                     data: dataset
                 , (response) ->
@@ -82,6 +83,10 @@ app.service 'DataService', [
                     .then (translation) ->
                         ngToast.create
                             content: translation
+
+                    link = $state.href("app.dataset", {id: response._id}, {absolute: true})
+                    $rootScope.link = link
+                    $rootScope.showLink = true
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
@@ -92,5 +97,6 @@ app.service 'DataService', [
                         ngToast.create
                             content: translation
                             className: "danger"
+
         new Data
 ]

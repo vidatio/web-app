@@ -1,3 +1,50 @@
 #catalog
+    h2
+        display block
+        margin-bottom 5px
+
     li
         list-style-type none
+
+    #filter
+        position relative
+        padding 15px
+        background $color-table-odd-passive
+        border-top 3px solid $color-green
+
+        #time-filter
+            input
+                width 100px
+                display inline
+                padding 8px
+
+            [date-picker-wrapper]
+                position absolute
+                top 38px
+
+            input + [date-picker-wrapper]
+                margin-left 20px
+
+
+    [date-picker] .active, [date-picker] .active.now
+        background-color $color-green
+        background-image none
+        border none
+
+    [date-picker] .now
+        background-color $color-white
+        color $color-black
+        background-image none
+        border 1px solid
+
+
+    @media screen and (max-width: 992px)
+        #filter
+            margin-bottom 20px !important
+
+        .vidatios .row div
+            &:nth-child(odd)
+                padding-left 0
+            &:nth-child(even)
+                padding-right 0
+
