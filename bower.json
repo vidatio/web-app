@@ -54,7 +54,7 @@
     "d3.parcoords.js": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js",
     "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css",
     "loggly-logger": "http://cloudfront.loggly.com/js/loggly.tracker-2.1.min.js",
-    "moment": "^2.11.2",
+    "moment": "2.10.2",
     "angular-datepicker": "~2.0.3"
   },
   "devDependencies": {
