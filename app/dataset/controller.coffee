@@ -35,6 +35,7 @@ app.controller "DatasetCtrl", [
             tags = $scope.data.tags || "-"
             format = "geoJSON"
             category = $scope.data.category || "-"
+            dataOrigin = "Vidatio"
             userName = $scope.data.userId || "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
@@ -48,6 +49,7 @@ app.controller "DatasetCtrl", [
                 id: datasetId
                 created: created
                 creator: userName
+                origin: dataOrigin
                 updated: updated
                 description: description
                 parent: parent
