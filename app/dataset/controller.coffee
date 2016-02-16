@@ -30,13 +30,14 @@ app.controller "DatasetCtrl", [
         # get dataset according to datasetId (if possible) and set necessary metadata
         DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
+            console.log data
             updated = convertDates($scope.data.updatedAt)
             created = convertDates($scope.data.createdAt)
             tags = $scope.data.tags || "-"
             format = "geoJSON"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
-            userName = $scope.data.userId || "-"
+            userName = $scope.data.userId.name || "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
             image = $scope.data.image || "images/logo-greyscale.svg"
