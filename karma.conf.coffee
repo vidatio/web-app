@@ -41,6 +41,9 @@ module.exports = (config) ->
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
 
+            # import angular mock - test dependency
+            "./bower_components/angular-mocks/angular-mocks.js"
+
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
@@ -53,7 +56,7 @@ module.exports = (config) ->
             "./app/app.coffee"
             "./app/app-controller.coffee"
 
-            #includes test files already
+            # includes test files already
             "./app/*/**/*.coffee"
             "./app/app-test.coffee"
 
