@@ -27,16 +27,16 @@
 
                         ul
                             li
-                                a(href="#" ng-click='downloadDataset()')
+                                a(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click='downloadDataset()')
                                     i.fa.fa-file-text-o
                                     |   {{ "DATASET" | translate }}
                             li
-                                a(href="#" ng-click='downloadImage()')
+                                a(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click='downloadImage()')
                                     i.fa.fa-file-image-o
                                     |   {{ "VISUALIZATION" | translate }}
 
                 .col-xs-12
-                    #vidatio-link-overlay(ng-show="$root.showLink")
+                    #vidatio-link-overlay(ng-show="$root.showVidatioLink")
                         p
                             i.fa.fa-link.link-icon-overlay
                             |   {{ "LINK_TO_SHARE" | translate }}

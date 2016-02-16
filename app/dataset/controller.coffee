@@ -21,7 +21,7 @@ app.controller "DatasetCtrl", [
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location) ->
 
         # link shouldn't be displayed on detailviews start
-        $rootScope.showLink = false
+        $rootScope.showVidatioLink = false
 
         # use datasetId from $stateParams
         datasetId = $stateParams.id
@@ -79,9 +79,13 @@ app.controller "DatasetCtrl", [
 
         $scope.downloadDataset = ->
             $log.info "DatasetCtrl downloadDataset called"
+            # at the moment direct download s not possible, so download via editor
+            $scope.editDataset()
 
         $scope.downloadImage = ->
             $log.info "DatasetCtrl downloadImage called"
+            # at the moment direct download s not possible, so download via editor
+            $scope.editDataset()
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
@@ -90,11 +94,11 @@ app.controller "DatasetCtrl", [
                 link: $location.$$absUrl
 
             # toggle link-overlay on click at link-button
-            $rootScope.showLink = if $rootScope.showLink then false else true
+            $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
             $rootScope.link = $location.$$absUrl
 
         $scope.hideLinkToVidatio = ->
-            $rootScope.showLink = false
+            $rootScope.showVidatioLink = false
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->
