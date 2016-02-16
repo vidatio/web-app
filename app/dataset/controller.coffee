@@ -17,7 +17,8 @@ app.controller "DatasetCtrl", [
     "$timeout"
     "ProgressService"
     "$stateParams"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams) ->
+    "$location"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location) ->
 
         # use datasetId from $stateParams
         datasetId = $stateParams.id
@@ -29,7 +30,7 @@ app.controller "DatasetCtrl", [
             updated = convertDates($scope.data.updatedAt)
             created = convertDates($scope.data.createdAt)
             tags = $scope.data.tags || "-"
-            format = "JSON"
+            format = "geoJSON"
             category = $scope.data.category || "-"
             userName = $scope.data.userId || "-"
             title = $scope.data.name || "Vidatio"
@@ -81,6 +82,14 @@ app.controller "DatasetCtrl", [
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
+
+            # extracts the current URL
+            absUrl = $location.$$absUrl
+            url = absUrl.substring 0, absUrl.indexOf("/" + $rootScope.locale + "/")
+            link = url + "/" + $rootScope.locale + "/vidatio/" + datasetId
+            $rootScope.link = link
+            $rootScope.showLink = true
+            console.log $rootScope.link
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->

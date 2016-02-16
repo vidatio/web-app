@@ -19,6 +19,12 @@
                         i.fa.fa-link
                         |   {{ "LINK" | translate | uppercase }}
 
+                    #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
+                        p {{"LINK_TO_SHARE" | translate }}
+                        a.fui-cross(href="#" ng-click="hideLink()")
+                        form
+                            input#link.form-control(ng-model="link" onClick="this.select();")
+
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
