@@ -37,7 +37,9 @@
 
                 .col-xs-12
                     #vidatio-link-overlay(ng-show="$root.showLink")
-                        p {{"LINK_TO_SHARE" | translate }}
+                        p
+                            i.fa.fa-link.link-icon-overlay
+                            |   {{ "LINK_TO_SHARE" | translate }}
                         a.fui-cross(href="#" ng-click="hideLinkToVidatio()")
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
