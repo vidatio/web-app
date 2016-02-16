@@ -15,7 +15,7 @@ RUN git config --global url."https://".insteadOf git://
 
 RUN npm install
 RUN npm install -g bower gulp
-RUN bower install --allow-root
+RUN bower install --allow-root --config.interactive=false
 
 # create folder var/www/vidatio and copy the app
 ADD . /var/www/

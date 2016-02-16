@@ -1,66 +1,65 @@
 {
-  "name": "vidatio",
-  "homepage": "http://www.vidat.io",
-  "version": "0.0.4",
-  "authors": [
-    "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
-  ],
-  "description": "Plattform to upload, share and expand datasets and visualizations",
-  "main": "assets/js/main.js",
-  "moduleType": [
-    "node"
-  ],
-  "keywords": [
-    "data",
-    "diagram",
-    "visualization",
-    "open",
-    "data",
-    "ogd"
-  ],
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
-  "dependencies": {
-    "angular": "^1.4",
-    "angular-animate": "~1.4.6",
-    "angular-leaflet-directive": "< 1.0",
-    "angular-loggly-logger": "~0.1.3",
-    "angular-sanitize": "~1.4.6",
-    "angular-translate": "~2.8.0",
-    "angular-translate-loader-static-files": "~2.8.0",
-    "angular-ui-router": "< 1.0",
-    "angular-resource": "~1.4.7",
-    "bootstrap": "^3.3",
-    "canvg": "~1.3.0",
-    "flat-ui": "~2.2.2",
-    "handsontable": "< 1.0",
-    "html2canvas": "~0.4.1",
-    "jquery": "*",
-    "ngToast": "ngtoast#~1.5.6",
-    "papa-parse": "^4.1.1",
-    "shp": "^3.2",
-    "jPushMenu": "~1.1.1",
-    "angular-simple-logger": "~0.1.5",
-    "angular-cookies": "~1.4.7",
-    "d3": "~3.5.12",
-    "c3": "~0.4.10",
-    "d3.parcoords.js": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.js",
-    "d3.parcoords.css": "https://syntagmatic.github.io/parallel-coordinates/d3.parcoords.css",
-    "loggly-logger": "http://cloudfront.loggly.com/js/loggly.tracker-2.1.min.js",
-    "moment": "^2.11.2",
-    "angular-datepicker": "~2.0.3"
-  },
-  "devDependencies": {
-    "angular-mocks": "^1.4"
-  },
-  "resolutions": {
-    "angular": "^1.4"
-  }
+    "name": "vidatio",
+    "homepage": "http://www.vidat.io",
+    "version": "0.0.4",
+    "authors": [
+        "MMTLukas <lwanko.mmt-m2014@fh-salzburg.ac.at>"
+    ],
+    "description": "Plattform to upload, share and expand datasets and visualizations",
+    "main": "assets/js/main.js",
+    "moduleType": [
+        "node"
+    ],
+    "keywords": [
+        "data",
+        "diagram",
+        "visualization",
+        "open",
+        "data",
+        "ogd"
+    ],
+    "license": "MIT",
+    "private": true,
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "^1.4",
+        "angular-animate": "~1.4.6",
+        "angular-cookies": "~1.4.7",
+        "angular-datepicker": "~2.0.3",
+        "angular-leaflet-directive": "< 1.0",
+        "angular-loggly-logger": "~0.1.3",
+        "angular-resource": "~1.4.7",
+        "angular-sanitize": "~1.4.6",
+        "angular-simple-logger": "~0.1.5",
+        "angular-translate": "~2.8.0",
+        "angular-translate-loader-static-files": "~2.8.0",
+        "angular-ui-router": "< 1.0",
+        "bootstrap": "^3.3",
+        "canvg": "~1.3.0",
+        "c3": "~0.4.10",
+        "d3.parcoords.js": "d3.parcoords#*",
+        "flat-ui": "~2.2.2",
+        "handsontable": "< 1.0",
+        "html2canvas": "~0.4.1",
+        "jPushMenu": "~1.1.1",
+        "jquery": "*",
+        "loggly-jslogger": "^2.1.0",
+        "ngToast": "ngtoast#~1.5.6",
+        "moment": "^2.11.2",
+        "papa-parse": "^4.1.1",
+        "shp": "^3.2"
+    },
+    "devDependencies": {
+        "angular-mocks": "^1.4"
+    },
+    "resolutions": {
+        "angular": "^1.4",
+        "moment": "^2.11.2"
+    }
 }

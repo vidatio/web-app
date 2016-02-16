@@ -125,6 +125,8 @@ app.controller "ImportCtrl", [
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                     Progress.setMessage message
 
+                initTableAndMap fileType, fileContent
+
                 # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath

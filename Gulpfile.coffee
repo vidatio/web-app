@@ -104,11 +104,12 @@ BUILD =
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/d3/d3.js"
             "./bower_components/c3/c3.js"
-            "./bower_components/d3.parcoords.js/index.js"
+            "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
             "./bower_components/moment/locale/de.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
+            "./bower_components/loggly-jslogger/src/loggly.tracker.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -120,7 +121,7 @@ BUILD =
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/c3/c3.css"
-            "./bower_components/d3.parcoords.css/index.css"
+            "./bower_components/d3.parcoords.css/d3.parcoords.css"
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
         ]
     dirs:
