@@ -20,6 +20,9 @@ app.controller "DatasetCtrl", [
     "$location"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location) ->
 
+        # link shouldn't be displayed on detailviews start
+        $rootScope.showLink = false
+
         # use datasetId from $stateParams
         datasetId = $stateParams.id
         $scope.information = []
@@ -82,14 +85,16 @@ app.controller "DatasetCtrl", [
 
         $scope.getLinkDataset = ->
             $log.info "DatasetCtrl getLinkDataset called"
+            $log.debug
+                id: datasetId
+                link: $location.$$absUrl
 
-            # extracts the current URL
-            absUrl = $location.$$absUrl
-            url = absUrl.substring 0, absUrl.indexOf("/" + $rootScope.locale + "/")
-            link = url + "/" + $rootScope.locale + "/vidatio/" + datasetId
-            $rootScope.link = link
-            $rootScope.showLink = true
-            console.log $rootScope.link
+            # toggle link-overlay on click at link-button
+            $rootScope.showLink = if $rootScope.showLink then false else true
+            $rootScope.link = $location.$$absUrl
+
+        $scope.hideLinkToVidatio = ->
+            $rootScope.showLink = false
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->
