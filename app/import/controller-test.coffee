@@ -30,14 +30,14 @@ describe "Controller Import", ->
             @httpBackend.whenGET(/index/).respond ""
             @httpBackend.whenGET(/editor/).respond ""
             @httpBackend.expectGET(/languages/).respond ""
-            @httpBackend.whenGET(@rootScope.apiBase + '/v0/import?url=test.txt').respond 'test,1\ntest,2\ntest,3'
-            @scope.link = 'test.txt'
+            @httpBackend.whenGET(@rootScope.apiBase + '/v0/forward?url=test.csv').respond
+                body: 'test,1\ntest,2\ntest,3'
+                fileType: 'csv'
+            @scope.link = 'test.csv'
             @scope.load()
             @httpBackend.flush()
 
-
             expect(@Table.setDataset).toHaveBeenCalled()
-            expect(@Table.setDataset).toHaveBeenCalledWith 'test,1\ntest,2\ntest,3'
 
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->

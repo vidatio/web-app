@@ -84,23 +84,23 @@ describe "Service Converter", ->
     xit 'should convert shp into arrays', ->
         geoJSON =
             "type": "FeatureCollection"
-        "features": [{
-            "type": "Feature"
-            "geometry":
-                "type": "Point"
-                "coordinates": [70, 90]
-        }, {
-            "type": "Feature"
-            "geometry":
-                "type": "Point"
-                "coordinates": [80, 80]
-        }, {
-            "type": "Feature"
-            "geometry":
-                "type": "Point"
-                "coordinates": [90, 70]
-        }
-        ]
+            "features": [{
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [70, 90]
+            }, {
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [80, 80]
+            }, {
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [90, 70]
+            }
+            ]
 
         result =
             [
