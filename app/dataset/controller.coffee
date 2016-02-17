@@ -18,7 +18,9 @@ app.controller "DatasetCtrl", [
     "ProgressService"
     "$stateParams"
     "$location"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location) ->
+    "$translate"
+    "ngToast"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast) ->
 
         # link shouldn't be displayed on detailviews start
         $rootScope.showVidatioLink = false
@@ -102,6 +104,33 @@ app.controller "DatasetCtrl", [
 
         $scope.hideLinkToVidatio = ->
             $rootScope.showVidatioLink = false
+
+        # copy link to clipboard
+        $scope.copyVidatioLink = ->
+            $log.info "DatasetCtrl copyVidatioLink called"
+            window.getSelection().removeAllRanges()
+            link = document.querySelector '#vidatio-link'
+            range = document.createRange()
+            range.selectNode link
+            window.getSelection().addRange(range)
+
+            try
+                successful = document.execCommand 'copy'
+
+                $log.debug
+                    message: "DatasetCtrl copy vidatio-link to clipboard"
+                    successful: successful
+
+                $translate('TOAST_MESSAGES.LINK_COPIED')
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+            catch error
+                $log.info "DatasetCtrl copy vidatio-link could not be copied"
+                $log.error
+                    error: error
+
+            window.getSelection().removeAllRanges()
 
         # convert available dates to locale date-format and display only the date (without time)
         convertDates = (date) ->

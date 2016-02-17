@@ -43,6 +43,9 @@
                         a.fui-cross(href="#" ng-click="hideLinkToVidatio()")
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
+                        a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
+                            i.fa.fa-clipboard
+                            |   {{"COPY_LINK" | translate | uppercase }}
 
     .row
         .col-sm-12

@@ -145,6 +145,7 @@
         border-top 3px solid $color-green
         padding 10px 20px 20px 20px
         text-align right
+        height 105px
 
         .link-icon-overlay
             font-size 14px
@@ -162,7 +163,30 @@
                 color $color-red
 
         .form-control
-            border-color $color-green
+            border-color $color-input-border-inactive
+            width calc(100% - 160px)
+            border-bottom-right-radius 0
+            border-top-right-radius 0
+
+            &:hover
+            &:focus
+                border-color $color-green
+
+        #copy-vidatio-link
+            border 2px solid $color-green
+            top -42px
+            position relative
+            height 42px
+            background $color-green
+
+            &:active
+                background-color $color-active
+                border-color $color-active
+
+            &:hover
+            &:focus
+                background-color $color-hover-dark
+                border-color $color-hover-dark
 
     .metadata-container
         margin-bottom 20px
