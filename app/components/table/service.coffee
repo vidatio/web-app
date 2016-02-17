@@ -14,8 +14,11 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
-                @xAxis = []
-                @yAxis = []
+                @xAxisSelection = []
+                @yAxisSelection = []
+                @xAxisCurrent = ""
+                @yAxisCurrent = ""
+
                 @instanceTable = {}
 
             initAxisSelection: ->
@@ -27,22 +30,33 @@ app.service 'TableService', [
                 $log.debug
                     colHeaders: colHeaders
 
-                @setXAxis colHeaders
-                @setYAxis colHeaders
+                @setXAxisSelection colHeaders
+                @setYAxisSelection colHeaders
 
-            setXAxis: (colHeaders) ->
-                $log.info "TableService setXAxis called"
+            setXAxisCurrent: (column) ->
+                $log.info "TableService setXAxisCurrent called"
 
-                @xAxis.splice 0, @xAxis.length
+                @xAxisCurrent = column
+
+            setYAxisCurrent: (column) ->
+                $log.info "TableService setYAxisCurrent called"
+
+                @yAxisCurrent = column
+
+            setXAxisSelection: (colHeaders) ->
+                $log.info "TableService setXAxisSelection called"
+
+                @xAxisSelection.splice 0, @xAxisSelection.length
+
                 colHeaders.forEach (item, index) =>
-                    @xAxis[index] = item
+                    @xAxisSelection[index] = item
 
-            setYAxis: (colHeaders) ->
-                $log.info "TableService setYAxis called"
+            setYAxisSelection: (colHeaders) ->
+                $log.info "TableService setYAxisSelection called"
 
-                @yAxis.splice 0, @yAxis.length
+                @yAxisSelection.splice 0, @yAxisSelection.length
                 colHeaders.forEach (item, index) =>
-                    @yAxis[index] = item
+                    @yAxisSelection[index] = item
 
             setInstance: (hot) ->
                 $log.info "TableService setInstance called"
