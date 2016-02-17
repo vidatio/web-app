@@ -110,5 +110,6 @@
     "TO": "bis",
     "FILTER": {
         "BY_TIME": "Filtern nach Zeit"
-    }
+    },
+    "HEADER": "Kopfzeile"
 }

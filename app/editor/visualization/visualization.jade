@@ -4,12 +4,12 @@
             .axis-selection
                 p {{ "X_AXIS" | translate }}
                 select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxisCurrent")
-                    option(value="") -- {{ "COLUMN" | translate }} --
-                    option(ng-repeat="header in colHeadersSelection" value="{{header}}") {{ header }}
+                    //- option(value="") -- {{ "COLUMN" | translate }} --
+                    option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
                 p {{ "Y_AXIS" | translate }}
                 select.btn.btn-default.dropdown-toggle(name="yAxisSelect" ng-model="yAxisCurrent")
-                    option(value="") -- {{ "COLUMN" | translate }} --
-                    option(ng-repeat="header in colHeadersSelection" value="{{header}}") {{ header }}
+                    //- option(value="") -- {{ "COLUMN" | translate }} --
+                    option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
 
             .download-button
                 a(href='#')

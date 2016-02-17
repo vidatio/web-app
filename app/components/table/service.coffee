@@ -28,15 +28,15 @@ app.service 'TableService', [
 
                 @setColHeadersSelection colHeaders
 
-            setXAxisCurrent: (column) ->
+            setXAxisCurrent: (id) ->
                 $log.info "TableService setXAxisCurrent called"
 
-                @xAxisCurrent = column
+                @xAxisCurrent = id
 
-            setYAxisCurrent: (column) ->
+            setYAxisCurrent: (id) ->
                 $log.info "TableService setYAxisCurrent called"
 
-                @yAxisCurrent = column
+                @yAxisCurrent = id
 
             setColHeadersSelection: (colHeaders) ->
                 $log.info "TableService setColHeaderSelection called"
@@ -46,7 +46,7 @@ app.service 'TableService', [
                 @colHeadersSelection.splice 0, @colHeadersSelection.length
                 colHeaders.forEach (item, index) =>
                     if item is null
-                        item = ""
+                        return
                     @colHeadersSelection[index] = item
 
             setInstance: (hot) ->
@@ -72,8 +72,6 @@ app.service 'TableService', [
             # @public
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
-
-                console.log "@instanceTable", @instanceTable
 
                 if @instanceTable
                     @instanceTable.updateSettings

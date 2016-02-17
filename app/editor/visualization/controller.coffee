@@ -31,6 +31,9 @@ app.controller "VisualizationCtrl", [
                 chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
 
+                Table.setXAxisCurrent xColumn
+                Table.setYAxisCurrent yColumn
+
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
                     when "scatter"
