@@ -1,16 +1,4 @@
 #catalog.wrapper-content(ng-controller="CatalogCtrl")
-    .vidatios(ng-show="vidatios.length")
-        .row
-            .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
-                .vidatio
-                    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
-                        img(src="{{ vidatio.image }}")
-
-                    .text
-                        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
-                            h4.title {{ vidatio.title }}
-                        p {{ vidatio.description | limitTo: 120}} ...
-
     .row
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             #time-filter
