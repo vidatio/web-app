@@ -5,7 +5,7 @@ describe "Service Data", ->
     beforeEach ->
         module "app"
 
-        inject (DataService, ConverterService, MapService, $rootScope, $q, $injector) ->
+        inject (DataService, ConverterService, TableService, MapService, $rootScope, $q, $injector) ->
             @injector = $injector
             @scope = $rootScope.$new()
             @deferred = $q.defer()
@@ -15,6 +15,12 @@ describe "Service Data", ->
 
             @Map = MapService
             @Map.init @scope
+
+            @Table = TableService
+            @Table.getInstance = ->
+            @Table.instanceTable =
+                getColHeader: ->
+                    return [0,1,2,3,4,5,5,6,7]
 
             spyOn(@Converter, "convertArrays2GeoJSON")
             spyOn(@Map, "setGeoJSON")

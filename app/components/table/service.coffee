@@ -62,10 +62,9 @@ app.service 'TableService', [
             # @method reset
             # @public
             # @param {Boolean} useColumnHeadersFromDataset
-            reset: (useColumnHeadersFromDataset) ->
+            reset: ->
                 $log.info "TableService reset called"
                 @resetDataset()
-                # @useColumnHeadersFromDataset = useColumnHeadersFromDataset
                 @resetColumnHeaders()
 
             # @method resetColumnHeaders
