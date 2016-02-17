@@ -10,7 +10,6 @@ app.service 'TableService', [
                 $log.info "TableService constructor called"
 
                 @dataset = [[]]
-                @columnHeaders = []
                 @useColumnHeadersFromDataset = true
 
                 @colHeadersSelection = []
@@ -63,7 +62,7 @@ app.service 'TableService', [
             reset: (useColumnHeadersFromDataset) ->
                 $log.info "TableService reset called"
                 @resetDataset()
-                @useColumnHeadersFromDataset = useColumnHeadersFromDataset
+                # @useColumnHeadersFromDataset = useColumnHeadersFromDataset
                 @resetColumnHeaders()
 
             # @method resetColumnHeaders
@@ -71,7 +70,7 @@ app.service 'TableService', [
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
 
-                @columnHeaders = true
+                @instanceTable.colHeaders = true
 
             # @method setColumnHeaders
             # @public
@@ -82,7 +81,7 @@ app.service 'TableService', [
                     message: "TableService setColumnHeaders called"
                     columnHeaders: columnHeaders
 
-                @columnHeaders = columnHeaders
+                @instanceTable.colHeaders = columnHeaders
 
             # @method takeColumnHeadersFromDataset
             # @public
@@ -90,7 +89,6 @@ app.service 'TableService', [
                 $log.info "TableService takeColumnHeadersFromDataset called"
                 columnHeaders = @dataset.splice(0, 1)[0]
                 @setColumnHeaders columnHeaders
-                @useColumnHeadersFromDataset = true
 
             # @method putColumnHeadersBackToDataset
             # @public
@@ -99,14 +97,14 @@ app.service 'TableService', [
 
                 # Before removing column headers delivered by the dataset
                 # we want to set them back to the rows inside the table
-                if @useColumnHeadersFromDataset
+                # if @useColumnHeadersFromDataset
                     # because we use data binding we can't unshift the array
                     # but we can push a new array with the items
-                    tmp = []
-                    @columnHeaders.forEach (item, index) ->
-                        tmp[index] = item
-                    @dataset.unshift tmp
-                    @useColumnHeadersFromDataset = false
+                    # tmp = []
+                    # @columnHeaders.forEach (item, index) ->
+                    #     tmp[index] = item
+                @dataset.unshift @instanceTable.colHeaders
+                    # @useColumnHeadersFromDataset = false
 
                 @resetColumnHeaders()
 
