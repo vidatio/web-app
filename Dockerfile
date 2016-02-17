@@ -1,9 +1,9 @@
 FROM mhart/alpine-node:4.2.1
 MAINTAINER Christian Lehner <lehner.chri@gmail.com>, Lukas Wanko <lwanko.mmt-m2014@fh-salzburg.ac.at>
 
-RUN apk update
-RUN apk upgrade
-RUN apk add nginx git python make g++
+RUN apk update && \
+    apk upgrade && \
+    apk add nginx git python make g++
 
 WORKDIR /var/www/
 
@@ -15,7 +15,7 @@ RUN git config --global url."https://".insteadOf git://
 
 RUN npm install
 RUN npm install -g bower gulp
-RUN bower install --allow-root
+RUN bower install --allow-root --config.interactive=false
 
 # create folder var/www/vidatio and copy the app
 ADD . /var/www/

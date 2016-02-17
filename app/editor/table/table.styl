@@ -1,6 +1,11 @@
 #table
     font-size 14px
 
+    #header-button
+    #header-button label
+        display inline-block
+        height 40
+
     #datatable
         width 100%
         height calc(100% - 50px) /* -50px according to the settings-bars' height + 20px margin */
@@ -10,6 +15,10 @@
         // TODO: Further check later
         .ht_master .wtHolder
             width 100% !important
+
+        .ht_clone_top_left_corner th
+            background $color-hover-light
+            border 2px solid white
 
         // Column headers (sticky and non-sticky)
         .ht_master thead,

@@ -14,24 +14,35 @@ module.exports = (config) ->
 
             # third party libs
             "./bower_components/jquery/dist/jquery.js"
-            "./bower_components/angular/angular.js"
-            "./bower_components/angular-mocks/angular-mocks.js"
-            "./bower_components/angular-ui-router/release/angular-ui-router.js"
-            "./bower_components/angular-resource/angular-resource.min.js"
-            "./bower_components/handsontable/dist/handsontable.full.js"
-            "./bower_components/leaflet/dist/leaflet-src.js"
-            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
-            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
-            "./bower_components/papa-parse/papaparse.js"
-            "./bower_components/ngToast/dist/ngToast.min.js"
-            "./bower_components/angular-resource/angular-resource.js"
-            "./bower_components/angular-animate/angular-animate.min.js"
-            "./bower_components/angular-cookies/angular-cookies.js"
-            "./bower_components/angular-sanitize/angular-sanitize.min.js"
-            "./bower_components/angular-loggly-logger/angular-loggly-logger.min.js"
-            "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
+            "./bower_components/angular/angular.js"
+            "./bower_components/angular-ui-router/release/angular-ui-router.js"
+            "./bower_components/angular-animate/angular-animate.min.js"
+            "./bower_components/angular-resource/angular-resource.min.js"
+            "./bower_components/angular-sanitize/angular-sanitize.min.js"
+            "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
+            "./bower_components/angular-simple-logger/dist/angular-simple-logger.js"
+            "./bower_components/angular-loggly-logger/angular-loggly-logger.js"
+            "./bower_components/angular-cookies/angular-cookies.js"
+            "./bower_components/ngToast/dist/ngToast.min.js"
+            "./bower_components/handsontable/dist/handsontable.full.js"
+            "./bower_components/papa-parse/papaparse.js"
+            "./bower_components/shp/dist/shp.js"
+            "./bower_components/leaflet/dist/leaflet-src.js"
+            "./bower_components/html2canvas/build/html2canvas.js"
+            "./bower_components/canvg/dist/canvg.bundle.js"
+            "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/d3/d3.js"
+            "./bower_components/c3/c3.js"
+            "./bower_components/d3.parcoords.js/d3.parcoords.js"
+            "./bower_components/moment/min/moment.min.js"
+            "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
+            "./bower_components/moment/locale/de.js"
+            "./bower_components/angular-datepicker/dist/angular-datepicker.js"
+            "./bower_components/loggly-jslogger/src/loggly.tracker.js"
 
+            # import angular mock - test dependency
+            "./bower_components/angular-mocks/angular-mocks.js"
 
             # angular-translate
             "./bower_components/angular-translate/angular-translate.js"
@@ -45,14 +56,20 @@ module.exports = (config) ->
             "./app/app.coffee"
             "./app/app-controller.coffee"
 
-            #includes test files already
+            # includes test files already
             "./app/*/**/*.coffee"
             "./app/app-test.coffee"
-        ]
 
+        ]
 
         # list of files to exclude
         exclude: [
+            # Bugfix PhantomJS
+            # TypeError: 'undefined' is not an object (evaluating 'parent.prototype')
+            "./app/components/visualization/bar/*.coffee"
+            "./app/components/visualization/timeserie/*.coffee"
+            "./app/components/visualization/parallel/*.coffee"
+            "./app/components/visualization/scatter/*.coffee"
         ]
 
         # preprocess matching files before serving them to the browser
@@ -70,14 +87,11 @@ module.exports = (config) ->
         # available reporters: https://npmjs.org/browse/keyword/karma-reporter
         reporters: ["progress"]
 
-
         # web server port
         port: 9876
 
-
         # enable / disable colors in the output (reporters and logs)
         colors: true
-
 
         # level of logging
         # possible values:
@@ -88,17 +102,14 @@ module.exports = (config) ->
         # - config.LOG_DEBUG
         logLevel: config.LOG_INFO
 
-
         # enable / disable watching file and executing tests whenever any file changes
         # autoWatch: true
-
 
         # start these browsers
         # available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
             "PhantomJS"
         ]
-
 
         # Continuous Integration mode
         # if true, Karma captures browsers, runs the tests and exits

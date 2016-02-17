@@ -22,19 +22,19 @@ app.service 'DataService', [
                     "fileType": ""
                     "fileName": ""
 
-            updateTableAndMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateTableAndMap called"
+            updateMap: (row, column, oldData, newData) ->
+                $log.info "DataService updateMap called"
                 $log.debug
-                    message: "DataService updateTableAndMap called"
+                    message: "DataService updateMap called"
                     row: row
                     column: column
                     oldData: oldData
                     newData: newData
 
-                key = Table.colHeaders[column]
+                key = Table.columnHeaders[column]
 
                 if @meta.fileType is "shp"
-                    Map.updateGeoJSONwithSHP(row, column, oldData, newData, key)
+                    Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
                 else if @meta.fileType is "csv"
                     geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
                     Map.setGeoJSON(geoJSON)
@@ -53,7 +53,7 @@ app.service 'DataService', [
                     newData: newData
 
                 if @meta.fileType is "shp"
-                    key = Table.colHeaders[column]
+                    key = Table.columnHeaders[column]
                     return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
 
                 return true
@@ -88,8 +88,8 @@ app.service 'DataService', [
                     $rootScope.link = link
                     $rootScope.showLink = true
                 , (error) ->
-                    $log.info("Dataset couldn't be saved")
-                    $log.error
+                    $log.error("Dataset couldn't be saved")
+                    $log.debug
                         error: error
 
                     $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')

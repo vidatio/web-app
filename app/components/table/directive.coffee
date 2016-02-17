@@ -5,16 +5,15 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
-    "MapService"
     "TableService"
-    ($timeout, $log, Data, Map, Table) ->
+    ($timeout, $log, Data, Table) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
         scope:
             dataset: '='
             activeViews: '='
-            colHeaders: '='
+            columnHeaders: '='
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
@@ -23,7 +22,7 @@ app.directive 'hot', [
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: $scope.colHeaders
+                colHeaders: true
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
@@ -44,7 +43,10 @@ app.directive 'hot', [
                         source: source
 
                     if change and change[0][3] != change[0][2]
-                        Data.updateTableAndMap(change[0][0], change[0][1], change[0][2], change[0][3])
+                        # TODO add commands for other chart types
+                        # use a variable "recommendDiagramm" to choose the right update function
+
+                        Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
