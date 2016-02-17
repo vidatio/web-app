@@ -14,8 +14,7 @@ app.service 'TableService', [
                 @dataset = [[]]
                 @colHeaders = []
 
-                @xAxisSelection = []
-                @yAxisSelection = []
+                @colHeadersSelection = []
                 @xAxisCurrent = ""
                 @yAxisCurrent = ""
 
@@ -30,8 +29,7 @@ app.service 'TableService', [
                 $log.debug
                     colHeaders: colHeaders
 
-                @setXAxisSelection colHeaders
-                @setYAxisSelection colHeaders
+                @setColHeadersSelection colHeaders
 
             setXAxisCurrent: (column) ->
                 $log.info "TableService setXAxisCurrent called"
@@ -43,20 +41,12 @@ app.service 'TableService', [
 
                 @yAxisCurrent = column
 
-            setXAxisSelection: (colHeaders) ->
-                $log.info "TableService setXAxisSelection called"
+            setColHeadersSelection: (colHeaders) ->
+                $log.info "TableService setColHeaderSelection called"
 
-                @xAxisSelection.splice 0, @xAxisSelection.length
-
+                @colHeadersSelection.splice 0, @colHeadersSelection.length
                 colHeaders.forEach (item, index) =>
-                    @xAxisSelection[index] = item
-
-            setYAxisSelection: (colHeaders) ->
-                $log.info "TableService setYAxisSelection called"
-
-                @yAxisSelection.splice 0, @yAxisSelection.length
-                colHeaders.forEach (item, index) =>
-                    @yAxisSelection[index] = item
+                    @colHeadersSelection[index] = item
 
             setInstance: (hot) ->
                 $log.info "TableService setInstance called"

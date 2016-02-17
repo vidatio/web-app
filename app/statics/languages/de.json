@@ -102,5 +102,6 @@
         }
     },
     "X_AXIS": "X-Achse",
-    "Y_AXIS": "Y-Achse"
+    "Y_AXIS": "Y-Achse",
+    "COLUMN": "Spalte"
 }

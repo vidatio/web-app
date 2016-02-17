@@ -11,10 +11,11 @@ app.controller "EditorCtrl", [
     "$log"
     "TableService"
     ($scope, $rootScope, $log, Table) ->
-        $scope.xAxisSelection = Table.xAxisSelection
-        $scope.yAxisSelection = Table.yAxisSelection
+        $scope.colHeadersSelection = Table.colHeadersSelection
+
         $scope.xAxisCurrent = Table.xAxisCurrent
         $scope.yAxisCurrent = Table.yAxisCurrent
+
         $scope.colHeaders = Table.colHeaders
 
         # watch if activeViews in change (defined in headerController.coffee)
