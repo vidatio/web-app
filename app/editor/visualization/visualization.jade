@@ -3,11 +3,12 @@
         .settings-bar
             .axis-selection
                 p {{ "X_AXIS" | translate }}
-                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxisCurrent")
+                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxisCurrent" ng-change="changeAxisColumnSelection()")
                     //- option(value="") -- {{ "COLUMN" | translate }} --
                     option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
                 p {{ "Y_AXIS" | translate }}
-                select.btn.btn-default.dropdown-toggle(name="yAxisSelect" ng-model="yAxisCurrent")
+                p {{ $scope.xAxisCurrent }} - {{ $scope.yAxisCurrent }}
+                select.btn.btn-default.dropdown-toggle(name="yAxisSelect" ng-model="yAxisCurrent" ng-change="changeAxisColumnSelection()")
                     //- option(value="") -- {{ "COLUMN" | translate }} --
                     option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
 
@@ -19,5 +20,5 @@
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
-        #chart(ng-hide="recommendedDiagram == 'map'")
+        leaflet(geojson="geojson" id="map" ng-show="diagramType == 'map'")
+        #chart(ng-hide="diagramType == 'map'")

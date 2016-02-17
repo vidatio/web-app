@@ -17,30 +17,41 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
+        $scope.colHeadersSelection = Table.colHeadersSelection
+        $scope.changeAxisColumnSelection = ->
+            $log.info "Visualization controller changeAxisColumnSelection called"
+
+            chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
+                trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
+            visualization.updateDataset(chartData)
+
+        visualization = null
+
         dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
         cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
 
         switch Data.meta.fileType
             when "shp"
-                $scope.recommendedDiagram = "map"
+                $scope.diagramType = "map"
                 Map.setScope $scope
             else
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
-                $scope.recommendedDiagram = recommendedDiagram
+                $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
+                $scope.diagramType = recommendedDiagram
+
+                $scope.xAxisCurrent = String(xColumn)
+                $scope.yAxisCurrent = String(yColumn)
+
                 chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
 
-                Table.setXAxisCurrent xColumn
-                Table.setYAxisCurrent yColumn
-
-                $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
                     when "scatter"
                         # Currently default labels for the points are used
                         chartData[0].unshift "A_x"
                         chartData[1].unshift "A"
-                        new vidatio.ScatterPlot chartData
+                        visualization = new vidatio.ScatterPlot chartData
                     when "map"
                         # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
@@ -50,16 +61,16 @@ app.controller "VisualizationCtrl", [
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
-                        new vidatio.ParallelCoordinates chartData
+                        visualization = new vidatio.ParallelCoordinates chartData
                     when "bar"
                         # Bar chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
-                        new vidatio.BarChart chartData
+                        visualization = new vidatio.BarChart chartData
                     when "timeseries"
                         # Currently default labels for the bars are used
                         chartData[0].unshift "x"
                         chartData[1].unshift "A"
-                        new vidatio.TimeseriesChart chartData
+                        visualization = new vidatio.TimeseriesChart chartData
                     else
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"

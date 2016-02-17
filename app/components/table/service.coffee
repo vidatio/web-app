@@ -11,11 +11,7 @@ app.service 'TableService', [
 
                 @dataset = [[]]
                 @useColumnHeadersFromDataset = true
-
                 @colHeadersSelection = []
-                @xAxisCurrent = ""
-                @yAxisCurrent = ""
-
                 @instanceTable = null
 
             initAxisSelection: ->
@@ -27,16 +23,6 @@ app.service 'TableService', [
                     colHeaders: colHeaders
 
                 @setColHeadersSelection colHeaders
-
-            setXAxisCurrent: (id) ->
-                $log.info "TableService setXAxisCurrent called"
-
-                @xAxisCurrent = id
-
-            setYAxisCurrent: (id) ->
-                $log.info "TableService setYAxisCurrent called"
-
-                @yAxisCurrent = id
 
             setColHeadersSelection: (colHeaders) ->
                 $log.info "TableService setColHeaderSelection called"

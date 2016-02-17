@@ -11,11 +11,6 @@ app.controller "EditorCtrl", [
     "$log"
     "TableService"
     ($scope, $rootScope, $log, Table) ->
-        $scope.colHeadersSelection = Table.colHeadersSelection
-
-        $scope.xAxisCurrent = Table.xAxisCurrent
-        $scope.yAxisCurrent = Table.yAxisCurrent
-
         # watch if activeViews in change (defined in headerController.coffee)
         # $watch takes two callbacks (watchExpression and Listener);
         # see Angular.js Docs for more info!
