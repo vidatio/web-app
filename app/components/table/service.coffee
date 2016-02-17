@@ -16,13 +16,12 @@ app.service 'TableService', [
                 @xAxisCurrent = ""
                 @yAxisCurrent = ""
 
-                @instanceTable = {}
+                @instanceTable = null
 
             initAxisSelection: ->
                 $log.info "TableService initAxis called"
 
-                hot = @getInstance()
-                colHeaders = hot.getColHeader()
+                colHeaders = @instanceTable.getColHeader()
 
                 $log.debug
                     colHeaders: colHeaders
@@ -41,9 +40,13 @@ app.service 'TableService', [
 
             setColHeadersSelection: (colHeaders) ->
                 $log.info "TableService setColHeaderSelection called"
+                $log.debug
+                    colHeaders: colHeaders
 
                 @colHeadersSelection.splice 0, @colHeadersSelection.length
                 colHeaders.forEach (item, index) =>
+                    if item is null
+                        item = ""
                     @colHeadersSelection[index] = item
 
             setInstance: (hot) ->
@@ -70,7 +73,14 @@ app.service 'TableService', [
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
 
-                @instanceTable.colHeaders = true
+                console.log "@instanceTable", @instanceTable
+
+                if @instanceTable
+                    @instanceTable.updateSettings
+                        colHeaders: true
+
+                    @instanceTable.render()
+                    @setColHeadersSelection @instanceTable.getColHeader()
 
             # @method setColumnHeaders
             # @public
@@ -81,7 +91,12 @@ app.service 'TableService', [
                     message: "TableService setColumnHeaders called"
                     columnHeaders: columnHeaders
 
-                @instanceTable.colHeaders = columnHeaders
+                if @instanceTable
+                    @instanceTable.updateSettings
+                        colHeaders: columnHeaders
+
+                    @instanceTable.render()
+                    @setColHeadersSelection columnHeaders
 
             # @method takeColumnHeadersFromDataset
             # @public
@@ -95,17 +110,7 @@ app.service 'TableService', [
             putColumnHeadersBackToDataset: ->
                 $log.info "TableService putColumnHeadersBackToDataset called"
 
-                # Before removing column headers delivered by the dataset
-                # we want to set them back to the rows inside the table
-                # if @useColumnHeadersFromDataset
-                    # because we use data binding we can't unshift the array
-                    # but we can push a new array with the items
-                    # tmp = []
-                    # @columnHeaders.forEach (item, index) ->
-                    #     tmp[index] = item
-                @dataset.unshift @instanceTable.colHeaders
-                    # @useColumnHeadersFromDataset = false
-
+                @dataset.unshift @instanceTable.getColHeader()
                 @resetColumnHeaders()
 
             resetDataset: ->

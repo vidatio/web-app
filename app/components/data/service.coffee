@@ -31,7 +31,8 @@ app.service 'DataService', [
                     oldData: oldData
                     newData: newData
 
-                key = Table.columnHeaders[column]
+                columnHeaders = Table.instanceTable.getColHeader()
+                key = columnHeaders[column]
 
                 if @meta.fileType is "shp"
                     Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
@@ -53,7 +54,8 @@ app.service 'DataService', [
                     newData: newData
 
                 if @meta.fileType is "shp"
-                    key = Table.columnHeaders[column]
+                    columnHeaders = Table.instanceTable.getColHeader()
+                    key = columnHeaders[column]
                     return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
 
                 return true
