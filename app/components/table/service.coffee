@@ -4,30 +4,78 @@ app = angular.module "app.services"
 
 app.service 'TableService', [
     "$log"
-    "MapService"
-    "ConverterService"
-    ($log, Map, Converter) ->
+    ($log) ->
         class Table
             constructor: ->
                 $log.info "TableService constructor called"
 
                 @dataset = [[]]
-                @colHeaders = []
+                @columnHeaders = []
+                @useColumnHeadersFromDataset = true
 
-            resetColHeaders: ->
-                $log.info "TableService resetColHeaders called"
+            # @method reset
+            # @public
+            # @param {Boolean} useColumnHeadersFromDataset
+            reset: (useColumnHeadersFromDataset) ->
+                $log.info "TableService reset called"
+                @resetDataset()
+                @useColumnHeadersFromDataset = useColumnHeadersFromDataset
+                @resetColumnHeaders()
 
-                @colHeaders.splice 0, @colHeaders.length
+            # @method resetColumnHeaders
+            # @public
+            resetColumnHeaders: ->
+                $log.info "TableService resetColumnHeaders called"
+                @columnHeaders.splice 0, @columnHeaders.length
 
-            setColHeaders: (colHeaders) ->
-                $log.info "TableService setColHeaders called"
+                if !@useColumnHeadersFromDataset
+                    # Because we want at least 26 columns we fill up the column headers
+                    # TODO whats about datasets with more then 26 columns?
+                    # Maybe use the width of the dataset + 1 for further free fields
+                    for element in [ 0..25 ]
+                        @columnHeaders[element] = String.fromCharCode(65 + element)
+
+            # @method setColumnHeaders
+            # @public
+            # @param {Array} columnHeaders
+            setColumnHeaders: (columnHeaders) ->
+                $log.info "TableService setColumnHeaders called"
                 $log.debug
-                    message: "TableService setColHeaders called"
-                    colHeaders: colHeaders
+                    message: "TableService setColumnHeaders called"
+                    columnHeaders: columnHeaders
 
-                @resetColHeaders()
-                colHeaders.forEach (item, index) =>
-                    @colHeaders[index] = item
+                @resetColumnHeaders()
+
+                # because we want to the keep the data binding
+                # we can't assign the array, but we can exchange the items
+                columnHeaders.forEach (item, index) =>
+                    @columnHeaders[index] = item
+
+            # @method takeColumnHeadersFromDataset
+            # @public
+            takeColumnHeadersFromDataset: ->
+                $log.info "TableService takeColumnHeadersFromDataset called"
+                columnHeaders = @dataset.splice(0, 1)[0]
+                @setColumnHeaders columnHeaders
+                @useColumnHeadersFromDataset = true
+
+            # @method putColumnHeadersBackToDataset
+            # @public
+            putColumnHeadersBackToDataset: ->
+                $log.info "TableService putColumnHeadersBackToDataset called"
+
+                # Before removing column headers delivered by the dataset
+                # we want to set them back to the rows inside the table
+                if @useColumnHeadersFromDataset
+                    # because we use data binding we can't unshift the array
+                    # but we can push a new array with the items
+                    tmp = []
+                    @columnHeaders.forEach (item, index) ->
+                        tmp[index] = item
+                    @dataset.unshift tmp
+                    @useColumnHeadersFromDataset = false
+
+                @resetColumnHeaders()
 
             resetDataset: ->
                 $log.info "TableService resetDataset called"
@@ -43,7 +91,7 @@ app.service 'TableService', [
                     message: "TableService setDataset called"
                     data: data
 
-                @resetDataset()
+                @reset true
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
