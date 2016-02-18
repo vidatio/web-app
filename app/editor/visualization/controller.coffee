@@ -18,12 +18,24 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
         $scope.colHeadersSelection = Table.colHeadersSelection
+
+        $scope.setXAxisColumnSelection = (id) ->
+            $log.info "Visualization controller setXAxisColumnSelection called"
+            $scope.xAxisCurrent = id
+            $scope.changeAxisColumnSelection()
+
+        $scope.setYAxisColumnSelection = (id) ->
+            $log.info "Visualization controller setYAxisColumnSelection called"
+            $scope.yAxisCurrent = id
+            $scope.changeAxisColumnSelection()
+
         $scope.changeAxisColumnSelection = ->
             $log.info "Visualization controller changeAxisColumnSelection called"
 
-            chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
-                trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
-            visualization.updateDataset(chartData)
+            if $scope.diagramType? and $scope.diagramType isnt "map"
+                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
+                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
+                visualization.updateDataset(chartData)
 
         visualization = null
 

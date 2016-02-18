@@ -3,14 +3,19 @@
         .settings-bar
             .axis-selection
                 p {{ "X_AXIS" | translate }}
-                select.btn.btn-default.dropdown-toggle(name="xAxisSelect" ng-model="xAxisCurrent" ng-change="changeAxisColumnSelection()")
-                    //- option(value="") -- {{ "COLUMN" | translate }} --
-                    option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[xAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setXAxisColumnSelection(id)") {{ header}}
                 p {{ "Y_AXIS" | translate }}
-                p {{ $scope.xAxisCurrent }} - {{ $scope.yAxisCurrent }}
-                select.btn.btn-default.dropdown-toggle(name="yAxisSelect" ng-model="yAxisCurrent" ng-change="changeAxisColumnSelection()")
-                    //- option(value="") -- {{ "COLUMN" | translate }} --
-                    option(ng-repeat="(id, header) in colHeadersSelection track by $index" value="{{id}}") {{ header }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[yAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setYAxisColumnSelection(id)") {{ header}}
 
             .download-button
                 a(href='#')
