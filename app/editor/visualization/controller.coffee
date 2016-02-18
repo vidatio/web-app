@@ -17,7 +17,62 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
+        $scope.supportedDiagrams = [
+            {
+                name: "Scatterplot"
+                type: "scatter"
+            }
+            {
+                name: "Map"
+                type: "map"
+            }
+            {
+                name: "Parallel Coordinates"
+                type: "parallel"
+            }
+            {
+                name: "Barchart"
+                type: "bar"
+            }
+            {
+                name: "Timeseries chart"
+                type: "timeseries"
+            }
+        ]
+
+        $scope.selectedDiagramName = ""
+        $scope.selectedDiagramType = ""
         $scope.colHeadersSelection = Table.colHeadersSelection
+
+        createDiagram = (type) ->
+            switch type
+                when "scatter"
+                    # Currently default labels for the points are used
+                    $scope.chartData[0].unshift "A_x"
+                    $scope.chartData[1].unshift "A"
+                    visualization = new vidatio.ScatterPlot $scope.chartData
+                when "map"
+                    # TODO map dataset and merge parser & recommender
+                    Map.setScope $scope
+                    # Use the hole dataset because we want the other attributes inside the popups
+                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
+                    Map.setGeoJSON geoJSON
+                when "parallel"
+                    # Parallel coordinate chart need the columns as rows so we transpose
+                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData
+                    visualization = new vidatio.ParallelCoordinates $scope.chartData
+                when "bar"
+                    # Bar chart need the columns as rows so we transpose
+                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData
+                    visualization = new vidatio.BarChart $scope.chartData
+                when "timeseries"
+                    # Currently default labels for the bars are used
+                    $scope.chartData[0].unshift "x"
+                    $scope.chartData[1].unshift "A"
+                    visualization = new vidatio.TimeseriesChart $scope.chartData
+                else
+                    # TODO: show a default image here
+                    $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         $scope.setXAxisColumnSelection = (id) ->
             $log.info "Visualization controller setXAxisColumnSelection called"
@@ -55,37 +110,10 @@ app.controller "VisualizationCtrl", [
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
 
-                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
+                $scope.chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
 
-                switch recommendedDiagram
-                    when "scatter"
-                        # Currently default labels for the points are used
-                        chartData[0].unshift "A_x"
-                        chartData[1].unshift "A"
-                        visualization = new vidatio.ScatterPlot chartData
-                    when "map"
-                        # TODO map dataset and merge parser & recommender
-                        Map.setScope $scope
-                        # Use the hole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
-                        Map.setGeoJSON geoJSON
-                    when "parallel"
-                        # Parallel coordinate chart need the columns as rows so we transpose
-                        chartData = vidatio.helper.transposeDataset chartData
-                        visualization = new vidatio.ParallelCoordinates chartData
-                    when "bar"
-                        # Bar chart need the columns as rows so we transpose
-                        chartData = vidatio.helper.transposeDataset chartData
-                        visualization = new vidatio.BarChart chartData
-                    when "timeseries"
-                        # Currently default labels for the bars are used
-                        chartData[0].unshift "x"
-                        chartData[1].unshift "A"
-                        visualization = new vidatio.TimeseriesChart chartData
-                    else
-                        # TODO: show a default image here
-                        $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
+                createDiagram(recommendedDiagram)
 
         $timeout ->
             Progress.setMessage ""
@@ -125,4 +153,10 @@ app.controller "VisualizationCtrl", [
                     className: "danger"
             , (notify) ->
                 Progress.setMessage notify
+
+        $scope.selectDiagram = (name, type) ->
+            $scope.selectedDiagramName = name
+            $scope.selectedDiagramType = type
+            console.log("name:", name)
+            console.log("TYPE:", type)
 ]

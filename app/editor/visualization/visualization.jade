@@ -16,7 +16,13 @@
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
                             a(href="#" ng-click="setYAxisColumnSelection(id)") {{ header}}
-
+            .diagram-selection
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="diagram in supportedDiagrams")
+                            a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)") {{ diagram.name }}
             .download-button
                 a(href='#')
                 ul
