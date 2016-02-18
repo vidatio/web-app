@@ -1,6 +1,25 @@
 "use strict"
 
-class window.vidatio.Parser
+class window.vidatio.GeoParser
+
+    # @method checkHeader
+    # @public
+    # @param {Array} header
+    # @return {Object}
+    #   success: find white listed column name
+    #   x: index of the x column
+    #   y: index of the y column
+    checkHeader: (header) ->
+        vidatio.log.info "GeoParser checkHeader called"
+        vidatio.log.debug
+            header: header
+
+        return (
+            success: false
+            x: 0
+            y: 0
+        )
+
     # first we try to find coordinates columns via the header
     # if this fails we parse the dataset for coordinates
     # @method findCoordinatesColumns

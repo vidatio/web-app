@@ -6,9 +6,9 @@
 
 "use strict"
 
-describe "Service Parser", ->
+describe "Service GeoParser", ->
     beforeEach ->
-        @Parser = new window.vidatio.Parser()
+        @Parser = new window.vidatio.GeoParser()
 
     it 'should find columns of the latitude and longitude in dataset', ->
         dataset = [

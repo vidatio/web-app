@@ -18,15 +18,14 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
         dataset = Table.getDataset()
-        trimmedDataset = vidatio.helper.trimDataset(dataset)
-        cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
+        focusedDataset = vidatio.helper.trimDataset(dataset)
 
         switch Data.meta.fileType
             when "shp"
                 $scope.recommendedDiagram = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run focusedDataset
                 $scope.recommendedDiagram = recommendedDiagram
                 chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
@@ -42,7 +41,7 @@ app.controller "VisualizationCtrl", [
                         # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
                         # Use the hole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
+                        geoJSON = Converter.convertArrays2GeoJSON focusedDataset
                         Map.setGeoJSON geoJSON
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose

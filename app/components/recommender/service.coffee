@@ -64,58 +64,73 @@ class window.vidatio.Recommender
     #   the index of the column for the x value,
     #   the index of the column for the y value
     # OR {error} Message with occurred error
-    run: (subset = [], dataset = subset) ->
-        vidatio.log.info "Recommender getRecommendedDiagram called"
+    run: (dataset = [], header = []) ->
+        vidatio.log.info "Recommender run called"
         vidatio.log.debug
-            subset: subset
             dataset: dataset
+            header: header
 
-        if subset.length < 1 or subset[0].length < 2
+        if dataset.length < 1 or dataset[0].length < 2
             message = "Dataset have not enough dimensions!"
-            return { error: message }
+            return {error: message}
 
         xIndex = null
         yIndex = null
-        @recommendedDiagram = null
-
         xVariance = null
         yVariance = null
+        nominalIdx = null
+        @recommendedDiagram = null
 
-        transposedDataset = vidatio.helper.transposeDataset subset
+        # We can recognize geo datasets via headers
+        # Se we first check the header
+        headerResult = vidatio.geoParser.checkHeader(header)
 
-        schema = @getSchema(transposedDataset)
-        variances = @getVariances(transposedDataset)
+        if headerResult.success
+            type = "coordinate coordinate"
+            xIndex = headerResult.x
+            yIndex = headerResult.y
 
-        for variance, index in variances
-            if variance > xVariance
+            # For other datasets and geo datasets without headers
+            # We classify the columns the the content
+        else
+            trimmedDataset = vidatio.helper.cutDataset dataset
+            transposedDataset = vidatio.helper.transposeDataset trimmedDataset
 
-                if xIndex?
-                    yIndex = xIndex
-                    yVariance = xVariance
+            schema = @getSchema(transposedDataset)
+            variances = @getVariances(transposedDataset)
 
-                xIndex = index
-                xVariance = variance
+            for variance, index in variances
+                if variance > xVariance
 
-            else if variance > yVariance
-                yIndex = index
-                yVariance = variance
+                    if xIndex?
+                        yIndex = xIndex
+                        yVariance = xVariance
 
-        type = schema[xIndex] + " " + schema[yIndex]
+                    xIndex = index
+                    xVariance = variance
 
-        nominalIdx = xIndex if schema[xIndex] is "nominal"
-        nominalIdx = yIndex if schema[yIndex] is "nominal"
+                else if variance > yVariance
+                    yIndex = index
+                    yVariance = variance
 
-        uniqueNominals = {}
-        for row in dataset
-            if row[nominalIdx] in uniqueNominals
-                continue
+            type = schema[xIndex] + " " + schema[yIndex]
 
-            uniqueNominals[row[nominalIdx]] = true
+            nominalIdx = xIndex if schema[xIndex] is "nominal"
+            nominalIdx = yIndex if schema[yIndex] is "nominal"
 
-            numberOfNominals = Object.keys(uniqueNominals).length
-            if numberOfNominals > @thresholdBar
-                break
+            uniqueNominals = {}
+            for row in dataset
+                if row[nominalIdx] in uniqueNominals
+                    continue
 
+                uniqueNominals[row[nominalIdx]] = true
+
+                numberOfNominals = Object.keys(uniqueNominals).length
+                if numberOfNominals > @thresholdBar
+                    break
+
+        # After checking the header or/and classify the columns
+        # we have to decide which diagram type we want to recommend
         switch type
 
             when "numeric numeric", "nominal nominal"
@@ -157,14 +172,12 @@ class window.vidatio.Recommender
                 yIndex = tmp
 
             else
-                if (type.indexOf "unknown" isnt -1) and (dataset.length > @thresholdPC)
+                if type.indexOf("unknown") isnt -1 and dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 
-
-        return {
-        recommendedDiagram: @recommendedDiagram
-        xColumn: xIndex
-        yColumn: yIndex
-        }
+        result =
+            recommendedDiagram: @recommendedDiagram
+            xColumn: xIndex
+            yColumn: yIndex

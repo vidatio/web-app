@@ -185,14 +185,14 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = vidatio.parser.findCoordinatesColumns(dataset)
+                indicesCoordinates = vidatio.geoParser.findCoordinatesColumns(dataset)
 
                 dataset.forEach (row) ->
                     coordinates = []
 
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = vidatio.parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
                     else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])

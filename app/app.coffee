@@ -40,7 +40,7 @@ app.run [
         window.vidatio.log = new vidatio.Logger(CONFIG.TOKEN.LOGGLY, CONFIG.ENV is "develop")
         window.vidatio.helper = new window.vidatio.Helper()
         window.vidatio.recommender = new window.vidatio.Recommender()
-        window.vidatio.parser = new window.vidatio.Parser()
+        window.vidatio.geoParser = new window.vidatio.GeoParser()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
