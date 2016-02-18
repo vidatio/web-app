@@ -22,7 +22,10 @@ app.controller "DatasetCtrl", [
     "ngToast"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast) ->
 
-        # link shouldn't be displayed on detailviews start
+        # set link to current vidatio
+        $rootScope.link = $location.$$absUrl
+
+        # link-overlay shouldn't be displayed on detailviews' start
         $rootScope.showVidatioLink = false
 
         # use datasetId from $stateParams
@@ -63,51 +66,45 @@ app.controller "DatasetCtrl", [
         , (error) ->
             console.error error
 
-        $scope.editDataset = ->
+        # create a new Vidatio and set necessary data
+        $scope.createVidatio = ->
             $log.info "DatasetCtrl editDataset called"
             $log.debug
                 id: datasetId
                 name: $scope.data.name
                 data: $scope.data.data
 
-            # the API-call receives data in GeoJSON, so convert it back in array-format
-            #dataset = Converter.convertGeoJSON2Arrays $scope.data.data[0]
-
-            # call necessary Table- and Map-functions to display dataset in editor
-            #Table.resetDataset()
-            #Table.resetColumnHeaders()
             Table.setDataset $scope.data.data
-            #Map.setGeoJSON $scope.data.data[0]
 
             $timeout ->
                 Progress.setMessage ""
 
+        # at the moment direct download is not possible, so download via editor
         $scope.downloadDataset = ->
             $log.info "DatasetCtrl downloadDataset called"
-            # at the moment direct download s not possible, so download via editor
-            $scope.editDataset()
+            @createVidatio()
 
         $scope.downloadImage = ->
             $log.info "DatasetCtrl downloadImage called"
-            # at the moment direct download s not possible, so download via editor
-            $scope.editDataset()
+            @createVidatio()
 
-        $scope.getLinkDataset = ->
+        # toggle link-overlay with vidatio-link
+        $scope.getVidatioLink = ->
             $log.info "DatasetCtrl getLinkDataset called"
             $log.debug
                 id: datasetId
-                link: $location.$$absUrl
+                link: $rootScope.link
 
-            # toggle link-overlay on click at link-button
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
-            $rootScope.link = $location.$$absUrl
 
+        # hide link-overlay if necessary
         $scope.hideLinkToVidatio = ->
             $rootScope.showVidatioLink = false
 
         # copy link to clipboard
         $scope.copyVidatioLink = ->
             $log.info "DatasetCtrl copyVidatioLink called"
+
             window.getSelection().removeAllRanges()
             link = document.querySelector '#vidatio-link'
             range = document.createRange()
@@ -125,10 +122,17 @@ app.controller "DatasetCtrl", [
                 .then (translation) ->
                     ngToast.create
                         content: translation
+
             catch error
-                $log.info "DatasetCtrl copy vidatio-link could not be copied"
+                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
                 $log.error
                     error: error
+
+                $translate('TOAST_MESSAGES.LINK_NOT_COPIED')
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 
             window.getSelection().removeAllRanges()
 

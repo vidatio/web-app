@@ -59,7 +59,7 @@ app.controller "VisualizationCtrl", [
                         new vidatio.TimeseriesChart chartData
                     else
                         # TODO: show a default image here
-                        $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
+                        $log.error "VisualizationCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         Progress.setMessage ""
 

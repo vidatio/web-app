@@ -10,28 +10,28 @@
 
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()")
+                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
                         i.fa.fa-plus
-                        |   {{ "EDIT" | translate | uppercase }}
+                        |   {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()')
+                    a#link-dataset.btn.btn-primary(href='#' ng-click="getVidatioLink()")
                         i.fa.fa-link
                         |   {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
-                        a.title.btn.btn-primary(href='#' ng-mouseover="hideLinkToVidatio()")
+                        a.title.btn.btn-primary(href='#')
                             i.fa.fa-download
                             |   {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
-                            li
-                                a(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click='downloadDataset()')
+                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
+                                a
                                     i.fa.fa-file-text-o
                                     |   {{ "DATASET" | translate }}
-                            li
-                                a(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click='downloadImage()')
+                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
+                                a
                                     i.fa.fa-file-image-o
                                     |   {{ "VISUALIZATION" | translate }}
 
