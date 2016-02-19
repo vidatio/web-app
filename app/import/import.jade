@@ -5,13 +5,15 @@
                 #option-empty-table.area
                     a(href="" ng-click="continueToEmptyTable()")
                         .option-icon.icon-table
-                        h4 {{ "EMPTY_TABLE" | translate | uppercase }}
+                        h4 {{ "NEW_VIDATIO" | translate | uppercase }}
+                        span.description-text ({{ "NEW_VIDATIO_DESCRIPTION" | translate }})
 
             .col-sm-6
                 #option-browse-data.area
                     a(ui-sref="app.catalog({ locale: locale })")
                         .option-icon.icon-opendata
-                        h4 {{ "ALL_DATASETS" | translate | uppercase }}
+                        h4 {{ "ALL_VIDATIOS" | translate | uppercase }}
+                        span.description-text ({{ "ALL_VIDATIOS_DESCRIPTION" | translate }})
 
         .row.file-read.layout-3-columns
 
@@ -20,6 +22,7 @@
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
                         h4 {{ "CHOOSE_FILE" | translate | uppercase }}
+                        span.description-text (CSV, SHP)
                         input#input-browse-filesystem(type="file" ng-file-select)
 
             .col-sm-4
@@ -27,6 +30,7 @@
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
                         h4 {{ "DRAG_AND_DROP" | translate | uppercase }}
+                        span.description-text (CSV, SHP)
 
                         .hover-wrapper
                             .area
