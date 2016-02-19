@@ -15,6 +15,7 @@
     "USP": "USP",
     "API": "API",
     "IMPORT": "Import",
+    "USE": "Verwenden",
     "EXPORT": "Export",
     "LIVE_DATA": "Live Data",
     "OPEN_DATA": "Open Data",
@@ -24,6 +25,7 @@
     "DATA": "Daten",
     "DATASET": "Datensatz",
     "VISUALIZATION": "Visualisierung",
+    "DATASET + VISUALIZATION": "Datensatz + Visualisierung",
     "SAVE": "Speichern",
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
