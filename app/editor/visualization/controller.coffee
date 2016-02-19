@@ -112,6 +112,12 @@ app.controller "VisualizationCtrl", [
                 $scope.chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
 
+                for diagram in $scope.supportedDiagrams
+                    console.log("TYPE", diagram.type)
+                    if diagram.type is recommendedDiagram
+                        console.log("NAME:", diagram.name)
+                        $scope.selectedDiagramName = diagram.name
+
                 createDiagram(recommendedDiagram)
 
         $timeout ->
