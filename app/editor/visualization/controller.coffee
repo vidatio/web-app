@@ -40,8 +40,7 @@ app.controller "VisualizationCtrl", [
             }
         ]
 
-        $scope.selectedDiagramName = ""
-        $scope.selectedDiagramType = ""
+        $scope.selectedDiagramName = "Diagrammart"
         $scope.colHeadersSelection = Table.colHeadersSelection
 
         createDiagram = (type) ->
@@ -156,7 +155,5 @@ app.controller "VisualizationCtrl", [
 
         $scope.selectDiagram = (name, type) ->
             $scope.selectedDiagramName = name
-            $scope.selectedDiagramType = type
-            console.log("name:", name)
-            console.log("TYPE:", type)
+            createDiagram(type)
 ]
