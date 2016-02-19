@@ -1,15 +1,18 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
-            .axis-selection
-                p {{ "X_AXIS" | translate }}
+            .axis-selection(ng-if="meta.fileType != 'shp'")
+                p(ng-if="diagramType != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") LAT
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[xAxisCurrent] }}
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
                             a(href="#" ng-click="setXAxisColumnSelection(id)") {{ header}}
-                p {{ "Y_AXIS" | translate }}
+
+                p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") LONG
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[yAxisCurrent] }}
                         span.caret

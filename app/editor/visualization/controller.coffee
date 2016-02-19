@@ -18,6 +18,7 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
         $scope.colHeadersSelection = Table.colHeadersSelection
+        $scope.meta = Data.meta
 
         $scope.setXAxisColumnSelection = (id) ->
             $log.info "Visualization controller setXAxisColumnSelection called"
