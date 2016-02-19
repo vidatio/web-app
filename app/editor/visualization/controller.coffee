@@ -40,6 +40,8 @@ app.controller "VisualizationCtrl", [
             }
         ]
 
+        visualization = null
+        isTransposed = false
         $scope.selectedDiagramName = "Diagrammart"
         $scope.colHeadersSelection = Table.colHeadersSelection
 
@@ -58,11 +60,13 @@ app.controller "VisualizationCtrl", [
                     Map.setGeoJSON geoJSON
                 when "parallel"
                     # Parallel coordinate chart need the columns as rows so we transpose
-                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData
+                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData if !isTransposed
+                    isTransposed = true
                     visualization = new vidatio.ParallelCoordinates $scope.chartData
                 when "bar"
                     # Bar chart need the columns as rows so we transpose
-                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData
+                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData if !isTransposed
+                    isTransposed = true
                     visualization = new vidatio.BarChart $scope.chartData
                 when "timeseries"
                     # Currently default labels for the bars are used
@@ -90,8 +94,6 @@ app.controller "VisualizationCtrl", [
                 chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
-
-        visualization = null
 
         dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
