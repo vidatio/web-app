@@ -6,6 +6,10 @@
                     a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
                         img(src="{{ vidatio.image }}")
 
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })" ng-click="createVidatio(vidatio._id)")
+                        i.fa.fa-plus.edit-icon
+                        |   {{ "CREATE_VIDATIO" | translate | uppercase }}
+
                     .text
                         a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
                             h4.title {{ vidatio.title }}
