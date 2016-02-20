@@ -44,7 +44,8 @@
         "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
-        "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden."
+        "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
+        "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",

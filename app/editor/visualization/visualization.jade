@@ -1,16 +1,14 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
-            #visualization-settings-container
-                .download-button
-                    a(href='#')
-                        i.fa.fa-download.download-icon
-                    ul
-                        li
-                            a(ng-click='shareVisualization("png")') PNG
-
-                        li
-                            a(ng-click='shareVisualization("jpg")') JPG
+            .download-button
+                a(href='#')
+                    i.fa.fa-download.download-icon
+                ul
+                    li
+                        a(ng-click='shareVisualization("png")') PNG
+                    li
+                        a(ng-click='shareVisualization("jpg")') JPG
 
         leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
         #chart(ng-hide="recommendedDiagram == 'map'")

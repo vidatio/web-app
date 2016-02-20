@@ -17,9 +17,9 @@
             border-radius 10px
 
             .download-button
+                float right
                 height 40px
                 width 40px
-                float right
                 z-index 300
                 position relative
                 cursor pointer
@@ -85,32 +85,31 @@
                                 top -24px
                                 z-index 1001
 
+                        & > a
+                            color $color-black
+                            position relative
+                            text-decoration none
+                            white-space nowrap
+                            z-index 302
+                            line-height 30px
+                            font-size 16px
+                            font-weight 700
+
+                        &:hover
+                            & > a
+                                color $color-green
+
+                &:hover
+                    & > ul
+                        display block
 
                     & > a
-                        color $color-black
-                        position relative
-                        text-decoration none
-                        white-space nowrap
-                        z-index 302
-                        line-height 30px
-                        font-size 16px
-                        font-weight 700
+                        background-color $color-hover-light
 
-                    &:hover
-                        & > a
-                            color $color-green
-
-            &:hover
-                & > ul
-                 display block
-
-                & > a
-                    background-color $color-hover-light
-
-            .download-icon
-                color $color-black
-                margin-top 8px
-                font-size 24px
+                .download-icon
+                    color $color-black
+                    margin-top 8px
+                    font-size 24px
 
     .wrapper-content
         max-width 100%
