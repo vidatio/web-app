@@ -185,7 +185,15 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = vidatio.geoParser.findCoordinatesColumns(dataset)
+                indicesCoordinates = vidatio.geoParser.checkHeader()
+                unless indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")
+                    schema = vidatio.recommender.getSchema(dataset)
+                    indexX = schema.indexOf("coordinate")
+                    indexY = schema.indexOf("coordinate", indexX)
+
+                    if indexX > -1 && indexY > -1
+                        indicesCoordinates["x"] = indexX
+                        indicesCoordinates["y"] = indexY
 
                 dataset.forEach (row) ->
                     coordinates = []
