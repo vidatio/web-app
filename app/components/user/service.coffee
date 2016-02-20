@@ -16,8 +16,7 @@ app.service 'UserService', [
             # @method constructor
             # @public
             constructor: ->
-                @user =
-                    name: ""
+                @user = {}
 
             # @method checkUniqueness
             # @public
@@ -31,8 +30,6 @@ app.service 'UserService', [
 
                 params = {}
                 params[key] = escape(value)
-
-                console.log UserUniquenessFactory
 
                 UserUniquenessFactory.check(params).$promise.then (results) ->
                     $log.info "UserService checkUniqueness success (user does not exist)"
@@ -60,24 +57,27 @@ app.service 'UserService', [
                     name: user.name
                     password: user.password
 
-                @setCredentials(user.name, user.password)
                 deferred = $q.defer()
+
+                authData = Base64.encode(user.name + ":" + user.password)
+                $http.defaults.headers.common["Authorization"] = "Basic " + authData
 
                 UserAuthFactory.get().$promise.then (result) =>
                     $log.info "UserService init success called"
                     $log.debug
                         result: result
 
-                    @user = result
-                    $rootScope.globals.authorized = true
+                    @user = result.user
+                    @setCredentials(@user.name, @user.password, @user._id, authData)
+
                     deferred.resolve @user
                 , (error) =>
                     $log.info "UserService init error of authorization called (401)"
                     $log.debug
                         error: error
 
-                    $rootScope.globals.authorized = false
                     @logout()
+
                     deferred.reject error
 
                 deferred.promise
@@ -89,30 +89,32 @@ app.service 'UserService', [
 
                 @user =
                     name: ""
+
                 $rootScope.globals.authorized = undefined
                 delete $rootScope.globals.currentUser
+
                 $cookieStore.remove "globals"
+
                 $http.defaults.headers.common.Authorization = "Basic "
 
             # @method setCredentials
             # @public
             # @param {String} name
             # @param {String} password
-            setCredentials: (name, password) ->
+            setCredentials: (name, password, userID, authData) ->
                 $log.info "UserService setCredentials called"
                 $log.debug
                     name: name
                     password: password
-
-                authData = Base64.encode(name + ":" + password)
+                    userID: userID
 
                 $rootScope.globals =
                     currentUser:
                         name: name
                         authData: authData
-
-                $http.defaults.headers.common["Authorization"] = "Basic " + authData
+                        id: userID
                 $cookieStore.put "globals", $rootScope.globals
+                $rootScope.globals.authorized = true
 
         new User
 ]

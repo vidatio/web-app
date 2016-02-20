@@ -9,77 +9,61 @@ app.controller "VisualizationCtrl", [
     '$scope'
     'TableService'
     'MapService'
-    "ParserService"
-    'leafletData'
     "$timeout"
     "ShareService"
     "DataService"
-    "HelperService"
     "ProgressService"
     "ngToast"
     "$log"
-    ($scope, Table, Map, Parser, leafletData, $timeout, Share, Data, Helper, Progress, ngToast, $log) ->
-        icon =
-            iconUrl: '../images/marker-small.png'
-            iconSize: [25, 30]
-            iconAnchor: [12.5, 30]
-            popupAnchor: [0, -30]
+    "ConverterService"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
+        dataset = Table.getDataset()
+        trimmedDataset = vidatio.helper.trimDataset(dataset)
+        cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
 
-        leafletData.getMap("map").then (map) ->
-            $log.info "VisualizationCtrl leafletData.getMap called"
-            $log.debug
-                message: "VisualizationCtrl leafletData.getMap called"
+        switch Data.meta.fileType
+            when "shp"
+                $scope.recommendedDiagram = "map"
+                Map.setScope $scope
+            else
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
+                $scope.recommendedDiagram = recommendedDiagram
+                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
+                    trimmedDataset.map((value, index) -> value[yColumn])]
 
-            Map.map = map
-            # Timeout is needed to wait for the view to finish render
-            $timeout ->
-                Map.init()
-        , (error) ->
-            $log.error "VisualizationCtrl error on map create"
-            $log.debug
-                message: "VisualizationCtrl error on map create"
-                error: error
+                $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
+                switch recommendedDiagram
+                    when "scatter"
+                        # Currently default labels for the points are used
+                        chartData[0].unshift "A_x"
+                        chartData[1].unshift "A"
+                        new vidatio.ScatterPlot chartData
+                    when "map"
+                        # TODO map dataset and merge parser & recommender
+                        Map.setScope $scope
+                        # Use the hole dataset because we want the other attributes inside the popups
+                        geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
+                        Map.setGeoJSON geoJSON
+                    when "parallel"
+                        # Parallel coordinate chart need the columns as rows so we transpose
+                        chartData = vidatio.helper.transposeDataset chartData
+                        new vidatio.ParallelCoordinates chartData
+                    when "bar"
+                        # Bar chart need the columns as rows so we transpose
+                        chartData = vidatio.helper.transposeDataset chartData
+                        new vidatio.BarChart chartData
+                    when "timeseries"
+                        # Currently default labels for the bars are used
+                        chartData[0].unshift "x"
+                        chartData[1].unshift "A"
+                        new vidatio.TimeseriesChart chartData
+                    else
+                        # TODO: show a default image here
+                        $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
-            ngToast.create
-                content: error
-                className: "danger"
+        Progress.setMessage ""
 
-        $scope.geojson =
-            data: Map.geoJSON
-            style: (feature) ->
-                {}
-            pointToLayer: (feature, latlng) ->
-                new L.marker(latlng, icon: L.icon(icon))
-
-            onEachFeature: (feature, layer) ->
-                # So every markers gets a popup
-                html = ""
-                isFirstAttribute = true
-
-                for property, value of feature.properties
-
-                    if value
-                        if isFirstAttribute
-                            html += "<b>"
-
-                        if Parser.isEmailAddress(value)
-                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if Parser.isPhoneNumber(value)
-                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if Parser.isURL(value)
-                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if value
-                            html += value + "<br>"
-
-                        if isFirstAttribute
-                            html += "</b>"
-                            isFirstAttribute = false
-
-                unless html
-                    html = "Keine Informationen vorhanden"
-
-                layer.bindPopup(html)
-
+        #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type
@@ -103,7 +87,7 @@ app.controller "VisualizationCtrl", [
                 Progress.setMessage ""
 
                 if Data.meta.fileName == ""
-                    fileName = Helper.dateToString(new Date())
+                    fileName = vidatio.helper.dateToString(new Date())
                 else
                     fileName = Data.meta.fileName
 

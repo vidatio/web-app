@@ -10,18 +10,28 @@ describe "Service User", ->
             @http = $http
             @http.defaults.headers.common["Authorization"] = "Basic "
 
-    it 'should have a user without name', ->
-        expect(@UserService.user.name).toEqual("")
+    it 'should have a user without variable', ->
+        expect(@UserService.user).toEqual({})
 
     it 'should set credentials on login', ->
         username = "test"
         password = "secret"
-
-        @UserService.setCredentials username, password
         authData = @Base64.encode username + ":" + password
+        userID = 1
+
+        @UserService.setCredentials username, password, userID, authData
 
         expect(@rootScope.globals.currentUser.authData).toBeTruthy()
         expect(@rootScope.globals.currentUser.authData).toEqual(authData)
+
+    it 'should set the http header on logon try', ->
+        user =
+            name: "test"
+            password: "secret"
+
+        authData = @Base64.encode user.name + ":" + user.password
+
+        @UserService.logon(user)
 
         expect(@http.defaults.headers.common.Authorization).toBeTruthy()
         expect(@http.defaults.headers.common.Authorization).toEqual("Basic " + authData)

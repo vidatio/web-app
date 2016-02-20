@@ -25,6 +25,7 @@
     "OPEN_DATA_DESCRIPTION": "Vidatio ist eine Sammelstelle für frei verfügbare Daten aller Art.",
     "FILE_DROP": "Datei Landeplatz",
     "LINK_TO_FILE": "Link zur Datei",
+    "LINK_TO_SHARE": "Link zum teilen",
     "DATA": "Daten",
     "DATASET": "Datensatz",
     "VISUALIZATION": "Visualisierung",
@@ -35,6 +36,7 @@
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
+        "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
         "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
@@ -45,7 +47,9 @@
         },
         "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
-        "REGISTRATION_SUCCESS": "Registrierung erfolgreich!"
+        "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
+        "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
+        "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -87,6 +91,7 @@
     "LINK": "Link",
     "METADATA": "Metadaten",
     "CODE": "Code",
+    "COPY_LINK": "Link kopieren",
     "INFORMATION-DATASET": "Informationen zum Datensatz",
     "DATASET-DESCRIPTION": "Beschreibung des Datensatzes",
     "DATASET-ORIGIN": "Urheber",
@@ -105,5 +110,11 @@
             "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
+    },
+    "DATE": "Datum",
+    "FROM": "von",
+    "TO": "bis",
+    "FILTER": {
+        "BY_TIME": "Filtern nach Zeit"
     }
 }

@@ -10,10 +10,8 @@ app = angular.module "app.services"
 app.service 'ConverterService', [
     "$timeout"
     "$log"
-    "ParserService"
-    "HelperService"
     "$q"
-    ($timeout, $log, Parser, Helper, $q) ->
+    ($timeout, $log, $q) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -136,7 +134,7 @@ app.service 'ConverterService', [
                     message: "ConverterService convertGeoJSON2ColHeaders called"
                     geoJSON: geoJSON
 
-                colHeaders = []
+                columnHeaders = []
 
                 maxIndex = 0
                 maxSize = 0
@@ -149,14 +147,14 @@ app.service 'ConverterService', [
                         maxIndex = property
 
                 for property, value of geoJSON.features[maxIndex].properties
-                    colHeaders.push property
+                    columnHeaders.push property
 
                 for property, value of geoJSON.features[maxIndex].geometry
                     if property is "bbox" or property is "coordinates"
-                        colHeaders = @addHeaderCols(value, colHeaders, property, 0)
+                        columnHeaders = @addHeaderCols(value, columnHeaders, property, 0)
                     else
-                        colHeaders.push property
-                return colHeaders
+                        columnHeaders.push property
+                return columnHeaders
 
             # Returns the size of a multidimensional array.
             # @method sizeOfMultiArray
@@ -181,26 +179,26 @@ app.service 'ConverterService', [
                     message: "ConverterService convertArrays2GeoJSON called"
                     dataset: dataset
 
-                dataset = Helper.trimDataset(dataset)
+                dataset = vidatio.helper.trimDataset(dataset)
 
                 geoJSON =
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = Parser.findCoordinatesColumns(dataset)
+                indicesCoordinates = vidatio.parser.findCoordinatesColumns(dataset)
 
                 dataset.forEach (row) ->
                     coordinates = []
 
                     # distinguish if coordinates are in the same column or in two different columns
                     if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = Parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
+                        coordinates = vidatio.parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
                     else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
                         # TODO check here also maybe with isCoordinate()
-                        if(Helper.isNumber(latitude) and Helper.isNumber(longitude))
+                        if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
                             coordinates.push(latitude)
                             coordinates.push(longitude)
                     else

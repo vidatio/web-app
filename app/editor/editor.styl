@@ -16,98 +16,95 @@
             margin-bottom 10px
             border-radius 10px
 
-            #visualization-settings-container
-            #table-settings-container
+            .download-button
                 float right
+                height 40px
+                width 40px
+                z-index 300
+                position relative
+                cursor pointer
+                padding 2px
 
-                .download-button
-                    height 40px
-                    width 40px
-                    z-index 300
-                    position relative
-                    cursor pointer
-                    padding 2px
+                & > a
+                    border-radius 4px
+                    display block
+                    height 36px
+                    overflow hidden
+                    width 36px
+                    text-align center
 
-                    & > a
-                        border-radius 4px
-                        display block
-                        height 36px
-                        overflow hidden
-                        width 36px
-                        text-align center
+                ul
+                    background $color-white none repeat scroll 0 0
+                    border 2px solid $color-green
+                    display none
+                    position absolute
+                    width 50px
+                    left -5px
+                    text-align center
+                    list-style outside none none
+                    padding 0
+                    margin-top 12px
+                    border-radius 4px
 
-                    ul
-                        background $color-white none repeat scroll 0 0
-                        border 2px solid $color-green
-                        display none
+                    &::after
+                        border-color transparent transparent $color-white transparent
+                        border-style solid
+                        border-width 10px
+                        content ""
+                        left 14px
                         position absolute
-                        width 50px
-                        left -5px
-                        text-align center
-                        list-style outside none none
-                        padding 0
-                        margin-top 12px
-                        border-radius 4px
+                        top -20px
+                        z-index 1000
 
-                        &::after
-                            border-color transparent transparent $color-white transparent
-                            border-style solid
-                            border-width 10px
-                            content ""
-                            left 14px
-                            position absolute
-                            top -20px
-                            z-index 1000
+                    li
+                        display block
+                        position relative
+                        z-index 301
 
-                        li
-                            display block
-                            position relative
-                            z-index 301
+                        &:first-child
+                            border-bottom 2px solid $color-green
 
-                            &:first-child
-                                border-bottom 2px solid $color-green
+                            &::before
+                                border-color transparent
+                                border-style solid
+                                border-width 6px
+                                content ""
+                                left -2px
+                                width 50px
+                                position absolute
+                                top -12px
+                                z-index 1001
 
-                                &::before
-                                    border-color transparent
-                                    border-style solid
-                                    border-width 6px
-                                    content ""
-                                    left -2px
-                                    width 50px
-                                    position absolute
-                                    top -12px
-                                    z-index 1001
-
-                                &::after
-                                    border-color transparent transparent $color-green transparent
-                                    border-style solid
-                                    border-width 11px
-                                    content ""
-                                    left 13px
-                                    position absolute
-                                    top -24px
-                                    z-index 1001
-
-                            & > a
-                                color $color-black
-                                position relative
-                                text-decoration none
-                                white-space nowrap
-                                z-index 302
-                                line-height 30px
-                                font-size 16px
-                                font-weight 700
-
-                            &:hover
-                                & > a
-                                    color $color-green
-
-                    &:hover
-                        & > ul
-                         display block
+                            &::after
+                                border-color transparent transparent $color-green transparent
+                                border-style solid
+                                border-width 11px
+                                content ""
+                                left 13px
+                                position absolute
+                                top -24px
+                                z-index 1001
 
                         & > a
-                            background-color $color-hover-light
+                            color $color-black
+                            position relative
+                            text-decoration none
+                            white-space nowrap
+                            z-index 302
+                            line-height 30px
+                            font-size 16px
+                            font-weight 700
+
+                        &:hover
+                            & > a
+                                color $color-green
+
+                &:hover
+                    & > ul
+                     display block
+
+                    & > a
+                        background-color $color-hover-light
 
                 .download-icon
                     color $color-black

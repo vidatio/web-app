@@ -10,17 +10,35 @@ app.controller "CatalogCtrl", [
     "$timeout"
     "ProgressService"
     "TableService"
-    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table) ->
+    "$translate"
+    "ngToast"
+    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast) ->
+
+        $scope.dates =
+            from: undefined
+            to: undefined
+            maxDate: moment.tz('UTC').hour(12).startOf('h')
+
+        $scope.maxDate = $scope.dates.maxDate
 
         CatalogFactory.query (response) ->
+            $log.info "CatalogCtrl successfully queried datasets"
+
             $scope.vidatios = response
 
             for vidatio in $scope.vidatios
                 vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+                vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
-            console.error error
+            $log.info "CatalogCtrl error on query datasets"
+            $log.error error
+
+            $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
+                ngToast.create
+                    content: translation
+                    className: "danger"
 
         # create a new Vidatio and get necessary data
         $scope.createVidatio = (datasetId) ->
@@ -41,5 +59,11 @@ app.controller "CatalogCtrl", [
                     Progress.setMessage ""
 
             , (error) ->
-                console.error error
+                $log.info "CatalogCtrl error on get dataset from id"
+                $log.error error
+
+                $translate('TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED').then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 ]

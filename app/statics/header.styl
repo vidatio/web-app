@@ -90,13 +90,10 @@ header
         span
             margin-right 1px
 
-    #back-to-import
-    #save-dataset
-        width 112px
-
     #save-dataset
         float left
         height 40px
+        width 112px
 
     .tab
         border-bottom 4px solid $color-passive
@@ -196,6 +193,41 @@ header
         a#login-button
             font-size 23px
             padding-left 2px
+
+    #link-overlay
+        position absolute
+        top 90px
+        right calc(100vw * 0.01)
+        z-index 310
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 5px 10px 10px 10px
+        text-align right
+        max-width 98%
+
+        p
+            float left
+            margin 0
+
+        .fui-cross
+            background $color-white
+            color $color-grey-dark
+            text-align right
+            &:hover
+                color $color-red
+
+        .form-control
+            border-color $color-grey-dark
+
+        #copy-link
+            background $color-white
+            color $color-grey-dark
+            border 2px solid $color-green
+            margin-top 10px
+            &:hover
+                background $color-hover-light
+                border-color $color-hover-light
 
 @media(max-width: 767px)
     #navigation
