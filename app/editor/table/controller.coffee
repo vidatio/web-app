@@ -10,7 +10,7 @@ app.controller "TableCtrl", [
     "ConverterService"
     ($scope, Table, Data, Map, Converter) ->
         $scope.dataset = Table.dataset
-        $scope.columnHeaders = Table.columnHeaders
+
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
         $('#column-headers-checkbox').radiocheck()
 

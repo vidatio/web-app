@@ -2,9 +2,8 @@
     .content
         .settings-bar
             #header-button
-                label.checkbox(for="column-headers-checkbox")
+                label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset")
-                    | Header
 
             .download-button
                 a(href="#")

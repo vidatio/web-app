@@ -7,6 +7,12 @@ class window.vidatio.Visualization
         vidatio.log.debug
             dataset: @dataset
             chart: @chart
+
     getChart: ->
         vidatio.log.info "Visualization getChart called"
         return @chart
+
+    # TODO: Implement Data-binding
+    updateDataset: (dataset) ->
+        $log.info "Visualization updateDataset called"
+        @dataset = dataset

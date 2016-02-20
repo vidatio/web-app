@@ -10,30 +10,60 @@ app.service 'TableService', [
                 $log.info "TableService constructor called"
 
                 @dataset = [[]]
-                @columnHeaders = []
                 @useColumnHeadersFromDataset = true
+                @colHeadersSelection = []
+                @instanceTable = null
+
+            initAxisSelection: ->
+                $log.info "TableService initAxis called"
+
+                colHeaders = @instanceTable.getColHeader()
+
+                $log.debug
+                    colHeaders: colHeaders
+
+                @setColHeadersSelection colHeaders
+
+            setColHeadersSelection: (colHeaders) ->
+                $log.info "TableService setColHeaderSelection called"
+                $log.debug
+                    colHeaders: colHeaders
+
+                @colHeadersSelection.splice 0, @colHeadersSelection.length
+                colHeaders.forEach (item, index) =>
+                    if item is null
+                        return
+                    @colHeadersSelection[index] = item
+
+            setInstance: (hot) ->
+                $log.info "TableService setInstance called"
+
+                @instanceTable = hot
+
+            getInstance: ->
+                $log.info "TableService getInstance called"
+
+                return @instanceTable
 
             # @method reset
             # @public
             # @param {Boolean} useColumnHeadersFromDataset
-            reset: (useColumnHeadersFromDataset) ->
+            reset: ->
                 $log.info "TableService reset called"
                 @resetDataset()
-                @useColumnHeadersFromDataset = useColumnHeadersFromDataset
                 @resetColumnHeaders()
 
             # @method resetColumnHeaders
             # @public
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
-                @columnHeaders.splice 0, @columnHeaders.length
 
-                if !@useColumnHeadersFromDataset
-                    # Because we want at least 26 columns we fill up the column headers
-                    # TODO whats about datasets with more then 26 columns?
-                    # Maybe use the width of the dataset + 1 for further free fields
-                    for element in [ 0..25 ]
-                        @columnHeaders[element] = String.fromCharCode(65 + element)
+                if @instanceTable
+                    @instanceTable.updateSettings
+                        colHeaders: true
+
+                    @instanceTable.render()
+                    @setColHeadersSelection @instanceTable.getColHeader()
 
             # @method setColumnHeaders
             # @public
@@ -44,12 +74,12 @@ app.service 'TableService', [
                     message: "TableService setColumnHeaders called"
                     columnHeaders: columnHeaders
 
-                @resetColumnHeaders()
+                if @instanceTable
+                    @instanceTable.updateSettings
+                        colHeaders: columnHeaders
 
-                # because we want to the keep the data binding
-                # we can't assign the array, but we can exchange the items
-                columnHeaders.forEach (item, index) =>
-                    @columnHeaders[index] = item
+                    @instanceTable.render()
+                    @setColHeadersSelection columnHeaders
 
             # @method takeColumnHeadersFromDataset
             # @public
@@ -57,24 +87,13 @@ app.service 'TableService', [
                 $log.info "TableService takeColumnHeadersFromDataset called"
                 columnHeaders = @dataset.splice(0, 1)[0]
                 @setColumnHeaders columnHeaders
-                @useColumnHeadersFromDataset = true
 
             # @method putColumnHeadersBackToDataset
             # @public
             putColumnHeadersBackToDataset: ->
                 $log.info "TableService putColumnHeadersBackToDataset called"
 
-                # Before removing column headers delivered by the dataset
-                # we want to set them back to the rows inside the table
-                if @useColumnHeadersFromDataset
-                    # because we use data binding we can't unshift the array
-                    # but we can push a new array with the items
-                    tmp = []
-                    @columnHeaders.forEach (item, index) ->
-                        tmp[index] = item
-                    @dataset.unshift tmp
-                    @useColumnHeadersFromDataset = false
-
+                @dataset.unshift @instanceTable.getColHeader()
                 @resetColumnHeaders()
 
             resetDataset: ->

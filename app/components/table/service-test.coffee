@@ -32,50 +32,9 @@ describe "Service Table", ->
         @Table.setCell(1, 1, 90)
         expect(@Table.dataset[1][1]).toEqual 90
 
-    it 'should reset the column headers', ->
-        @Table.columnHeaders = ["A", "B"]
-        @Table.resetColumnHeaders()
-
-        expect(@Table.columnHeaders).toEqual []
-        expect(@Table.columnHeaders).not.toBe []
-
-        @Table.columnHeaders = ["A", "B"]
-        @Table.useColumnHeadersFromDataset = true
-        @Table.resetColumnHeaders()
-
-        expect(@Table.columnHeaders).toEqual []
-
-        @Table.columnHeaders = ["test", "test"]
-        @Table.useColumnHeadersFromDataset = false
-        @Table.resetColumnHeaders()
-
-        expect(@Table.columnHeaders).toContain "A"
-        expect(@Table.columnHeaders).toContain "Z"
-        expect(@Table.columnHeaders).not.toContain "A1"
-
-    it 'should set the column headers', ->
-        columnHeaders = ["test", "test"]
-        @Table.setColumnHeaders columnHeaders
-
-        expect(@Table.columnHeaders).toContain "test"
-        expect(@Table.columnHeaders).not.toContain "A"
-
     it 'should take the first line of the dataset for the column headers', ->
         @Table.dataset = [["h1", "h2"], ["c1", "c2"]]
         @Table.takeColumnHeadersFromDataset()
 
-        expect(@Table.columnHeaders).toEqual ["h1", "h2"]
-        expect(@Table.columnHeaders).not.toContain "A"
         expect(@Table.dataset[0]).not.toContain "h1"
         expect(@Table.dataset[0]).toContain "c1"
-
-    it 'should put the column headers back the the dataset', ->
-        @Table.columnHeaders = ["h1", "h2"]
-        @Table.dataset = [["c1", "c2"]]
-        @Table.putColumnHeadersBackToDataset()
-
-        expect(@Table.columnHeaders).toContain "A"
-        expect(@Table.columnHeaders).toContain "Z"
-        expect(@Table.columnHeaders).not.toContain "h1"
-        expect(@Table.dataset[0]).toContain "h1"
-        expect(@Table.dataset[0]).not.toContain "c1"

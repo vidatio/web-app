@@ -102,10 +102,14 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
+    "X_AXIS": "X-Achse",
+    "Y_AXIS": "Y-Achse",
+    "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
     "FILTER": {
         "BY_TIME": "Filtern nach Zeit"
-    }
+    },
+    "HEADER": "Kopfzeile"
 }

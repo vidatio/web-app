@@ -5,7 +5,8 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
-    ($timeout, $log, Data) ->
+    "TableService"
+    ($timeout, $log, Data, Table) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -21,7 +22,7 @@ app.directive 'hot', [
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: $scope.columnHeaders
+                colHeaders: true
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
@@ -50,6 +51,9 @@ app.directive 'hot', [
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
             )
+
+            Table.setInstance hot
+            Table.initAxisSelection()
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

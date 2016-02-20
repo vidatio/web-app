@@ -9,7 +9,8 @@ app.controller "EditorCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    ($scope, $rootScope, $log) ->
+    "TableService"
+    ($scope, $rootScope, $log, Table) ->
         # watch if activeViews in change (defined in headerController.coffee)
         # $watch takes two callbacks (watchExpression and Listener);
         # see Angular.js Docs for more info!
