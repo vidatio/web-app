@@ -18,7 +18,6 @@ app.service 'TableService', [
                 $log.info "TableService initAxis called"
 
                 colHeaders = @instanceTable.getColHeader()
-
                 $log.debug
                     colHeaders: colHeaders
 
@@ -37,13 +36,19 @@ app.service 'TableService', [
 
             setInstance: (hot) ->
                 $log.info "TableService setInstance called"
-
                 @instanceTable = hot
 
             getInstance: ->
                 $log.info "TableService getInstance called"
-
                 return @instanceTable
+
+            getColumnHeaders: ->
+                $log.info "TableService getColumnHeaders called"
+
+                if @useColumnHeadersFromDataset
+                    return @instanceTable.getColHeader()
+                else
+                    return []
 
             # @method reset
             # @public
@@ -59,11 +64,13 @@ app.service 'TableService', [
                 $log.info "TableService resetColumnHeaders called"
 
                 if @instanceTable
+                    @useColumnHeadersFromDataset = false
                     @instanceTable.updateSettings
                         colHeaders: true
-
                     @instanceTable.render()
                     @setColHeadersSelection @instanceTable.getColHeader()
+                else
+                    $log.error "TableService setColumnHeaders instanceTable is not defined"
 
             # @method setColumnHeaders
             # @public
@@ -75,11 +82,13 @@ app.service 'TableService', [
                     columnHeaders: columnHeaders
 
                 if @instanceTable
+                    @useColumnHeadersFromDataset = true
                     @instanceTable.updateSettings
                         colHeaders: columnHeaders
-
                     @instanceTable.render()
                     @setColHeadersSelection columnHeaders
+                else
+                    $log.error "TableService setColumnHeaders instanceTable is not defined"
 
             # @method takeColumnHeadersFromDataset
             # @public

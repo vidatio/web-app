@@ -11,7 +11,8 @@ app.service 'ConverterService', [
     "$timeout"
     "$log"
     "$q"
-    ($timeout, $log, $q) ->
+    "TableService"
+    ($timeout, $log, $q, Table) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -173,7 +174,7 @@ app.service 'ConverterService', [
             # @public
             # @param {Array} dataset
             # @return {GeoJSON}
-            convertArrays2GeoJSON: (dataset) ->
+            convertArrays2GeoJSON: (dataset = [], header = []) ->
                 $log.info "ConverterService convertArrays2GeoJSON called"
                 $log.debug
                     message: "ConverterService convertArrays2GeoJSON called"
@@ -185,11 +186,12 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = vidatio.geoParser.checkHeader()
+                indicesCoordinates = vidatio.geoParser.checkHeader(header)
                 unless indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")
-                    schema = vidatio.recommender.getSchema(dataset)
+                    transposedDataset = vidatio.helper.transposeDataset dataset
+                    schema = vidatio.recommender.getSchema transposedDataset
                     indexX = schema.indexOf("coordinate")
-                    indexY = schema.indexOf("coordinate", indexX)
+                    indexY = schema.indexOf("coordinate", indexX + 1)
 
                     if indexX > -1 && indexY > -1
                         indicesCoordinates["x"] = indexX

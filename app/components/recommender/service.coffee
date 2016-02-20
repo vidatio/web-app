@@ -83,12 +83,12 @@ class window.vidatio.Recommender
 
         # We can recognize geo datasets via headers
         # Se we first check the header
-        headerResult = vidatio.geoParser.checkHeader(header)
+        coordinateIndices = vidatio.geoParser.checkHeader(header)
 
-        if headerResult.success
+        if coordinateIndices.hasOwnProperty("x") and coordinateIndices.hasOwnProperty("x") or coordinateIndices.hasOwnProperty("xy")
             type = "coordinate coordinate"
-            xIndex = headerResult.x
-            yIndex = headerResult.y
+            xIndex = coordinateIndices.x
+            yIndex = coordinateIndices.y
 
             # For other datasets and geo datasets without headers
             # We classify the columns the the content

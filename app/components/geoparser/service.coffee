@@ -40,12 +40,13 @@ class window.vidatio.GeoParser
         indicesCoordinates = {}
 
         for cell, index in header
-
             if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty["y"] or indicesCoordinates.hasOwnProperty["xy"]
                 break
 
+            unless cell
+                break
+
             headerColumnIndex = _checkWhiteList.call(this, cell)
-            console.log cell, headerColumnIndex
             if headerColumnIndex
                 indicesCoordinates[headerColumnIndex] = index
 

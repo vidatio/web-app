@@ -13,7 +13,7 @@ app.directive 'hot', [
         scope:
             dataset: '='
             activeViews: '='
-            columnHeaders: '='
+            useColumnHeadersFromDataset: '='
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
@@ -50,10 +50,14 @@ app.directive 'hot', [
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
+                afterInit: ->
+
             )
 
             Table.setInstance hot
             Table.initAxisSelection()
+            if Table.useColumnHeadersFromDataset
+                Table.takeColumnHeadersFromDataset()
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

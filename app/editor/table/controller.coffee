@@ -8,7 +8,8 @@ app.controller "TableCtrl", [
     "DataService"
     "MapService"
     "ConverterService"
-    ($scope, Table, Data, Map, Converter) ->
+    "$timeout"
+    ($scope, Table, Data, Map, Converter, $timeout) ->
         $scope.dataset = Table.dataset
 
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
@@ -23,13 +24,10 @@ app.controller "TableCtrl", [
         else
             $('#header-button').show()
 
-        $scope.$watch ->
-            $scope.useColumnHeadersFromDataset
-        , ->
+        $scope.changeUseOfHeader = ->
             if Data.meta.fileType != "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeColumnHeadersFromDataset()
                 else
                     Table.putColumnHeadersBackToDataset()
-        , true
 ]

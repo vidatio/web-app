@@ -34,8 +34,8 @@ app.controller "VisualizationCtrl", [
             $log.info "Visualization controller changeAxisColumnSelection called"
 
             if $scope.diagramType? and $scope.diagramType isnt "map"
-                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
-                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
+                chartData = [focusedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
+                    focusedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
 
         visualization = null
@@ -48,15 +48,16 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
+                # FIXME gets called to early
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run focusedDataset, Table.getColumnHeaders()
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 $scope.diagramType = recommendedDiagram
 
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
 
-                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
-                    trimmedDataset.map((value, index) -> value[yColumn])]
+                chartData = [focusedDataset.map((value, index) -> value[xColumn]),
+                    focusedDataset.map((value, index) -> value[yColumn])]
 
                 switch recommendedDiagram
                     when "scatter"
@@ -68,7 +69,7 @@ app.controller "VisualizationCtrl", [
                         # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
                         # Use the hole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON focusedDataset
+                        geoJSON = Converter.convertArrays2GeoJSON focusedDataset, Table.getColumnHeaders()
                         Map.setGeoJSON geoJSON
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose

@@ -3,7 +3,7 @@
         .settings-bar
             #header-button
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
-                    input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset")
+                    input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="changeUseOfHeader()")
 
             .download-button
                 a(href="#")
