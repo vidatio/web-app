@@ -32,7 +32,7 @@ app.controller "DatasetCtrl", [
         datasetId = $stateParams.id
         $scope.information = []
 
-        # get dataset according to datasetId (if possible) and set necessary metadata
+        # get dataset according to datasetId and set necessary metadata
         DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
             console.log data
@@ -68,7 +68,7 @@ app.controller "DatasetCtrl", [
 
         # create a new Vidatio and set necessary data
         $scope.createVidatio = ->
-            $log.info "DatasetCtrl editDataset called"
+            $log.info "DatasetCtrl createVidatio called"
             $log.debug
                 id: datasetId
                 name: $scope.data.name
@@ -90,7 +90,7 @@ app.controller "DatasetCtrl", [
 
         # toggle link-overlay with vidatio-link
         $scope.getVidatioLink = ->
-            $log.info "DatasetCtrl getLinkDataset called"
+            $log.info "DatasetCtrl getVidatioLink called"
             $log.debug
                 id: datasetId
                 link: $rootScope.link
