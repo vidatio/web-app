@@ -20,16 +20,21 @@ app.controller "VisualizationCtrl", [
         $scope.colHeadersSelection = Table.colHeadersSelection
         $scope.meta = Data.meta
 
+        # @method setXAxisColumnSelection
+        # @param {Number} id
         $scope.setXAxisColumnSelection = (id) ->
             $log.info "Visualization controller setXAxisColumnSelection called"
             $scope.xAxisCurrent = id
             $scope.changeAxisColumnSelection()
 
+        # @method setYAxisColumnSelection
+        # @param {Number} id
         $scope.setYAxisColumnSelection = (id) ->
             $log.info "Visualization controller setYAxisColumnSelection called"
             $scope.yAxisCurrent = id
             $scope.changeAxisColumnSelection()
 
+        # @method changeAxisColumnSelection
         $scope.changeAxisColumnSelection = ->
             $log.info "Visualization controller changeAxisColumnSelection called"
 
