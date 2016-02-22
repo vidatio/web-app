@@ -106,6 +106,8 @@ header.ng-cloak
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-3.logo
                     a#logo.button(ui-sref="app.index({ locale: locale })")
+                    a#back-to-import.button.icon-return-2(ui-sref='app.import({ locale: locale })')
+                        span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.middle
                     h1.underline-red {{ "ALL_VIDATIOS" | translate | uppercase }}
