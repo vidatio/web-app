@@ -10,9 +10,7 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview(ui-sref='app.catalog({ locale: locale })')
-                        i.fa.fa-reply.back-icon
-                        span {{ "OVERVIEW" | translate | uppercase }}
+                    a#back-to-datasets-overview.button.icon-return-2(ui-sref='app.catalog({ locale: locale })')
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
