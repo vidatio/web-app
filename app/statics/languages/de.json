@@ -111,5 +111,7 @@
     "FILTER": {
         "BY_TIME": "Filtern nach Zeit"
     },
-    "HEADER": "Kopfzeile"
+    "HEADER": "Kopfzeile",
+    "LONGITUDE": "Long",
+    "LATITUDE": "Lat"
 }

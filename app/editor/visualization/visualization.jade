@@ -3,7 +3,7 @@
         .settings-bar
             .axis-selection(ng-if="meta.fileType != 'shp'")
                 p(ng-if="diagramType != 'map'") {{ "X_AXIS" | translate }}
-                p(ng-if="diagramType == 'map'") LAT
+                p(ng-if="diagramType == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[xAxisCurrent] }}
                         span.caret
@@ -12,7 +12,7 @@
                             a(href="#" ng-click="setXAxisColumnSelection(id)") {{ header}}
 
                 p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
-                p(ng-if="diagramType == 'map'") LONG
+                p(ng-if="diagramType == 'map'") {{ "LATITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[yAxisCurrent] }}
                         span.caret
