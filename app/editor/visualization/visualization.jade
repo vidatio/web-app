@@ -22,7 +22,9 @@
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="diagram in supportedDiagrams")
-                            a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)") {{ diagram.name }}
+                            a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)")
+                                img.graph-icon(src="{{ diagram.imagePath }}")
+                                | {{ diagram.name }}
             .download-button
                 a(href='#')
                 ul

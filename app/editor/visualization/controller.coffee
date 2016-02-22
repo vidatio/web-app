@@ -21,10 +21,12 @@ app.controller "VisualizationCtrl", [
             {
                 name: "Scatterplot"
                 type: "scatter"
+                imagePath: "/images/diagram-icons/scatter-plot.svg"
             }
             {
                 name: "Map"
                 type: "map"
+                imagePath: "/images/diagram-icons/map.svg"
             }
             {
                 name: "Parallel Coordinates"
@@ -33,10 +35,12 @@ app.controller "VisualizationCtrl", [
             {
                 name: "Barchart"
                 type: "bar"
+                imagePath: "/images/diagram-icons/bar-chart.svg"
             }
             {
                 name: "Timeseries chart"
                 type: "timeseries"
+                imagePath: "/images/diagram-icons/line-chart.svg"
             }
         ]
 
