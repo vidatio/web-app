@@ -11,41 +11,41 @@
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
                     a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
-                        i.fa.fa-plus
-                        |   {{ "CREATE_VIDATIO" | translate | uppercase }}
+                        span.icon-plus
+                        span  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     a#link-dataset.btn.btn-primary(href='#' ng-click="getVidatioLink()")
-                        i.fa.fa-link
-                        |   {{ "LINK" | translate | uppercase }}
+                        span.icon-link
+                        span  {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
-                            i.fa.fa-download
-                            |   {{ "DOWNLOAD" | translate | uppercase }}
+                            span.icon-download-3
+                            span  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
                             li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
                                 a
-                                    i.fa.fa-file-text-o
-                                    |   {{ "DATASET" | translate }}
+                                    span.icon-download-dataset
+                                    span  {{ "DATASET" | translate }}
                             li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
                                 a
-                                    i.fa.fa-file-image-o
-                                    |   {{ "VISUALIZATION" | translate }}
+                                    span.icon-download-visualization
+                                    span  {{ "VISUALIZATION" | translate }}
 
                 .col-xs-12
                     #vidatio-link-overlay(ng-show="$root.showVidatioLink")
                         p
-                            i.fa.fa-link.link-icon-overlay
-                            |   {{ "LINK_TO_SHARE" | translate }}
+                            span.icon-link.link-icon-overlay
+                            span  {{ "LINK_TO_SHARE" | translate }}
                         a.fui-cross(href="#" ng-click="hideLinkToVidatio()")
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
                         a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
-                            i.fa.fa-clipboard
-                            |   {{"COPY_LINK" | translate | uppercase }}
+                            span.icon-copy-clipboard
+                            span  {{"COPY_LINK" | translate | uppercase }}
 
     .row
         .col-sm-12
