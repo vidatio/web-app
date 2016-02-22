@@ -83,18 +83,20 @@ header
                 border-width 10px
                 margin-left -10px
 
-    a#login-button
-    a#menu
-    a#back-to-import
-        color $color-black
-        line-height 38px
+    #back-to-datasets-overview
+    #back-to-import
+        float left
+        margin-left 60px
         text-align center
-        width 38px
-        height 38px
+        color $color-black
+        line-height 42px
+        font-size 26px
+        width 42px
+        height 42px
         border-radius 4px
-
-        &.menu-active
-            color $color-green !important
+        top -5px
+        position relative
+        cursor pointer
 
         &:hover, &:focus
             color $color-grey-light
@@ -103,16 +105,13 @@ header
         &:active
             color $color-green
 
-        &.menu-active
-            color $color-green !important
-
         span
             display block
             position relative
             color $color-black
             font-size 10px
             font-family Colaborate,Arial,Helvetica,sans-serif
-            top -12px
+            top -16px
 
     .menu-buttons
         height 42px
@@ -121,34 +120,50 @@ header
         div
             display inline
             position relative
-            top -7px
+            top -5px
 
-            a#login-button
-            a#menu
-                margin-top 2px
-                display inline-block
-                margin-left 3px
+        a#login-button
+        a#menu
+            color $color-black
+            line-height 42px
+            vertical-align middle
+            text-align center
+            width 42px
+            height 42px
+            display inline-block
+            margin-left 3px
+            border-radius 4px
 
-        #login-button
-        #logout-button
-            span
-                left -2px
+            &:hover, &:focus
+                color $color-grey-light
+                background-color $color-passive
+
+            &:active
+                color $color-green
+
+            &.menu-active
+                color $color-green !important
+
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
 
         a#menu
             font-size 20px
+
+            span
+                top -16px
 
         a#login-button
             font-size 23px
             padding-left 2px
 
-    #back-to-import
-        float left
-        margin-left 60px
-        margin-top -5px
-        font-size 28px
-
-        span
-            margin-left -1px
+            span
+                top -15px
+                margin-left -2px
 
     #link-overlay
         position absolute
