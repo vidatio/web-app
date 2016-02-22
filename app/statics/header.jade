@@ -109,7 +109,8 @@ header.ng-cloak
                         span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.middle
-                    h1.underline-red {{ "ALL_VIDATIOS" | translate | uppercase }}
+                    h1.underline-turqoise.catalog-title {{ "ALL_VIDATIOS" | translate | uppercase }}
+
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
@@ -135,4 +136,3 @@ header.ng-cloak
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
                             span {{ "MENU" | translate | uppercase }}
-
