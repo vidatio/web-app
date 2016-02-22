@@ -67,6 +67,7 @@
             &:hover
                 .option-icon
                 h4
+                .description-text
                     display none
 
                 .hover-wrapper
@@ -108,6 +109,14 @@
                 width 80%
                 margin 0 auto
 
+                &:hover
+                    .form-control
+                        border-color $color-grey
+
+                .form-control
+                    &:hover
+                        border-color $color-green
+
         .other, .file-read
             margin-bottom 56px
 
@@ -130,6 +139,12 @@
 
         #link-submit-button
             top 0
+
+            &:hover
+            &:active
+            &:focus
+                border-color $color-hover-dark
+                background-color $color-hover-dark
 
     #drop-zone
         display none
@@ -167,4 +182,3 @@
             position fixed
             z-index: 999
             {overlayParent}
-
