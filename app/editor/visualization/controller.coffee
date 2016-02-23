@@ -22,6 +22,7 @@ app.controller "VisualizationCtrl", [
         visualization = undefined
         isTransposed = false
         recommendedDiagram = undefined
+        $scope.colHeadersSelection = Table.colHeadersSelection
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -64,8 +65,9 @@ app.controller "VisualizationCtrl", [
                 if diagram.type is recommendedDiagram
                     $scope.selectedDiagramName = diagram.name
 
-        $scope.colHeadersSelection = Table.colHeadersSelection
-
+        # create a new diagram based on the recommended diagram
+        # @method createDiagram
+        # @param {String} type
         createDiagram = (type) ->
             switch type
                 when "scatter"
