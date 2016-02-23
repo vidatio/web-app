@@ -132,6 +132,8 @@ header
             top -5px
 
         a#login-button
+        a#logout-button
+        a#profile-button
         a#menu
             color $color-black
             line-height 42px
@@ -142,6 +144,7 @@ header
             display inline-block
             margin-left 3px
             border-radius 4px
+            cursor pointer
 
             &:hover, &:focus
                 color $color-grey-light
@@ -167,12 +170,31 @@ header
                 top -16px
 
         a#login-button
+        a#logout-button
+            font-size 24px
+            padding-left 2px
+
+            span
+                margin-left -2px
+
+        a#login-button
+            &:before
+                margin-left 3px
+
+            span
+                top -16px
+
+        a#logout-button
+            span
+                top -16px
+
+        a#profile-button
             font-size 23px
             padding-left 2px
 
             span
-                top -15px
                 margin-left -2px
+                top -15px
 
     #link-overlay
         position absolute
