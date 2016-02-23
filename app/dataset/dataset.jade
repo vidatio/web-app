@@ -73,10 +73,10 @@
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
-                    .dataset-created.info {{ info.created }}
+                    .dataset-created.info {{ info.created | date: "dd.MM.yyyy" }}
                 .one-row
                     .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-update.info {{ info.updated }}
+                    .dataset-update.info {{ info.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:

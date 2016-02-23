@@ -35,9 +35,8 @@ app.controller "DatasetCtrl", [
         # get dataset according to datasetId and set necessary metadata
         DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
-            console.log data
-            updated = convertDates($scope.data.updatedAt)
-            created = convertDates($scope.data.createdAt)
+            updated = new Date($scope.data.updatedAt)
+            created = new Date($scope.data.createdAt)
             tags = $scope.data.tags || "-"
             format = "geoJSON"
             category = $scope.data.category || "-"
@@ -141,13 +140,4 @@ app.controller "DatasetCtrl", [
                         className: "danger"
 
             window.getSelection().removeAllRanges()
-
-        # convert available dates to locale date-format and display only the date (without time)
-        convertDates = (date) ->
-            if date == undefined
-                return "-"
-
-            current = (new Date date).toLocaleString()
-            current = current.split ','
-            return current[0]
 ]
