@@ -47,10 +47,10 @@ class window.vidatio.Helper
     # @public
     # @param {Array} dataset
     # @return {Array}
-    cutDataset: (dataset) ->
-        vidatio.log.info "HelperService cutDataset called"
+    getSubset: (dataset) ->
+        vidatio.log.info "HelperService getSubset called"
         vidatio.log.debug
-            message: "HelperService cutDataset called"
+            message: "HelperService getSubset called"
             dataset: dataset
 
         tmp = []

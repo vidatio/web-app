@@ -39,6 +39,10 @@ app.controller "VisualizationCtrl", [
             $log.info "Visualization controller changeAxisColumnSelection called"
 
             if $scope.diagramType? and $scope.diagramType isnt "map"
+                # trimmedDataset: 2D dataset
+                # value: row of the 2D dataset
+                # value[$scope.xAxisCurrent]: cell of row
+                # map: collects the cells of the selected columns
                 chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
@@ -47,14 +51,14 @@ app.controller "VisualizationCtrl", [
 
         dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
-        cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
+        subset = vidatio.helper.getSubset(trimmedDataset)
 
         switch Data.meta.fileType
             when "shp"
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, dataset
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 $scope.diagramType = recommendedDiagram
 
