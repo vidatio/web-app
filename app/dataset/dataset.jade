@@ -10,20 +10,20 @@
 
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
-                        span.icon-plus
-                        span  {{ "CREATE_VIDATIO" | translate | uppercase }}
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
+                        span.icon-new-vidatio.icons
+                        span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     a#link-dataset.btn.btn-primary(href='#' ng-click="getVidatioLink()")
-                        span.icon-link
-                        span  {{ "LINK" | translate | uppercase }}
+                        span.icon-link.icons
+                        span.button-text  {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
-                            span.icon-download-3
-                            span  {{ "DOWNLOAD" | translate | uppercase }}
+                            span.icon-download-3.icons
+                            span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
                             li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
@@ -44,8 +44,8 @@
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
                         a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
-                            span.icon-copy-clipboard
-                            span  {{"COPY_LINK" | translate | uppercase }}
+                            span.icon-copy-clipboard.icons
+                            span.button-text  {{"COPY_LINK" | translate | uppercase }}
 
     .row
         .col-sm-12

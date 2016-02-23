@@ -25,7 +25,14 @@
     .buttons-first-row
         margin -23px -15px 50px -15px
 
-        #edit-dataset
+        .icons
+            font-size 20px
+
+        .button-text
+            position relative
+            top -1px
+
+        #create-vidatio
         #link-dataset
         #download-dataset
             width 170px
@@ -115,9 +122,6 @@
                         font-size 16px
                         font-weight 500
                         margin-left 25px
-
-                        i
-                            margin-top 10px
 
                     &:hover
                         & > a
@@ -217,16 +221,18 @@
 @media (max-width: 767px)
     #dataset-view
         .buttons-first-row
-            #edit-dataset
+            .icons
+                font-size 14px
+
+            #create-vidatio
+                padding-left 4px
+
+            #create-vidatio
             #download-dataset
             #link-dataset
                 width 117px
                 font-size 12px
                 line-height 26px
-
-            #edit-dataset
-                .fa
-                    margin-left -9px
 
             #download-dataset
                 a.title
