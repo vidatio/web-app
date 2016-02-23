@@ -186,10 +186,14 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
+                console.log header
                 indicesCoordinates = vidatio.geoParser.checkHeader(header)
+                console.log "HEADER called", indicesCoordinates
                 unless indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")
                     transposedDataset = vidatio.helper.transposeDataset dataset
+                    console.log "HELPER called", transposedDataset
                     schema = vidatio.recommender.getSchema transposedDataset
+                    console.log "RECOMMENDER called", schema
                     indexX = schema.indexOf("coordinate")
                     indexY = schema.indexOf("coordinate", indexX + 1)
 

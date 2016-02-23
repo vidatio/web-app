@@ -31,6 +31,11 @@ describe "Service GeoParser", ->
             y: 2
         expect(@Parser.checkHeader(header)).toEqual(result)
 
+        header = []
+        result = {}
+        expect(@Parser.checkHeader(header)).toEqual(result)
+
+
     it 'should extract the coordinates from one cell', ->
         cell = "42.23 23.902 180.001 21 test"
         expect(@Parser.extractCoordinatesOfOneCell(cell)).toContain("42.23")
