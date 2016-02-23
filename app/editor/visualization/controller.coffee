@@ -16,37 +16,54 @@ app.controller "VisualizationCtrl", [
     "ngToast"
     "$log"
     "ConverterService"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter) ->
-        $scope.supportedDiagrams = [
-            {
-                name: "Scatterplot"
-                type: "scatter"
-                imagePath: "/images/diagram-icons/scatter-plot.svg"
-            }
-            {
-                name: "Map"
-                type: "map"
-                imagePath: "/images/diagram-icons/map.svg"
-            }
-            {
-                name: "Parallel Coordinates"
-                type: "parallel"
-            }
-            {
-                name: "Barchart"
-                type: "bar"
-                imagePath: "/images/diagram-icons/bar-chart.svg"
-            }
-            {
-                name: "Timeseries chart"
-                type: "timeseries"
-                imagePath: "/images/diagram-icons/line-chart.svg"
-            }
-        ]
+    "$translate"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
 
-        visualization = null
+        visualization = undefined
         isTransposed = false
-        $scope.selectedDiagramName = "Diagrammart"
+        recommendedDiagram = undefined
+
+        $translate([
+            "DIAGRAMS.DIAGRAM_TYPE"
+            "DIAGRAMS.SCATTER_PLOT"
+            "DIAGRAMS.MAP"
+            "DIAGRAMS.PARALLEL_COORDINATES"
+            "DIAGRAMS.BAR_CHART"
+            "DIAGRAMS.TIME_SERIES"
+        ]).then (translations) ->
+            $scope.selectedDiagramName = translations["DIAGRAMS.DIAGRAM_TYPE"]
+            $scope.supportedDiagrams = [
+                {
+                    name: translations["DIAGRAMS.SCATTER_PLOT"]
+                    type: "scatter"
+                    imagePath: "/images/diagram-icons/scatter-plot.svg"
+                }
+                {
+                    name: translations["DIAGRAMS.MAP"]
+                    type: "map"
+                    imagePath: "/images/diagram-icons/map.svg"
+                }
+                {
+                    name: translations["DIAGRAMS.PARALLEL_COORDINATES"]
+                    type: "parallel"
+                }
+                {
+                    name: translations["DIAGRAMS.BAR_CHART"]
+                    type: "bar"
+                    imagePath: "/images/diagram-icons/bar-chart.svg"
+                }
+                {
+                    name: translations["DIAGRAMS.TIME_SERIES"]
+                    type: "timeseries"
+                    imagePath: "/images/diagram-icons/line-chart.svg"
+                }
+            ]
+            return $scope.supportedDiagrams
+        .then (supportedDiagrams) ->
+            for diagram in supportedDiagrams
+                if diagram.type is recommendedDiagram
+                    $scope.selectedDiagramName = diagram.name
+
         $scope.colHeadersSelection = Table.colHeadersSelection
 
         createDiagram = (type) ->
@@ -117,12 +134,6 @@ app.controller "VisualizationCtrl", [
 
                 $scope.chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
-
-                for diagram in $scope.supportedDiagrams
-                    console.log("TYPE", diagram.type)
-                    if diagram.type is recommendedDiagram
-                        console.log("NAME:", diagram.name)
-                        $scope.selectedDiagramName = diagram.name
 
                 createDiagram(recommendedDiagram)
 

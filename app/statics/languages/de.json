@@ -111,5 +111,13 @@
     "FILTER": {
         "BY_TIME": "Filtern nach Zeit"
     },
-    "HEADER": "Kopfzeile"
+    "HEADER": "Kopfzeile",
+    "DIAGRAMS": {
+        "DIAGRAM_TYPE": "Diagrammart",
+        "SCATTER_PLOT": "Scatter Plot",
+        "MAP": "Karte",
+        "PARALLEL_COORDINATES": "Parallel Coordinates",
+        "BAR_CHART": "Balkendiagramm",
+        "TIME_SERIES": "Zeitlicher Verlauf"
+    }
 }
