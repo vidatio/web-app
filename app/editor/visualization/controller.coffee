@@ -23,6 +23,7 @@ app.controller "VisualizationCtrl", [
         isTransposed = false
         recommendedDiagram = undefined
         $scope.colHeadersSelection = Table.colHeadersSelection
+        chartData = undefined
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -72,9 +73,9 @@ app.controller "VisualizationCtrl", [
             switch type
                 when "scatter"
                     # Currently default labels for the points are used
-                    $scope.chartData[0].unshift "A_x"
-                    $scope.chartData[1].unshift "A"
-                    visualization = new vidatio.ScatterPlot $scope.chartData
+                    chartData[0].unshift "A_x"
+                    chartData[1].unshift "A"
+                    visualization = new vidatio.ScatterPlot chartData
                 when "map"
                     # TODO map dataset and merge parser & recommender
                     Map.setScope $scope
@@ -83,19 +84,19 @@ app.controller "VisualizationCtrl", [
                     Map.setGeoJSON geoJSON
                 when "parallel"
                     # Parallel coordinate chart need the columns as rows so we transpose
-                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData if !isTransposed
+                    chartData = vidatio.helper.transposeDataset chartData if !isTransposed
                     isTransposed = true
-                    visualization = new vidatio.ParallelCoordinates $scope.chartData
+                    visualization = new vidatio.ParallelCoordinates chartData
                 when "bar"
                     # Bar chart need the columns as rows so we transpose
-                    $scope.chartData = vidatio.helper.transposeDataset $scope.chartData if !isTransposed
+                    chartData = vidatio.helper.transposeDataset chartData if !isTransposed
                     isTransposed = true
-                    visualization = new vidatio.BarChart $scope.chartData
+                    visualization = new vidatio.BarChart chartData
                 when "timeseries"
                     # Currently default labels for the bars are used
-                    $scope.chartData[0].unshift "x"
-                    $scope.chartData[1].unshift "A"
-                    visualization = new vidatio.TimeseriesChart $scope.chartData
+                    chartData[0].unshift "x"
+                    chartData[1].unshift "A"
+                    visualization = new vidatio.TimeseriesChart chartData
                 else
                     # TODO: show a default image here
                     $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
@@ -134,7 +135,7 @@ app.controller "VisualizationCtrl", [
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
 
-                $scope.chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
+                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
                     trimmedDataset.map((value, index) -> value[yColumn])]
 
                 createDiagram(recommendedDiagram)
