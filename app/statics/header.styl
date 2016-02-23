@@ -8,6 +8,9 @@ header
         background $color-red
         height 8px
 
+    h1
+        margin-top 3px
+
     .middle
         text-align center
 
@@ -84,6 +87,13 @@ header
                 margin-left -10px
 
     #back-to-datasets-overview
+        position relative
+
+    #back-to-import
+        position absolute
+        z-index 100
+
+    #back-to-datasets-overview
     #back-to-import
         float left
         margin-left 60px
@@ -95,7 +105,6 @@ header
         height 42px
         border-radius 4px
         top -5px
-        position relative
         cursor pointer
 
         &:hover, &:focus
@@ -214,6 +223,9 @@ header
             left 150px
             margin-left 0
 
+        .catalog-title
+            margin-top 40px
+
 @media(max-width: 900px)
     .catalog-title
-        margin-top 50px
+        margin-top 82px

@@ -103,15 +103,12 @@ header.ng-cloak
                             span {{ "MENU" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="catalog")
-                .col-xs-3.logo
+                .col-xs-6.col-sm-2.logo
                     a#logo.button(ui-sref="app.index({ locale: locale })")
                     a#back-to-import.button.icon-return-2(ui-sref='app.import({ locale: locale })')
                         span {{ "IMPORT" | translate | uppercase }}
 
-                .col-xs-6.middle
-                    h1.underline-turqoise.catalog-title {{ "ALL_VIDATIOS" | translate | uppercase }}
-
-                .col-xs-3.menu-buttons
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
                             span {{ "PROFILE" | translate | uppercase }}
@@ -121,6 +118,9 @@ header.ng-cloak
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
                             span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle
+                    h1.underline-turqoise.catalog-title {{ "ALL_VIDATIOS" | translate | uppercase }}
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
