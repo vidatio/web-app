@@ -14,7 +14,7 @@ class window.vidatio.GeoParser
 
         # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 
-        # matches the following numbers:
+        # extract the following numbers:
         #    123.45, 123, -123, -123.45
         regex = /(?:-)?(?:\d+)(?:\.\d+)?/g
 
