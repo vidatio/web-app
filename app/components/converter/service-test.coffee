@@ -111,7 +111,6 @@ describe "Service Converter", ->
                 ],
                 [
                     "Point", "90", "70"
-
                 ]
             ]
 

@@ -173,6 +173,8 @@ app.service 'ConverterService', [
             # @method convertArrays2GeoJSON
             # @public
             # @param {Array} dataset
+            # @param {Array} header
+            # @param {Array} indicesCoordinates
             # @return {GeoJSON}
             convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
                 $log.info "ConverterService convertArrays2GeoJSON called"

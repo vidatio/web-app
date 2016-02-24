@@ -60,6 +60,7 @@ class window.vidatio.Recommender
     # @method run
     # @public
     # @param {Array} dataset
+    # @param {Array} header
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
