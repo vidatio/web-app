@@ -14,10 +14,7 @@ app.controller "EditorCtrl", [
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
-
-        $scope.activeViews = [false, true, false]
         $scope.activeTabs = [false, true, false]
-        console.log "$scope.activeViews ", $scope.activeViews
 
         # Invert the value of the clicked tab to hide or show views in the editor
         # @method tabClicked
@@ -32,8 +29,6 @@ app.controller "EditorCtrl", [
                 $scope.activeTabs[i] = false
 
             $scope.activeTabs[tabIndex] = true
-            $scope.activeViews = $scope.activeTabs
-            console.log "$scope.activeViews ", $scope.activeViews
 
             views = [true, true]
             if tabIndex == 0
