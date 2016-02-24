@@ -101,34 +101,45 @@ app.controller "VisualizationCtrl", [
                     # TODO: show a default image here
                     $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
+        $scope.meta = Data.meta
+
+        # @method setXAxisColumnSelection
+        # @param {Number} id
         $scope.setXAxisColumnSelection = (id) ->
             $log.info "Visualization controller setXAxisColumnSelection called"
             $scope.xAxisCurrent = id
             $scope.changeAxisColumnSelection()
 
+        # @method setYAxisColumnSelection
+        # @param {Number} id
         $scope.setYAxisColumnSelection = (id) ->
             $log.info "Visualization controller setYAxisColumnSelection called"
             $scope.yAxisCurrent = id
             $scope.changeAxisColumnSelection()
 
+        # @method changeAxisColumnSelection
         $scope.changeAxisColumnSelection = ->
             $log.info "Visualization controller changeAxisColumnSelection called"
 
             if $scope.diagramType? and $scope.diagramType isnt "map"
+                # trimmedDataset: 2D dataset
+                # value: row of the 2D dataset
+                # value[$scope.xAxisCurrent]: cell of row
+                # map: collects the cells of the selected columns
                 chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
 
         dataset = Table.getDataset()
         trimmedDataset = vidatio.helper.trimDataset(dataset)
-        cuttedDataset = vidatio.helper.cutDataset(trimmedDataset)
+        subset = vidatio.helper.getSubset(trimmedDataset)
 
         switch Data.meta.fileType
             when "shp"
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, dataset
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 $scope.diagramType = recommendedDiagram
 

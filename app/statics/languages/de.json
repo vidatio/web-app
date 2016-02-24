@@ -119,5 +119,7 @@
         "PARALLEL_COORDINATES": "Parallel Coordinates",
         "BAR_CHART": "Balkendiagramm",
         "TIME_SERIES": "Zeitlicher Verlauf"
-    }
+    },
+    "LONGITUDE": "Long",
+    "LATITUDE": "Lat"
 }

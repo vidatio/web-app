@@ -40,7 +40,7 @@ describe "Service Converter", ->
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
 
-    it 'should convert GeoJSON into arrays', ->
+    it 'should convert arrays with properties to GeoJSON', ->
         dataset = [
             ["City", "Content", "GEOMETRIE"]
             ["Innsbruck", "40,5%", "POINT (49 11)"]
@@ -81,7 +81,7 @@ describe "Service Converter", ->
             ]
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
 
-    xit 'should convert shp into arrays', ->
+    it 'should convert GeoJSON into arrays', ->
         geoJSON =
             "type": "FeatureCollection"
             "features": [{
@@ -105,13 +105,13 @@ describe "Service Converter", ->
         result =
             [
                 [
-                    "Point", "70", "90"
+                    "Point", 70, 90
                 ],
                 [
-                    "Point", "70", "90"
+                    "Point", 80, 80
                 ],
                 [
-                    "Point", "90", "70"
+                    "Point", 90, 70
 
                 ]
             ]

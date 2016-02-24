@@ -13,14 +13,14 @@ class window.vidatio.Parser
             message: "ParserService findCoordinatesColumns called"
             dataset: dataset
 
-        choppedDataset = vidatio.helper.cutDataset(dataset)
-        unless choppedDataset.length
+        subset = vidatio.helper.getSubset(dataset)
+        unless subset.length
             return
 
-        indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, choppedDataset)
+        indicesCoordinates = _findCoordinatesIndicesInHeader.call(this, subset)
 
         if(!(indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")))
-            indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, choppedDataset)
+            indicesCoordinates = _findCoordinatesIndicesInDataset.call(this, subset)
 
         return indicesCoordinates
 

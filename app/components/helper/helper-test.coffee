@@ -226,7 +226,7 @@ describe "Service Helper", ->
             ]
         ]
 
-        expect(@Helper.cutDataset dataset).toEqual result
+        expect(@Helper.getSubset dataset).toEqual result
 
     it 'should identify phone numbers', ->
         expect(@Helper.isPhoneNumber "+43 902 128391" ).toBeTruthy()
