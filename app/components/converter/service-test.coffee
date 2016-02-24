@@ -9,13 +9,6 @@ describe "Service Converter", ->
             @deferred = $q.defer()
             spyOn(@Converter, 'convertSHP2GeoJSON').and.returnValue(@deferred.promise)
 
-            spyOn(vidatio.recommender, 'getSchema').and.returnValue(["coordinate", "coordinate"])
-            spyOn(vidatio.helper, 'transposeDataset')
-
-    afterEach ->
-        vidatio.recommender.getSchema.calls.reset()
-        vidatio.helper.transposeDataset.calls.reset()
-
     it 'should be defined and included', ->
         expect(@Converter).toBeDefined()
         expect(@injector.has("ConverterService"))
@@ -45,14 +38,7 @@ describe "Service Converter", ->
             }
             ]
 
-        spyOn(vidatio.geoParser, 'checkHeader').and
         expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
-
-        ###
-        expect(vidatio.recommender.getSchema).toHaveBeenCalled()
-        expect(vidatio.helper.transposeDataset).toHaveBeenCalled()
-        expect(vidatio.geoParser.checkHeader).toHaveBeenCalled()
-        vidatio.geoParser.checkHeader.calls.reset()
 
         header = ["City", "Content", "GEOMETRIE"]
         dataset = [
@@ -92,12 +78,7 @@ describe "Service Converter", ->
             }
             ]
 
-        spyOn(vidatio.geoParser, 'checkHeader').and.returnValue
-            xy: 2
         expect(@Converter.convertArrays2GeoJSON(dataset,header)).toEqual(geoJSON)
-        expect(vidatio.geoParser.checkHeader).toHaveBeenCalled()
-        vidatio.geoParser.checkHeader.calls.reset()
-        ###
 
     xit 'should convert shp into arrays', ->
         geoJSON =

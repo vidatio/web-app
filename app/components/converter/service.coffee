@@ -174,7 +174,7 @@ app.service 'ConverterService', [
             # @public
             # @param {Array} dataset
             # @return {GeoJSON}
-            convertArrays2GeoJSON: (dataset = [], header = []) ->
+            convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
                 $log.info "ConverterService convertArrays2GeoJSON called"
                 $log.debug
                     message: "ConverterService convertArrays2GeoJSON called"
@@ -186,28 +186,13 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
-                console.log header
-                indicesCoordinates = vidatio.geoParser.checkHeader(header)
-                console.log "HEADER called", indicesCoordinates
-                unless indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y") or indicesCoordinates.hasOwnProperty("xy")
-                    transposedDataset = vidatio.helper.transposeDataset dataset
-                    console.log "HELPER called", transposedDataset
-                    schema = vidatio.recommender.getSchema transposedDataset
-                    console.log "RECOMMENDER called", schema
-                    indexX = schema.indexOf("coordinate")
-                    indexY = schema.indexOf("coordinate", indexX + 1)
-
-                    if indexX > -1 && indexY > -1
-                        indicesCoordinates["x"] = indexX
-                        indicesCoordinates["y"] = indexY
-
                 dataset.forEach (row) ->
                     coordinates = []
 
                     # distinguish if coordinates are in the same column or in two different columns
-                    if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
+                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["x"]]
+                    else
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
@@ -215,9 +200,6 @@ app.service 'ConverterService', [
                         if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
                             coordinates.push(latitude)
                             coordinates.push(longitude)
-                    else
-                        $log.info "Keine Koordinaten gefunden."
-                        return
 
                     unless coordinates.length
                         return
@@ -242,11 +224,11 @@ app.service 'ConverterService', [
                         return
 
                     # All none coordinate cell should be filled into the properties of the feature
-                    if indicesCoordinates.hasOwnProperty("xy")
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
                         row.forEach (cell, indexColumn) ->
-                            if(indexColumn != indicesCoordinates["xy"])
+                            if(indexColumn != indicesCoordinates["x"])
                                 feature.properties[indexColumn] = (cell)
-                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
+                    else
                         row.forEach (cell, indexColumn) ->
                             if(indexColumn != indicesCoordinates["x"] and indexColumn != indicesCoordinates["y"])
                                 feature.properties[indexColumn] = (cell)

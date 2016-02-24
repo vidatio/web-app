@@ -69,7 +69,7 @@ app.controller "VisualizationCtrl", [
                         # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
                         # Use the hole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON focusedDataset, Table.getColumnHeaders()
+                        geoJSON = Converter.convertArrays2GeoJSON focusedDataset, Table.getColumnHeaders(), { x: xColumn, y: yColumn }
                         Map.setGeoJSON geoJSON
                     when "parallel"
                         # Parallel coordinate chart need the columns as rows so we transpose

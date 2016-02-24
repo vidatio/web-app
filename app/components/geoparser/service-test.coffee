@@ -16,7 +16,8 @@ describe "Service GeoParser", ->
 
         header = ["City", "Content", "GEOMETRIE"]
         result =
-            xy: 2
+            x: 2
+            y: 2
         expect(@Parser.checkHeader(header)).toEqual(result)
 
         header = ["City", "Content", "Lat", "Lng"]
