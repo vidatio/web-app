@@ -4,6 +4,8 @@ class vidatio.BarChart extends vidatio.Visualization
     constructor: (dataset) ->
         vidatio.log.info "Barchart constructor called"
 
+        console.log "DATASET", dataset
+
         data = [
             {
                 'year': 1991
