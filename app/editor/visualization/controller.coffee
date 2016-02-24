@@ -70,6 +70,7 @@ app.controller "VisualizationCtrl", [
         # @method createDiagram
         # @param {String} type
         createDiagram = (type) ->
+            $log.info "Visualization controller createDiagram function called"
             switch type
                 when "scatter"
                     # Currently default labels for the points are used
@@ -191,6 +192,11 @@ app.controller "VisualizationCtrl", [
                 Progress.setMessage notify
 
         $scope.selectDiagram = (name, type) ->
+            $log.info "Visualization controller selectDiagram called"
+            $log.debug
+                name: name
+                type: type
+
             $scope.selectedDiagramName = name
             createDiagram(type)
 ]
