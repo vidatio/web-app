@@ -14,6 +14,8 @@ app.service 'TableService', [
                 @colHeadersSelection = []
                 @instanceTable = null
 
+            # @method initAxisSelection
+            # @public
             initAxisSelection: ->
                 $log.info "TableService initAxis called"
 
@@ -23,6 +25,9 @@ app.service 'TableService', [
 
                 @setColHeadersSelection colHeaders
 
+            # @method setColHeadersSelection
+            # @public
+            # @param {Array} colHeaders
             setColHeadersSelection: (colHeaders) ->
                 $log.info "TableService setColHeaderSelection called"
                 $log.debug
@@ -34,10 +39,16 @@ app.service 'TableService', [
                         return
                     @colHeadersSelection[index] = item
 
+            # @method setInstance
+            # @public
+            # @param {Handsontable Instance} hot
             setInstance: (hot) ->
                 $log.info "TableService setInstance called"
                 @instanceTable = hot
 
+            # @method getInstance
+            # @public
+            # @return {Handsontable Instance}
             getInstance: ->
                 $log.info "TableService getInstance called"
                 return @instanceTable
@@ -105,6 +116,8 @@ app.service 'TableService', [
                 @dataset.unshift @instanceTable.getColHeader()
                 @resetColumnHeaders()
 
+            # @method resetDataset
+            # @public
             resetDataset: ->
                 $log.info "TableService resetDataset called"
 
@@ -113,6 +126,9 @@ app.service 'TableService', [
                 @dataset.splice 0, @dataset.length - 1
                 @dataset[0].splice 0, @dataset[0].length
 
+            # @method setDataset
+            # @public
+            # @param {Array} data
             setDataset: (data) ->
                 $log.info "TableService setDataset called"
                 $log.debug
@@ -123,6 +139,11 @@ app.service 'TableService', [
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
+            # @method setCell
+            # @public
+            # @param {Number} row
+            # @param {Number} column
+            # @param {Mixed} data
             setCell: (row, column, data) ->
                 $log.info "TableService setCell called"
                 $log.debug
@@ -133,6 +154,9 @@ app.service 'TableService', [
 
                 @dataset[row][column] = data
 
+            # @method getDataset
+            # @public
+            # @return {Array}
             getDataset: ->
                 $log.info "TableService getDataset called"
 
