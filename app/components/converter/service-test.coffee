@@ -38,7 +38,7 @@ describe "Service Converter", ->
             }
             ]
 
-        expect(@Converter.convertArrays2GeoJSON(dataset)).toEqual(geoJSON)
+        expect(@Converter.convertArrays2GeoJSON(dataset, [], {x: 0, y: 1})).toEqual(geoJSON)
 
         header = ["City", "Content", "GEOMETRIE"]
         dataset = [
@@ -78,7 +78,7 @@ describe "Service Converter", ->
             }
             ]
 
-        expect(@Converter.convertArrays2GeoJSON(dataset,header)).toEqual(geoJSON)
+        expect(@Converter.convertArrays2GeoJSON(dataset, header, {x: 2, y: 2})).toEqual(geoJSON)
 
     xit 'should convert shp into arrays', ->
         geoJSON =
@@ -119,28 +119,28 @@ describe "Service Converter", ->
 
     it 'should extract Headers from GeoJSON', ->
         geoJSON =
-        "type": "FeatureCollection"
-        "features": [{
-            "type": "Feature"
-            "geometry":
-                "type": "Point"
-                "coordinates": [70,90]
-            "properties":
-                "prop0": "value0"
-                "prop1": 0.0
+            "type": "FeatureCollection"
+            "features": [{
+                "type": "Feature"
+                "geometry":
+                    "type": "Point"
+                    "coordinates": [70, 90]
+                "properties":
+                    "prop0": "value0"
+                    "prop1": 0.0
             }, {
-            "type": "Feature"
-            "geometry":
-                "type": "Polygon"
-                "coordinates": [
-                     [ [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
-                       [100.0, 1.0], [100.0, 0.0] ]
-                     ]
-            "properties":
-              "prop0": "value1"
-              "prop1": 1.0
+                "type": "Feature"
+                "geometry":
+                    "type": "Polygon"
+                    "coordinates": [
+                        [[100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+                            [100.0, 1.0], [100.0, 0.0]]
+                    ]
+                "properties":
+                    "prop0": "value1"
+                    "prop1": 1.0
             }
-        ]
+            ]
 
         headers =
             [
