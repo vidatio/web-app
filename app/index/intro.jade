@@ -19,9 +19,12 @@ section#intro
                         |  {{ "TO_YOUR_VIDATIO_LANDING_PAGE" | translate }}!
 
                     ol
-                        li.active {{ "UPLOAD_FILE" | translate }}.
-                        li {{ "GENERATED_AUTOMATICALLY" | translate }}.
-                        li {{ "SAVE_OR_SHARE" | translate }}.
+                        li.active.icon-import-2
+                            span {{ "UPLOAD_FILE" | translate }}.
+                        li.icon-edit
+                            span {{ "GENERATED_AUTOMATICALLY" | translate }}.
+                        li.icon-check
+                            span {{ "SAVE_OR_SHARE" | translate }}.
 
         .get-started
             //- generate link with correct language

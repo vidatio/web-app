@@ -5,7 +5,7 @@
     "TO_YOUR_VIDATIO_LANDING_PAGE": "zu deinem Vidatio",
     "UPLOAD_FILE": "Datensatz hochladen",
     "GENERATED_AUTOMATICALLY": "Datensatz und Visualisierung anpassen",
-    "SAVE_OR_SHARE": "Vidatio exportieren und/ oder veröffentlichen",
+    "SAVE_OR_SHARE": "Vidatio exportieren und veröffentlichen",
     "GET_LANDING_PAGE": "Get",
     "STARTED_LANDING_PAGE": "Started",
     "FEATURED_VIDATIOS": "Beliebte Vidatios",
@@ -72,7 +72,7 @@
             "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
         }
     },
-    "AVAILABLE_DATASETS": "Verfügbare Datensets",
+    "AVAILABLE_DATASETS": "Verfügbare Vidatios",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
