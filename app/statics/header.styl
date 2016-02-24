@@ -30,10 +30,9 @@ header
         width 111px
         height 40px
         float left
-    
+
     #process-nav
-        padding-left 2%
-        
+
         a
             font-family Colaborate-Medium, $fonts
             border-bottom 3px solid $color-passive
@@ -44,16 +43,16 @@ header
             height 50px
             text-align center
             width 33.333%
-            
+
             &:hover,
             &:focus
                 color $color-hover-dark
                 border-color $color-hover-dark
-            
+
             &.active
                 color $color-green
                 border-color $color-green
-                
+
                 //arrow in line on active
                 &::after
                     border-left 16px solid transparent
@@ -63,11 +62,11 @@ header
                     display block
                     margin -16px auto 0
                     width 15px
-        
+
                 span
                     //arrow in line on active, 1st span is icon
-                    &:nth-child(2) 
-                        &::after 
+                    &:nth-child(2)
+                        &::after
                             border-left 16px solid transparent
                             border-right 16px solid transparent
                             border-top 12px solid $color-green
@@ -75,22 +74,22 @@ header
                             display block
                             margin -5px auto 0
                             width 15px
-                
+
                 &:hover,
                 &:focus
                     color $color-green
                     border-color $color-green
-            
-            &.disabled 
+
+            &.disabled
                 opacity 0.15
                 cursor default
-                
+
                 &:hover,
                 &:focus
                     color $color-passive
                     border-color $color-passive
-            
-            
+
+
         //editable field
         .title
             position absolute
@@ -98,7 +97,7 @@ header
             margin-left -15px
             text-align center
             width 100%
-    
+
             p
                 border 1px dotted $color-table-even-passive
                 display inline-block
@@ -230,14 +229,14 @@ header
     header
         #process-nav
             margin-top 15px
-            
+
             a
                 height 65px
                 line-height 28px
-                
+
                 span
                     display block
-                    
+
                     &:nth-child(2)
                         font-size 16px
 
@@ -245,8 +244,8 @@ header
                         span
                              &:nth-child(2)
                                     &::after
-                                        margin-top 5px 
-            .title 
+                                        margin-top 5px
+            .title
                     p
                         margin-top 15px
                         font-size 21px
