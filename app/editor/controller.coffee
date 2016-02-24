@@ -14,9 +14,12 @@ app.controller "EditorCtrl", [
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
+        $scope.activeViews = 2
         $scope.activeTabs = [false, true, false]
+        views = [true, true]
+        [$rootScope.showTableView, $rootScope.showVisualizationView] = views
 
-        # Invert the value of the clicked tab to hide or show views in the editor
+        # the displayed views are set according to the clicked tab
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
@@ -30,7 +33,6 @@ app.controller "EditorCtrl", [
 
             $scope.activeTabs[tabIndex] = true
 
-            views = [true, true]
             if tabIndex == 0
                 views = [true, false]
             else if tabIndex == 1
@@ -41,18 +43,18 @@ app.controller "EditorCtrl", [
             changeViews views
 
         # change active views when a tab in the header is clicked
+        # them are only two bool values as the second tab uses both views
         # @method changeViews
-        # @param {Array} tabs Array of three bool values, which represent the three tabs in the editor
-        changeViews = (tabs) ->
-            console.log tabs
-            [$rootScope.showTableView, $rootScope.showVisualizationView] = tabs
+        # @param {Array} tabs Array of two bool values, which represent the three tabs in the editor
+        changeViews = (viewsToDisplay) ->
+            [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
             $log.info "EditorCtrl changeViews called"
             $log.debug
                 message: "EditorCtrl changeViews called"
-                tabs: tabs
+                tabs: viewsToDisplay
 
             $scope.activeViews = 0
-            for tab in tabs
+            for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
 ]
