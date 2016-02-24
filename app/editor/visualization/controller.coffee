@@ -20,10 +20,9 @@ app.controller "VisualizationCtrl", [
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
 
         visualization = undefined
-        isTransposed = false
-        recommendedDiagram = undefined
-        $scope.colHeadersSelection = Table.colHeadersSelection
         chartData = undefined
+        isTransposed = false
+        $scope.colHeadersSelection = Table.colHeadersSelection
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -63,7 +62,7 @@ app.controller "VisualizationCtrl", [
             return $scope.supportedDiagrams
         .then (supportedDiagrams) ->
             for diagram in supportedDiagrams
-                if diagram.type is recommendedDiagram
+                if diagram.type is $scope.diagramType
                     $scope.selectedDiagramName = diagram.name
 
         # create a new diagram based on the recommended diagram
@@ -81,7 +80,7 @@ app.controller "VisualizationCtrl", [
                     # TODO map dataset and merge parser & recommender
                     Map.setScope $scope
                     # Use the hole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
+                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), { x: xColumn, y: yColumn }
                     Map.setGeoJSON geoJSON
                 when "parallel"
                     # Parallel coordinate chart need the columns as rows so we transpose
@@ -140,7 +139,7 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, dataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, Table.getColumnHeaders()
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
 
                 $scope.diagramType = recommendedDiagram

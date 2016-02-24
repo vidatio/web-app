@@ -22,7 +22,6 @@ app.service 'ConverterService', [
             convertSHP2GeoJSON: (buffer) ->
                 $log.info "ConverterService convertSHP2GeoJSON called"
                 $log.debug
-                    message: "ConverterService convertSHP2GeoJSON called"
                     buffer: buffer
 
                 return shp(buffer)
@@ -34,7 +33,6 @@ app.service 'ConverterService', [
             convertCSV2Arrays: (csv) ->
                 $log.info "ConverterService convertCSV2Arrays called"
                 $log.debug
-                    message: "ConverterService convertCSV2Arrays called"
                     csv: csv
 
                 return Papa.parse(csv).data
@@ -46,7 +44,6 @@ app.service 'ConverterService', [
             convertGeoJSON2Arrays: (geoJSON) ->
                 $log.info "ConverterService convertGeoJSON2Arrays called"
                 $log.debug
-                    message: "ConverterService convertGeoJSON2Arrays called"
                     geoJSON: geoJSON
 
                 dataset = []
@@ -132,7 +129,6 @@ app.service 'ConverterService', [
             convertGeoJSON2ColHeaders: (geoJSON) ->
                 $log.info "ConverterService convertGeoJSON2ColHeaders called"
                 $log.debug
-                    message: "ConverterService convertGeoJSON2ColHeaders called"
                     geoJSON: geoJSON
 
                 columnHeaders = []
@@ -179,8 +175,8 @@ app.service 'ConverterService', [
             convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
                 $log.info "ConverterService convertArrays2GeoJSON called"
                 $log.debug
-                    message: "ConverterService convertArrays2GeoJSON called"
                     dataset: dataset
+                    indicesCoordinates: indicesCoordinates
 
                 dataset = vidatio.helper.trimDataset(dataset)
 
@@ -247,7 +243,6 @@ app.service 'ConverterService', [
             matrixToArray: (str) ->
                 $log.info "ConverterService matrixToArray called"
                 $log.debug
-                    message: "ConverterService matrixToArray called"
                     str: str
 
                 return str.split('(')[1].split(')')[0].split(',')

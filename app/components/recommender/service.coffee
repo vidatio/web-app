@@ -93,8 +93,8 @@ class window.vidatio.Recommender
         # For other datasets and geo datasets without headers
         # We classify the columns the the content
         else
-            trimmedDataset = vidatio.helper.cutDataset dataset
-            transposedDataset = vidatio.helper.transposeDataset trimmedDataset
+            subset = vidatio.helper.getSubset dataset
+            transposedDataset = vidatio.helper.transposeDataset subset
 
             schema = @getSchema(transposedDataset)
             variances = @getVariances(transposedDataset)
