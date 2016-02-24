@@ -8,8 +8,54 @@
                         .option-icon.icon-download
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 
+                    form
+                        .form-group
+                            label(for="dataset") {{ "DATASET" | translate }}
+                            select#dataset.form-control
+                                option CSV
+                                option XML
+                                option JSON
+                        .form-group
+                            label(for="dataset") Vidatio
+                            select#dataset.form-control
+                                option JPEG
+                                option PNG
+                                option SVG
+
             .col-sm-6
                 #save-share.area
-                    a(href="#")
-                        .option-icon.icon-sharing
-                        h4 {{ "SAVE_AND_SHARE_VIDATIO" | translate | uppercase }}
+                    .option-icon.icon-sharing
+                    h4 {{ "SAVE_AND_SHARE_VIDATIO" | translate | uppercase }}
+                    .row
+                        ul.share-options
+                            li: button.btn.btn-primary.icon-facebook(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.fui-link(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-(ng-class="{true: 'disabled'}[!globals.authorized]")
+                    .row
+                        p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
+                    form(name="metadataForm" ng-submit="" ng-controller="ShareCtrl")
+                        .row
+                            .input-group.form-group.first(ng-class="")
+                                input.form-control(type="name" name="name" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        .row
+                            .input-group.form-group(ng-class="")
+                                input.form-control(type="name" name="name" placeholder="{{ 'EDITOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        .row
+                            .input-group.form-group(ng-class="")
+                                input.form-control(type="name" name="name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        .row
+                            .input-group.form-group(ng-class="")
+                                input.form-control(type="name" name="name" placeholder="{{ 'CATEGORY' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        .row
+                            .input-group.form-group.last(ng-class="")
+                                input.form-control(type="name" name="name" placeholder="{{ 'LICENCE' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        .row
+                            .tagsinput-primary
+                                .bootstrap-tagsinput   
+                                    input(type="text" placeholder="Füge Text hinzu, damit dein Vidatio besser gefunden wird" size="52")
+
+                        .row
+                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="") {{ 'SAVE' | translate }}
+
