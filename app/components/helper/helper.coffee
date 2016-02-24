@@ -340,3 +340,21 @@ class window.vidatio.Helper
         DDMMYYYY = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
         MMDDYYYY = /^(0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.]\d{4}$/
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
+
+
+    transformToArrayOfObjects: (dataset, xColumn, yColumn) ->
+        console.log("DATASET", dataset)
+        transformedDataset = []
+        self = @
+        dataset.forEach (row) ->
+            x = if self.isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
+            y = if self.isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
+            # for the simple barchart dataset the x and y columns are switched (nominal on y axis and ordinal on x axis)
+            # TODO: Recommender should return them vice versa
+            transformedDataset.push
+                "x": y
+                "y": x
+                "name": y
+
+        console.log("TRANSFORMED", transformedDataset)
+        transformedDataset

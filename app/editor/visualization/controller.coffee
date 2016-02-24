@@ -51,6 +51,7 @@ app.controller "VisualizationCtrl", [
                     when "bar"
                         # Bar chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
+                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn
                         new vidatio.BarChart chartData
                     when "timeseries"
                         # Currently default labels for the bars are used
