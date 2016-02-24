@@ -10,10 +10,7 @@ app.controller "EditorCtrl", [
     "$rootScope"
     "$log"
     ($scope, $rootScope, $log) ->
-
-        # The three bool values represent the three tabs in the header
-        # @property activeViews
-        # @type {Array}
+        # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
         $scope.activeTabs = [false, true, false]
         views = [true, true]
