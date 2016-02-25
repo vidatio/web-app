@@ -72,8 +72,13 @@ a
 
         span
             background-color $color-green
-
-
+    
+    &[disabled]
+        color $color-white
+        &:hover
+            box-shadow none
+            top 0
+        
 .dropdown-menu > li > a
     &:hover
         background-color $color-hover-dark

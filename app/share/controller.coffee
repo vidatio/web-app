@@ -6,6 +6,7 @@
 app = angular.module "app.controllers"
 
 app.controller "ShareCtrl", [
+    "$scope"
     "$translate"
-    ($translate) ->
+    ($scope, $translate) ->
 ]

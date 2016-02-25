@@ -22,8 +22,8 @@
                                 option PNG
                                 option SVG
 
-            .col-sm-6
-                #save-share.area
+            .col-sm-6(ng-switch on="save")
+                #save-share.area(ng-switch-default)
                     .option-icon.icon-sharing
                     h4 {{ "SAVE_AND_SHARE_VIDATIO" | translate | uppercase }}
                     .row
@@ -37,25 +37,61 @@
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
                     form(name="metadataForm" ng-submit="" ng-controller="ShareCtrl")
                         .row
-                            .input-group.form-group.first(ng-class="")
-                                input.form-control(type="name" name="name" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            .input-group.form-group.first
+                                input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
-                            .input-group.form-group(ng-class="")
-                                input.form-control(type="name" name="name" placeholder="{{ 'EDITOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            .input-group.form-group
+                                input.form-control(type="text" name="editor" ng-model="vidatio.editor" placeholder="{{ 'EDITOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
-                            .input-group.form-group(ng-class="")
-                                input.form-control(type="name" name="name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            .input-group.form-group
+                                input.form-control(type="text" name="title" ng-model="vidatio.title" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
-                            .input-group.form-group(ng-class="")
-                                input.form-control(type="name" name="name" placeholder="{{ 'CATEGORY' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            .input-group.form-group
+                                input.form-control(type="text" name="category" ng-model="vidatio.category" placeholder="{{ 'CATEGORY' | translate }}")
                         .row
-                            .input-group.form-group.last(ng-class="")
-                                input.form-control(type="name" name="name" placeholder="{{ 'LICENCE' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            .input-group.form-group.last
+                                input.form-control(type="text" name="licence" ng-model="vidatio.licence" placeholder="{{ 'LICENCE' | translate }}")
                         .row
                             .tagsinput-primary
                                 .bootstrap-tagsinput   
                                     input(type="text" placeholder="Füge Text hinzu, damit dein Vidatio besser gefunden wird" size="52")
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="metadataForm.$invalid || metadataForm.$pending") {{ 'SAVE' | translate }}
 
+                #save-share.area(ng-switch-when="")
+                    .option-icon.icon-lock
+                    h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
+                    .row
+                        p Logge dich ein, um dein Vidatio in deinem Profil zu speichern.
+                    form(name="loginForm" ng-submit="" ng-controller="ShareCtrl")
+                        .row
+                            .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
+                                span.input-group-addon.fui-user
+                                input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") Kein gültiger Benutzername!
+
+                        .row
+                            .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
+                                span.input-group-addon.fui-lock
+                                input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
+                        .row 
+                            label.checkbox(for="publish")
+                                input.custom-checkbox(data-toggle="checkbox", type="checkbox")
+                                span.icons
+                                    span.icon-unchecked
+                                    span.icon-checked
+                                | Vidatio im öffentlichen Katalog anzeigen
+
+                        .row
+                            button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'SAVE' | translate }}
+
+                    .row
+                        .col-xs-6.left
+                            a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
+                        .col-xs-6.right
+                            a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
+
+                    .row
+                        a.share-only(href="#") Vidatio ohne Login teilen
+                        p Wenn du dein Vidatio zu einem späteren Zeitpunkt weiter bearbeiten oder erneut teilen willst, melde dich bitte an bevor du dein Vidatio teilst! 

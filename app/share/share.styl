@@ -14,7 +14,7 @@
             text-align center
             margin-bottom 56px
             
-            a 
+            a:not(.inverse) 
                 {fillParent}
                 display inline-block
                 color $color-grey-dark
@@ -108,10 +108,27 @@
             .input-group 
                 margin-bottom 0
                 width 100%
+                .form-control:not(:first-child)
+                    border-left none
+                
+            button[type="submit"]
+                margin-top 10px
             
             p
                 {lightText}
                 margin-bottom 12px
+            
+            .col-xs-6.left
+                text-align left
+                padding 0
+                
+            .col-xs-6.right
+                text-align right
+                padding 0
+            
+            .share-only
+                margin-top 30px
+                color $color-border
 
 
 @media(max-width 768px)
