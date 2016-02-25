@@ -34,30 +34,29 @@ app.controller "TableCtrl", [
                 else
                     Table.putColumnHeadersBackToDataset()
 
-        #@method $scope.download
-        #@description exports a
-        #@params {string} type
-        $scope.download = (type) ->
-            $log.info "TableCtrl download called"
-            $log.debug
-                type: type
+        $scope.showDownloadButton = Data.meta.fileName is "csv"
 
-            dataset = vidatio.helper.trimDataset Table.getDataset()
+        #@method $scope.download
+        #@description downloads a csv
+        $scope.download = ->
+            $log.info "TableCtrl download called"
+
+            trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
 
             if Table.useColumnHeadersFromDataset
                 csv = Papa.unparse
                     fields: Table.getColumnHeaders(),
-                    data: dataset
+                    data: trimmedDataset
             else
-                csv = Papa.unparse dataset
+                csv = Papa.unparse trimmedDataset
 
-            if Data.meta.fileName == ""
-                fileName = vidatio.helper.dateToString(new Date())
+            if Data.meta.fileName is ""
+                fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
             else
                 fileName = Data.meta.fileName
 
-            csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'})
+            csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
             csvURL = window.URL.createObjectURL(csvData)
 
-            Share.download fileName + "." + type, csvURL
+            Share.download fileName + ".csv", csvURL
 ]
