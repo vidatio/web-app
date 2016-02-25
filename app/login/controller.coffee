@@ -34,7 +34,7 @@ app.controller "LoginCtrl", [
                         if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                             $log.info "UserCtrl redirect to " + element.name
 
-                            # redirect to detailview needs vidatio-id, so an additional if is necessary
+                            # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
                             if element.name is "app.dataset"
                                 $state.go element.name, 'id': element.params.id, element.params.locale
                                 return
