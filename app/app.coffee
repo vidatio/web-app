@@ -34,8 +34,13 @@ app.run [
     ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
-        $rootScope.apiBase = "http://localhost:3000"
-        $rootScope.apiVersion = "/v0"
+
+        if CONFIG.ENV is "production"
+            $rootScope.apiBase = "https://api.vidatio.com"
+            $rootScope.apiVersion = "/v0"
+        else
+            $rootScope.apiBase = "http://localhost:3000"
+            $rootScope.apiVersion = "/v0"
 
         window.vidatio.log = new vidatio.Logger(CONFIG.TOKEN.LOGGLY, CONFIG.ENV is "develop")
         window.vidatio.helper = new window.vidatio.Helper()
