@@ -35,8 +35,8 @@ app.controller "VisualizationCtrl", [
                 switch recommendedDiagram
                     when "scatter"
                         # Currently default labels for the points are used
-                        chartData[0].unshift "A_x"
-                        chartData[1].unshift "A"
+                        chartData = vidatio.helper.transposeDataset chartData
+                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn
                         new vidatio.ScatterPlot chartData
                     when "map"
                         # TODO map dataset and merge parser & recommender
