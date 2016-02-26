@@ -17,6 +17,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
                 .id("name")
                 .x("x")
                 .y("y")
+                .size(10)
                 .draw()
 
             super(dataset, chart)
