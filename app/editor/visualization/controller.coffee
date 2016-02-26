@@ -36,7 +36,7 @@ app.controller "VisualizationCtrl", [
                     when "scatter"
                         # Currently default labels for the points are used
                         chartData = vidatio.helper.transposeDataset chartData
-                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn
+                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
                         new vidatio.ScatterPlot chartData
                     when "map"
                         # TODO map dataset and merge parser & recommender
@@ -51,12 +51,12 @@ app.controller "VisualizationCtrl", [
                     when "bar"
                         # Bar chart need the columns as rows so we transpose
                         chartData = vidatio.helper.transposeDataset chartData
-                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn
+                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
                         new vidatio.BarChart chartData
                     when "timeseries"
                         # Currently default labels for the bars are used
-                        chartData[0].unshift "x"
-                        chartData[1].unshift "A"
+                        chartData = vidatio.helper.transposeDataset chartData
+                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
                         new vidatio.TimeseriesChart chartData
                     else
                         # TODO: show a default image here

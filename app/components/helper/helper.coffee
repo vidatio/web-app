@@ -342,19 +342,22 @@ class window.vidatio.Helper
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
 
 
-    transformToArrayOfObjects: (dataset, xColumn, yColumn) ->
-        console.log("DATASET", dataset)
+    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType) ->
         transformedDataset = []
         self = @
         dataset.forEach (row) ->
             x = if self.isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
             y = if self.isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
-            # for the simple barchart dataset the x and y columns are switched (nominal on y axis and ordinal on x axis)
-            # TODO: Recommender should return them vice versa
-            transformedDataset.push
-                "x": y
-                "y": x
-                "name": y
 
-        console.log("TRANSFORMED", transformedDataset)
+            if visualizationType == "bar" or visualizationType == "scatter"
+                transformedDataset.push
+                    "x": x
+                    "y": y
+                    "name": x
+            else if visualizationType == "timeseries"
+                transformedDataset.push
+                    "x": x
+                    "y": y
+                    "name": "Line 1"
+
         transformedDataset
