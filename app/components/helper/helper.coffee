@@ -66,7 +66,7 @@ class window.vidatio.Helper
     # @param {Array} dataset with rows and columns
     # @return {Array} dataset but rows are now columns and vice versa
     transposeDataset: (dataset) ->
-        vidatio.log.info "Recommender transposeDataset called"
+        vidatio.log.info "Helper transposeDataset called"
         vidatio.log.debug
             dataset: dataset
 
@@ -342,6 +342,7 @@ class window.vidatio.Helper
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
 
 
+    # TODO pass names of header if available to use as default keys for x and y in visualization
     transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType) ->
         transformedDataset = []
         self = @
@@ -361,3 +362,10 @@ class window.vidatio.Helper
                     "name": "Line 1"
 
         transformedDataset
+
+    subsetWithXColumnFirst: (dataset, xColumn, yColumn) ->
+        subset = []
+        subset.push dataset[xColumn]
+        subset.push dataset[yColumn]
+
+        subset

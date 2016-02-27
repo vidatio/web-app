@@ -28,35 +28,32 @@ app.controller "VisualizationCtrl", [
             else
                 { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run cuttedDataset, dataset
                 $scope.recommendedDiagram = recommendedDiagram
-                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
-                    trimmedDataset.map((value, index) -> value[yColumn])]
+
 
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
                 switch recommendedDiagram
                     when "scatter"
-                        # Currently default labels for the points are used
-                        chartData = vidatio.helper.transposeDataset chartData
-                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
+                        chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
                         new vidatio.ScatterPlot chartData
                     when "map"
                         # TODO map dataset and merge parser & recommender
                         Map.setScope $scope
-                        # Use the hole dataset because we want the other attributes inside the popups
+                        # Use the whole dataset because we want the other attributes inside the popups
                         geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
                         Map.setGeoJSON geoJSON
                     when "parallel"
-                        # Parallel coordinate chart need the columns as rows so we transpose
-                        chartData = vidatio.helper.transposeDataset chartData
+                        # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
+                        transposedDataset = vidatio.helper.transposeDataset(trimmedDataset)
+                        chartData = vidatio.helper.subsetWithXColumnFirst(transposedDataset, xColumn, yColumn)
+                        chartData = vidatio.helper.transposeDataset(chartData)
                         new vidatio.ParallelCoordinates chartData
                     when "bar"
                         # Bar chart need the columns as rows so we transpose
-                        chartData = vidatio.helper.transposeDataset chartData
-                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
+                        chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
                         new vidatio.BarChart chartData
                     when "timeseries"
                         # Currently default labels for the bars are used
-                        chartData = vidatio.helper.transposeDataset chartData
-                        chartData = vidatio.helper.transformToArrayOfObjects chartData, xColumn, yColumn, recommendedDiagram
+                        chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
                         new vidatio.TimeseriesChart chartData
                     else
                         # TODO: show a default image here
