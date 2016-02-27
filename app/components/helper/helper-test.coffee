@@ -271,5 +271,27 @@ describe "Service Helper", ->
         expect(@Helper.isDate "2016/00/31" ).toBeFalsy()
         expect(@Helper.isDate "2016/12/32" ).toBeFalsy()
 
+    it 'should should transform 2 dimensional arrays to arrays of objects', ->
+        test = [
+            [ 123, "Hello World" ]
+            [ 456, "This is a test" ]
+        ]
 
+        result = [
+            {
+                x: "Hello World"
+                y: 123
+            }
+            {
+                x: "This is a test"
+                y: 456
+            }
+        ]
+
+        xColumn = 1
+        yColumn = 0
+
+        transformedDataset = @Helper.subsetWithXColumnFirst(test, xColumn, yColumn)
+        console.log "EXPECTED RESULT", transformedDataset
+        expect(transformedDataset).toEqual(result)
 
