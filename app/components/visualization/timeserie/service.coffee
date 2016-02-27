@@ -22,7 +22,6 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
                 .text("name")
                 .y("y")
                 .x("date")
-#                .time("YYYY-MM-DD")
                 .draw()
 
             super(dataset, chart)

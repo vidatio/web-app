@@ -345,17 +345,17 @@ class window.vidatio.Helper
     # TODO pass names of header if available to use as default keys for x and y in visualization
     transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType) ->
         transformedDataset = []
-        self = @
-        dataset.forEach (row) ->
-            x = if self.isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
-            y = if self.isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
 
-            if visualizationType == "bar" or visualizationType == "scatter"
+        dataset.forEach (row) =>
+            x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
+            y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
+
+            if visualizationType is "bar" or visualizationType == "scatter"
                 transformedDataset.push
                     "x": x
                     "y": y
                     "name": x
-            else if visualizationType == "timeseries"
+            else if visualizationType is "timeseries"
                 transformedDataset.push
                     "x": x
                     "y": y
