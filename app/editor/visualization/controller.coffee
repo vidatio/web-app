@@ -69,7 +69,7 @@ app.controller "VisualizationCtrl", [
         # @param {String} type
         createDiagram = (type) ->
             $log.info "Visualization controller createDiagram function called"
-            switch recommendedDiagram
+            switch type
                 when "scatter"
                     chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
                     new vidatio.ScatterPlot chartData
