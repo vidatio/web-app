@@ -103,7 +103,7 @@ BUILD =
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/d3/d3.js"
-            "./bower_components/d3plus/d3plus.min.js"
+            "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
@@ -114,7 +114,6 @@ BUILD =
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
-            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
             "./bower_components/flat-ui/dist/css/flat-ui.css"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
