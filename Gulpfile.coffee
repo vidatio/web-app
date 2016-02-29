@@ -102,6 +102,7 @@ BUILD =
             "./bower_components/c3/c3.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/d3/d3.js"
+            "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/moment/min/moment.min.js"
@@ -109,17 +110,16 @@ BUILD =
             "./bower_components/moment/locale/de.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
+
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
-            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
             "./bower_components/flat-ui/dist/css/flat-ui.css"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
-            "./bower_components/c3/c3.css"
             "./bower_components/d3.parcoords.css/d3.parcoords.css"
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
         ]
