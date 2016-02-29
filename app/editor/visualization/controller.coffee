@@ -23,6 +23,10 @@ app.controller "VisualizationCtrl", [
         chartData = undefined
         $scope.colHeadersSelection = Table.colHeadersSelection
 
+        dataset = Table.getDataset()
+        trimmedDataset = vidatio.helper.trimDataset(dataset)
+        subset = vidatio.helper.getSubset(trimmedDataset)
+
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
             "DIAGRAMS.SCATTER_PLOT"
@@ -127,10 +131,6 @@ app.controller "VisualizationCtrl", [
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
 
-        dataset = Table.getDataset()
-        trimmedDataset = vidatio.helper.trimDataset(dataset)
-        subset = vidatio.helper.getSubset(trimmedDataset)
-
         switch Data.meta.fileType
             when "shp"
                 $scope.diagramType = "map"
@@ -142,13 +142,6 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = recommendedDiagram
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
-
-                # trimmedDataset: 2D dataset
-                # value: row of the 2D dataset
-                # value[$scope.xAxisCurrent]: cell of row
-                # map: collects the cells of the selected columns
-                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
-                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
 
                 createDiagram(recommendedDiagram)
 
