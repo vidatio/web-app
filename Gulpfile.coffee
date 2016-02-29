@@ -9,7 +9,7 @@ templateCache = require "gulp-angular-templatecache"
 stylus = require "gulp-stylus"
 stylint = require "gulp-stylint"
 
-karma = require "gulp-karma"
+karmaServer = require("karma").Server
 {protractor} = require "gulp-protractor"
 
 browserSync = require('browser-sync').create()
@@ -179,6 +179,15 @@ gulp.task "develop",
         "run"
     ]
 
+gulp.task "tdd",
+    "Watches/Build and Test the source files on change.",
+    [
+        "config:develop"
+        "build"
+        "test:tdd"
+        "run"
+    ]
+
 gulp.task "dev",
     "Shorthand for develop.",
     [
@@ -214,11 +223,20 @@ gulp.task "build",
 
 gulp.task "test",
     "Starts and reruns all tests on change of test or source files.",
-    ->
-        gulp.src []
-        .pipe karma
-            configFile: "karma.conf.coffee"
-            action: "watch"
+    (done) ->
+        new karmaServer(
+            configFile: __dirname + "/karma.conf.coffee"
+            singleRun: true
+        , done).start()
+
+gulp.task "test:tdd",
+    "Starts and reruns all tests on change of test or source files.",
+    (done) ->
+        new karmaServer(
+            configFile: __dirname + "/karma.conf.coffee"
+            singleRun: false
+            autoWatch: true
+        , done).start()
 
 gulp.task "e2e",
     "Runs all e2e tests.",
