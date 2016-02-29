@@ -40,6 +40,35 @@ describe "Service Recommender", ->
         dataset = @helper.transposeDataset(dataset)
         expect(@recommender.getVariances dataset).toEqual(variances)
 
+    it "should recommend a map if there is a geo column header", ->
+        header = ["X", "Y", "test", "City"]
+        dataset = [
+            ["47.349", "13.892", "Salzburg", "2%"]
+            ["47.349", "13.892", "Salzburg", "3%"]
+            ["46.323", "13.892", "Salzburg", "4%"]
+            ["46.323", "10.348", "Salzburg", "5%"]
+        ]
+
+        expect(@recommender.run dataset, header).toEqual(
+            "recommendedDiagram": "map"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        header = ["GEOMETRIE", "empty", "test", "City"]
+        dataset = [
+            ["47.349,13.892", "Salzburg", "2%", "2%"]
+            ["47.349,13.892", "Salzburg", "3%", "2%"]
+            ["46.323,13.892", "Salzburg", "4%", "2%"]
+            ["46.323,10.348", "Salzburg", "5%", "2%"]
+        ]
+
+        expect(@recommender.run dataset, header).toEqual(
+            "recommendedDiagram": "map"
+            "xColumn": 0
+            "yColumn": 0
+        )
+
     it "should analyse the best diagram type for a given dataset system", ->
         dataset = [
             ["200", "10", "Salzburg", "2%"]

@@ -20,10 +20,8 @@ app.controller "VisualizationCtrl", [
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
 
         visualization = undefined
-        isTransposed = false
-        recommendedDiagram = undefined
-        $scope.colHeadersSelection = Table.colHeadersSelection
         chartData = undefined
+        $scope.colHeadersSelection = Table.colHeadersSelection
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -63,7 +61,7 @@ app.controller "VisualizationCtrl", [
             return $scope.supportedDiagrams
         .then (supportedDiagrams) ->
             for diagram in supportedDiagrams
-                if diagram.type is recommendedDiagram
+                if diagram.type is $scope.diagramType
                     $scope.selectedDiagramName = diagram.name
 
         # create a new diagram based on the recommended diagram
@@ -78,8 +76,9 @@ app.controller "VisualizationCtrl", [
                 when "map"
                     # TODO map dataset and merge parser & recommender
                     Map.setScope $scope
+
                     # Use the whole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset
+                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), { x: xColumn, y: yColumn }
                     Map.setGeoJSON geoJSON
                 when "parallel"
                     # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
@@ -137,15 +136,19 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, dataset
+                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, Table.getColumnHeaders()
                 $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
-                $scope.diagramType = recommendedDiagram
 
+                $scope.diagramType = recommendedDiagram
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
 
-                chartData = [trimmedDataset.map((value, index) -> value[xColumn]),
-                    trimmedDataset.map((value, index) -> value[yColumn])]
+                # trimmedDataset: 2D dataset
+                # value: row of the 2D dataset
+                # value[$scope.xAxisCurrent]: cell of row
+                # map: collects the cells of the selected columns
+                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
+                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
 
                 createDiagram(recommendedDiagram)
 
