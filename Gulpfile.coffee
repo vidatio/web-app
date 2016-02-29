@@ -10,7 +10,6 @@ stylus = require "gulp-stylus"
 stylint = require "gulp-stylint"
 
 karmaServer = require("karma").Server
-{protractor} = require "gulp-protractor"
 
 browserSync = require('browser-sync').create()
 reload = browserSync.reload
@@ -237,20 +236,6 @@ gulp.task "test:tdd",
             singleRun: false
             autoWatch: true
         , done).start()
-
-gulp.task "e2e",
-    "Runs all e2e tests.",
-    [
-        "run"
-    ],
-    ->
-        gulp.src E2E_FILES
-        .pipe protractor
-            configFile: "./protractor.config.coffee"
-            args: [
-                "--baseUrl"
-                BASEURL
-            ]
 
 ###
     LINTING
