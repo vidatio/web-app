@@ -139,21 +139,6 @@ app.service 'TableService', [
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
-            # @method setCell
-            # @public
-            # @param {Number} row
-            # @param {Number} column
-            # @param {Mixed} data
-            setCell: (row, column, data) ->
-                $log.info "TableService setCell called"
-                $log.debug
-                    message: "TableService setCell called"
-                    row: row
-                    column: column
-                    data: data
-
-                @dataset[row][column] = data
-
             # @method getDataset
             # @public
             # @return {Array}
