@@ -107,7 +107,7 @@ app.controller "VisualizationCtrl", [
         # @method changeAxisColumnSelection
         # @param {Number} axis
         # @param {Number} id
-        $scope.changeAxisColumnSelection = (axis, id) ->
+        $scope.setAxisColumnSelection = (axis, id) ->
             $log.info "VisualizationCtrl changeAxisColumnSelection called"
             $log.debug
                 axis: axis

@@ -9,7 +9,7 @@
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
-                            a(href="#" ng-click="setXAxisColumnSelection(id)") {{ header}}
+                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ header}}
 
                 p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
                 p(ng-if="diagramType == 'map'") {{ "LATITUDE" | translate }}
@@ -18,7 +18,7 @@
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
-                            a(href="#" ng-click="setYAxisColumnSelection(id)") {{ header}}
+                            a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ header}}
             .diagram-selection
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName }}
