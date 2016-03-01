@@ -1,6 +1,33 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
+            .axis-selection(ng-if="meta.fileType != 'shp'")
+                p(ng-if="diagramType != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") {{ "LONGITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[xAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setXAxisColumnSelection(id)") {{ header}}
+
+                p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") {{ "LATITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[yAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setYAxisColumnSelection(id)") {{ header}}
+            .diagram-selection
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="diagram in supportedDiagrams")
+                            a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)")
+                                img.graph-icon(src="{{ diagram.imagePath }}")
+                                | {{ diagram.name }}
             .download-button
                 a(href='#')
                     i.fa.fa-download.download-icon
@@ -10,5 +37,5 @@
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
-        #chart(ng-hide="recommendedDiagram == 'map'")
+        leaflet(geojson="geojson" id="map" ng-show="diagramType == 'map'")
+        #chart(ng-hide="diagramType == 'map'")

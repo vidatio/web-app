@@ -226,7 +226,7 @@ describe "Service Helper", ->
             ]
         ]
 
-        expect(@Helper.cutDataset dataset).toEqual result
+        expect(@Helper.getSubset dataset).toEqual result
 
     it 'should identify phone numbers', ->
         expect(@Helper.isPhoneNumber "+43 902 128391" ).toBeTruthy()
@@ -271,5 +271,73 @@ describe "Service Helper", ->
         expect(@Helper.isDate "2016/00/31" ).toBeFalsy()
         expect(@Helper.isDate "2016/12/32" ).toBeFalsy()
 
+    it 'should transform 2 dimensional arrays to arrays of objects for a bar chart and scatter plot', ->
+        test = [
+            [ 123, "Hello World" ]
+            [ 456, "This is a test" ]
+        ]
 
+        expectedResult = [
+            {
+                x: "Hello World"
+                y: 123
+                name: "Hello World"
+            }
+            {
+                x: "This is a test"
+                y: 456
+                name: "This is a test"
+            }
+        ]
 
+        xColumn = 1
+        yColumn = 0
+
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "bar")
+        expect(actualResult).toEqual(expectedResult)
+
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "scatter")
+        expect(actualResult).toEqual(expectedResult)
+
+    it 'should transform 2 dimensional arrays to arrays of objects for a timeseries chart', ->
+        test = [
+            [ 123, new Date("2016-02-28") ]
+            [ 456, new Date("2016-02-29") ]
+        ]
+
+        expectedResult = [
+            {
+                x: new Date("2016-02-28")
+                y: 123
+                name: "Line 1"
+            }
+            {
+                x: new Date("2016-02-29")
+                y: 456
+                name: "Line 1"
+            }
+        ]
+
+        xColumn = 1
+        yColumn = 0
+
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "timeseries")
+        expect(actualResult).toEqual(expectedResult)
+
+    it 'should create a subset of a 2 dimensional array with x column first and y column second (where each column is an Array)', ->
+        test = [
+            [ 123, 456 ]
+            [ "Hello World", "This is a test" ]
+            [ new Date("2016-02-28"), new Date("2016-02-29") ]
+        ]
+
+        xColumn = 2
+        yColumn = 0
+
+        expectedResult = [
+            [ new Date("2016-02-28"), new Date("2016-02-29")]
+            [ 123, 456 ]
+        ]
+
+        actualResult = @Helper.subsetWithXColumnFirst(test, xColumn, yColumn)
+        expect(actualResult).toEqual(expectedResult)

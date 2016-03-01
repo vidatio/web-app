@@ -5,14 +5,23 @@ class vidatio.BarChart extends vidatio.Visualization
         vidatio.log.info "Barchart constructor called"
 
         setTimeout( ->
-            chart = c3.generate
-                bindto: "#chart"
-                data:
-                    columns: dataset,
-                    type: "bar"
-                bar: width: ratio: 0.5
-                padding:
-                    right: 30
+            chart = d3plus
+                .viz()
+                .container("#chart")
+                .data(dataset)
+                .type("bar")
+                .id("name")
+                .x("x")
+                .y("y")
+                .draw()
 
-            super(dataset, chart)
+            super(dataset, @chart)
         , 500)
+
+    updateDataset: (dataset) ->
+        vidatio.log.info "Barchart updateDataset called"
+        vidatio.log.debug
+            dataset: dataset
+
+        @chart.load
+            columns: dataset

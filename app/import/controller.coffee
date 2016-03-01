@@ -30,7 +30,7 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl continueToEmptyTable called"
 
             Data.meta.fileType = "csv"
-            Table.reset false
+            Table.reset()
             Map.resetGeoJSON()
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
@@ -104,7 +104,7 @@ app.controller "ImportCtrl", [
             if fileType isnt "csv" and fileType isnt "zip"
                 $log.info "ImportCtrl data format not supported"
                 $log.debug
-                    Format: fileType
+                    format: fileType
 
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
@@ -149,6 +149,7 @@ app.controller "ImportCtrl", [
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
                     Table.setDataset dataset
+                    Table.useColumnHeadersFromDataset = true
                     $location.path editorPath
 
                 when "zip"
@@ -161,6 +162,7 @@ app.controller "ImportCtrl", [
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
                         if dataset.length
                             Table.setDataset dataset
+                            Table.useColumnHeadersFromDataset = true
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 

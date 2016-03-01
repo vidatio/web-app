@@ -13,6 +13,7 @@ describe "Controller Import", ->
 
             @Table =
                 setDataset: (result) ->
+                takeColumnHeadersFromDataset: ->
             @Import =
                 readFile: (file, scope) ->
 

@@ -47,10 +47,10 @@ class window.vidatio.Helper
     # @public
     # @param {Array} dataset
     # @return {Array}
-    cutDataset: (dataset) ->
-        vidatio.log.info "HelperService cutDataset called"
+    getSubset: (dataset) ->
+        vidatio.log.info "HelperService getSubset called"
         vidatio.log.debug
-            message: "HelperService cutDataset called"
+            message: "HelperService getSubset called"
             dataset: dataset
 
         tmp = []
@@ -66,7 +66,7 @@ class window.vidatio.Helper
     # @param {Array} dataset with rows and columns
     # @return {Array} dataset but rows are now columns and vice versa
     transposeDataset: (dataset) ->
-        vidatio.log.info "Recommender transposeDataset called"
+        vidatio.log.info "Helper transposeDataset called"
         vidatio.log.debug
             dataset: dataset
 
@@ -340,3 +340,54 @@ class window.vidatio.Helper
         DDMMYYYY = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
         MMDDYYYY = /^(0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.]\d{4}$/
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
+
+
+    # @method transformToArrayOfObjects
+    # @description This method transforms the dataset from a 2 dimensional Array to an Array of Objects, which is needed by D3plus
+    #               xColumn, yColumn and visualizationType
+    # @public
+    # @param {Array} dataset
+    # @param {Number} xColumn
+    # @param {Number} yColumn
+    # @param {String} visualizationType
+    # @return {Array}
+    # TODO pass names of header if available to use as default keys for x and y in visualization
+    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType) ->
+        unless dataset or xColumn or yColumn or visualizationType
+            return
+
+        transformedDataset = []
+        dataset.forEach (row) =>
+            x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
+            y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
+
+            if visualizationType is "bar" or visualizationType == "scatter"
+                transformedDataset.push
+                    "x": x
+                    "y": y
+                    "name": x
+            else if visualizationType is "timeseries"
+                transformedDataset.push
+                    "x": x
+                    "y": y
+                    "name": "Line 1"
+
+        transformedDataset
+
+    # @method subsetWithXColumnFirst
+    # @description This method is used to get a subset with 2 columns. The data has to be in a format like it is used by D3.parcoords,
+    #               which is that each column is an Array: eg [ [ Col1Value1, Col1Value2 ], [ Col2Value1, Col2Value2 ] ]
+    # @public
+    # @param {Array} dataset
+    # @param {Number} xColumn
+    # @param {Number} yColumn
+    # @return {Array}
+    subsetWithXColumnFirst: (dataset, xColumn, yColumn) ->
+        unless dataset or xColumn or yColumn
+            return
+
+        subset = []
+        subset.push dataset[xColumn]
+        subset.push dataset[yColumn]
+
+        subset

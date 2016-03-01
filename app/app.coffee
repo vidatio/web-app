@@ -34,13 +34,18 @@ app.run [
     ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
-        $rootScope.apiBase = "http://localhost:3000"
-        $rootScope.apiVersion = "/v0"
+
+        if CONFIG.ENV is "production"
+            $rootScope.apiBase = "https://api.vidatio.com"
+            $rootScope.apiVersion = "/v0"
+        else
+            $rootScope.apiBase = "http://localhost:3000"
+            $rootScope.apiVersion = "/v0"
 
         window.vidatio.log = new vidatio.Logger(CONFIG.TOKEN.LOGGLY, CONFIG.ENV is "develop")
         window.vidatio.helper = new window.vidatio.Helper()
         window.vidatio.recommender = new window.vidatio.Recommender()
-        window.vidatio.parser = new window.vidatio.Parser()
+        window.vidatio.geoParser = new window.vidatio.GeoParser()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0

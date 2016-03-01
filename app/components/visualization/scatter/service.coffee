@@ -10,15 +10,15 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
         # http://stackoverflow.com/questions/23044338/window-resize-directive
 
         setTimeout( ->
-            chart = c3.generate
-                bindto: "#chart"
-                data:
-                    xs:
-                        "A": "A_x"
-                    columns: dataset,
-                    type: "scatter"
-                padding:
-                    right: 30
+            chart = d3plus.viz()
+                .container("#chart")
+                .data(dataset)
+                .type("scatter")
+                .id("name")
+                .x("x")
+                .y("y")
+                .size(10)
+                .draw()
 
             super(dataset, chart)
         , 500)

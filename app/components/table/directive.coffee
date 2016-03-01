@@ -5,14 +5,15 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
-    ($timeout, $log, Data) ->
+    "TableService"
+    ($timeout, $log, Data, Table) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
         scope:
             dataset: '='
             activeViews: '='
-            columnHeaders: '='
+            useColumnHeadersFromDataset: '='
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
@@ -21,7 +22,7 @@ app.directive 'hot', [
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: $scope.columnHeaders
+                colHeaders: true
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
@@ -49,7 +50,14 @@ app.directive 'hot', [
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
+                afterInit: ->
+
             )
+
+            Table.setInstance hot
+            Table.initAxisSelection()
+            if Table.useColumnHeadersFromDataset
+                Table.takeColumnHeadersFromDataset()
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible
