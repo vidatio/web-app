@@ -17,8 +17,8 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .data(@chartData)
             .type("scatter")
             .id("name")
-            .x("x")
-            .y("y")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
             .size(10)
             .draw()
         , 0

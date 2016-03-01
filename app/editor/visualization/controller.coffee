@@ -70,6 +70,12 @@ app.controller "VisualizationCtrl", [
             $log.info "VisualizationCtrl createDiagram function called"
             trimmedDataset = vidatio.helper.trimDataset Table.dataset
 
+            headers = Table.getColumnHeaders()
+
+            options["headers"] = {}
+            options.headers["x"] = headers[options.xColumn]
+            options.headers["y"] = headers[options.yColumn]
+
             switch options.type
                 when "scatter"
 
@@ -120,6 +126,8 @@ app.controller "VisualizationCtrl", [
             else if axis is "x"
                 $scope.xAxisCurrent = id
 
+            Table.setDiagramColumns($scope.xAxisCurrent, $scope.yAxisCurrent)
+
             createDiagram
                 type: $scope.diagramType
                 xColumn: $scope.xAxisCurrent
@@ -144,6 +152,8 @@ app.controller "VisualizationCtrl", [
                     $scope.diagramType = recommendationResults.type
                     $scope.xAxisCurrent = String(recommendationResults.xColumn)
                     $scope.yAxisCurrent = String(recommendationResults.yColumn)
+
+                    Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
 
                 # After having recommend diagram options, we watch the dataset of the table
                 # because the watcher fires at initialization the diagram gets immediately drawn

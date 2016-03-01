@@ -18,7 +18,7 @@ class vidatio.BarChart extends vidatio.Visualization
             .data(@chartData)
             .type("bar")
             .id("name")
-            .x("x")
-            .y("y")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
             .draw()
         , 0

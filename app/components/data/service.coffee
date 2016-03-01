@@ -36,12 +36,8 @@ app.service 'DataService', [
 
                 if @meta.fileType is "shp"
                     Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
-                else if @meta.fileType is "csv"
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset, Table.getColumnHeaders())
-                    Map.setGeoJSON(geoJSON)
-                # last else to update empty table
-                else
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset, Table.getColumnHeaders())
+                else # CSV
+                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset, Table.getColumnHeaders(), Table.getDiagramColumns())
                     Map.setGeoJSON(geoJSON)
 
             validateInput: (row, column, oldData, newData) ->
