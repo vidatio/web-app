@@ -44,7 +44,8 @@
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
         "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
-        "NOT_ENOUGH_DIMENSIONS": "Für die Daten wurde keine Empfehlung gefunden!"
+        "NOT_ENOUGH_DIMENSIONS": "Für die Daten wurde keine Empfehlung gefunden!",
+        "NO_DIAGRAM_POSSIBLE": "Die ausgewählten Daten erlauben kein Diagramm!"
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",

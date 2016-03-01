@@ -75,7 +75,20 @@ app.controller "VisualizationCtrl", [
 
             switch options.type
                 when "scatter"
-                    visualization = new vidatio.ScatterPlot trimmedDataset, options
+
+                    subset = vidatio.helper.getSubset trimmedDataset
+                    transposedDataset = vidatio.helper.transposeDataset subset
+                    schema = vidatio.recommender.getSchema transposedDataset
+
+                    if(schema[options.xColumn] isnt "numeric" or schema[options.xColumn] isnt "numeric")
+                        $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
+                            ngToast.create
+                                className: "danger"
+                                content: translation
+                        visualization = new vidatio.ScatterPlot [[]], options
+                    else
+                        visualization = new vidatio.ScatterPlot trimmedDataset, options
+
                 when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
                     geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), {
