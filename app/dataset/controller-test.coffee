@@ -23,6 +23,7 @@ describe "Dataset Controller", ->
 
             spyOn(@Table, 'setDataset')
             @scope.createVidatio()
+            expect(@Table.setDataset).toHaveBeenCalled()
 
     describe "on clicked getLink-button", ->
         it 'should show the Vidatio-link box including the link to the current Vidatio on click at link-button', ->
