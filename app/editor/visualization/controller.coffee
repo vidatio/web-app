@@ -124,6 +124,8 @@ app.controller "VisualizationCtrl", [
             else if axis is "x"
                 $scope.xAxisCurrent = id
 
+            Table.setDiagramColumns($scope.xAxisCurrent, $scope.yAxisCurrent)
+
             createDiagram
                 type: $scope.diagramType
                 xColumn: $scope.xAxisCurrent
