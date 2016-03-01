@@ -15,7 +15,7 @@
                         span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click="getVidatioLink()")
+                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
                         span.icon-link.icons
                         span.button-text  {{ "LINK" | translate | uppercase }}
 
@@ -40,7 +40,7 @@
                         p
                             span.icon-link.link-icon-overlay
                             span  {{ "LINK_TO_SHARE" | translate }}
-                        a.fui-cross(href="#" ng-click="hideLinkToVidatio()")
+                        a.fui-cross(href="#" ng-click="hideVidatioLink()")
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
                         a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")

@@ -91,8 +91,8 @@ app.controller "DatasetCtrl", [
             $log.info "DatasetCtrl downloadImage called"
             @createVidatio()
 
-        # toggle link-overlay with vidatio-link
-        $scope.getVidatioLink = ->
+        # toggle link-box with vidatio-link
+        $scope.toggleVidatioLink = ->
             $log.info "DatasetCtrl getVidatioLink called"
             $log.debug
                 id: datasetId
@@ -100,8 +100,8 @@ app.controller "DatasetCtrl", [
 
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
-        # hide link-overlay if necessary
-        $scope.hideLinkToVidatio = ->
+        # hide link-box if necessary
+        $scope.hideVidatioLink = ->
             $rootScope.showVidatioLink = false
 
         # copy link to clipboard
