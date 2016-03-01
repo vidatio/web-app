@@ -19,11 +19,14 @@ describe "Editor Controller", ->
             @scope.tabClicked(0)
             expect(@rootScope.showTableView).toBeTruthy()
             expect(@rootScope.showVisualizationView).toBeFalsy()
+            expect(@scope.activeViews).toEqual(1)
 
             @scope.tabClicked(1)
             expect(@rootScope.showTableView).toBeTruthy()
             expect(@rootScope.showVisualizationView).toBeTruthy()
+            expect(@scope.activeViews).toEqual(2)
 
             @scope.tabClicked(2)
             expect(@rootScope.showTableView).toBeFalsy()
             expect(@rootScope.showVisualizationView).toBeTruthy()
+            expect(@scope.activeViews).toEqual(1)
