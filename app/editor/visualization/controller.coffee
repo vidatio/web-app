@@ -73,6 +73,12 @@ app.controller "VisualizationCtrl", [
         createDiagram = (options) ->
             $log.info "Visualization controller createDiagram function called"
 
+            headers = Table.getColumnHeaders()
+
+            options["headers"] = {}
+            options.headers["x"] = headers[options.xColumn]
+            options.headers["y"] = headers[options.yColumn]
+
             switch options.type
                 when "scatter"
                     visualization = new vidatio.ScatterPlot trimmedDataset, options
