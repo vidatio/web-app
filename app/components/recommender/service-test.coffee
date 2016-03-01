@@ -50,7 +50,7 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset, header).toEqual(
-            "recommendedDiagram": "map"
+            "type": "map"
             "xColumn": 0
             "yColumn": 1
         )
@@ -64,7 +64,7 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset, header).toEqual(
-            "recommendedDiagram": "map"
+            "type": "map"
             "xColumn": 0
             "yColumn": 0
         )
@@ -77,7 +77,7 @@ describe "Service Recommender", ->
             ["500", "13", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
@@ -89,7 +89,7 @@ describe "Service Recommender", ->
             ["500", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "bar"
+            "type": "bar"
             "xColumn": 2
             "yColumn": 0
         )
@@ -101,7 +101,7 @@ describe "Service Recommender", ->
             ["500", "Orange"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "bar"
+            "type": "bar"
             "xColumn": 1
             "yColumn": 0
         )
@@ -113,7 +113,7 @@ describe "Service Recommender", ->
             ["Kaffee", "Wien", "Salzburg", "3%"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
@@ -124,7 +124,7 @@ describe "Service Recommender", ->
             [300, "2013-01-01"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "timeseries"
+            "type": "timeseries"
             "xColumn": 1
             "yColumn": 0
         )
@@ -138,7 +138,7 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
@@ -148,7 +148,7 @@ describe "Service Recommender", ->
             dataset.push [Math.random(), Math.random(), "True", "11.222"]
 
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "parallel"
+            "type": "parallel"
             "xColumn": 0
             "yColumn": 1
         )
@@ -162,7 +162,7 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
@@ -174,7 +174,7 @@ describe "Service Recommender", ->
                 dataset.push dataset[i]
 
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "parallel"
+            "type": "parallel"
             "xColumn": 0
             "yColumn": 1
         )
@@ -193,7 +193,7 @@ describe "Service Recommender", ->
             ["Wurst", 1]
         ]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "bar"
+            "type": "bar"
             "xColumn": 0
             "yColumn": 1
         )
@@ -201,20 +201,19 @@ describe "Service Recommender", ->
         # NOMINAL, NUMERIC WITH SCATTER
         dataset.push ["Mango", 100]
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "scatter"
             "xColumn": 0
             "yColumn": 1
         )
 
         # NOMINAL, NUMERIC WITH PC
-        # current problem: if dataset.length < 23 --> yColumn is going to be Null
         tmp = dataset.length
-        while dataset.length < 50
+        while dataset.length < 501
             for i in [ 0...tmp ]
                 dataset.push [dataset[i]]
 
         expect(@recommender.run dataset).toEqual(
-            "recommendedDiagram": "scatter"
+            "type": "parallel"
             "xColumn": 0
             "yColumn": 1
         )

@@ -72,7 +72,7 @@ class window.vidatio.Recommender
             header: header
 
         if dataset.length < 1 or dataset[0].length < 2
-            message = "Dataset have not enough dimensions!"
+            message = "not enough dimensions"
             return {error: message}
 
         xIndex = null
@@ -132,7 +132,6 @@ class window.vidatio.Recommender
         # After checking the header or/and classify the columns
         # we have to decide which diagram type we want to recommend
         switch type
-
             when "numeric numeric", "nominal nominal"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
@@ -178,6 +177,6 @@ class window.vidatio.Recommender
                     @recommendedDiagram = "scatter"
 
         result =
-            recommendedDiagram: @recommendedDiagram
+            type: @recommendedDiagram
             xColumn: xIndex
             yColumn: yIndex
