@@ -101,8 +101,10 @@ app.controller "VisualizationCtrl", [
                 when "timeseries"
                     new vidatio.TimeseriesChart trimmedDataset, options
                 else
-                    # TODO: show a default image here
-                    $log.error "VisualizationCtrl recommend diagram failed, dataset isn't usable with vidatio"
+                    $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
+                        ngToast.create
+                            className: "danger"
+                            content: translation
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -134,11 +136,8 @@ app.controller "VisualizationCtrl", [
                 if recommendationResults.error?
                     $log.error
                         message: recommendationResults.error
-                    if recommendationResults.error is "not enough dimensions"
-                            $translate('TOAST_MESSAGES.NOT_ENOUGH_DIMENSIONS').then (translation) ->
-                                ngToast.create
-                                    className: "danger"
-                                    content: translation
+
+                    $scope.diagramType = false
                 else
                     $log.info "Recommender Results: #{JSON.stringify(recommendationResults)}"
 
