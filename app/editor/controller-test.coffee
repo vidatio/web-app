@@ -27,7 +27,3 @@ describe "Editor Controller", ->
             @scope.tabClicked(2)
             expect(@rootScope.showTableView).toBeFalsy()
             expect(@rootScope.showVisualizationView).toBeTruthy()
-
-
-
-
