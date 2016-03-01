@@ -70,6 +70,12 @@ app.controller "VisualizationCtrl", [
             $log.info "VisualizationCtrl createDiagram function called"
             trimmedDataset = vidatio.helper.trimDataset Table.dataset
 
+            headers = Table.getColumnHeaders()
+
+            options["headers"] = {}
+            options.headers["x"] = headers[options.xColumn]
+            options.headers["y"] = headers[options.yColumn]
+
             switch options.type
                 when "scatter"
 

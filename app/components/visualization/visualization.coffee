@@ -15,6 +15,6 @@ class window.vidatio.Visualization
         vidatio.log.info "Visualization preprocess called"
         vidatio.log.debug
             options: options
-        { type, xColumn, yColumn } = options
-        @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type
+        { type, xColumn, yColumn, headers } = options
+        @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type, headers
 

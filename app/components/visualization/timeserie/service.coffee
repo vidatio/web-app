@@ -12,7 +12,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
 
         # handle different date formats and parse them for c3.js charts
         for element in @chartData
-            element["date"] = moment(element.x, ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
+            element[options.headers["x"]] = moment(element[options.headers["x"]], ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
 
         # we need to wait for angular to finish rendering
         setTimeout =>
@@ -22,7 +22,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             .type("line")
             .id("name")
             .text("name")
-            .y("y")
-            .x("date")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
             .draw()
         , 0
