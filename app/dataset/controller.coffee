@@ -38,7 +38,6 @@ app.controller "DatasetCtrl", [
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
             tags = $scope.data.tags || "-"
-            format = "geoJSON"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
             userName = $scope.data.userId.name || "-"
@@ -60,7 +59,6 @@ app.controller "DatasetCtrl", [
                 parent: parent
                 category: category
                 tags: tags
-                format: format
 
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"

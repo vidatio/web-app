@@ -96,7 +96,6 @@
     "DATASET_ID": "ID des Datensatzes",
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
-    "DATASET_FORMAT": "Datentyp",
     "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {
