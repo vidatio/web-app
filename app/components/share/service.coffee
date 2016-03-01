@@ -35,10 +35,8 @@ app.service "ShareService", [
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
-
                     $log.info "ShareService html2canvas on targetElem onrendered callback called"
                     deferred.notify $translate.instant('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS')
-
 
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
                     dyPopupOffset = 0

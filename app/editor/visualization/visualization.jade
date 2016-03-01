@@ -28,6 +28,7 @@
                             a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)")
                                 img.graph-icon(src="{{ diagram.imagePath }}")
                                 | {{ diagram.name }}
+
             .download-button
                 a(href='#')
                 ul
@@ -37,4 +38,9 @@
                         a(ng-click='shareVisualization("jpg")') JPG
 
         leaflet(geojson="geojson" id="map" ng-show="diagramType == 'map'")
-        #chart(ng-hide="diagramType == 'map'")
+        #chart(ng-hide="diagramType == 'map' || diagramType == false")
+        #chart-empty(ng-hide="diagramType")
+            .row
+                .col-md-12.diagram-placeholder
+                    div
+                        img(src="images/logo-without-name.png" )

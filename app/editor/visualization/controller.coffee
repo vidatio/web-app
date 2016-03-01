@@ -18,7 +18,6 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
-
         visualization = undefined
         chartData = undefined
         $scope.colHeadersSelection = Table.colHeadersSelection
@@ -71,38 +70,33 @@ app.controller "VisualizationCtrl", [
         # create a new diagram based on the recommended diagram
         # @method createDiagram
         # @param {String} type
-        createDiagram = (type) ->
+        createDiagram = (options) ->
             $log.info "Visualization controller createDiagram function called"
-            switch type
-                when "scatter"
-                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
-                    new vidatio.ScatterPlot chartData
-                when "map"
-                    # TODO map dataset and merge parser & recommender
-                    Map.setScope $scope
 
+            switch options.type
+                when "scatter"
+                    visualization = new vidatio.ScatterPlot trimmedDataset, options
+                when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), { x: xColumn, y: yColumn }
+                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), {
+                        x: options.xColumn,
+                        y: options.yColumn
+                    }
                     Map.setGeoJSON geoJSON
+                    Map.setScope $scope
                 when "parallel"
-                    # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
-                    transposedDataset = vidatio.helper.transposeDataset(trimmedDataset)
-                    chartData = vidatio.helper.subsetWithXColumnFirst(transposedDataset, xColumn, yColumn)
-                    chartData = vidatio.helper.transposeDataset(chartData)
-                    new vidatio.ParallelCoordinates chartData
+                    visualization = new vidatio.ParallelCoordinates trimmedDataset, options
                 when "bar"
-                    # Bar chart need the columns as rows so we transpose
-                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
-                    new vidatio.BarChart chartData
+                    visualization = new vidatio.BarChart trimmedDataset, options
                 when "timeseries"
-                    # Currently default labels for the bars are used
-                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
-                    new vidatio.TimeseriesChart chartData
+                    visualization = new vidatio.TimeseriesChart trimmedDataset, options
                 else
                     # TODO: show a default image here
                     $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         $scope.meta = Data.meta
+
+        $scope.diagramType = false
 
         # @method setXAxisColumnSelection
         # @param {Number} id
@@ -136,17 +130,43 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
-                { recommendedDiagram, xColumn, yColumn } = vidatio.recommender.run subset, Table.getColumnHeaders()
-                $log.info "Recommender chose type: #{recommendedDiagram} with column #{xColumn} and #{yColumn}"
+                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
 
-                $scope.diagramType = recommendedDiagram
-                $scope.xAxisCurrent = String(xColumn)
-                $scope.yAxisCurrent = String(yColumn)
+                if recommendationResults.error?
+                    $log.error
+                        message: recommendationResults.error
+                    if recommendationResults.error is "not enough dimensions"
+                            $translate('TOAST_MESSAGES.NOT_ENOUGH_DIMENSIONS').then (translation) ->
+                                ngToast.create
+                                    className: "danger"
+                                    content: translation
+                else
+                    $log.info "Recommender Results: #{JSON.stringify(recommendationResults)}"
 
-                createDiagram(recommendedDiagram)
+                    $scope.diagramType = recommendationResults.type
+                    $scope.xAxisCurrent = String(recommendationResults.xColumn)
+                    $scope.yAxisCurrent = String(recommendationResults.yColumn)
+                    createDiagram(recommendationResults)
 
         $timeout ->
             Progress.setMessage ""
+
+        # @method selectDiagram
+        # @param {String} name
+        # @param {String} type
+        $scope.selectDiagram = (name, type) ->
+            $log.info "Visualization controller selectDiagram called"
+            $log.debug
+                name: name
+                type: type
+
+            $scope.selectedDiagramName = name
+            $scope.diagramType = type
+
+            createDiagram
+                type: type
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
@@ -183,13 +203,4 @@ app.controller "VisualizationCtrl", [
                     className: "danger"
             , (notify) ->
                 Progress.setMessage notify
-
-        $scope.selectDiagram = (name, type) ->
-            $log.info "Visualization controller selectDiagram called"
-            $log.debug
-                name: name
-                type: type
-
-            $scope.selectedDiagramName = name
-            createDiagram(type)
 ]
