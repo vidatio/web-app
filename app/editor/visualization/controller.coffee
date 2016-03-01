@@ -152,6 +152,8 @@ app.controller "VisualizationCtrl", [
                     $scope.xAxisCurrent = String(recommendationResults.xColumn)
                     $scope.yAxisCurrent = String(recommendationResults.yColumn)
 
+                    Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
+
                 # After having recommend diagram options, we watch the dataset of the table
                 # because the watcher fires at initialization the diagram gets immediately drawn
                 $scope.$watch (->

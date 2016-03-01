@@ -26,12 +26,6 @@ describe "Service Table", ->
         expect(@Table.dataset.length).toEqual 1
         expect(@Table.dataset[0].length).toEqual 0
 
-    it 'should set a cell of the dataset', ->
-        dataset = [[20, 90], ["test", "test2"]]
-        @Table.setDataset dataset
-        @Table.setCell(1, 1, 90)
-        expect(@Table.dataset[1][1]).toEqual 90
-
     it 'should take the first line of the dataset for the column headers', ->
         @Table.dataset = [["h1", "h2"], ["c1", "c2"]]
         @Table.takeColumnHeadersFromDataset()
