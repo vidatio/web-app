@@ -279,24 +279,28 @@ describe "Service Helper", ->
 
         expectedResult = [
             {
-                x: "Hello World"
-                y: 123
-                name: "Hello World"
+                "Apfel": "Hello World"
+                "Banane": 123
+                "name": 123
             }
             {
-                x: "This is a test"
-                y: 456
-                name: "This is a test"
+                "Apfel": "This is a test"
+                "Banane": 456
+                "name": 456
             }
         ]
+
+        headers =
+            "x": "Apfel"
+            "y": "Banane"
 
         xColumn = 1
         yColumn = 0
 
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "bar")
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "bar", headers)
         expect(actualResult).toEqual(expectedResult)
 
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "scatter")
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "scatter", headers)
         expect(actualResult).toEqual(expectedResult)
 
     it 'should transform 2 dimensional arrays to arrays of objects for a timeseries chart', ->
@@ -307,21 +311,25 @@ describe "Service Helper", ->
 
         expectedResult = [
             {
-                x: new Date("2016-02-28")
-                y: 123
-                name: "Line 1"
+                "Apfel": new Date("2016-02-28")
+                "Banane": 123
+                "name": "Line 1"
             }
             {
-                x: new Date("2016-02-29")
-                y: 456
-                name: "Line 1"
+                "Apfel": new Date("2016-02-29")
+                "Banane": 456
+                "name": "Line 1"
             }
         ]
+
+        headers =
+            "x": "Apfel"
+            "y": "Banane"
 
         xColumn = 1
         yColumn = 0
 
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "timeseries")
+        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "timeseries", headers)
         expect(actualResult).toEqual(expectedResult)
 
     it 'should create a subset of a 2 dimensional array with x column first and y column second (where each column is an Array)', ->
