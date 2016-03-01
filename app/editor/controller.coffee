@@ -50,6 +50,7 @@ app.controller "EditorCtrl", [
                 message: "EditorCtrl changeViews called"
                 tabs: viewsToDisplay
 
+            # count activeViews to set bootstrap classes accordingly for editor-width
             $scope.activeViews = 0
             for tab in viewsToDisplay
                 if tab
