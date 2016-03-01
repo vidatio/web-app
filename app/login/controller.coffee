@@ -13,17 +13,17 @@ app.controller "LoginCtrl", [
     "$stateParams"
     ($scope, UserService, $rootScope, $state, $log, $translate, ngToast) ->
         $scope.logon = ->
-            $log.info "UserCtrl logon called"
+            $log.info "LoginCtrl logon called"
 
             UserService.logon($scope.user).then(
                 (value) ->
-                    $log.info "UserCtrl successfully logged in"
+                    $log.info "LoginCtrl successfully logged in"
                     $log.debug
                         value: value
 
                     # Default routing for user at logout success
                     unless $rootScope.history.length
-                        $log.info "UserCtrl redirect to app.index"
+                        $log.info "LoginCtrl redirect to app.index"
                         $state.go "app.index"
                         return
 
@@ -39,13 +39,14 @@ app.controller "LoginCtrl", [
                                 $state.go element.name, 'id': element.params.id, element.params.locale
                                 return
 
+
                             $state.go element.name, element.params.locale
                             return
 
                     $state.go "app.index"
 
                 (error) ->
-                    $log.info "UserCtrl error on login"
+                    $log.info "LoginCtrl error on login"
 
                     $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
                         ngToast.create

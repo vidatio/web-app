@@ -21,8 +21,11 @@ app.controller "VisualizationCtrl", [
 
         visualization = undefined
         chartData = undefined
-        isTransposed = false
         $scope.colHeadersSelection = Table.colHeadersSelection
+
+        dataset = Table.getDataset()
+        trimmedDataset = vidatio.helper.trimDataset(dataset)
+        subset = vidatio.helper.getSubset(trimmedDataset)
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -72,31 +75,29 @@ app.controller "VisualizationCtrl", [
             $log.info "Visualization controller createDiagram function called"
             switch type
                 when "scatter"
-                    # Currently default labels for the points are used
-                    chartData[0].unshift "A_x"
-                    chartData[1].unshift "A"
-                    visualization = new vidatio.ScatterPlot chartData
+                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
+                    new vidatio.ScatterPlot chartData
                 when "map"
                     # TODO map dataset and merge parser & recommender
                     Map.setScope $scope
-                    # Use the hole dataset because we want the other attributes inside the popups
+
+                    # Use the whole dataset because we want the other attributes inside the popups
                     geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), { x: xColumn, y: yColumn }
                     Map.setGeoJSON geoJSON
                 when "parallel"
-                    # Parallel coordinate chart need the columns as rows so we transpose
-                    chartData = vidatio.helper.transposeDataset chartData if !isTransposed
-                    isTransposed = true
-                    visualization = new vidatio.ParallelCoordinates chartData
+                    # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
+                    transposedDataset = vidatio.helper.transposeDataset(trimmedDataset)
+                    chartData = vidatio.helper.subsetWithXColumnFirst(transposedDataset, xColumn, yColumn)
+                    chartData = vidatio.helper.transposeDataset(chartData)
+                    new vidatio.ParallelCoordinates chartData
                 when "bar"
                     # Bar chart need the columns as rows so we transpose
-                    chartData = vidatio.helper.transposeDataset chartData if !isTransposed
-                    isTransposed = true
-                    visualization = new vidatio.BarChart chartData
+                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
+                    new vidatio.BarChart chartData
                 when "timeseries"
                     # Currently default labels for the bars are used
-                    chartData[0].unshift "x"
-                    chartData[1].unshift "A"
-                    visualization = new vidatio.TimeseriesChart chartData
+                    chartData = vidatio.helper.transformToArrayOfObjects trimmedDataset, xColumn, yColumn, recommendedDiagram
+                    new vidatio.TimeseriesChart chartData
                 else
                     # TODO: show a default image here
                     $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
@@ -130,10 +131,6 @@ app.controller "VisualizationCtrl", [
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
                 visualization.updateDataset(chartData)
 
-        dataset = Table.getDataset()
-        trimmedDataset = vidatio.helper.trimDataset(dataset)
-        subset = vidatio.helper.getSubset(trimmedDataset)
-
         switch Data.meta.fileType
             when "shp"
                 $scope.diagramType = "map"
@@ -145,13 +142,6 @@ app.controller "VisualizationCtrl", [
                 $scope.diagramType = recommendedDiagram
                 $scope.xAxisCurrent = String(xColumn)
                 $scope.yAxisCurrent = String(yColumn)
-
-                # trimmedDataset: 2D dataset
-                # value: row of the 2D dataset
-                # value[$scope.xAxisCurrent]: cell of row
-                # map: collects the cells of the selected columns
-                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
-                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
 
                 createDiagram(recommendedDiagram)
 
