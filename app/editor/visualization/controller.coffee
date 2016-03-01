@@ -150,6 +150,8 @@ app.controller "VisualizationCtrl", [
                 chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
                     trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
 
+                Table.setDiagramColumns xColumn, yColumn
+
                 createDiagram(recommendedDiagram)
 
         $timeout ->

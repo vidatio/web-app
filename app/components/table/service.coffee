@@ -13,6 +13,7 @@ app.service 'TableService', [
                 @useColumnHeadersFromDataset = true
                 @colHeadersSelection = []
                 @instanceTable = null
+                @diagramColumns = {}
 
             # @method initAxisSelection
             # @public
@@ -146,6 +147,16 @@ app.service 'TableService', [
                 $log.info "TableService getDataset called"
 
                 return @dataset
+
+            setDiagramColumns: (xColumn, yColumn) ->
+                unless xColumn or yColumn
+                    return
+
+                @diagramColumns["x"] = xColumn
+                @diagramColumns["y"] = yColumn
+
+            getDiagramColumns: ->
+                @diagramColumns
 
         new Table
 ]
