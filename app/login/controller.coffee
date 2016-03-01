@@ -39,7 +39,6 @@ app.controller "LoginCtrl", [
                                 $state.go element.name, 'id': element.params.id, element.params.locale
                                 return
 
-
                             $state.go element.name, element.params.locale
                             return
 
