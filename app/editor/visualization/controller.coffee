@@ -18,13 +18,9 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
-        visualization = undefined
-        chartData = undefined
+        $scope.meta = Data.meta
+        $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
-
-        dataset = Table.getDataset()
-        trimmedDataset = vidatio.helper.trimDataset(dataset)
-        subset = vidatio.helper.getSubset(trimmedDataset)
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -71,7 +67,8 @@ app.controller "VisualizationCtrl", [
         # @method createDiagram
         # @param {String} type
         createDiagram = (options) ->
-            $log.info "Visualization controller createDiagram function called"
+            $log.info "VisualizationCtrl createDiagram function called"
+            trimmedDataset = vidatio.helper.trimDataset Table.dataset
 
             switch options.type
                 when "scatter"
@@ -85,9 +82,9 @@ app.controller "VisualizationCtrl", [
                             ngToast.create
                                 className: "danger"
                                 content: translation
-                        visualization = new vidatio.ScatterPlot [[]], options
+                        new vidatio.ScatterPlot [[]], options
                     else
-                        visualization = new vidatio.ScatterPlot trimmedDataset, options
+                        new vidatio.ScatterPlot trimmedDataset, options
 
                 when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
@@ -98,51 +95,40 @@ app.controller "VisualizationCtrl", [
                     Map.setGeoJSON geoJSON
                     Map.setScope $scope
                 when "parallel"
-                    visualization = new vidatio.ParallelCoordinates trimmedDataset, options
+                    new vidatio.ParallelCoordinates trimmedDataset, options
                 when "bar"
-                    visualization = new vidatio.BarChart trimmedDataset, options
+                    new vidatio.BarChart trimmedDataset, options
                 when "timeseries"
-                    visualization = new vidatio.TimeseriesChart trimmedDataset, options
+                    new vidatio.TimeseriesChart trimmedDataset, options
                 else
                     # TODO: show a default image here
-                    $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
-
-        $scope.meta = Data.meta
-
-        $scope.diagramType = false
-
-        # @method setXAxisColumnSelection
-        # @param {Number} id
-        $scope.setXAxisColumnSelection = (id) ->
-            $log.info "Visualization controller setXAxisColumnSelection called"
-            $scope.xAxisCurrent = id
-            $scope.changeAxisColumnSelection()
-
-        # @method setYAxisColumnSelection
-        # @param {Number} id
-        $scope.setYAxisColumnSelection = (id) ->
-            $log.info "Visualization controller setYAxisColumnSelection called"
-            $scope.yAxisCurrent = id
-            $scope.changeAxisColumnSelection()
+                    $log.error "VisualizationCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
         # @method changeAxisColumnSelection
-        $scope.changeAxisColumnSelection = ->
-            $log.info "Visualization controller changeAxisColumnSelection called"
+        # @param {Number} axis
+        # @param {Number} id
+        $scope.changeAxisColumnSelection = (axis, id) ->
+            $log.info "VisualizationCtrl changeAxisColumnSelection called"
+            $log.debug
+                axis: axis
+                id: id
 
-            if $scope.diagramType? and $scope.diagramType isnt "map"
-                # trimmedDataset: 2D dataset
-                # value: row of the 2D dataset
-                # value[$scope.xAxisCurrent]: cell of row
-                # map: collects the cells of the selected columns
-                chartData = [trimmedDataset.map((value, index) -> value[$scope.xAxisCurrent]),
-                    trimmedDataset.map((value, index) -> value[$scope.yAxisCurrent])]
-                visualization.updateDataset(chartData)
+            if axis is "y"
+                $scope.yAxisCurrent = id
+            else if axis is "x"
+                $scope.xAxisCurrent = id
+
+            createDiagram
+                type: $scope.diagramType
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
 
         switch Data.meta.fileType
             when "shp"
                 $scope.diagramType = "map"
                 Map.setScope $scope
             else
+                trimmedDataset = vidatio.helper.trimDataset Table.dataset
                 recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
 
                 if recommendationResults.error?
@@ -159,7 +145,19 @@ app.controller "VisualizationCtrl", [
                     $scope.diagramType = recommendationResults.type
                     $scope.xAxisCurrent = String(recommendationResults.xColumn)
                     $scope.yAxisCurrent = String(recommendationResults.yColumn)
-                    createDiagram(recommendationResults)
+
+                # After having recommend diagram options, we watch the dataset of the table
+                # because the watcher fires at initialization the diagram gets immediately drawn
+                $scope.$watch (->
+                    Table.dataset
+                ), ( ->
+                    $log.info "VisualizationCtrl - dataset has changed so we create a new diagram"
+
+                    createDiagram
+                        type: $scope.diagramType
+                        xColumn: $scope.xAxisCurrent
+                        yColumn: $scope.yAxisCurrent
+                ), true
 
         $timeout ->
             Progress.setMessage ""
@@ -168,7 +166,7 @@ app.controller "VisualizationCtrl", [
         # @param {String} name
         # @param {String} type
         $scope.selectDiagram = (name, type) ->
-            $log.info "Visualization controller selectDiagram called"
+            $log.info "VisualizationCtrl selectDiagram called"
             $log.debug
                 name: name
                 type: type
@@ -177,7 +175,7 @@ app.controller "VisualizationCtrl", [
             $scope.diagramType = type
 
             createDiagram
-                type: type
+                type: $scope.diagramType
                 xColumn: $scope.xAxisCurrent
                 yColumn: $scope.yAxisCurrent
 
@@ -186,9 +184,8 @@ app.controller "VisualizationCtrl", [
         #@description exports a
         #@params {string} type
         $scope.shareVisualization = (type) ->
-            $log.info "ShareCtrl shareVisualization called"
+            $log.info "VisualizationCtrl shareVisualization called"
             $log.debug
-                message: "ShareCtrl shareVisualization called"
                 type: type
 
             $map = $("#map")
@@ -197,9 +194,8 @@ app.controller "VisualizationCtrl", [
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
-                $log.info "ShareCtrl shareVisualization promise success called"
+                $log.info "VisualizationCtrl shareVisualization promise success called"
                 $log.debug
-                    message: "Share mapToImg success callback"
                     obj: obj
 
                 Progress.setMessage ""
