@@ -74,8 +74,9 @@ app.service 'TableService', [
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
 
+                @useColumnHeadersFromDataset = false
+
                 if @instanceTable
-                    @useColumnHeadersFromDataset = false
                     @instanceTable.updateSettings
                         colHeaders: true
                     @instanceTable.render()
