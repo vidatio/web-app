@@ -42,7 +42,7 @@
     "karma": "^0.13.21",
     "karma-coffee-preprocessor": "^0.2.1",
     "karma-jasmine": "^0.3.5",
-    "karma-jasmine-jquery": "file:../../../../tmp/gbeschbacher/npm-7888-31da1caa/git-cache-2a93b0aa9ced/bd0bbc6fa41e4c99c9d9e91f9cc1dc9bc4ee103f",
+    "karma-jasmine-jquery": "git+https://git@github.com/AStoker/karma-jasmine-jquery.git",
     "karma-ng-constant-preprocessor": "^1.0.0",
     "karma-phantomjs-launcher": "^0.1.4"
   },
