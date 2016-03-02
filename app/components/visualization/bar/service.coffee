@@ -22,3 +22,4 @@ class vidatio.BarChart extends vidatio.Visualization
             .y(options.headers["y"])
             .draw()
         , 0
+

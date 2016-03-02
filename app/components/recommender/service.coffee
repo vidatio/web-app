@@ -20,18 +20,23 @@ class window.vidatio.Recommender
         schema = []
 
         dataset.forEach (column) =>
-            if vidatio.helper.isCoordinateColumn column
-                schema.push @types[0]
-            else if vidatio.helper.isDateColumn column
-                schema.push @types[1]
-            else if vidatio.helper.isNominalColumn column
-                schema.push @types[2]
-            else if vidatio.helper.isNumericColumn column
-                schema.push @types[3]
-            else
-                schema.push @types[4]
+            schema.push @getColumnType column
 
         return schema
+
+    getColumnType: (column) ->
+        if vidatio.helper.isCoordinateColumn column
+            type = @types[0]
+        else if vidatio.helper.isDateColumn column
+            type = @types[1]
+        else if vidatio.helper.isNominalColumn column
+            type = @types[2]
+        else if vidatio.helper.isNumericColumn column
+            type = @types[3]
+        else
+            type = @types[4]
+
+        return type
 
     # @method getVariances
     # @public

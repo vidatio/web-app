@@ -46,7 +46,8 @@
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
         "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
-        "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden."
+        "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
+        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' ist mit '{{diagramType}}' nicht möglich. Bitte eine andere Spalte auswählen."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
