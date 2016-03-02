@@ -367,7 +367,7 @@ class window.vidatio.Helper
             dataItem[xHeader] = x
             dataItem[yHeader] = y
 
-            if visualizationType is "bar" or visualizationType == "scatter"
+            if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
             else if visualizationType is "timeseries"
                 dataItem["name"] = "Line 1"
