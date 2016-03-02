@@ -11,6 +11,14 @@ class window.vidatio.Visualization
         vidatio.log.info "Visualization remove called"
         $("#chart").empty()
 
+    # @method preProcess
+    # @param {Object} options
+    #   @param {String} type
+    #   @param {Integer} xColumn
+    #   @param {Integer} yColumn
+    #   @param {Object} headers
+    #       @param {String} headers
+    #       @param {String} headers
     preProcess: (options) ->
         vidatio.log.info "Visualization preprocess called"
         vidatio.log.debug
