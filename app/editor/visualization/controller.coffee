@@ -107,10 +107,8 @@ app.controller "VisualizationCtrl", [
                 when "timeseries"
                     new vidatio.TimeseriesChart trimmedDataset, options
                 else
-                    $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
-                        ngToast.create
-                            className: "danger"
-                            content: translation
+                    $log.error
+                        message: recommendationResults.error
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -142,9 +140,6 @@ app.controller "VisualizationCtrl", [
                 recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
 
                 if recommendationResults.error?
-                    $log.error
-                        message: recommendationResults.error
-
                     $scope.diagramType = false
                 else
                     $log.info "Recommender Results: #{JSON.stringify(recommendationResults)}"
