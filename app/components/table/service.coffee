@@ -13,6 +13,7 @@ app.service 'TableService', [
                 @useColumnHeadersFromDataset = true
                 @colHeadersSelection = []
                 @instanceTable = null
+                @diagramColumns = {}
 
             # @method initAxisSelection
             # @public
@@ -56,10 +57,9 @@ app.service 'TableService', [
             getColumnHeaders: ->
                 $log.info "TableService getColumnHeaders called"
 
-                if @useColumnHeadersFromDataset
-                    return @instanceTable.getColHeader()
-                else
-                    return []
+                return @instanceTable.getColHeader().filter( (value) ->
+                    return value if value?
+                )
 
             # @method reset
             # @public
@@ -74,8 +74,9 @@ app.service 'TableService', [
             resetColumnHeaders: ->
                 $log.info "TableService resetColumnHeaders called"
 
+                @useColumnHeadersFromDataset = false
+
                 if @instanceTable
-                    @useColumnHeadersFromDataset = false
                     @instanceTable.updateSettings
                         colHeaders: true
                     @instanceTable.render()
@@ -139,21 +140,6 @@ app.service 'TableService', [
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
-            # @method setCell
-            # @public
-            # @param {Number} row
-            # @param {Number} column
-            # @param {Mixed} data
-            setCell: (row, column, data) ->
-                $log.info "TableService setCell called"
-                $log.debug
-                    message: "TableService setCell called"
-                    row: row
-                    column: column
-                    data: data
-
-                @dataset[row][column] = data
-
             # @method getDataset
             # @public
             # @return {Array}
@@ -161,6 +147,27 @@ app.service 'TableService', [
                 $log.info "TableService getDataset called"
 
                 return @dataset
+
+            # @method setDiagramColumns
+            # @public
+            setDiagramColumns: (xColumn, yColumn) ->
+                $log.info "TableService setDiagramColumns called"
+                $log.debug
+                    xColumn: xColumn
+                    yColumn: yColumn
+
+                unless xColumn or yColumn
+                    return
+
+                @diagramColumns["x"] = xColumn
+                @diagramColumns["y"] = yColumn
+
+            # @method getDiagramColumns
+            # @public
+            # @return {Object}
+            getDiagramColumns: ->
+                $log.info "TableService getDiagramColumns called"
+                @diagramColumns
 
         new Table
 ]

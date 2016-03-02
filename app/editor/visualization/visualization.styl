@@ -4,6 +4,8 @@
         width 100%
         height calc(100% - 50px)
 
+
+
     .angular-leaflet-map
         height calc(100% - 50px) /* -50px according to the settings-bars' height + 20px margin */
         width 100%
@@ -51,7 +53,6 @@
 
     .axis-selection
         margin-top 5px
-
         p
             display inline-block
 
@@ -77,3 +78,22 @@
 
     .download-button li:first-child
             border-bottom 2px solid $color-green
+
+    .diagram-placeholder
+        padding 0 0
+
+        div
+            box-shadow inset $box-shadow-size $color-shadow
+            min-height 318px
+            height calc(100vh - 310px)
+
+        img
+            width 120px
+            display inline-block
+            opacity .4
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
+            margin auto

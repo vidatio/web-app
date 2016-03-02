@@ -43,6 +43,7 @@
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
         "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
+        "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",

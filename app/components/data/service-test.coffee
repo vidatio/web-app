@@ -36,11 +36,10 @@ describe "Service Data", ->
     describe "should update Table and Map", ->
         it "with file type csv", ->
             @Data.meta.fileType = "csv"
-
             @Data.updateMap 0, 0, "oldData", "newData"
 
-            expect(@Converter.convertArrays2GeoJSON).toHaveBeenCalled()
-            expect(@Map.setGeoJSON).toHaveBeenCalled()
+            expect(@Converter.convertArrays2GeoJSON).not.toHaveBeenCalled()
+            expect(@Map.setGeoJSON).not.toHaveBeenCalled()
 
         it "with file type shp", ->
             @Data.meta.fileType = "shp"

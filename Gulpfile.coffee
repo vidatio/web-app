@@ -120,7 +120,7 @@ BUILD =
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
-            "./bower_components/d3.parcoords.css/d3.parcoords.css"
+            "./bower_components/d3.parcoords.js/d3.parcoords.css"
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
         ]
     dirs:

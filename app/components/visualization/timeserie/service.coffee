@@ -1,28 +1,28 @@
 "use strict"
 
 class vidatio.TimeseriesChart extends vidatio.Visualization
-    constructor: (dataset) ->
+    constructor: (dataset, options) ->
         vidatio.log.info "Timeseries chart constructor called"
         vidatio.log.debug
             dataset: dataset
+            options: options
+
+        super dataset
+        @preProcess options
 
         # handle different date formats and parse them for c3.js charts
-        for element in dataset
-            tmp = moment(element.x, ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
-            element["date"] = tmp
+        for element in @chartData
+            element[options.headers["x"]] = moment(element[options.headers["x"]], ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
 
-        setTimeout(->
-            vidatio.log.info "Timeseries chart generation called"
-
-            chart = d3plus.viz()
-                .container("#chart")
-                .data(dataset)
-                .type("line")
-                .id("name")
-                .text("name")
-                .y("y")
-                .x("date")
-                .draw()
-
-            super(dataset, chart)
-        , 500)
+        # we need to wait for angular to finish rendering
+        setTimeout =>
+            d3plus.viz()
+            .container("#chart")
+            .data(@chartData)
+            .type("line")
+            .id("name")
+            .text("name")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
+            .draw()
+        , 0
