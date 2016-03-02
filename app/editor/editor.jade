@@ -2,7 +2,9 @@
     //- TODO: -save user edited text as title
     .title
         //p(contenteditable="true") Titel des Datensatzes
-        input(type="text" id="vidatio-title" value="" placeholder="{{ 'VIDATIO_TITLE' | translate }}" )
+        span.icon-edit-2.icon-vidatio-title
+        input(type="text" id="vidatio-title" value="" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" )
+        .underline-title
     .editor-panel
         a.tab(href='#' ng-class="{'active': activeTabs[0]}" ng-click="tabClicked(0)") {{ "DATASET" | translate | uppercase }}
         a.tab.middle(href='#' ng-class="{'active': activeTabs[1]}" ng-click="tabClicked(1)") {{ "DATASET + VISUALIZATION" | translate | uppercase }}
