@@ -87,6 +87,41 @@ header
                     color $color-passive
                     border-color $color-passive
 
+    //editable title input-field
+    .icon-vidatio-title
+        font-size 21px
+        height 35px
+        line-height 33px
+
+    .title
+        text-align center
+        width 100%
+        margin-bottom 20px
+        position absolute
+        top 95px
+
+        input
+            min-width 240px
+            border none
+            display inline-block
+            font-family Colaborate-Thin, $fonts
+            font-size 30px
+            height 35px
+            line-height 33px
+            padding 0 2px
+            text-align center
+
+            &:focus
+            &:hover
+            &:active
+                outline-color $color-green
+                outline-style auto
+
+    .underline-title
+        border-bottom 3px solid $color-red-light
+        min-width 280px
+        margin 0 auto
+
     #back-to-datasets-overview
         float left
         margin-left 60px

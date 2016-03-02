@@ -40,9 +40,16 @@ header.ng-cloak
                         a#edit-data.active(href='#' type="submit" ng-class="[!globals.authorized]")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref='app.share({ locale: locale })')
+                        a#save-dataset(ui-sref='app.share({ locale: locale })' ng-click="saveVidatioTitle()")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
+
+                    //- TODO: -save user edited text as title
+                    .title
+                        //p(contenteditable="true") Titel des Datensatzes
+                        span.icon-edit-2.icon-vidatio-title
+                        input(type="text" id="vidatio-title" value="" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" )
+                        .underline-title
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
                     p {{"LINK_TO_SHARE" | translate }}
