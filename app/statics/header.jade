@@ -10,9 +10,7 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview.btn.btn-primary(ui-sref='app.catalog({ locale: locale })')
-                        span.btn-tip.fui-arrow-left
-                        span {{ "OVERVIEW" | translate | uppercase }}
+                    a#back-to-datasets-overview.button.icon-return-2(ui-sref='app.catalog({ locale: locale })')
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
@@ -109,4 +107,3 @@ header.ng-cloak
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
-

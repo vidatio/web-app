@@ -36,14 +36,17 @@
                 padding 2px
 
                 & > a
-                    background-image url(../images/download-button.svg)
-                    background-position center center
-                    background-repeat no-repeat
                     border-radius 4px
                     display block
                     height 36px
                     overflow hidden
                     width 36px
+
+                .icon-download-3
+                    font-size 24px
+                    text-align center
+                    color $color-black
+                    line-height 36px
 
                 ul
                     background $color-white none repeat scroll 0 0
@@ -111,10 +114,15 @@
 
                 &:hover
                     & > ul
-                     display block
+                        display block
 
                     & > a
                         background-color $color-hover-light
+
+                .download-icon
+                    color $color-black
+                    margin-top 8px
+                    font-size 24px
 
     .wrapper-content
         max-width 100%
