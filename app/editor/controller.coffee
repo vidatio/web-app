@@ -48,4 +48,19 @@ app.controller "EditorCtrl", [
             for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
+
+        $.fn.textWidth = (text, font) ->
+            if !$.fn.textWidth.fakeEl
+                $.fn.textWidth.fakeEl = $('<span>').hide().appendTo(document.body)
+            $.fn.textWidth.fakeEl.text(text or @val() or @text()).css 'font', font or @css('font')
+            $.fn.textWidth.fakeEl.width()
+
+        $('#vidatio-title').on('input', ->
+            paddingBetweenLetters = 10
+            #Works as a minimum width
+            valWidth = $(this).textWidth() + paddingBetweenLetters + 'px'
+            $('#' + @id + '-width').html valWidth
+            $('#vidatio-title').css 'width', valWidth
+            return
+        ).trigger 'input'
 ]
