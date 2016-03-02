@@ -2,7 +2,6 @@
     //- TODO: -save user edited text as title
     .title
         p(contenteditable="true") Titel des Datensatzes
-        .underline-red
 
     .editor-panel
         a.tab(href='#' ng-class="{'active': activeTabs[0]}" ng-click="tabClicked(0)") {{ "DATASET" | translate | uppercase }}

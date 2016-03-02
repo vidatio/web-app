@@ -62,16 +62,17 @@ header.ng-cloak
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
-                .col-xs-12.col-sm-pull-2.col-sm-8#process-nav
-                    a#back-to-import.active(ui-sref='app.import({ locale: locale })')
-                        span.icon-import-2
-                        span  {{ "IMPORT" | translate | uppercase }}
-                    a#edit-data(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
-                        span.icon-edit
-                        span  {{"EDIT" | translate | uppercase}}
-                    a#save-dataset(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
-                        span.icon-check
-                        span  {{"USE" | translate | uppercase}}
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#back-to-import.active(ui-sref='app.import({ locale: locale })')
+                            span.icon-import-2
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
