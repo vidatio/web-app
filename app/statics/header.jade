@@ -32,20 +32,17 @@ header.ng-cloak
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
                     a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
 
-                .col-xs-12.col-sm-pull-2.col-sm-8#process-nav
-                    a#back-to-import(ui-sref='app.import({ locale: locale })')
-                        span.icon-import-2
-                        span  {{ "IMPORT" | translate | uppercase }}
-                    a#edit-data.active(href='#' type="submit" ng-class="[!globals.authorized]")
-                        span.icon-edit
-                        span  {{"EDIT" | translate | uppercase}}
-                    a#save-dataset(ui-sref='app.share({ locale: locale })')
-                        span.icon-check
-                        span  {{"USE" | translate | uppercase}}
-
-                    //- TODO: -save user edited text as title
-                    .title
-                        p(contenteditable="true") Titel des Datensatzes
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#back-to-import(ui-sref='app.import({ locale: locale })')
+                            span.icon-import-2
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data.active(href='#' type="submit" ng-class="[!globals.authorized]")
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset(ui-sref='app.share({ locale: locale })')
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
                     p {{"LINK_TO_SHARE" | translate }}
