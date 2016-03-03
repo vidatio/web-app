@@ -5,15 +5,17 @@ describe "Header Controller", ->
 
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, DataService) ->
+        inject ($controller, $rootScope, $httpBackend, DataService, $compile) ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
             @Data = DataService
+            @compile = $compile
+            @inputElement = angular.element('<div class="title"><input type="text" id="vidatio-title" ng-change="saveVidatioTitle()" ng-model="vidatioTitle"></input></div>')
 
             HeaderCtrl = $controller "HeaderCtrl", {$scope: @scope, $rootScope: @rootScope, DataService: @Data}
 
-    describe "on save vidatio-title if title input-field is empty", ->
+    describe "on save vidatio-title if title input-field is not filled up", ->
     it "should set the Data.meta.filename according to a predefined standard title", ->
         @httpBackend.whenGET(/index/).respond ""
         @httpBackend.whenGET(/editor/).respond ""
@@ -35,9 +37,14 @@ describe "Header Controller", ->
         @httpBackend.expectGET(/languages/).respond ""
 
         @Data.meta.fileName = ""
-        @scope.vidatioTitle = "Vidatio created a diagramm for me"
-        @scope.standardTitle = "My Vidatio"
 
-        @scope.saveVidatioTitle()
+        @compile(@inputElement) @scope
+        @scope.$digest()
+
+        @inputElementInput = @inputElement.find("input")
+
+        angular.element(@inputElementInput).val("I created my first Vidatio").trigger "input"
+        @scope.$apply()
+
         expect(@Data.meta.fileName).toBeDefined()
-        expect(@Data.meta.fileName).toEqual("Vidatio created a diagramm for me")
+        expect(@Data.meta.fileName).toBe("I created my first Vidatio")
