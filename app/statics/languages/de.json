@@ -3,6 +3,8 @@
     "UPLOAD_FILE": "Datei hochladen",
     "GENERATED_AUTOMATICALLY": "Eine Grafik wird automatisch erstellt",
     "SAVE_OR_SHARE": "Speichern oder Teilen",
+    "SAVE_AND_SHARE": "Vidatio speichern und teilen" ,
+    "SAVE_PERMANENTLY": "Vidatio dauerhaft speichern",
     "FEATURED_VIDATIOS": "Beliebte Vidatios",
     "SEARCH_VIDATIOS": "Vidatios durchsuchen",
     "POPULAR_CATEGORIES": "Beliebte Kategorien",
@@ -55,6 +57,8 @@
     "PUBLICATION": "Veröffentlichung",
     "CHOOSE": "Auswählen",
     "AUTHOR": "Urheber",
+    "EDITOR": "Bearbeiter",
+    "TITLE": "Titel",
     "CATEGORY": "Kategorie",
     "LICENCE": "Lizenz",
     "OVERLAY_MESSAGES": {

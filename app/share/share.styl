@@ -1,0 +1,143 @@
+#share
+    margin 10px auto 0
+    h4
+        text-align center
+        margin 15px auto
+        width 100%
+
+    .row
+        .area
+            height 254px
+            border-top 3px solid $color-green
+            background $color-white
+            box-shadow $box-shadow-size $color-shadow
+            text-align center
+            margin-bottom 56px
+            
+            a:not(.inverse) 
+                {fillParent}
+                display inline-block
+                color $color-grey-dark
+            
+            &:hover
+                background $color-hover-light
+                
+
+        .option-icon
+            width 100px
+            margin 20px auto 0
+            height 62px
+            font-size 45px
+            color $color-dark-grey
+            text-align center
+        
+        #preview
+            height 293px
+
+        #preview
+        #download
+            margin-right 13px
+
+        #download  
+            height 215px
+            a
+                display inline
+                .option-icon
+                    margin-top 5px      
+            form
+                width 70%
+                margin 0 auto
+                
+                .form-group
+                    width 43%
+                    margin 0 3% 
+                    float left
+                    
+                    &::after
+                        border-left 6px solid transparent
+                        border-right 6px solid transparent
+                        border-top 5px solid black
+                        content ""
+                        float right
+                        margin -18px 15px 0 0
+                        width 10px
+                    
+                    label
+                        margin-bottom 0
+                        {lightText}
+                    
+                    select
+                        text-align center
+                        -webkit-appearance none  
+                        -moz-appearance none
+                        appearance none
+                        height 34px
+                        padding 5px 12px
+                        &:focus
+                        &:hover
+                            position static
+                            outline none
+        
+        #save-share
+            padding 0 45px 25px
+            height auto
+            min-height 564px
+            margin-left 13px
+            &:hover
+                background-color $color-white
+            
+            .share-options 
+                display block
+                height 45px
+                margin 0 auto 15px
+                padding 0
+                width 275px
+
+                li
+                    list-style-type none
+                    float left
+                    margin 0 5px
+                    
+                    button
+                        width 45px
+                        height 45px
+                        padding 5px
+                        font-size 25px
+                        color $color-white
+            
+            .input-group 
+                margin-bottom 0
+                width 100%
+                .form-control:not(:first-child)
+                    border-left none
+                
+            button[type="submit"]
+                margin-top 10px
+            
+            p
+                {lightText}
+                margin-bottom 12px
+            
+            .col-xs-6.left
+                text-align left
+                padding 0
+                
+            .col-xs-6.right
+                text-align right
+                padding 0
+            
+            .share-only
+                margin-top 30px
+                color $color-border
+
+
+@media(max-width 768px)
+    #share
+        .row
+            .area
+                margin-bottom 25px !important
+            
+            #preview
+            #download
+            #save-share
+                margin 0    
