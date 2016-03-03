@@ -95,13 +95,15 @@ header
 
     .title
         text-align center
-        width 100%
-        margin-bottom 20px
+        width 98%
+        margin 0 1%
+        left 0
         position absolute
         top 95px
 
         input
             min-width 240px
+            max-width 100%
             border none
             display inline-block
             font-family Colaborate-Thin, $fonts
@@ -120,6 +122,7 @@ header
     .underline-title
         border-bottom 3px solid $color-red-light
         min-width 280px
+        max-width 100%
         margin 0 auto
 
     #back-to-datasets-overview
@@ -237,6 +240,18 @@ header
                 background $color-hover-light
                 border-color $color-hover-light
 
+@media(max-width: 767px)
+    header
+        .title
+            width 90%
+            margin 0 5%
+
+            input
+                min-width 180px
+                font-size 22px
+
+        .underline-title
+            min-width 220px
 
 @media(max-width: 800px)
     header
@@ -258,7 +273,5 @@ header
                              &:nth-child(2)
                                     &::after
                                         margin-top 5px
-            .title
-                    p
-                        margin-top 15px
-                        font-size 21px
+        .title
+            top 125px

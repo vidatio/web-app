@@ -19,7 +19,8 @@ app.controller "HeaderCtrl", [
         .then (translation) ->
             Data.meta.fileName = translation + "_" +  moment().format("L") + "_" + moment().format("LT")
 
-        # set the vidatio-title according to the users' input
+        # @method saveVidatioTitle
+        # @description set the vidatio-title according to the users' input
         $scope.saveVidatioTitle = ->
             Data.meta.fileName = $scope.vidatioTitle
 

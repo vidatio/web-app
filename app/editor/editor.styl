@@ -173,8 +173,11 @@
                 font-size 16px
                 display inline-block
                 margin-top 2px
-                width 50%
+                width 49.5%
                 float none
+
+                &:first-child
+                    margin-right 1%
 
                 &.middle
                     float right
@@ -189,3 +192,27 @@
     #editor
         .row
             height 100%
+
+        .editor-panel
+            .tab
+                font-size 16px
+                line-height 40px
+
+                &.middle
+                    line-height 20px !important
+                    padding-top 1px
+
+                    &.active
+                        padding-top 3px
+
+@media(min-width: 991px) and (max-width: 1079px)
+    #editor
+        .editor-panel
+            .tab
+                font-size 15px
+
+@media(min-width: 1080px) and (max-width: 1200px)
+    #editor
+        .editor-panel
+            .tab
+                font-size 17px
