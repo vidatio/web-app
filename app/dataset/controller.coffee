@@ -20,7 +20,8 @@ app.controller "DatasetCtrl", [
     "$location"
     "$translate"
     "ngToast"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast) ->
+    "DataService"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data) ->
 
         # set link to current vidatio
         $rootScope.link = $location.$$absUrl
@@ -37,6 +38,7 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
+            Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
@@ -69,7 +71,8 @@ app.controller "DatasetCtrl", [
                     content: translation
                     className: "danger"
 
-        # create a new Vidatio and set necessary data
+        # @method $scope.createVidatio
+        # @description creates Vidatio from saved Dataset
         $scope.createVidatio = ->
             $log.info "DatasetCtrl createVidatio called"
             $log.debug
@@ -77,7 +80,21 @@ app.controller "DatasetCtrl", [
                 name: $scope.data.name
                 data: $scope.data.data
 
-            Table.setDataset $scope.data.data
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                Progress.setMessage message
+
+            #TODO: Header need to be initialized from database.
+
+            if Data.meta["fileType"] is "shp"
+                dataset = Converter.convertGeoJSON2Arrays $scope.data.data
+                console.log "dataset", dataset
+                Table.setDataset dataset
+                Table.useColumnHeadersFromDataset = true
+                Map.setGeoJSON $scope.data.data
+                console.log "geoJSON", $scope.data.data
+            else
+                Table.setDataset $scope.data.data
+                Table.useColumnHeadersFromDataset = true
 
             $timeout ->
                 Progress.setMessage ""
