@@ -17,12 +17,17 @@ app.controller "HeaderCtrl", [
         # set a standardisized vidatio-title on page enter
         $translate("NEW_VIDATIO")
         .then (translation) ->
-            Data.meta.fileName = translation + "_" +  moment().format("L") + "_" + moment().format("LT")
+            $scope.standardTitle = translation + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+            Data.meta.fileName = $scope.standardTitle
 
         # @method saveVidatioTitle
-        # @description set the vidatio-title according to the users' input
+        # @description set the users' input (if existing) as vidatio-title; standard-title otherwise
         $scope.saveVidatioTitle = ->
-            Data.meta.fileName = $scope.vidatioTitle
+            if $scope.vidatioTitle == ""
+                console.log Data.meta.fileName = $scope.standardTitle
+            else
+                Data.meta.fileName = $scope.vidatioTitle
+                console.log "test"
 
         # the following lines are a solution from stack-overflow
         # the input-field width automatically resizes according to a users' input
