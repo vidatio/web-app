@@ -86,10 +86,7 @@ app.controller "VisualizationCtrl", [
 
                 Progress.setMessage ""
 
-                if Data.meta.fileName == ""
-                    fileName = vidatio.helper.dateToString(new Date())
-                else
-                    fileName = Data.meta.fileName
+                fileName = Data.meta.fileName
 
                 Share.download fileName, obj[type]
             , (error) ->
