@@ -29,6 +29,10 @@
                                 img.graph-icon(src="{{ diagram.imagePath }}")
                                 | {{ diagram.name }}
 
+            .color-selection
+                a(href='#').icon-download-3
+                    color-picker(ng-model="color")
+
             .download-button
                 a(href='#').icon-download-3
                 ul

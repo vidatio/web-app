@@ -82,32 +82,32 @@ app.controller "VisualizationCtrl", [
             transposedDataset = vidatio.helper.transposeDataset subset
             schema = vidatio.recommender.getSchema transposedDataset
 
+            if vidatio.helper.isDiagramPossible schema[options.xColumn], schema[options.yColumn], options.type
+                chartData = trimmedDataset
+            else
+                $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
+                    ngToast.create
+                        className: "danger"
+                        content: translation
+                chartData = []
+
             switch options.type
                 when "scatter"
-
-                    if vidatio.helper.isDiagramPossible schema[options.xColumn], schema[options.yColumn], "scatter"
-                        chart = new vidatio.ScatterPlot trimmedDataset, options
-                    else
-                        $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
-                            ngToast.create
-                                className: "danger"
-                                content: translation
-                        chart = new vidatio.ScatterPlot [[]], options
-
+                    chart = new vidatio.ScatterPlot chartData, options
                 when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), {
+                    geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getColumnHeaders(), {
                         x: options.xColumn,
                         y: options.yColumn
                     }
                     Map.setGeoJSON geoJSON
                     Map.setScope $scope
                 when "parallel"
-                    chart = new vidatio.ParallelCoordinates trimmedDataset, options
+                    chart = new vidatio.ParallelCoordinates chartData, options
                 when "bar"
-                    chart = new vidatio.BarChart trimmedDataset, options
+                    chart = new vidatio.BarChart chartData, options
                 when "timeseries"
-                    chart = new vidatio.TimeseriesChart trimmedDataset, options
+                    chart = new vidatio.TimeseriesChart chartData, options
                 else
                     $log.error
                         message: recommendationResults.error
