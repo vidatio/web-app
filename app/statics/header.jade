@@ -10,7 +10,7 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview.btn.btn-primary(ui-sref='app.catalog({ locale: locale })')
+                    a#back-to-datasets-overview.btn.btn-primary(ui-sref="app.catalog({ locale: locale })")
                         span.btn-tip.fui-arrow-left
                         span {{ "OVERVIEW" | translate | uppercase }}
 
@@ -30,25 +30,23 @@ header.ng-cloak
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#back-to-import(ui-sref='app.import({ locale: locale })')
+                        a#back-to-import(ui-sref="app.import({ locale: locale })")
                             span.icon-import-2
                             span  {{ "IMPORT" | translate | uppercase }}
                         a#edit-data.active(href='#' type="submit" ng-class="[!globals.authorized]")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref='app.share({ locale: locale })' ng-click="saveVidatioTitle()")
+                        a#save-dataset(ui-sref="app.share({ locale: locale })")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
-                    //- TODO: -save user edited text as title
                     .title
-                        //p(contenteditable="true") Titel des Datensatzes
                         span.icon-edit-2.icon-vidatio-title
-                        input(type="text" id="vidatio-title" value="" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" ng-model="title")
+                        input(type="text" id="vidatio-title" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" ng-change="saveVidatioTitle()" ng-model="vidatioTitle" ng-model-options="{ updateOn: 'blur' }")
                         .underline-title
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
@@ -67,11 +65,11 @@ header.ng-cloak
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#back-to-import(ui-sref='app.import({ locale: locale })')
+                        a#back-to-import(ui-sref="app.import({ locale: locale })")
                             span.icon-import-2
                             span  {{ "IMPORT" | translate | uppercase }}
                         a#edit-data(ui-sref="app.editor({ locale: locale })" type="submit" ng-class="[!globals.authorized]")
@@ -94,13 +92,13 @@ header.ng-cloak
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#back-to-import.active(ui-sref='app.import({ locale: locale })')
+                        a#back-to-import.active(ui-sref="app.import({ locale: locale })")
                             span.icon-import-2
                             span  {{ "IMPORT" | translate | uppercase }}
                         a#edit-data(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(href='#' type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
+                        a#save-dataset(href="#" type="submit" ng-class="{true: 'disabled'}[!globals.authorized]")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -111,7 +109,7 @@ header.ng-cloak
                 .col-xs-6.middle
                     h1.underline-red {{ "LOGIN" | translate | uppercase }}
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
@@ -120,7 +118,7 @@ header.ng-cloak
                 .col-xs-6.middle
                     h1.underline-red {{ "REGISTRATION" | translate | uppercase }}
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-3.logo
@@ -144,4 +142,4 @@ header.ng-cloak
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
