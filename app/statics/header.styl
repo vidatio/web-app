@@ -29,7 +29,10 @@ header
 
     #process-nav
         max-width 653px
+        height 50px
+        display block
         margin 0 auto
+        position relative
 
         a
             font-family Colaborate-Medium, $fonts
@@ -41,17 +44,47 @@ header
             height 50px
             text-align center
             width 33.333%
+            
+            //hover transitions for underline and color
+            &:nth-child(3)
+            &:nth-child(2)
+            &:first-child    
+                &::before
+                    background $color-hover-dark
+                    bottom 0
+                    content ""
+                    display block
+                    height 3px
+                    position absolute
+                    transition width 0.3s ease 0s
+                    width 0
+                
+                &:hover:not(.active):not(.disabled)
+                    &::before
+                        width 33.333%
+            
+            &:nth-child(3)
+                &::before
+                    left calc(653px/3*2)
+            &:nth-child(2)
+                &::before
+                    right calc(653px/3)
+            &:first-child
+                &::before
+                    right calc(653px/3*2)
 
             &:hover,
             &:focus
                 color $color-hover-dark
-                border-color $color-hover-dark
+                -webkit-transition color 0.5s
+                transition color 0.5s
 
+
+            //active state with arrow in line 
             &.active
                 color $color-green
                 border-color $color-green
-
-                //arrow in line on active
+                
                 &::after
                     border-left 16px solid transparent
                     border-right 16px solid transparent
