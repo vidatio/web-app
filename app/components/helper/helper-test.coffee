@@ -351,19 +351,19 @@ describe "Service Helper", ->
         expect(actualResult).toEqual(expectedResult)
 
     it 'should check if diagram is possible', ->
-        expect(@Helper.isDiagramPossible("numeric", "numeric", "scatter")).toEqual(true)
-        expect(@Helper.isDiagramPossible("numeric", "date", "scatter")).toEqual(false)
-        expect(@Helper.isDiagramPossible("nominal", "numeric", "scatter")).toEqual(false)
+        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "scatter")).toEqual(true)
+        expect(@Helper.isDiagramPossible(["numeric"], ["date"], "scatter")).toEqual(false)
+        expect(@Helper.isDiagramPossible(["nominal"], ["numeric"], "scatter")).toEqual(false)
 
-        expect(@Helper.isDiagramPossible("", "", "map")).toEqual(true)
+        expect(@Helper.isDiagramPossible([], [], "map")).toEqual(true)
 
-        expect(@Helper.isDiagramPossible("", "", "parallel")).toEqual(true)
+        expect(@Helper.isDiagramPossible([], [], "parallel")).toEqual(true)
 
-        expect(@Helper.isDiagramPossible("numeric", "numeric", "bar")).toEqual(true)
-        expect(@Helper.isDiagramPossible("nominal", "numeric", "bar")).toEqual(true)
-        expect(@Helper.isDiagramPossible("numeric", "nominal", "bar")).toEqual(false)
+        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "bar")).toEqual(true)
+        expect(@Helper.isDiagramPossible(["nominal"], ["numeric"], "bar")).toEqual(true)
+        expect(@Helper.isDiagramPossible(["numeric"], ["nominal"], "bar")).toEqual(false)
 
-        expect(@Helper.isDiagramPossible("date", "numeric", "timeseries")).toEqual(true)
-        expect(@Helper.isDiagramPossible("date", "nominal", "timeseries")).toEqual(false)
-        expect(@Helper.isDiagramPossible("numeric", "numeric", "timeseries")).toEqual(false)
+        expect(@Helper.isDiagramPossible(["date"], ["numeric"], "timeseries")).toEqual(true)
+        expect(@Helper.isDiagramPossible(["date"], ["nominal"], "timeseries")).toEqual(false)
+        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "timeseries")).toEqual(false)
 
