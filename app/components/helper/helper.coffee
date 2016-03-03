@@ -422,10 +422,10 @@ class window.vidatio.Helper
                     return false
 
             when "timeseries"
-                if axis is "y" and columnType isnt "numeric"
+                if xColumnType isnt "date"
                     return false
 
-                if axis is "x" and columnType isnt "date"
+                if yColumnType isnt "numeric"
                     return false
 
         return true
