@@ -48,7 +48,7 @@ header.ng-cloak
                     .title
                         //p(contenteditable="true") Titel des Datensatzes
                         span.icon-edit-2.icon-vidatio-title
-                        input(type="text" id="vidatio-title" value="" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" )
+                        input(type="text" id="vidatio-title" value="" placeholder=" {{ 'VIDATIO_TITLE' | translate }}" ng-model="title")
                         .underline-title
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
@@ -57,6 +57,29 @@ header.ng-cloak
                     form
                         input#link.form-control(ng-model="link" onClick="this.select();")
                     a#copy-link.btn(ng-click="copyLink()") {{"COPY_LINK" | translate }}
+
+            #navigation.row.editor(ng-switch-when="share" ng-controller="HeaderCtrl")
+                .col-xs-6.col-sm-2.logo
+                    a#logo(ui-sref="app.index({ locale: locale })")
+
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    div(ng-if="globals.authorized")
+                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                    div(ng-if="!globals.authorized")
+                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#back-to-import(ui-sref='app.import({ locale: locale })')
+                            span.icon-import-2
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data(ui-sref="app.editor({ locale: locale })" type="submit" ng-class="[!globals.authorized]")
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset.active(href="#")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
 
             #navigation.row(ng-switch-when="import")
                 .col-xs-6.col-sm-2.logo

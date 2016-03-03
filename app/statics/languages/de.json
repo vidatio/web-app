@@ -13,7 +13,6 @@
     "ALL_DATASETS": "Alle Datensätze",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
-    "LINK": "Link",
     "USP": "USP",
     "API": "API",
     "IMPORT": "Import",
@@ -100,6 +99,7 @@
     "DATASET-TAGS": "Tags",
     "DATASET-FORMAT": "Datentyp",
     "CATALOG": "Katalog",
+    "NEW_VIDATIO": "Neues Vidatio",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",

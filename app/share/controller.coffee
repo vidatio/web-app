@@ -8,5 +8,8 @@ app = angular.module "app.controllers"
 app.controller "ShareCtrl", [
     "$scope"
     "$translate"
-    ($scope, $translate) ->
+    "$rootScope"
+    "DataService"
+    ($scope, $translate, $rootScope, Data) ->
+
 ]

@@ -14,42 +14,13 @@ app.controller "HeaderCtrl", [
     "$translate"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate) ->
 
-        #$scope.saveDataset = ->
-        #    geoJSON = Map.getGeoJSON()
-        #    Data.saveViaAPI geoJSON
-
-        #$scope.hideLink = ->
-        #    $rootScope.showLink = false
-
-        #$scope.copyLink = ->
-        #    $log.info "HeaderCtrl copyLink called"
-        #    window.getSelection().removeAllRanges()
-        #    link = document.querySelector '#link'
-        #    range = document.createRange()
-        #    range.selectNode link
-        #    window.getSelection().addRange(range)
-
-        #    try
-        #        successful = document.execCommand 'copy'
-
-        #        $log.debug
-        #            message: "HeaderCtrl copyLink copy link to clipboard"
-        #            successful: successful
-
-        #        $translate('TOAST_MESSAGES.LINK_COPIED')
-        #            .then (translation) ->
-        #                ngToast.create
-        #                    content: translation
-        #    catch err
-        #        $log.info "Link could not be copied"
-        #        $log.error
-        #            error: error
-
-        #    window.getSelection().removeAllRanges()
-
         $scope.saveVidatioTitle = ->
-            $scope.vidatioTitle = $('#vidatio-title').val() || "Neues Vidatio"
-            console.log $scope.vidatioTitle
+            if $scope.title?
+                Data.meta.fileName = $scope.title
+            else
+                $translate('NEW_VIDATIO')
+                .then (translation) ->
+                    Data.meta.fileName = translation + "_" +  moment().format('L') + "_" + moment().format('LT')
 
         # the following lines are a solution from stack-overflow
         # the input-field width automatically resizes according to a users' input
