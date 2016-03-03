@@ -53,7 +53,6 @@ app.service 'DataService', [
             # Sends the dataset to the API, which saves it in the database.
             # @method saveViaAPI
             # @param {Object} dataset
-            # @param {String} userId
             # @param {String} name
             saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
@@ -64,6 +63,8 @@ app.service 'DataService', [
                 DataFactory.save
                     name: name
                     data: dataset
+                    metaData:
+                        fileType: @meta.fileType
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
