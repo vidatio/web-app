@@ -11,7 +11,7 @@ describe "Editor Controller", ->
             EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope}
 
     describe "on clicked tab", ->
-        it 'should set the showTableView and showVisualizationView variables accordingly', ->
+        it "should set the showTableView and showVisualizationView variables accordingly", ->
             @httpBackend.whenGET(/index/).respond ""
             @httpBackend.whenGET(/editor/).respond ""
             @httpBackend.expectGET(/languages/).respond ""
