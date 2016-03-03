@@ -234,7 +234,18 @@ app.controller "VisualizationCtrl", [
             , (notify) ->
                 Progress.setMessage notify
 
+        # @method isInputValid
+        # @params {Number} x
+        # @params {Number} y
+        # @params {String} diagrmType
+        # @return {Function}
         isInputValid = (x, y, diagramType) ->
+            $log.info "VisualizationCtrl isInputValid called"
+            $log.debug
+                x: x
+                y: y
+                diagramType: diagramType
+
             transposedDataset = vidatio.helper.transposeDataset Table.dataset
             subset = vidatio.helper.getSubset transposedDataset
 
