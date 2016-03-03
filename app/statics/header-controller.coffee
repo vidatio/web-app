@@ -24,10 +24,9 @@ app.controller "HeaderCtrl", [
         # @description set the users' input (if existing) as vidatio-title; standard-title otherwise
         $scope.saveVidatioTitle = ->
             if $scope.vidatioTitle == ""
-                console.log Data.meta.fileName = $scope.standardTitle
+                Data.meta.fileName = $scope.standardTitle
             else
                 Data.meta.fileName = $scope.vidatioTitle
-                console.log "test"
 
         # the following lines are a solution from stack-overflow
         # the input-field width automatically resizes according to a users' input
