@@ -92,17 +92,15 @@ app.controller "VisualizationCtrl", [
             else if axis is "x" and isInputValid id, $scope.yAxisCurrent, $scope.diagramType
                 $scope.xAxisCurrent = id
             else
-                for supportedDiagram in $scope.supportedDiagrams
-                    if supportedDiagram.type is $scope.diagramType
-                        $translate('TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
-                            column: Table.getColumnHeaders()[id]
-                            diagramType: supportedDiagram.name
-                        )
-                        .then (translation) ->
-                            ngToast.create(
-                                content: translation
-                                className: "danger"
-                            )
+                $translate(translationKeys[$scope.diagramType]).then (diagramName) ->
+                    return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
+                        column: Table.getColumnHeaders()[id]
+                        diagramType: diagramName
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
                 return
 
 
