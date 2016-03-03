@@ -64,7 +64,7 @@ app.controller "DatasetCtrl", [
             $log.info "DatasetCtrl error on get dataset from id"
             $log.error error
 
-            $translate('TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED').then (translation) ->
+            $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
                 ngToast.create
                     content: translation
                     className: "danger"
@@ -109,19 +109,19 @@ app.controller "DatasetCtrl", [
             $log.info "DatasetCtrl copyVidatioLink called"
 
             window.getSelection().removeAllRanges()
-            link = document.querySelector '#vidatio-link'
+            link = document.querySelector "#vidatio-link"
             range = document.createRange()
             range.selectNode link
             window.getSelection().addRange(range)
 
             try
-                successful = document.execCommand 'copy'
+                successful = document.execCommand "copy"
 
                 $log.debug
                     message: "DatasetCtrl copy vidatio-link to clipboard"
                     successful: successful
 
-                $translate('TOAST_MESSAGES.LINK_COPIED')
+                $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
@@ -131,7 +131,7 @@ app.controller "DatasetCtrl", [
                 $log.error
                     error: error
 
-                $translate('TOAST_MESSAGES.LINK_NOT_COPIED')
+                $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
