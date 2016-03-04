@@ -26,6 +26,8 @@ app.controller "VisualizationCtrl", [
             "bar": "DIAGRAMS.BAR_CHART"
             "timeseries": "DIAGRAMS.TIME_SERIES"
 
+        # allows the user to trigger the recommender and redraw the diagram accordingly
+        # @method recommend
         $scope.recommend = ->
             runRecommender()
             createDiagram
@@ -34,6 +36,7 @@ app.controller "VisualizationCtrl", [
                 yColumn: $scope.yAxisCurrent
                 color: $scope.color
 
+        # @method runRecommender
         runRecommender = ->
             $log.info "VisualizationCtrl recommend called"
 
@@ -85,6 +88,7 @@ app.controller "VisualizationCtrl", [
         $timeout ->
             Progress.setMessage ""
 
+        # @method updateColor
         $scope.updateColor = ->
             createDiagram
                 type: $scope.diagramType
