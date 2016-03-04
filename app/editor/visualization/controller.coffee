@@ -18,9 +18,11 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
+
         $scope.meta = Data.meta
         $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
+        $scope.color = "#11DDC6"
 
         $scope.updateColor = ->
             createDiagram
@@ -41,14 +43,12 @@ app.controller "VisualizationCtrl", [
         # @param {String} type
         createDiagram = (options) ->
             $log.info "VisualizationCtrl createDiagram function called"
+
             trimmedDataset = vidatio.helper.trimDataset Table.dataset
-
             headers = Table.getColumnHeaders()
-
             options["headers"] =
                 "x": headers[options.xColumn]
                 "y": headers[options.yColumn]
-
             subset = vidatio.helper.getSubset trimmedDataset
             transposedDataset = vidatio.helper.transposeDataset subset
             schema = vidatio.recommender.getSchema transposedDataset
@@ -108,13 +108,13 @@ app.controller "VisualizationCtrl", [
 
                 return
 
-
             Table.setDiagramColumns $scope.xAxisCurrent, $scope.yAxisCurrent
 
             createDiagram
                 type: $scope.diagramType
                 xColumn: $scope.xAxisCurrent
                 yColumn: $scope.yAxisCurrent
+                color: $scope.color
 
         switch Data.meta.fileType
             when "shp"
@@ -149,6 +149,7 @@ app.controller "VisualizationCtrl", [
                         type: $scope.diagramType
                         xColumn: $scope.xAxisCurrent
                         yColumn: $scope.yAxisCurrent
+                        color: $scope.color
                 ), true
 
         $timeout ->
@@ -170,6 +171,7 @@ app.controller "VisualizationCtrl", [
                     type: $scope.diagramType
                     xColumn: $scope.xAxisCurrent
                     yColumn: $scope.yAxisCurrent
+                    color: $scope.color
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization

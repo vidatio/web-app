@@ -8,7 +8,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             options: options
 
         @remove()
-        super dataset
+        super dataset, options.color
         @preProcess options
 
         setTimeout =>
@@ -20,6 +20,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
 
             d3.parcoords()("#chart")
             .data(@chartData)
+            .color(@color)
             .width(width)
             .height(height)
             .render()
