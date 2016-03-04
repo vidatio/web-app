@@ -54,19 +54,19 @@ app.controller "HeaderCtrl", [
         $scope.copyLink = ->
             $log.info "HeaderCtrl copyLink called"
             window.getSelection().removeAllRanges()
-            link = document.querySelector '#link'
+            link = document.querySelector "#link"
             range = document.createRange()
             range.selectNode link
             window.getSelection().addRange(range)
 
             try
-                successful = document.execCommand 'copy'
+                successful = document.execCommand "copy"
 
                 $log.debug
                     message: "HeaderCtrl copyLink copy link to clipboard"
                     successful: successful
 
-                $translate('TOAST_MESSAGES.LINK_COPIED')
+                $translate("TOAST_MESSAGES.LINK_COPIED")
                     .then (translation) ->
                         ngToast.create
                             content: translation

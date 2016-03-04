@@ -9,14 +9,14 @@ nav
                 a#logo-menu(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
 
         .menu-list
-            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()") {{ 'AVAILABLE_DATASETS' | translate }}
-            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ 'IMPORT_DATA' | translate }}
-            a.item(href="") {{ 'FEATURES' | translate }}
-            a.item(href="") {{ 'PRICING' | translate }}
-            a.item(href="") {{ 'API' | translate }}
+            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()") {{ "AVAILABLE_DATASETS" | translate }}
+            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()") {{ "IMPORT_DATA" | translate }}
+            a.item(href="") {{ "FEATURES" | translate }}
+            a.item(href="") {{ "PRICING" | translate }}
+            a.item(href="") {{ "API" | translate }}
             br
-            a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()") {{ 'LOG_ON' | translate }}
-            a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ 'LOG_OUT' | translate }}
+            a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()") {{ "LOG_ON" | translate }}
+            a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()") {{ "LOG_OUT" | translate }}
 
         registration
         login

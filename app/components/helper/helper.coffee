@@ -396,7 +396,20 @@ class window.vidatio.Helper
 
         subset
 
+    # @method isDiagramPossible
+    # @description This method checks if the current column type selection is possible with a given diagram.
+    # @public
+    # @param {String} xColumnType
+    # @param {String} yColumnType
+    # @param {String} yColumnType
+    # @return {Boolean}
     isDiagramPossible: (xColumnType, yColumnType, diagramType) ->
+        vidatio.log.info "HelperService isDiagramPossible called"
+        vidatio.log.debug
+            xColumnType: xColumnType
+            yColumnType: yColumnType
+            diagramType: diagramType
+
         switch diagramType
             when "scatter"
                 if yColumnType isnt "numeric" or xColumnType isnt "numeric"
@@ -411,10 +424,10 @@ class window.vidatio.Helper
                     return false
 
             when "timeseries"
-                if axis is "y" and columnType isnt "numeric"
+                if xColumnType isnt "date"
                     return false
 
-                if axis is "x" and columnType isnt "date"
+                if yColumnType isnt "numeric"
                     return false
 
         return true

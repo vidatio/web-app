@@ -29,46 +29,12 @@ app.controller "VisualizationCtrl", [
                 yColumn: $scope.yAxisCurrent
                 color: $scope.color
 
-        $translate([
-            "DIAGRAMS.DIAGRAM_TYPE"
-            "DIAGRAMS.SCATTER_PLOT"
-            "DIAGRAMS.MAP"
-            "DIAGRAMS.PARALLEL_COORDINATES"
-            "DIAGRAMS.BAR_CHART"
-            "DIAGRAMS.TIME_SERIES"
-        ]).then (translations) ->
-            $scope.selectedDiagramName = translations["DIAGRAMS.DIAGRAM_TYPE"]
-            $scope.supportedDiagrams = [
-                {
-                    name: translations["DIAGRAMS.SCATTER_PLOT"]
-                    type: "scatter"
-                    imagePath: "/images/diagram-icons/scatter-plot.svg"
-                }
-                {
-                    name: translations["DIAGRAMS.MAP"]
-                    type: "map"
-                    imagePath: "/images/diagram-icons/map.svg"
-                }
-                {
-                    name: translations["DIAGRAMS.PARALLEL_COORDINATES"]
-                    type: "parallel"
-                }
-                {
-                    name: translations["DIAGRAMS.BAR_CHART"]
-                    type: "bar"
-                    imagePath: "/images/diagram-icons/bar-chart.svg"
-                }
-                {
-                    name: translations["DIAGRAMS.TIME_SERIES"]
-                    type: "timeseries"
-                    imagePath: "/images/diagram-icons/line-chart.svg"
-                }
-            ]
-            return $scope.supportedDiagrams
-        .then (supportedDiagrams) ->
-            for diagram in supportedDiagrams
-                if diagram.type is $scope.diagramType
-                    $scope.selectedDiagramName = diagram.name
+        translationKeys =
+            "scatter": "DIAGRAMS.SCATTER_PLOT"
+            "map": "DIAGRAMS.MAP"
+            "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
+            "bar": "DIAGRAMS.BAR_CHART"
+            "timeseries": "DIAGRAMS.TIME_SERIES"
 
         # create a new diagram based on the recommended diagram
         # @method createDiagram
@@ -79,9 +45,9 @@ app.controller "VisualizationCtrl", [
 
             headers = Table.getColumnHeaders()
 
-            options["headers"] = {}
-            options.headers["x"] = headers[options.xColumn]
-            options.headers["y"] = headers[options.yColumn]
+            options["headers"] =
+                "x": headers[options.xColumn]
+                "y": headers[options.yColumn]
 
             subset = vidatio.helper.getSubset trimmedDataset
             transposedDataset = vidatio.helper.transposeDataset subset
@@ -131,17 +97,15 @@ app.controller "VisualizationCtrl", [
             else if axis is "x" and isInputValid id, $scope.yAxisCurrent, $scope.diagramType
                 $scope.xAxisCurrent = id
             else
-                for supportedDiagram in $scope.supportedDiagrams
-                    if supportedDiagram.type is $scope.diagramType
-                        $translate('TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
-                            column: Table.getColumnHeaders()[id]
-                            diagramType: supportedDiagram.name
-                        )
-                        .then (translation) ->
-                            ngToast.create(
-                                content: translation
-                                className: "danger"
-                            )
+                $translate(translationKeys[$scope.diagramType]).then (diagramName) ->
+                    return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
+                        column: Table.getColumnHeaders()[id]
+                        diagramType: diagramName
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
                 return
 
 
@@ -169,6 +133,9 @@ app.controller "VisualizationCtrl", [
                     $scope.xAxisCurrent = String(recommendationResults.xColumn)
                     $scope.yAxisCurrent = String(recommendationResults.yColumn)
 
+                    $translate(translationKeys[$scope.diagramType]).then (translation) ->
+                        $scope.selectedDiagramName = translation
+
                     Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
 
                 # After having recommend diagram options, we watch the dataset of the table
@@ -190,19 +157,19 @@ app.controller "VisualizationCtrl", [
         # @method selectDiagram
         # @param {String} name
         # @param {String} type
-        $scope.selectDiagram = (name, type) ->
+        $scope.selectDiagram = (type) ->
             $log.info "VisualizationCtrl selectDiagram called"
             $log.debug
-                name: name
                 type: type
 
-            $scope.selectedDiagramName = name
-            $scope.diagramType = type
+            $translate(translationKeys[type]).then (translation) ->
+                $scope.selectedDiagramName = translation
+                $scope.diagramType = type
 
-            createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
+                createDiagram
+                    type: $scope.diagramType
+                    xColumn: $scope.xAxisCurrent
+                    yColumn: $scope.yAxisCurrent
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
@@ -238,7 +205,18 @@ app.controller "VisualizationCtrl", [
             , (notify) ->
                 Progress.setMessage notify
 
+        # @method isInputValid
+        # @params {Number} x
+        # @params {Number} y
+        # @params {String} diagrmType
+        # @return {Function}
         isInputValid = (x, y, diagramType) ->
+            $log.info "VisualizationCtrl isInputValid called"
+            $log.debug
+                x: x
+                y: y
+                diagramType: diagramType
+
             transposedDataset = vidatio.helper.transposeDataset Table.dataset
             subset = vidatio.helper.getSubset transposedDataset
 
