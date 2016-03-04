@@ -20,6 +20,7 @@ app = angular.module "app", [
     "ngCookies"
     "logglyLogger"
     "datePicker"
+    "colorpicker.module"
 ]
 
 app.run [

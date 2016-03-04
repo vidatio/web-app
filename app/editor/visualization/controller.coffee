@@ -22,6 +22,13 @@ app.controller "VisualizationCtrl", [
         $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
 
+        $scope.updateColor = ->
+            createDiagram
+                type: $scope.diagramType
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
+                color: $scope.color
+
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
             "DIAGRAMS.SCATTER_PLOT"
@@ -76,36 +83,36 @@ app.controller "VisualizationCtrl", [
             options.headers["x"] = headers[options.xColumn]
             options.headers["y"] = headers[options.yColumn]
 
+            subset = vidatio.helper.getSubset trimmedDataset
+            transposedDataset = vidatio.helper.transposeDataset subset
+            schema = vidatio.recommender.getSchema transposedDataset
+
+            if vidatio.helper.isDiagramPossible schema[options.xColumn], schema[options.yColumn], options.type
+                chartData = trimmedDataset
+            else
+                $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
+                    ngToast.create
+                        className: "danger"
+                        content: translation
+                chartData = []
+
             switch options.type
                 when "scatter"
-
-                    subset = vidatio.helper.getSubset trimmedDataset
-                    transposedDataset = vidatio.helper.transposeDataset subset
-                    schema = vidatio.recommender.getSchema transposedDataset
-
-                    if(schema[options.xColumn] isnt "numeric" or schema[options.xColumn] isnt "numeric")
-                        $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
-                            ngToast.create
-                                className: "danger"
-                                content: translation
-                        new vidatio.ScatterPlot [[]], options
-                    else
-                        new vidatio.ScatterPlot trimmedDataset, options
-
+                    chart = new vidatio.ScatterPlot chartData, options
                 when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON trimmedDataset, Table.getColumnHeaders(), {
+                    geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getColumnHeaders(), {
                         x: options.xColumn,
                         y: options.yColumn
                     }
                     Map.setGeoJSON geoJSON
                     Map.setScope $scope
                 when "parallel"
-                    new vidatio.ParallelCoordinates trimmedDataset, options
+                    chart = new vidatio.ParallelCoordinates chartData, options
                 when "bar"
-                    new vidatio.BarChart trimmedDataset, options
+                    chart = new vidatio.BarChart chartData, options
                 when "timeseries"
-                    new vidatio.TimeseriesChart trimmedDataset, options
+                    chart = new vidatio.TimeseriesChart chartData, options
                 else
                     $log.error
                         message: recommendationResults.error
@@ -119,10 +126,24 @@ app.controller "VisualizationCtrl", [
                 axis: axis
                 id: id
 
-            if axis is "y"
+            if axis is "y" and isInputValid $scope.xAxisCurrent, id, $scope.diagramType
                 $scope.yAxisCurrent = id
-            else if axis is "x"
+            else if axis is "x" and isInputValid id, $scope.yAxisCurrent, $scope.diagramType
                 $scope.xAxisCurrent = id
+            else
+                for supportedDiagram in $scope.supportedDiagrams
+                    if supportedDiagram.type is $scope.diagramType
+                        $translate('TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
+                            column: Table.getColumnHeaders()[id]
+                            diagramType: supportedDiagram.name
+                        )
+                        .then (translation) ->
+                            ngToast.create(
+                                content: translation
+                                className: "danger"
+                            )
+                return
+
 
             Table.setDiagramColumns $scope.xAxisCurrent, $scope.yAxisCurrent
 
@@ -216,4 +237,20 @@ app.controller "VisualizationCtrl", [
                     className: "danger"
             , (notify) ->
                 Progress.setMessage notify
-]
+
+        isInputValid = (x, y, diagramType) ->
+            transposedDataset = vidatio.helper.transposeDataset Table.dataset
+            subset = vidatio.helper.getSubset transposedDataset
+
+            xSubsetFiltered = subset[x].filter( (value) ->
+                return value if value?
+            )
+            ySubsetFiltered = subset[y].filter( (value) ->
+                return value if value?
+            )
+
+            xColumnType = vidatio.recommender.getColumnType xSubsetFiltered
+            yColumnType = vidatio.recommender.getColumnType ySubsetFiltered
+
+            return vidatio.helper.isDiagramPossible xColumnType, yColumnType, diagramType
+    ]

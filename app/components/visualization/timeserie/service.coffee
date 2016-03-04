@@ -7,7 +7,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             dataset: dataset
             options: options
 
-        super dataset
+        super dataset, options.color
         @preProcess options
 
         # handle different date formats and parse them for c3.js charts
@@ -24,5 +24,6 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             .text("name")
             .x(options.headers["x"])
             .y(options.headers["y"])
+            .color("color")
             .draw()
         , 0

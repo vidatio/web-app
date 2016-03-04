@@ -110,7 +110,7 @@ BUILD =
             "./bower_components/moment/locale/de.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
-
+            "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -122,6 +122,7 @@ BUILD =
             "./bower_components/leaflet/dist/leaflet.css"
             "./bower_components/d3.parcoords.js/d3.parcoords.css"
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
+            "./bower_components/angular-bootstrap-colorpicker/css/colorpicker.css"
         ]
     dirs:
         out: "./build"

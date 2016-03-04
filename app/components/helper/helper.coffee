@@ -352,7 +352,7 @@ class window.vidatio.Helper
     # @param {String} visualizationType
     # @return {Array}
     # TODO pass names of header if available to use as default keys for x and y in visualization
-    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers) ->
+    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers, color) ->
         unless dataset or xColumn or yColumn or visualizationType
             return
 
@@ -366,6 +366,8 @@ class window.vidatio.Helper
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
+
+            dataItem["color"] = color
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
@@ -393,3 +395,27 @@ class window.vidatio.Helper
         subset.push dataset[yColumn]
 
         subset
+
+    isDiagramPossible: (xColumnType, yColumnType, diagramType) ->
+        switch diagramType
+            when "scatter"
+                if yColumnType isnt "numeric" or xColumnType isnt "numeric"
+                    return false
+            when "map"
+                break
+            when "parallel"
+                break
+
+            when "bar"
+                if yColumnType isnt "numeric"
+                    return false
+
+            when "timeseries"
+                if axis is "y" and columnType isnt "numeric"
+                    return false
+
+                if axis is "x" and columnType isnt "date"
+                    return false
+
+        return true
+
