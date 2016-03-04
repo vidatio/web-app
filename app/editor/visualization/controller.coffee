@@ -22,7 +22,12 @@ app.controller "VisualizationCtrl", [
         $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
 
-        chart = null
+        $scope.updateColor = ->
+            createDiagram
+                type: $scope.diagramType
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
+                color: $scope.color
 
         $translate([
             "DIAGRAMS.DIAGRAM_TYPE"
@@ -193,7 +198,6 @@ app.controller "VisualizationCtrl", [
 
             $scope.selectedDiagramName = name
             $scope.diagramType = type
-
 
             createDiagram
                 type: $scope.diagramType
