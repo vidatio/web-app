@@ -27,7 +27,7 @@ describe "Header Controller", ->
 
         @scope.saveVidatioTitle()
         expect(@Data.meta.fileName).toBeDefined()
-        expect(@Data.meta.fileName).toEqual("My Vidatio")
+        expect(@Data.meta.fileName).toBe("My Vidatio")
 
 
     describe "on save vidatio-title if title input-field is filled up", ->
@@ -48,3 +48,4 @@ describe "Header Controller", ->
 
         expect(@Data.meta.fileName).toBeDefined()
         expect(@Data.meta.fileName).toBe("I created my first Vidatio")
+

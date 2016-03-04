@@ -33,7 +33,6 @@ app.controller "HeaderCtrl", [
             $log.debug
                 filename: Data.meta.fileName
 
-        # the following lines are a solution from stack-overflow
         # the input-field width automatically resizes according to a users' input
         $.fn.textWidth = (text, font) ->
             if !$.fn.textWidth.fakeEl
@@ -44,7 +43,7 @@ app.controller "HeaderCtrl", [
         # eventlistener to call the resize function of the input-element above
         $("#vidatio-title").on("input", ->
             paddingBetweenLetters = 10 # works as a minimum width
-            valWidth = $(this).textWidth() + paddingBetweenLetters + "px"
+            valWidth = $(@).textWidth() + paddingBetweenLetters + "px"
             $("#vidatio-title").css "width", valWidth
             $(".underline-title").css "width", valWidth
             return
