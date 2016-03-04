@@ -45,11 +45,14 @@
                                 img.graph-icon(src="/images/diagram-icons/line-chart.svg")
                                 | {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
+            .trigger-recommender.hover-button(ng-hide="$scope.meta.fileType == 'shp'")
+                a.icon-search(href='#' ng-click="recommend()")
+
             .color-selection.hover-button(ng-hide="diagramType == 'map'")
                 a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="color" ng-change="updateColor()" colorpicker-with-input="true")
 
             .download-button.hover-button
-                a(href='#').icon-download-3
+                a.icon-download-3(href='#')
                 ul
                     li
                         a(ng-click='shareVisualization("png")') PNG

@@ -19,10 +19,71 @@ app.controller "VisualizationCtrl", [
     "$translate"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
 
+        translationKeys =
+            "scatter": "DIAGRAMS.SCATTER_PLOT"
+            "map": "DIAGRAMS.MAP"
+            "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
+            "bar": "DIAGRAMS.BAR_CHART"
+            "timeseries": "DIAGRAMS.TIME_SERIES"
+
+        $scope.recommend = ->
+            runRecommender()
+            createDiagram
+                type: $scope.diagramType
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
+                color: $scope.color
+
+        runRecommender = ->
+            $log.info "VisualizationCtrl recommend called"
+
+            trimmedDataset = vidatio.helper.trimDataset Table.dataset
+            recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
+
+            if recommendationResults.error?
+                $log.error "Visualization Ctrl error at recommend diagram"
+                $log.debug
+                    error: recommendationResults.error
+                $scope.diagramType = false
+            else
+                $log.info "VisualizationCtrl recommender results: #{JSON.stringify(recommendationResults)}"
+                $scope.diagramType = recommendationResults.type
+                $scope.xAxisCurrent = String(recommendationResults.xColumn)
+                $scope.yAxisCurrent = String(recommendationResults.yColumn)
+
+                $translate(translationKeys[$scope.diagramType]).then (translation) ->
+                    $scope.selectedDiagramName = translation
+
+                Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
+
+        # After having recommend diagram options, we watch the dataset of the table
+        # because the watcher fires at initialization the diagram gets immediately drawn
+        $scope.$watch (->
+            Table.dataset
+        ), ( ->
+            $log.info "VisualizationCtrl dataset watcher triggered"
+
+            createDiagram
+                type: $scope.diagramType
+                xColumn: $scope.xAxisCurrent
+                yColumn: $scope.yAxisCurrent
+                color: $scope.color
+        ), true
+
         $scope.meta = Data.meta
         $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
         $scope.color = "#11DDC6"
+
+        switch Data.meta.fileType
+            when "shp"
+                $scope.diagramType = "map"
+                Map.setScope $scope
+            else
+                runRecommender()
+
+        $timeout ->
+            Progress.setMessage ""
 
         $scope.updateColor = ->
             createDiagram
@@ -30,13 +91,6 @@ app.controller "VisualizationCtrl", [
                 xColumn: $scope.xAxisCurrent
                 yColumn: $scope.yAxisCurrent
                 color: $scope.color
-
-        translationKeys =
-            "scatter": "DIAGRAMS.SCATTER_PLOT"
-            "map": "DIAGRAMS.MAP"
-            "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
-            "bar": "DIAGRAMS.BAR_CHART"
-            "timeseries": "DIAGRAMS.TIME_SERIES"
 
         # create a new diagram based on the recommended diagram
         # @method createDiagram
@@ -80,8 +134,7 @@ app.controller "VisualizationCtrl", [
                 when "timeseries"
                     chart = new vidatio.TimeseriesChart chartData, options
                 else
-                    $log.error
-                        message: recommendationResults.error
+                    $log.error "VisualizationCtrl options.type not set"
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -115,45 +168,6 @@ app.controller "VisualizationCtrl", [
                 xColumn: $scope.xAxisCurrent
                 yColumn: $scope.yAxisCurrent
                 color: $scope.color
-
-        switch Data.meta.fileType
-            when "shp"
-                $scope.diagramType = "map"
-                Map.setScope $scope
-            else
-                trimmedDataset = vidatio.helper.trimDataset Table.dataset
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
-
-                if recommendationResults.error?
-                    $scope.diagramType = false
-                else
-                    $log.info "Recommender Results: #{JSON.stringify(recommendationResults)}"
-
-                    $scope.diagramType = recommendationResults.type
-                    $scope.xAxisCurrent = String(recommendationResults.xColumn)
-                    $scope.yAxisCurrent = String(recommendationResults.yColumn)
-
-                    $translate(translationKeys[$scope.diagramType]).then (translation) ->
-                        $scope.selectedDiagramName = translation
-
-                    Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
-
-                # After having recommend diagram options, we watch the dataset of the table
-                # because the watcher fires at initialization the diagram gets immediately drawn
-                $scope.$watch (->
-                    Table.dataset
-                ), ( ->
-                    $log.info "VisualizationCtrl - dataset has changed so we create a new diagram"
-
-                    createDiagram
-                        type: $scope.diagramType
-                        xColumn: $scope.xAxisCurrent
-                        yColumn: $scope.yAxisCurrent
-                        color: $scope.color
-                ), true
-
-        $timeout ->
-            Progress.setMessage ""
 
         # @method selectDiagram
         # @param {String} name
