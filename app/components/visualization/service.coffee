@@ -21,7 +21,6 @@ app.service 'VisualizationService', [
                     yAxisCurrent: 1
                     color: "#11DDC6"
                     selectedDiagramName: null
-
                     translationKeys:
                         "scatter": "DIAGRAMS.SCATTER_PLOT"
                         "map": "DIAGRAMS.MAP"
@@ -68,8 +67,6 @@ app.service 'VisualizationService', [
 
                 transposedDataset = vidatio.helper.transposeDataset Table.dataset
                 subset = vidatio.helper.getSubset transposedDataset
-
-                console.log Table.dataset, transposedDataset, subset
 
                 xSubsetFiltered = subset[x].filter((value) ->
                     return value if value?
