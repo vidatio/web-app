@@ -20,12 +20,7 @@ app.controller "VisualizationCtrl", [
     "VisualizationService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
 
-        $scope.diagramType = Visualization.diagramType
-        $scope.translationKeys = Visualization.translationKeys
-        $scope.xAxisCurrent = Visualization.xAxisCurrent
-        $scope.yAxisCurrent = Visualization.yAxisCurrent
-        $scope.color = Visualization.color
-        $scope.selectedDiagramName = Visualization.selectedDiagramName
+        $scope.visualization = Visualization.options
         $scope.meta = Data.meta
         $scope.colHeadersSelection = Table.colHeadersSelection
 
@@ -34,10 +29,10 @@ app.controller "VisualizationCtrl", [
         $scope.recommend = ->
             Visualization.recommendDiagram()
             Visualization.createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-                color: $scope.color
+                type: $scope.visualization.diagramType
+                xColumn: $scope.visualization.xAxisCurrent
+                yColumn: $scope.visualization.yAxisCurrent
+                color: $scope.visualization.color
 
         # After having recommend diagram options, we watch the dataset of the table
         # because the watcher fires at initialization the diagram gets immediately drawn
@@ -47,10 +42,10 @@ app.controller "VisualizationCtrl", [
             $log.info "VisualizationCtrl dataset watcher triggered"
 
             Visualization.createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-                color: $scope.color
+                type: $scope.visualization.diagramType
+                xColumn: $scope.visualization.xAxisCurrent
+                yColumn: $scope.visualization.yAxisCurrent
+                color: $scope.visualization.color
         ), true
 
         if Data.meta.fileType is "shp"
@@ -63,10 +58,10 @@ app.controller "VisualizationCtrl", [
         # @method updateColor
         $scope.updateColor = ->
             Visualization.createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-                color: $scope.color
+                type: $scope.visualization.diagramType
+                xColumn: $scope.visualization.xAxisCurrent
+                yColumn: $scope.visualization.yAxisCurrent
+                color: $scope.visualization.color
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -77,10 +72,10 @@ app.controller "VisualizationCtrl", [
                 axis: axis
                 id: id
 
-            if axis is "y" and Visualization.isInputValid $scope.xAxisCurrent, id, $scope.diagramType
-                $scope.yAxisCurrent = id
-            else if axis is "x" and Visualization.isInputValid id, $scope.yAxisCurrent, $scope.diagramType
-                $scope.xAxisCurrent = id
+            if axis is "x" and Visualization.isInputValid id, $scope.visualization.yAxisCurrent, $scope.diagramType
+                $scope.visualization.xAxisCurrent = id
+            else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.diagramType
+                $scope.visualization.yAxisCurrent = id
             else
                 $translate(Visualization.translationKeys[$scope.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
@@ -92,12 +87,12 @@ app.controller "VisualizationCtrl", [
                         className: "danger"
                 return
 
-            Table.setDiagramColumns $scope.xAxisCurrent, $scope.yAxisCurrent
+            Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
             Visualization.createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-                color: $scope.color
+                type: $scope.visualization.diagramType
+                xColumn: $scope.visualization.xAxisCurrent
+                yColumn: $scope.visualization.yAxisCurrent
+                color: $scope.visualization.color
 
         # @method selectDiagram
         # @param {String} name
@@ -108,14 +103,14 @@ app.controller "VisualizationCtrl", [
                 type: type
 
             $translate(Visualization.translationKeys[type]).then (translation) ->
-                $scope.selectedDiagramName = translation
-                $scope.diagramType = type
+                $scope.visualization.selectedDiagramName = translation
+                $scope.visualization.diagramType = type
 
                 Visualization.createDiagram
-                    type: $scope.diagramType
-                    xColumn: $scope.xAxisCurrent
-                    yColumn: $scope.yAxisCurrent
-                    color: $scope.color
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization

@@ -40,12 +40,6 @@ app.controller "DatasetCtrl", [
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
             Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
-            if data.options?
-                Visualization.diagramType = data.options.diagramType || false
-                Visualization.xAxisCurrent = data.options.xAxisCurrent || 0
-                Visualization.yAxisCurrent = data.options.yAxisCurrent || 1
-                Visualization.color = data.options.color || "#11DDC6"
-                Visualization.selectedDiagramName = data.options.selectedDiagramName || null
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
@@ -87,6 +81,8 @@ app.controller "DatasetCtrl", [
                 name: $scope.data.name
                 data: $scope.data.data
 
+            console.log "$scope.data", $scope.data
+
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
 
@@ -94,14 +90,21 @@ app.controller "DatasetCtrl", [
 
             if Data.meta["fileType"] is "shp"
                 dataset = Converter.convertGeoJSON2Arrays $scope.data.data
-                console.log "dataset", dataset
                 Table.setDataset dataset
                 Table.useColumnHeadersFromDataset = true
                 Map.setGeoJSON $scope.data.data
-                console.log "geoJSON", $scope.data.data
             else
+                if $scope.data.options?
+                    console.log "$scope.data.options", $scope.data.options
+                    Visualization.options =
+                        diagramType: $scope.data.options.diagramType || false
+                        xAxisCurrent: $scope.data.options.xAxisCurrent || 0
+                        yAxisCurrent: $scope.data.options.yAxisCurrent || 1
+                        color: $scope.data.options.color || "#11DDC6"
+                        selectedDiagramName: $scope.data.options.selectedDiagramName || null
+                    Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
+
                 Table.setDataset $scope.data.data
-                Table.useColumnHeadersFromDataset = true
 
             $timeout ->
                 Progress.setMessage ""

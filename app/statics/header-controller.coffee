@@ -52,7 +52,8 @@ app.controller "HeaderCtrl", [
                 dataset = Map.getGeoJSON()
             else
                 dataset = Table.dataset.slice()
-                dataset.unshift Table.instanceTable.getColHeader()
+                if Table.useColumnHeadersFromDataset
+                    dataset.unshift Table.instanceTable.getColHeader()
 
             Data.saveViaAPI dataset
 

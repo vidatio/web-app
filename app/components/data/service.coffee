@@ -60,9 +60,6 @@ app.service 'DataService', [
                 $log.debug
                     dataset: dataset
                     name: name
-                    metaData:
-                        fileType: @meta.fileType
-                        fileName: @meta.fileName
 
                 DataFactory.save
                     name: name
@@ -71,11 +68,12 @@ app.service 'DataService', [
                         fileType: @meta.fileType
                         fileName: @meta.fileName
                     options:
-                        diagramType: Visualization.diagramType
-                        xAxisCurrent: Visualization.xAxisCurrent
-                        yAxisCurrent: Visualization.yAxisCurrent
-                        color: Visualization.color
-                        selectedDiagramName: Visualization.selectedDiagramName
+                        diagramType: Visualization.options.diagramType
+                        xAxisCurrent: Visualization.options.xAxisCurrent
+                        yAxisCurrent: Visualization.options.yAxisCurrent
+                        color: Visualization.options.color
+                        selectedDiagramName: Visualization.options.selectedDiagramName
+                        useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
 
                 , (response) ->
                     $log.info("Dataset successfully saved")
