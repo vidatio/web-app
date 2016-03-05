@@ -20,7 +20,8 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "ProgressService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
+    "VisualizationService"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
@@ -150,6 +151,7 @@ app.controller "ImportCtrl", [
                     dataset = Converter.convertCSV2Arrays fileContent
                     Table.setDataset dataset
                     Table.useColumnHeadersFromDataset = true
+                    Visualization.recommendDiagram()
                     $location.path editorPath
 
                 when "zip"

@@ -17,7 +17,7 @@ describe "Visualization Ctrl", ->
                 setDiagramColumns: (x, y) ->
 
             Map =
-                setScope: ->
+                setInstance: ->
                 setGeoJSON: ->
 
             Data =
@@ -31,22 +31,34 @@ describe "Visualization Ctrl", ->
                 convertArrays2GeoJSON: ->
                     {}
 
+            @Visualization =
+                isInputValid: ->
+                    true
+                createDiagram: ->
+                recommendDiagram: ->
+                translationKeys:
+                    "scatter": "DIAGRAMS.SCATTER_PLOT"
+                    "map": "DIAGRAMS.MAP"
+                    "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
+                    "bar": "DIAGRAMS.BAR_CHART"
+                    "timeseries": "DIAGRAMS.TIME_SERIES"
+
             @VisualizationCtrl = $controller "VisualizationCtrl",
                 $scope: @scope, TableService: Table, MapService: Map, DataService: Data,
-                ProgressService: Progress, ConverterService: Converter
+                ProgressService: Progress, ConverterService: Converter, VisualizationService: @Visualization
 
-            spyOn(vidatio.helper, 'trimDataset').and.callThrough()
+            spyOn(@Visualization, 'createDiagram')
 
     afterEach ->
-        vidatio.helper.trimDataset.calls.reset()
+        @Visualization.createDiagram.calls.reset()
 
-    describe "on upload via browse and drag and drop", ->
-        it 'should read the file via the ImportService', ->
+    describe "on calling scope functions", ->
+        it 'should call the trimdataset function for further processing', ->
             @scope.updateColor()
-            expect(vidatio.helper.trimDataset).toHaveBeenCalled()
+            expect(@Visualization.createDiagram).toHaveBeenCalled()
 
             @scope.setAxisColumnSelection("x", 0)
-            expect(vidatio.helper.trimDataset).toHaveBeenCalled()
+            expect(@Visualization.createDiagram).toHaveBeenCalled()
 
             @scope.selectDiagram()
-            expect(vidatio.helper.trimDataset).toHaveBeenCalled()
+            expect(@Visualization.createDiagram).toHaveBeenCalled()

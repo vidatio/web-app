@@ -45,7 +45,7 @@
                                 img.graph-icon(src="/images/diagram-icons/line-chart.svg")
                                 | {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
-            .trigger-recommender.hover-button(ng-hide="$scope.meta.fileType == 'shp'")
+            .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
                 a.icon-search(href='#' ng-click="recommend()")
 
             .color-selection.hover-button(ng-hide="diagramType == 'map'")

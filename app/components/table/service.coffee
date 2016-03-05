@@ -57,9 +57,12 @@ app.service 'TableService', [
             getColumnHeaders: ->
                 $log.info "TableService getColumnHeaders called"
 
-                return @instanceTable.getColHeader().filter( (value) ->
-                    return value if value?
-                )
+                if @instanceTable
+                    return @instanceTable.getColHeader().filter( (value) ->
+                        return value if value?
+                    )
+                else
+                    []
 
             # @method reset
             # @public
