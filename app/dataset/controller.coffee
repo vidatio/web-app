@@ -21,7 +21,8 @@ app.controller "DatasetCtrl", [
     "$translate"
     "ngToast"
     "DataService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data) ->
+    "VisualizationService"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
 
         # set link to current vidatio
         $rootScope.link = $location.$$absUrl
@@ -39,6 +40,12 @@ app.controller "DatasetCtrl", [
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
             Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            if data.options?
+                Visualization.diagramType = data.options.diagramType || false
+                Visualization.xAxisCurrent = data.options.xAxisCurrent || 0
+                Visualization.yAxisCurrent = data.options.yAxisCurrent || 1
+                Visualization.color = data.options.color || "#11DDC6"
+                Visualization.selectedDiagramName = data.options.selectedDiagramName || null
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"

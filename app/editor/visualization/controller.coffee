@@ -25,6 +25,7 @@ app.controller "VisualizationCtrl", [
         $scope.xAxisCurrent = Visualization.xAxisCurrent
         $scope.yAxisCurrent = Visualization.yAxisCurrent
         $scope.color = Visualization.color
+        $scope.selectedDiagramName = Visualization.selectedDiagramName
         $scope.meta = Data.meta
         $scope.colHeadersSelection = Table.colHeadersSelection
 

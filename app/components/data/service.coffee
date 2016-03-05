@@ -6,6 +6,7 @@ app.service 'DataService', [
     "MapService"
     "TableService"
     "ConverterService"
+    "VisualizationService"
     "$rootScope"
     "ngToast"
     "$translate"
@@ -13,7 +14,7 @@ app.service 'DataService', [
     "DataFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -69,6 +70,13 @@ app.service 'DataService', [
                     metaData:
                         fileType: @meta.fileType
                         fileName: @meta.fileName
+                    options:
+                        diagramType: Visualization.diagramType
+                        xAxisCurrent: Visualization.xAxisCurrent
+                        yAxisCurrent: Visualization.yAxisCurrent
+                        color: Visualization.color
+                        selectedDiagramName: Visualization.selectedDiagramName
+
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
