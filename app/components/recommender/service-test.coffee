@@ -6,7 +6,7 @@ describe "Service Recommender", ->
         @helper = new window.vidatio.Helper()
 
     it "should analyse type of the columns and so the schema of the dataset", ->
-        schema = ["coordinate", "coordinate", "nominal", "nominal", "coordinate"]
+        schema = [["coordinate", "numeric"], ["coordinate", "numeric"], ["nominal"], ["nominal"], ["coordinate", "numeric"]]
         dataset = [
             ["47", "13", "Salzburg", "41,5%", "2"]
             ["46", "12", "Wien", "38,5%", "2"]

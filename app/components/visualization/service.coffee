@@ -8,24 +8,26 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    (Table, Converter, Map, $log, $translate) ->
+    "ngToast"
+    (Table, Converter, Map, $log, $translate, ngToast) ->
         class Visualization
 
             # @method constructor
             # @public
             constructor: ->
-                @diagramType = false
-                @xAxisCurrent = 0
-                @yAxisCurrent = 1
-                @color = "#11DDC6"
-                @selectedDiagramName = null
+                @options =
+                    diagramType: false
+                    xAxisCurrent: 0
+                    yAxisCurrent: 1
+                    color: "#11DDC6"
+                    selectedDiagramName: null
 
-                @translationKeys =
-                    "scatter": "DIAGRAMS.SCATTER_PLOT"
-                    "map": "DIAGRAMS.MAP"
-                    "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
-                    "bar": "DIAGRAMS.BAR_CHART"
-                    "timeseries": "DIAGRAMS.TIME_SERIES"
+                    translationKeys:
+                        "scatter": "DIAGRAMS.SCATTER_PLOT"
+                        "map": "DIAGRAMS.MAP"
+                        "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
+                        "bar": "DIAGRAMS.BAR_CHART"
+                        "timeseries": "DIAGRAMS.TIME_SERIES"
 
             # @method useRecommendedOptions
             # @public
@@ -39,15 +41,15 @@ app.service 'VisualizationService', [
                     $log.error "Visualization Ctrl error at recommend diagram"
                     $log.debug
                         error: recommendationResults.error
-                    @diagramType = false
+                    @options.diagramType = false
                 else
                     $log.info "VisualizationCtrl recommender results: #{JSON.stringify(recommendationResults)}"
-                    @diagramType = recommendationResults.type
-                    @xAxisCurrent = String(recommendationResults.xColumn)
-                    @yAxisCurrent = String(recommendationResults.yColumn)
+                    @options.diagramType = recommendationResults.type
+                    @options.xAxisCurrent = String(recommendationResults.xColumn)
+                    @options.yAxisCurrent = String(recommendationResults.yColumn)
 
-                    $translate(@translationKeys[@diagramType]).then (translation) =>
-                        @selectedDiagramName = translation
+                    $translate(@options.translationKeys[@options.diagramType]).then (translation) =>
+                        @options.selectedDiagramName = translation
 
                     Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
 
@@ -87,6 +89,8 @@ app.service 'VisualizationService', [
             # @param {String} type
             createDiagram: (options) ->
                 $log.info "VisualizationService createDiagram function called"
+                $log.debug
+                    options: options
 
                 trimmedDataset = vidatio.helper.trimDataset Table.dataset
                 headers = Table.getColumnHeaders()

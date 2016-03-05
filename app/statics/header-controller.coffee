@@ -12,7 +12,8 @@ app.controller "HeaderCtrl", [
     "$log"
     "ngToast"
     "$translate"
-    ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate) ->
+    "TableService"
+    ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
         # The three bool values represent the three tabs in the header
         # @property activeViews
         # @type {Array}
@@ -45,8 +46,16 @@ app.controller "HeaderCtrl", [
             #             console.log "nothing to recommend, abort! "
 
         $scope.saveDataset = ->
-            geoJSON = Map.getGeoJSON()
-            Data.saveViaAPI geoJSON
+            $log.info "HeaderCtrl saveDataset called"
+
+            if Data.meta.fileType is "shp"
+                dataset = Map.getGeoJSON()
+            else
+                dataset = Table.dataset.slice()
+                if Table.useColumnHeadersFromDataset
+                    dataset.unshift Table.instanceTable.getColHeader()
+
+            Data.saveViaAPI dataset
 
         $scope.hideLink = ->
             $rootScope.showLink = false
