@@ -10,14 +10,14 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview.button.icon-return-2(ui-sref='app.catalog({ locale: locale })')
+                    a#back-to-datasets-overview.button.icon-return-2(ui-sref="app.catalog({ locale: locale })")
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
@@ -29,15 +29,15 @@ header.ng-cloak
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
                 .col-xs-6.col-sm-pull-2.col-sm-2
-                    a#back-to-import.btn.btn-primary(ui-sref='app.import({ locale: locale })')
+                    a#back-to-import.btn.btn-primary(ui-sref="app.import({ locale: locale })")
                         span.fui-arrow-left
                         span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-2.col-sm-push-2
-                    a#save-dataset.btn.btn-primary(href='#' type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
+                    a#save-dataset.btn.btn-primary(href="#" type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
                     p {{"LINK_TO_SHARE" | translate }}
@@ -47,10 +47,9 @@ header.ng-cloak
                     a#copy-link.btn(ng-click="copyLink()") {{"COPY_LINK" | translate }}
 
                 .col-xs-12.col-sm-4.col-sm-pull-4.editor-panel
-                    a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
+                    a.tab.border-left(href="#" ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
                     .separator
-                    a.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
-
+                    a.tab.border-right(href="#" ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
@@ -62,9 +61,7 @@ header.ng-cloak
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
-
-
+                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
@@ -73,7 +70,7 @@ header.ng-cloak
                 .col-xs-6.middle
                     h1.underline-red {{ "LOGIN" | translate | uppercase }}
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
@@ -82,7 +79,7 @@ header.ng-cloak
                 .col-xs-6.middle
                     h1.underline-red {{ "REGISTRATION" | translate | uppercase }}
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-3.logo
@@ -95,7 +92,7 @@ header.ng-cloak
                         a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
@@ -106,4 +103,4 @@ header.ng-cloak
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
                         a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")

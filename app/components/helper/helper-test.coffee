@@ -272,64 +272,66 @@ describe "Service Helper", ->
         expect(@Helper.isDate "2016/12/32" ).toBeFalsy()
 
     it 'should transform 2 dimensional arrays to arrays of objects for a bar chart and scatter plot', ->
-        test = [
+        dataset = [
             [ 123, "Hello World" ]
             [ 456, "This is a test" ]
         ]
+        headers =
+            "x": "Apfel"
+            "y": "Banane"
+        xColumn = 1
+        yColumn = 0
+        color = "#FF0"
 
         expectedResult = [
             {
                 "Apfel": "Hello World"
                 "Banane": 123
                 "name": 123
+                "color": "#FF0"
             }
             {
                 "Apfel": "This is a test"
                 "Banane": 456
                 "name": 456
+                "color": "#FF0"
             }
         ]
 
-        headers =
-            "x": "Apfel"
-            "y": "Banane"
-
-        xColumn = 1
-        yColumn = 0
-
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "bar", headers)
+        actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "bar", headers, color)
         expect(actualResult).toEqual(expectedResult)
 
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "scatter", headers)
+        actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "scatter", headers, color)
         expect(actualResult).toEqual(expectedResult)
 
     it 'should transform 2 dimensional arrays to arrays of objects for a timeseries chart', ->
-        test = [
+        dataset = [
             [ 123, new Date("2016-02-28") ]
             [ 456, new Date("2016-02-29") ]
         ]
+        headers =
+            "x": "Apfel"
+            "y": "Banane"
+        xColumn = 1
+        yColumn = 0
+        color = "#FF0"
 
         expectedResult = [
             {
                 "Apfel": new Date("2016-02-28")
                 "Banane": 123
                 "name": "Line 1"
+                "color": "#FF0"
             }
             {
                 "Apfel": new Date("2016-02-29")
                 "Banane": 456
                 "name": "Line 1"
+                "color": "#FF0"
             }
         ]
 
-        headers =
-            "x": "Apfel"
-            "y": "Banane"
-
-        xColumn = 1
-        yColumn = 0
-
-        actualResult = @Helper.transformToArrayOfObjects(test, xColumn, yColumn, "timeseries", headers)
+        actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "timeseries", headers, color)
         expect(actualResult).toEqual(expectedResult)
 
     it 'should create a subset of a 2 dimensional array with x column first and y column second (where each column is an Array)', ->

@@ -118,9 +118,9 @@
     "HEADER": "Kopfzeile",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
-        "SCATTER_PLOT": "Scatter Plot",
+        "SCATTER_PLOT": "Streudiagramm",
         "MAP": "Karte",
-        "PARALLEL_COORDINATES": "Parallel Coordinates",
+        "PARALLEL_COORDINATES": "Parallele Koordinaten",
         "BAR_CHART": "Balkendiagramm",
         "TIME_SERIES": "Zeitlicher Verlauf"
     },

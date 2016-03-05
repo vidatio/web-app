@@ -19,22 +19,40 @@
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
                             a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ header}}
+
             .diagram-selection
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
-                        li(ng-repeat="diagram in supportedDiagrams")
-                            a(href="#" ng-click="selectDiagram(diagram.name, diagram.type)")
-                                img.graph-icon(src="{{ diagram.imagePath }}")
-                                | {{ diagram.name }}
+                        li
+                            a(href="#" ng-click="selectDiagram('scatter')")
+                                img.graph-icon(src="/images/diagram-icons/scatter-plot.svg")
+                                | {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('map')")
+                                img.graph-icon(src="/images/diagram-icons/map.svg")
+                                | {{ "DIAGRAMS.MAP" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('parallel')")
+                                | {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('bar')")
+                                img.graph-icon(src="/images/diagram-icons/bar-chart.svg")
+                                | {{ "DIAGRAMS.BAR_CHART" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('timeseries')")
+                                img.graph-icon(src="/images/diagram-icons/line-chart.svg")
+                                | {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
-            .color-selection
-                a(href='#').icon-download-3
-                    color-picker(ng-model="color")
+            .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
+                a.icon-search(href='#' ng-click="recommend()")
 
-            .download-button
-                a(href='#').icon-download-3
+            .color-selection.hover-button(ng-hide="diagramType == 'map'")
+                a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="color" ng-change="updateColor()" colorpicker-with-input="true")
+
+            .download-button.hover-button
+                a.icon-download-3(href='#')
                 ul
                     li
                         a(ng-click='shareVisualization("png")') PNG
