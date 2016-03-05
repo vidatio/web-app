@@ -22,6 +22,7 @@ app.controller "VisualizationCtrl", [
 
         $scope.diagramType = Visualization.diagramType
         $scope.translationKeys = Visualization.translationKeys
+        $scope.selectedDiagramName = Visualization.selectedDiagramName
         $scope.xAxisCurrent = Visualization.xAxisCurrent
         $scope.yAxisCurrent = Visualization.yAxisCurrent
         $scope.color = Visualization.color
@@ -38,23 +39,24 @@ app.controller "VisualizationCtrl", [
                 yColumn: $scope.yAxisCurrent
                 color: $scope.color
 
-        # After having recommend diagram options, we watch the dataset of the table
-        # because the watcher fires at initialization the diagram gets immediately drawn
-        $scope.$watch (->
-            Table.dataset
-        ), ( ->
-            $log.info "VisualizationCtrl dataset watcher triggered"
-
-            Visualization.createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-                color: $scope.color
-        ), true
-
         if Data.meta.fileType is "shp"
             $scope.diagramType = "map"
             Map.setInstance()
+        else
+            # After having recommend diagram options, we watch the dataset of the table
+            # because the watcher fires at initialization the diagram gets immediately drawn
+            # FIXME: Whats should happen, if a person clears the table after watching shp?!
+            $scope.$watch (->
+                Table.dataset
+            ), ( ->
+                $log.info "VisualizationCtrl dataset watcher triggered"
+
+                Visualization.createDiagram
+                    type: $scope.diagramType
+                    xColumn: $scope.xAxisCurrent
+                    yColumn: $scope.yAxisCurrent
+                    color: $scope.color
+            ), true
 
         $timeout ->
             Progress.setMessage ""

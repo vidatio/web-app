@@ -12,29 +12,24 @@ app.controller "TableCtrl", [
     "$log"
     ($scope, Table, Share, Data, Map, Converter, $log) ->
         $scope.dataset = Table.dataset
-
+        $scope.meta = Data.meta
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
+
         $('#column-headers-checkbox').radiocheck()
 
-        # If the imported file is a shp file we always use the column headers
         if Data.meta.fileType is "shp"
             geoJSON = Map.getGeoJSON()
             columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
             Table.setColumnHeaders columnHeaders
-            $('#header-button').hide()
-        else
-            $('#header-button').show()
 
-        $scope.changeUseOfHeader = ->
+        $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
 
-            if Data.meta.fileType != "shp"
+            if Data.meta.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeColumnHeadersFromDataset()
                 else
                     Table.putColumnHeadersBackToDataset()
-
-        $scope.showDownloadButton = Data.meta.fileName is "csv"
 
         #@method $scope.download
         #@description downloads a csv

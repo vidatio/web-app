@@ -18,7 +18,7 @@ app.service 'TableService', [
             # @method initAxisSelection
             # @public
             initAxisSelection: ->
-                $log.info "TableService initAxis called"
+                $log.info "TableService initAxisSelection called"
 
                 colHeaders = @instanceTable.getColHeader()
                 $log.debug

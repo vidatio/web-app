@@ -18,7 +18,7 @@ app.service 'VisualizationService', [
                 @xAxisCurrent = 0
                 @yAxisCurrent = 1
                 @color = "#11DDC6"
-                @selectDiagramName = null
+                @selectedDiagramName = null
 
                 @translationKeys =
                     "scatter": "DIAGRAMS.SCATTER_PLOT"

@@ -128,7 +128,6 @@ app.controller "ImportCtrl", [
 
                 initTableAndMap fileType, fileContent
 
-                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
 
@@ -145,7 +144,6 @@ app.controller "ImportCtrl", [
 
         initTableAndMap = (fileType, fileContent) ->
             switch fileType
-
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
