@@ -49,7 +49,7 @@ app.controller "VisualizationCtrl", [
         ), true
 
         if Data.meta.fileType is "shp"
-            $scope.diagramType = "map"
+            $scope.visualization.diagramType = "map"
             Map.setInstance()
 
         $timeout ->
@@ -77,7 +77,7 @@ app.controller "VisualizationCtrl", [
             else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.diagramType
                 $scope.visualization.yAxisCurrent = id
             else
-                $translate(Visualization.translationKeys[$scope.diagramType]).then (diagramName) ->
+                $translate(Visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
                         column: Table.getColumnHeaders()[id]
                         diagramType: diagramName
