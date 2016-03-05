@@ -81,12 +81,8 @@ app.controller "DatasetCtrl", [
                 name: $scope.data.name
                 data: $scope.data.data
 
-            console.log "$scope.data", $scope.data
-
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
-
-            #TODO: Header need to be initialized from database.
 
             if Data.meta["fileType"] is "shp"
                 dataset = Converter.convertGeoJSON2Arrays $scope.data.data
@@ -95,13 +91,12 @@ app.controller "DatasetCtrl", [
                 Map.setGeoJSON $scope.data.data
             else
                 if $scope.data.options?
-                    console.log "$scope.data.options", $scope.data.options
-                    Visualization.options =
-                        diagramType: $scope.data.options.diagramType || false
-                        xAxisCurrent: $scope.data.options.xAxisCurrent || 0
-                        yAxisCurrent: $scope.data.options.yAxisCurrent || 1
-                        color: $scope.data.options.color || "#11DDC6"
-                        selectedDiagramName: $scope.data.options.selectedDiagramName || null
+                    # Each value has to be assigned individually, otherwise all options get overwritten.
+                    Visualization.options["diagramType"] = $scope.data.options.diagramType || false
+                    Visualization.options["xAxisCurrent"] = $scope.data.options.xAxisCurrent || 0
+                    Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
+                    Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
+                    Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
                     Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
 
                 Table.setDataset $scope.data.data

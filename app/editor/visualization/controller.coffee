@@ -35,7 +35,7 @@ app.controller "VisualizationCtrl", [
                 color: $scope.visualization.color
 
         if Data.meta.fileType is "shp"
-            $scope.diagramType = "map"
+            $scope.visualization.diagramType = "map"
             Map.setInstance()
         else
             # After having recommend diagram options, we watch the dataset of the table
@@ -78,7 +78,7 @@ app.controller "VisualizationCtrl", [
             else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.diagramType
                 $scope.visualization.yAxisCurrent = id
             else
-                $translate(Visualization.translationKeys[$scope.diagramType]).then (diagramName) ->
+                $translate(Visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
                         column: Table.getColumnHeaders()[id]
                         diagramType: diagramName

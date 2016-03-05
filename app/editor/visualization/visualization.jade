@@ -49,7 +49,7 @@
                 a.icon-search(href='#' ng-click="recommend()")
 
             .color-selection.hover-button(ng-hide="diagramType == 'map'")
-                a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="color" ng-change="updateColor()" colorpicker-with-input="true")
+                a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" ng-change="updateColor()" colorpicker-with-input="true")
 
             .download-button.hover-button
                 a.icon-download-3(href='#')

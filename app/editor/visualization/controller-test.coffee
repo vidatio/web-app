@@ -6,9 +6,6 @@ describe "Visualization Ctrl", ->
 
         inject ($controller, $rootScope) ->
             @scope = $rootScope.$new()
-            @scope.diagramType = "scatter"
-            @scope.xAxisCurrent = 0
-            @scope.yAxisCurrent = 1
 
             Table =
                 dataset: [["0", "1"]]
@@ -22,7 +19,7 @@ describe "Visualization Ctrl", ->
 
             Data =
                 meta:
-                    fileType: "shp"
+                    fileType: "csv"
 
             Progress =
                 setDataset: ->
@@ -32,6 +29,11 @@ describe "Visualization Ctrl", ->
                     {}
 
             @Visualization =
+                options:
+                    diagramType: "scatter"
+                    xAxisCurrent: 0
+                    yAxisCurrent: 1
+                    color: '#000111'
                 isInputValid: ->
                     true
                 createDiagram: ->
