@@ -59,12 +59,16 @@ app.service 'DataService', [
                 $log.debug
                     dataset: dataset
                     name: name
+                    metaData:
+                        fileType: @meta.fileType
+                        fileName: @meta.fileName
 
                 DataFactory.save
                     name: name
                     data: dataset
                     metaData:
                         fileType: @meta.fileType
+                        fileName: @meta.fileName
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
