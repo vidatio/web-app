@@ -46,10 +46,13 @@ app.controller "HeaderCtrl", [
             #             console.log "nothing to recommend, abort! "
 
         $scope.saveDataset = ->
+            $log.info "HeaderCtrl saveDataset called"
+
             if Data.meta.fileType is "shp"
                 dataset = Map.getGeoJSON()
             else
-                dataset = Table.dataset
+                dataset = Table.dataset.slice()
+                dataset.unshift Table.instanceTable.getColHeader()
 
             Data.saveViaAPI dataset
 
