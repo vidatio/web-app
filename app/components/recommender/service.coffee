@@ -137,13 +137,28 @@ class window.vidatio.Recommender
 
             # After checking the header or/and classify the columns
             # we have to decide which diagram type we want to recommend
-            if ("numeric" in schema[xIndex] and "numeric" in schema[yIndex]) or ("nominal" in schema[xIndex] and "nominal" in schema[yIndex])
+
+            if "coordinate" in schema[xIndex] and "coordinate" in schema[yIndex]
+                @recommendedDiagram = "map"
+
+            else if ("date" in schema[xIndex] and "numeric" in schema[yIndex]) or ("numeric" in schema[xIndex] and "date" in schema[yIndex])
+                @recommendedDiagram = "timeseries"
+
+                if "numeric" in schema[xIndex] and "date" in schema[yIndex]
+                    tmp = xIndex
+                    xIndex = yIndex
+                    yIndex = tmp
+
+            else if "numeric" in schema[xIndex] and "numeric" in schema[yIndex]
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 
-            if "nominal" in schema[xIndex] and "numeric" in schema[yIndex]
+            else if "nominal" in schema[xIndex] and "nominal" in schema[yIndex]
+                @recommendedDiagram = "parallel"
+
+            else if ("nominal" in schema[xIndex] and "numeric" in schema[yIndex]) or ("numeric" in schema[xIndex] and "nominal" in schema[yIndex])
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
                 else if numberOfNominals > @thresholdBar
@@ -151,32 +166,13 @@ class window.vidatio.Recommender
                 else
                     @recommendedDiagram = "bar"
 
-            if "numeric" in schema[xIndex] and "nominal" in schema[yIndex]
-                if dataset.length > @thresholdPC
-                    @recommendedDiagram = "parallel"
-                else if numberOfNominals > @thresholdBar
-                    @recommendedDiagram = "scatter"
-                else
-                    @recommendedDiagram = "bar"
-
-                tmp = xIndex
-                xIndex = yIndex
-                yIndex = tmp
-
-            if "date" in schema[xIndex] and "numeric" in schema[yIndex]
-                @recommendedDiagram = "timeseries"
-
-            if "numeric" in schema[xIndex] and "date" in schema[yIndex]
-                @recommendedDiagram = "timeseries"
-                tmp = xIndex
-                xIndex = yIndex
-                yIndex = tmp
+                if "numeric" in schema[xIndex] and "nominal" in schema[yIndex]
+                    tmp = xIndex
+                    xIndex = yIndex
+                    yIndex = tmp
 
             if @recommendedDiagram is null
-                if schema[xIndex] > 0 and schema[xIndex] > 0 and dataset.length > @thresholdPC
-                    @recommendedDiagram = "parallel"
-                else
-                    @recommendedDiagram = "scatter"
+                @recommendedDiagram = "parallel"
 
         result =
             type: @recommendedDiagram

@@ -47,10 +47,10 @@ app.controller "VisualizationCtrl", [
                 $log.info "VisualizationCtrl dataset watcher triggered"
 
                 Visualization.createDiagram
-                    type: $scope.diagramType
-                    xColumn: $scope.xAxisCurrent
-                    yColumn: $scope.yAxisCurrent
-                    color: $scope.color
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
             ), true
 
         $timeout ->
@@ -78,7 +78,7 @@ app.controller "VisualizationCtrl", [
             else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.diagramType
                 $scope.visualization.yAxisCurrent = id
             else
-                $translate(Visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
+                $translate($scope.visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
                         column: Table.getColumnHeaders()[id]
                         diagramType: diagramName
@@ -103,7 +103,7 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
-            $translate(Visualization.translationKeys[type]).then (translation) ->
+            $translate($scope.visualization.translationKeys[type]).then (translation) ->
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.diagramType = type
 

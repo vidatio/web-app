@@ -2,8 +2,8 @@
     .content.height-500
         .settings-bar
             .axis-selection(ng-if="meta.fileType != 'shp'")
-                p(ng-if="diagramType != 'map'") {{ "X_AXIS" | translate }}
-                p(ng-if="diagramType == 'map'") {{ "LONGITUDE" | translate }}
+                p(ng-if="visualization.diagramType != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="visualization.diagramType == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[visualization.xAxisCurrent] }}
                         span.caret
@@ -11,8 +11,8 @@
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
                             a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ header}}
 
-                p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
-                p(ng-if="diagramType == 'map'") {{ "LATITUDE" | translate }}
+                p(ng-if="visualization.diagramType != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="visualization.diagramType == 'map'") {{ "LATITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[visualization.yAxisCurrent] }}
                         span.caret
@@ -20,7 +20,7 @@
                         li(ng-repeat="(id, header) in colHeadersSelection track by $index")
                             a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ header}}
 
-            .diagram-selection
+            .diagram-selection(ng-hide="meta.fileType == 'shp'")
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
@@ -48,7 +48,7 @@
             .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
                 a.icon-search(href='#' ng-click="recommend()")
 
-            .color-selection.hover-button(ng-hide="diagramType == 'map'")
+            .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
                 a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" ng-change="updateColor()" colorpicker-with-input="true")
 
             .download-button.hover-button
@@ -59,9 +59,9 @@
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="diagramType == 'map'")
-        #chart(ng-hide="diagramType == 'map' || diagramType == false")
-        #chart-empty(ng-hide="diagramType")
+        leaflet(geojson="geojson" id="map" ng-show="visualization.diagramType == 'map'")
+        #chart(ng-hide="visualization.diagramType == 'map' || visualization.diagramType == false")
+        #chart-empty(ng-hide="visualization.diagramType")
             .row
                 .col-md-12.diagram-placeholder
                     div

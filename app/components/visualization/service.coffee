@@ -34,7 +34,8 @@ app.service 'VisualizationService', [
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.dataset
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
+                header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
+                recommendationResults = vidatio.recommender.run trimmedDataset, header
 
                 if recommendationResults.error?
                     $log.error "Visualization Ctrl error at recommend diagram"
@@ -125,7 +126,9 @@ app.service 'VisualizationService', [
                     when "timeseries"
                         chart = new vidatio.TimeseriesChart chartData, options
                     else
-                        $log.error "VisualizationCtrl options.type not set"
+                        $log.error "VisualizationCtrl type not set"
+                        $log.debug
+                            type: options.type
 
         new Visualization
 ]
