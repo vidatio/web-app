@@ -34,33 +34,34 @@ describe "Visualization Ctrl", ->
                     xAxisCurrent: 0
                     yAxisCurrent: 1
                     color: '#000111'
+                    translationKeys:
+                        "scatter": "DIAGRAMS.SCATTER_PLOT"
+                        "map": "DIAGRAMS.MAP"
+                        "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
+                        "bar": "DIAGRAMS.BAR_CHART"
+                        "timeseries": "DIAGRAMS.TIME_SERIES"
                 isInputValid: ->
                     true
-                createDiagram: ->
+                create: ->
                 recommendDiagram: ->
-                translationKeys:
-                    "scatter": "DIAGRAMS.SCATTER_PLOT"
-                    "map": "DIAGRAMS.MAP"
-                    "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
-                    "bar": "DIAGRAMS.BAR_CHART"
-                    "timeseries": "DIAGRAMS.TIME_SERIES"
 
-            @VisualizationCtrl = $controller "VisualizationCtrl",
+
+            VisualizationCtrl = $controller "VisualizationCtrl",
                 $scope: @scope, TableService: Table, MapService: Map, DataService: Data,
                 ProgressService: Progress, ConverterService: Converter, VisualizationService: @Visualization
 
-            spyOn(@Visualization, 'createDiagram')
+            spyOn(@Visualization, 'create')
 
     afterEach ->
-        @Visualization.createDiagram.calls.reset()
+        @Visualization.create.calls.reset()
 
     describe "on calling scope functions", ->
-        it 'should call the trimdataset function for further processing', ->
-            @scope.updateColor()
-            expect(@Visualization.createDiagram).toHaveBeenCalled()
+        it 'should call the createDiagram function for redrawing the visualization', ->
+            @scope.$emit("colorpicker-selected")
+            expect(@Visualization.create).toHaveBeenCalled()
 
             @scope.setAxisColumnSelection("x", 0)
-            expect(@Visualization.createDiagram).toHaveBeenCalled()
+            expect(@Visualization.create).toHaveBeenCalled()
 
             @scope.selectDiagram()
-            expect(@Visualization.createDiagram).toHaveBeenCalled()
+            expect(@Visualization.create).toHaveBeenCalled()

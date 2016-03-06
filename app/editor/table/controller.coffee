@@ -17,11 +17,6 @@ app.controller "TableCtrl", [
 
         $('#column-headers-checkbox').radiocheck()
 
-        if Data.meta.fileType is "shp"
-            geoJSON = Map.getGeoJSON()
-            columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
-            Table.setColumnHeaders columnHeaders
-
         $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
 

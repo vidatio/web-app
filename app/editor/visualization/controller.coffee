@@ -28,7 +28,7 @@ app.controller "VisualizationCtrl", [
         # @method recommend
         $scope.recommend = ->
             Visualization.recommendDiagram()
-            Visualization.createDiagram
+            Visualization.create
                 type: $scope.visualization.diagramType
                 xColumn: $scope.visualization.xAxisCurrent
                 yColumn: $scope.visualization.yAxisCurrent
@@ -46,7 +46,7 @@ app.controller "VisualizationCtrl", [
             ), ( ->
                 $log.info "VisualizationCtrl dataset watcher triggered"
 
-                Visualization.createDiagram
+                Visualization.create
                     type: $scope.visualization.diagramType
                     xColumn: $scope.visualization.xAxisCurrent
                     yColumn: $scope.visualization.yAxisCurrent
@@ -56,9 +56,8 @@ app.controller "VisualizationCtrl", [
         $timeout ->
             Progress.setMessage ""
 
-        # @method updateColor
-        $scope.updateColor = ->
-            Visualization.createDiagram
+        $scope.$on "colorpicker-selected", ->
+            Visualization.create
                 type: $scope.visualization.diagramType
                 xColumn: $scope.visualization.xAxisCurrent
                 yColumn: $scope.visualization.yAxisCurrent
@@ -89,7 +88,7 @@ app.controller "VisualizationCtrl", [
                 return
 
             Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
-            Visualization.createDiagram
+            Visualization.create
                 type: $scope.visualization.diagramType
                 xColumn: $scope.visualization.xAxisCurrent
                 yColumn: $scope.visualization.yAxisCurrent
@@ -107,7 +106,7 @@ app.controller "VisualizationCtrl", [
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.diagramType = type
 
-                Visualization.createDiagram
+                Visualization.create
                     type: $scope.visualization.diagramType
                     xColumn: $scope.visualization.xAxisCurrent
                     yColumn: $scope.visualization.yAxisCurrent

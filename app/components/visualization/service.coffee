@@ -82,11 +82,11 @@ app.service 'VisualizationService', [
                 return vidatio.helper.isDiagramPossible xColumnType, yColumnType, diagramType
 
             # create a new diagram based on the recommended diagram
-            # @method createDiagram
+            # @method create
             # @public
             # @param {String} type
-            createDiagram: (options) ->
-                $log.info "VisualizationService createDiagram function called"
+            create: (options) ->
+                $log.info "VisualizationService create function called"
                 $log.debug
                     options: options
 

@@ -88,7 +88,7 @@ app.config [
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level
-        LogglyLoggerProvider.level "DEBUG"
+        LogglyLoggerProvider.level "INFO"
 
         # Send console error stack traces to Loggly.
         # @method sendConsoleErrors

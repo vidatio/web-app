@@ -24,26 +24,24 @@ app.service 'MapService', [
             setInstance: ->
                 $log.info "MapService getInstance called"
 
-                if !@map
-                    leafletData.getMap("map").then (mapInstance) =>
-                        $log.info "MapService leafletData.getMap called"
-                        $log.debug
-                            message: "MapService leafletData.getMap called"
+                leafletData.getMap("map").then (mapInstance) =>
+                    $log.info "MapService leafletData.getMap called"
+                    $log.debug
+                        message: "MapService leafletData.getMap called"
 
-                        @map = mapInstance
-                        # Timeout is needed to wait for the view to finish render
-                        $timeout =>
-                            @init()
+                    @map = mapInstance
+                    $timeout =>
+                        @init()
 
-                    , (error) ->
-                        $log.error "MapService error on map create"
-                        $log.debug
-                            message: "MapService error on map create"
-                            error: error
+                , (error) ->
+                    $log.error "MapService error on map create"
+                    $log.debug
+                        message: "MapService error on map create"
+                        error: error
 
-                        ngToast.create
-                            content: error
-                            className: "danger"
+                    ngToast.create
+                        content: error
+                        className: "danger"
 
             # Because the map gets set later than the geoJSON
             # we need init function to do initial actions
