@@ -26,7 +26,10 @@ app.controller "CatalogCtrl", [
             "Finanzen"
         ]
 
-        CatalogFactory.query (response) ->
+        CatalogFactory.getCategories().query (response) ->
+            console.log("CATEGORIES", response)
+
+        CatalogFactory.getDatasets().query (response) ->
             $log.info "CatalogCtrl successfully queried datasets"
 
             $scope.vidatios = response
