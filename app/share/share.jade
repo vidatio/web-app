@@ -9,13 +9,13 @@
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 
                     form
-                        .form-group
+                        .form-group.selection
                             label(for="dataset") {{ "DATASET" | translate }}
                             select#dataset.form-control
                                 option CSV
                                 option XML
                                 option JSON
-                        .form-group
+                        .form-group.selection
                             label(for="dataset") Vidatio
                             select#dataset.form-control
                                 option JPEG
@@ -25,13 +25,13 @@
             .col-sm-6(ng-switch on="save")
                 #save-share.area(ng-switch-default)
                     .option-icon.icon-sharing
-                    h4 {{ "SAVE_AND_SHARE_VIDATIO" | translate | uppercase }}
+                    h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
                             li: button.btn.btn-primary.icon-facebook(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.fui-link(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-link(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
@@ -46,15 +46,24 @@
                             .input-group.form-group
                                 input.form-control(type="text" name="title" ng-model="vidatio.title" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
-                            .input-group.form-group
-                                input.form-control(type="text" name="category" ng-model="vidatio.category" placeholder="{{ 'CATEGORY' | translate }}")
+                            .input-group.form-group.selection
+                                select.form-control
+                                    option(selected="selected" disabled="true") {{ 'CATEGORY' | translate }}
+                                    option 1
+                                    option 2
+                                    option 3
                         .row
-                            .input-group.form-group.last
-                                input.form-control(type="text" name="licence" ng-model="vidatio.licence" placeholder="{{ 'LICENCE' | translate }}")
+                            .input-group.form-group.selection.last
+                                select.form-control
+                                    option(selected="selected" disabled="true") {{ 'LICENCE' | translate }}
+                                    option 1
+                                    option 2
+                                    option 3 
                         .row
-                            .tagsinput-primary
-                                .bootstrap-tagsinput   
-                                    input(type="text" placeholder="Füge Text hinzu, damit dein Vidatio besser gefunden wird" size="52")
+                            .tagsinput-primary  
+                                    input(name="tagsinput" class="tagsinput" data-role="tagsinput")
+                                    span.add-tag +
+                                    span.placeholder Füge Text hinzu, damit dein Vidatio besser gefunden wird
 
                         .row
                             button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="metadataForm.$invalid || metadataForm.$pending") {{ 'SAVE' | translate }}

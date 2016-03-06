@@ -25,7 +25,7 @@
 
         .option-icon
             width 100px
-            margin 20px auto 0
+            margin 15px auto 0
             height 62px
             font-size 45px
             color $color-dark-grey
@@ -52,34 +52,9 @@
                     width 43%
                     margin 0 3% 
                     float left
-                    
-                    &::after
-                        border-left 6px solid transparent
-                        border-right 6px solid transparent
-                        border-top 5px solid black
-                        content ""
-                        float right
-                        margin -18px 15px 0 0
-                        width 10px
-                    
-                    label
-                        margin-bottom 0
-                        {lightText}
-                    
-                    select
-                        text-align center
-                        -webkit-appearance none  
-                        -moz-appearance none
-                        appearance none
-                        height 34px
-                        padding 5px 12px
-                        &:focus
-                        &:hover
-                            position static
-                            outline none
         
         #save-share
-            padding 0 45px 25px
+            padding 0 45px 20px
             height auto
             min-height 564px
             margin-left 13px
@@ -111,8 +86,21 @@
                 .form-control:not(:first-child)
                     border-left none
                 
+                &.selection
+                    &::after
+                        top 48%
+                    select
+                        height 42px
+                        text-align left
+                        color $color-table-even-active
+                        &.selected
+                            color $color-black
+                        option
+                            color $color-black
+                            padding 5px 12px
+                
             button[type="submit"]
-                margin-top 10px
+                margin-top 8px
             
             p
                 {lightText}

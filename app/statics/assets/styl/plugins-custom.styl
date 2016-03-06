@@ -147,6 +147,10 @@ input.form-control
         border-bottom-right-radius 4px
         &:first-child
             border-radius 0 0 4px 4px
+    select
+        border-bottom-right-radius 4px
+        &:first-child
+            border-radius 0 0 4px 4px
 
 /*input round corners, if single*/        
 .input-group.single
@@ -173,6 +177,42 @@ input.form-control
     &:active
         background $color-green
         border-color $color-green
+
+.form-group
+    label
+        {lightText}
+    &.selection
+        &::after
+            border-left 6px solid transparent
+            border-right 6px solid transparent
+            border-top 5px solid black
+            content ""
+            position absolute
+            top 68%
+            right 15px
+            z-index 3
+
+select.form-control
+    text-align center
+    -webkit-appearance none  
+    -moz-appearance none
+    appearance none
+    height 34px
+    padding 5px 12px
+    &:focus
+    &:hover
+        position relative
+        z-index 2
+        outline none
+    
+    option[disabled="true"]
+        display none
+
+/*hack to remove dotted focus from select in firefox*/
+.form-group
+    select.form-control:-moz-focusring
+        color transparent !important
+        text-shadow 0 0 0 #000
 
 /* STATE VALID */
 .input-group.form-group
@@ -223,24 +263,37 @@ span.error
 
 /*tags flat-ui custom styles*/
 .tagsinput-primary
-    .bootstrap-tagsinput 
-        border none
-        padding 7px 1px 1px 1px
-        &::before
+    min-height 66px
+    margin-bottom 0
+    > span
+        {lightText}
+        margin -20px 0 0 32px
+        float left
+        &.add-tag
             background-color $color-passive
             border-radius 4px
             color $color-white
-            content "+"
-            display inline-block
+            display block
             font-size 30px
-            height 29px
-            line-height 23px
-            margin-right 5px
+            height 27px
+            line-height 21px
+            margin -28px 0 0 0
             text-align center
-            width 29px
-            
-        input[type="text"]
-            left -30px
+            width 27px
+            cursor pointer
             position relative
-            text-indent 30px
+            &:hover
+                background-color $color-hover-dark
+    
+    .bootstrap-tagsinput 
+        border none
+        padding 6px 1px 1px 1px
+                
+        input[type="text"]
+            padding-left 35px
+            margin 0
+            height 27px
             {lightText}
+        .tag
+            margin 0 5px 3px 0
+            float left
