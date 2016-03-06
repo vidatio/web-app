@@ -12,11 +12,19 @@
         background $color-table-odd-passive
         border-top 3px solid $color-green
 
+        > div:not(#time-filter)
+            margin-top 15px
+
         #time-filter
             input
-                width 100px
+                width 46%
                 display inline
                 padding 8px
+
+            span
+                display inline-block
+                text-align center
+                width 6%
 
             [date-picker-wrapper]
                 position absolute

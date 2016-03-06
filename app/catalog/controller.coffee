@@ -10,23 +10,34 @@ app.controller "CatalogCtrl", [
     "ngToast"
     ($scope, CatalogFactory, $log, $translate, ngToast) ->
 
-        $scope.dates =
-            from: undefined
-            to: undefined
-            maxDate: moment.tz('UTC').hour(12).startOf('h')
+        $scope.filter =
+            dates:
+                from: undefined
+                to: undefined
+            category: undefined
 
-        $scope.maxDate = $scope.dates.maxDate
+        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
+
+        categories = [
+            "Politik"
+            "Sport"
+            "Umwelt"
+            "Bildung"
+            "Finanzen"
+        ]
 
         CatalogFactory.query (response) ->
             $log.info "CatalogCtrl successfully queried datasets"
 
             $scope.vidatios = response
 
-            for vidatio in $scope.vidatios
+            for vidatio, index in $scope.vidatios
                 vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
+                vidatio.metaData =
+                    category: categories[ index % categories.length ]
         , (error) ->
             $log.info "CatalogCtrl error on query datasets"
             $log.error error

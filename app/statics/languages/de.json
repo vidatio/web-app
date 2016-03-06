@@ -113,7 +113,8 @@
     "FROM": "von",
     "TO": "bis",
     "FILTER": {
-        "BY_TIME": "Filtern nach Zeit"
+        "BY_TIME": "Filtern nach Zeit",
+        "BY_CATEGORY": "Filtern nach Kategorie"
     },
     "HEADER": "Kopfzeile",
     "DIAGRAMS": {
