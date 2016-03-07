@@ -72,9 +72,9 @@ app.controller "VisualizationCtrl", [
                 axis: axis
                 id: id
 
-            if axis is "x" and Visualization.isInputValid id, $scope.visualization.yAxisCurrent, $scope.diagramType
+            if axis is "x" and Visualization.isInputValid id, $scope.visualization.yAxisCurrent, $scope.visualization.diagramType
                 $scope.visualization.xAxisCurrent = id
-            else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.diagramType
+            else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.visualization.diagramType
                 $scope.visualization.yAxisCurrent = id
             else
                 $translate($scope.visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->

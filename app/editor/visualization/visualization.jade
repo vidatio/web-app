@@ -22,7 +22,7 @@
 
             .diagram-selection(ng-hide="meta.fileType == 'shp'")
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ visualization.selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li
