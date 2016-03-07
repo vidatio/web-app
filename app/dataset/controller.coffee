@@ -39,7 +39,9 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
-            Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            console.log "$scope.data.metaData", $scope.data.metaData
+            if $scope.data.metaData?
+                Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"

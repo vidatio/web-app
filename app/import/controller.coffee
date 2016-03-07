@@ -149,7 +149,7 @@ app.controller "ImportCtrl", [
                     dataset = Converter.convertCSV2Arrays fileContent
                     Table.setDataset dataset
                     Table.useColumnHeadersFromDataset = true
-                    Visualization.recommendDiagram()
+                    Visualization.recommendDiagram Table.dataset[0].slice()
                     $location.path editorPath
 
                 when "zip"

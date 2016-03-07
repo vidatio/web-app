@@ -85,7 +85,7 @@ app.service 'TableService', [
                     @instanceTable.render()
                     @setColHeadersSelection @instanceTable.getColHeader()
                 else
-                    $log.warn "TableService resetColumnHeaders instanceTable is not defined"
+                    $log.info "TableService resetColumnHeaders instanceTable is not defined"
 
             # @method setColumnHeaders
             # @public
