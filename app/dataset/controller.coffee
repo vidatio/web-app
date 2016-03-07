@@ -90,6 +90,8 @@ app.controller "DatasetCtrl", [
                 Table.useColumnHeadersFromDataset = true
                 Map.setGeoJSON $scope.data.data
             else
+                Table.setDataset $scope.data.data
+
                 if $scope.data.options?
                     # Each value has to be assigned individually, otherwise all options get overwritten.
                     Visualization.options["diagramType"] = $scope.data.options.diagramType || false
@@ -97,9 +99,9 @@ app.controller "DatasetCtrl", [
                     Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
                     Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
                     Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
+                    Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
 
-                Table.setDataset $scope.data.data
-                Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
+                # if $scope.data.options.useColumnHeadersFromDataset?
 
             $timeout ->
                 Progress.setMessage ""
