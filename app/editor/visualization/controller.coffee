@@ -78,6 +78,8 @@ app.controller "VisualizationCtrl", [
                     $log.error
                         message: recommendationResults.error
 
+            initInlineEditingLabels()
+
         # @method changeAxisColumnSelection
         # @param {Number} axis
         # @param {Number} id
@@ -144,10 +146,59 @@ app.controller "VisualizationCtrl", [
                         type: $scope.diagramType
                         xColumn: $scope.xAxisCurrent
                         yColumn: $scope.yAxisCurrent
+
                 ), true
 
         $timeout ->
             Progress.setMessage ""
+
+
+        initInlineEditingLabels = ->
+            merge = (options, overrides) ->
+                extend (extend {}, options), overrides
+
+            extend = (object, properties) ->
+                for key, val of properties
+                    object[key] = val
+                object
+
+            $ "#chart"
+            .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
+                $element = $(@)
+
+                inputSize =
+                    width: $element.width() + 20
+                    height: $element.height() + 6
+
+                defaultCss =
+                    "position": "absolute"
+                    "width": "#{inputSize.width}px"
+                    "height": "#{inputSize.height}px"
+                    "padding": "5px"
+                    "font-family": "Helvetica"
+                    "font-weight": "200"
+                    "font-size": "12px"
+
+                if $element.attr("id") is "d3plus_graph_ylabel"
+                    inputPosition =
+                        "left": "-#{inputSize.height}px"
+                        "top": "50%"
+                        "margin-top": "-#{inputSize.width / 2}px"
+                        "transform": "rotate(-90deg)"
+                else
+                    inputPosition =
+                        "left": "50%"
+                        "top": "calc(100% - #{inputSize.height}px)"
+                        "margin-left": "-#{inputSize.width / 2}px"
+
+                $ "<input id='#{$element.attr("id")}_input' type='text' value='#{$element.text()}' />"
+                .css merge defaultCss, inputPosition
+                .appendTo "#chart"
+                .keyup (event) ->
+                    if event.keyCode is 13 or event.keyCode is 27
+                        $element.text $(@).val()
+                        $(this).remove()
+
 
         # @method selectDiagram
         # @param {String} name
@@ -227,3 +278,4 @@ app.controller "VisualizationCtrl", [
 
             return vidatio.helper.isDiagramPossible xColumnType, yColumnType, diagramType
     ]
+
