@@ -16,7 +16,7 @@ nav
                 span.icons.icon-opendata
                 span.link-text {{ 'AVAILABLE_DATASETS' | translate }}
             a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()")
-                span.icons.icon-import-2
+                span.icons.icon-import
                 span.link-text {{ 'IMPORT_DATA' | translate }}
             a.item(href="")
                 span.icons.icon-plus
@@ -29,10 +29,10 @@ nav
                 span.link-text-api {{ 'API' | translate }}
             br
             a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()")
-                span.icons.icon-login-2
+                span.icons.icon-login
                 span.link-text {{ 'LOG_ON' | translate }}
             a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()")
-                span.icons.icon-logout-2
+                span.icons.icon-logout
                 span.link-text {{ 'LOG_OUT' | translate }}
 
         registration

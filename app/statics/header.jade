@@ -18,7 +18,7 @@ header.ng-cloak
                         a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login-2(ui-sref="app.login({ locale: locale })")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -33,7 +33,7 @@ header.ng-cloak
                         a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login-2(ui-sref="app.login({ locale: locale })")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -41,7 +41,7 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-pull-2.col-sm-2
                     a#back-to-import.btn.btn-primary(ui-sref='app.import({ locale: locale })')
-                        span.fui-arrow-left
+                        span.fui-bracketleft
                         span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-2.col-sm-push-2
@@ -72,7 +72,7 @@ header.ng-cloak
                         a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login-2(ui-sref="app.login({ locale: locale })")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -111,7 +111,7 @@ header.ng-cloak
 
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#logout-button.button.icon-logout-2(ng-click="logout()")
+                        a#logout-button.button.icon-logout(ng-click="logout()")
                             span {{ "LOG_OUT" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -120,7 +120,7 @@ header.ng-cloak
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-6.col-sm-2.logo
                     a#logo.button(ui-sref="app.index({ locale: locale })")
-                    a#back-to-import.button.icon-import-2(ui-sref='app.import({ locale: locale })')
+                    a#back-to-import.button.icon-import(ui-sref='app.import({ locale: locale })')
                         span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
@@ -128,7 +128,7 @@ header.ng-cloak
                         a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login-2(ui-sref="app.login({ locale: locale })")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
@@ -146,7 +146,7 @@ header.ng-cloak
                         a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login-2(ui-sref="app.login({ locale: locale })")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
