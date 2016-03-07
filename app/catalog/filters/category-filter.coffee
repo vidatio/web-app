@@ -15,7 +15,7 @@ app.filter "categoryFilter", [
             output = []
 
             for element in input
-                output.push(element) if element.metaData.category.toLowerCase() is category.toLowerCase()
+                output.push(element) if element.metaData.category.toLowerCase().indexOf(category.toLowerCase()) >= 0
 
             output
 ]

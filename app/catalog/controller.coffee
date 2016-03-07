@@ -27,6 +27,8 @@ app.controller "CatalogCtrl", [
         ]
 
         CatalogFactory.getCategories().query (response) ->
+            $log.info "CatalogCtrl successfully queried categories"
+            $scope.categories = response
             console.log("CATEGORIES", response)
 
         CatalogFactory.getDatasets().query (response) ->
