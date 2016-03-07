@@ -7,9 +7,9 @@ class window.vidatio.GeoParser
     # @param {String} cell
     # @return {Array}
     extractCoordinatesOfOneCell: (cell) ->
-        vidatio.log.info "ParserService extractCoordinatesOfOneCell called"
-        vidatio.log.debug
-            cell: cell
+        # vidatio.log.info "ParserService extractCoordinatesOfOneCell called"
+        # vidatio.log.debug
+        #     cell: cell
 
         # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 

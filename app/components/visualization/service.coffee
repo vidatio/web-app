@@ -30,11 +30,10 @@ app.service 'VisualizationService', [
 
             # @method useRecommendedOptions
             # @public
-            recommendDiagram: ->
+            recommendDiagram: (header) ->
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.dataset
-                header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
                 recommendationResults = vidatio.recommender.run trimmedDataset, header
 
                 if recommendationResults.error?

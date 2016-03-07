@@ -27,7 +27,8 @@ app.controller "VisualizationCtrl", [
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            Visualization.recommendDiagram()
+            header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
+            Visualization.recommendDiagram(header)
             Visualization.create
                 type: $scope.visualization.diagramType
                 xColumn: $scope.visualization.xAxisCurrent
