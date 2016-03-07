@@ -128,7 +128,6 @@ app.controller "ImportCtrl", [
 
                 initTableAndMap fileType, fileContent
 
-                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
 
@@ -145,7 +144,6 @@ app.controller "ImportCtrl", [
 
         initTableAndMap = (fileType, fileContent) ->
             switch fileType
-
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
@@ -156,15 +154,17 @@ app.controller "ImportCtrl", [
 
                 when "zip"
                     Data.meta.fileType = "shp"
+                    Table.useColumnHeadersFromDataset = false
+
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                         $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                         $log.debug
                             fileContent: fileContent
 
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
+
                         if dataset.length
                             Table.setDataset dataset
-                            Table.useColumnHeadersFromDataset = true
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 

@@ -5,8 +5,10 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
+    "MapService"
     "TableService"
-    ($timeout, $log, Data, Table) ->
+    "ConverterService"
+    ($timeout, $log, Data, Map, Table, Converter) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -53,6 +55,11 @@ app.directive 'hot', [
             Table.initAxisSelection()
             if Table.useColumnHeadersFromDataset
                 Table.takeColumnHeadersFromDataset()
+
+            if Data.meta.fileType is "shp"
+                geoJSON = Map.getGeoJSON()
+                columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+                Table.setColumnHeaders columnHeaders, "shp"
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

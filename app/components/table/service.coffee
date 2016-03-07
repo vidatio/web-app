@@ -18,7 +18,7 @@ app.service 'TableService', [
             # @method initAxisSelection
             # @public
             initAxisSelection: ->
-                $log.info "TableService initAxis called"
+                $log.info "TableService initAxisSelection called"
 
                 colHeaders = @instanceTable.getColHeader()
                 $log.debug
@@ -68,6 +68,7 @@ app.service 'TableService', [
             # @public
             reset: ->
                 $log.info "TableService reset called"
+
                 @resetDataset()
                 @resetColumnHeaders()
 
@@ -89,25 +90,27 @@ app.service 'TableService', [
             # @method setColumnHeaders
             # @public
             # @param {Array} columnHeaders
-            setColumnHeaders: (columnHeaders) ->
+            setColumnHeaders: (columnHeaders, fileType) ->
                 $log.info "TableService setColumnHeaders called"
                 $log.debug
-                    message: "TableService setColumnHeaders called"
                     columnHeaders: columnHeaders
 
                 if @instanceTable
-                    @useColumnHeadersFromDataset = true
                     @instanceTable.updateSettings
                         colHeaders: columnHeaders
                     @instanceTable.render()
                     @setColHeadersSelection columnHeaders
                 else
-                    $log.error "TableService setColumnHeaders instanceTable is not defined"
+                    $log.warn "TableService setColumnHeaders instanceTable is not defined"
+
+                if fileType isnt "shp"
+                    @useColumnHeadersFromDataset = true
 
             # @method takeColumnHeadersFromDataset
             # @public
             takeColumnHeadersFromDataset: ->
                 $log.info "TableService takeColumnHeadersFromDataset called"
+
                 columnHeaders = @dataset.splice(0, 1)[0]
                 @setColumnHeaders columnHeaders
 
@@ -138,7 +141,7 @@ app.service 'TableService', [
                     message: "TableService setDataset called"
                     data: data
 
-                @reset true
+                @reset()
                 data.forEach (row, index) =>
                     @dataset[index] = row
 
