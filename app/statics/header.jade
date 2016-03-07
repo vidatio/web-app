@@ -41,11 +41,11 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-pull-2.col-sm-2
                     a#back-to-import.btn.btn-primary(ui-sref='app.import({ locale: locale })')
-                        span.fui-bracketleft
+                        span.icon-bracketleft
                         span {{ "IMPORT" | translate | uppercase }}
 
                 .col-xs-6.col-sm-2.col-sm-push-2
-                    a#save-dataset.btn.btn-primary(href='#' type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
+                    a#save-dataset.btn.btn-primary(href="#" type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
 
                 #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
                     p {{"LINK_TO_SHARE" | translate }}
@@ -55,10 +55,9 @@ header.ng-cloak
                     a#copy-link.btn(ng-click="copyLink()") {{"COPY_LINK" | translate }}
 
                 .col-xs-12.col-sm-4.col-sm-pull-4.editor-panel
-                    a.tab.border-left(href='#' ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
+                    a.tab.border-left(href="#" ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
                     .separator
-                    a.tab.border-right(href='#' ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
-
+                    a.tab.border-right(href="#" ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="import")
                 .col-xs-3.logo
@@ -89,6 +88,7 @@ header.ng-cloak
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
                             span {{ "MENU" | translate | uppercase }}
+
 
             #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
@@ -151,3 +151,4 @@ header.ng-cloak
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
                             span {{ "MENU" | translate | uppercase }}
+

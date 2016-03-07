@@ -1,24 +1,24 @@
 "use strict"
 
 class window.vidatio.ScatterPlot extends window.vidatio.Visualization
-    constructor: (dataset) ->
+    constructor: (dataset, options) ->
         vidatio.log.info "ScatterPlot constructor called"
         vidatio.log.debug
             dataset: dataset
+            options: options
 
-        # TODO: Add something like this
-        # http://stackoverflow.com/questions/23044338/window-resize-directive
+        super dataset
+        @preProcess options
 
-        setTimeout( ->
-            chart = c3.generate
-                bindto: "#chart"
-                data:
-                    xs:
-                        "A": "A_x"
-                    columns: dataset,
-                    type: "scatter"
-                padding:
-                    right: 30
-
-            super(dataset, chart)
-        , 500)
+        # we need to wait for angular to finish rendering
+        setTimeout =>
+            d3plus.viz()
+            .container("#chart")
+            .data(@chartData)
+            .type("scatter")
+            .id("name")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
+            .size(10)
+            .draw()
+        , 0

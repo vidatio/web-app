@@ -31,17 +31,9 @@ app.service 'DataService', [
                     oldData: oldData
                     newData: newData
 
-                key = Table.columnHeaders[column]
-
-                if @meta.fileType is "shp"
-                    Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
-                else if @meta.fileType is "csv"
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
-                    Map.setGeoJSON(geoJSON)
-                # last else to update empty table
-                else
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
-                    Map.setGeoJSON(geoJSON)
+                columnHeaders = Table.instanceTable.getColHeader()
+                key = columnHeaders[column]
+                Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
 
             validateInput: (row, column, oldData, newData) ->
                 $log.info "DataService validateInput called"
@@ -52,11 +44,9 @@ app.service 'DataService', [
                     oldData: oldData
                     newData: newData
 
-                if @meta.fileType is "shp"
-                    key = Table.columnHeaders[column]
-                    return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
-
-                return true
+                columnHeaders = Table.instanceTable.getColHeader()
+                key = columnHeaders[column]
+                return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
 
             # TODO: Name has to be set by the user
 

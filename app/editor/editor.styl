@@ -16,6 +16,16 @@
             margin-bottom 10px
             border-radius 10px
 
+            & > div
+                display inline-block
+
+            p
+                padding-top 3px
+                font-size 14px
+
+            .dropdown-toggle
+                padding 3px 5px 3px 5px
+
             .download-button
                 float right
                 height 40px
@@ -32,6 +42,12 @@
                     overflow hidden
                     width 36px
                     text-align center
+
+                .download-icon
+                    font-size 24px
+                    text-align center
+                    color $color-black
+                    line-height 36px
 
                 ul
                     background $color-white none repeat scroll 0 0
@@ -62,8 +78,6 @@
                         z-index 301
 
                         &:first-child
-                            border-bottom 2px solid $color-green
-
                             &::before
                                 border-color transparent
                                 border-style solid
@@ -101,15 +115,10 @@
 
                 &:hover
                     & > ul
-                     display block
+                        display block
 
                     & > a
                         background-color $color-hover-light
-
-                .download-icon
-                    color $color-black
-                    margin-top 8px
-                    font-size 24px
 
     .wrapper-content
         max-width 100%

@@ -2,15 +2,18 @@
     .row
         .col-md-12
             .area
-
                 .vidatios(ng-show="vidatios.length")
-                    h2.font-violet {{ "MY_VIDATIOS" | translate }}
+                    h2 {{ "MY_VIDATIOS" | translate }}
 
                     .row
                         .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
                                 a.img(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
                                     img(src="{{ vidatio.image }}")
+
+                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
+                                    span  {{ "EDIT" | translate | uppercase }}
+
                                 .text
                                     a.inverse(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
                                         h4.title {{ vidatio.title }}

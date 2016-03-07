@@ -1,14 +1,66 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
+            .axis-selection(ng-if="meta.fileType != 'shp'")
+                p(ng-if="diagramType != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") {{ "LONGITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[xAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ header}}
+
+                p(ng-if="diagramType != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="diagramType == 'map'") {{ "LATITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[yAxisCurrent] }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
+                            a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ header}}
+            .diagram-selection
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li
+                            a(href="#" ng-click="selectDiagram('scatter')")
+                                .icon-scatterplotchart.diagramm-icons
+                                .diagramm-selection-text {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('map')")
+                                .icon-map.diagramm-icons
+                                .diagramm-selection-text {{ "DIAGRAMS.MAP" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('parallel')")
+                                .icon-parallelcoordinateschart.diagramm-icons
+                                .diagramm-selection-text {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('bar')")
+                                .icon-barchart.diagramm-icons
+                                .diagramm-selection-text {{ "DIAGRAMS.BAR_CHART" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('timeseries')")
+                                .icon-linechart.diagramm-icons
+                                .diagramm-selection-text {{ "DIAGRAMS.TIME_SERIES" | translate }}
+
+            .color-selection
+                a(href='#').icon-colorbucket.download-icon
+                    color-picker(ng-model="color")
+
             .download-button
-                a(href='#')
-                    i.fa.fa-download.download-icon
+                a(href='#').icon-download.download-icon
                 ul
                     li
                         a(ng-click='shareVisualization("png")') PNG
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="recommendedDiagram == 'map'")
-        #chart(ng-hide="recommendedDiagram == 'map'")
+        leaflet(geojson="geojson" id="map" ng-show="diagramType == 'map'")
+        #chart(ng-hide="diagramType == 'map' || diagramType == false")
+        #chart-empty(ng-hide="diagramType")
+            .row
+                .col-md-12.diagram-placeholder
+                    div
+                        img(src="images/logo-without-name.png" )

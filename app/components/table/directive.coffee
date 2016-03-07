@@ -5,14 +5,15 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
-    ($timeout, $log, Data) ->
+    "TableService"
+    ($timeout, $log, Data, Table) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
         scope:
             dataset: '='
             activeViews: '='
-            columnHeaders: '='
+            useColumnHeadersFromDataset: '='
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
@@ -21,7 +22,7 @@ app.directive 'hot', [
                 minCols: 26
                 minRows: 26
                 rowHeaders: true
-                colHeaders: $scope.columnHeaders
+                colHeaders: true
                 currentColClassName: 'current-col'
                 currentRowClassName: 'current-row'
                 beforeChange: (change, source) ->
@@ -31,7 +32,7 @@ app.directive 'hot', [
                         change: change
                         source: source
 
-                    if !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
+                    if Data.meta.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                         change[0][3] = change[0][2]
 
                 afterChange: (change, source) ->
@@ -41,15 +42,17 @@ app.directive 'hot', [
                         change: change
                         source: source
 
-                    if change and change[0][3] != change[0][2]
-                        # TODO add commands for other chart types
-                        # use a variable "recommendDiagramm" to choose the right update function
-
+                    if Data.meta.fileType is "shp" and change and change[0][3] != change[0][2]
                         Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                         # Needed for updating the map, else the markers are
                         # updating too late from angular refreshing cycle
                         $scope.$applyAsync()
             )
+
+            Table.setInstance hot
+            Table.initAxisSelection()
+            if Table.useColumnHeadersFromDataset
+                Table.takeColumnHeadersFromDataset()
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

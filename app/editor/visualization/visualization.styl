@@ -48,3 +48,63 @@
             fill-opacity 0.25
             stroke-width 3px
             stroke-dasharray 5
+
+    .axis-selection
+        margin-top 5px
+        p
+            display inline-block
+
+            &:last-of-type
+                margin-left 15px
+
+        ul
+            max-height 500px
+            overflow auto
+
+        .btn-group
+            display inline-block
+
+        .btn
+            min-width 20px
+
+    .diagram-selection
+        margin-top 1px
+
+        li > a
+            display flex
+            flex-direction row
+            font-size 16px
+
+            .diagramm-icons
+                font-size 28px
+                margin-right 10px
+
+            .diagramm-selection-text
+                line-height 43px
+
+    .graph-icon
+        width 30px
+        margin-right 10px
+        margin-top 5px
+
+    .download-button li:first-child
+            border-bottom 2px solid $color-green
+
+    .diagram-placeholder
+        padding 0 0
+
+        div
+            box-shadow inset $box-shadow-size $color-shadow
+            min-height 318px
+            height calc(100vh - 310px)
+
+        img
+            width 120px
+            display inline-block
+            opacity .4
+            position absolute
+            top 0
+            left 0
+            right 0
+            bottom 0
+            margin auto

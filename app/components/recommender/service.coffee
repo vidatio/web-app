@@ -20,18 +20,23 @@ class window.vidatio.Recommender
         schema = []
 
         dataset.forEach (column) =>
-            if vidatio.helper.isCoordinateColumn column
-                schema.push @types[0]
-            else if vidatio.helper.isDateColumn column
-                schema.push @types[1]
-            else if vidatio.helper.isNominalColumn column
-                schema.push @types[2]
-            else if vidatio.helper.isNumericColumn column
-                schema.push @types[3]
-            else
-                schema.push @types[4]
+            schema.push @getColumnType column
 
         return schema
+
+    getColumnType: (column) ->
+        if vidatio.helper.isCoordinateColumn column
+            type = @types[0]
+        else if vidatio.helper.isDateColumn column
+            type = @types[1]
+        else if vidatio.helper.isNominalColumn column
+            type = @types[2]
+        else if vidatio.helper.isNumericColumn column
+            type = @types[3]
+        else
+            type = @types[4]
+
+        return type
 
     # @method getVariances
     # @public
@@ -60,64 +65,78 @@ class window.vidatio.Recommender
     # @method run
     # @public
     # @param {Array} dataset
+    # @param {Array} header
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
     # OR {error} Message with occurred error
-    run: (subset = [], dataset = subset) ->
-        vidatio.log.info "Recommender getRecommendedDiagram called"
+    run: (dataset = [], header = []) ->
+        vidatio.log.info "Recommender run called"
         vidatio.log.debug
-            subset: subset
             dataset: dataset
+            header: header
 
-        if subset.length < 1 or subset[0].length < 2
-            message = "Dataset have not enough dimensions!"
-            return { error: message }
+        if dataset.length < 1 or dataset[0].length < 2
+            message = "not enough dimensions"
+            return {error: message}
 
         xIndex = null
         yIndex = null
-        @recommendedDiagram = null
-
         xVariance = null
         yVariance = null
+        nominalIdx = null
+        @recommendedDiagram = null
 
-        transposedDataset = vidatio.helper.transposeDataset subset
+        # We can recognize geo datasets via headers
+        # Se we first check the header
+        coordinateIndices = vidatio.geoParser.checkHeader(header)
+        if coordinateIndices.hasOwnProperty("x") and coordinateIndices.hasOwnProperty("y")
+            type = "coordinate coordinate"
+            xIndex = coordinateIndices.x
+            yIndex = coordinateIndices.y
 
-        schema = @getSchema(transposedDataset)
-        variances = @getVariances(transposedDataset)
+        # For other datasets and geo datasets without headers
+        # We classify the columns the the content
+        else
+            subset = vidatio.helper.getSubset dataset
+            transposedDataset = vidatio.helper.transposeDataset subset
 
-        for variance, index in variances
-            if variance > xVariance
+            schema = @getSchema(transposedDataset)
+            variances = @getVariances(transposedDataset)
 
-                if xIndex?
-                    yIndex = xIndex
-                    yVariance = xVariance
+            for variance, index in variances
+                if variance > xVariance
 
-                xIndex = index
-                xVariance = variance
+                    if xIndex?
+                        yIndex = xIndex
+                        yVariance = xVariance
 
-            else if variance > yVariance
-                yIndex = index
-                yVariance = variance
+                    xIndex = index
+                    xVariance = variance
 
-        type = schema[xIndex] + " " + schema[yIndex]
+                else if variance > yVariance
+                    yIndex = index
+                    yVariance = variance
 
-        nominalIdx = xIndex if schema[xIndex] is "nominal"
-        nominalIdx = yIndex if schema[yIndex] is "nominal"
+            type = schema[xIndex] + " " + schema[yIndex]
 
-        uniqueNominals = {}
-        for row in dataset
-            if row[nominalIdx] in uniqueNominals
-                continue
+            nominalIdx = xIndex if schema[xIndex] is "nominal"
+            nominalIdx = yIndex if schema[yIndex] is "nominal"
 
-            uniqueNominals[row[nominalIdx]] = true
+            uniqueNominals = {}
+            for row in dataset
+                if row[nominalIdx] in uniqueNominals
+                    continue
 
-            numberOfNominals = Object.keys(uniqueNominals).length
-            if numberOfNominals > @thresholdBar
-                break
+                uniqueNominals[row[nominalIdx]] = true
 
+                numberOfNominals = Object.keys(uniqueNominals).length
+                if numberOfNominals > @thresholdBar
+                    break
+
+        # After checking the header or/and classify the columns
+        # we have to decide which diagram type we want to recommend
         switch type
-
             when "numeric numeric", "nominal nominal"
                 if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
@@ -157,14 +176,12 @@ class window.vidatio.Recommender
                 yIndex = tmp
 
             else
-                if (type.indexOf "unknown" isnt -1) and (dataset.length > @thresholdPC)
+                if type.indexOf("unknown") isnt -1 and dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 
-
-        return {
-        recommendedDiagram: @recommendedDiagram
-        xColumn: xIndex
-        yColumn: yIndex
-        }
+        result =
+            type: @recommendedDiagram
+            xColumn: xIndex
+            yColumn: yIndex

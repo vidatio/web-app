@@ -13,9 +13,6 @@
         box-shadow 2px 2px 2px 0px $color-shadow
         border-radius 4xp
 
-    .visualization-container
-        margin-top 20px
-
         img
             width 100%
             height 50%
@@ -26,19 +23,21 @@
         text-align center
 
     .buttons-first-row
-        margin-top -23px
-        margin-bottom 50px
+        margin -23px -15px 50px -15px
 
-    .buttons-first-row
-        margin-right -15px
-        margin-left -15px
+        .icons
+            font-size 20px
 
-        #edit-dataset
+        .button-text
+            position relative
+            top -1px
+
+        #create-vidatio
         #link-dataset
         #download-dataset
             width 170px
             height 45px
-            line-height 28px
+            line-height 25px
 
         #download-dataset
             position relative
@@ -142,6 +141,58 @@
     a.button
         width 132px
 
+    #vidatio-link-box
+        position relative
+        top 25px
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 10px 20px 20px 20px
+        text-align right
+        height 105px
+
+        .link-box-icon
+            font-size 14px
+            text-align left
+
+        p
+            float left
+            margin 0
+
+        .fui-cross
+            background $color-white
+            color $color-grey-dark
+            text-align right
+            &:hover
+                color $color-red
+
+        .form-control
+            border-color $color-input-border-inactive
+            width calc(100% - 160px)
+            border-bottom-right-radius 0
+            border-top-right-radius 0
+
+            &:hover
+            &:focus
+                border-color $color-green
+
+        #copy-vidatio-link
+            border 2px solid $color-green
+            top -42px
+            position relative
+            height 42px
+            background $color-green
+            line-height 18px
+
+            &:active
+                background-color $color-active
+                border-color $color-active
+
+            &:hover
+            &:focus
+                background-color $color-hover-dark
+                border-color $color-hover-dark
+
     .metadata-container
         margin-bottom 20px
 
@@ -159,14 +210,25 @@
                 font-weight bold
                 width 250px
 
+@media (max-width: 435px)
+    #dataset-view
+        .buttons-first-row
+            #link-dataset
+                margin-left -6px
+
+            #download-dataset
+                margin-left -12px
 
 @media (max-width: 767px)
     #dataset-view
         .buttons-first-row
-            margin-left -28px
-            margin-right -1px
+            .icons
+                font-size 14px
 
-            #edit-dataset
+            #create-vidatio
+                padding-left 4px
+
+            #create-vidatio
             #download-dataset
             #link-dataset
                 width 117px

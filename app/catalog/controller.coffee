@@ -39,31 +39,4 @@ app.controller "CatalogCtrl", [
                 ngToast.create
                     content: translation
                     className: "danger"
-
-        # create a new Vidatio and get necessary data
-        $scope.createVidatio = (datasetId) ->
-
-            # get dataset according to datasetId (if possible)
-            DataFactory.get { id: datasetId }, (data) ->
-                $scope.data = data
-
-                $log.info "CatalogCtrl createVidatio called"
-                $log.debug
-                    id: datasetId
-                    name: $scope.data.name
-                    data: $scope.data.data
-
-                Table.setDataset $scope.data.data
-
-                $timeout ->
-                    Progress.setMessage ""
-
-            , (error) ->
-                $log.info "CatalogCtrl error on get dataset from id"
-                $log.error error
-
-                $translate('TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED').then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
 ]
