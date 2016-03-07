@@ -48,9 +48,4 @@ app.controller "HeaderCtrl", [
             $(".underline-title").css "width", valWidth
             return
         ).trigger "input"
-
-        # remove edit-icon on first click at the input-field
-        $("#vidatio-title").click ->
-            $(".icon-vidatio-title").css "display", "none"
-            return
 ]
