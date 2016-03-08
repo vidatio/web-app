@@ -9,12 +9,29 @@ app.controller "EditorCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    ($scope, $rootScope, $log) ->
+    "$timeout"
+    "DataService"
+    "ngToast"
+    "$translate"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate) ->
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
         $scope.activeTabs = [false, true, false]
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
+
+        $scope.standardTitle = $translate.instant("NEW_VIDATIO") + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+        console.log $scope.standardTitle
+
+        $scope.editor = Data.meta
+
+        $("#vidatio-title").on 'focus', ->
+            $timeout -> document.execCommand 'selectAll', false, null
+
+            if $scope.editor.fileName is ""
+                $scope.editor.fileName = $scope.standardTitle
+
+            console.log "in if"
 
         # the displayed views are set accordingly to the clicked tab
         # @method tabClicked

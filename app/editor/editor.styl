@@ -5,35 +5,30 @@
     .title
         text-align center
         width 98%
-        margin 25px 1%
+        margin 15px 1%
         position relative
 
-        input
+        #vidatio-title
             min-width 240px
             max-width 100%
             border none
-            display inline-block
-            font-family Colaborate-Thin, $fonts
-            font-size 30px
-            height 35px
-            line-height 33px
+            display inline
+            font-family Colaborate-Regular, $fonts
+            font-size 22px
+            height 30px
+            line-height 23px
             padding 0 2px
             text-align center
             overflow hidden
             text-overflow ellipsis
             background none
+            border-bottom 3px solid $color-red-light
 
             &:focus
             &:hover
             &:active
                 outline-color $color-green
                 outline-style auto
-
-    .underline-title
-        border-bottom 3px solid $color-red-light
-        min-width 240px
-        max-width 100%
-        margin 0 auto
 
     .editor-panel
         display block

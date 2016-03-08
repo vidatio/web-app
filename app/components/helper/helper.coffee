@@ -340,3 +340,10 @@ class window.vidatio.Helper
         DDMMYYYY = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
         MMDDYYYY = /^(0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.]\d{4}$/
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
+
+# the input-field width automatically resizes according to a users' input
+$.fn.textWidth = (text, font) ->
+    if !$.fn.textWidth.fakeEl
+        $.fn.textWidth.fakeEl = $("<span>").hide().appendTo(document.body)
+    $.fn.textWidth.fakeEl.text(text or @val() or @text()).css "font", font or @css("font")
+    $.fn.textWidth.fakeEl.width()

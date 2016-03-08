@@ -61,7 +61,8 @@ app.controller "VisualizationCtrl", [
                         # TODO: show a default image here
                         $log.error "EdtiorCtrl recommend diagram failed, dataset isn't usable with vidatio"
 
-        Progress.setMessage ""
+        $timeout ->
+            Progress.setMessage ""
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
@@ -84,7 +85,8 @@ app.controller "VisualizationCtrl", [
                     message: "Share mapToImg success callback"
                     obj: obj
 
-                Progress.setMessage ""
+                $timeout ->
+                    Progress.setMessage message
 
                 fileName = Data.meta.fileName
 
