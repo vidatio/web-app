@@ -85,7 +85,6 @@ app.controller "VisualizationCtrl", [
                         content: translation
                         className: "danger"
                 return
-
             Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
             Visualization.create
                 type: $scope.visualization.diagramType

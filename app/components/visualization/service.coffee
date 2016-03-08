@@ -130,5 +130,54 @@ app.service 'VisualizationService', [
                         $log.debug
                             type: options.type
 
+                initInlineEditingLabels()
+
+            initInlineEditingLabels = ->
+                $log.info "VisualizationService initInlineEditingLabels called"
+
+                $ "#chart"
+                .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
+                    $element = $(@)
+                    minWidth = 200
+
+                    inputSize =
+                        width: $element.width() + 20
+                        height: $element.height() + 6
+
+                    if inputSize.width < minWidth
+                        inputSize.width = minWidth
+
+                    defaultCss =
+                        "min-width": "#{minWidth}px"
+                        "width": "#{inputSize.width}px"
+                        "height": "#{inputSize.height}px"
+
+                    if $element.attr("id") is "d3plus_graph_ylabel"
+                        inputPosition =
+                            "left": "-#{(inputSize.width / 2) - 6}px"
+                            "top": "50%"
+                            "margin-top": "-#{inputSize.height}px"
+                            "transform": "rotate(-90deg)"
+                        axis = "Y"
+                    else
+                        inputPosition =
+                            "left": "50%"
+                            "top": "calc(100% - #{inputSize.height}px)"
+                            "margin-left": "-#{inputSize.width / 2}px"
+                        axis = "X"
+
+                    $ "<input id='#{$element.attr("id")}_inline_input' type='text' value='#{$element.text()}' />"
+                    .css angular.extend defaultCss, inputPosition
+                    .appendTo "#chart"
+                    .focus()
+                    .select()
+                    .blur (event) ->
+                        $element.text $(@).val() || axis
+                        $(@).remove()
+                    .keyup (event) ->
+                        if event.keyCode is 13 or event.keyCode is 27
+                            $element.text $(@).val() || axis
+                            $(@).remove()
+
         new Visualization
 ]
