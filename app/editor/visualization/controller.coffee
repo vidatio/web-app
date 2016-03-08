@@ -154,23 +154,20 @@ app.controller "VisualizationCtrl", [
 
 
         initInlineEditingLabels = ->
-            merge = (options, overrides) ->
-                extend (extend {}, options), overrides
-
-            extend = (object, properties) ->
-                for key, val of properties
-                    object[key] = val
-                object
-
             $ "#chart"
             .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
                 $element = $(@)
+                minWidth = 200
 
                 inputSize =
                     width: $element.width() + 20
                     height: $element.height() + 6
 
+                if inputSize.width < minWidth
+                    inputSize.width = minWidth
+
                 defaultCss =
+                    "min-width": "#{minWidth}px"
                     "width": "#{inputSize.width}px"
                     "height": "#{inputSize.height}px"
 
@@ -180,23 +177,25 @@ app.controller "VisualizationCtrl", [
                         "top": "50%"
                         "margin-top": "-#{inputSize.height}px"
                         "transform": "rotate(-90deg)"
+                    axis = "Y"
                 else
                     inputPosition =
                         "left": "50%"
                         "top": "calc(100% - #{inputSize.height}px)"
                         "margin-left": "-#{inputSize.width / 2}px"
+                    axis = "X"
 
                 $ "<input id='#{$element.attr("id")}_inline_input' type='text' value='#{$element.text()}' />"
-                .css merge defaultCss, inputPosition
+                .css angular.extend defaultCss, inputPosition
                 .appendTo "#chart"
                 .focus()
                 .select()
                 .blur (event) ->
-                    $element.text $(@).val()
+                    $element.text $(@).val() || axis
                     $(@).remove()
                 .keyup (event) ->
                     if event.keyCode is 13 or event.keyCode is 27
-                        $element.text $(@).val()
+                        $element.text $(@).val() || axis
                         $(@).remove()
 
         # @method selectDiagram
