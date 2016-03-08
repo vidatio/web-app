@@ -9,17 +9,12 @@
                 img(src="{{ info.image }}")
 
             .row.buttons-first-row
-                .col-xs-4.col-sm-4.middle
+                .col-xs-12.col-sm-4.middle
                     a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
                         span.icon-edit.icons
                         span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
-                .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
-                        span.icon-link.icons
-                        span.button-text  {{ "LINK" | translate | uppercase }}
-
-                .col-xs-4.col-sm-4.middle
+                .col-xs-12.col-xs-push-12.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
                             span.icon-download.icons
@@ -34,6 +29,11 @@
                                 a
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
+
+                .col-xs-12.col-xs-pull-12.col-sm-4.middle
+                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
+                        span.icon-link.icons
+                        span.button-text  {{ "LINK" | translate | uppercase }}
 
                 .col-xs-12
                     #vidatio-link-box(ng-show="$root.showVidatioLink")
