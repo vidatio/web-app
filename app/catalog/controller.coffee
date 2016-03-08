@@ -14,22 +14,13 @@ app.controller "CatalogCtrl", [
             dates:
                 from: undefined
                 to: undefined
-            category: undefined
+            category: ""
 
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-
-        categories = [
-            "Politik"
-            "Sport"
-            "Umwelt"
-            "Bildung"
-            "Finanzen"
-        ]
 
         CatalogFactory.getCategories().query (response) ->
             $log.info "CatalogCtrl successfully queried categories"
             $scope.categories = response
-            console.log("CATEGORIES", response)
 
         CatalogFactory.getDatasets().query (response) ->
             $log.info "CatalogCtrl successfully queried datasets"
@@ -41,8 +32,7 @@ app.controller "CatalogCtrl", [
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
-                vidatio.metaData =
-                    category: categories[ index % categories.length ]
+
         , (error) ->
             $log.info "CatalogCtrl error on query datasets"
             $log.error error
@@ -51,5 +41,8 @@ app.controller "CatalogCtrl", [
                 ngToast.create
                     content: translation
                     className: "danger"
+
+        $scope.setCategory = (category) ->
+            $scope.filter.category = category
 
 ]
