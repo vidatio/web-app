@@ -7,7 +7,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             dataset: dataset
             options: options
 
-        super dataset
+        super dataset, options.color
         @preProcess options
 
         # we need to wait for angular to finish rendering
@@ -20,5 +20,6 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .x(options.headers["x"])
             .y(options.headers["y"])
             .size(10)
+            .color("color")
             .draw()
         , 0

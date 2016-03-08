@@ -39,6 +39,7 @@ module.exports = (config) ->
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/shp/dist/shp.js"
+            "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
 
             # import angular mock - test dependency
             "./bower_components/angular-mocks/angular-mocks.js"

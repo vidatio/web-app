@@ -76,6 +76,17 @@
     .diagram-selection
         margin-top 1px
 
+    .color-selection a .angular-color-picker
+        display none
+
+        //bugfix angular-color-picker cursors
+        .angular-color-picker > ._hues > ._cursor
+            left -6px
+            width 40px
+
+    .color-selection a:hover .angular-color-picker
+        display block
+
     .graph-icon
         width 30px
         margin-right 10px

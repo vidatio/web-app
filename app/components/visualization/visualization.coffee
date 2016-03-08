@@ -2,10 +2,11 @@
 
 class window.vidatio.Visualization
 
-    constructor: (@dataset) ->
+    constructor: (@dataset, @color = "#11DDC6") ->
         vidatio.log.info "Visualization constructor called"
         vidatio.log.debug
             dataset: @dataset
+            color: @color
 
     remove: ->
         vidatio.log.info "Visualization remove called"
@@ -24,5 +25,5 @@ class window.vidatio.Visualization
         vidatio.log.debug
             options: options
         { type, xColumn, yColumn, headers } = options
-        @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type, headers
+        @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type, headers, @color
 

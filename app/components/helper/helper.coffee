@@ -352,7 +352,7 @@ class window.vidatio.Helper
     # @param {String} visualizationType
     # @return {Array}
     # TODO pass names of header if available to use as default keys for x and y in visualization
-    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers) ->
+    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers, color) ->
         unless dataset or xColumn or yColumn or visualizationType
             return
 
@@ -366,6 +366,8 @@ class window.vidatio.Helper
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
+
+            dataItem["color"] = color
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
@@ -397,20 +399,20 @@ class window.vidatio.Helper
     # @method isDiagramPossible
     # @description This method checks if the current column type selection is possible with a given diagram.
     # @public
-    # @param {String} xColumnType
-    # @param {String} yColumnType
+    # @param {Array} xColumnTypes
+    # @param {Array} yColumnTypes
     # @param {String} yColumnType
     # @return {Boolean}
-    isDiagramPossible: (xColumnType, yColumnType, diagramType) ->
+    isDiagramPossible: (xColumnTypes, yColumnTypes, diagramType) ->
         vidatio.log.info "HelperService isDiagramPossible called"
         vidatio.log.debug
-            xColumnType: xColumnType
-            yColumnType: yColumnType
+            xColumnTypes: xColumnTypes
+            yColumnTypes: yColumnTypes
             diagramType: diagramType
 
         switch diagramType
             when "scatter"
-                if yColumnType isnt "numeric" or xColumnType isnt "numeric"
+                if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
                     return false
             when "map"
                 break
@@ -418,15 +420,11 @@ class window.vidatio.Helper
                 break
 
             when "bar"
-                if yColumnType isnt "numeric"
+                if "numeric" not in yColumnTypes
                     return false
 
             when "timeseries"
-                if xColumnType isnt "date"
-                    return false
-
-                if yColumnType isnt "numeric"
+                if "date" not in xColumnTypes or "numeric" not in yColumnTypes
                     return false
 
         return true
-

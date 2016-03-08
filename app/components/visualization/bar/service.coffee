@@ -7,7 +7,7 @@ class vidatio.BarChart extends vidatio.Visualization
             dataset: dataset
             options: options
 
-        super dataset
+        super dataset, options.color
         @preProcess options
 
         # we need to wait for angular to finish rendering
@@ -20,6 +20,7 @@ class vidatio.BarChart extends vidatio.Visualization
             .id("name")
             .x(options.headers["x"])
             .y(options.headers["y"])
+            .color("color")
             .draw()
         , 0
 

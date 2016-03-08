@@ -1,11 +1,11 @@
 #table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content
         .settings-bar
-            #header-button
+            .header-button(ng-hide="meta.fileType == 'shp'")
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
-                    input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="changeUseOfHeader()")
+                    input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
-            .download-button
+            .download-button(ng-hide="meta.fileType == 'shp'")
                 a(href='#').icon-download-3
                 ul
                     li

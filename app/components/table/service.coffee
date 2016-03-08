@@ -10,35 +10,10 @@ app.service 'TableService', [
                 $log.info "TableService constructor called"
 
                 @dataset = [[]]
+                @header = []
                 @useColumnHeadersFromDataset = true
-                @colHeadersSelection = []
                 @instanceTable = null
                 @diagramColumns = {}
-
-            # @method initAxisSelection
-            # @public
-            initAxisSelection: ->
-                $log.info "TableService initAxis called"
-
-                colHeaders = @instanceTable.getColHeader()
-                $log.debug
-                    colHeaders: colHeaders
-
-                @setColHeadersSelection colHeaders
-
-            # @method setColHeadersSelection
-            # @public
-            # @param {Array} colHeaders
-            setColHeadersSelection: (colHeaders) ->
-                $log.info "TableService setColHeaderSelection called"
-                $log.debug
-                    colHeaders: colHeaders
-
-                @colHeadersSelection.splice 0, @colHeadersSelection.length
-                colHeaders.forEach (item, index) =>
-                    if item is null
-                        return
-                    @colHeadersSelection[index] = item
 
             # @method setInstance
             # @public
@@ -54,90 +29,74 @@ app.service 'TableService', [
                 $log.info "TableService getInstance called"
                 return @instanceTable
 
-            getColumnHeaders: ->
-                $log.info "TableService getColumnHeaders called"
-
-                return @instanceTable.getColHeader().filter( (value) ->
-                    return value if value?
-                )
-
-            # @method reset
+            # @method getHeader
             # @public
-            # @param {Boolean} useColumnHeadersFromDataset
-            reset: ->
-                $log.info "TableService reset called"
-                @resetDataset()
-                @resetColumnHeaders()
+            getHeader: ->
+                $log.info "TableService getHeader called"
+                return @header
 
-            # @method resetColumnHeaders
+            # @method setHeader
             # @public
-            resetColumnHeaders: ->
-                $log.info "TableService resetColumnHeaders called"
-
-                @useColumnHeadersFromDataset = false
-
-                if @instanceTable
-                    @instanceTable.updateSettings
-                        colHeaders: true
-                    @instanceTable.render()
-                    @setColHeadersSelection @instanceTable.getColHeader()
-                else
-                    $log.error "TableService resetColumnHeaders instanceTable is not defined"
-
-            # @method setColumnHeaders
-            # @public
-            # @param {Array} columnHeaders
-            setColumnHeaders: (columnHeaders) ->
-                $log.info "TableService setColumnHeaders called"
+            # @param {Array} header
+            # @param {String} fileType
+            setHeader: (header = []) ->
+                $log.info "TableService setHeader called"
                 $log.debug
-                    message: "TableService setColumnHeaders called"
-                    columnHeaders: columnHeaders
+                    header: header
 
-                if @instanceTable
-                    @useColumnHeadersFromDataset = true
-                    @instanceTable.updateSettings
-                        colHeaders: columnHeaders
-                    @instanceTable.render()
-                    @setColHeadersSelection columnHeaders
+                setHeader.call @, header
+
+                if @useColumnHeadersFromDataset
+                    colHeaders = @header
                 else
-                    $log.error "TableService setColumnHeaders instanceTable is not defined"
+                    colHeaders = true
 
-            # @method takeColumnHeadersFromDataset
+                unless @instanceTable
+                    return $log.info "TableService resetHeader instanceTable is not defined"
+
+                @instanceTable.updateSettings
+                    colHeaders: colHeaders
+                @instanceTable.render()
+
+                if colHeaders is true then setHeader.call @, @instanceTable.getColHeader()
+
+            setHeader = (header) ->
+                tmp = angular.copy(header)
+                @header.splice 0, @header.length
+                tmp.forEach (cell, index) =>
+                    @header[index] = cell
+
+            # @method takeHeaderFromDataset
             # @public
-            takeColumnHeadersFromDataset: ->
-                $log.info "TableService takeColumnHeadersFromDataset called"
-                columnHeaders = @dataset.splice(0, 1)[0]
-                @setColumnHeaders columnHeaders
+            takeHeaderFromDataset: ->
+                $log.info "TableService takeHeaderFromDataset called"
+                header = @dataset.shift()
+                @useColumnHeadersFromDataset = true
+                @setHeader header
 
-            # @method putColumnHeadersBackToDataset
+            # @method putHeaderToDataset
             # @public
-            putColumnHeadersBackToDataset: ->
-                $log.info "TableService putColumnHeadersBackToDataset called"
+            putHeaderToDataset: ->
+                $log.info "TableService putHeaderToDataset called"
+                @useColumnHeadersFromDataset = false
+                @dataset.unshift angular.copy(@header)
+                @setHeader()
 
-                @dataset.unshift @instanceTable.getColHeader()
-                @resetColumnHeaders()
-
-            # @method resetDataset
+            # @method setDataset
             # @public
-            resetDataset: ->
-                $log.info "TableService resetDataset called"
+            # @param {Array} data
+            setDataset: (dataset = []) ->
+                $log.info "TableService setDataset called"
+                $log.debug
+                    message: "TableService setDataset called"
+                    data: dataset
 
                 # safely remove all items, keeps data binding alive
                 # there should be left a 2D array - needed for handsontable
                 @dataset.splice 0, @dataset.length - 1
                 @dataset[0].splice 0, @dataset[0].length
 
-            # @method setDataset
-            # @public
-            # @param {Array} data
-            setDataset: (data) ->
-                $log.info "TableService setDataset called"
-                $log.debug
-                    message: "TableService setDataset called"
-                    data: data
-
-                @reset true
-                data.forEach (row, index) =>
+                dataset.forEach (row, index) =>
                     @dataset[index] = row
 
             # @method getDataset
@@ -145,7 +104,6 @@ app.service 'TableService', [
             # @return {Array}
             getDataset: ->
                 $log.info "TableService getDataset called"
-
                 return @dataset
 
             # @method setDiagramColumns
