@@ -5,20 +5,20 @@
                 p(ng-if="visualization.diagramType != 'map'") {{ "X_AXIS" | translate }}
                 p(ng-if="visualization.diagramType == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[visualization.xAxisCurrent] }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.xAxisCurrent] }}
                         span.caret
                     ul.dropdown-menu(role="menu")
-                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
-                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ header}}
+                        li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
+                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column}}
 
                 p(ng-if="visualization.diagramType != 'map'") {{ "Y_AXIS" | translate }}
                 p(ng-if="visualization.diagramType == 'map'") {{ "LATITUDE" | translate }}
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ colHeadersSelection[visualization.yAxisCurrent] }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.yAxisCurrent] }}
                         span.caret
                     ul.dropdown-menu(role="menu")
-                        li(ng-repeat="(id, header) in colHeadersSelection track by $index")
-                            a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ header}}
+                        li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
+                            a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ column }}
 
             .diagram-selection(ng-hide="meta.fileType == 'shp'")
                 .btn-group

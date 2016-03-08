@@ -13,6 +13,8 @@ app.controller "TableCtrl", [
     ($scope, Table, Share, Data, Map, Converter, $log) ->
         $scope.dataset = Table.dataset
         $scope.meta = Data.meta
+
+        # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
         $('#column-headers-checkbox').radiocheck()
@@ -22,9 +24,9 @@ app.controller "TableCtrl", [
 
             if Data.meta.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
-                    Table.takeColumnHeadersFromDataset()
+                    Table.takeHeaderFromDataset()
                 else
-                    Table.putColumnHeadersBackToDataset()
+                    Table.putHeaderToDataset()
 
         #@method $scope.download
         #@description downloads a csv
@@ -35,7 +37,7 @@ app.controller "TableCtrl", [
 
             if Table.useColumnHeadersFromDataset
                 csv = Papa.unparse
-                    fields: Table.getColumnHeaders(),
+                    fields: Table.getHeader(),
                     data: trimmedDataset
             else
                 csv = Papa.unparse trimmedDataset
