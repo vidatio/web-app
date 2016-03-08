@@ -22,8 +22,6 @@ app.controller "VisualizationCtrl", [
         $scope.diagramType = false
         $scope.colHeadersSelection = Table.colHeadersSelection
 
-        chart = null
-
         translationKeys =
             "scatter": "DIAGRAMS.SCATTER_PLOT"
             "map": "DIAGRAMS.MAP"
@@ -59,7 +57,7 @@ app.controller "VisualizationCtrl", [
 
             switch options.type
                 when "scatter"
-                    chart = new vidatio.ScatterPlot chartData, options
+                    new vidatio.ScatterPlot chartData, options
                 when "map"
                     # Use the whole dataset because we want the other attributes inside the popups
                     geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getColumnHeaders(), {
@@ -69,11 +67,11 @@ app.controller "VisualizationCtrl", [
                     Map.setGeoJSON geoJSON
                     Map.setScope $scope
                 when "parallel"
-                    chart = new vidatio.ParallelCoordinates chartData, options
+                    new vidatio.ParallelCoordinates chartData, options
                 when "bar"
-                    chart = new vidatio.BarChart chartData, options
+                    new vidatio.BarChart chartData, options
                 when "timeseries"
-                    chart = new vidatio.TimeseriesChart chartData, options
+                    new vidatio.TimeseriesChart chartData, options
                 else
                     $log.error
                         message: recommendationResults.error
