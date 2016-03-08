@@ -14,7 +14,7 @@
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                             img(src="{{ vidatio.image }}")
 
-                        a#create-vidatio.btn.btn-primary.icon-createvidatio(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
+                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
                             span {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                         .text
