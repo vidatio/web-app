@@ -81,6 +81,7 @@ module.exports = (config) ->
         preprocessors:
             "**/*.coffee": ["coffee"]
             "**/*.json": ["ng-constant"]
+            "**/!(*-test).coffee": ["coverage"]
 
         coffeePreprocessor:
             options:
@@ -89,7 +90,7 @@ module.exports = (config) ->
         # test results reporter to use
         # possible values: "dots", "progress"
         # available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ["progress"]
+        reporters: ["progress", "coverage"]
 
         # web server port
         port: 9876
