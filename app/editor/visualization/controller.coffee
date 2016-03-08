@@ -152,6 +152,8 @@ app.controller "VisualizationCtrl", [
 
 
         initInlineEditingLabels = ->
+            $log.info "VisualizationCtrl initInlineEditingLabels called"
+
             $ "#chart"
             .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
                 $element = $(@)
