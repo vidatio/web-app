@@ -43,6 +43,9 @@ app.controller "CatalogCtrl", [
                     className: "danger"
 
         $scope.setCategory = (category) ->
+            vidatio.log.info "CatalogCtrl setCategory called"
+            vidatio.log.debug
+                category: category
             $scope.filter.category = category
 
 ]
