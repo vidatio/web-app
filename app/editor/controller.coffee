@@ -21,17 +21,29 @@ app.controller "EditorCtrl", [
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
         $scope.standardTitle = $translate.instant("NEW_VIDATIO") + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-        console.log $scope.standardTitle
 
         $scope.editor = Data.meta
 
-        $("#vidatio-title").on 'focus', ->
-            $timeout -> document.execCommand 'selectAll', false, null
+        $scope.editor.fileName = Data.meta.fileName || $scope.standardTitle
+        $timeout -> setTitleInputWidth()
+
+        $("#vidatio-title").on 'input', ->
+            setTitleInputWidth()
+
+        # @method saveVidatioTitle
+        # @description set the users' input (if existing) as vidatio-title; set a standard-title otherwise
+        $scope.saveVidatioTitle = ->
+            $log.info "HeaderCtrl saveVidatioTitle called"
+            $log.debug
+                filename: Data.meta.fileName
 
             if $scope.editor.fileName is ""
-                $scope.editor.fileName = $scope.standardTitle
+                $("#vidatio-title").css "min-width", 240
+            else
+                $("#vidatio-title").css "min-width", 10
 
-            console.log "in if"
+            # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
+            return true
 
         # the displayed views are set accordingly to the clicked tab
         # @method tabClicked
@@ -65,4 +77,9 @@ app.controller "EditorCtrl", [
             for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
+
+        setTitleInputWidth = ->
+            valWidth = $("#vidatio-title").textWidth() + 10 + "px" # 10 is the width per letter
+            $("#vidatio-title").css "width", valWidth
+
 ]

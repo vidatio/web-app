@@ -1,6 +1,6 @@
 #editor.wrapper-content(ng-controller="EditorCtrl")
     .title
-        div(contentEditable="true" id="vidatio-title" ng-model="editor.fileName")
+        input(type="text" id="vidatio-title" placeholder=" {{ 'VIDATIO_TITLE' | translate }} " ng-change="saveVidatioTitle()" ng-model="editor.fileName" ng-model-options="{ updateOn: 'blur' }" onClick="select();")
 
     .editor-panel
         a.tab(href="#" ng-class="{'active': activeTabs[0]}" ng-click="tabClicked(0)") {{ "DATASET" | translate | uppercase }}

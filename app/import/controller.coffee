@@ -32,6 +32,7 @@ app.controller "ImportCtrl", [
             Data.meta.fileType = "csv"
             Table.reset false
             Map.resetGeoJSON()
+            Data.meta.fileName = ""
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
