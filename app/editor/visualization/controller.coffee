@@ -171,19 +171,14 @@ app.controller "VisualizationCtrl", [
                     height: $element.height() + 6
 
                 defaultCss =
-                    "position": "absolute"
                     "width": "#{inputSize.width}px"
                     "height": "#{inputSize.height}px"
-                    "padding": "5px"
-                    "font-family": "Helvetica"
-                    "font-weight": "200"
-                    "font-size": "12px"
 
                 if $element.attr("id") is "d3plus_graph_ylabel"
                     inputPosition =
-                        "left": "-#{inputSize.height}px"
+                        "left": "-#{(inputSize.width / 2) - 6}px"
                         "top": "50%"
-                        "margin-top": "-#{inputSize.width / 2}px"
+                        "margin-top": "-#{inputSize.height}px"
                         "transform": "rotate(-90deg)"
                 else
                     inputPosition =
@@ -191,14 +186,18 @@ app.controller "VisualizationCtrl", [
                         "top": "calc(100% - #{inputSize.height}px)"
                         "margin-left": "-#{inputSize.width / 2}px"
 
-                $ "<input id='#{$element.attr("id")}_input' type='text' value='#{$element.text()}' />"
+                $ "<input id='#{$element.attr("id")}_inline_input' type='text' value='#{$element.text()}' />"
                 .css merge defaultCss, inputPosition
                 .appendTo "#chart"
+                .focus()
+                .select()
+                .blur (event) ->
+                    $element.text $(@).val()
+                    $(@).remove()
                 .keyup (event) ->
                     if event.keyCode is 13 or event.keyCode is 27
                         $element.text $(@).val()
-                        $(this).remove()
-
+                        $(@).remove()
 
         # @method selectDiagram
         # @param {String} name
