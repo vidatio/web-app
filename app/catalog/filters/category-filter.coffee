@@ -5,6 +5,10 @@ app = angular.module "app.filters"
 app.filter "categoryFilter", [
     "$log"
     ($log) ->
+        # @method Anonymous Function
+        # @param {Array} input
+        # @param {String} category
+        # @return {Array}
         return (input, category) ->
             $log.info "CategoryFilter called"
             $log.debug

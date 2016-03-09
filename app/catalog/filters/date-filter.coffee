@@ -5,6 +5,11 @@ app = angular.module "app.filters"
 app.filter "dateFilter", [
     "$log"
     ($log) ->
+        # @method Anonymous Function
+        # @param {Array} input
+        # @param {Date or String} from
+        # @param {Date or String} to
+        # @return {Array}
         return (input, from, to) ->
             $log.info "DateFilter called"
             $log.debug
