@@ -65,13 +65,15 @@ header
 
             &:nth-child(3)
                 &::before
-                    left calc(653px/3*2)
+                    left calc(100%/3*2)
+
             &:nth-child(2)
                 &::before
-                    right calc(653px/3)
+                    right calc(100%/3)
+
             &:first-child
                 &::before
-                    right calc(653px/3*2)
+                    right calc(100%/3*2)
 
             &:hover,
             &:focus
@@ -211,21 +213,33 @@ header
             width 90%
             margin 0 5%
 
-            input
-                min-width 180px
-                font-size 22px
+        .menu-buttons
+            a#save-button
+                position absolute
+                right 60%
 
-        .underline-title
-            min-width 220px
+@media(min-width: 768px)
+    header
+        .menu-buttons
+            a#save-button
+                position absolute
+                right 15px
+                top 57px
 
 @media(max-width: 800px)
     header
         #process-nav
-            margin-top 15px
+            margin-top 25px
 
             a
                 height 65px
                 line-height 28px
+
+                &:nth-child(3)
+                &:nth-child(2)
+                &:first-child
+                    &::before
+                        bottom -15px
 
                 span
                     display block
@@ -238,5 +252,13 @@ header
                              &:nth-child(2)
                                     &::after
                                         margin-top 5px
+
         .title
             top 125px
+
+@media(min-width: 1100px)
+    header
+        .menu-buttons
+            a#save-button
+                left 0
+                top 0
