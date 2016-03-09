@@ -4,9 +4,6 @@ describe "Filter Catalog", ->
         module "app.filters"
         inject ($filter, $injector) ->
             @injector = $injector
-            #@scope = $rootScope.$new()
-            #@deferred = $q.defer()
-
             @filter = $filter
 
     describe "DateFilter", ->
@@ -66,3 +63,31 @@ describe "Filter Catalog", ->
             ]
 
             expect(@filter('dateFilter')(input, undefined, "2016-02-07")).toEqual(result)
+
+    describe "CategoryFilter", ->
+        it "should be defined and included", ->
+            expect(@filter('categoryFilter')).toBeDefined()
+
+        it "should filter input correctly with a cateory", ->
+            input = [
+                {
+                    metaData:
+                        category:
+                            name: "category1"
+                },
+                {
+                    metaData:
+                        category:
+                            name: "category2"
+                }
+            ]
+
+            result = [
+                {
+                    metaData:
+                        category:
+                            name: "category2"
+                }
+            ]
+
+            expect(@filter('categoryFilter')(input, "category2")).toEqual(result)
