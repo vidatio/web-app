@@ -14,6 +14,10 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate) ->
+
+        # check if userAgent is Firefox -> necessary for the width calculation of the input field
+        isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
+
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
         $scope.activeTabs = [false, true, false]
@@ -25,22 +29,22 @@ app.controller "EditorCtrl", [
         $scope.editor = Data.meta
 
         $scope.editor.fileName = Data.meta.fileName || $scope.standardTitle
-        $timeout -> setTitleInputWidth()
+        $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
         $("#vidatio-title").on 'input', ->
-            setTitleInputWidth()
+            $("#vidatio-title").css "width", setTitleInputWidth()
 
         # @method saveVidatioTitle
         # @description set the users' input (if existing) as vidatio-title; set a standard-title otherwise
         $scope.saveVidatioTitle = ->
-            $log.info "HeaderCtrl saveVidatioTitle called"
+            $log.info "EditorCtrl saveVidatioTitle called"
             $log.debug
-                filename: Data.meta.fileName
+                filename: $scope.editor.fileName
 
             if $scope.editor.fileName is ""
                 $("#vidatio-title").css "min-width", 240
             else
-                $("#vidatio-title").css "min-width", 10
+                $("#vidatio-title").css "min-width", 100
 
             # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
             return true
@@ -78,8 +82,13 @@ app.controller "EditorCtrl", [
                 if tab
                     $scope.activeViews++
 
+        # calculate and return the necessary width for the input field
         setTitleInputWidth = ->
-            valWidth = $("#vidatio-title").textWidth() + 10 + "px" # 10 is the width per letter
-            $("#vidatio-title").css "width", valWidth
+            if isFirefox
+                valWidth = $("#vidatio-title").textWidth() * 1.4 + "px"
+            else
+                valWidth = $("#vidatio-title").textWidth() + 10 + "px"
+
+            return valWidth
 
 ]
