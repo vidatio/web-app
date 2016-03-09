@@ -47,10 +47,10 @@ class window.vidatio.Helper
     # @public
     # @param {Array} dataset
     # @return {Array}
-    cutDataset: (dataset) ->
-        vidatio.log.info "HelperService cutDataset called"
+    getSubset: (dataset) ->
+        vidatio.log.info "HelperService getSubset called"
         vidatio.log.debug
-            message: "HelperService cutDataset called"
+            message: "HelperService getSubset called"
             dataset: dataset
 
         tmp = []
@@ -66,7 +66,7 @@ class window.vidatio.Helper
     # @param {Array} dataset with rows and columns
     # @return {Array} dataset but rows are now columns and vice versa
     transposeDataset: (dataset) ->
-        vidatio.log.info "Recommender transposeDataset called"
+        vidatio.log.info "Helper transposeDataset called"
         vidatio.log.debug
             dataset: dataset
 
@@ -340,6 +340,93 @@ class window.vidatio.Helper
         DDMMYYYY = /^(0?[1-9]|[12][0-9]|3[01])[\/\-.](0?[1-9]|1[012])[\/\-.]\d{4}$/
         MMDDYYYY = /^(0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.]\d{4}$/
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
+
+    # @method transformToArrayOfObjects
+    # @description This method transforms the dataset from a 2 dimensional Array to an Array of Objects, which is needed by D3plus
+    #               xColumn, yColumn and visualizationType
+    # @public
+    # @param {Array} dataset
+    # @param {Number} xColumn
+    # @param {Number} yColumn
+    # @param {String} visualizationType
+    # @return {Array}
+    # TODO pass names of header if available to use as default keys for x and y in visualization
+    transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers, color) ->
+        unless dataset or xColumn or yColumn or visualizationType
+            return
+
+        transformedDataset = []
+        { x: xHeader, y: yHeader } = headers
+
+        dataset.forEach (row) =>
+            x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
+            y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
+
+            dataItem = {}
+            dataItem[xHeader] = x
+            dataItem[yHeader] = y
+
+            dataItem["color"] = color
+
+            if visualizationType is "bar" or visualizationType is "scatter"
+                dataItem["name"] = y
+            else if visualizationType is "timeseries"
+                dataItem["name"] = "Line 1"
+
+            transformedDataset.push dataItem
+
+        transformedDataset
+
+    # @method subsetWithXColumnFirst
+    # @description This method is used to get a subset with 2 columns. The data has to be in a format like it is used by D3.parcoords,
+    #               which is that each column is an Array: eg [ [ Col1Value1, Col1Value2 ], [ Col2Value1, Col2Value2 ] ]
+    # @public
+    # @param {Array} dataset
+    # @param {Number} xColumn
+    # @param {Number} yColumn
+    # @return {Array}
+    subsetWithXColumnFirst: (dataset, xColumn, yColumn) ->
+        unless dataset or xColumn or yColumn
+            return
+
+        subset = []
+        subset.push dataset[xColumn]
+        subset.push dataset[yColumn]
+
+        subset
+
+    # @method isDiagramPossible
+    # @description This method checks if the current column type selection is possible with a given diagram.
+    # @public
+    # @param {Array} xColumnTypes
+    # @param {Array} yColumnTypes
+    # @param {String} yColumnType
+    # @return {Boolean}
+    isDiagramPossible: (xColumnTypes, yColumnTypes, diagramType) ->
+        vidatio.log.info "HelperService isDiagramPossible called"
+        vidatio.log.debug
+            xColumnTypes: xColumnTypes
+            yColumnTypes: yColumnTypes
+            diagramType: diagramType
+
+        switch diagramType
+            when "scatter"
+                if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
+                    return false
+            when "map"
+                break
+            when "parallel"
+                break
+
+            when "bar"
+                if "numeric" not in yColumnTypes
+                    return false
+
+            when "timeseries"
+                if "date" not in xColumnTypes or "numeric" not in yColumnTypes
+                    return false
+
+        return true
 
 # the input-field width automatically resizes according to a users' input
 $.fn.textWidth = (text, font) ->

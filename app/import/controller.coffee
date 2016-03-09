@@ -20,7 +20,8 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "ProgressService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
+    "VisualizationService"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
@@ -30,7 +31,9 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl continueToEmptyTable called"
 
             Data.meta.fileType = "csv"
-            Table.reset false
+            Table.useColumnHeadersFromDataset = false
+            Visualization.options.diagramType = false
+            Table.setDataset()
             Map.resetGeoJSON()
             Data.meta.fileName = ""
 
@@ -105,7 +108,7 @@ app.controller "ImportCtrl", [
             if fileType isnt "csv" and fileType isnt "zip"
                 $log.info "ImportCtrl data format not supported"
                 $log.debug
-                    Format: fileType
+                    format: fileType
 
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
@@ -129,7 +132,6 @@ app.controller "ImportCtrl", [
 
                 initTableAndMap fileType, fileContent
 
-                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
 
@@ -145,22 +147,27 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
-            switch fileType
+            Table.useColumnHeadersFromDataset = true
 
+            switch fileType
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
+                    Table.setHeader dataset.shift()
                     Table.setDataset dataset
+                    Visualization.recommendDiagram()
                     $location.path editorPath
 
                 when "zip"
                     Data.meta.fileType = "shp"
+
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                         $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                         $log.debug
                             fileContent: fileContent
 
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
+
                         if dataset.length
                             Table.setDataset dataset
                             Map.setGeoJSON geoJSON

@@ -11,7 +11,8 @@ app.service 'ConverterService', [
     "$timeout"
     "$log"
     "$q"
-    ($timeout, $log, $q) ->
+    "TableService"
+    ($timeout, $log, $q, Table) ->
         class Converter
 
             # @method convertSHP2GeoJSON
@@ -21,7 +22,6 @@ app.service 'ConverterService', [
             convertSHP2GeoJSON: (buffer) ->
                 $log.info "ConverterService convertSHP2GeoJSON called"
                 $log.debug
-                    message: "ConverterService convertSHP2GeoJSON called"
                     buffer: buffer
 
                 return shp(buffer)
@@ -33,7 +33,6 @@ app.service 'ConverterService', [
             convertCSV2Arrays: (csv) ->
                 $log.info "ConverterService convertCSV2Arrays called"
                 $log.debug
-                    message: "ConverterService convertCSV2Arrays called"
                     csv: csv
 
                 return Papa.parse(csv).data
@@ -45,7 +44,6 @@ app.service 'ConverterService', [
             convertGeoJSON2Arrays: (geoJSON) ->
                 $log.info "ConverterService convertGeoJSON2Arrays called"
                 $log.debug
-                    message: "ConverterService convertGeoJSON2Arrays called"
                     geoJSON: geoJSON
 
                 dataset = []
@@ -131,7 +129,6 @@ app.service 'ConverterService', [
             convertGeoJSON2ColHeaders: (geoJSON) ->
                 $log.info "ConverterService convertGeoJSON2ColHeaders called"
                 $log.debug
-                    message: "ConverterService convertGeoJSON2ColHeaders called"
                     geoJSON: geoJSON
 
                 columnHeaders = []
@@ -172,12 +169,14 @@ app.service 'ConverterService', [
             # @method convertArrays2GeoJSON
             # @public
             # @param {Array} dataset
+            # @param {Array} header
+            # @param {Array} indicesCoordinates
             # @return {GeoJSON}
-            convertArrays2GeoJSON: (dataset) ->
+            convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
                 $log.info "ConverterService convertArrays2GeoJSON called"
                 $log.debug
-                    message: "ConverterService convertArrays2GeoJSON called"
                     dataset: dataset
+                    indicesCoordinates: indicesCoordinates
 
                 dataset = vidatio.helper.trimDataset(dataset)
 
@@ -185,15 +184,13 @@ app.service 'ConverterService', [
                     "type": "FeatureCollection"
                     "features": []
 
-                indicesCoordinates = vidatio.parser.findCoordinatesColumns(dataset)
-
                 dataset.forEach (row) ->
                     coordinates = []
 
                     # distinguish if coordinates are in the same column or in two different columns
-                    if indicesCoordinates.hasOwnProperty("xy")
-                        coordinates = vidatio.parser.extractCoordinatesOfOneCell row[indicesCoordinates["xy"]]
-                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
+                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["x"]]
+                    else
                         # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
@@ -201,9 +198,6 @@ app.service 'ConverterService', [
                         if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
                             coordinates.push(latitude)
                             coordinates.push(longitude)
-                    else
-                        $log.info "Keine Koordinaten gefunden."
-                        return
 
                     unless coordinates.length
                         return
@@ -228,11 +222,11 @@ app.service 'ConverterService', [
                         return
 
                     # All none coordinate cell should be filled into the properties of the feature
-                    if indicesCoordinates.hasOwnProperty("xy")
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
                         row.forEach (cell, indexColumn) ->
-                            if(indexColumn != indicesCoordinates["xy"])
+                            if(indexColumn != indicesCoordinates["x"])
                                 feature.properties[indexColumn] = (cell)
-                    else if indicesCoordinates.hasOwnProperty("x") and indicesCoordinates.hasOwnProperty("y")
+                    else
                         row.forEach (cell, indexColumn) ->
                             if(indexColumn != indicesCoordinates["x"] and indexColumn != indicesCoordinates["y"])
                                 feature.properties[indexColumn] = (cell)
@@ -249,7 +243,6 @@ app.service 'ConverterService', [
             matrixToArray: (str) ->
                 $log.info "ConverterService matrixToArray called"
                 $log.debug
-                    message: "ConverterService matrixToArray called"
                     str: str
 
                 return str.split('(')[1].split(')')[0].split(',')

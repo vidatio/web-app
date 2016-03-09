@@ -9,8 +9,7 @@ templateCache = require "gulp-angular-templatecache"
 stylus = require "gulp-stylus"
 stylint = require "gulp-stylint"
 
-karma = require "gulp-karma"
-{protractor} = require "gulp-protractor"
+karmaServer = require("karma").Server
 
 browserSync = require('browser-sync').create()
 reload = browserSync.reload
@@ -102,6 +101,7 @@ BUILD =
             "./bower_components/c3/c3.js"
             "./bower_components/canvg/dist/canvg.bundle.js"
             "./bower_components/d3/d3.js"
+            "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/moment/min/moment.min.js"
@@ -109,19 +109,19 @@ BUILD =
             "./bower_components/moment/locale/de.js"
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
+            "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
-            "./bower_components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css"
             "./bower_components/flat-ui/dist/css/flat-ui.css"
             "./bower_components/ngToast/dist/ngToast.min.css"
             "./bower_components/ngToast/dist/ngToast-animations.min.css"
             "./bower_components/jPushMenu/css/jPushMenu.css"
             "./bower_components/handsontable/dist/handsontable.full.css"
             "./bower_components/leaflet/dist/leaflet.css"
-            "./bower_components/c3/c3.css"
-            "./bower_components/d3.parcoords.css/d3.parcoords.css"
+            "./bower_components/d3.parcoords.js/d3.parcoords.css"
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
+            "./bower_components/angular-bootstrap-colorpicker/css/colorpicker.css"
         ]
     dirs:
         out: "./build"
@@ -179,6 +179,15 @@ gulp.task "develop",
         "run"
     ]
 
+gulp.task "tdd",
+    "Watches/Build and Test the source files on change.",
+    [
+        "config:develop"
+        "build"
+        "test:tdd"
+        "run"
+    ]
+
 gulp.task "dev",
     "Shorthand for develop.",
     [
@@ -214,25 +223,20 @@ gulp.task "build",
 
 gulp.task "test",
     "Starts and reruns all tests on change of test or source files.",
-    ->
-        gulp.src []
-        .pipe karma
-            configFile: "karma.conf.coffee"
-            action: "watch"
+    (done) ->
+        new karmaServer(
+            configFile: __dirname + "/karma.conf.coffee"
+            singleRun: true
+        , done).start()
 
-gulp.task "e2e",
-    "Runs all e2e tests.",
-    [
-        "run"
-    ],
-    ->
-        gulp.src E2E_FILES
-        .pipe protractor
-            configFile: "./protractor.config.coffee"
-            args: [
-                "--baseUrl"
-                BASEURL
-            ]
+gulp.task "test:tdd",
+    "Starts and reruns all tests on change of test or source files.",
+    (done) ->
+        new karmaServer(
+            configFile: __dirname + "/karma.conf.coffee"
+            singleRun: false
+            autoWatch: true
+        , done).start()
 
 ###
     LINTING

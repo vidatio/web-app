@@ -1,18 +1,26 @@
 "use strict"
 
 class vidatio.BarChart extends vidatio.Visualization
-    constructor: (dataset) ->
+    constructor: (dataset, options) ->
         vidatio.log.info "Barchart constructor called"
+        vidatio.log.debug
+            dataset: dataset
+            options: options
 
-        setTimeout( ->
-            chart = c3.generate
-                bindto: "#chart"
-                data:
-                    columns: dataset,
-                    type: "bar"
-                bar: width: ratio: 0.5
-                padding:
-                    right: 30
+        super dataset, options.color
+        @preProcess options
 
-            super(dataset, chart)
-        , 500)
+        # we need to wait for angular to finish rendering
+        setTimeout =>
+            d3plus
+            .viz()
+            .container("#chart")
+            .data(@chartData)
+            .type("bar")
+            .id("name")
+            .x(options.headers["x"])
+            .y(options.headers["y"])
+            .color("color")
+            .draw()
+        , 0
+

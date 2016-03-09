@@ -4,7 +4,6 @@ class window.vidatio.Recommender
     constructor: ->
         vidatio.log.info "Recommender constructor called"
         @recommendedDiagram = null
-        @types = ["coordinate", "date", "nominal", "numeric", "unknown"]
         @thresholdPC = 500
         @thresholdBar = 10
 
@@ -20,18 +19,27 @@ class window.vidatio.Recommender
         schema = []
 
         dataset.forEach (column) =>
-            if vidatio.helper.isCoordinateColumn column
-                schema.push @types[0]
-            else if vidatio.helper.isDateColumn column
-                schema.push @types[1]
-            else if vidatio.helper.isNominalColumn column
-                schema.push @types[2]
-            else if vidatio.helper.isNumericColumn column
-                schema.push @types[3]
-            else
-                schema.push @types[4]
+            schema.push @getColumnType column
 
         return schema
+
+    # @method getColumnType
+    # @public
+    # @param {Array} column
+    # @return {Array} type, types of the column
+    getColumnType: (column) ->
+        type = []
+
+        if vidatio.helper.isCoordinateColumn column
+            type.push "coordinate"
+        if vidatio.helper.isDateColumn column
+            type.push "date"
+        if vidatio.helper.isNominalColumn column
+            type.push "nominal"
+        if vidatio.helper.isNumericColumn column
+            type.push "numeric"
+
+        return type
 
     # @method getVariances
     # @public
@@ -60,111 +68,115 @@ class window.vidatio.Recommender
     # @method run
     # @public
     # @param {Array} dataset
+    # @param {Array} header
     # @return {recommendDiagram, xColumn, yColumn} the type of the recommend diagram,
     #   the index of the column for the x value,
     #   the index of the column for the y value
     # OR {error} Message with occurred error
-    run: (subset = [], dataset = subset) ->
-        vidatio.log.info "Recommender getRecommendedDiagram called"
+    run: (dataset = [], header = [], useHeader = true) ->
+        vidatio.log.info "Recommender run called"
         vidatio.log.debug
-            subset: subset
             dataset: dataset
+            header: header
 
-        if subset.length < 1 or subset[0].length < 2
-            message = "Dataset have not enough dimensions!"
-            return { error: message }
+        if dataset.length < 1 or dataset[0].length < 2
+            message = "not enough dimensions"
+            return {error: message}
 
         xIndex = null
         yIndex = null
-        @recommendedDiagram = null
-
         xVariance = null
         yVariance = null
+        nominalIdx = null
+        coordinateIndices = null
+        @recommendedDiagram = null
 
-        transposedDataset = vidatio.helper.transposeDataset subset
+        # We can recognize geo datasets via headers
+        # Se we first check the header
+        if useHeader then coordinateIndices = vidatio.geoParser.checkHeader(header)
 
-        schema = @getSchema(transposedDataset)
-        variances = @getVariances(transposedDataset)
+        if coordinateIndices?.hasOwnProperty("x") and coordinateIndices?.hasOwnProperty("y")
+            xIndex = coordinateIndices.x
+            yIndex = coordinateIndices.y
+            @recommendedDiagram = "map"
 
-        for variance, index in variances
-            if variance > xVariance
+        # For other datasets and geo datasets without headers
+        # We classify the columns the the content
+        else
+            subset = vidatio.helper.getSubset dataset
+            transposedDataset = vidatio.helper.transposeDataset subset
 
-                if xIndex?
-                    yIndex = xIndex
-                    yVariance = xVariance
+            schema = @getSchema(transposedDataset)
+            variances = @getVariances(transposedDataset)
 
-                xIndex = index
-                xVariance = variance
+            for variance, index in variances
+                if variance > xVariance
 
-            else if variance > yVariance
-                yIndex = index
-                yVariance = variance
+                    if xIndex?
+                        yIndex = xIndex
+                        yVariance = xVariance
 
-        type = schema[xIndex] + " " + schema[yIndex]
+                    xIndex = index
+                    xVariance = variance
 
-        nominalIdx = xIndex if schema[xIndex] is "nominal"
-        nominalIdx = yIndex if schema[yIndex] is "nominal"
+                else if variance > yVariance
+                    yIndex = index
+                    yVariance = variance
 
-        uniqueNominals = {}
-        for row in dataset
-            if row[nominalIdx] in uniqueNominals
-                continue
+            nominalIdx = xIndex if "nominal" in schema[xIndex]
+            nominalIdx = yIndex if "nominal" in schema[yIndex]
 
-            uniqueNominals[row[nominalIdx]] = true
+            uniqueNominals = {}
+            for row in dataset
+                if row[nominalIdx] in uniqueNominals
+                    continue
 
-            numberOfNominals = Object.keys(uniqueNominals).length
-            if numberOfNominals > @thresholdBar
-                break
+                uniqueNominals[row[nominalIdx]] = true
 
-        switch type
+                numberOfNominals = Object.keys(uniqueNominals).length
+                if numberOfNominals > @thresholdBar
+                    break
 
-            when "numeric numeric", "nominal nominal"
-                if dataset.length > @thresholdPC
-                    @recommendedDiagram = "parallel"
-                else
-                    @recommendedDiagram = "scatter"
+            # After checking the header or/and classify the columns
+            # we have to decide which diagram type we want to recommend
 
-            when "nominal numeric"
-                if dataset.length > @thresholdPC
-                    @recommendedDiagram = "parallel"
-                else if numberOfNominals > @thresholdBar
-                    @recommendedDiagram = "scatter"
-                else
-                    @recommendedDiagram = "bar"
-
-            when "numeric nominal"
-                if dataset.length > @thresholdPC
-                    @recommendedDiagram = "parallel"
-                else if numberOfNominals > @thresholdBar
-                    @recommendedDiagram = "scatter"
-                else
-                    @recommendedDiagram = "bar"
-
-                tmp = xIndex
-                xIndex = yIndex
-                yIndex = tmp
-
-            when "coordinate coordinate"
+            if "coordinate" in schema[xIndex] and "coordinate" in schema[yIndex]
                 @recommendedDiagram = "map"
 
-            when "date numeric"
+            else if ("date" in schema[xIndex] and "numeric" in schema[yIndex]) or ("numeric" in schema[xIndex] and "date" in schema[yIndex])
                 @recommendedDiagram = "timeseries"
 
-            when "numeric date"
-                @recommendedDiagram = "timeseries"
-                tmp = xIndex
-                xIndex = yIndex
-                yIndex = tmp
+                if "numeric" in schema[xIndex] and "date" in schema[yIndex]
+                    tmp = xIndex
+                    xIndex = yIndex
+                    yIndex = tmp
 
-            else
-                if (type.indexOf "unknown" isnt -1) and (dataset.length > @thresholdPC)
+            else if "numeric" in schema[xIndex] and "numeric" in schema[yIndex]
+                if dataset.length > @thresholdPC
                     @recommendedDiagram = "parallel"
                 else
                     @recommendedDiagram = "scatter"
 
+            else if "nominal" in schema[xIndex] and "nominal" in schema[yIndex]
+                @recommendedDiagram = "parallel"
 
-        return {
-        recommendedDiagram: @recommendedDiagram
-        xColumn: xIndex
-        yColumn: yIndex
-        }
+            else if ("nominal" in schema[xIndex] and "numeric" in schema[yIndex]) or ("numeric" in schema[xIndex] and "nominal" in schema[yIndex])
+                if dataset.length > @thresholdPC
+                    @recommendedDiagram = "parallel"
+                else if numberOfNominals > @thresholdBar
+                    @recommendedDiagram = "scatter"
+                else
+                    @recommendedDiagram = "bar"
+
+                if "numeric" in schema[xIndex] and "nominal" in schema[yIndex]
+                    tmp = xIndex
+                    xIndex = yIndex
+                    yIndex = tmp
+
+            if @recommendedDiagram is null
+                @recommendedDiagram = "parallel"
+
+        result =
+            type: @recommendedDiagram
+            xColumn: xIndex
+            yColumn: yIndex

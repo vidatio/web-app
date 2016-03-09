@@ -5,7 +5,7 @@ describe "Service Data", ->
     beforeEach ->
         module "app"
 
-        inject (DataService, ConverterService, MapService, $rootScope, $q, $injector) ->
+        inject (DataService, ConverterService, TableService, MapService, $rootScope, $q, $injector) ->
             @injector = $injector
             @scope = $rootScope.$new()
             @deferred = $q.defer()
@@ -15,6 +15,12 @@ describe "Service Data", ->
 
             @Map = MapService
             @Map.init @scope
+
+            @Table = TableService
+            @Table.getInstance = ->
+            @Table.instanceTable =
+                getColHeader: ->
+                    return [0,1,2,3,4,5,5,6,7]
 
             spyOn(@Converter, "convertArrays2GeoJSON")
             spyOn(@Map, "setGeoJSON")
@@ -30,11 +36,10 @@ describe "Service Data", ->
     describe "should update Table and Map", ->
         it "with file type csv", ->
             @Data.meta.fileType = "csv"
-
             @Data.updateMap 0, 0, "oldData", "newData"
 
-            expect(@Converter.convertArrays2GeoJSON).toHaveBeenCalled()
-            expect(@Map.setGeoJSON).toHaveBeenCalled()
+            expect(@Converter.convertArrays2GeoJSON).not.toHaveBeenCalled()
+            expect(@Map.setGeoJSON).not.toHaveBeenCalled()
 
         it "with file type shp", ->
             @Data.meta.fileType = "shp"

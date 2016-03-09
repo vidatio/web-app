@@ -5,7 +5,7 @@
     .title
         text-align center
         width 98%
-        margin 15px 1%
+        margin 5px 1% 15px
         position relative
 
         #vidatio-title
@@ -73,7 +73,7 @@
                 color $color-white
 
     .row
-        height calc(100vh - 250px)
+        height calc(100vh - 310px)
         min-height 400px
         border-top 3px solid $color-green
         background $color-white
@@ -84,7 +84,7 @@
             background $color-shadow
 
     .content
-        height calc(100vh - 250px)
+        height calc(100vh - 310px)
         min-height 400px
         padding 10px 5px 20px 5px
         margin-bottom 30px
@@ -94,6 +94,16 @@
             height 40px
             margin-bottom 10px
             border-radius 10px
+
+            & > div
+                display inline-block
+
+            p
+                padding-top 3px
+                font-size 14px
+
+            .dropdown-toggle
+                padding 3px 5px 3px 5px
 
             .download-button
                 float right
@@ -146,8 +156,6 @@
                         z-index 301
 
                         &:first-child
-                            border-bottom 2px solid $color-green
-
                             &::before
                                 border-color transparent
                                 border-style solid
@@ -182,13 +190,29 @@
                         &:hover
                             & > a
                                 color $color-green
-
                 &:hover
                     & > ul
-                     display block
+                        display block
 
-                    & > a
-                        background-color $color-hover-light
+            .hover-button
+                height 40px
+                width 40px
+                z-index 300
+                position relative
+                cursor pointer
+                padding 2px
+
+                & > a
+                    border-radius 4px
+                    display block
+                    width 36px
+                    font-size 24px
+                    text-align center
+                    color $color-black
+                    line-height 36px
+
+                &:hover > a
+                    background-color $color-hover-light
 
     .wrapper-content
         max-width 100%
@@ -244,24 +268,26 @@
                 font-size 15px
 
 @media(max-width: 991px)
-    .row
-        .seperator
-            height 2px
-            width calc(100% - 10px)
-            margin -15px 5px 15px
+    #editor
+        .row
+            .seperator
+                height 2px
+                width calc(100% - 10px)
+                margin -15px 5px 15px
 
 @media(min-width: 992px)
-    .row
-        display flex
-        flex-direction row
+    #editor
+        .row
+            display flex
+            flex-direction row
 
-        .col-md-6
-            width calc(50% - 1px)
+            .col-md-6
+                width calc(50% - 1px)
 
-        .seperator
-            height calc(100% - 10px)
-            width 2px
-            margin 5px 0
+            .seperator
+                height calc(100% - 10px)
+                width 2px
+                margin 5px 0
 
 @media(min-width: 1080px) and (max-width: 1200px)
     #editor
