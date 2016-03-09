@@ -24,11 +24,12 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        $scope.standardTitle = $translate.instant("NEW_VIDATIO") + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+        $scope.standardTitle = $translate.instant("NEW_VIDATIO")
+        $scope.originalTitle = Data.meta.fileName
 
         $scope.editor = Data.meta
 
-        $scope.editor.fileName = Data.meta.fileName || $scope.standardTitle
+        $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
         $("#vidatio-title").on 'input', ->
@@ -43,8 +44,11 @@ app.controller "EditorCtrl", [
 
             if $scope.editor.fileName is ""
                 $("#vidatio-title").css "min-width", 240
+                $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
             else
                 $("#vidatio-title").css "min-width", 100
+
+            console.log "title: " , $scope.editor.fileName
 
             # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
             return true
@@ -85,10 +89,13 @@ app.controller "EditorCtrl", [
         # calculate and return the necessary width for the input field
         setTitleInputWidth = ->
             if isFirefox
-                valWidth = $("#vidatio-title").textWidth() * 1.4 + "px"
+                valWidth = $("#vidatio-title").textWidth()
+                if valWidth < 150
+                    valWidth = valWidth * 1.5 + "px"
+                else
+                    valWidth = valWidth * 1.4 + "px"
             else
                 valWidth = $("#vidatio-title").textWidth() + 10 + "px"
 
             return valWidth
-
 ]

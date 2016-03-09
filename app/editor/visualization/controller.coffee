@@ -88,7 +88,7 @@ app.controller "VisualizationCtrl", [
                 $timeout ->
                     Progress.setMessage message
 
-                fileName = Data.meta.fileName
+                fileName = Data.meta.fileName + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
                 Share.download fileName, obj[type]
             , (error) ->
