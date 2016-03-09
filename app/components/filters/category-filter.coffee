@@ -19,9 +19,7 @@ app.filter "categoryFilter", [
             output = []
 
             for element in input
-                if  element.metaData and
-                    element.metaData.category and
-                    element.metaData.category.name.toLowerCase() is category.toLowerCase()
+                if element.metaData?.category?.name?.toLowerCase() is category.toLowerCase()
                         output.push(element)
 
             output

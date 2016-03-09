@@ -4,9 +4,6 @@ describe "Filter Catalog", ->
         module "app.filters"
         inject ($filter, $injector) ->
             @injector = $injector
-            #@scope = $rootScope.$new()
-            #@deferred = $q.defer()
-
             @filter = $filter
 
     describe "DateFilter", ->
