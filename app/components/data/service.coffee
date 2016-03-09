@@ -6,6 +6,7 @@ app.service 'DataService', [
     "MapService"
     "TableService"
     "ConverterService"
+    "VisualizationService"
     "$rootScope"
     "ngToast"
     "$translate"
@@ -13,7 +14,7 @@ app.service 'DataService', [
     "DataFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -53,7 +54,6 @@ app.service 'DataService', [
             # Sends the dataset to the API, which saves it in the database.
             # @method saveViaAPI
             # @param {Object} dataset
-            # @param {String} userId
             # @param {String} name
             saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
@@ -64,6 +64,17 @@ app.service 'DataService', [
                 DataFactory.save
                     name: name
                     data: dataset
+                    metaData:
+                        fileType: @meta.fileType
+                        fileName: @meta.fileName
+                    options:
+                        diagramType: Visualization.options.diagramType
+                        xAxisCurrent: Visualization.options.xAxisCurrent
+                        yAxisCurrent: Visualization.options.yAxisCurrent
+                        color: Visualization.options.color
+                        selectedDiagramName: Visualization.options.selectedDiagramName
+                        useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
+
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug

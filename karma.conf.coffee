@@ -39,6 +39,7 @@ module.exports = (config) ->
             "./bower_components/ngToast/dist/ngToast.min.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/shp/dist/shp.js"
+            "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
 
             # import angular mock - test dependency
             "./bower_components/angular-mocks/angular-mocks.js"
@@ -81,6 +82,7 @@ module.exports = (config) ->
         preprocessors:
             "**/*.coffee": ["coffee"]
             "**/*.json": ["ng-constant"]
+            "**/!(*-test).coffee": ["coverage"]
 
         coffeePreprocessor:
             options:
@@ -89,7 +91,7 @@ module.exports = (config) ->
         # test results reporter to use
         # possible values: "dots", "progress"
         # available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ["progress"]
+        reporters: ["progress", "coverage"]
 
         # web server port
         port: 9876

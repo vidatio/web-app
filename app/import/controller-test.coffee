@@ -13,7 +13,9 @@ describe "Controller Import", ->
 
             @Table =
                 setDataset: (result) ->
-                takeColumnHeadersFromDataset: ->
+                takeHeaderFromDataset: ->
+                setHeader: (header) ->
+                    @header = header
             @Import =
                 readFile: (file, scope) ->
 
