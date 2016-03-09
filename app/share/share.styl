@@ -106,6 +106,10 @@
                 {lightText}
                 margin-bottom 12px
             
+            .option-icon
+               &.icon-lock
+                    margin-top 45px  
+                  
             .col-xs-6.left
                 text-align left
                 padding 0
@@ -113,12 +117,25 @@
             .col-xs-6.right
                 text-align right
                 padding 0
+
+            .checkbox
+                margin 12px 7px 3px
+                width 265px
+                {lightText}
+                line-height 19px
+                padding-left 30px
             
             .share-only
+                margin-top 90px
+                display block
+            
+            .form-control[readonly]
+                color $color-passive
+                font-size 14px
+            
+            h3
                 margin-top 30px
-                color $color-border
-
-
+                
 @media(max-width 768px)
     #share
         .row
@@ -128,4 +145,8 @@
             #preview
             #download
             #save-share
-                margin 0    
+                margin 0 
+                padding 0 15px 20px
+            #download
+                form
+                    width 90%   

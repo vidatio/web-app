@@ -23,7 +23,7 @@
                                 option SVG
 
             .col-sm-6(ng-switch on="save")
-                #save-share.area(ng-switch-default)
+                #save-share.area(ng-switch-when="")
                     .option-icon.icon-sharing
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
@@ -32,7 +32,7 @@
                             li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-link(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-embed(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
                     form(name="metadataForm" ng-submit="" ng-controller="ShareCtrl")
@@ -47,32 +47,35 @@
                                 input.form-control(type="text" name="title" ng-model="vidatio.title" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
                             .input-group.form-group.selection
-                                select.form-control
-                                    option(selected="selected" disabled="true") {{ 'CATEGORY' | translate }}
-                                    option 1
-                                    option 2
-                                    option 3
+                                select.form-control(name="category" ng-model="vidatio.category" required)
+                                    option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
+                                    option(value="1") 1
+                                    option(value="2") 2
+                                    option(value="3") 3 
                         .row
                             .input-group.form-group.selection.last
-                                select.form-control
-                                    option(selected="selected" disabled="true") {{ 'LICENCE' | translate }}
-                                    option 1
-                                    option 2
-                                    option 3 
+                                select.form-control(name="licence" ng-model="vidatio.licence" required)
+                                    option(selected="selected" disabled="true" value="") {{ 'LICENCE' | translate }}
+                                    option(value="1") 1
+                                    option(value="2") 2
+                                    option(value="3") 3 
                         .row
                             .tagsinput-primary  
                                     input(name="tagsinput" class="tagsinput" data-role="tagsinput")
                                     span.add-tag +
-                                    span.placeholder Füge Text hinzu, damit dein Vidatio besser gefunden wird
+                                    span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="metadataForm.$invalid || metadataForm.$pending") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
                 #save-share.area(ng-switch-when="")
                     .option-icon.icon-lock
                     h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
                     .row
-                        p Logge dich ein, um dein Vidatio in deinem Profil zu speichern.
+                        p 
+                            | Logge dich ein, um dein Vidatio in deinem Profil zu speichern. 
+                            br
+                            | Nur gespeicherte Vidatios können später weiter bearbeitet werden.
                     form(name="loginForm" ng-submit="" ng-controller="ShareCtrl")
                         .row
                             .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
@@ -84,23 +87,44 @@
                             .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
                                 span.input-group-addon.fui-lock
                                 input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
+
                         .row 
                             label.checkbox(for="publish")
-                                input.custom-checkbox(data-toggle="checkbox", type="checkbox")
-                                span.icons
-                                    span.icon-unchecked
-                                    span.icon-checked
+                                input#publish.custom-checkbox(data-toggle="checkbox", type="checkbox" checked="checked")
                                 | Vidatio im öffentlichen Katalog anzeigen
 
                         .row
                             button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'SAVE' | translate }}
 
-                    .row
-                        .col-xs-6.left
-                            a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
-                        .col-xs-6.right
-                            a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
+                        .row
+                            .col-xs-6.left
+                                a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
+                            .col-xs-6.right
+                                a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
 
                     .row
-                        a.share-only(href="#") Vidatio ohne Login teilen
-                        p Wenn du dein Vidatio zu einem späteren Zeitpunkt weiter bearbeiten oder erneut teilen willst, melde dich bitte an bevor du dein Vidatio teilst! 
+                        a.share-only.inverse.ng-binding(href="#") Vidatio ohne Login teilen
+                            span.fui-arrow-right
+                        p Achtung, ohne Login kannst du dein Vidatio später nicht mehr bearbeiten
+
+
+                #save-share.area(ng-switch-default)
+                    .option-icon.icon-sharing
+                    h4 {{ "SHARE" | translate | uppercase }}
+                    .row
+                        ul.share-options
+                            li: button.btn.btn-primary.icon-facebook
+                            li: button.btn.btn-primary.icon-googleplus
+                            li: button.btn.btn-primary.icon-twitter
+                            li: button.btn.btn-primary.icon-link
+                            li: button.btn.btn-primary.icon-embed
+                    .row
+                        h3 Embed Code
+                            span.icon-embed
+                        .input-group.single
+                            textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
+                    .row 
+                        h3 {{ "COPY_LINK" | translate }}
+                            span.icon-link
+                        .input-group.single
+                            input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly) 

@@ -154,7 +154,8 @@ input.form-control
 
 /*input round corners, if single*/        
 .input-group.single
-    input
+    input.form-control
+    textarea.form-control    
         border-radius 4px
 
 .input-group
@@ -260,6 +261,13 @@ span.error
 
     &.ng-hide-remove
         animation: 0.5s fadeIn ease;
+
+/*checboxes*/
+.checkbox input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
+.radio input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
+.checkbox input.custom-radio[type="radio"]:checked + .icons .icon-checked, 
+.radio input.custom-radio[type="radio"]:checked + .icons .icon-checked
+    color $color-green
 
 /*tags flat-ui custom styles*/
 .tagsinput-primary
