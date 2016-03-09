@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/components/table/directive.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">app/components/table/</a> directive.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/48</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">6.25% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/48</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var app;
+&nbsp;
+app = angular.module("app.directives");
+&nbsp;
+app.directive('hot', [
+  "$timeout", "$log", "DataService", "MapService", "TableService", "ConverterService", <span class="fstat-no" title="function not covered" >function($timeout, $log, Data, Map, Table, Converter) {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      restriction: "EA",
+      template: '&lt;div id="datatable"&gt;&lt;/div&gt;',
+      replace: true,
+      scope: {
+        dataset: '=',
+        activeViews: '=',
+        useColumnHeadersFromDataset: '='
+      },
+      link: <span class="fstat-no" title="function not covered" >function($scope, $element) {</span>
+<span class="cstat-no" title="statement not covered" >        var columnHeaders, geoJSON, header, hot, i, minHeight, minWidth, _i, _ref;</span>
+<span class="cstat-no" title="statement not covered" >        $log.info("HotDirective link called");</span>
+<span class="cstat-no" title="statement not covered" >        minWidth = 26;</span>
+<span class="cstat-no" title="statement not covered" >        minHeight = 26;</span>
+<span class="cstat-no" title="statement not covered" >        if (Table.useColumnHeadersFromDataset) {</span>
+<span class="cstat-no" title="statement not covered" >          header = Table.getHeader();</span>
+<span class="cstat-no" title="statement not covered" >          for (i = _i = _ref = header.length; _ref &lt;= minWidth ? _i &lt; minWidth : _i &gt; minWidth; i = _ref &lt;= minWidth ? ++_i : --_i) {</span>
+<span class="cstat-no" title="statement not covered" >            header.push(null);</span>
+          }
+        } else {
+<span class="cstat-no" title="statement not covered" >          header = true;</span>
+        }
+<span class="cstat-no" title="statement not covered" >        hot = null;</span>
+<span class="cstat-no" title="statement not covered" >        (<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          return hot = new Handsontable($element[0], {</span>
+            data: $scope.dataset,
+            minCols: minWidth,
+            minRows: minHeight,
+            rowHeaders: true,
+            colHeaders: header,
+            currentColClassName: 'current-col',
+            currentRowClassName: 'current-row',
+            beforeChange: <span class="fstat-no" title="function not covered" >function(change, source) {</span>
+<span class="cstat-no" title="statement not covered" >              $log.info("HotDirective beforeChange called");</span>
+<span class="cstat-no" title="statement not covered" >              $log.debug({</span>
+                message: "HotDirective beforeChange called",
+                change: change,
+                source: source
+              });
+<span class="cstat-no" title="statement not covered" >              if (Data.meta.fileType === "shp" &amp;&amp; !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])) {</span>
+<span class="cstat-no" title="statement not covered" >                return change[0][3] = change[0][2];</span>
+              }
+            },
+            afterChange: <span class="fstat-no" title="function not covered" >function(change, source) {</span>
+<span class="cstat-no" title="statement not covered" >              $log.info("HotDirective afterChange called");</span>
+<span class="cstat-no" title="statement not covered" >              $log.debug({</span>
+                message: "HotDirective afterChange called",
+                change: change,
+                source: source
+              });
+<span class="cstat-no" title="statement not covered" >              if (Data.meta.fileType === "shp" &amp;&amp; change &amp;&amp; change[0][3] !== change[0][2]) {</span>
+<span class="cstat-no" title="statement not covered" >                Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3]);</span>
+<span class="cstat-no" title="statement not covered" >                return $scope.$applyAsync();</span>
+              }
+            }
+          });
+        })();
+<span class="cstat-no" title="statement not covered" >        Table.setInstance(hot);</span>
+<span class="cstat-no" title="statement not covered" >        if (Data.meta.fileType === "shp") {</span>
+<span class="cstat-no" title="statement not covered" >          geoJSON = Map.getGeoJSON();</span>
+<span class="cstat-no" title="statement not covered" >          columnHeaders = Converter.convertGeoJSON2ColHeaders(geoJSON);</span>
+<span class="cstat-no" title="statement not covered" >          Table.setHeader(columnHeaders, "shp");</span>
+        }
+<span class="cstat-no" title="statement not covered" >        $scope.$watch((<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          return $scope.activeViews;</span>
+        }), (<span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >          return $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            return hot.render();</span>
+          }, 25);
+        }), true);
+<span class="cstat-no" title="statement not covered" >        $scope.$watch((<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          return $scope.dataset;</span>
+        }), (<span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >          return hot.render();</span>
+        }), true);
+<span class="cstat-no" title="statement not covered" >        return Handsontable.Dom.addEvent(window, 'resize', <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          var availableHeight, availableWidth, offset, wrapperHeight, wrapperWidth;</span>
+<span class="cstat-no" title="statement not covered" >          $log.info("HotDirective resize called");</span>
+<span class="cstat-no" title="statement not covered" >          offset = Handsontable.Dom.offset($element[0]);</span>
+<span class="cstat-no" title="statement not covered" >          wrapperWidth = Handsontable.Dom.innerWidth($element.parent()[0]);</span>
+<span class="cstat-no" title="statement not covered" >          wrapperHeight = Handsontable.Dom.innerHeight($element.parent()[0]);</span>
+<span class="cstat-no" title="statement not covered" >          availableWidth = wrapperWidth - offset.left - offset.right;</span>
+<span class="cstat-no" title="statement not covered" >          availableHeight = wrapperHeight - offset.top - offset.bottom;</span>
+<span class="cstat-no" title="statement not covered" >          $element.parent()[0].style.width = availableWidth + 'px';</span>
+<span class="cstat-no" title="statement not covered" >          $element.parent()[0].style.height = availableHeight + 'px';</span>
+<span class="cstat-no" title="statement not covered" >          return hot.render();</span>
+        });
+      }
+    };
+  }
+]);
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGlyZWN0aXZlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZGlyZWN0aXZlLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxZQUFBLENBQUE7QUFBQSxJQUFBLEdBQUE7O0FBQUEsR0FDQSxHQUFNLE9BQU8sQ0FBQyxNQUFSLENBQWUsZ0JBQWYsQ0FETixDQUFBOztBQUFBLEdBR0csQ0FBQyxTQUFKLENBQWMsS0FBZCxFQUFxQjtFQUNqQixVQURpQixFQUVqQixNQUZpQixFQUdqQixhQUhpQixFQUlqQixZQUppQixFQUtqQixjQUxpQixFQU1qQixrQkFOaUIsRUFPakIsU0FBQyxRQUFELEVBQVcsSUFBWCxFQUFpQixJQUFqQixFQUF1QixHQUF2QixFQUE0QixLQUE1QixFQUFtQyxTQUFuQyxHQUFBO1dBQ0k7QUFBQSxNQUFBLFdBQUEsRUFBYSxJQUFiO0FBQUEsTUFDQSxRQUFBLEVBQVUsNEJBRFY7QUFBQSxNQUVBLE9BQUEsRUFBUyxJQUZUO0FBQUEsTUFHQSxLQUFBLEVBQ0k7QUFBQSxRQUFBLE9BQUEsRUFBUyxHQUFUO0FBQUEsUUFDQSxXQUFBLEVBQWEsR0FEYjtBQUFBLFFBRUEsMkJBQUEsRUFBNkIsR0FGN0I7T0FKSjtBQUFBLE1BT0EsSUFBQSxFQUFNLFNBQUMsTUFBRCxFQUFTLFFBQVQsR0FBQTtBQUNGLFlBQUEscUVBQUE7QUFBQSxRQUFBLElBQUksQ0FBQyxJQUFMLENBQVUsMEJBQVYsQ0FBQSxDQUFBO0FBQUEsUUFFQSxRQUFBLEdBQVcsRUFGWCxDQUFBO0FBQUEsUUFHQSxTQUFBLEdBQVksRUFIWixDQUFBO0FBS0EsUUFBQSxJQUFHLEtBQUssQ0FBQywyQkFBVDtBQUNJLFVBQUEsTUFBQSxHQUFTLEtBQUssQ0FBQyxTQUFOLENBQUEsQ0FBVCxDQUFBO0FBQ0EsZUFBUyxtSEFBVCxHQUFBO0FBQ0ksWUFBQSxNQUFNLENBQUMsSUFBUCxDQUFZLElBQVosQ0FBQSxDQURKO0FBQUEsV0FGSjtTQUFBLE1BQUE7QUFLSSxV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LENBQUMsS0FOckQsQ0FBQTtBQUFBLFVBT0EsZUFBQSxHQUFrQixhQUFBLEdBQWdCLE1BQU0sQ0FBQyxHQUF2QixHQUE2QixNQUFNLENBQUMsTUFQdEQsQ0FBQTtBQUFBLFVBU0EsUUFBUSxDQUFDLE1BQVQsQ0FBQSxDQUFrQixDQUFBLENBQUEsQ0FBRSxDQUFDLEtBQUssQ0FBQyxLQUEzQixHQUFtQyxjQUFBLEdBQWlCLElBVHBELENBQUE7QUFBQSxVQVVBLFFBQVEsQ0FBQyxNQUFULENBQUEsQ0FBa0IsQ0FBQSxDQUFBLENBQUUsQ0FBQyxLQUFLLENBQUMsTUFBM0IsR0FBb0MsZUFBQSxHQUFrQixJQVZ0RCxDQUFBO2lCQVdBLEdBQUcsQ0FBQyxNQUFKLENBQUEsRUFad0M7UUFBQSxDQUE1QyxFQXpFRTtNQUFBLENBUE47TUFESjtFQUFBLENBUGlCO0NBQXJCLENBSEEsQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiXG5hcHAgPSBhbmd1bGFyLm1vZHVsZSBcImFwcC5kaXJlY3RpdmVzXCJcblxuYXBwLmRpcmVjdGl2ZSAnaG90JywgW1xuICAgIFwiJHRpbWVvdXRcIlxuICAgIFwiJGxvZ1wiXG4gICAgXCJEYXRhU2VydmljZVwiXG4gICAgXCJNYXBTZXJ2aWNlXCJcbiAgICBcIlRhYmxlU2VydmljZVwiXG4gICAgXCJDb252ZXJ0ZXJTZXJ2aWNlXCJcbiAgICAoJHRpbWVvdXQsICRsb2csIERhdGEsIE1hcCwgVGFibGUsIENvbnZlcnRlcikgLT5cbiAgICAgICAgcmVzdHJpY3Rpb246IFwiRUFcIlxuICAgICAgICB0ZW1wbGF0ZTogJzxkaXYgaWQ9XCJkYXRhdGFibGVcIj48L2Rpdj4nXG4gICAgICAgIHJlcGxhY2U6IHRydWVcbiAgICAgICAgc2NvcGU6XG4gICAgICAgICAgICBkYXRhc2V0OiAnPSdcbiAgICAgICAgICAgIGFjdGl2ZVZpZXdzOiAnPSdcbiAgICAgICAgICAgIHVzZUNvbHVtbkhlYWRlcnNGcm9tRGF0YXNldDogJz0nXG4gICAgICAgIGxpbms6ICgkc2NvcGUsICRlbGVtZW50KSAtPlxuICAgICAgICAgICAgJGxvZy5pbmZvIFwiSG90RGlyZWN0aXZlIGxpbmsgY2FsbGVkXCJcblxuICAgICAgICAgICAgbWluV2lkdGggPSAyNlxuICAgICAgICAgICAgbWluSGVpZ2h0ID0gMjZcblxuICAgICAgICAgICAgaWYgVGFibGUudXNlQ29sdW1uSGVhZGVyc0Zyb21EYXRhc2V0XG4gICAgICAgICAgICAgICAgaGVhZGVyID0gVGFibGUuZ2V0SGVhZGVyKClcbiAgICAgICAgICAgICAgICBmb3IgaSBpbiBbaGVhZGVyLmxlbmd0aC4uLm1pbldpZHRoXVxuICAgICAgICAgICAgICAgICAgICBoZWFkZXIucHVzaCBudWxsXG4gICAgICAgICAgICBlbHNlXG4gICAgICAgICAgICAgICAgaGVhZGVyID0gdHJ1ZVxuXG4gICAgICAgICAgICBob3QgPSBudWxsXG4gICAgICAgICAgICBkbyAtPlxuICAgICAgICAgICAgICAgIGhvdCA9IG5ldyBIYW5kc29udGFibGUoJGVsZW1lbnRbMF0sXG4gICAgICAgICAgICAgICAgICAgIGRhdGE6ICRzY29wZS5kYXRhc2V0XG4gICAgICAgICAgICAgICAgICAgIG1pbkNvbHM6IG1pbldpZHRoXG4gICAgICAgICAgICAgICAgICAgIG1pblJvd3M6IG1pbkhlaWdodFxuICAgICAgICAgICAgICAgICAgICByb3dIZWFkZXJzOiB0cnVlXG4gICAgICAgICAgICAgICAgICAgIGNvbEhlYWRlcnM6IGhlYWRlclxuICAgICAgICAgICAgICAgICAgICBjdXJyZW50Q29sQ2xhc3NOYW1lOiAnY3VycmVudC1jb2wnXG4gICAgICAgICAgICAgICAgICAgIGN1cnJlbnRSb3dDbGFzc05hbWU6ICdjdXJyZW50LXJvdydcbiAgICAgICAgICAgICAgICAgICAgYmVmb3JlQ2hhbmdlOiAoY2hhbmdlLCBzb3VyY2UpIC0+XG4gICAgICAgICAgICAgICAgICAgICAgICAkbG9nLmluZm8gXCJIb3REaXJlY3RpdmUgYmVmb3JlQ2hhbmdlIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgbWVzc2FnZTogXCJIb3REaXJlY3RpdmUgYmVmb3JlQ2hhbmdlIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhbmdlOiBjaGFuZ2VcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzb3VyY2U6IHNvdXJjZVxuXG4gICAgICAgICAgICAgICAgICAgICAgICBpZiBEYXRhLm1ldGEuZmlsZVR5cGUgaXMgXCJzaHBcIiBhbmQgIURhdGEudmFsaWRhdGVJbnB1dChjaGFuZ2VbMF1bMF0sIGNoYW5nZVswXVsxXSwgY2hhbmdlWzBdWzJdLCBjaGFuZ2VbMF1bM10pXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhbmdlWzBdWzNdID0gY2hhbmdlWzBdWzJdXG5cbiAgICAgICAgICAgICAgICAgICAgYWZ0ZXJDaGFuZ2U6IChjaGFuZ2UsIHNvdXJjZSkgLT5cbiAgICAgICAgICAgICAgICAgICAgICAgICRsb2cuaW5mbyBcIkhvdERpcmVjdGl2ZSBhZnRlckNoYW5nZSBjYWxsZWRcIlxuICAgICAgICAgICAgICAgICAgICAgICAgJGxvZy5kZWJ1Z1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2U6IFwiSG90RGlyZWN0aXZlIGFmdGVyQ2hhbmdlIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY2hhbmdlOiBjaGFuZ2VcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBzb3VyY2U6IHNvdXJjZVxuXG4gICAgICAgICAgICAgICAgICAgICAgICBpZiBEYXRhLm1ldGEuZmlsZVR5cGUgaXMgXCJzaHBcIiBhbmQgY2hhbmdlIGFuZCBjaGFuZ2VbMF1bM10gIT0gY2hhbmdlWzBdWzJdXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgRGF0YS51cGRhdGVNYXAoY2hhbmdlWzBdWzBdLCBjaGFuZ2VbMF1bMV0sIGNoYW5nZVswXVsyXSwgY2hhbmdlWzBdWzNdKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgTmVlZGVkIGZvciB1cGRhdGluZyB0aGUgbWFwLCBlbHNlIHRoZSBtYXJrZXJzIGFyZVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICMgdXBkYXRpbmcgdG9vIGxhdGUgZnJvbSBhbmd1bGFyIHJlZnJlc2hpbmcgY3ljbGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAkc2NvcGUuJGFwcGx5QXN5bmMoKVxuICAgICAgICAgICAgICAgIClcblxuICAgICAgICAgICAgVGFibGUuc2V0SW5zdGFuY2UgaG90XG5cbiAgICAgICAgICAgIGlmIERhdGEubWV0YS5maWxlVHlwZSBpcyBcInNocFwiXG4gICAgICAgICAgICAgICAgZ2VvSlNPTiA9IE1hcC5nZXRHZW9KU09OKClcbiAgICAgICAgICAgICAgICBjb2x1bW5IZWFkZXJzID0gQ29udmVydGVyLmNvbnZlcnRHZW9KU09OMkNvbEhlYWRlcnMgZ2VvSlNPTlxuICAgICAgICAgICAgICAgIFRhYmxlLnNldEhlYWRlciBjb2x1bW5IZWFkZXJzLCBcInNocFwiXG5cbiAgICAgICAgICAgICMgUmVuZGVyIG9mIHRhYmxlIGlzIGV2ZW4gdGhlbiBjYWxsZWQsIHdoZW4gdGFibGVcbiAgICAgICAgICAgICMgdmlldyBpcyBub3QgYWN0aXZlLCByZWZhY3RvcmluZyBwb3NzaWJsZVxuICAgICAgICAgICAgJHNjb3BlLiR3YXRjaCAoLT5cbiAgICAgICAgICAgICAgICAkc2NvcGUuYWN0aXZlVmlld3NcbiAgICAgICAgICAgICksICggLT5cbiAgICAgICAgICAgICAgICAjIE5lZWQgdG8gd2FpdCBmb3IgZGlnZXN0IGN5Y2xlXG4gICAgICAgICAgICAgICAgIyBhcHBseSBhbmQgZGlnZXN0IGRvbid0IHdvcmtcbiAgICAgICAgICAgICAgICAkdGltZW91dCgtPlxuICAgICAgICAgICAgICAgICAgICBob3QucmVuZGVyKClcbiAgICAgICAgICAgICAgICAsIDI1KVxuICAgICAgICAgICAgKSwgdHJ1ZVxuXG4gICAgICAgICAgICAkc2NvcGUuJHdhdGNoICgtPlxuICAgICAgICAgICAgICAgICRzY29wZS5kYXRhc2V0XG4gICAgICAgICAgICApLCAoIC0+XG4gICAgICAgICAgICAgICAgaG90LnJlbmRlcigpXG4gICAgICAgICAgICApLCB0cnVlXG5cbiAgICAgICAgICAgICMgTmVlZGVkIGZvciBjb3JyZWN0IGRpc3BsYXllZCB0YWJsZVxuICAgICAgICAgICAgSGFuZHNvbnRhYmxlLkRvbS5hZGRFdmVudCB3aW5kb3csICdyZXNpemUnLCAtPlxuICAgICAgICAgICAgICAgICRsb2cuaW5mbyBcIkhvdERpcmVjdGl2ZSByZXNpemUgY2FsbGVkXCJcblxuICAgICAgICAgICAgICAgIG9mZnNldCA9IEhhbmRzb250YWJsZS5Eb20ub2Zmc2V0ICRlbGVtZW50WzBdXG5cbiAgICAgICAgICAgICAgICB3cmFwcGVyV2lkdGggPSBIYW5kc29udGFibGUuRG9tLmlubmVyV2lkdGggJGVsZW1lbnQucGFyZW50KClbMF1cbiAgICAgICAgICAgICAgICB3cmFwcGVySGVpZ2h0ID0gSGFuZHNvbnRhYmxlLkRvbS5pbm5lckhlaWdodCAkZWxlbWVudC5wYXJlbnQoKVswXVxuICAgICAgICAgICAgICAgIGF2YWlsYWJsZVdpZHRoID0gd3JhcHBlcldpZHRoIC0gb2Zmc2V0LmxlZnQgLSBvZmZzZXQucmlnaHRcbiAgICAgICAgICAgICAgICBhdmFpbGFibGVIZWlnaHQgPSB3cmFwcGVySGVpZ2h0IC0gb2Zmc2V0LnRvcCAtIG9mZnNldC5ib3R0b21cblxuICAgICAgICAgICAgICAgICRlbGVtZW50LnBhcmVudCgpWzBdLnN0eWxlLndpZHRoID0gYXZhaWxhYmxlV2lkdGggKyAncHgnXG4gICAgICAgICAgICAgICAgJGVsZW1lbnQucGFyZW50KClbMF0uc3R5bGUuaGVpZ2h0ID0gYXZhaWxhYmxlSGVpZ2h0ICsgJ3B4J1xuICAgICAgICAgICAgICAgIGhvdC5yZW5kZXIoKVxuXVxuIl19
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

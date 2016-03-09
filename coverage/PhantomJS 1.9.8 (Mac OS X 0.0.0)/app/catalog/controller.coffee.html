@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/catalog/controller.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/catalog/</a> controller.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">13.64% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">13.64% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var app;
+&nbsp;
+app = angular.module("app.controllers");
+&nbsp;
+app.controller("CatalogCtrl", [
+  "$scope", "CatalogFactory", "$log", "$translate", "ngToast", <span class="fstat-no" title="function not covered" >function($scope, CatalogFactory, $log, $translate, ngToast) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.dates = {</span>
+      from: void 0,
+      to: void 0,
+      maxDate: moment.tz('UTC').hour(12).startOf('h')
+    };
+<span class="cstat-no" title="statement not covered" >    $scope.maxDate = $scope.dates.maxDate;</span>
+<span class="cstat-no" title="statement not covered" >    return CatalogFactory.query(<span class="fstat-no" title="function not covered" >function(response) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var vidatio, _i, _len, _ref, _results;</span>
+<span class="cstat-no" title="statement not covered" >      $log.info("CatalogCtrl successfully queried datasets");</span>
+<span class="cstat-no" title="statement not covered" >      $scope.vidatios = response;</span>
+<span class="cstat-no" title="statement not covered" >      _ref = $scope.vidatios;</span>
+<span class="cstat-no" title="statement not covered" >      _results = [];</span>
+<span class="cstat-no" title="statement not covered" >      for (_i = 0, _len = _ref.length; _i &lt; _len; _i++) {</span>
+<span class="cstat-no" title="statement not covered" >        vidatio = _ref[_i];</span>
+<span class="cstat-no" title="statement not covered" >        vidatio.description = "Hello world, this is a test!";</span>
+<span class="cstat-no" title="statement not covered" >        vidatio.title = vidatio.name;</span>
+<span class="cstat-no" title="statement not covered" >        vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg";</span>
+<span class="cstat-no" title="statement not covered" >        _results.push(vidatio.createdAt = new Date(vidatio.createdAt));</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return _results;</span>
+    }, <span class="fstat-no" title="function not covered" >function(error) {</span>
+<span class="cstat-no" title="statement not covered" >      $log.info("CatalogCtrl error on query datasets");</span>
+<span class="cstat-no" title="statement not covered" >      $log.error(error);</span>
+<span class="cstat-no" title="statement not covered" >      return $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return ngToast.create({</span>
+          content: translation,
+          className: "danger"
+        });
+      });
+    });
+  }
+]);
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnRyb2xsZXIuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxpQkFBZixDQUZOLENBQUE7O0FBQUEsR0FJRyxDQUFDLFVBQUosQ0FBZSxhQUFmLEVBQThCO0VBQzFCLFFBRDBCLEVBRTFCLGdCQUYwQixFQUcxQixNQUgwQixFQUkxQixZQUowQixFQUsxQixTQUwwQixFQU0xQixTQUFDLE1BQUQsRUFBUyxjQUFULEVBQXlCLElBQXpCLEVBQStCLFVBQS9CLEVBQTJDLE9BQTNDLEdBQUE7QUFFSSxJQUFBLE1BQU0sQ0FBQyxLQUFQLEdBQ0k7QUFBQSxNQUFBLElBQUEsRUFBTSxNQUFOO0FBQUEsTUFDQSxFQUFBLEVBQUksTUFESjtBQUFBLE1BRUEsT0FBQSxFQUFTLE1BQU0sQ0FBQyxFQUFQLENBQVUsS0FBVixDQUFnQixDQUFDLElBQWpCLENBQXNCLEVBQXRCLENBQXlCLENBQUMsT0FBMUIsQ0FBa0MsR0FBbEMsQ0FGVDtLQURKLENBQUE7QUFBQSxJQUtBLE1BQU0sQ0FBQyxPQUFQLEdBQWlCLE1BQU0sQ0FBQyxLQUFLLENBQUMsT0FMOUIsQ0FBQTtXQU9BLGNBQWMsQ0FBQyxLQUFmLENBQXFCLFNBQUMsUUFBRCxHQUFBO0FBQ2pCLFVBQUEsaUNBQUE7QUFBQSxNQUFBLElBQUksQ0FBQyxJQUFMLENBQVUsMkNBQVYsQ0FBQSxDQUFBO0FBQUEsTUFFQSxNQUFNLENBQUMsUUFBUCxHQUFrQixRQUZsQixDQUFBO0FBSUE7QUFBQTtXQUFBLDJDQUFBOzJCQUFBO0FBQ0ksUUFBQSxPQUFPLENBQUMsV0FBUixHQUFzQiw4QkFBdEIsQ0FBQTtBQUFBLFFBQ0EsT0FBTyxDQUFDLEtBQVIsR0FBZ0IsT0FBTyxDQUFDLElBRHhCLENBQUE7QUFBQSxRQUVBLE9BQU8sQ0FBQyxLQUFSLEdBQWdCLHNFQUZoQixDQUFBO0FBQUEsc0JBR0EsT0FBTyxDQUFDLFNBQVIsR0FBd0IsSUFBQSxJQUFBLENBQUssT0FBTyxDQUFDLFNBQWIsRUFIeEIsQ0FESjtBQUFBO3NCQUxpQjtJQUFBLENBQXJCLEVBVUUsU0FBQyxLQUFELEdBQUE7QUFDRSxNQUFBLElBQUksQ0FBQyxJQUFMLENBQVUscUNBQVYsQ0FBQSxDQUFBO0FBQUEsTUFDQSxJQUFJLENBQUMsS0FBTCxDQUFXLEtBQVgsQ0FEQSxDQUFBO2FBR0EsVUFBQSxDQUFXLDZDQUFYLENBQXlELENBQUMsSUFBMUQsQ0FBK0QsU0FBQyxXQUFELEdBQUE7ZUFDM0QsT0FBTyxDQUFDLE1BQVIsQ0FDSTtBQUFBLFVBQUEsT0FBQSxFQUFTLFdBQVQ7QUFBQSxVQUNBLFNBQUEsRUFBVyxRQURYO1NBREosRUFEMkQ7TUFBQSxDQUEvRCxFQUpGO0lBQUEsQ0FWRixFQVRKO0VBQUEsQ0FOMEI7Q0FBOUIsQ0FKQSxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCJcblxuYXBwID0gYW5ndWxhci5tb2R1bGUgXCJhcHAuY29udHJvbGxlcnNcIlxuXG5hcHAuY29udHJvbGxlciBcIkNhdGFsb2dDdHJsXCIsIFtcbiAgICBcIiRzY29wZVwiXG4gICAgXCJDYXRhbG9nRmFjdG9yeVwiXG4gICAgXCIkbG9nXCJcbiAgICBcIiR0cmFuc2xhdGVcIlxuICAgIFwibmdUb2FzdFwiXG4gICAgKCRzY29wZSwgQ2F0YWxvZ0ZhY3RvcnksICRsb2csICR0cmFuc2xhdGUsIG5nVG9hc3QpIC0+XG5cbiAgICAgICAgJHNjb3BlLmRhdGVzID1cbiAgICAgICAgICAgIGZyb206IHVuZGVmaW5lZFxuICAgICAgICAgICAgdG86IHVuZGVmaW5lZFxuICAgICAgICAgICAgbWF4RGF0ZTogbW9tZW50LnR6KCdVVEMnKS5ob3VyKDEyKS5zdGFydE9mKCdoJylcblxuICAgICAgICAkc2NvcGUubWF4RGF0ZSA9ICRzY29wZS5kYXRlcy5tYXhEYXRlXG5cbiAgICAgICAgQ2F0YWxvZ0ZhY3RvcnkucXVlcnkgKHJlc3BvbnNlKSAtPlxuICAgICAgICAgICAgJGxvZy5pbmZvIFwiQ2F0YWxvZ0N0cmwgc3VjY2Vzc2Z1bGx5IHF1ZXJpZWQgZGF0YXNldHNcIlxuXG4gICAgICAgICAgICAkc2NvcGUudmlkYXRpb3MgPSByZXNwb25zZVxuXG4gICAgICAgICAgICBmb3IgdmlkYXRpbyBpbiAkc2NvcGUudmlkYXRpb3NcbiAgICAgICAgICAgICAgICB2aWRhdGlvLmRlc2NyaXB0aW9uID0gXCJIZWxsbyB3b3JsZCwgdGhpcyBpcyBhIHRlc3QhXCJcbiAgICAgICAgICAgICAgICB2aWRhdGlvLnRpdGxlID0gdmlkYXRpby5uYW1lXG4gICAgICAgICAgICAgICAgdmlkYXRpby5pbWFnZSA9IFwiaW1hZ2VzL3BsYWNlaG9sZGVyLWZlYXR1cmVkLXZpZGF0aW9zLWFyYmVpdHNsb3NlbnphaGxlbi1zYWx6YnVyZy5zdmdcIlxuICAgICAgICAgICAgICAgIHZpZGF0aW8uY3JlYXRlZEF0ID0gbmV3IERhdGUodmlkYXRpby5jcmVhdGVkQXQpXG4gICAgICAgICwgKGVycm9yKSAtPlxuICAgICAgICAgICAgJGxvZy5pbmZvIFwiQ2F0YWxvZ0N0cmwgZXJyb3Igb24gcXVlcnkgZGF0YXNldHNcIlxuICAgICAgICAgICAgJGxvZy5lcnJvciBlcnJvclxuXG4gICAgICAgICAgICAkdHJhbnNsYXRlKCdUT0FTVF9NRVNTQUdFUy5WSURBVElPU19DT1VMRF9OT1RfQkVfTE9BREVEJykudGhlbiAodHJhbnNsYXRpb24pIC0+XG4gICAgICAgICAgICAgICAgbmdUb2FzdC5jcmVhdGVcbiAgICAgICAgICAgICAgICAgICAgY29udGVudDogdHJhbnNsYXRpb25cbiAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lOiBcImRhbmdlclwiXG5cbl1cbiJdfQ==
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

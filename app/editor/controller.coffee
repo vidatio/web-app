@@ -24,12 +24,13 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        $scope.standardTitle = $translate.instant("NEW_VIDATIO")
         $scope.originalTitle = Data.meta.fileName
-
         $scope.editor = Data.meta
 
-        $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
+        $translate("NEW_VIDATIO").then (translation) ->
+            $scope.standardTitle = translation
+            $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
+
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
         # the displayed views are set accordingly to the clicked tab

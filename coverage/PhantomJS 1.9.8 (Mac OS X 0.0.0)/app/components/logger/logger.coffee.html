@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/components/logger/logger.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">app/components/logger/</a> logger.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">72.22% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>13/18</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">50% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>4/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">80% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/5</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">72.22% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>13/18</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">47×</span>
+<span class="cline-any cline-yes">47×</span>
+<span class="cline-any cline-yes">47×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">138×</span>
+<span class="cline-any cline-yes">138×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">255×</span>
+<span class="cline-any cline-yes">255×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">window.vidatio.Logger = (function() {
+  function Logger(TOKEN, sendToConsole) {
+    this.sendToConsole = sendToConsole;
+    this._LTracker = this._LTracker || [];
+    this._LTracker.push({
+      'logglyKey': TOKEN,
+      'sendConsoleErrors': true,
+      'tag': 'loggly-jslogger'
+    });
+  }
+&nbsp;
+  Logger.prototype.debug = function(object) {
+    this._LTracker.push(object);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.sendToConsole) {
+<span class="cstat-no" title="statement not covered" >      return console.log(object);</span>
+    }
+  };
+&nbsp;
+  Logger.prototype.info = function(message) {
+    this._LTracker.push(message);
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.sendToConsole) {
+<span class="cstat-no" title="statement not covered" >      return console.info(message);</span>
+    }
+  };
+&nbsp;
+  Logger.prototype.error = <span class="fstat-no" title="function not covered" >function(message) {</span>
+<span class="cstat-no" title="statement not covered" >    this._LTracker.push(message);</span>
+<span class="cstat-no" title="statement not covered" >    if (this.sendToConsole) {</span>
+<span class="cstat-no" title="statement not covered" >      return console.error(message);</span>
+    }
+  };
+&nbsp;
+  return Logger;
+&nbsp;
+})();
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibG9nZ2VyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibG9nZ2VyLmNvZmZlZSJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFZLENBQUMsT0FBTyxDQUFDO0FBQ0osRUFBQSxnQkFBQyxLQUFELEVBQVEsYUFBUixHQUFBO0FBQ1QsSUFBQSxJQUFDLENBQUEsYUFBRCxHQUFpQixhQUFqQixDQUFBO0FBQUEsSUFDQSxJQUFDLENBQUEsU0FBRCxHQUFhLElBQUMsQ0FBQSxTQUFELElBQWMsRUFEM0IsQ0FBQTtBQUFBLElBRUEsSUFBQyxDQUFBLFNBQVMsQ0FBQyxJQUFYLENBQ0k7QUFBQSxNQUFBLFdBQUEsRUFBYSxLQUFiO0FBQUEsTUFDQSxtQkFBQSxFQUFxQixJQURyQjtBQUFBLE1BRUEsS0FBQSxFQUFPLGlCQUZQO0tBREosQ0FGQSxDQURTO0VBQUEsQ0FBYjs7QUFBQSxtQkFRQSxLQUFBLEdBQU8sU0FBQyxNQUFELEdBQUE7QUFDSCxJQUFBLElBQUMsQ0FBQSxTQUFTLENBQUMsSUFBWCxDQUFnQixNQUFoQixDQUFBLENBQUE7QUFDQSxJQUFBLElBQXNCLElBQUMsQ0FBQSxhQUF2QjthQUFBLE9BQU8sQ0FBQyxHQUFSLENBQVksTUFBWixFQUFBO0tBRkc7RUFBQSxDQVJQLENBQUE7O0FBQUEsbUJBWUEsSUFBQSxHQUFNLFNBQUMsT0FBRCxHQUFBO0FBQ0YsSUFBQSxJQUFDLENBQUEsU0FBUyxDQUFDLElBQVgsQ0FBZ0IsT0FBaEIsQ0FBQSxDQUFBO0FBQ0EsSUFBQSxJQUF3QixJQUFDLENBQUEsYUFBekI7YUFBQSxPQUFPLENBQUMsSUFBUixDQUFhLE9BQWIsRUFBQTtLQUZFO0VBQUEsQ0FaTixDQUFBOztBQUFBLG1CQWdCQSxLQUFBLEdBQU8sU0FBQyxPQUFELEdBQUE7QUFDSCxJQUFBLElBQUMsQ0FBQSxTQUFTLENBQUMsSUFBWCxDQUFnQixPQUFoQixDQUFBLENBQUE7QUFDQSxJQUFBLElBQXlCLElBQUMsQ0FBQSxhQUExQjthQUFBLE9BQU8sQ0FBQyxLQUFSLENBQWMsT0FBZCxFQUFBO0tBRkc7RUFBQSxDQWhCUCxDQUFBOztnQkFBQTs7SUFESixDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiY2xhc3Mgd2luZG93LnZpZGF0aW8uTG9nZ2VyXG4gICAgY29uc3RydWN0b3I6IChUT0tFTiwgc2VuZFRvQ29uc29sZSkgLT5cbiAgICAgICAgQHNlbmRUb0NvbnNvbGUgPSBzZW5kVG9Db25zb2xlXG4gICAgICAgIEBfTFRyYWNrZXIgPSBAX0xUcmFja2VyIG9yIFtdXG4gICAgICAgIEBfTFRyYWNrZXIucHVzaFxuICAgICAgICAgICAgJ2xvZ2dseUtleSc6IFRPS0VOXG4gICAgICAgICAgICAnc2VuZENvbnNvbGVFcnJvcnMnOiB0cnVlXG4gICAgICAgICAgICAndGFnJzogJ2xvZ2dseS1qc2xvZ2dlcidcblxuICAgIGRlYnVnOiAob2JqZWN0KSAtPlxuICAgICAgICBAX0xUcmFja2VyLnB1c2gob2JqZWN0KVxuICAgICAgICBjb25zb2xlLmxvZyBvYmplY3QgaWYgQHNlbmRUb0NvbnNvbGVcblxuICAgIGluZm86IChtZXNzYWdlKSAtPlxuICAgICAgICBAX0xUcmFja2VyLnB1c2gobWVzc2FnZSlcbiAgICAgICAgY29uc29sZS5pbmZvIG1lc3NhZ2UgaWYgQHNlbmRUb0NvbnNvbGVcblxuICAgIGVycm9yOiAobWVzc2FnZSkgLT5cbiAgICAgICAgQF9MVHJhY2tlci5wdXNoKG1lc3NhZ2UpXG4gICAgICAgIGNvbnNvbGUuZXJyb3IgbWVzc2FnZSBpZiBAc2VuZFRvQ29uc29sZVxuXG4iXX0=
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

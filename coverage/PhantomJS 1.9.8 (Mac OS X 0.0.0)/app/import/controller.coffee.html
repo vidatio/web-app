@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/import/controller.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/import/</a> controller.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44.44% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>44/99</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.67% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>5/12</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>6/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">44.44% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>44/99</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var app;
+&nbsp;
+app = angular.module("app.controllers");
+&nbsp;
+app.controller("ImportCtrl", [
+  "$scope", "$http", "$location", "$log", "$rootScope", "$timeout", "$translate", "ImportService", "TableService", "ConverterService", "MapService", "DataService", "ngToast", "ProgressService", "VisualizationService", function($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) {
+    var editorPath, initTableAndMap;
+    $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv";
+    $scope.importService = Import;
+    editorPath = "/" + $rootScope.locale + "/editor";
+    $scope.continueToEmptyTable = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >      $log.info("ImportCtrl continueToEmptyTable called");</span>
+<span class="cstat-no" title="statement not covered" >      Data.meta.fileType = "csv";</span>
+<span class="cstat-no" title="statement not covered" >      Table.useColumnHeadersFromDataset = false;</span>
+<span class="cstat-no" title="statement not covered" >      Visualization.options.diagramType = false;</span>
+<span class="cstat-no" title="statement not covered" >      Table.setDataset();</span>
+<span class="cstat-no" title="statement not covered" >      Map.resetGeoJSON();</span>
+<span class="cstat-no" title="statement not covered" >      return $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        return $location.path(editorPath);</span>
+      });
+    };
+    $scope.load = function() {
+      $log.info("ImportCtrl load called");
+      return $translate("OVERLAY_MESSAGES.PARSING_DATA").then(function(message) {
+        var url;
+        Progress.setMessage(message);
+        url = $scope.link;
+        return $http.get($rootScope.apiBase + "/v0/forward", {
+          params: {
+            url: url
+          }
+        }).success(function(resp) {
+          var fileContent;
+          $log.info("ImportCtrl load success called");
+          $log.debug({
+            data: resp.body
+          });
+          fileContent = resp.fileType === 'zip' ? <span class="branch-0 cbranch-no" title="branch not covered" >resp.body.data </span>: resp.body;
+          initTableAndMap(resp.fileType, fileContent);
+          return $timeout(<span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            Progress.setMessage("");</span>
+<span class="cstat-no" title="statement not covered" >            return $location.path(editorPath);</span>
+          });
+        }).error(<span class="fstat-no" title="function not covered" >function(resp) {</span>
+<span class="cstat-no" title="statement not covered" >          $log.error("ImportCtrl load file by url error called");</span>
+<span class="cstat-no" title="statement not covered" >          $log.debug({</span>
+            resp: resp
+          });
+<span class="cstat-no" title="statement not covered" >          $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >            return Progress.setMessage("");</span>
+          });
+<span class="cstat-no" title="statement not covered" >          return $translate('TOAST_MESSAGES.READ_ERROR_LINK').then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
+<span class="cstat-no" title="statement not covered" >            return ngToast.create({</span>
+              content: translation,
+              className: "danger"
+            });
+          });
+        });
+      });
+    };
+    $scope.getFile = function() {
+      var fileName, fileType, maxFileSize;
+      $log.info("ImportCtrl getFile called");
+      fileType = $scope.file.name.split(".");
+      fileType = fileType[fileType.length - 1];
+      fileName = $scope.file.name.toString();
+      fileName = fileName.substring(0, fileName.lastIndexOf("."));
+      Data.meta.fileName = fileName;
+      maxFileSize = 52428800;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if ($scope.file.size &gt; maxFileSize) {
+<span class="cstat-no" title="statement not covered" >        $log.info("ImportCtrl maxFileSize exceeded");</span>
+<span class="cstat-no" title="statement not covered" >        $log.debug({</span>
+          FileSize: $scope.file.size
+        });
+<span class="cstat-no" title="statement not covered" >        $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {</span>
+          maxFileSize: maxFileSize / 1048576
+        }).then(<span class="fstat-no" title="function not covered" >function(translation) {</span>
+<span class="cstat-no" title="statement not covered" >          return ngToast.create({</span>
+            content: translation,
+            className: "danger"
+          });
+        });
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (fileType !== "csv" &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >fileType !== "zip")</span> {
+<span class="cstat-no" title="statement not covered" >        $log.info("ImportCtrl data format not supported");</span>
+<span class="cstat-no" title="statement not covered" >        $log.debug({</span>
+          format: fileType
+        });
+<span class="cstat-no" title="statement not covered" >        $translate('TOAST_MESSAGES.NOT_SUPPORTED', {</span>
+          format: fileType
+        }).then(<span class="fstat-no" title="function not covered" >function(translation) {</span>
+<span class="cstat-no" title="statement not covered" >          return ngToast.create({</span>
+            content: translation,
+            className: "danger"
+          });
+        });
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+      $translate("OVERLAY_MESSAGES.READING_FILE").then(<span class="fstat-no" title="function not covered" >function(message) {</span>
+<span class="cstat-no" title="statement not covered" >        return Progress.setMessage(message);</span>
+      });
+      return Import.readFile($scope.file, fileType).then(<span class="fstat-no" title="function not covered" >function(fileContent) {</span>
+<span class="cstat-no" title="statement not covered" >        $log.info("ImportCtrl Import.readFile promise success called");</span>
+<span class="cstat-no" title="statement not covered" >        $log.debug({</span>
+          fileContent: fileContent
+        });
+<span class="cstat-no" title="statement not covered" >        $translate("OVERLAY_MESSAGES.PARSING_DATA").then(<span class="fstat-no" title="function not covered" >function(message) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return Progress.setMessage(message);</span>
+        });
+<span class="cstat-no" title="statement not covered" >        initTableAndMap(fileType, fileContent);</span>
+<span class="cstat-no" title="statement not covered" >        return $timeout(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >          return $location.path(editorPath);</span>
+        });
+      }, <span class="fstat-no" title="function not covered" >function(error) {</span>
+<span class="cstat-no" title="statement not covered" >        $log.error("ImportCtrl Import.readFile promise error called");</span>
+<span class="cstat-no" title="statement not covered" >        $log.debug({</span>
+          error: error
+        });
+<span class="cstat-no" title="statement not covered" >        return $translate('TOAST_MESSAGES.READ_ERROR').then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
+<span class="cstat-no" title="statement not covered" >          return ngToast.create({</span>
+            content: translation,
+            className: "danger"
+          });
+        });
+      });
+    };
+    return initTableAndMap = function(fileType, fileContent) {
+      var dataset;
+      Table.useColumnHeadersFromDataset = true;
+      switch (fileType) {
+        case "csv":
+          Data.meta.fileType = "csv";
+          dataset = Converter.convertCSV2Arrays(fileContent);
+          Table.setHeader(dataset.shift());
+          Table.setDataset(dataset);
+          Visualization.recommendDiagram();
+          return $location.path(editorPath);
+<span class="branch-1 cbranch-no" title="branch not covered" >        case "zip":</span>
+<span class="cstat-no" title="statement not covered" >          Data.meta.fileType = "shp";</span>
+<span class="cstat-no" title="statement not covered" >          return Converter.convertSHP2GeoJSON(fileContent).then(<span class="fstat-no" title="function not covered" >function(geoJSON) {</span></span>
+<span class="cstat-no" title="statement not covered" >            $log.info("ImportCtrl Converter.convertSHP2GeoJSON promise success called");</span>
+<span class="cstat-no" title="statement not covered" >            $log.debug({</span>
+              fileContent: fileContent
+            });
+<span class="cstat-no" title="statement not covered" >            dataset = Converter.convertGeoJSON2Arrays(geoJSON);</span>
+<span class="cstat-no" title="statement not covered" >            if (dataset.length) {</span>
+<span class="cstat-no" title="statement not covered" >              Table.setDataset(dataset);</span>
+<span class="cstat-no" title="statement not covered" >              Map.setGeoJSON(geoJSON);</span>
+<span class="cstat-no" title="statement not covered" >              return $location.path(editorPath);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >              $log.error("ImportCtrl Converter.convertGeoJSON2Arrays error");</span>
+<span class="cstat-no" title="statement not covered" >              $log.debug({</span>
+                geoJSON: geoJSON
+              });
+<span class="cstat-no" title="statement not covered" >              return $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR').then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
+<span class="cstat-no" title="statement not covered" >                return ngToast.create({</span>
+                  content: translation,
+                  className: "danger"
+                });
+              });
+            }
+          }, <span class="fstat-no" title="function not covered" >function(error) {</span>
+<span class="cstat-no" title="statement not covered" >            $log.error("ImportCtrl Converter.convertSHP2GeoJSON promise error called");</span>
+<span class="cstat-no" title="statement not covered" >            $log.debug({</span>
+              error: error
+            });
+<span class="cstat-no" title="statement not covered" >            return $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR').then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
+<span class="cstat-no" title="statement not covered" >              return ngToast.create({</span>
+                content: translation,
+                className: "danger"
+              });
+            });
+          });
+      }
+    };
+  }
+]);
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnRyb2xsZXIuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxpQkFBZixDQUZOLENBQUE7O0FBQUEsR0FJRyxDQUFDLFVBQUosQ0FBZSxZQUFmLEVBQTZCO0VBQ3pCLFFBRHlCLEVBRXpCLE9BRnlCLEVBR3pCLFdBSHlCLEVBSXpCLE1BSnlCLEVBS3pCLFlBTHlCLEVBTXpCLFVBTnlCLEVBT3pCLFlBUHlCLEVBUXpCLGVBUnlCLEVBU3pCLGNBVHlCLEVBVXpCLGtCQVZ5QixFQVd6QixZQVh5QixFQVl6QixhQVp5QixFQWF6QixTQWJ5QixFQWN6QixpQkFkeUIsRUFlekIsc0JBZnlCLEVBZ0J6QixTQUFDLE1BQUQsRUFBUyxLQUFULEVBQWdCLFNBQWhCLEVBQTJCLElBQTNCLEVBQWlDLFVBQWpDLEVBQTZDLFFBQTdDLEVBQXVELFVBQXZELEVBQW1FLE1BQW5FLEVBQTJFLEtBQTNFLEVBQWtGLFNBQWxGLEVBQTZGLEdBQTdGLEVBQWtHLElBQWxHLEVBQXdHLE9BQXhHLEVBQWlILFFBQWpILEVBQTJILGFBQTNILEdBQUE7QUFDSSxRQUFBLDJCQUFBO0FBQUEsSUFBQSxNQUFNLENBQUMsSUFBUCxHQUFjLGtGQUFkLENBQUE7QUFBQSxJQUVBLE1BQU0sQ0FBQyxhQUFQLEdBQXVCLE1BRnZCLENBQUE7QUFBQSxJQUdBLFVBQUEsR0FBYSxHQUFBLEdBQU0sVUFBVSxDQUFDLE1BQWpCLEdBQTBCLFNBSHZDLENBQUE7QUFBQSxJQUtBLE1BQU0sQ0FBQyxvQkFBUCxHQUE4QixTQUFBLEdBQUE7QUFDMUIsTUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLHdDQUFWLENBQUEsQ0FBQTtBQUFBLE1BRUEsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFWLEdBQXFCLEtBRnJCLENBQUE7QUFBQSxNQUdBLEtBQUssQ0FBQywyQkFBTixHQUFvQyxLQUhwQyxDQUFBO0FBQUEsTUFJQSxhQUFhLENBQUMsT0FBTyxDQUFDLFdBQXRCLEdBQW9DLEtBSnBDLENBQUE7QUFBQSxNQUtBLEtBQUssQ0FBQyxVQUFOLENBQUEsQ0FMQSxDQUFBO0FBQUEsTUFNQSxHQUFHLENBQUMsWUFBSixDQUFBLENBTkEsQ0FBQTthQVNBLFFBQUEsQ0FBUyxTQUFBLEdBQUE7ZUFDTCxTQUFTLENBQUMsSUFBVixDQUFlLFVBQWYsRUFESztNQUFBLENBQVQsRUFWMEI7SUFBQSxDQUw5QixDQUFBO0FBQUEsSUFtQkEsTUFBTSxDQUFDLElBQVAsR0FBYyxTQUFBLEdBQUE7QUFDVixNQUFBLElBQUksQ0FBQyxJQUFMLENBQVUsd0JBQVYsQ0FBQSxDQUFBO2FBRUEsVUFBQSxDQUFXLCtCQUFYLENBQTJDLENBQUMsSUFBNUMsQ0FBaUQsU0FBQyxPQUFELEdBQUE7QUFDN0MsWUFBQSxHQUFBO0FBQUEsUUFBQSxRQUFRLENBQUMsVUFBVCxDQUFvQixPQUFwQixDQUFBLENBQUE7QUFBQSxRQUVBLEdBQUEsR0FBTSxNQUFNLENBQUMsSUFGYixDQUFBO2VBR0EsS0FBSyxDQUFDLEdBQU4sQ0FBVSxVQUFVLENBQUMsT0FBWCxHQUFxQixhQUEvQixFQUNJO0FBQUEsVUFBQSxNQUFBLEVBQ0k7QUFBQSxZQUFBLEdBQUEsRUFBSyxHQUFMO1dBREo7U0FESixDQUdDLENBQUMsT0FIRixDQUdVLFNBQUMsSUFBRCxHQUFBO0FBQ04sY0FBQSxXQUFBO0FBQUEsVUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLGdDQUFWLENBQUEsQ0FBQTtBQUFBLFVBQ0EsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLFlBQUEsSUFBQSxFQUFNLElBQUksQ0FBQyxJQUFYO1dBREosQ0FEQSxDQUFBO0FBQUEsVUFJQSxXQUFBLEdBQWlCLElBQUksQ0FBQyxRQUFMLEtBQWlCLEtBQXBCLEdBQStCLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBekMsR0FBbUQsSUFBSSxDQUFDLElBSnRFLENBQUE7QUFBQSxVQUtBLGVBQUEsQ0FBZ0IsSUFBSSxDQUFDLFFBQXJCLEVBQStCLFdBQS9CLENBTEEsQ0FBQTtpQkFRQSxRQUFBLENBQVMsU0FBQSxHQUFBO0FBQ0wsWUFBQSxRQUFRLENBQUMsVUFBVCxDQUFvQixFQUFwQixDQUFBLENBQUE7bUJBQ0EsU0FBUyxDQUFDLElBQVYsQ0FBZSxVQUFmLEVBRks7VUFBQSxDQUFULEVBVE07UUFBQSxDQUhWLENBZ0JBLENBQUMsS0FoQkQsQ0FnQk8sU0FBQyxJQUFELEdBQUE7QUFDSCxVQUFBLElBQUksQ0FBQyxLQUFMLENBQVcsMENBQVgsQ0FBQSxDQUFBO0FBQUEsVUFDQSxJQUFJLENBQUMsS0FBTCxDQUNJO0FBQUEsWUFBQSxJQUFBLEVBQU0sSUFBTjtXQURKLENBREEsQ0FBQTtBQUFBLFVBSUEsUUFBQSxDQUFTLFNBQUEsR0FBQTttQkFDTCxRQUFRLENBQUMsVUFBVCxDQUFvQixFQUFwQixFQURLO1VBQUEsQ0FBVCxDQUpBLENBQUE7aUJBT0EsVUFBQSxDQUFXLGdDQUFYLENBQ0EsQ0FBQyxJQURELENBQ00sU0FBQyxXQUFELEdBQUE7bUJBQ0YsT0FBTyxDQUFDLE1BQVIsQ0FDSTtBQUFBLGNBQUEsT0FBQSxFQUFTLFdBQVQ7QUFBQSxjQUNBLFNBQUEsRUFBVyxRQURYO2FBREosRUFERTtVQUFBLENBRE4sRUFSRztRQUFBLENBaEJQLEVBSjZDO01BQUEsQ0FBakQsRUFIVTtJQUFBLENBbkJkLENBQUE7QUFBQSxJQTBEQSxNQUFNLENBQUMsT0FBUCxHQUFpQixTQUFBLEdBQUE7QUFDYixVQUFBLCtCQUFBO0FBQUEsTUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLDJCQUFWLENBQUEsQ0FBQTtBQUFBLE1BR0EsUUFBQSxHQUFXLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQWpCLENBQXVCLEdBQXZCLENBSFgsQ0FBQTtBQUFBLE1BSUEsUUFBQSxHQUFXLFFBQVMsQ0FBQSxRQUFRLENBQUMsTUFBVCxHQUFrQixDQUFsQixDQUpwQixDQUFBO0FBQUEsTUFLQSxRQUFBLEdBQVcsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBakIsQ0FBQSxDQUxYLENBQUE7QUFBQSxNQU1BLFFBQUEsR0FBVyxRQUFRLENBQUMsU0FBVCxDQUFtQixDQUFuQixFQUFzQixRQUFRLENBQUMsV0FBVCxDQUFxQixHQUFyQixDQUF0QixDQU5YLENBQUE7QUFBQSxNQU9BLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBVixHQUFxQixRQVByQixDQUFBO0FBQUEsTUFTQSxXQUFBLEdBQWMsUUFUZCxDQUFBO0FBVUEsTUFBQSxJQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBWixHQUFtQixXQUF0QjtBQUNJLFFBQUEsSUFBSSxDQUFDLElBQUwsQ0FBVSxpQ0FBVixDQUFBLENBQUE7QUFBQSxRQUNBLElBQUksQ0FBQyxLQUFMLENBQ0k7QUFBQSxVQUFBLFFBQUEsRUFBVSxNQUFNLENBQUMsSUFBSSxDQUFDLElBQXRCO1NBREosQ0FEQSxDQUFBO0FBQUEsUUFJQSxVQUFBLENBQVcsbUNBQVgsRUFBZ0Q7QUFBQSxVQUFDLFdBQUEsRUFBYSxXQUFBLEdBQWMsT0FBNUI7U0FBaEQsQ0FDQSxDQUFDLElBREQsQ0FDTSxTQUFDLFdBQUQsR0FBQTtpQkFDRixPQUFPLENBQUMsTUFBUixDQUNJO0FBQUEsWUFBQSxPQUFBLEVBQVMsV0FBVDtBQUFBLFlBQ0EsU0FBQSxFQUFXLFFBRFg7V0FESixFQURFO1FBQUEsQ0FETixDQUpBLENBQUE7QUFVQSxjQUFBLENBWEo7T0FWQTtBQXVCQSxNQUFBLElBQUcsUUFBQSxLQUFjLEtBQWQsSUFBd0IsUUFBQSxLQUFjLEtBQXpDO0FBQ0ksUUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLHNDQUFWLENBQUEsQ0FBQTtBQUFBLFFBQ0EsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLFVBQUEsTUFBQSxFQUFRLFFBQVI7U0FESixDQURBLENBQUE7QUFBQSxRQUlBLFVBQUEsQ0FBVyw4QkFBWCxFQUEyQztBQUFBLFVBQUUsTUFBQSxFQUFRLFFBQVY7U0FBM0MsQ0FDQSxDQUFDLElBREQsQ0FDTSxTQUFDLFdBQUQsR0FBQTtpQkFDRixPQUFPLENBQUMsTUFBUixDQUNJO0FBQUEsWUFBQSxPQUFBLEVBQVMsV0FBVDtBQUFBLFlBQ0EsU0FBQSxFQUFXLFFBRFg7V0FESixFQURFO1FBQUEsQ0FETixDQUpBLENBQUE7QUFVQSxjQUFBLENBWEo7T0F2QkE7QUFBQSxNQW9DQSxVQUFBLENBQVcsK0JBQVgsQ0FBMkMsQ0FBQyxJQUE1QyxDQUFpRCxTQUFDLE9BQUQsR0FBQTtlQUM3QyxRQUFRLENBQUMsVUFBVCxDQUFvQixPQUFwQixFQUQ2QztNQUFBLENBQWpELENBcENBLENBQUE7YUF1Q0EsTUFBTSxDQUFDLFFBQVAsQ0FBZ0IsTUFBTSxDQUFDLElBQXZCLEVBQTZCLFFBQTdCLENBQXNDLENBQUMsSUFBdkMsQ0FBNEMsU0FBQyxXQUFELEdBQUE7QUFDeEMsUUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLG1EQUFWLENBQUEsQ0FBQTtBQUFBLFFBQ0EsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLFVBQUEsV0FBQSxFQUFhLFdBQWI7U0FESixDQURBLENBQUE7QUFBQSxRQUlBLFVBQUEsQ0FBVywrQkFBWCxDQUEyQyxDQUFDLElBQTVDLENBQWlELFNBQUMsT0FBRCxHQUFBO2lCQUM3QyxRQUFRLENBQUMsVUFBVCxDQUFvQixPQUFwQixFQUQ2QztRQUFBLENBQWpELENBSkEsQ0FBQTtBQUFBLFFBT0EsZUFBQSxDQUFnQixRQUFoQixFQUEwQixXQUExQixDQVBBLENBQUE7ZUFTQSxRQUFBLENBQVMsU0FBQSxHQUFBO2lCQUNMLFNBQVMsQ0FBQyxJQUFWLENBQWUsVUFBZixFQURLO1FBQUEsQ0FBVCxFQVZ3QztNQUFBLENBQTVDLEVBYUUsU0FBQyxLQUFELEdBQUE7QUFDRSxRQUFBLElBQUksQ0FBQyxLQUFMLENBQVcsaURBQVgsQ0FBQSxDQUFBO0FBQUEsUUFDQSxJQUFJLENBQUMsS0FBTCxDQUNJO0FBQUEsVUFBQSxLQUFBLEVBQU8sS0FBUDtTQURKLENBREEsQ0FBQTtlQUlBLFVBQUEsQ0FBVywyQkFBWCxDQUNJLENBQUMsSUFETCxDQUNVLFNBQUMsV0FBRCxHQUFBO2lCQUNGLE9BQU8sQ0FBQyxNQUFSLENBQ0k7QUFBQSxZQUFBLE9BQUEsRUFBUyxXQUFUO0FBQUEsWUFDQSxTQUFBLEVBQVcsUUFEWDtXQURKLEVBREU7UUFBQSxDQURWLEVBTEY7TUFBQSxDQWJGLEVBeENhO0lBQUEsQ0ExRGpCLENBQUE7V0EwSEEsZUFBQSxHQUFrQixTQUFDLFFBQUQsRUFBVyxXQUFYLEdBQUE7QUFDZCxVQUFBLE9BQUE7QUFBQSxNQUFBLEtBQUssQ0FBQywyQkFBTixHQUFvQyxJQUFwQyxDQUFBO0FBRUEsY0FBTyxRQUFQO0FBQUEsYUFDUyxLQURUO0FBRVEsVUFBQSxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVYsR0FBcUIsS0FBckIsQ0FBQTtBQUFBLFVBQ0EsT0FBQSxHQUFVLFNBQVMsQ0FBQyxpQkFBVixDQUE0QixXQUE1QixDQURWLENBQUE7QUFBQSxVQUVBLEtBQUssQ0FBQyxTQUFOLENBQWdCLE9BQU8sQ0FBQyxLQUFSLENBQUEsQ0FBaEIsQ0FGQSxDQUFBO0FBQUEsVUFHQSxLQUFLLENBQUMsVUFBTixDQUFpQixPQUFqQixDQUhBLENBQUE7QUFBQSxVQUlBLGFBQWEsQ0FBQyxnQkFBZCxDQUFBLENBSkEsQ0FBQTtpQkFLQSxTQUFTLENBQUMsSUFBVixDQUFlLFVBQWYsRUFQUjtBQUFBLGFBU1MsS0FUVDtBQVVRLFVBQUEsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFWLEdBQXFCLEtBQXJCLENBQUE7aUJBRUEsU0FBUyxDQUFDLGtCQUFWLENBQTZCLFdBQTdCLENBQXlDLENBQUMsSUFBMUMsQ0FBK0MsU0FBQyxPQUFELEdBQUE7QUFDM0MsWUFBQSxJQUFJLENBQUMsSUFBTCxDQUFVLGdFQUFWLENBQUEsQ0FBQTtBQUFBLFlBQ0EsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLGNBQUEsV0FBQSxFQUFhLFdBQWI7YUFESixDQURBLENBQUE7QUFBQSxZQUlBLE9BQUEsR0FBVSxTQUFTLENBQUMscUJBQVYsQ0FBZ0MsT0FBaEMsQ0FKVixDQUFBO0FBTUEsWUFBQSxJQUFHLE9BQU8sQ0FBQyxNQUFYO0FBQ0ksY0FBQSxLQUFLLENBQUMsVUFBTixDQUFpQixPQUFqQixDQUFBLENBQUE7QUFBQSxjQUNBLEdBQUcsQ0FBQyxVQUFKLENBQWUsT0FBZixDQURBLENBQUE7cUJBRUEsU0FBUyxDQUFDLElBQVYsQ0FBZSxVQUFmLEVBSEo7YUFBQSxNQUFBO0FBTUksY0FBQSxJQUFJLENBQUMsS0FBTCxDQUFXLGtEQUFYLENBQUEsQ0FBQTtBQUFBLGNBQ0EsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLGdCQUFBLE9BQUEsRUFBUyxPQUFUO2VBREosQ0FEQSxDQUFBO3FCQUlBLFVBQUEsQ0FBVyxxQ0FBWCxDQUNJLENBQUMsSUFETCxDQUNVLFNBQUMsV0FBRCxHQUFBO3VCQUNGLE9BQU8sQ0FBQyxNQUFSLENBQ0k7QUFBQSxrQkFBQSxPQUFBLEVBQVMsV0FBVDtBQUFBLGtCQUNBLFNBQUEsRUFBVyxRQURYO2lCQURKLEVBREU7Y0FBQSxDQURWLEVBVko7YUFQMkM7VUFBQSxDQUEvQyxFQXVCRSxTQUFDLEtBQUQsR0FBQTtBQUNFLFlBQUEsSUFBSSxDQUFDLEtBQUwsQ0FBVyw4REFBWCxDQUFBLENBQUE7QUFBQSxZQUNBLElBQUksQ0FBQyxLQUFMLENBQ0k7QUFBQSxjQUFBLEtBQUEsRUFBTyxLQUFQO2FBREosQ0FEQSxDQUFBO21CQUlBLFVBQUEsQ0FBVyxrQ0FBWCxDQUNJLENBQUMsSUFETCxDQUNVLFNBQUMsV0FBRCxHQUFBO3FCQUNGLE9BQU8sQ0FBQyxNQUFSLENBQ0k7QUFBQSxnQkFBQSxPQUFBLEVBQVMsV0FBVDtBQUFBLGdCQUNBLFNBQUEsRUFBVyxRQURYO2VBREosRUFERTtZQUFBLENBRFYsRUFMRjtVQUFBLENBdkJGLEVBWlI7QUFBQSxPQUhjO0lBQUEsRUEzSHRCO0VBQUEsQ0FoQnlCO0NBQTdCLENBSkEsQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbIiMgSW1wb3J0IENvbnRyb2xsZXJcbiMgPT09PT09PT09PT09PT09PT09PVxuXG5cInVzZSBzdHJpY3RcIlxuXG5hcHAgPSBhbmd1bGFyLm1vZHVsZSBcImFwcC5jb250cm9sbGVyc1wiXG5cbmFwcC5jb250cm9sbGVyIFwiSW1wb3J0Q3RybFwiLCBbXG4gICAgXCIkc2NvcGVcIlxuICAgIFwiJGh0dHBcIlxuICAgIFwiJGxvY2F0aW9uXCJcbiAgICBcIiRsb2dcIlxuICAgIFwiJHJvb3RTY29wZVwiXG4gICAgXCIkdGltZW91dFwiXG4gICAgXCIkdHJhbnNsYXRlXCJcbiAgICBcIkltcG9ydFNlcnZpY2VcIlxuICAgIFwiVGFibGVTZXJ2aWNlXCJcbiAgICBcIkNvbnZlcnRlclNlcnZpY2VcIlxuICAgIFwiTWFwU2VydmljZVwiXG4gICAgXCJEYXRhU2VydmljZVwiXG4gICAgXCJuZ1RvYXN0XCJcbiAgICBcIlByb2dyZXNzU2VydmljZVwiXG4gICAgXCJWaXN1YWxpemF0aW9uU2VydmljZVwiXG4gICAgKCRzY29wZSwgJGh0dHAsICRsb2NhdGlvbiwgJGxvZywgJHJvb3RTY29wZSwgJHRpbWVvdXQsICR0cmFuc2xhdGUsIEltcG9ydCwgVGFibGUsIENvbnZlcnRlciwgTWFwLCBEYXRhLCBuZ1RvYXN0LCBQcm9ncmVzcywgVmlzdWFsaXphdGlvbikgLT5cbiAgICAgICAgJHNjb3BlLmxpbmsgPSBcImh0dHA6Ly9kYXRhLm9vZS5ndi5hdC9maWxlcy9jbXMvTWVkaWVuZGF0ZWllbi9PR0Qvb2dkX2FidFN0YXQvV2FobF9MVF8wOV9PR0QuY3N2XCJcblxuICAgICAgICAkc2NvcGUuaW1wb3J0U2VydmljZSA9IEltcG9ydFxuICAgICAgICBlZGl0b3JQYXRoID0gXCIvXCIgKyAkcm9vdFNjb3BlLmxvY2FsZSArIFwiL2VkaXRvclwiXG5cbiAgICAgICAgJHNjb3BlLmNvbnRpbnVlVG9FbXB0eVRhYmxlID0gLT5cbiAgICAgICAgICAgICRsb2cuaW5mbyBcIkltcG9ydEN0cmwgY29udGludWVUb0VtcHR5VGFibGUgY2FsbGVkXCJcblxuICAgICAgICAgICAgRGF0YS5tZXRhLmZpbGVUeXBlID0gXCJjc3ZcIlxuICAgICAgICAgICAgVGFibGUudXNlQ29sdW1uSGVhZGVyc0Zyb21EYXRhc2V0ID0gZmFsc2VcbiAgICAgICAgICAgIFZpc3VhbGl6YXRpb24ub3B0aW9ucy5kaWFncmFtVHlwZSA9IGZhbHNlXG4gICAgICAgICAgICBUYWJsZS5zZXREYXRhc2V0KClcbiAgICAgICAgICAgIE1hcC5yZXNldEdlb0pTT04oKVxuXG4gICAgICAgICAgICAjIFJFRkFDVE9SIE5lZWQgdG8gd2FpdCBmb3IgbGVhZmxldCBkaXJlY3RpdmUgdG8gcmVzZXQgaXRzIGdlb0pTT05cbiAgICAgICAgICAgICR0aW1lb3V0IC0+XG4gICAgICAgICAgICAgICAgJGxvY2F0aW9uLnBhdGggZWRpdG9yUGF0aFxuXG4gICAgICAgICMgUmVhZCB2aWEgbGlua1xuICAgICAgICAkc2NvcGUubG9hZCA9IC0+XG4gICAgICAgICAgICAkbG9nLmluZm8gXCJJbXBvcnRDdHJsIGxvYWQgY2FsbGVkXCJcblxuICAgICAgICAgICAgJHRyYW5zbGF0ZShcIk9WRVJMQVlfTUVTU0FHRVMuUEFSU0lOR19EQVRBXCIpLnRoZW4gKG1lc3NhZ2UpIC0+XG4gICAgICAgICAgICAgICAgUHJvZ3Jlc3Muc2V0TWVzc2FnZSBtZXNzYWdlXG5cbiAgICAgICAgICAgICAgICB1cmwgPSAkc2NvcGUubGlua1xuICAgICAgICAgICAgICAgICRodHRwLmdldCgkcm9vdFNjb3BlLmFwaUJhc2UgKyBcIi92MC9mb3J3YXJkXCJcbiAgICAgICAgICAgICAgICAgICAgcGFyYW1zOlxuICAgICAgICAgICAgICAgICAgICAgICAgdXJsOiB1cmxcbiAgICAgICAgICAgICAgICApLnN1Y2Nlc3MgKHJlc3ApIC0+XG4gICAgICAgICAgICAgICAgICAgICRsb2cuaW5mbyBcIkltcG9ydEN0cmwgbG9hZCBzdWNjZXNzIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgICAgICRsb2cuZGVidWdcbiAgICAgICAgICAgICAgICAgICAgICAgIGRhdGE6IHJlc3AuYm9keVxuXG4gICAgICAgICAgICAgICAgICAgIGZpbGVDb250ZW50ID0gaWYgcmVzcC5maWxlVHlwZSBpcyAnemlwJyB0aGVuIHJlc3AuYm9keS5kYXRhIGVsc2UgcmVzcC5ib2R5XG4gICAgICAgICAgICAgICAgICAgIGluaXRUYWJsZUFuZE1hcCByZXNwLmZpbGVUeXBlLCBmaWxlQ29udGVudFxuXG4gICAgICAgICAgICAgICAgICAgICMgUkVGQUNUT1IgTmVlZGVkIHRvIHdhaXQgZm9yIGxlYWZsZXQgZGlyZWN0aXZlIHRvIHJlc2V0IGl0cyBnZW9KU09OXG4gICAgICAgICAgICAgICAgICAgICR0aW1lb3V0IC0+XG4gICAgICAgICAgICAgICAgICAgICAgICBQcm9ncmVzcy5zZXRNZXNzYWdlIFwiXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICRsb2NhdGlvbi5wYXRoIGVkaXRvclBhdGhcblxuICAgICAgICAgICAgICAgIC5lcnJvciAocmVzcCkgLT5cbiAgICAgICAgICAgICAgICAgICAgJGxvZy5lcnJvciBcIkltcG9ydEN0cmwgbG9hZCBmaWxlIGJ5IHVybCBlcnJvciBjYWxsZWRcIlxuICAgICAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgICAgICByZXNwOiByZXNwXG5cbiAgICAgICAgICAgICAgICAgICAgJHRpbWVvdXQgLT5cbiAgICAgICAgICAgICAgICAgICAgICAgIFByb2dyZXNzLnNldE1lc3NhZ2UgXCJcIlxuXG4gICAgICAgICAgICAgICAgICAgICR0cmFuc2xhdGUoJ1RPQVNUX01FU1NBR0VTLlJFQURfRVJST1JfTElOSycpXG4gICAgICAgICAgICAgICAgICAgIC50aGVuICh0cmFuc2xhdGlvbikgLT5cbiAgICAgICAgICAgICAgICAgICAgICAgIG5nVG9hc3QuY3JlYXRlKFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnQ6IHRyYW5zbGF0aW9uXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lOiBcImRhbmdlclwiXG4gICAgICAgICAgICAgICAgICAgICAgICApXG5cbiAgICAgICAgIyBSZWFkIHZpYSBCcm93c2luZyBhbmQgRHJhZy1hbmQtRHJvcFxuICAgICAgICAkc2NvcGUuZ2V0RmlsZSA9IC0+XG4gICAgICAgICAgICAkbG9nLmluZm8gXCJJbXBvcnRDdHJsIGdldEZpbGUgY2FsbGVkXCJcblxuICAgICAgICAgICAgIyBDYW4ndCB1c2UgZmlsZS50eXBlIGJlY2F1c2Ugb2YgY2hyb21lcyBGaWxlIEFQSVxuICAgICAgICAgICAgZmlsZVR5cGUgPSAkc2NvcGUuZmlsZS5uYW1lLnNwbGl0IFwiLlwiXG4gICAgICAgICAgICBmaWxlVHlwZSA9IGZpbGVUeXBlW2ZpbGVUeXBlLmxlbmd0aCAtIDFdXG4gICAgICAgICAgICBmaWxlTmFtZSA9ICRzY29wZS5maWxlLm5hbWUudG9TdHJpbmcoKVxuICAgICAgICAgICAgZmlsZU5hbWUgPSBmaWxlTmFtZS5zdWJzdHJpbmcgMCwgZmlsZU5hbWUubGFzdEluZGV4T2YoXCIuXCIpXG4gICAgICAgICAgICBEYXRhLm1ldGEuZmlsZU5hbWUgPSBmaWxlTmFtZVxuXG4gICAgICAgICAgICBtYXhGaWxlU2l6ZSA9IDUyNDI4ODAwXG4gICAgICAgICAgICBpZiAkc2NvcGUuZmlsZS5zaXplID4gbWF4RmlsZVNpemVcbiAgICAgICAgICAgICAgICAkbG9nLmluZm8gXCJJbXBvcnRDdHJsIG1heEZpbGVTaXplIGV4Y2VlZGVkXCJcbiAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgIEZpbGVTaXplOiAkc2NvcGUuZmlsZS5zaXplXG5cbiAgICAgICAgICAgICAgICAkdHJhbnNsYXRlKCdUT0FTVF9NRVNTQUdFUy5GSUxFX1NJWkVfRVhDRUVERUQnLCB7bWF4RmlsZVNpemU6IG1heEZpbGVTaXplIC8gMTA0ODU3Nn0pXG4gICAgICAgICAgICAgICAgLnRoZW4gKHRyYW5zbGF0aW9uKSAtPlxuICAgICAgICAgICAgICAgICAgICBuZ1RvYXN0LmNyZWF0ZShcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnQ6IHRyYW5zbGF0aW9uXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU6IFwiZGFuZ2VyXCJcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgIHJldHVyblxuXG4gICAgICAgICAgICBpZiBmaWxlVHlwZSBpc250IFwiY3N2XCIgYW5kIGZpbGVUeXBlIGlzbnQgXCJ6aXBcIlxuICAgICAgICAgICAgICAgICRsb2cuaW5mbyBcIkltcG9ydEN0cmwgZGF0YSBmb3JtYXQgbm90IHN1cHBvcnRlZFwiXG4gICAgICAgICAgICAgICAgJGxvZy5kZWJ1Z1xuICAgICAgICAgICAgICAgICAgICBmb3JtYXQ6IGZpbGVUeXBlXG5cbiAgICAgICAgICAgICAgICAkdHJhbnNsYXRlKCdUT0FTVF9NRVNTQUdFUy5OT1RfU1VQUE9SVEVEJywgeyBmb3JtYXQ6IGZpbGVUeXBlIH0pXG4gICAgICAgICAgICAgICAgLnRoZW4gKHRyYW5zbGF0aW9uKSAtPlxuICAgICAgICAgICAgICAgICAgICBuZ1RvYXN0LmNyZWF0ZShcbiAgICAgICAgICAgICAgICAgICAgICAgIGNvbnRlbnQ6IHRyYW5zbGF0aW9uXG4gICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU6IFwiZGFuZ2VyXCJcbiAgICAgICAgICAgICAgICAgICAgKVxuICAgICAgICAgICAgICAgIHJldHVyblxuXG4gICAgICAgICAgICAkdHJhbnNsYXRlKFwiT1ZFUkxBWV9NRVNTQUdFUy5SRUFESU5HX0ZJTEVcIikudGhlbiAobWVzc2FnZSkgLT5cbiAgICAgICAgICAgICAgICBQcm9ncmVzcy5zZXRNZXNzYWdlIG1lc3NhZ2VcblxuICAgICAgICAgICAgSW1wb3J0LnJlYWRGaWxlKCRzY29wZS5maWxlLCBmaWxlVHlwZSkudGhlbiAoZmlsZUNvbnRlbnQpIC0+XG4gICAgICAgICAgICAgICAgJGxvZy5pbmZvIFwiSW1wb3J0Q3RybCBJbXBvcnQucmVhZEZpbGUgcHJvbWlzZSBzdWNjZXNzIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgJGxvZy5kZWJ1Z1xuICAgICAgICAgICAgICAgICAgICBmaWxlQ29udGVudDogZmlsZUNvbnRlbnRcblxuICAgICAgICAgICAgICAgICR0cmFuc2xhdGUoXCJPVkVSTEFZX01FU1NBR0VTLlBBUlNJTkdfREFUQVwiKS50aGVuIChtZXNzYWdlKSAtPlxuICAgICAgICAgICAgICAgICAgICBQcm9ncmVzcy5zZXRNZXNzYWdlIG1lc3NhZ2VcblxuICAgICAgICAgICAgICAgIGluaXRUYWJsZUFuZE1hcCBmaWxlVHlwZSwgZmlsZUNvbnRlbnRcblxuICAgICAgICAgICAgICAgICR0aW1lb3V0IC0+XG4gICAgICAgICAgICAgICAgICAgICRsb2NhdGlvbi5wYXRoIGVkaXRvclBhdGhcblxuICAgICAgICAgICAgLCAoZXJyb3IpIC0+XG4gICAgICAgICAgICAgICAgJGxvZy5lcnJvciBcIkltcG9ydEN0cmwgSW1wb3J0LnJlYWRGaWxlIHByb21pc2UgZXJyb3IgY2FsbGVkXCJcbiAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgIGVycm9yOiBlcnJvclxuXG4gICAgICAgICAgICAgICAgJHRyYW5zbGF0ZSgnVE9BU1RfTUVTU0FHRVMuUkVBRF9FUlJPUicpXG4gICAgICAgICAgICAgICAgICAgIC50aGVuICh0cmFuc2xhdGlvbikgLT5cbiAgICAgICAgICAgICAgICAgICAgICAgIG5nVG9hc3QuY3JlYXRlXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29udGVudDogdHJhbnNsYXRpb25cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU6IFwiZGFuZ2VyXCJcblxuICAgICAgICBpbml0VGFibGVBbmRNYXAgPSAoZmlsZVR5cGUsIGZpbGVDb250ZW50KSAtPlxuICAgICAgICAgICAgVGFibGUudXNlQ29sdW1uSGVhZGVyc0Zyb21EYXRhc2V0ID0gdHJ1ZVxuXG4gICAgICAgICAgICBzd2l0Y2ggZmlsZVR5cGVcbiAgICAgICAgICAgICAgICB3aGVuIFwiY3N2XCJcbiAgICAgICAgICAgICAgICAgICAgRGF0YS5tZXRhLmZpbGVUeXBlID0gXCJjc3ZcIlxuICAgICAgICAgICAgICAgICAgICBkYXRhc2V0ID0gQ29udmVydGVyLmNvbnZlcnRDU1YyQXJyYXlzIGZpbGVDb250ZW50XG4gICAgICAgICAgICAgICAgICAgIFRhYmxlLnNldEhlYWRlciBkYXRhc2V0LnNoaWZ0KClcbiAgICAgICAgICAgICAgICAgICAgVGFibGUuc2V0RGF0YXNldCBkYXRhc2V0XG4gICAgICAgICAgICAgICAgICAgIFZpc3VhbGl6YXRpb24ucmVjb21tZW5kRGlhZ3JhbSgpXG4gICAgICAgICAgICAgICAgICAgICRsb2NhdGlvbi5wYXRoIGVkaXRvclBhdGhcblxuICAgICAgICAgICAgICAgIHdoZW4gXCJ6aXBcIlxuICAgICAgICAgICAgICAgICAgICBEYXRhLm1ldGEuZmlsZVR5cGUgPSBcInNocFwiXG5cbiAgICAgICAgICAgICAgICAgICAgQ29udmVydGVyLmNvbnZlcnRTSFAyR2VvSlNPTihmaWxlQ29udGVudCkudGhlbiAoZ2VvSlNPTikgLT5cbiAgICAgICAgICAgICAgICAgICAgICAgICRsb2cuaW5mbyBcIkltcG9ydEN0cmwgQ29udmVydGVyLmNvbnZlcnRTSFAyR2VvSlNPTiBwcm9taXNlIHN1Y2Nlc3MgY2FsbGVkXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICRsb2cuZGVidWdcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBmaWxlQ29udGVudDogZmlsZUNvbnRlbnRcblxuICAgICAgICAgICAgICAgICAgICAgICAgZGF0YXNldCA9IENvbnZlcnRlci5jb252ZXJ0R2VvSlNPTjJBcnJheXMgZ2VvSlNPTlxuXG4gICAgICAgICAgICAgICAgICAgICAgICBpZiBkYXRhc2V0Lmxlbmd0aFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFRhYmxlLnNldERhdGFzZXQgZGF0YXNldFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIE1hcC5zZXRHZW9KU09OIGdlb0pTT05cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAkbG9jYXRpb24ucGF0aCBlZGl0b3JQYXRoXG5cbiAgICAgICAgICAgICAgICAgICAgICAgIGVsc2VcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAkbG9nLmVycm9yIFwiSW1wb3J0Q3RybCBDb252ZXJ0ZXIuY29udmVydEdlb0pTT04yQXJyYXlzIGVycm9yXCJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGdlb0pTT046IGdlb0pTT05cblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICR0cmFuc2xhdGUoJ1RPQVNUX01FU1NBR0VTLkdFT0pTT04yQVJSQVlTX0VSUk9SJylcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgLnRoZW4gKHRyYW5zbGF0aW9uKSAtPlxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbmdUb2FzdC5jcmVhdGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb250ZW50OiB0cmFuc2xhdGlvblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZTogXCJkYW5nZXJcIlxuXG4gICAgICAgICAgICAgICAgICAgICwgKGVycm9yKSAtPlxuICAgICAgICAgICAgICAgICAgICAgICAgJGxvZy5lcnJvciBcIkltcG9ydEN0cmwgQ29udmVydGVyLmNvbnZlcnRTSFAyR2VvSlNPTiBwcm9taXNlIGVycm9yIGNhbGxlZFwiXG4gICAgICAgICAgICAgICAgICAgICAgICAkbG9nLmRlYnVnXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZXJyb3I6IGVycm9yXG5cbiAgICAgICAgICAgICAgICAgICAgICAgICR0cmFuc2xhdGUoJ1RPQVNUX01FU1NBR0VTLlNIUDJHRU9KU09OX0VSUk9SJylcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAudGhlbiAodHJhbnNsYXRpb24pIC0+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5nVG9hc3QuY3JlYXRlXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb250ZW50OiB0cmFuc2xhdGlvblxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lOiBcImRhbmdlclwiXG5dXG4iXX0=
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

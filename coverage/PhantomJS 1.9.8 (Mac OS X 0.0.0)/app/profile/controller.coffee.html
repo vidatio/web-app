@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/profile/controller.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/profile/</a> controller.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.27% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.27% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/11</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var app;
+&nbsp;
+app = angular.module("app.controllers");
+&nbsp;
+app.controller("ProfileCtrl", [
+  "$scope", "DataFactory", <span class="fstat-no" title="function not covered" >function($scope, DataFactory) {</span>
+<span class="cstat-no" title="statement not covered" >    $scope.vidatios = [];</span>
+<span class="cstat-no" title="statement not covered" >    return DataFactory.query(null, <span class="fstat-no" title="function not covered" >function(response) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var dataset, _i, _len;</span>
+<span class="cstat-no" title="statement not covered" >      for (_i = 0, _len = response.length; _i &lt; _len; _i++) {</span>
+<span class="cstat-no" title="statement not covered" >        dataset = response[_i];</span>
+<span class="cstat-no" title="statement not covered" >        $scope.vidatios.push({</span>
+          title: dataset.name,
+          image: "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg",
+          data: dataset.data,
+          id: dataset._id,
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
+        });
+<span class="cstat-no" title="statement not covered" >        if ($scope.vidatios.length &gt;= 4) {</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+      }
+    });
+  }
+]);
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnRyb2xsZXIuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxpQkFBZixDQUZOLENBQUE7O0FBQUEsR0FJRyxDQUFDLFVBQUosQ0FBZSxhQUFmLEVBQThCO0VBQzFCLFFBRDBCLEVBRTFCLGFBRjBCLEVBRzFCLFNBQUMsTUFBRCxFQUFTLFdBQVQsR0FBQTtBQUNJLElBQUEsTUFBTSxDQUFDLFFBQVAsR0FBa0IsRUFBbEIsQ0FBQTtXQUVBLFdBQVcsQ0FBQyxLQUFaLENBQWtCLElBQWxCLEVBQXdCLFNBQUMsUUFBRCxHQUFBO0FBQ3BCLFVBQUEsaUJBQUE7QUFBQSxXQUFBLCtDQUFBOytCQUFBO0FBQ0ksUUFBQSxNQUFNLENBQUMsUUFBUSxDQUFDLElBQWhCLENBQ0k7QUFBQSxVQUFBLEtBQUEsRUFBTyxPQUFPLENBQUMsSUFBZjtBQUFBLFVBQ0EsS0FBQSxFQUFPLHNFQURQO0FBQUEsVUFFQSxJQUFBLEVBQU0sT0FBTyxDQUFDLElBRmQ7QUFBQSxVQUdBLEVBQUEsRUFBSSxPQUFPLENBQUMsR0FIWjtBQUFBLFVBSUEsV0FBQSxFQUFhLHlVQUpiO1NBREosQ0FBQSxDQUFBO0FBT0EsUUFBQSxJQUFHLE1BQU0sQ0FBQyxRQUFRLENBQUMsTUFBaEIsSUFBMEIsQ0FBN0I7QUFDSSxnQkFBQSxDQURKO1NBUko7QUFBQSxPQURvQjtJQUFBLENBQXhCLEVBSEo7RUFBQSxDQUgwQjtDQUE5QixDQUpBLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyJcInVzZSBzdHJpY3RcIlxuXG5hcHAgPSBhbmd1bGFyLm1vZHVsZShcImFwcC5jb250cm9sbGVyc1wiKVxuXG5hcHAuY29udHJvbGxlciBcIlByb2ZpbGVDdHJsXCIsIFtcbiAgICBcIiRzY29wZVwiXG4gICAgXCJEYXRhRmFjdG9yeVwiXG4gICAgKCRzY29wZSwgRGF0YUZhY3RvcnkpIC0+XG4gICAgICAgICRzY29wZS52aWRhdGlvcyA9IFtdXG5cbiAgICAgICAgRGF0YUZhY3RvcnkucXVlcnkgbnVsbCwgKHJlc3BvbnNlKSAtPlxuICAgICAgICAgICAgZm9yIGRhdGFzZXQgaW4gcmVzcG9uc2VcbiAgICAgICAgICAgICAgICAkc2NvcGUudmlkYXRpb3MucHVzaFxuICAgICAgICAgICAgICAgICAgICB0aXRsZTogZGF0YXNldC5uYW1lXG4gICAgICAgICAgICAgICAgICAgIGltYWdlOiBcImltYWdlcy9wbGFjZWhvbGRlci1mZWF0dXJlZC12aWRhdGlvcy1hcmJlaXRzbG9zZW56YWhsZW4tc2FsemJ1cmcuc3ZnXCJcbiAgICAgICAgICAgICAgICAgICAgZGF0YTogZGF0YXNldC5kYXRhXG4gICAgICAgICAgICAgICAgICAgIGlkOiBkYXRhc2V0Ll9pZFxuICAgICAgICAgICAgICAgICAgICBkZXNjcmlwdGlvbjogXCJMb3JlbSBpcHN1bSBkb2xvciBzaXQgYW1ldCwgY29uc2VjdGV0dXIgYWRpcGlzY2luZyBlbGl0LiBEb25lYyBhIGRpYW0gbGVjdHVzLiBTZWQgc2l0IGFtZXQgaXBzdW0gbWF1cmlzLiBNYWVjZW5hcyBjb25ndWUgbGlndWxhIGFjIHF1YW0gdml2ZXJyYSBuZWMgY29uc2VjdGV0dXIgYW50ZSBoZW5kcmVyaXQuIERvbmVjIGV0IG1vbGxpcyBkb2xvci4gUHJhZXNlbnQgZXQgZGlhbSBlZ2V0IGxpYmVybyBlZ2VzdGFzIG1hdHRpcyBzaXQgYW1ldCB2aXRhZSBhdWd1ZS4gTmFtIHRpbmNpZHVudCBjb25ndWUgZW5pbSwgdXQgcG9ydGEgbG9yZW0gbGFjaW5pYSBjb25zZWN0ZXR1ci5cIlxuXG4gICAgICAgICAgICAgICAgaWYgJHNjb3BlLnZpZGF0aW9zLmxlbmd0aCA+PSA0XG4gICAgICAgICAgICAgICAgICAgIHJldHVyblxuXG5dXG4iXX0=
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/editor/controller.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">app/editor/</a> controller.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>21/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">75% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>3/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>21/21</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+var app;
+&nbsp;
+app = angular.module("app.controllers");
+&nbsp;
+app.controller("EditorCtrl", [
+  "$scope", "$rootScope", "$log", function($scope, $rootScope, $log) {
+    var changeViews;
+    $rootScope.$watch((function(rootScope) {
+      return rootScope.activeViews;
+    }), (function(tabs) {
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (tabs) {
+        return changeViews(tabs);
+      }
+    }), true);
+    return changeViews = function(tabs) {
+      var tab, _i, _len, _results;
+      $rootScope.showTableView = tabs[0], $rootScope.showVisualizationView = tabs[1];
+      $log.info("EditorCtrl changeViews called");
+      $log.debug({
+        message: "EditorCtrl changeViews called",
+        tabs: tabs
+      });
+      $scope.activeViews = 0;
+      _results = [];
+      for (_i = 0, _len = tabs.length; _i &lt; _len; _i++) {
+        tab = tabs[_i];
+        if (tab) {
+          _results.push($scope.activeViews++);
+        } else {
+          _results.push(void 0);
+        }
+      }
+      return _results;
+    };
+  }
+]);
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29udHJvbGxlci5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNvbnRyb2xsZXIuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUdBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxpQkFBZixDQUZOLENBQUE7O0FBQUEsR0FJRyxDQUFDLFVBQUosQ0FBZSxZQUFmLEVBQTZCO0VBQ3pCLFFBRHlCLEVBRXpCLFlBRnlCLEVBR3pCLE1BSHlCLEVBSXpCLFNBQUMsTUFBRCxFQUFTLFVBQVQsRUFBcUIsSUFBckIsR0FBQTtBQU9JLFFBQUEsV0FBQTtBQUFBLElBQUEsVUFBVSxDQUFDLE1BQVgsQ0FBa0IsQ0FBRSxTQUFDLFNBQUQsR0FBQTthQUNoQixTQUFTLENBQUMsWUFETTtJQUFBLENBQUYsQ0FBbEIsRUFFRyxDQUFDLFNBQUMsSUFBRCxHQUFBO0FBQ0EsTUFBQSxJQUFvQixJQUFwQjtlQUFBLFdBQUEsQ0FBWSxJQUFaLEVBQUE7T0FEQTtJQUFBLENBQUQsQ0FGSCxFQUlHLElBSkgsQ0FBQSxDQUFBO1dBU0EsV0FBQSxHQUFjLFNBQUMsSUFBRCxHQUFBO0FBQ1YsVUFBQSx1QkFBQTtBQUFBLE1BQUMsVUFBVSxDQUFDLHVCQUFaLEVBQTJCLFVBQVUsQ0FBQywrQkFBdEMsQ0FBQTtBQUFBLE1BQ0EsSUFBSSxDQUFDLElBQUwsQ0FBVSwrQkFBVixDQURBLENBQUE7QUFBQSxNQUVBLElBQUksQ0FBQyxLQUFMLENBQ0k7QUFBQSxRQUFBLE9BQUEsRUFBUywrQkFBVDtBQUFBLFFBQ0EsSUFBQSxFQUFNLElBRE47T0FESixDQUZBLENBQUE7QUFBQSxNQU9BLE1BQU0sQ0FBQyxXQUFQLEdBQXFCLENBUHJCLENBQUE7QUFRQTtXQUFBLDJDQUFBO3VCQUFBO0FBQ0ksUUFBQSxJQUFHLEdBQUg7d0JBQ0ksTUFBTSxDQUFDLFdBQVAsSUFESjtTQUFBLE1BQUE7Z0NBQUE7U0FESjtBQUFBO3NCQVRVO0lBQUEsRUFoQmxCO0VBQUEsQ0FKeUI7Q0FBN0IsQ0FKQSxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiIyBFZGl0b3IgQ29udHJvbGxlclxuIyA9PT09PT09PT09PT09PT09PT09XG5cblwidXNlIHN0cmljdFwiXG5cbmFwcCA9IGFuZ3VsYXIubW9kdWxlIFwiYXBwLmNvbnRyb2xsZXJzXCJcblxuYXBwLmNvbnRyb2xsZXIgXCJFZGl0b3JDdHJsXCIsIFtcbiAgICBcIiRzY29wZVwiXG4gICAgXCIkcm9vdFNjb3BlXCJcbiAgICBcIiRsb2dcIlxuICAgICgkc2NvcGUsICRyb290U2NvcGUsICRsb2cpIC0+XG4gICAgICAgICMgd2F0Y2ggaWYgYWN0aXZlVmlld3MgaW4gY2hhbmdlIChkZWZpbmVkIGluIGhlYWRlckNvbnRyb2xsZXIuY29mZmVlKVxuICAgICAgICAjICR3YXRjaCB0YWtlcyB0d28gY2FsbGJhY2tzICh3YXRjaEV4cHJlc3Npb24gYW5kIExpc3RlbmVyKTtcbiAgICAgICAgIyBzZWUgQW5ndWxhci5qcyBEb2NzIGZvciBtb3JlIGluZm8hXG4gICAgICAgICMgQG1ldGhvZCAkd2F0Y2hcbiAgICAgICAgIyBAcGFyYW0ge0Z1bmN0aW9ufSB3YXRjaEV4cHJlc3Npb25cbiAgICAgICAgIyBAcGFyYW0ge0Z1bmN0aW9ufSBMaXN0ZW5lclxuICAgICAgICAkcm9vdFNjb3BlLiR3YXRjaCAoIChyb290U2NvcGUpIC0+XG4gICAgICAgICAgICByb290U2NvcGUuYWN0aXZlVmlld3NcbiAgICAgICAgKSwgKCh0YWJzKSAtPlxuICAgICAgICAgICAgY2hhbmdlVmlld3MgdGFicyBpZiB0YWJzXG4gICAgICAgICksIHRydWVcblxuICAgICAgICAjIGNoYW5nZSBhY3RpdmUgdmlld3Mgd2hlbiBhIHRhYiBpbiB0aGUgaGVhZGVyIGlzIGNsaWNrZWRcbiAgICAgICAgIyBAbWV0aG9kIGNoYW5nZVZpZXdzXG4gICAgICAgICMgQHBhcmFtIHtBcnJheX0gdGFicyBBcnJheSBvZiB0aHJlZSBib29sIHZhbHVlcywgd2hpY2ggcmVwcmVzZW50IHRoZSB0aHJlZSB0YWJzIGluIHRoZSBlZGl0b3JcbiAgICAgICAgY2hhbmdlVmlld3MgPSAodGFicykgLT5cbiAgICAgICAgICAgIFskcm9vdFNjb3BlLnNob3dUYWJsZVZpZXcsICRyb290U2NvcGUuc2hvd1Zpc3VhbGl6YXRpb25WaWV3XSA9IHRhYnNcbiAgICAgICAgICAgICRsb2cuaW5mbyBcIkVkaXRvckN0cmwgY2hhbmdlVmlld3MgY2FsbGVkXCJcbiAgICAgICAgICAgICRsb2cuZGVidWdcbiAgICAgICAgICAgICAgICBtZXNzYWdlOiBcIkVkaXRvckN0cmwgY2hhbmdlVmlld3MgY2FsbGVkXCJcbiAgICAgICAgICAgICAgICB0YWJzOiB0YWJzXG5cbiAgICAgICAgICAgICMgY291bnQgYWN0aXZlIGVkaXRvciB2aWV3cyB0byBzZXQgYm9vdHN0cmFwIGNsYXNzZXMgZm9yIHRoZSBjb3JyZWN0IHdpZHRoc1xuICAgICAgICAgICAgJHNjb3BlLmFjdGl2ZVZpZXdzID0gMFxuICAgICAgICAgICAgZm9yIHRhYiBpbiB0YWJzXG4gICAgICAgICAgICAgICAgaWYgdGFiXG4gICAgICAgICAgICAgICAgICAgICRzY29wZS5hY3RpdmVWaWV3cysrXG5cbl1cbiJdfQ==
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

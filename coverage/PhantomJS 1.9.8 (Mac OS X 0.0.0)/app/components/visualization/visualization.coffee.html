@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for app/components/visualization/visualization.coffee</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">app/components/visualization/</a> visualization.coffee
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.25% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>5/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">31.25% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>5/16</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+window.vidatio.Visualization = (function() {
+<span class="fstat-no" title="function not covered" >  function Visualization(dataset, color) {</span>
+<span class="cstat-no" title="statement not covered" >    this.dataset = dataset;</span>
+<span class="cstat-no" title="statement not covered" >    this.color = color != null ? color : "#11DDC6";</span>
+<span class="cstat-no" title="statement not covered" >    vidatio.log.info("Visualization constructor called");</span>
+<span class="cstat-no" title="statement not covered" >    vidatio.log.debug({</span>
+      dataset: this.dataset,
+      color: this.color
+    });
+  }
+&nbsp;
+  Visualization.prototype.remove = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >    vidatio.log.info("Visualization remove called");</span>
+<span class="cstat-no" title="statement not covered" >    return $("#chart").empty();</span>
+  };
+&nbsp;
+  Visualization.prototype.preProcess = <span class="fstat-no" title="function not covered" >function(options) {</span>
+<span class="cstat-no" title="statement not covered" >    var headers, type, xColumn, yColumn;</span>
+<span class="cstat-no" title="statement not covered" >    vidatio.log.info("Visualization preprocess called");</span>
+<span class="cstat-no" title="statement not covered" >    vidatio.log.debug({</span>
+      options: options
+    });
+<span class="cstat-no" title="statement not covered" >    type = options.type, xColumn = options.xColumn, yColumn = options.yColumn, headers = options.headers;</span>
+<span class="cstat-no" title="statement not covered" >    return this.chartData = vidatio.helper.transformToArrayOfObjects(this.dataset, xColumn, yColumn, type, headers, this.color);</span>
+  };
+&nbsp;
+  return Visualization;
+&nbsp;
+})();
+&nbsp;
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidmlzdWFsaXphdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInZpc3VhbGl6YXRpb24uY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFlBQUEsQ0FBQTtBQUFBLE1BRVksQ0FBQyxPQUFPLENBQUM7QUFFSixFQUFBLHVCQUFFLE9BQUYsRUFBWSxLQUFaLEdBQUE7QUFDVCxJQURVLElBQUMsQ0FBQSxVQUFBLE9BQ1gsQ0FBQTtBQUFBLElBRG9CLElBQUMsQ0FBQSx3QkFBQSxRQUFRLFNBQzdCLENBQUE7QUFBQSxJQUFBLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBWixDQUFpQixrQ0FBakIsQ0FBQSxDQUFBO0FBQUEsSUFDQSxPQUFPLENBQUMsR0FBRyxDQUFDLEtBQVosQ0FDSTtBQUFBLE1BQUEsT0FBQSxFQUFTLElBQUMsQ0FBQSxPQUFWO0FBQUEsTUFDQSxLQUFBLEVBQU8sSUFBQyxDQUFBLEtBRFI7S0FESixDQURBLENBRFM7RUFBQSxDQUFiOztBQUFBLDBCQU1BLE1BQUEsR0FBUSxTQUFBLEdBQUE7QUFDSixJQUFBLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBWixDQUFpQiw2QkFBakIsQ0FBQSxDQUFBO1dBQ0EsQ0FBQSxDQUFFLFFBQUYsQ0FBVyxDQUFDLEtBQVosQ0FBQSxFQUZJO0VBQUEsQ0FOUixDQUFBOztBQUFBLDBCQWtCQSxVQUFBLEdBQVksU0FBQyxPQUFELEdBQUE7QUFDUixRQUFBLCtCQUFBO0FBQUEsSUFBQSxPQUFPLENBQUMsR0FBRyxDQUFDLElBQVosQ0FBaUIsaUNBQWpCLENBQUEsQ0FBQTtBQUFBLElBQ0EsT0FBTyxDQUFDLEdBQUcsQ0FBQyxLQUFaLENBQ0k7QUFBQSxNQUFBLE9BQUEsRUFBUyxPQUFUO0tBREosQ0FEQSxDQUFBO0FBQUEsSUFHRSxlQUFBLElBQUYsRUFBUSxrQkFBQSxPQUFSLEVBQWlCLGtCQUFBLE9BQWpCLEVBQTBCLGtCQUFBLE9BSDFCLENBQUE7V0FJQSxJQUFDLENBQUEsU0FBRCxHQUFhLE9BQU8sQ0FBQyxNQUFNLENBQUMseUJBQWYsQ0FBeUMsSUFBQyxDQUFBLE9BQTFDLEVBQW1ELE9BQW5ELEVBQTRELE9BQTVELEVBQXFFLElBQXJFLEVBQTJFLE9BQTNFLEVBQW9GLElBQUMsQ0FBQSxLQUFyRixFQUxMO0VBQUEsQ0FsQlosQ0FBQTs7dUJBQUE7O0lBSkosQ0FBQSIsInNvdXJjZXNDb250ZW50IjpbIlwidXNlIHN0cmljdFwiXG5cbmNsYXNzIHdpbmRvdy52aWRhdGlvLlZpc3VhbGl6YXRpb25cblxuICAgIGNvbnN0cnVjdG9yOiAoQGRhdGFzZXQsIEBjb2xvciA9IFwiIzExRERDNlwiKSAtPlxuICAgICAgICB2aWRhdGlvLmxvZy5pbmZvIFwiVmlzdWFsaXphdGlvbiBjb25zdHJ1Y3RvciBjYWxsZWRcIlxuICAgICAgICB2aWRhdGlvLmxvZy5kZWJ1Z1xuICAgICAgICAgICAgZGF0YXNldDogQGRhdGFzZXRcbiAgICAgICAgICAgIGNvbG9yOiBAY29sb3JcblxuICAgIHJlbW92ZTogLT5cbiAgICAgICAgdmlkYXRpby5sb2cuaW5mbyBcIlZpc3VhbGl6YXRpb24gcmVtb3ZlIGNhbGxlZFwiXG4gICAgICAgICQoXCIjY2hhcnRcIikuZW1wdHkoKVxuXG4gICAgIyBAbWV0aG9kIHByZVByb2Nlc3NcbiAgICAjIEBwYXJhbSB7T2JqZWN0fSBvcHRpb25zXG4gICAgIyAgIEBwYXJhbSB7U3RyaW5nfSB0eXBlXG4gICAgIyAgIEBwYXJhbSB7SW50ZWdlcn0geENvbHVtblxuICAgICMgICBAcGFyYW0ge0ludGVnZXJ9IHlDb2x1bW5cbiAgICAjICAgQHBhcmFtIHtPYmplY3R9IGhlYWRlcnNcbiAgICAjICAgICAgIEBwYXJhbSB7U3RyaW5nfSBoZWFkZXJzXG4gICAgIyAgICAgICBAcGFyYW0ge1N0cmluZ30gaGVhZGVyc1xuICAgIHByZVByb2Nlc3M6IChvcHRpb25zKSAtPlxuICAgICAgICB2aWRhdGlvLmxvZy5pbmZvIFwiVmlzdWFsaXphdGlvbiBwcmVwcm9jZXNzIGNhbGxlZFwiXG4gICAgICAgIHZpZGF0aW8ubG9nLmRlYnVnXG4gICAgICAgICAgICBvcHRpb25zOiBvcHRpb25zXG4gICAgICAgIHsgdHlwZSwgeENvbHVtbiwgeUNvbHVtbiwgaGVhZGVycyB9ID0gb3B0aW9uc1xuICAgICAgICBAY2hhcnREYXRhID0gdmlkYXRpby5oZWxwZXIudHJhbnNmb3JtVG9BcnJheU9mT2JqZWN0cyBAZGF0YXNldCwgeENvbHVtbiwgeUNvbHVtbiwgdHlwZSwgaGVhZGVycywgQGNvbG9yXG5cbiJdfQ==
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 14:49:34 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
