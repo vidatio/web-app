@@ -7,6 +7,7 @@ app.controller "HeaderCtrl", [
     "$scope"
     "$rootScope"
     "$timeout"
+    "MapService"
     "DataService"
     "$log"
     "ngToast"
@@ -14,20 +15,20 @@ app.controller "HeaderCtrl", [
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
 
-            # REFACTOR Needed to wait for leaflet directive to render
-            # $timeout ->
-            #     # TODO: Only resize what is currently visible or used
-            #     switch vidatio.Recommender.recommendedDiagram
-            #         when "scatter"
-            #             new ScatterPlot.getChart().resize()
-            #         when "bar"
-            #             new BarChart.getChart().resize()
-            #         when "map"
-            #             Map.resizeMap()
-            #         else
-            #             # TODO: show a default image here
-            #             console.log "****************"
-            #             console.log "nothing to recommend, abort! "
+        # REFACTOR Needed to wait for leaflet directive to render
+        # $timeout ->
+        #     # TODO: Only resize what is currently visible or used
+        #     switch vidatio.Recommender.recommendedDiagram
+        #         when "scatter"
+        #             new ScatterPlot.getChart().resize()
+        #         when "bar"
+        #             new BarChart.getChart().resize()
+        #         when "map"
+        #             Map.resizeMap()
+        #         else
+        #             # TODO: show a default image here
+        #             console.log "****************"
+        #             console.log "nothing to recommend, abort! "
 
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
@@ -60,9 +61,9 @@ app.controller "HeaderCtrl", [
                     successful: successful
 
                 $translate("TOAST_MESSAGES.LINK_COPIED")
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
             catch err
                 $log.info "Link could not be copied"
                 $log.error

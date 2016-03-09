@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>4/12</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -32,16 +32,16 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>0/5</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">33.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/4</span>
+        <span class='fraction'>4/12</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -55,12 +55,42 @@
 10
 11
 12
-13</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -74,18 +104,33 @@ app = angular.module("app.factories");
 &nbsp;
 app.factory("CatalogFactory", [
   "$resource", "$rootScope", <span class="fstat-no" title="function not covered" >function($resource, $rootScope) {</span>
-<span class="cstat-no" title="statement not covered" >    return $resource($rootScope.apiBase + "/v0/datasets/");</span>
+<span class="cstat-no" title="statement not covered" >    var CatalogFactory;</span>
+<span class="cstat-no" title="statement not covered" >    CatalogFactory = (<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="fstat-no" title="function not covered" >      function CatalogFactory() {</span>}
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      CatalogFactory.prototype.getDatasets = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        return $resource($rootScope.apiBase + "/v0/datasets/");</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      CatalogFactory.prototype.getCategories = <span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >        return $resource($rootScope.apiBase + "/v0/categories/");</span>
+      };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return CatalogFactory;</span>
+&nbsp;
+    })();
+<span class="cstat-no" title="statement not covered" >    return new CatalogFactory;</span>
   }
 ]);
 &nbsp;
-//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmFjdG9yeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZhY3RvcnkuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxlQUFmLENBRk4sQ0FBQTs7QUFBQSxHQUlHLENBQUMsT0FBSixDQUFZLGdCQUFaLEVBQThCO0VBQzFCLFdBRDBCLEVBRTFCLFlBRjBCLEVBRzFCLFNBQUMsU0FBRCxFQUFZLFVBQVosR0FBQTtXQUNJLFNBQUEsQ0FBVSxVQUFVLENBQUMsT0FBWCxHQUFxQixlQUEvQixFQURKO0VBQUEsQ0FIMEI7Q0FBOUIsQ0FKQSxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCJcblxuYXBwID0gYW5ndWxhci5tb2R1bGUgXCJhcHAuZmFjdG9yaWVzXCJcblxuYXBwLmZhY3RvcnkgXCJDYXRhbG9nRmFjdG9yeVwiLCBbXG4gICAgXCIkcmVzb3VyY2VcIlxuICAgIFwiJHJvb3RTY29wZVwiXG4gICAgKCRyZXNvdXJjZSwgJHJvb3RTY29wZSkgLT5cbiAgICAgICAgJHJlc291cmNlICRyb290U2NvcGUuYXBpQmFzZSArIFwiL3YwL2RhdGFzZXRzL1wiXG5cbl1cbiJdfQ==
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmFjdG9yeS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImZhY3RvcnkuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLFlBQUEsQ0FBQTtBQUFBLElBQUEsR0FBQTs7QUFBQSxHQUVBLEdBQU0sT0FBTyxDQUFDLE1BQVIsQ0FBZSxlQUFmLENBRk4sQ0FBQTs7QUFBQSxHQUlHLENBQUMsT0FBSixDQUFZLGdCQUFaLEVBQThCO0VBQzFCLFdBRDBCLEVBRTFCLFlBRjBCLEVBRzFCLFNBQUMsU0FBRCxFQUFZLFVBQVosR0FBQTtBQUVJLFFBQUEsY0FBQTtBQUFBLElBQU07a0NBRUY7O0FBQUEsK0JBQUEsV0FBQSxHQUFhLFNBQUEsR0FBQTtBQUNULGVBQU8sU0FBQSxDQUFVLFVBQVUsQ0FBQyxPQUFYLEdBQXFCLGVBQS9CLENBQVAsQ0FEUztNQUFBLENBQWIsQ0FBQTs7QUFBQSwrQkFHQSxhQUFBLEdBQWUsU0FBQSxHQUFBO0FBQ1gsZUFBTyxTQUFBLENBQVUsVUFBVSxDQUFDLE9BQVgsR0FBcUIsaUJBQS9CLENBQVAsQ0FEVztNQUFBLENBSGYsQ0FBQTs7NEJBQUE7O1FBRkosQ0FBQTtXQVFBLEdBQUEsQ0FBQSxlQVZKO0VBQUEsQ0FIMEI7Q0FBOUIsQ0FKQSxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiXCJ1c2Ugc3RyaWN0XCJcblxuYXBwID0gYW5ndWxhci5tb2R1bGUgXCJhcHAuZmFjdG9yaWVzXCJcblxuYXBwLmZhY3RvcnkgXCJDYXRhbG9nRmFjdG9yeVwiLCBbXG4gICAgXCIkcmVzb3VyY2VcIlxuICAgIFwiJHJvb3RTY29wZVwiXG4gICAgKCRyZXNvdXJjZSwgJHJvb3RTY29wZSkgLT5cblxuICAgICAgICBjbGFzcyBDYXRhbG9nRmFjdG9yeVxuXG4gICAgICAgICAgICBnZXREYXRhc2V0czogLT5cbiAgICAgICAgICAgICAgICByZXR1cm4gJHJlc291cmNlKCRyb290U2NvcGUuYXBpQmFzZSArIFwiL3YwL2RhdGFzZXRzL1wiKVxuXG4gICAgICAgICAgICBnZXRDYXRlZ29yaWVzOiAtPlxuICAgICAgICAgICAgICAgIHJldHVybiAkcmVzb3VyY2UoJHJvb3RTY29wZS5hcGlCYXNlICsgXCIvdjAvY2F0ZWdvcmllcy9cIilcblxuICAgICAgICBuZXcgQ2F0YWxvZ0ZhY3Rvcnlcbl1cbiJdfQ==
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 17:14:18 GMT+0100 (CET)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 17:54:07 GMT+0100 (CET)
 </div>
 </div>
 <script src="../../../prettify.js"></script>
