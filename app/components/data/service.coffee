@@ -99,5 +99,31 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
+
+            createVidatio: (data) ->
+                $log.info "DatasetCtrl createVidatio called"
+
+                if @meta["fileType"] is "shp"
+                    dataset = Converter.convertGeoJSON2Arrays data.data
+                    Table.setDataset dataset
+                    Table.useColumnHeadersFromDataset = true
+                    Map.setGeoJSON data.data
+                else
+                    if data.options?
+                        # Each value has to be assigned individually, otherwise all options get overwritten.
+                        Visualization.options["diagramType"] = data.options.diagramType || false
+                        Visualization.options["xAxisCurrent"] = data.options.xAxisCurrent || 0
+                        Visualization.options["yAxisCurrent"] = data.options.yAxisCurrent || 1
+                        Visualization.options["color"] = data.options.color || "#11DDC6"
+                        Visualization.options["selectedDiagramName"] = data.options.selectedDiagramName || null
+
+                        if data.options.useColumnHeadersFromDataset?
+                            Table.useColumnHeadersFromDataset = data.options.useColumnHeadersFromDataset || false
+
+                            if Table.useColumnHeadersFromDataset
+                                Table.setHeader data.data.shift()
+
+                    Table.setDataset data.data
+
         new Data
 ]
