@@ -44,7 +44,7 @@
                                 input.form-control(type="text" name="editor" ng-model="vidatio.editor" placeholder="{{ 'EDITOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
                             .input-group.form-group
-                                input.form-control(type="text" name="title" ng-model="vidatio.title" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
+                                input.form-control(type="text" name="title" ng-model="share.fileName" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
                             .input-group.form-group.selection
                                 select.form-control
@@ -58,9 +58,9 @@
                                     option(selected="selected" disabled="true") {{ 'LICENCE' | translate }}
                                     option 1
                                     option 2
-                                    option 3 
+                                    option 3
                         .row
-                            .tagsinput-primary  
+                            .tagsinput-primary
                                     input(name="tagsinput" class="tagsinput" data-role="tagsinput")
                                     span.add-tag +
                                     span.placeholder Füge Text hinzu, damit dein Vidatio besser gefunden wird
@@ -84,7 +84,7 @@
                             .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
                                 span.input-group-addon.fui-lock
                                 input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
-                        .row 
+                        .row
                             label.checkbox(for="publish")
                                 input.custom-checkbox(data-toggle="checkbox", type="checkbox")
                                 span.icons
@@ -103,4 +103,4 @@
 
                     .row
                         a.share-only(href="#") Vidatio ohne Login teilen
-                        p Wenn du dein Vidatio zu einem späteren Zeitpunkt weiter bearbeiten oder erneut teilen willst, melde dich bitte an bevor du dein Vidatio teilst! 
+                        p Wenn du dein Vidatio zu einem späteren Zeitpunkt weiter bearbeiten oder erneut teilen willst, melde dich bitte an bevor du dein Vidatio teilst!
