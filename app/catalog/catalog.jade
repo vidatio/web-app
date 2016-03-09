@@ -17,10 +17,17 @@
                         li(ng-repeat="category in categories")
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
 
+            .header-button
+                label.checkbox(for="own-vidatios-checkbox") Check - Label
+                    input#own-vidatios-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="filter.showOwnVidatios" ng-change="toggleOwnVidatios()")
+
+            {{ user }}
+
+
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row
                 .col-xs-6.col-sm-6.col-md-4.col-lg-4(
-                ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category"
+                ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category | myVidatioFilter : filter.showOwnVidatios"
                 )
                     .vidatio
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
