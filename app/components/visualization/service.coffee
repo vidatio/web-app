@@ -142,7 +142,7 @@ app.service 'VisualizationService', [
 
                     inputSize =
                         width: $element.width() + 20
-                        height: $element.height() + 6
+                        height: ($element.height() || 14) + 16
 
                     if inputSize.width < minWidth
                         inputSize.width = minWidth
@@ -160,9 +160,11 @@ app.service 'VisualizationService', [
                             "transform": "rotate(-90deg)"
                         axis = "Y"
                     else
+                        offsetTop = $("svg#d3plus").height() - inputSize.height
+
                         inputPosition =
                             "left": "50%"
-                            "top": "calc(100% - #{inputSize.height}px)"
+                            "top": "#{offsetTop}px"
                             "margin-left": "-#{inputSize.width / 2}px"
                         axis = "X"
 
