@@ -24,7 +24,14 @@ app.controller "ImportCtrl", [
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
+        #$rootScope.savedWorks = true
         $scope.importService = Import
+
+        if Data.meta.fileName is ""
+            Data.meta.savedWorks = true
+        else
+            Data.meta.savedWorks = false
+
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->

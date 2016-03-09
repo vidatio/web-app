@@ -15,6 +15,12 @@ app.controller "HeaderCtrl", [
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
 
+        $rootScope.savedWorks = true
+
+        $scope.header = Data.meta
+
+        console.log "test ",  $scope.header
+
         # REFACTOR Needed to wait for leaflet directive to render
         # $timeout ->
         #     # TODO: Only resize what is currently visible or used
@@ -41,33 +47,4 @@ app.controller "HeaderCtrl", [
                     dataset.unshift Table.instanceTable.getColHeader()
 
             Data.saveViaAPI dataset
-
-        $scope.hideLink = ->
-            $rootScope.showLink = false
-
-        $scope.copyLink = ->
-            $log.info "HeaderCtrl copyLink called"
-            window.getSelection().removeAllRanges()
-            link = document.querySelector "#link"
-            range = document.createRange()
-            range.selectNode link
-            window.getSelection().addRange(range)
-
-            try
-                successful = document.execCommand "copy"
-
-                $log.debug
-                    message: "HeaderCtrl copyLink copy link to clipboard"
-                    successful: successful
-
-                $translate("TOAST_MESSAGES.LINK_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-            catch err
-                $log.info "Link could not be copied"
-                $log.error
-                    error: error
-
-            window.getSelection().removeAllRanges()
 ]

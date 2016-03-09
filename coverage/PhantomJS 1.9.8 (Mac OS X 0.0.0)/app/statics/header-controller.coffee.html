@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.68% </span>
+        <span class="strong">18.75% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>3/31</span>
+        <span class='fraction'>3/16</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
@@ -32,12 +32,12 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/5</span>
+        <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">9.68% </span>
+        <span class="strong">18.75% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>3/31</span>
+        <span class='fraction'>3/16</span>
       </div>
     </div>
   </div>
@@ -70,34 +70,7 @@
 25
 26
 27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+28</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -108,41 +81,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -156,10 +102,14 @@
 app = angular.module("app.controllers");
 &nbsp;
 app.controller("HeaderCtrl", [
-  "$scope", "$rootScope", "$timeout", "DataService", "$log", "ngToast", "$translate", "TableService", <span class="fstat-no" title="function not covered" >function($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) {</span>
-<span class="cstat-no" title="statement not covered" >    $scope.saveDataset = <span class="fstat-no" title="function not covered" >function() {</span></span>
+  "$scope", "$rootScope", "$timeout", "MapService", "DataService", "$log", "ngToast", "$translate", "TableService", <span class="fstat-no" title="function not covered" >function($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) {</span>
+<span class="cstat-no" title="statement not covered" >    $rootScope.savedWorks = true;</span>
+<span class="cstat-no" title="statement not covered" >    $scope.header = Data.meta;</span>
+<span class="cstat-no" title="statement not covered" >    console.log("test ", $scope.header);</span>
+<span class="cstat-no" title="statement not covered" >    return $scope.saveDataset = <span class="fstat-no" title="function not covered" >function() {</span></span>
 <span class="cstat-no" title="statement not covered" >      var dataset;</span>
 <span class="cstat-no" title="statement not covered" >      $log.info("HeaderCtrl saveDataset called");</span>
+<span class="cstat-no" title="statement not covered" >      $scope.header.savedWorks = false;</span>
 <span class="cstat-no" title="statement not covered" >      if (Data.meta.fileType === "shp") {</span>
 <span class="cstat-no" title="statement not covered" >        dataset = Map.getGeoJSON();</span>
       } else {
@@ -170,48 +120,17 @@ app.controller("HeaderCtrl", [
       }
 <span class="cstat-no" title="statement not covered" >      return Data.saveViaAPI(dataset);</span>
     };
-<span class="cstat-no" title="statement not covered" >    $scope.hideLink = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      return $rootScope.showLink = false;</span>
-    };
-<span class="cstat-no" title="statement not covered" >    return $scope.copyLink = <span class="fstat-no" title="function not covered" >function() {</span></span>
-<span class="cstat-no" title="statement not covered" >      var err, link, range, successful;</span>
-<span class="cstat-no" title="statement not covered" >      $log.info("HeaderCtrl copyLink called");</span>
-<span class="cstat-no" title="statement not covered" >      window.getSelection().removeAllRanges();</span>
-<span class="cstat-no" title="statement not covered" >      link = document.querySelector("#link");</span>
-<span class="cstat-no" title="statement not covered" >      range = document.createRange();</span>
-<span class="cstat-no" title="statement not covered" >      range.selectNode(link);</span>
-<span class="cstat-no" title="statement not covered" >      window.getSelection().addRange(range);</span>
-<span class="cstat-no" title="statement not covered" >      try {</span>
-<span class="cstat-no" title="statement not covered" >        successful = document.execCommand("copy");</span>
-<span class="cstat-no" title="statement not covered" >        $log.debug({</span>
-          message: "HeaderCtrl copyLink copy link to clipboard",
-          successful: successful
-        });
-<span class="cstat-no" title="statement not covered" >        $translate("TOAST_MESSAGES.LINK_COPIED").then(<span class="fstat-no" title="function not covered" >function(translation) {</span></span>
-<span class="cstat-no" title="statement not covered" >          return ngToast.create({</span>
-            content: translation
-          });
-        });
-      } catch (_error) {
-<span class="cstat-no" title="statement not covered" >        err = _error;</span>
-<span class="cstat-no" title="statement not covered" >        $log.info("Link could not be copied");</span>
-<span class="cstat-no" title="statement not covered" >        $log.error({</span>
-          error: error
-        });
-      }
-<span class="cstat-no" title="statement not covered" >      return window.getSelection().removeAllRanges();</span>
-    };
   }
 ]);
 &nbsp;
-//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGVhZGVyLWNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoZWFkZXItY29udHJvbGxlci5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0EsSUFBQSxHQUFBOztBQUFBLEdBQUEsR0FBTSxPQUFPLENBQUMsTUFBUixDQUFlLGlCQUFmLENBQU4sQ0FBQTs7QUFBQSxHQUVHLENBQUMsVUFBSixDQUFlLFlBQWYsRUFBNkI7RUFDekIsUUFEeUIsRUFFekIsWUFGeUIsRUFHekIsVUFIeUIsRUFJekIsYUFKeUIsRUFLekIsTUFMeUIsRUFNekIsU0FOeUIsRUFPekIsWUFQeUIsRUFRekIsY0FSeUIsRUFTekIsU0FBQyxNQUFELEVBQVMsVUFBVCxFQUFxQixRQUFyQixFQUErQixHQUEvQixFQUFvQyxJQUFwQyxFQUEwQyxJQUExQyxFQUFnRCxPQUFoRCxFQUF5RCxVQUF6RCxFQUFxRSxLQUFyRSxHQUFBO0FBaUJJLElBQUEsTUFBTSxDQUFDLFdBQVAsR0FBcUIsU0FBQSxHQUFBO0FBQ2pCLFVBQUEsT0FBQTtBQUFBLE1BQUEsSUFBSSxDQUFDLElBQUwsQ0FBVSwrQkFBVixDQUFBLENBQUE7QUFFQSxNQUFBLElBQUcsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFWLEtBQXNCLEtBQXpCO0FBQ0ksUUFBQSxPQUFBLEdBQVUsR0FBRyxDQUFDLFVBQUosQ0FBQSxDQUFWLENBREo7T0FBQSxNQUFBO0FBR0ksUUFBQSxPQUFBLEdBQVUsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFkLENBQUEsQ0FBVixDQUFBO0FBQ0EsUUFBQSxJQUFHLEtBQUssQ0FBQywyQkFBVDtBQUNJLFVBQUEsT0FBTyxDQUFDLE9BQVIsQ0FBZ0IsS0FBSyxDQUFDLGFBQWEsQ0FBQyxZQUFwQixDQUFBLENBQWhCLENBQUEsQ0FESjtTQUpKO09BRkE7YUFTQSxJQUFJLENBQUMsVUFBTCxDQUFnQixPQUFoQixFQVZpQjtJQUFBLENBQXJCLENBQUE7QUFBQSxJQVlBLE1BQU0sQ0FBQyxRQUFQLEdBQWtCLFNBQUEsR0FBQTthQUNkLFVBQVUsQ0FBQyxRQUFYLEdBQXNCLE1BRFI7SUFBQSxDQVpsQixDQUFBO1dBZUEsTUFBTSxDQUFDLFFBQVAsR0FBa0IsU0FBQSxHQUFBO0FBQ2QsVUFBQSw0QkFBQTtBQUFBLE1BQUEsSUFBSSxDQUFDLElBQUwsQ0FBVSw0QkFBVixDQUFBLENBQUE7QUFBQSxNQUNBLE1BQU0sQ0FBQyxZQUFQLENBQUEsQ0FBcUIsQ0FBQyxlQUF0QixDQUFBLENBREEsQ0FBQTtBQUFBLE1BRUEsSUFBQSxHQUFPLFFBQVEsQ0FBQyxhQUFULENBQXVCLE9BQXZCLENBRlAsQ0FBQTtBQUFBLE1BR0EsS0FBQSxHQUFRLFFBQVEsQ0FBQyxXQUFULENBQUEsQ0FIUixDQUFBO0FBQUEsTUFJQSxLQUFLLENBQUMsVUFBTixDQUFpQixJQUFqQixDQUpBLENBQUE7QUFBQSxNQUtBLE1BQU0sQ0FBQyxZQUFQLENBQUEsQ0FBcUIsQ0FBQyxRQUF0QixDQUErQixLQUEvQixDQUxBLENBQUE7QUFPQTtBQUNJLFFBQUEsVUFBQSxHQUFhLFFBQVEsQ0FBQyxXQUFULENBQXFCLE1BQXJCLENBQWIsQ0FBQTtBQUFBLFFBRUEsSUFBSSxDQUFDLEtBQUwsQ0FDSTtBQUFBLFVBQUEsT0FBQSxFQUFTLDRDQUFUO0FBQUEsVUFDQSxVQUFBLEVBQVksVUFEWjtTQURKLENBRkEsQ0FBQTtBQUFBLFFBTUEsVUFBQSxDQUFXLDRCQUFYLENBQ0ksQ0FBQyxJQURMLENBQ1UsU0FBQyxXQUFELEdBQUE7aUJBQ0YsT0FBTyxDQUFDLE1BQVIsQ0FDSTtBQUFBLFlBQUEsT0FBQSxFQUFTLFdBQVQ7V0FESixFQURFO1FBQUEsQ0FEVixDQU5BLENBREo7T0FBQSxjQUFBO0FBWUksUUFERSxZQUNGLENBQUE7QUFBQSxRQUFBLElBQUksQ0FBQyxJQUFMLENBQVUsMEJBQVYsQ0FBQSxDQUFBO0FBQUEsUUFDQSxJQUFJLENBQUMsS0FBTCxDQUNJO0FBQUEsVUFBQSxLQUFBLEVBQU8sS0FBUDtTQURKLENBREEsQ0FaSjtPQVBBO2FBdUJBLE1BQU0sQ0FBQyxZQUFQLENBQUEsQ0FBcUIsQ0FBQyxlQUF0QixDQUFBLEVBeEJjO0lBQUEsRUFoQ3RCO0VBQUEsQ0FUeUI7Q0FBN0IsQ0FGQSxDQUFBIiwic291cmNlc0NvbnRlbnQiOlsiIyBIZWFkZXIgQ29udHJvbGxlclxuIyA9PT09PT09PT09PT09PT09PT09XG5cbmFwcCA9IGFuZ3VsYXIubW9kdWxlIFwiYXBwLmNvbnRyb2xsZXJzXCJcblxuYXBwLmNvbnRyb2xsZXIgXCJIZWFkZXJDdHJsXCIsIFtcbiAgICBcIiRzY29wZVwiXG4gICAgXCIkcm9vdFNjb3BlXCJcbiAgICBcIiR0aW1lb3V0XCJcbiAgICBcIkRhdGFTZXJ2aWNlXCJcbiAgICBcIiRsb2dcIlxuICAgIFwibmdUb2FzdFwiXG4gICAgXCIkdHJhbnNsYXRlXCJcbiAgICBcIlRhYmxlU2VydmljZVwiXG4gICAgKCRzY29wZSwgJHJvb3RTY29wZSwgJHRpbWVvdXQsIE1hcCwgRGF0YSwgJGxvZywgbmdUb2FzdCwgJHRyYW5zbGF0ZSwgVGFibGUpIC0+XG5cbiAgICAgICAgICAgICMgUkVGQUNUT1IgTmVlZGVkIHRvIHdhaXQgZm9yIGxlYWZsZXQgZGlyZWN0aXZlIHRvIHJlbmRlclxuICAgICAgICAgICAgIyAkdGltZW91dCAtPlxuICAgICAgICAgICAgIyAgICAgIyBUT0RPOiBPbmx5IHJlc2l6ZSB3aGF0IGlzIGN1cnJlbnRseSB2aXNpYmxlIG9yIHVzZWRcbiAgICAgICAgICAgICMgICAgIHN3aXRjaCB2aWRhdGlvLlJlY29tbWVuZGVyLnJlY29tbWVuZGVkRGlhZ3JhbVxuICAgICAgICAgICAgIyAgICAgICAgIHdoZW4gXCJzY2F0dGVyXCJcbiAgICAgICAgICAgICMgICAgICAgICAgICAgbmV3IFNjYXR0ZXJQbG90LmdldENoYXJ0KCkucmVzaXplKClcbiAgICAgICAgICAgICMgICAgICAgICB3aGVuIFwiYmFyXCJcbiAgICAgICAgICAgICMgICAgICAgICAgICAgbmV3IEJhckNoYXJ0LmdldENoYXJ0KCkucmVzaXplKClcbiAgICAgICAgICAgICMgICAgICAgICB3aGVuIFwibWFwXCJcbiAgICAgICAgICAgICMgICAgICAgICAgICAgTWFwLnJlc2l6ZU1hcCgpXG4gICAgICAgICAgICAjICAgICAgICAgZWxzZVxuICAgICAgICAgICAgIyAgICAgICAgICAgICAjIFRPRE86IHNob3cgYSBkZWZhdWx0IGltYWdlIGhlcmVcbiAgICAgICAgICAgICMgICAgICAgICAgICAgY29uc29sZS5sb2cgXCIqKioqKioqKioqKioqKioqXCJcbiAgICAgICAgICAgICMgICAgICAgICAgICAgY29uc29sZS5sb2cgXCJub3RoaW5nIHRvIHJlY29tbWVuZCwgYWJvcnQhIFwiXG5cbiAgICAgICAgJHNjb3BlLnNhdmVEYXRhc2V0ID0gLT5cbiAgICAgICAgICAgICRsb2cuaW5mbyBcIkhlYWRlckN0cmwgc2F2ZURhdGFzZXQgY2FsbGVkXCJcblxuICAgICAgICAgICAgaWYgRGF0YS5tZXRhLmZpbGVUeXBlIGlzIFwic2hwXCJcbiAgICAgICAgICAgICAgICBkYXRhc2V0ID0gTWFwLmdldEdlb0pTT04oKVxuICAgICAgICAgICAgZWxzZVxuICAgICAgICAgICAgICAgIGRhdGFzZXQgPSBUYWJsZS5kYXRhc2V0LnNsaWNlKClcbiAgICAgICAgICAgICAgICBpZiBUYWJsZS51c2VDb2x1bW5IZWFkZXJzRnJvbURhdGFzZXRcbiAgICAgICAgICAgICAgICAgICAgZGF0YXNldC51bnNoaWZ0IFRhYmxlLmluc3RhbmNlVGFibGUuZ2V0Q29sSGVhZGVyKClcblxuICAgICAgICAgICAgRGF0YS5zYXZlVmlhQVBJIGRhdGFzZXRcblxuICAgICAgICAkc2NvcGUuaGlkZUxpbmsgPSAtPlxuICAgICAgICAgICAgJHJvb3RTY29wZS5zaG93TGluayA9IGZhbHNlXG5cbiAgICAgICAgJHNjb3BlLmNvcHlMaW5rID0gLT5cbiAgICAgICAgICAgICRsb2cuaW5mbyBcIkhlYWRlckN0cmwgY29weUxpbmsgY2FsbGVkXCJcbiAgICAgICAgICAgIHdpbmRvdy5nZXRTZWxlY3Rpb24oKS5yZW1vdmVBbGxSYW5nZXMoKVxuICAgICAgICAgICAgbGluayA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IgXCIjbGlua1wiXG4gICAgICAgICAgICByYW5nZSA9IGRvY3VtZW50LmNyZWF0ZVJhbmdlKClcbiAgICAgICAgICAgIHJhbmdlLnNlbGVjdE5vZGUgbGlua1xuICAgICAgICAgICAgd2luZG93LmdldFNlbGVjdGlvbigpLmFkZFJhbmdlKHJhbmdlKVxuXG4gICAgICAgICAgICB0cnlcbiAgICAgICAgICAgICAgICBzdWNjZXNzZnVsID0gZG9jdW1lbnQuZXhlY0NvbW1hbmQgXCJjb3B5XCJcblxuICAgICAgICAgICAgICAgICRsb2cuZGVidWdcbiAgICAgICAgICAgICAgICAgICAgbWVzc2FnZTogXCJIZWFkZXJDdHJsIGNvcHlMaW5rIGNvcHkgbGluayB0byBjbGlwYm9hcmRcIlxuICAgICAgICAgICAgICAgICAgICBzdWNjZXNzZnVsOiBzdWNjZXNzZnVsXG5cbiAgICAgICAgICAgICAgICAkdHJhbnNsYXRlKFwiVE9BU1RfTUVTU0FHRVMuTElOS19DT1BJRURcIilcbiAgICAgICAgICAgICAgICAgICAgLnRoZW4gKHRyYW5zbGF0aW9uKSAtPlxuICAgICAgICAgICAgICAgICAgICAgICAgbmdUb2FzdC5jcmVhdGVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb250ZW50OiB0cmFuc2xhdGlvblxuICAgICAgICAgICAgY2F0Y2ggZXJyXG4gICAgICAgICAgICAgICAgJGxvZy5pbmZvIFwiTGluayBjb3VsZCBub3QgYmUgY29waWVkXCJcbiAgICAgICAgICAgICAgICAkbG9nLmVycm9yXG4gICAgICAgICAgICAgICAgICAgIGVycm9yOiBlcnJvclxuXG4gICAgICAgICAgICB3aW5kb3cuZ2V0U2VsZWN0aW9uKCkucmVtb3ZlQWxsUmFuZ2VzKClcbl1cbiJdfQ==
+//@ sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGVhZGVyLWNvbnRyb2xsZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoZWFkZXItY29udHJvbGxlci5jb2ZmZWUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0EsSUFBQSxHQUFBOztBQUFBLEdBQUEsR0FBTSxPQUFPLENBQUMsTUFBUixDQUFlLGlCQUFmLENBQU4sQ0FBQTs7QUFBQSxHQUVHLENBQUMsVUFBSixDQUFlLFlBQWYsRUFBNkI7RUFDekIsUUFEeUIsRUFFekIsWUFGeUIsRUFHekIsVUFIeUIsRUFJekIsWUFKeUIsRUFLekIsYUFMeUIsRUFNekIsTUFOeUIsRUFPekIsU0FQeUIsRUFRekIsWUFSeUIsRUFTekIsY0FUeUIsRUFVekIsU0FBQyxNQUFELEVBQVMsVUFBVCxFQUFxQixRQUFyQixFQUErQixHQUEvQixFQUFvQyxJQUFwQyxFQUEwQyxJQUExQyxFQUFnRCxPQUFoRCxFQUF5RCxVQUF6RCxFQUFxRSxLQUFyRSxHQUFBO0FBRUksSUFBQSxVQUFVLENBQUMsVUFBWCxHQUF3QixJQUF4QixDQUFBO0FBQUEsSUFFQSxNQUFNLENBQUMsTUFBUCxHQUFnQixJQUFJLENBQUMsSUFGckIsQ0FBQTtBQUFBLElBSUEsT0FBTyxDQUFDLEdBQVIsQ0FBWSxPQUFaLEVBQXNCLE1BQU0sQ0FBQyxNQUE3QixDQUpBLENBQUE7V0FxQkEsTUFBTSxDQUFDLFdBQVAsR0FBcUIsU0FBQSxHQUFBO0FBQ2pCLFVBQUEsT0FBQTtBQUFBLE1BQUEsSUFBSSxDQUFDLElBQUwsQ0FBVSwrQkFBVixDQUFBLENBQUE7QUFBQSxNQUVBLE1BQU0sQ0FBQyxNQUFNLENBQUMsVUFBZCxHQUEyQixLQUYzQixDQUFBO0FBSUEsTUFBQSxJQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsUUFBVixLQUFzQixLQUF6QjtBQUNJLFFBQUEsT0FBQSxHQUFVLEdBQUcsQ0FBQyxVQUFKLENBQUEsQ0FBVixDQURKO09BQUEsTUFBQTtBQUdJLFFBQUEsT0FBQSxHQUFVLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBZCxDQUFBLENBQVYsQ0FBQTtBQUNBLFFBQUEsSUFBRyxLQUFLLENBQUMsMkJBQVQ7QUFDSSxVQUFBLE9BQU8sQ0FBQyxPQUFSLENBQWdCLEtBQUssQ0FBQyxhQUFhLENBQUMsWUFBcEIsQ0FBQSxDQUFoQixDQUFBLENBREo7U0FKSjtPQUpBO2FBV0EsSUFBSSxDQUFDLFVBQUwsQ0FBZ0IsT0FBaEIsRUFaaUI7SUFBQSxFQXZCekI7RUFBQSxDQVZ5QjtDQUE3QixDQUZBLENBQUEiLCJzb3VyY2VzQ29udGVudCI6WyIjIEhlYWRlciBDb250cm9sbGVyXG4jID09PT09PT09PT09PT09PT09PT1cblxuYXBwID0gYW5ndWxhci5tb2R1bGUgXCJhcHAuY29udHJvbGxlcnNcIlxuXG5hcHAuY29udHJvbGxlciBcIkhlYWRlckN0cmxcIiwgW1xuICAgIFwiJHNjb3BlXCJcbiAgICBcIiRyb290U2NvcGVcIlxuICAgIFwiJHRpbWVvdXRcIlxuICAgIFwiTWFwU2VydmljZVwiXG4gICAgXCJEYXRhU2VydmljZVwiXG4gICAgXCIkbG9nXCJcbiAgICBcIm5nVG9hc3RcIlxuICAgIFwiJHRyYW5zbGF0ZVwiXG4gICAgXCJUYWJsZVNlcnZpY2VcIlxuICAgICgkc2NvcGUsICRyb290U2NvcGUsICR0aW1lb3V0LCBNYXAsIERhdGEsICRsb2csIG5nVG9hc3QsICR0cmFuc2xhdGUsIFRhYmxlKSAtPlxuXG4gICAgICAgICRyb290U2NvcGUuc2F2ZWRXb3JrcyA9IHRydWVcblxuICAgICAgICAkc2NvcGUuaGVhZGVyID0gRGF0YS5tZXRhXG5cbiAgICAgICAgY29uc29sZS5sb2cgXCJ0ZXN0IFwiLCAgJHNjb3BlLmhlYWRlclxuXG4gICAgICAgICMgUkVGQUNUT1IgTmVlZGVkIHRvIHdhaXQgZm9yIGxlYWZsZXQgZGlyZWN0aXZlIHRvIHJlbmRlclxuICAgICAgICAjICR0aW1lb3V0IC0+XG4gICAgICAgICMgICAgICMgVE9ETzogT25seSByZXNpemUgd2hhdCBpcyBjdXJyZW50bHkgdmlzaWJsZSBvciB1c2VkXG4gICAgICAgICMgICAgIHN3aXRjaCB2aWRhdGlvLlJlY29tbWVuZGVyLnJlY29tbWVuZGVkRGlhZ3JhbVxuICAgICAgICAjICAgICAgICAgd2hlbiBcInNjYXR0ZXJcIlxuICAgICAgICAjICAgICAgICAgICAgIG5ldyBTY2F0dGVyUGxvdC5nZXRDaGFydCgpLnJlc2l6ZSgpXG4gICAgICAgICMgICAgICAgICB3aGVuIFwiYmFyXCJcbiAgICAgICAgIyAgICAgICAgICAgICBuZXcgQmFyQ2hhcnQuZ2V0Q2hhcnQoKS5yZXNpemUoKVxuICAgICAgICAjICAgICAgICAgd2hlbiBcIm1hcFwiXG4gICAgICAgICMgICAgICAgICAgICAgTWFwLnJlc2l6ZU1hcCgpXG4gICAgICAgICMgICAgICAgICBlbHNlXG4gICAgICAgICMgICAgICAgICAgICAgIyBUT0RPOiBzaG93IGEgZGVmYXVsdCBpbWFnZSBoZXJlXG4gICAgICAgICMgICAgICAgICAgICAgY29uc29sZS5sb2cgXCIqKioqKioqKioqKioqKioqXCJcbiAgICAgICAgIyAgICAgICAgICAgICBjb25zb2xlLmxvZyBcIm5vdGhpbmcgdG8gcmVjb21tZW5kLCBhYm9ydCEgXCJcblxuICAgICAgICAkc2NvcGUuc2F2ZURhdGFzZXQgPSAtPlxuICAgICAgICAgICAgJGxvZy5pbmZvIFwiSGVhZGVyQ3RybCBzYXZlRGF0YXNldCBjYWxsZWRcIlxuXG4gICAgICAgICAgICAkc2NvcGUuaGVhZGVyLnNhdmVkV29ya3MgPSBmYWxzZVxuXG4gICAgICAgICAgICBpZiBEYXRhLm1ldGEuZmlsZVR5cGUgaXMgXCJzaHBcIlxuICAgICAgICAgICAgICAgIGRhdGFzZXQgPSBNYXAuZ2V0R2VvSlNPTigpXG4gICAgICAgICAgICBlbHNlXG4gICAgICAgICAgICAgICAgZGF0YXNldCA9IFRhYmxlLmRhdGFzZXQuc2xpY2UoKVxuICAgICAgICAgICAgICAgIGlmIFRhYmxlLnVzZUNvbHVtbkhlYWRlcnNGcm9tRGF0YXNldFxuICAgICAgICAgICAgICAgICAgICBkYXRhc2V0LnVuc2hpZnQgVGFibGUuaW5zdGFuY2VUYWJsZS5nZXRDb2xIZWFkZXIoKVxuXG4gICAgICAgICAgICBEYXRhLnNhdmVWaWFBUEkgZGF0YXNldFxuXVxuIl19
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 17:54:07 GMT+0100 (CET)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 09 2016 20:47:47 GMT+0100 (CET)
 </div>
 </div>
 <script src="../../prettify.js"></script>
