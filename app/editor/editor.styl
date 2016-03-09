@@ -79,6 +79,9 @@
         box-shadow $box-shadow-size $color-shadow
         margin 0 15px
 
+        .seperator
+            background $color-shadow
+
     .content
         height calc(100vh - 250px)
         min-height 400px
@@ -238,6 +241,26 @@
         .editor-panel
             .tab
                 font-size 15px
+
+@media(max-width: 991px)
+    .row
+        .seperator
+            height 2px
+            width calc(100% - 10px)
+            margin -15px 5px 15px
+
+@media(min-width: 992px)
+    .row
+        display flex
+        flex-direction row
+
+        .col-md-6
+            width calc(50% - 1px)
+
+        .seperator
+            height calc(100% - 10px)
+            width 2px
+            margin 5px 0
 
 @media(min-width: 1080px) and (max-width: 1200px)
     #editor
