@@ -32,27 +32,6 @@ app.controller "EditorCtrl", [
         $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
-        $("#vidatio-title").on 'input', ->
-            $("#vidatio-title").css "width", setTitleInputWidth()
-
-        # @method saveVidatioTitle
-        # @description set the users' input (if existing) as vidatio-title; set a standard-title otherwise
-        $scope.saveVidatioTitle = ->
-            $log.info "EditorCtrl saveVidatioTitle called"
-            $log.debug
-                filename: $scope.editor.fileName
-
-            if $scope.editor.fileName is ""
-                $("#vidatio-title").css "min-width", 240
-                $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
-            else
-                $("#vidatio-title").css "min-width", 100
-
-            console.log "title: " , $scope.editor.fileName
-
-            # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
-            return true
-
         # the displayed views are set accordingly to the clicked tab
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
@@ -86,16 +65,35 @@ app.controller "EditorCtrl", [
                 if tab
                     $scope.activeViews++
 
+
+        $("#vidatio-title").on 'input', ->
+            $("#vidatio-title").css "width", setTitleInputWidth()
+
+        # @method saveVidatioTitle
+        # @description set the users' input (if existing) as vidatio-title; set a standard-title otherwise
+        $scope.saveVidatioTitle = ->
+            $log.info "EditorCtrl saveVidatioTitle called"
+            $log.debug
+                filename: $scope.editor.fileName
+
+            if $scope.editor.fileName is ""
+                $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
+
+            $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
+
+            return true # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
+
         # calculate and return the necessary width for the input field
         setTitleInputWidth = ->
+            valWidth = $("#vidatio-title").textWidth()
+            # firefox calculates the letter-widths in a different manner than other browsers obviously
             if isFirefox
-                valWidth = $("#vidatio-title").textWidth()
                 if valWidth < 150
                     valWidth = valWidth * 1.5 + "px"
                 else
                     valWidth = valWidth * 1.4 + "px"
             else
-                valWidth = $("#vidatio-title").textWidth() + 10 + "px"
+                valWidth = valWidth + 10 + "px"
 
             return valWidth
 ]
