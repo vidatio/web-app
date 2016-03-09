@@ -19,10 +19,9 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
-
         $scope.visualization = Visualization.options
         $scope.meta = Data.meta
-        $scope.colHeadersSelection = Table.colHeadersSelection
+        $scope.header = Table.header
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
@@ -80,14 +79,13 @@ app.controller "VisualizationCtrl", [
             else
                 $translate($scope.visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
-                        column: Table.getColumnHeaders()[id]
+                        column: Table.getHeader()[id]
                         diagramType: diagramName
                 .then (translation) ->
                     ngToast.create
                         content: translation
                         className: "danger"
                 return
-
             Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
             Visualization.create
                 type: $scope.visualization.diagramType

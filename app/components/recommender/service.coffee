@@ -73,7 +73,7 @@ class window.vidatio.Recommender
     #   the index of the column for the x value,
     #   the index of the column for the y value
     # OR {error} Message with occurred error
-    run: (dataset = [], header = []) ->
+    run: (dataset = [], header = [], useHeader = true) ->
         vidatio.log.info "Recommender run called"
         vidatio.log.debug
             dataset: dataset
@@ -88,12 +88,14 @@ class window.vidatio.Recommender
         xVariance = null
         yVariance = null
         nominalIdx = null
+        coordinateIndices = null
         @recommendedDiagram = null
 
         # We can recognize geo datasets via headers
         # Se we first check the header
-        coordinateIndices = vidatio.geoParser.checkHeader(header)
-        if coordinateIndices.hasOwnProperty("x") and coordinateIndices.hasOwnProperty("y")
+        if useHeader then coordinateIndices = vidatio.geoParser.checkHeader(header)
+
+        if coordinateIndices?.hasOwnProperty("x") and coordinateIndices?.hasOwnProperty("y")
             xIndex = coordinateIndices.x
             yIndex = coordinateIndices.y
             @recommendedDiagram = "map"

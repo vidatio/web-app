@@ -9,7 +9,7 @@ describe "Visualization Ctrl", ->
 
             Table =
                 dataset: [["0", "1"]]
-                getColumnHeaders: ->
+                getHeader: ->
                     ["a", "b"]
                 setDiagramColumns: (x, y) ->
 

@@ -31,7 +31,9 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl continueToEmptyTable called"
 
             Data.meta.fileType = "csv"
-            Table.reset()
+            Table.useColumnHeadersFromDataset = false
+            Visualization.options.diagramType = false
+            Table.setDataset()
             Map.resetGeoJSON()
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
@@ -143,18 +145,19 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
+            Table.useColumnHeadersFromDataset = true
+
             switch fileType
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
+                    Table.setHeader dataset.shift()
                     Table.setDataset dataset
-                    Table.useColumnHeadersFromDataset = true
-                    Visualization.recommendDiagram Table.dataset[0].slice()
+                    Visualization.recommendDiagram()
                     $location.path editorPath
 
                 when "zip"
                     Data.meta.fileType = "shp"
-                    Table.useColumnHeadersFromDataset = false
 
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                         $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
