@@ -39,6 +39,13 @@ app.controller "HeaderCtrl", [
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
 
+            fileName = $scope.header.fileName
+
+            if fileName is "Neues Vidatio"
+                fileName = fileName + " " + moment().format("hh_mm_ss_a")
+
+            console.log fileName
+
             if Data.meta.fileType is "shp"
                 dataset = Map.getGeoJSON()
             else
@@ -46,5 +53,5 @@ app.controller "HeaderCtrl", [
                 if Table.useColumnHeadersFromDataset
                     dataset.unshift Table.instanceTable.getColHeader()
 
-            Data.saveViaAPI dataset
+            Data.saveViaAPI dataset, fileName
 ]

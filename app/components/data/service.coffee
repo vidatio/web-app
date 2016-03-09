@@ -55,7 +55,7 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset, name = "Neues Vidatio") ->
+            saveViaAPI: (dataset, name) ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
