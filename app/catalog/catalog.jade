@@ -13,10 +13,9 @@
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li
-                            a(href="#" ng-click="setCategory('')") Filter aufheben
+                            a(href="#" ng-click="setCategory()") Filter aufheben
                         li(ng-repeat="category in categories")
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
-
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row
