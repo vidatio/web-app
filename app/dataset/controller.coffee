@@ -42,6 +42,8 @@ app.controller "DatasetCtrl", [
             console.log "$scope.data.metaData", $scope.data.metaData
             if $scope.data.metaData?
                 Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            else
+                Data.meta["fileType"] = "-"
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
@@ -78,35 +80,36 @@ app.controller "DatasetCtrl", [
         # @description creates Vidatio from saved Dataset
         $scope.createVidatio = ->
             $log.info "DatasetCtrl createVidatio called"
-            $log.debug
-                id: datasetId
-                name: $scope.data.name
-                data: $scope.data.data
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
 
-            if Data.meta["fileType"] is "shp"
-                dataset = Converter.convertGeoJSON2Arrays $scope.data.data
-                Table.setDataset dataset
-                Table.useColumnHeadersFromDataset = true
-                Map.setGeoJSON $scope.data.data
-            else
-                Table.setDataset $scope.data.data
+                if Data.meta["fileType"] is "shp"
+                    dataset = Converter.convertGeoJSON2Arrays $scope.data.data
+                    Table.setDataset dataset
+                    Table.useColumnHeadersFromDataset = true
+                    Map.setGeoJSON $scope.data.data
+                else
 
-                if $scope.data.options?
-                    # Each value has to be assigned individually, otherwise all options get overwritten.
-                    Visualization.options["diagramType"] = $scope.data.options.diagramType || false
-                    Visualization.options["xAxisCurrent"] = $scope.data.options.xAxisCurrent || 0
-                    Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
-                    Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
-                    Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
-                    Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
+                    if $scope.data.options?
+                        # Each value has to be assigned individually, otherwise all options get overwritten.
+                        Visualization.options["diagramType"] = $scope.data.options.diagramType || false
+                        Visualization.options["xAxisCurrent"] = $scope.data.options.xAxisCurrent || 0
+                        Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
+                        Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
+                        Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
 
-                # if $scope.data.options.useColumnHeadersFromDataset?
+                        if $scope.data.options.useColumnHeadersFromDataset?
+                            Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
 
-            $timeout ->
-                Progress.setMessage ""
+                            if Table.useColumnHeadersFromDataset
+                                Table.setHeader $scope.data.data.shift()
+
+                    Table.setDataset $scope.data.data
+
+
+                $timeout ->
+                    Progress.setMessage ""
 
         # at the moment direct download is not possible, so download via editor
         $scope.downloadDataset = ->
