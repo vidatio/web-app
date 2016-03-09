@@ -32,6 +32,13 @@ describe "Service Data", ->
             spyOn(@Table, "setDataset")
             spyOn(@Table, "setHeader")
 
+    afterEach ->
+        @Table.setDataset.calls.reset()
+        @Table.setHeader.calls.reset()
+        @Map.setGeoJSON.calls.reset()
+        @Map.updateGeoJSONWithSHP.calls.reset()
+        @Converter.convertArrays2GeoJSON.calls.reset()
+
     it "should be defined and included", ->
         expect(@Data).toBeDefined()
         expect(@injector.has("DataService"))
@@ -88,6 +95,7 @@ describe "Service Data", ->
 
             @Data.createVidatio data
             expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
+            expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
             @Data.meta.fileType = "csv"
