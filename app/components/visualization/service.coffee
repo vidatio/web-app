@@ -17,8 +17,8 @@ app.service 'VisualizationService', [
             constructor: ->
                 @options =
                     diagramType: false
-                    xAxisCurrent: 0
-                    yAxisCurrent: 1
+                    xAxisCurrent: null
+                    yAxisCurrent: null
                     color: "#11DDC6"
                     selectedDiagramName: null
                     translationKeys:
@@ -28,10 +28,16 @@ app.service 'VisualizationService', [
                         "bar": "DIAGRAMS.BAR_CHART"
                         "timeseries": "DIAGRAMS.TIME_SERIES"
 
+            resetOptions: ->
+                @options.diagramType = false
+                @options.xAxisCurrent = null
+                @options.yAxisCurrent = null
+                @options.color = "#11DDC6"
+                @options.selectedDiagramName = null
 
             # @method useRecommendedOptions
             # @public
-            recommendDiagram: ->
+            recommendDiagram: (header) ->
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
@@ -65,6 +71,9 @@ app.service 'VisualizationService', [
                     x: x
                     y: y
                     diagramType: diagramType
+
+                if not x? or not y? or not diagramType?
+                    return false
 
                 transposedDataset = vidatio.helper.transposeDataset Table.getDataset()
                 subset = vidatio.helper.getSubset transposedDataset
@@ -126,7 +135,7 @@ app.service 'VisualizationService', [
                     when "timeseries"
                         new vidatio.TimeseriesChart chartData, options
                     else
-                        $log.error "VisualizationCtrl type not set"
+                        $log.info "VisualizationCtrl type not set"
                         $log.debug
                             type: options.type
 

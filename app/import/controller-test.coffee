@@ -12,6 +12,7 @@ describe "Controller Import", ->
             @deferred = $q.defer()
 
             @Table =
+                dataset: [[]]
                 setDataset: (result) ->
                 takeHeaderFromDataset: ->
                 setHeader: (header) ->
@@ -39,6 +40,7 @@ describe "Controller Import", ->
             @scope.link = 'test.csv'
             @scope.load()
             @httpBackend.flush()
+
 
             expect(@Table.setDataset).toHaveBeenCalled()
 

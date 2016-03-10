@@ -39,7 +39,11 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
-            Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            console.log "$scope.data.metaData", $scope.data.metaData
+            if $scope.data.metaData?
+                Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            else
+                Data.meta["fileType"] = "-"
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
@@ -75,34 +79,15 @@ app.controller "DatasetCtrl", [
         # @method $scope.createVidatio
         # @description creates Vidatio from saved Dataset
         $scope.createVidatio = ->
-            $log.info "DatasetCtrl createVidatio called"
-            $log.debug
-                id: datasetId
-                name: $scope.data.name
-                data: $scope.data.data
+            $log.info "DatasetCtrl $scope.createVidatio called"
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
 
-            if Data.meta["fileType"] is "shp"
-                dataset = Converter.convertGeoJSON2Arrays $scope.data.data
-                Table.setDataset dataset
-                Table.useColumnHeadersFromDataset = true
-                Map.setGeoJSON $scope.data.data
-            else
-                if $scope.data.options?
-                    # Each value has to be assigned individually, otherwise all options get overwritten.
-                    Visualization.options["diagramType"] = $scope.data.options.diagramType || false
-                    Visualization.options["xAxisCurrent"] = $scope.data.options.xAxisCurrent || 0
-                    Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
-                    Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
-                    Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
-                    Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
+                Data.createVidatio $scope.data
 
-                Table.setDataset $scope.data.data
-
-            $timeout ->
-                Progress.setMessage ""
+                $timeout ->
+                    Progress.setMessage ""
 
         # at the moment direct download is not possible, so download via editor
         $scope.downloadDataset = ->

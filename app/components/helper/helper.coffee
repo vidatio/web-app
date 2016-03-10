@@ -73,10 +73,11 @@ class window.vidatio.Helper
         transposedDataset = []
 
         dataset.forEach (row, i, dataset) ->
-            row.forEach (cell, j, row) ->
-                if not transposedDataset[j]
-                    transposedDataset.push []
-                transposedDataset[j].push cell
+            if row?
+                row.forEach (cell, j, row) ->
+                    if not transposedDataset[j]
+                        transposedDataset.push []
+                    transposedDataset[j].push cell
 
         return transposedDataset
 
@@ -409,6 +410,9 @@ class window.vidatio.Helper
             xColumnTypes: xColumnTypes
             yColumnTypes: yColumnTypes
             diagramType: diagramType
+
+        if not xColumnTypes? or not yColumnTypes?
+            return false
 
         switch diagramType
             when "scatter"
