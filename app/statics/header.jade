@@ -40,9 +40,7 @@ header.ng-cloak
                             span {{ "MENU" | translate | uppercase }}
 
                 .col-xs-6.col-sm-pull-2.col-sm-2
-                    a#back-to-import.btn.btn-primary(ui-sref='app.import({ locale: locale })')
-                        span.icon-bracketleft
-                        span {{ "IMPORT" | translate | uppercase }}
+
 
                 .col-xs-6.col-sm-2.col-sm-push-2
                     a#save-dataset.btn.btn-primary(href="#" type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
