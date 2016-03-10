@@ -57,11 +57,16 @@ app.controller "VisualizationCtrl", [
             Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
-            Visualization.create
-                type: $scope.visualization.diagramType
-                xColumn: $scope.visualization.xAxisCurrent
-                yColumn: $scope.visualization.yAxisCurrent
+            $log.info "VisualizationCtrl colorpicker-selected emitted"
+            $log.debug
                 color: $scope.visualization.color
+
+            $timeout ->
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
 
         # @method changeAxisColumnSelection
         # @param {Number} axis

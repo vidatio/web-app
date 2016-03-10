@@ -45,7 +45,6 @@ describe "Visualization Ctrl", ->
                 create: ->
                 recommendDiagram: ->
 
-
             VisualizationCtrl = $controller "VisualizationCtrl",
                 $scope: @scope, TableService: Table, MapService: Map, DataService: Data,
                 ProgressService: Progress, ConverterService: Converter, VisualizationService: @Visualization
@@ -57,9 +56,6 @@ describe "Visualization Ctrl", ->
 
     describe "on calling scope functions", ->
         it 'should call the createDiagram function for redrawing the visualization', ->
-            @scope.$emit("colorpicker-selected")
-            expect(@Visualization.create).toHaveBeenCalled()
-
             @scope.setAxisColumnSelection("x", 0)
             expect(@Visualization.create).toHaveBeenCalled()
 
