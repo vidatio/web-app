@@ -24,13 +24,14 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        # set initial values for displayed title and input-field length
-        $scope.originalTitle = Data.meta.fileName
         $scope.editor = Data.meta
 
+        # set initial values for displayed title and input-field length
+        # standardTitle is needed, if user sets no title
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
-            $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
+            if $scope.editor.fileName is ""
+                $scope.editor.fileName = $scope.standardTitle
 
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
@@ -75,13 +76,14 @@ app.controller "EditorCtrl", [
         # @description set the users' input (if existing) as Vidatio-title; set a standard-title or the original filename otherwise
         $scope.saveVidatioTitle = ->
             $log.info "EditorCtrl saveVidatioTitle called"
-            $log.debug
-                filename: $scope.editor.fileName
 
             if $scope.editor.fileName is ""
-                $scope.editor.fileName = $scope.originalTitle || $scope.standardTitle
+                $scope.editor.fileName = $scope.standardTitle
 
             $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
+
+            $log.debug
+                filename: $scope.editor.fileName
 
             return true # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
 
