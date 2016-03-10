@@ -125,8 +125,9 @@
         "BY_CATEGORY": "Filtern nach Kategorie"
     },
     "HEADER": "Kopfzeile",
+    "HEADER_DEFAULT": "Spalte...",
     "DIAGRAMS": {
-        "DIAGRAM_TYPE": "Diagrammart",
+        "DIAGRAM_TYPE": "Diagrammart...",
         "SCATTER_PLOT": "Streudiagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
