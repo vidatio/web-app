@@ -113,7 +113,7 @@ app.service 'DataService', [
                         # Each value has to be assigned individually, otherwise all options get overwritten.
                         Visualization.options["diagramType"] = data.options.diagramType || false
                         Visualization.options["xAxisCurrent"] = data.options.xAxisCurrent || 0
-                        Visualization.options["yAxisCurrent"] = data.options.yAxisCurrent || 1
+                        Visualization.options["yAxisCurrent"] = data.options.yAxisCurrent || 0
                         Visualization.options["color"] = data.options.color || "#11DDC6"
                         Visualization.options["selectedDiagramName"] = data.options.selectedDiagramName || null
 
