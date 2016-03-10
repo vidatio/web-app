@@ -127,5 +127,6 @@
         "TIME_SERIES": "Zeitlicher Verlauf"
     },
     "LONGITUDE": "Long",
-    "LATITUDE": "Lat"
+    "LATITUDE": "Lat",
+    "MY_VIDATIOS": "Eigene Vidatios"
 }

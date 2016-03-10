@@ -16,7 +16,7 @@ app.controller "CatalogCtrl", [
                 from: undefined
                 to: undefined
             category: ""
-            showOwnVidatios: false
+            showMyVidatios: false
 
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
@@ -24,7 +24,7 @@ app.controller "CatalogCtrl", [
 
         console.log "$scope.user", $scope.user
 
-        $('#own-vidatios-checkbox').radiocheck()
+        $('#my-vidatio-checkbox').radiocheck()
 
         CatalogFactory.getCategories().query (response) ->
             $log.info "CatalogCtrl successfully queried categories"
@@ -55,12 +55,5 @@ app.controller "CatalogCtrl", [
             vidatio.log.debug
                 category: category
             $scope.filter.category = category
-
-        # $scope.toggleOwnVidatios = ->
-
-        #     console.log "$scope.showOwnVidatios", $scope.showOwnVidatios
-        #     $scope.showOwnVidatios = !$scope.showOwnVidatios
-        #     console.log "$scope.showOwnVidatios", $scope.showOwnVidatios
-        #     console.log "!$scope.showOwnVidatios", !$scope.showOwnVidatios
 
 ]

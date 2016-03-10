@@ -91,3 +91,7 @@ describe "Filter Catalog", ->
             ]
 
             expect(@filter('categoryFilter')(input, "category2")).toEqual(result)
+
+    xdescribe "MyVidatioFilter", ->
+        it "should be defined and included", ->
+            expect(@filter('myVidatioFilter')).toBeDefined()

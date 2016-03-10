@@ -4,22 +4,25 @@ app = angular.module "app.filters"
 
 app.filter "myVidatioFilter", [
     "$log"
-    ($log) ->
+    "$cookieStore"
+    ($log, $cookieStore) ->
         # @method Anonymous Function
         # @param {Array} input
-        # @param {String} category
+        # @param {Boolean} showOwnVidatios
         # @return {Array}
-        return (input, showOwnVidatios) ->
+        return (input, showMyVidatios) ->
             $log.info "myVidatioFilter called"
             $log.debug
-                showOwnVidatios: showOwnVidatios
+                showMyVidatios: showMyVidatios
 
-            return input if not showOwnVidatios or not input
+            return input if not showMyVidatios or not input
 
+            globals = $cookieStore.get( "globals" ) or {}
             output = []
 
-            # for element in input
+            for element in input
+                if globals.currentUser.name is element.userId.name
+                    output.push element
 
-
-            # output
+            output
 ]
