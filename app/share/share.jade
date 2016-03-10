@@ -2,7 +2,16 @@
         .row
             .col-sm-6
                 #preview.area
-                    a(href="#")
+                    div.chart-preview
+                        ul.metadata-preview(ng-show="show==3")
+                            li.editor Editor
+                                span.author (Author)
+                            li.title Vidatio Title
+                            li.category Category
+                            li.licence Licence
+                            li.tags Tags, Tags, Tags
+                            li.edit
+                                a.fui-new(ng-click="show=1")
                 #download.area
                     a(href="#")
                         .option-icon.icon-download
@@ -22,8 +31,8 @@
                                 option PNG
                                 option SVG
 
-            .col-sm-6(ng-switch on="save")
-                #save-share.area(ng-switch-when="")
+            .col-sm-6
+                #save-share.area(ng-init="show=1" ng-show="show==1")
                     .option-icon.icon-sharing
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
@@ -35,7 +44,7 @@
                             li: button.btn.btn-primary.icon-embed(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
-                    form(name="metadataForm" ng-submit="" ng-controller="ShareCtrl")
+                    form(name="metadataForm" ng-controller="ShareCtrl")
                         .row
                             .input-group.form-group.first
                                 input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
@@ -66,9 +75,9 @@
                                     span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="$parent.show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
-                #save-share.area(ng-switch-when="")
+                #save-share.area(ng-show="show==2")
                     .option-icon.icon-lock
                     h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
                     .row
@@ -94,7 +103,7 @@
                                 | Vidatio im öffentlichen Katalog anzeigen
 
                         .row
-                            button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'SAVE_PERMANENTLY' | translate }}
 
                         .row
                             .col-xs-6.left
@@ -103,12 +112,12 @@
                                 a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
 
                     .row
-                        a.share-only.inverse.ng-binding(href="#") Vidatio ohne Login teilen
+                        a.share-only.inverse.ng-binding(href="#" ng-click="show=3") Vidatio ohne Login teilen
                             span.fui-arrow-right
                         p Achtung, ohne Login kannst du dein Vidatio später nicht mehr bearbeiten
 
 
-                #save-share.area(ng-switch-default)
+                #save-share.area(ng-show="show==3")
                     .option-icon.icon-sharing
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
