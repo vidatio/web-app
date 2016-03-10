@@ -102,6 +102,8 @@ app.service 'DataService', [
 
             createVidatio: (data) ->
                 $log.info "DatasetCtrl createVidatio called"
+                $log.debug
+                    data: data
 
                 if @meta["fileType"] is "shp"
                     dataset = Converter.convertGeoJSON2Arrays data.data
