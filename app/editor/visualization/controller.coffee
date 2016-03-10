@@ -77,26 +77,30 @@ app.controller "VisualizationCtrl", [
                 axis: axis
                 id: id
 
-            if axis is "x" and Visualization.isInputValid id, $scope.visualization.yAxisCurrent, $scope.visualization.diagramType
+            if axis is "x"
                 $scope.visualization.xAxisCurrent = id
-            else if axis is "y" and Visualization.isInputValid $scope.visualization.xAxisCurrent, id, $scope.visualization.diagramType
+            else if axis is "y"
                 $scope.visualization.yAxisCurrent = id
+
+            Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
+
+            if Visualization.isInputValid $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent, $scope.visualization.diagramType
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
             else
                 $translate($scope.visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
                         column: Table.getHeader()[id]
                         diagramType: diagramName
-                .then (translation) ->
+                    .then (translation) ->
                     ngToast.create
                         content: translation
                         className: "danger"
-                return
-            Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
-            Visualization.create
-                type: $scope.visualization.diagramType
-                xColumn: $scope.visualization.xAxisCurrent
-                yColumn: $scope.visualization.yAxisCurrent
-                color: $scope.visualization.color
+
+            return true
 
         # @method selectDiagram
         # @param {String} name

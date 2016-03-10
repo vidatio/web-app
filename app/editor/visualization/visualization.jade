@@ -9,7 +9,7 @@
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
-                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column}}
+                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column }}
 
                 p(ng-if="visualization.diagramType != 'map'") {{ "Y_AXIS" | translate }}
                 p(ng-if="visualization.diagramType == 'map'") {{ "LATITUDE" | translate }}

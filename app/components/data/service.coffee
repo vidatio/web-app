@@ -99,7 +99,6 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
-
             createVidatio: (data) ->
                 $log.info "DatasetCtrl createVidatio called"
                 $log.debug
