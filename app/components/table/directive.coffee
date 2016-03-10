@@ -65,6 +65,9 @@ app.directive 'hot', [
 
             Table.setInstance hot
 
+            if not Table.useColumnHeadersFromDataset
+                Table.setHeader()
+
             if Data.meta.fileType is "shp"
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
