@@ -17,7 +17,8 @@ app.controller "TableCtrl", [
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
-        $('#column-headers-checkbox').radiocheck()
+        headerCheckbox = $('#column-headers-checkbox')
+        if headerCheckbox? and headerCheckbox.radiocheck? then headerCheckbox.radiocheck()
 
         $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
@@ -27,6 +28,15 @@ app.controller "TableCtrl", [
                     Table.takeHeaderFromDataset()
                 else
                     Table.putHeaderToDataset()
+
+        #@method $scope.transpose
+        #@description transpose the dataset including the header
+        $scope.transpose = ->
+            $log.info "TableCtrl transpose called"
+
+            if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
+            Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
+            if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()
 
         #@method $scope.download
         #@description downloads a csv
