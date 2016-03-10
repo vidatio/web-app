@@ -20,8 +20,7 @@
                 color $color-grey-dark
 
             &:hover
-                background $color-hover-light
-
+                background $color-white
 
         .option-icon
             width 100px
@@ -33,6 +32,50 @@
 
         #preview
             height 293px
+            padding 20px
+            .chart-preview
+                width 100%
+                height 100%
+                background-color $color-hover-light
+                .metadata-preview
+                    background-color $color-overlay
+                    border-top 2px solid $color-table-odd-active
+                    text-align left
+                    padding 15px
+                    position relative
+                    li
+                        list-style-type none
+                        {lightText}
+                        line-height 16px
+                        max-width 70%
+                        span.author
+                            margin-left 5px
+                            font-family Colaborate-Thin, $fonts
+                        &.author
+                        &.title
+                            font-family Colaborate, $fonts
+                            font-size 15px
+                            line-height 17px
+                        &.title
+                            margin-bottom 5px
+                        &.category
+                        &.licence
+                            float left
+                            margin-right 5px
+                        &.tags
+                            color $color-active
+                        &.edit
+                            position absolute
+                            right 10px
+                            top 10px
+                            a
+                                padding 5px
+                                border-radius 4px
+                                &:hover
+                                &:focus
+                                    background-color $color-passive
+                                    color $color-grey-light
+                                    cursor pointer
 
         #preview
         #download
@@ -53,13 +96,16 @@
                     margin 0 3%
                     float left
 
+                    option
+                        text-align center
+            &:hover
+                background-color $color-hover-light
+
         #save-share
             padding 0 45px 20px
             height auto
             min-height 564px
             margin-left 13px
-            &:hover
-                background-color $color-white
 
             .share-options
                 display block
@@ -106,6 +152,10 @@
                 {lightText}
                 margin-bottom 12px
 
+            .option-icon
+               &.icon-lock
+                    margin-top 45px
+
             .col-xs-6.left
                 text-align left
                 padding 0
@@ -114,10 +164,23 @@
                 text-align right
                 padding 0
 
-            .share-only
-                margin-top 30px
-                color $color-border
+            .checkbox
+                margin 12px 7px 3px
+                width 265px
+                {lightText}
+                line-height 19px
+                padding-left 30px
 
+            .share-only
+                margin-top 90px
+                display block
+
+            .form-control[readonly]
+                color $color-passive
+                font-size 14px
+
+            h3
+                margin-top 30px
 
 @media(max-width 768px)
     #share
@@ -129,3 +192,7 @@
             #download
             #save-share
                 margin 0
+                padding 0 15px 20px
+            #download
+                form
+                    width 90%

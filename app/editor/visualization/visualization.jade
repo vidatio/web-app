@@ -2,8 +2,8 @@
     .content.height-500
         .settings-bar
             .axis-selection(ng-if="meta.fileType != 'shp'")
-                p(ng-if="visualization.diagramType != 'map'") {{ "X_AXIS" | translate }}
-                p(ng-if="visualization.diagramType == 'map'") {{ "LONGITUDE" | translate }}
+                p(ng-if="visualization.type != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.xAxisCurrent] || "HEADER_DEFAULT" | translate }}
                         span.caret
@@ -11,8 +11,8 @@
                         li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
                             a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column }}
 
-                p(ng-if="visualization.diagramType != 'map'") {{ "Y_AXIS" | translate }}
-                p(ng-if="visualization.diagramType == 'map'") {{ "LATITUDE" | translate }}
+                p(ng-if="visualization.type != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LATITUDE" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.yAxisCurrent] || "HEADER_DEFAULT" | translate }}
                         span.caret
@@ -48,7 +48,7 @@
             .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
                 a.icon-search(href='#' ng-click="recommend()")
 
-            .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
+            .color-selection.hover-button(ng-hide="visualization.type == 'map'")
                 a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
 
             .download-button.hover-button
@@ -59,10 +59,9 @@
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="visualization.diagramType == 'map'")
-        #chart(ng-hide="visualization.diagramType == 'map' || visualization.diagramType == false")
-        #chart-empty(ng-hide="visualization.diagramType")
-            .row
-                .col-md-12.diagram-placeholder
-                    div
-                        img(src="images/logo-without-name.png" )
+        leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
+
+        #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
+
+        #chart-placeholder(ng-hide="visualization.type")
+            img(src="images/logo-without-name.png" )
