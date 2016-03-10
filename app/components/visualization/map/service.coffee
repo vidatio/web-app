@@ -21,14 +21,8 @@ app.service 'MapService', [
 
             # Because we add some objects to the scope we need this function
             # has to be called before the init function
-            setScope: ($scope) ->
-                $log.info "MapService init called"
-
-                icon =
-                    iconUrl: '../images/marker-small.png'
-                    iconSize: [25, 30]
-                    iconAnchor: [12.5, 30]
-                    popupAnchor: [0, -30]
+            setInstance: ->
+                $log.info "MapService getInstance called"
 
                 leafletData.getMap("map").then (mapInstance) =>
                     $log.info "MapService leafletData.getMap called"
@@ -36,7 +30,6 @@ app.service 'MapService', [
                         message: "MapService leafletData.getMap called"
 
                     @map = mapInstance
-                    # Timeout is needed to wait for the view to finish render
                     $timeout =>
                         @init()
 
@@ -49,42 +42,6 @@ app.service 'MapService', [
                     ngToast.create
                         content: error
                         className: "danger"
-
-                $scope.geojson =
-                    data: @geoJSON
-                    style: ->
-                        {}
-                    pointToLayer: (feature, latlng) ->
-                        new L.marker(latlng, icon: L.icon(icon))
-
-                    onEachFeature: (feature, layer) ->
-                        # So every markers gets a popup
-                        html = ""
-                        isFirstAttribute = true
-
-                        for property, value of feature.properties
-
-                            if value
-                                if isFirstAttribute
-                                    html += "<b>"
-
-                                if vidatio.helper.isEmailAddress(value)
-                                    html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                                else if vidatio.helper.isPhoneNumber(value)
-                                    html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                                else if vidatio.helper.isURL(value)
-                                    html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                                else if value
-                                    html += value + "<br>"
-
-                                if isFirstAttribute
-                                    html += "</b>"
-                                    isFirstAttribute = false
-
-                        unless html
-                            html = "Keine Informationen vorhanden"
-
-                        layer.bindPopup(html)
 
             # Because the map gets set later than the geoJSON
             # we need init function to do initial actions

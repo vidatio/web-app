@@ -6,6 +6,7 @@ app.service 'DataService', [
     "MapService"
     "TableService"
     "ConverterService"
+    "VisualizationService"
     "$rootScope"
     "ngToast"
     "$translate"
@@ -13,7 +14,7 @@ app.service 'DataService', [
     "DataFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -31,17 +32,9 @@ app.service 'DataService', [
                     oldData: oldData
                     newData: newData
 
-                key = Table.columnHeaders[column]
-
-                if @meta.fileType is "shp"
-                    Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
-                else if @meta.fileType is "csv"
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
-                    Map.setGeoJSON(geoJSON)
-                # last else to update empty table
-                else
-                    geoJSON = Converter.convertArrays2GeoJSON(Table.dataset)
-                    Map.setGeoJSON(geoJSON)
+                columnHeaders = Table.instanceTable.getColHeader()
+                key = columnHeaders[column]
+                Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
 
             validateInput: (row, column, oldData, newData) ->
                 $log.info "DataService validateInput called"
@@ -52,18 +45,15 @@ app.service 'DataService', [
                     oldData: oldData
                     newData: newData
 
-                if @meta.fileType is "shp"
-                    key = Table.columnHeaders[column]
-                    return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
-
-                return true
+                columnHeaders = Table.instanceTable.getColHeader()
+                key = columnHeaders[column]
+                return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
 
             # TODO: Name has to be set by the user
 
             # Sends the dataset to the API, which saves it in the database.
             # @method saveViaAPI
             # @param {Object} dataset
-            # @param {String} userId
             # @param {String} name
             saveViaAPI: (dataset, name = "Neues Vidatio") ->
                 $log.info("saveViaAPI called")
@@ -74,6 +64,17 @@ app.service 'DataService', [
                 DataFactory.save
                     name: name
                     data: dataset
+                    metaData:
+                        fileType: @meta.fileType
+                        fileName: @meta.fileName
+                    options:
+                        diagramType: Visualization.options.diagramType
+                        xAxisCurrent: Visualization.options.xAxisCurrent
+                        yAxisCurrent: Visualization.options.yAxisCurrent
+                        color: Visualization.options.color
+                        selectedDiagramName: Visualization.options.selectedDiagramName
+                        useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
+
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug

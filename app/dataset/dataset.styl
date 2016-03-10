@@ -1,4 +1,7 @@
 #dataset-view
+    .dataset-title
+        text-align center
+
     .visualization-container
         text-align center
         vertical-align middle
@@ -10,62 +13,45 @@
         box-shadow 2px 2px 2px 0px $color-shadow
         border-radius 4xp
 
-    .visualization-container
-        margin-top 20px
-
         img
             width 100%
-            height 90%
+            height 50%
+            opacity 0.4
+            margin-top 65px
 
     .middle
         text-align center
 
     .buttons-first-row
-        margin-top -23px
+        margin -23px -15px 50px -15px
 
-    .buttons-second-row
-        margin-top 30px
-        margin-bottom 50px
+        .icons
+            font-size 20px
 
-    .buttons-first-row
-    .buttons-second-row
-        margin-right -15px
-        margin-left -15px
+        .button-text
+            position relative
+            top -1px
 
-        #edit-dataset
-        #share-dataset
+        #create-vidatio
         #link-dataset
-        #code-dataset
         #download-dataset
-        #metadata-dataset
-            width 150px
+            width 170px
             height 45px
-            line-height 28px
+            line-height 25px
 
         #download-dataset
             position relative
             cursor pointer
             margin 0 auto
+            text-align left
 
             a.title
                 color $color-black
                 background $color-white
                 border 2px solid $color-green
-                width 150px
+                width 170px
                 height 45px
                 line-height 23px
-
-                span.download
-                    &::before
-                        content ''
-                        background-image url('../images/download-button.svg')
-                        background-repeat no-repeat
-                        background-size 15px
-                        margin-top 0.5px
-                        margin-left 5px
-                        float left
-                        width 15px
-                        height 20px
 
                 &:focus
                     background $color-hover-light
@@ -73,14 +59,14 @@
 
             & > a
                 display block
-                width 150px
+                width 170px
 
             ul
                 background $color-white none repeat scroll 0 0
                 border 2px solid $color-green
                 display none
                 position absolute
-                width 150px
+                width 170px
                 list-style outside none none
                 padding 0
                 margin-top 12px
@@ -92,7 +78,7 @@
                     border-style solid
                     border-width 10px
                     content ""
-                    left 63px
+                    left 73px
                     position absolute
                     top -20px
                     z-index 1000
@@ -121,7 +107,7 @@
                             border-style solid
                             border-width 11px
                             content ""
-                            left 62px
+                            left 72px
                             position absolute
                             top -24px
                             z-index 1001
@@ -135,6 +121,7 @@
                         line-height 30px
                         font-size 16px
                         font-weight 500
+                        margin-left 25px
 
                     &:hover
                         & > a
@@ -154,6 +141,58 @@
     a.button
         width 132px
 
+    #vidatio-link-box
+        position relative
+        top 25px
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 10px 20px 20px 20px
+        text-align right
+        height 105px
+
+        .link-box-icon
+            font-size 14px
+            text-align left
+
+        p
+            float left
+            margin 0
+
+        .fui-cross
+            background $color-white
+            color $color-grey-dark
+            text-align right
+            &:hover
+                color $color-red
+
+        .form-control
+            border-color $color-input-border-inactive
+            width calc(100% - 160px)
+            border-bottom-right-radius 0
+            border-top-right-radius 0
+
+            &:hover
+            &:focus
+                border-color $color-green
+
+        #copy-vidatio-link
+            border 2px solid $color-green
+            top -42px
+            position relative
+            height 42px
+            background $color-green
+            line-height 18px
+
+            &:active
+                background-color $color-active
+                border-color $color-active
+
+            &:hover
+            &:focus
+                background-color $color-hover-dark
+                border-color $color-hover-dark
+
     .metadata-container
         margin-bottom 20px
 
@@ -171,25 +210,34 @@
                 font-weight bold
                 width 250px
 
+@media (max-width: 435px)
+    #dataset-view
+        .buttons-first-row
+            #link-dataset
+                margin-left -6px
+            #download-dataset
+                margin-left -12px
 
 @media (max-width: 767px)
     #dataset-view
         .buttons-first-row
-        .buttons-second-row
-            #edit-dataset
-            #share-dataset
+            .icons
+                font-size 14px
+
+            #create-vidatio
+                padding-left 4px
+
+            #create-vidatio
             #download-dataset
             #link-dataset
-            #code-dataset
-            #metadata-dataset
-                width 100px
-                font-size 13px
+                width 117px
+                font-size 12px
                 line-height 26px
 
             #download-dataset
                 a.title
-                    width 100px
-                    font-size 13px
+                    width 117px
+                    font-size 11px
 
                     span.download
                         &::before
@@ -198,22 +246,29 @@
                             margin-top 3px
 
                 ul
-                    width 100px
+                    width 117px
 
                     &::after
-                        left 37px
+                        left 45px
                         top -19px
 
                     li
                         &:first-child
                             &::after
-                                left 36px
+                                left 44px
                                 top -23px
 
-        .dataset-title
+                        & > a
+                            margin-left 10px
+                            font-size 13px
+
+        .dataset-title-text
             margin-top 30px
+
+        .metadata-container
+            margin-bottom 100px
 
 @media (min-width: 768px) and (max-width: 1012px)
     #dataset-view
-        .dataset-title
+        .dataset-title-text
             margin-left 30px

@@ -31,6 +31,8 @@ tmp/
 app/public/
 build/*
 
+coverage/*
+
 userconfig.coffee
 userconfig*
 

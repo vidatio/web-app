@@ -33,23 +33,34 @@ header
     #logo
         background url(../images/logo-text-black.svg) no-repeat
         background-size 111px
-        width 111px
+        width 113px
         height 40px
         float left
-
-    #back-to-import
-        float right
 
     #back-to-datasets-overview
         float left
         margin-left 60px
+        text-align center
+        color $color-black
+        line-height 42px
+        font-size 23px
+        width 42px
+        height 42px
+        border-radius 4px
+
+        &:hover, &:focus
+            color $color-grey-light
+            background-color $color-passive
+
+        &:active
+            color $color-green
 
     #back-to-import
-    #back-to-datasets-overview
         position relative
         height 40px
         text-align center
         line-height 17px
+        float right
 
         .btn-tip
             padding-left 0
@@ -184,8 +195,12 @@ header
         a#save-dataset
         a#back-to-import
             margin-top 10px
+            float left
 
         a#save-dataset
             float right
-        a#back-to-import
-            float left
+
+        #back-to-datasets-overview
+            position absolute
+            left 150px
+            margin-left 0

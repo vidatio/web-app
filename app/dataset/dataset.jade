@@ -1,7 +1,7 @@
 #dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
-    .row
+    .row.dataset-title
         .col-sm-12
-            h1.underline-turqoise.dataset-title {{ info.title }}
+            h1.underline-turqoise.dataset-title-text {{ info.title }}
 
     .row
         .col-sm-12
@@ -10,66 +10,77 @@
 
             .row.buttons-first-row
                 .col-xs-4.col-sm-4.middle
-                    a#edit-dataset.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="editDataset()") {{ "EDIT" | translate | uppercase }}
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
+                        span.icon-new-vidatio.icons
+                        span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
-                    a#share-dataset.btn.btn-primary(href='#' ng-click='shareDataset()') {{ "SHARE" | translate | uppercase }}
+                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
+                        span.icon-link.icons
+                        span.button-text  {{ "LINK" | translate | uppercase }}
 
                 .col-xs-4.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
-                            span.download
-                            | {{ "DOWNLOAD" | translate | uppercase }}
+                            span.icon-download-3.icons
+                            span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
+
                         ul
-                            li
-                                a(href="#" ng-click='downloadDataset()') {{ "DATASET" | translate }}
-                            li
-                                a(href="#" ng-click='downloadImage()') {{ "VISUALIZATION" | translate }}
+                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
+                                a
+                                    span.icon-download-dataset
+                                    span  {{ "DATASET" | translate }}
+                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
+                                a
+                                    span.icon-download-visualization
+                                    span  {{ "VISUALIZATION" | translate }}
 
-
-            .row.buttons-second-row
-                .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click='getLinkDataset()') {{ "LINK" | translate | uppercase }}
-
-                .col-xs-4.col-sm-4.middle
-                    a#code-dataset.btn.btn-primary(href='#' ng-click='getCodeDataset()') {{ "CODE" | translate | uppercase }}
-
-                .col-xs-4.col-sm-4.middle
-                    a#metadata-dataset.btn.btn-primary(href='#' ng-click='getMetadataDataset()') {{ "METADATA" | translate | uppercase }}
+                .col-xs-12
+                    #vidatio-link-box(ng-show="$root.showVidatioLink")
+                        p
+                            span.icon-link.link-box-icon
+                            span  {{ "LINK_TO_SHARE" | translate }}
+                        a.fui-cross(href="#" ng-click="hideVidatioLink()")
+                        form
+                            input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
+                        a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
+                            span.icon-copy-clipboard.icons
+                            span.button-text  {{"COPY_LINK" | translate | uppercase }}
 
     .row
         .col-sm-12
-            h1.underline-turqoise {{ "INFORMATION-DATASET" | translate | uppercase }}
+            h1.underline-turqoise {{ "INFORMATION_DATASET" | translate | uppercase }}
 
     .row
         .col-sm-12
             .metadata-container
                 .one-row
                     .description {{ info.description }}
-                .one-row
-                    .text {{ "DATASET-ORIGIN" | translate }}:
-                    .dataset-creator.info {{ info.creator }}
-                .one-row
-                    .text {{ "DATASET-FORMAT" | translate }}:
-                    .dataset-creator.info {{ info.format }}
                 .one-row.space
                 .one-row
-                    .text {{ "DATASET-ID" | translate }}:
+                    .text {{ "DATASET_ORIGIN" | translate }}:
+                    .dataset-creator.info {{ info.origin }}
+                .one-row
+                    .text {{ "DATASET_EDITOR" | translate }}:
+                    .dataset-creator.info {{ info.creator }}
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET_ID" | translate }}:
                     .dataset-creator.info {{ info.id }}
                 .one-row
-                    .text {{ "DATASET-PARENT" | translate }}:
+                    .text {{ "DATASET_PARENT" | translate }}:
                     .dataset-creator.info {{ info.parent }}
                 .one-row.space
                 .one-row
-                    .text {{ "DATASET-CREATED" | translate }}:
-                    .dataset-created.info {{ info.created }}
+                    .text {{ "DATASET_CREATED" | translate }}:
+                    .dataset-created.info {{ info.created | date: "dd.MM.yyyy" }}
                 .one-row
-                    .text {{ "DATASET-UPDATED" | translate }}:
-                    .dataset-update.info {{ info.updated }}
+                    .text {{ "DATASET_UPDATED" | translate }}:
+                    .dataset-update.info {{ info.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
                     .dataset-creator.info {{ info.category }}
                 .one-row
-                    .text {{ "DATASET-TAGS" | translate }}:
+                    .text {{ "DATASET_TAGS" | translate }}:
                     .dataset-creator.info {{ info.tags }}

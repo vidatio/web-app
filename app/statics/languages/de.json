@@ -13,7 +13,6 @@
     "ALL_DATASETS": "Alle Datensätze",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
-    "LINK": "Link",
     "USP": "USP",
     "API": "API",
     "IMPORT": "Import",
@@ -22,7 +21,6 @@
     "OPEN_DATA": "Open Data",
     "FILE_DROP": "Datei Landeplatz",
     "LINK_TO_FILE": "Link zur Datei",
-    "LINK_TO_SHARE": "Link zum teilen",
     "DATA": "Daten",
     "DATASET": "Datensatz",
     "VISUALIZATION": "Visualisierung",
@@ -34,6 +32,7 @@
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
         "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
+        "LINK_NOT_COPIED": "Der Link konnte nicht in die Zwischenablage kopiert werden. Bitte Seite neu laden und noch einmal versuchen.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
         "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
@@ -45,7 +44,10 @@
         "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
-        "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden."
+        "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
+        "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
+        "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
+        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -78,24 +80,27 @@
     "LOG_OUT": "Abmelden",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
-    "OVERVIEW": "Übersicht",
+    "OVERVIEW": "Katalog",
+    "MENU": "Menü",
     "DETAIL-VIEW" : "Detail-Ansicht",
     "EDIT": "Bearbeiten",
     "SHARE": "Vidatio Teilen",
+    "CREATE_VIDATIO": "Neues Vidatio",
     "DOWNLOAD": "Download",
     "LINK": "Link",
+    "LINK_TO_SHARE": "Link zum Teilen deines Vidatios",
     "METADATA": "Metadaten",
     "CODE": "Code",
     "COPY_LINK": "Link kopieren",
-    "INFORMATION-DATASET": "Informationen zum Datensatz",
-    "DATASET-DESCRIPTION": "Beschreibung des Datensatzes",
-    "DATASET-ORIGIN": "Urheber",
-    "DATASET-CREATED": "Erstellt am",
-    "DATASET-UPDATED": "Letztes Update",
-    "DATASET-ID": "ID des Datensatzes",
-    "DATASET-PARENT": "Original Datensatz",
-    "DATASET-TAGS": "Tags",
-    "DATASET-FORMAT": "Datentyp",
+    "INFORMATION_DATASET": "Informationen zum Datensatz",
+    "DATASET_DESCRIPTION": "Beschreibung des Datensatzes",
+    "DATASET_ORIGIN": "Urheber",
+    "DATASET_EDITOR": "Editiert von",
+    "DATASET_CREATED": "Erstellt am",
+    "DATASET_UPDATED": "Letztes Update",
+    "DATASET_ID": "ID des Datensatzes",
+    "DATASET_PARENT": "Original Datensatz",
+    "DATASET_TAGS": "Tags",
     "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {
@@ -106,10 +111,25 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
+    "X_AXIS": "X-Achse",
+    "Y_AXIS": "Y-Achse",
+    "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
     "FILTER": {
-        "BY_TIME": "Filtern nach Zeit"
-    }
+        "BY_TIME": "Filtern nach Zeit",
+        "BY_CATEGORY": "Filtern nach Kategorie"
+    },
+    "HEADER": "Kopfzeile",
+    "DIAGRAMS": {
+        "DIAGRAM_TYPE": "Diagrammart",
+        "SCATTER_PLOT": "Streudiagramm",
+        "MAP": "Karte",
+        "PARALLEL_COORDINATES": "Parallele Koordinaten",
+        "BAR_CHART": "Balkendiagramm",
+        "TIME_SERIES": "Zeitlicher Verlauf"
+    },
+    "LONGITUDE": "Long",
+    "LATITUDE": "Lat"
 }

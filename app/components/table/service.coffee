@@ -10,105 +10,122 @@ app.service 'TableService', [
                 $log.info "TableService constructor called"
 
                 @dataset = [[]]
-                @columnHeaders = []
+                @header = []
                 @useColumnHeadersFromDataset = true
+                @instanceTable = null
+                @diagramColumns = {}
 
-            # @method reset
+            # @method setInstance
             # @public
-            # @param {Boolean} useColumnHeadersFromDataset
-            reset: (useColumnHeadersFromDataset) ->
-                $log.info "TableService reset called"
-                @resetDataset()
-                @useColumnHeadersFromDataset = useColumnHeadersFromDataset
-                @resetColumnHeaders()
+            # @param {Handsontable Instance} hot
+            setInstance: (hot) ->
+                $log.info "TableService setInstance called"
+                @instanceTable = hot
 
-            # @method resetColumnHeaders
+            # @method getInstance
             # @public
-            resetColumnHeaders: ->
-                $log.info "TableService resetColumnHeaders called"
-                @columnHeaders.splice 0, @columnHeaders.length
+            # @return {Handsontable Instance}
+            getInstance: ->
+                $log.info "TableService getInstance called"
+                return @instanceTable
 
-                if !@useColumnHeadersFromDataset
-                    # Because we want at least 26 columns we fill up the column headers
-                    # TODO whats about datasets with more then 26 columns?
-                    # Maybe use the width of the dataset + 1 for further free fields
-                    for element in [ 0..25 ]
-                        @columnHeaders[element] = String.fromCharCode(65 + element)
-
-            # @method setColumnHeaders
+            # @method getHeader
             # @public
-            # @param {Array} columnHeaders
-            setColumnHeaders: (columnHeaders) ->
-                $log.info "TableService setColumnHeaders called"
+            getHeader: ->
+                $log.info "TableService getHeader called"
+                return @header
+
+            # @method setHeader
+            # @public
+            # @param {Array} header
+            # @param {String} fileType
+            setHeader: (header = []) ->
+                $log.info "TableService setHeader called"
                 $log.debug
-                    message: "TableService setColumnHeaders called"
-                    columnHeaders: columnHeaders
+                    header: header
 
-                @resetColumnHeaders()
+                setHeader.call @, header
 
-                # because we want to the keep the data binding
-                # we can't assign the array, but we can exchange the items
-                columnHeaders.forEach (item, index) =>
-                    @columnHeaders[index] = item
-
-            # @method takeColumnHeadersFromDataset
-            # @public
-            takeColumnHeadersFromDataset: ->
-                $log.info "TableService takeColumnHeadersFromDataset called"
-                columnHeaders = @dataset.splice(0, 1)[0]
-                @setColumnHeaders columnHeaders
-                @useColumnHeadersFromDataset = true
-
-            # @method putColumnHeadersBackToDataset
-            # @public
-            putColumnHeadersBackToDataset: ->
-                $log.info "TableService putColumnHeadersBackToDataset called"
-
-                # Before removing column headers delivered by the dataset
-                # we want to set them back to the rows inside the table
                 if @useColumnHeadersFromDataset
-                    # because we use data binding we can't unshift the array
-                    # but we can push a new array with the items
-                    tmp = []
-                    @columnHeaders.forEach (item, index) ->
-                        tmp[index] = item
-                    @dataset.unshift tmp
-                    @useColumnHeadersFromDataset = false
+                    colHeaders = @header
+                else
+                    colHeaders = true
 
-                @resetColumnHeaders()
+                unless @instanceTable
+                    return $log.info "TableService resetHeader instanceTable is not defined"
 
-            resetDataset: ->
-                $log.info "TableService resetDataset called"
+                @instanceTable.updateSettings
+                    colHeaders: colHeaders
+                @instanceTable.render()
+
+                if colHeaders is true then setHeader.call @, @instanceTable.getColHeader()
+
+            setHeader = (header) ->
+                tmp = angular.copy(header)
+                @header.splice 0, @header.length
+                tmp.forEach (cell, index) =>
+                    @header[index] = cell
+
+            # @method takeHeaderFromDataset
+            # @public
+            takeHeaderFromDataset: ->
+                $log.info "TableService takeHeaderFromDataset called"
+                header = @dataset.shift()
+                @useColumnHeadersFromDataset = true
+                @setHeader header
+
+            # @method putHeaderToDataset
+            # @public
+            putHeaderToDataset: ->
+                $log.info "TableService putHeaderToDataset called"
+                @useColumnHeadersFromDataset = false
+                @dataset.unshift angular.copy(@header)
+                @setHeader()
+
+            # @method setDataset
+            # @public
+            # @param {Array} data
+            setDataset: (dataset = []) ->
+                $log.info "TableService setDataset called"
+                $log.debug
+                    message: "TableService setDataset called"
+                    data: dataset
 
                 # safely remove all items, keeps data binding alive
                 # there should be left a 2D array - needed for handsontable
                 @dataset.splice 0, @dataset.length - 1
                 @dataset[0].splice 0, @dataset[0].length
 
-            setDataset: (data) ->
-                $log.info "TableService setDataset called"
-                $log.debug
-                    message: "TableService setDataset called"
-                    data: data
-
-                @reset true
-                data.forEach (row, index) =>
+                dataset.forEach (row, index) =>
                     @dataset[index] = row
 
-            setCell: (row, column, data) ->
-                $log.info "TableService setCell called"
-                $log.debug
-                    message: "TableService setCell called"
-                    row: row
-                    column: column
-                    data: data
-
-                @dataset[row][column] = data
-
+            # @method getDataset
+            # @public
+            # @return {Array}
             getDataset: ->
                 $log.info "TableService getDataset called"
-
                 return @dataset
+
+            # @method setDiagramColumns
+            # @public
+            setDiagramColumns: (xColumn, yColumn) ->
+                $log.info "TableService setDiagramColumns called"
+                $log.debug
+                    xColumn: xColumn
+                    yColumn: yColumn
+
+                unless xColumn or yColumn
+                    return
+
+                @diagramColumns["x"] = xColumn
+                @diagramColumns["y"] = yColumn
+
+            # @method getDiagramColumns
+            # @public
+            # @return {Object}
+            getDiagramColumns: ->
+                $log.info "TableService getDiagramColumns called"
+                @diagramColumns
 
         new Table
 ]
