@@ -15,6 +15,8 @@ app.controller "EditorCtrl", [
     "$translate"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate) ->
 
+        $scope.editor = Data.meta
+
         # check if userAgent is Firefox -> necessary for the width calculation of the input field
         isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
 
@@ -23,8 +25,6 @@ app.controller "EditorCtrl", [
         $scope.activeTabs = [false, true, false]
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
-
-        $scope.editor = Data.meta
 
         # set initial values for displayed title and input-field length
         # standardTitle is needed, if user sets no title

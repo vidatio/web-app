@@ -55,14 +55,14 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset, name) ->
+            saveViaAPI: (dataset) ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    name: name
+                    name: @meta.fileName
 
                 DataFactory.save
-                    name: name
+                    name: @meta.fileName
                     data: dataset
                     metaData:
                         fileType: @meta.fileType

@@ -85,10 +85,10 @@ header.ng-cloak
                         a#back-to-import.active(ui-sref="app.import({ locale: locale })")
                             span.icon-import-2
                             span  {{ "IMPORT" | translate | uppercase }}
-                        a#edit-data.clickable(ui-sref="app.editor({ locale: locale })"  ng-disabled="header.savedWorks" ng-class="{'disabled': header.savedWorks}")
+                        a#edit-data.clickable(ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotYetInitialized" ng-class="{'disabled': header.editorNotYetInitialized}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref="app.share({ locale: locale })" ng-disabled="header.savedWorks" ng-class="{'disabled': header.savedWorks}")
+                        a#save-dataset(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotYetInitialized" ng-class="{'disabled': header.editorNotYetInitialized}")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 

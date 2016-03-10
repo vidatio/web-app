@@ -28,9 +28,9 @@ app.controller "ImportCtrl", [
 
         # set bool value if user has already started editor with a dataset
         if Data.meta.fileName is ""
-            Data.meta.savedWorks = true
+            Data.meta.editorNotYetInitialized = true
         else
-            Data.meta.savedWorks = false
+            Data.meta.editorNotYetInitialized = false
 
         editorPath = "/" + $rootScope.locale + "/editor"
 

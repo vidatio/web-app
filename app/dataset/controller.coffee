@@ -39,7 +39,6 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
-            console.log "$scope.data.metaData", $scope.data.metaData
             if $scope.data.metaData?
                 Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
             else

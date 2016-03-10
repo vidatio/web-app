@@ -15,11 +15,9 @@ app.controller "HeaderCtrl", [
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
 
-        $rootScope.savedWorks = true
-
         $scope.header = Data.meta
-
-        console.log "test ",  $scope.header
+        $translate("NEW_VIDATIO").then (translation) ->
+            $scope.standardTitle = translation
 
         # REFACTOR Needed to wait for leaflet directive to render
         # $timeout ->
@@ -39,12 +37,8 @@ app.controller "HeaderCtrl", [
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
 
-            fileName = $scope.header.fileName
-
-            if fileName is "Neues Vidatio"
-                fileName = fileName + " " + moment().format("hh_mm_ss_a")
-
-            console.log fileName
+            if $scope.header.fileName is $scope.standardTitle
+                $scope.header.fileName = $scope.header.fileName + " " + moment().format("HH_mm_ss")
 
             if Data.meta.fileType is "shp"
                 dataset = Map.getGeoJSON()
@@ -53,5 +47,5 @@ app.controller "HeaderCtrl", [
                 if Table.useColumnHeadersFromDataset
                     dataset.unshift Table.instanceTable.getColHeader()
 
-            Data.saveViaAPI dataset, fileName
+            Data.saveViaAPI dataset
 ]
