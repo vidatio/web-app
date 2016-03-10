@@ -21,9 +21,9 @@ app.controller "HeaderCtrl", [
 
         # set bool value editorNotYetInitialized; it depends on wheter editor was already initialized with a dataset
         if Table.getDataset().length == 1
-            $scope.header.editorNotYetInitialized = true
+            $scope.header.editorNotInitialized = true
         else
-            $scope.header.editorNotYetInitialized = false
+            $scope.header.editorNotInitialized = false
 
         # REFACTOR Needed to wait for leaflet directive to render
         # $timeout ->
