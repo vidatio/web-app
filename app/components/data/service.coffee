@@ -99,7 +99,9 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
-
+            # @method createVidatio
+            # @description from existing dataset
+            # @param {Object} data
             createVidatio: (data) ->
                 $log.info "DatasetCtrl createVidatio called"
                 $log.debug
