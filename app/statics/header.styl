@@ -61,7 +61,7 @@ header
 
                 &:hover:not(.active):not(.disabled)
                     &::before
-                        width 33.333%
+                        width 33.34%
 
             &:nth-child(3)
                 &::before
@@ -80,7 +80,6 @@ header
                 color $color-hover-dark
                 -webkit-transition color 0.5s
                 transition color 0.5s
-
 
             //active state with arrow in line
             &.active
@@ -121,6 +120,11 @@ header
                 &:focus
                     color $color-passive
                     border-color $color-passive
+
+        a#edit-data.clickable
+            &:nth-child(2)
+                &::before
+                    left calc(100%/3)
 
     #back-to-datasets-overview
         float left

@@ -136,7 +136,7 @@ app.controller "VisualizationCtrl", [
                     obj: obj
 
                 $timeout ->
-                    Progress.setMessage message
+                    Progress.setMessage ""
 
                 fileName = Data.meta.fileName + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
