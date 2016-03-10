@@ -24,6 +24,7 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
+        # set initial values for displayed title and input-field length
         $scope.originalTitle = Data.meta.fileName
         $scope.editor = Data.meta
 
@@ -66,12 +67,12 @@ app.controller "EditorCtrl", [
                 if tab
                     $scope.activeViews++
 
-
+        # watcher for text input in the title input field
         $("#vidatio-title").on 'input', ->
             $("#vidatio-title").css "width", setTitleInputWidth()
 
         # @method saveVidatioTitle
-        # @description set the users' input (if existing) as vidatio-title; set a standard-title otherwise
+        # @description set the users' input (if existing) as Vidatio-title; set a standard-title or the original filename otherwise
         $scope.saveVidatioTitle = ->
             $log.info "EditorCtrl saveVidatioTitle called"
             $log.debug
@@ -84,17 +85,19 @@ app.controller "EditorCtrl", [
 
             return true # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
 
-        # calculate and return the necessary width for the input field
+        # @method setTitleInputWidth
+        # @description calculate and return the necessary width for the input field
         setTitleInputWidth = ->
-            valWidth = $("#vidatio-title").textWidth()
-            # firefox calculates the letter-widths in a different manner than other browsers obviously
-            if isFirefox
-                if valWidth < 150
-                    valWidth = valWidth * 1.5 + "px"
-                else
-                    valWidth = valWidth * 1.4 + "px"
-            else
-                valWidth = valWidth + 10 + "px"
+            inputWidth = $("#vidatio-title").textWidth()
 
-            return valWidth
+            # firefox calculates the letter-widths in a different manner than other browsers; fine adjustments for width needed according to textWidth
+            if isFirefox
+                if inputWidth < 150
+                    inputWidth = inputWidth * 1.5 + "px"
+                else
+                    inputWidth = inputWidth * 1.4 + "px"
+            else
+                inputWidth = inputWidth + 10 + "px"
+
+            return inputWidth
 ]

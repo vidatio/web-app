@@ -27,6 +27,7 @@ app.controller "ImportCtrl", [
         #$rootScope.savedWorks = true
         $scope.importService = Import
 
+        # set bool value if user has already started editor with a dataset
         if Data.meta.fileName is ""
             Data.meta.savedWorks = true
         else
