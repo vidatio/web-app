@@ -32,7 +32,7 @@ app.controller "ImportCtrl", [
 
             Data.meta.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
-            Visualization.options.diagramType = false
+            Visualization.options.type = false
             Table.setDataset()
             Map.resetGeoJSON()
 

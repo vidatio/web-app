@@ -403,14 +403,14 @@ class window.vidatio.Helper
     # @param {Array} yColumnTypes
     # @param {String} yColumnType
     # @return {Boolean}
-    isDiagramPossible: (xColumnTypes, yColumnTypes, diagramType) ->
+    isDiagramPossible: (xColumnTypes, yColumnTypes, type) ->
         vidatio.log.info "HelperService isDiagramPossible called"
         vidatio.log.debug
             xColumnTypes: xColumnTypes
             yColumnTypes: yColumnTypes
-            diagramType: diagramType
+            type: type
 
-        switch diagramType
+        switch type
             when "scatter"
                 if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
                     return false

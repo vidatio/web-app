@@ -92,9 +92,9 @@ app.controller "DatasetCtrl", [
             else
                 if $scope.data.options?
                     # Each value has to be assigned individually, otherwise all options get overwritten.
-                    Visualization.options["diagramType"] = $scope.data.options.diagramType || false
-                    Visualization.options["xAxisCurrent"] = $scope.data.options.xAxisCurrent || 0
-                    Visualization.options["yAxisCurrent"] = $scope.data.options.yAxisCurrent || 1
+                    Visualization.options["type"] = $scope.data.options.type || false
+                    Visualization.options["xColumn"] = $scope.data.options.xColumn || 0
+                    Visualization.options["yColumn"] = $scope.data.options.yColumn || 1
                     Visualization.options["color"] = $scope.data.options.color || "#11DDC6"
                     Visualization.options["selectedDiagramName"] = $scope.data.options.selectedDiagramName || null
                     Table.useColumnHeadersFromDataset = $scope.data.options.useColumnHeadersFromDataset || false
