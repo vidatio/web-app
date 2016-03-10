@@ -15,7 +15,7 @@ app.controller "HeaderCtrl", [
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
 
-        $scope.header = Data.meta
+        $scope.header = Data
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
 

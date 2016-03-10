@@ -36,7 +36,7 @@ app.controller "ImportCtrl", [
             Visualization.resetOptions()
             Table.setDataset()
             Map.resetGeoJSON()
-            Data.meta.fileName = ""
+            Data.name = ""
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
@@ -90,7 +90,7 @@ app.controller "ImportCtrl", [
             fileType = fileType[fileType.length - 1]
             fileName = $scope.file.name.toString()
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
-            Data.meta.fileName = fileName
+            Data.name = fileName
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize

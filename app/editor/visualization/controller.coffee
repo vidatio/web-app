@@ -20,7 +20,7 @@ app.controller "VisualizationCtrl", [
     "VisualizationService"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
         $scope.visualization = Visualization.options
-        $scope.meta = Data.meta
+        $scope.dataset = Data
         $scope.header = Table.header
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
@@ -96,9 +96,9 @@ app.controller "VisualizationCtrl", [
                         column: Table.getHeader()[id]
                         diagramType: diagramName
                     .then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+                        ngToast.create
+                            content: translation
+                            className: "danger"
                 return
 
             Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
@@ -148,7 +148,7 @@ app.controller "VisualizationCtrl", [
                 $timeout ->
                     Progress.setMessage ""
 
-                fileName = Data.meta.fileName + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+                fileName = $scope.dataset.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
                 Share.download fileName, obj[type]
             , (error) ->

@@ -15,7 +15,7 @@ app.controller "EditorCtrl", [
     "$translate"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate) ->
 
-        $scope.editor = Data.meta
+        $scope.editor = Data
 
         # check if userAgent is Firefox -> necessary for the width calculation of the input field
         isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1

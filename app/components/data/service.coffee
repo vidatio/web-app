@@ -19,9 +19,9 @@ app.service 'DataService', [
             constructor: ->
                 $log.info "DataService constructor called"
 
+                @name = ""
                 @meta =
                     "fileType": ""
-                    "name": ""
 
             updateMap: (row, column, oldData, newData) ->
                 $log.info "DataService updateMap called"
@@ -59,13 +59,13 @@ app.service 'DataService', [
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    name: @meta.name
+                    name: @name
 
                 DataFactory.save
+                    name: @name
                     data: dataset
                     metaData:
                         fileType: @meta.fileType
-                        name: @meta.name
                     options:
                         diagramType: Visualization.options.diagramType
                         xAxisCurrent: Visualization.options.xAxisCurrent

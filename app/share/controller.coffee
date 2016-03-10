@@ -12,7 +12,7 @@ app.controller "ShareCtrl", [
     "DataService"
     ($scope, $translate, $rootScope, Data) ->
 
-        $scope.share = Data.meta
+        $scope.share = Data
 
         #to remove tags label on focus & remove flag-ui tags-input length
         $('.tagsinput-primary ').on 'focus', '.bootstrap-tagsinput input', ->

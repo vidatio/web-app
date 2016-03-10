@@ -27,7 +27,7 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#save-button.icon-trash(href="#" ng-click="saveDataset()")
+                        a#save-button.icon-upload(href="#" ng-click="saveDataset()")
                     div(ng-if="globals.authorized")
                         a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
                     div(ng-if="!globals.authorized")
