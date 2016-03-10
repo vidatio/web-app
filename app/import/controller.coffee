@@ -20,7 +20,8 @@ app.controller "ImportCtrl", [
     "DataService"
     "ngToast"
     "ProgressService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress) ->
+    "VisualizationService"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
@@ -30,7 +31,9 @@ app.controller "ImportCtrl", [
             $log.info "ImportCtrl continueToEmptyTable called"
 
             Data.meta.fileType = "csv"
-            Table.reset()
+            Table.useColumnHeadersFromDataset = false
+            Visualization.resetOptions()
+            Table.setDataset()
             Map.resetGeoJSON()
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
@@ -127,7 +130,6 @@ app.controller "ImportCtrl", [
 
                 initTableAndMap fileType, fileContent
 
-                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                 $timeout ->
                     $location.path editorPath
 
@@ -143,26 +145,29 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
-            switch fileType
+            Table.useColumnHeadersFromDataset = true
 
+            switch fileType
                 when "csv"
                     Data.meta.fileType = "csv"
                     dataset = Converter.convertCSV2Arrays fileContent
+                    Table.setHeader dataset.shift()
                     Table.setDataset dataset
-                    Table.useColumnHeadersFromDataset = true
+                    Visualization.recommendDiagram()
                     $location.path editorPath
 
                 when "zip"
                     Data.meta.fileType = "shp"
+
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
                         $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
                         $log.debug
                             fileContent: fileContent
 
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
+
                         if dataset.length
                             Table.setDataset dataset
-                            Table.useColumnHeadersFromDataset = true
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 

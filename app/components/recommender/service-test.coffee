@@ -6,7 +6,7 @@ describe "Service Recommender", ->
         @helper = new window.vidatio.Helper()
 
     it "should analyse type of the columns and so the schema of the dataset", ->
-        schema = ["coordinate", "coordinate", "nominal", "nominal", "coordinate"]
+        schema = [["coordinate", "numeric"], ["coordinate", "numeric"], ["nominal"], ["nominal"], ["coordinate", "numeric"]]
         dataset = [
             ["47", "13", "Salzburg", "41,5%", "2"]
             ["46", "12", "Wien", "38,5%", "2"]
@@ -50,6 +50,19 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset, header).toEqual(
+            "type": "map"
+            "xColumn": 0
+            "yColumn": 1
+        )
+
+        dataset = [
+            ["47.349", "13.892", "Salzburg", "2%"]
+            ["47.349", "13.892", "Salzburg", "3%"]
+            ["46.321", "11.892", "Salzburg", "3%"]
+            ["46.323", "10.348", "Salzburg", "3%"]
+        ]
+
+        expect(@recommender.run dataset).toEqual(
             "type": "map"
             "xColumn": 0
             "yColumn": 1
@@ -107,18 +120,6 @@ describe "Service Recommender", ->
         )
 
         dataset = [
-            ["Apfelsaft", "Linz", "Salzburg", "2%"]
-            ["Apfelkuchen", "Innsbruck", "Salzburg", "3%"]
-            ["Croissants", "Salzburg", "Salzburg", "3%"]
-            ["Kaffee", "Wien", "Salzburg", "3%"]
-        ]
-        expect(@recommender.run dataset).toEqual(
-            "type": "scatter"
-            "xColumn": 0
-            "yColumn": 1
-        )
-
-        dataset = [
             [100, "2015-01-01"]
             [200, "2014-01-01"]
             [300, "2013-01-01"]
@@ -162,7 +163,7 @@ describe "Service Recommender", ->
         ]
 
         expect(@recommender.run dataset).toEqual(
-            "type": "scatter"
+            "type": "parallel"
             "xColumn": 0
             "yColumn": 1
         )

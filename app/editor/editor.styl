@@ -112,13 +112,29 @@
                         &:hover
                             & > a
                                 color $color-green
-
                 &:hover
                     & > ul
                         display block
 
-                    & > a
-                        background-color $color-hover-light
+            .hover-button
+                height 40px
+                width 40px
+                z-index 300
+                position relative
+                cursor pointer
+                padding 2px
+
+                & > a
+                    border-radius 4px
+                    display block
+                    width 36px
+                    font-size 24px
+                    text-align center
+                    color $color-black
+                    line-height 36px
+
+                &:hover > a
+                    background-color $color-hover-light
 
     .wrapper-content
         max-width 100%

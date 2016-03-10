@@ -17,66 +17,56 @@ app.controller "VisualizationCtrl", [
     "$log"
     "ConverterService"
     "$translate"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate) ->
+    "VisualizationService"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
+        $scope.visualization = Visualization.options
         $scope.meta = Data.meta
-        $scope.diagramType = false
-        $scope.colHeadersSelection = Table.colHeadersSelection
+        $scope.header = Table.header
 
-        chart = null
+        # allows the user to trigger the recommender and redraw the diagram accordingly
+        # @method recommend
+        $scope.recommend = ->
+            header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
+            Visualization.recommendDiagram(header)
+            Visualization.create
+                type: $scope.visualization.diagramType
+                xColumn: $scope.visualization.xAxisCurrent
+                yColumn: $scope.visualization.yAxisCurrent
+                color: $scope.visualization.color
 
-        translationKeys =
-            "scatter": "DIAGRAMS.SCATTER_PLOT"
-            "map": "DIAGRAMS.MAP"
-            "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
-            "bar": "DIAGRAMS.BAR_CHART"
-            "timeseries": "DIAGRAMS.TIME_SERIES"
+        if Data.meta.fileType is "shp"
+            $scope.visualization.diagramType = "map"
+            Map.setInstance()
+        else
+            # After having recommend diagram options, we watch the dataset of the table
+            # because the watcher fires at initialization the diagram gets immediately drawn
+            # FIXME: Whats should happen, if a person clears the table after watching shp?!
+            $scope.$watch (->
+                Table.dataset
+            ), ( ->
+                $log.info "VisualizationCtrl dataset watcher triggered"
 
-        # create a new diagram based on the recommended diagram
-        # @method createDiagram
-        # @param {String} type
-        createDiagram = (options) ->
-            $log.info "VisualizationCtrl createDiagram function called"
-            trimmedDataset = vidatio.helper.trimDataset Table.dataset
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
+            ), true
 
-            headers = Table.getColumnHeaders()
+        $timeout ->
+            Progress.setMessage ""
 
-            options["headers"] =
-                "x": headers[options.xColumn]
-                "y": headers[options.yColumn]
+        $scope.$on "colorpicker-selected", ->
+            $log.info "VisualizationCtrl colorpicker-selected emitted"
+            $log.debug
+                color: $scope.visualization.color
 
-            subset = vidatio.helper.getSubset trimmedDataset
-            transposedDataset = vidatio.helper.transposeDataset subset
-            schema = vidatio.recommender.getSchema transposedDataset
-
-            if vidatio.helper.isDiagramPossible schema[options.xColumn], schema[options.yColumn], options.type
-                chartData = trimmedDataset
-            else
-                $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
-                    ngToast.create
-                        className: "danger"
-                        content: translation
-                chartData = []
-
-            switch options.type
-                when "scatter"
-                    chart = new vidatio.ScatterPlot chartData, options
-                when "map"
-                    # Use the whole dataset because we want the other attributes inside the popups
-                    geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getColumnHeaders(), {
-                        x: options.xColumn,
-                        y: options.yColumn
-                    }
-                    Map.setGeoJSON geoJSON
-                    Map.setScope $scope
-                when "parallel"
-                    chart = new vidatio.ParallelCoordinates chartData, options
-                when "bar"
-                    chart = new vidatio.BarChart chartData, options
-                when "timeseries"
-                    chart = new vidatio.TimeseriesChart chartData, options
-                else
-                    $log.error
-                        message: recommendationResults.error
+            $timeout ->
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -87,67 +77,30 @@ app.controller "VisualizationCtrl", [
                 axis: axis
                 id: id
 
-            if axis is "y" and isInputValid $scope.xAxisCurrent, id, $scope.diagramType
-                $scope.yAxisCurrent = id
-            else if axis is "x" and isInputValid id, $scope.yAxisCurrent, $scope.diagramType
-                $scope.xAxisCurrent = id
+            if axis is "x"
+                $scope.visualization.xAxisCurrent = id
+            else if axis is "y"
+                $scope.visualization.yAxisCurrent = id
+
+            Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
+
+            if Visualization.isInputValid $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent, $scope.visualization.diagramType
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
             else
-                $translate(translationKeys[$scope.diagramType]).then (diagramName) ->
+                $translate($scope.visualization.translationKeys[$scope.visualization.diagramType]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
-                        column: Table.getColumnHeaders()[id]
+                        column: Table.getHeader()[id]
                         diagramType: diagramName
-                .then (translation) ->
+                    .then (translation) ->
                     ngToast.create
                         content: translation
                         className: "danger"
 
-                return
-
-
-            Table.setDiagramColumns $scope.xAxisCurrent, $scope.yAxisCurrent
-
-            createDiagram
-                type: $scope.diagramType
-                xColumn: $scope.xAxisCurrent
-                yColumn: $scope.yAxisCurrent
-
-        switch Data.meta.fileType
-            when "shp"
-                $scope.diagramType = "map"
-                Map.setScope $scope
-            else
-                trimmedDataset = vidatio.helper.trimDataset Table.dataset
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getColumnHeaders()
-
-                if recommendationResults.error?
-                    $scope.diagramType = false
-                else
-                    $log.info "Recommender Results: #{JSON.stringify(recommendationResults)}"
-
-                    $scope.diagramType = recommendationResults.type
-                    $scope.xAxisCurrent = String(recommendationResults.xColumn)
-                    $scope.yAxisCurrent = String(recommendationResults.yColumn)
-
-                    $translate(translationKeys[$scope.diagramType]).then (translation) ->
-                        $scope.selectedDiagramName = translation
-
-                    Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
-
-                # After having recommend diagram options, we watch the dataset of the table
-                # because the watcher fires at initialization the diagram gets immediately drawn
-                $scope.$watch (->
-                    Table.dataset
-                ), ( ->
-                    $log.info "VisualizationCtrl - dataset has changed so we create a new diagram"
-
-                    createDiagram
-                        type: $scope.diagramType
-                        xColumn: $scope.xAxisCurrent
-                        yColumn: $scope.yAxisCurrent
-                ), true
-
-        $timeout ->
-            Progress.setMessage ""
+            return true
 
         # @method selectDiagram
         # @param {String} name
@@ -157,14 +110,15 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
-            $translate(translationKeys[type]).then (translation) ->
-                $scope.selectedDiagramName = translation
-                $scope.diagramType = type
+            $translate($scope.visualization.translationKeys[type]).then (translation) ->
+                $scope.visualization.selectedDiagramName = translation
+                $scope.visualization.diagramType = type
 
-                createDiagram
-                    type: $scope.diagramType
-                    xColumn: $scope.xAxisCurrent
-                    yColumn: $scope.yAxisCurrent
+                Visualization.create
+                    type: $scope.visualization.diagramType
+                    xColumn: $scope.visualization.xAxisCurrent
+                    yColumn: $scope.visualization.yAxisCurrent
+                    color: $scope.visualization.color
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
@@ -200,30 +154,43 @@ app.controller "VisualizationCtrl", [
             , (notify) ->
                 Progress.setMessage notify
 
-        # @method isInputValid
-        # @params {Number} x
-        # @params {Number} y
-        # @params {String} diagrmType
-        # @return {Function}
-        isInputValid = (x, y, diagramType) ->
-            $log.info "VisualizationCtrl isInputValid called"
-            $log.debug
-                x: x
-                y: y
-                diagramType: diagramType
+        $scope.geojson =
+            data: Map.geoJSON
+            style: ->
+                {}
+            pointToLayer: (feature, latLng) ->
+                new L.marker(latLng, icon: L.icon(
+                    iconUrl: '../images/marker-small.png'
+                    iconSize: [25, 30]
+                    iconAnchor: [12.5, 30]
+                    popupAnchor: [0, -30]
+                ))
+            onEachFeature: (feature, layer) ->
+                # So every markers gets a popup
+                html = ""
+                isFirstAttribute = true
 
-            transposedDataset = vidatio.helper.transposeDataset Table.dataset
-            subset = vidatio.helper.getSubset transposedDataset
+                for property, value of feature.properties
 
-            xSubsetFiltered = subset[x].filter( (value) ->
-                return value if value?
-            )
-            ySubsetFiltered = subset[y].filter( (value) ->
-                return value if value?
-            )
+                    if value
+                        if isFirstAttribute
+                            html += "<b>"
 
-            xColumnType = vidatio.recommender.getColumnType xSubsetFiltered
-            yColumnType = vidatio.recommender.getColumnType ySubsetFiltered
+                        if vidatio.helper.isEmailAddress(value)
+                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if vidatio.helper.isPhoneNumber(value)
+                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if vidatio.helper.isURL(value)
+                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                        else if value
+                            html += value + "<br>"
 
-            return vidatio.helper.isDiagramPossible xColumnType, yColumnType, diagramType
-    ]
+                        if isFirstAttribute
+                            html += "</b>"
+                            isFirstAttribute = false
+
+                unless html
+                    html = "Keine Informationen vorhanden"
+
+                layer.bindPopup(html)
+]

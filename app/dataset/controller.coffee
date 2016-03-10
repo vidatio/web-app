@@ -20,7 +20,9 @@ app.controller "DatasetCtrl", [
     "$location"
     "$translate"
     "ngToast"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast) ->
+    "DataService"
+    "VisualizationService"
+    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
 
         # set link to current vidatio
         $rootScope.link = $location.$$absUrl
@@ -28,7 +30,7 @@ app.controller "DatasetCtrl", [
         # link-overlay shouldn't be displayed on detailviews' start
         $rootScope.showVidatioLink = false
 
-# use datasetId from $stateParams
+        # use datasetId from $stateParams
         datasetId = $stateParams.id
         $scope.information = []
 
@@ -37,6 +39,11 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
+            console.log "$scope.data.metaData", $scope.data.metaData
+            if $scope.data.metaData?
+                Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
+            else
+                Data.meta["fileType"] = "-"
             tags = $scope.data.tags || "-"
             category = $scope.data.category || "-"
             dataOrigin = "Vidatio"
@@ -68,18 +75,18 @@ app.controller "DatasetCtrl", [
                     content: translation
                     className: "danger"
 
-        # create a new Vidatio and set necessary data
+        # @method $scope.createVidatio
+        # @description creates Vidatio from saved Dataset
         $scope.createVidatio = ->
-            $log.info "DatasetCtrl createVidatio called"
-            $log.debug
-                id: datasetId
-                name: $scope.data.name
-                data: $scope.data.data
+            $log.info "DatasetCtrl $scope.createVidatio called"
 
-            Table.setDataset $scope.data.data
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                Progress.setMessage message
 
-            $timeout ->
-                Progress.setMessage ""
+                Data.createVidatio $scope.data
+
+                $timeout ->
+                    Progress.setMessage ""
 
         # at the moment direct download is not possible, so download via editor
         $scope.downloadDataset = ->

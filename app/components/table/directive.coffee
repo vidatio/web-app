@@ -5,8 +5,10 @@ app.directive 'hot', [
     "$timeout"
     "$log"
     "DataService"
+    "MapService"
     "TableService"
-    ($timeout, $log, Data, Table) ->
+    "ConverterService"
+    ($timeout, $log, Data, Map, Table, Converter) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -17,42 +19,59 @@ app.directive 'hot', [
         link: ($scope, $element) ->
             $log.info "HotDirective link called"
 
-            hot = new Handsontable($element[0],
-                data: $scope.dataset
-                minCols: 26
-                minRows: 26
-                rowHeaders: true
-                colHeaders: true
-                currentColClassName: 'current-col'
-                currentRowClassName: 'current-row'
-                beforeChange: (change, source) ->
-                    $log.info "HotDirective beforeChange called"
-                    $log.debug
-                        message: "HotDirective beforeChange called"
-                        change: change
-                        source: source
+            minWidth = 26
+            minHeight = 26
 
-                    if Data.meta.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
-                        change[0][3] = change[0][2]
+            if Table.useColumnHeadersFromDataset
+                header = Table.getHeader()
+                for i in [header.length...minWidth]
+                    header.push null
+            else
+                header = true
 
-                afterChange: (change, source) ->
-                    $log.info "HotDirective afterChange called"
-                    $log.debug
-                        message: "HotDirective afterChange called"
-                        change: change
-                        source: source
+            hot = null
+            do ->
+                hot = new Handsontable($element[0],
+                    data: $scope.dataset
+                    minCols: minWidth
+                    minRows: minHeight
+                    rowHeaders: true
+                    colHeaders: header
+                    currentColClassName: 'current-col'
+                    currentRowClassName: 'current-row'
+                    beforeChange: (change, source) ->
+                        $log.info "HotDirective beforeChange called"
+                        $log.debug
+                            message: "HotDirective beforeChange called"
+                            change: change
+                            source: source
 
-                    if Data.meta.fileType is "shp" and change and change[0][3] != change[0][2]
-                        Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
-                        # Needed for updating the map, else the markers are
-                        # updating too late from angular refreshing cycle
-                        $scope.$applyAsync()
-            )
+                        if Data.meta.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
+                            change[0][3] = change[0][2]
+
+                    afterChange: (change, source) ->
+                        $log.info "HotDirective afterChange called"
+                        $log.debug
+                            message: "HotDirective afterChange called"
+                            change: change
+                            source: source
+
+                        if Data.meta.fileType is "shp" and change and change[0][3] != change[0][2]
+                            Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
+                            # Needed for updating the map, else the markers are
+                            # updating too late from angular refreshing cycle
+                            $scope.$applyAsync()
+                )
 
             Table.setInstance hot
-            Table.initAxisSelection()
-            if Table.useColumnHeadersFromDataset
-                Table.takeColumnHeadersFromDataset()
+
+            if not Table.useColumnHeadersFromDataset
+                Table.setHeader()
+
+            if Data.meta.fileType is "shp"
+                geoJSON = Map.getGeoJSON()
+                columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
+                Table.setHeader columnHeaders, "shp"
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

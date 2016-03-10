@@ -3,13 +3,25 @@
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             #time-filter
                 h2 {{ "FILTER.BY_TIME" | translate }}
-                input.form-control.input-sm(date-time ng-model="dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
-                |  -
-                input.form-control.input-sm(date-time ng-model="dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+                input.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+                span.to  -
+                input.form-control.input-sm(date-time ng-model="filter.dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+            #category-filter
+                h2 {{ "FILTER.BY_CATEGORY" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ filter.category }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li
+                            a(href="#" ng-click="setCategory()") Filter aufheben
+                        li(ng-repeat="category in categories")
+                            a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row
-                .col-xs-6.col-md-4.col-lg-4(ng-repeat="vidatio in vidatios | dateFilter: dates.from : dates.to")
+                .col-xs-6.col-sm-6.col-md-4.col-lg-4(
+                ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category"
+                )
                     .vidatio
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                             img(src="{{ vidatio.image }}")
@@ -21,4 +33,5 @@
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                                 h4.title {{ vidatio.title }}
                             p {{ vidatio.description | limitTo: 120}} ...
+                            p Kategorie: {{ vidatio.metaData.category.name }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}

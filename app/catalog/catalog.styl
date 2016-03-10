@@ -35,19 +35,39 @@
         background $color-table-odd-passive
         border-top 3px solid $color-border
 
+        > div:not(#time-filter)
+            margin-top 20px
+
+        #time-filter, #category-filter
+            padding 0
+
         #time-filter
+            position relative
             input
-                width 100px
+                width 46%
                 display inline
                 padding 8px
 
+            span.to
+                display inline-block
+                text-align center
+                width 6%
+
             [date-picker-wrapper]
                 position absolute
-                top 38px
+                top 23px
 
-            input + [date-picker-wrapper]
-                margin-left 20px
+            input + span + [date-picker-wrapper]
+                margin-left 36px
 
+        #category-filter
+            .btn-group
+                display block
+                button
+                    float none
+                    width 100%
+                ul
+                    width 100%
 
     [date-picker] .active, [date-picker] .active.now
         background-color $color-green
@@ -76,3 +96,16 @@
 
             .text
                 padding 10px 10px 25px
+        #time-filter
+        #category-filter
+            max-width 30em
+            margin 0 auto
+            padding 0 15px !important
+
+        input + span + [date-picker-wrapper]
+            right 0
+
+
+    @media screen and (max-width: 730px)
+        #time-filter span.to
+            display none

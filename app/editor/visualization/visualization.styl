@@ -4,6 +4,13 @@
         width 100%
         height calc(100% - 50px)
 
+        input[id^="d3plus_"][id$="_inline_input"]
+            position absolute
+            padding 5px
+            font-family Helvetica
+            font-weight 200
+            font-size 12px
+
     .angular-leaflet-map
         height calc(100% - 50px) /* -50px according to the settings-bars' height + 20px margin */
         width 100%
@@ -82,6 +89,22 @@
 
             .selection-text
                 line-height 43px
+
+    .color-selection a .angular-color-picker
+        display none
+
+        //bugfix angular-color-picker cursors
+        .angular-color-picker > ._hues > ._cursor
+            left -6px
+            width 40px
+
+    .color-selection a:hover .angular-color-picker
+        display block
+
+    .graph-icon
+        width 30px
+        margin-right 10px
+        margin-top 5px
 
     .download-button li:first-child
             border-bottom 2px solid $color-green
