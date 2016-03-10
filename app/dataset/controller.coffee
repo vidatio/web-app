@@ -83,9 +83,7 @@ app.controller "DatasetCtrl", [
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
-
                 Data.createVidatio $scope.data
-
                 $timeout ->
                     Progress.setMessage ""
 

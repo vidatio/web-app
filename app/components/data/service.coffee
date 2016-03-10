@@ -68,9 +68,9 @@ app.service 'DataService', [
                         fileType: @meta.fileType
                         fileName: @meta.fileName
                     options:
-                        diagramType: Visualization.options.diagramType
-                        xAxisCurrent: Visualization.options.xAxisCurrent
-                        yAxisCurrent: Visualization.options.yAxisCurrent
+                        type: Visualization.options.type
+                        xAxisCurrent: Visualization.options.xColumn
+                        yAxisCurrent: Visualization.options.yColumn
                         color: Visualization.options.color
                         selectedDiagramName: Visualization.options.selectedDiagramName
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
