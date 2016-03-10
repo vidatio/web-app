@@ -117,6 +117,7 @@
         "BY_CATEGORY": "Filtern nach Kategorie"
     },
     "HEADER": "Kopfzeile",
+    "HEADER_DEFAULT": "Spalte...",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
         "SCATTER_PLOT": "Streudiagramm",
