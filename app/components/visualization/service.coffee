@@ -17,8 +17,8 @@ app.service 'VisualizationService', [
             constructor: ->
                 @options =
                     diagramType: false
-                    xAxisCurrent: 0
-                    yAxisCurrent: 1
+                    xAxisCurrent: null
+                    yAxisCurrent: null
                     color: "#11DDC6"
                     selectedDiagramName: null
                     translationKeys:

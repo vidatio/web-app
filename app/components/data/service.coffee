@@ -113,14 +113,14 @@ app.service 'DataService', [
                 else
                     if data.options?
                         # Each value has to be assigned individually, otherwise all options get overwritten.
-                        Visualization.options["diagramType"] = data.options.diagramType || false
-                        Visualization.options["xAxisCurrent"] = data.options.xAxisCurrent || 0
-                        Visualization.options["yAxisCurrent"] = data.options.yAxisCurrent || 0
-                        Visualization.options["color"] = data.options.color || "#11DDC6"
-                        Visualization.options["selectedDiagramName"] = data.options.selectedDiagramName || null
+                        Visualization.options["diagramType"] = if data.options.diagramType? then data.options.diagramType else false
+                        Visualization.options["xAxisCurrent"] = if data.options.xAxisCurrent? then data.options.xAxisCurrent else null
+                        Visualization.options["yAxisCurrent"] = if data.options.yAxisCurrent? then data.options.yAxisCurrent else null
+                        Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
+                        Visualization.options["selectedDiagramName"] = if data.options.selectedDiagramName? then data.options.selectedDiagramName else null
 
                         if data.options.useColumnHeadersFromDataset?
-                            Table.useColumnHeadersFromDataset = data.options.useColumnHeadersFromDataset || false
+                            Table.useColumnHeadersFromDataset = if data.options.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
 
                             if Table.useColumnHeadersFromDataset
                                 Table.setHeader data.data.shift()
