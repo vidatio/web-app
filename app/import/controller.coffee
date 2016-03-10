@@ -26,12 +26,6 @@ app.controller "ImportCtrl", [
 
         $scope.importService = Import
 
-        # set bool value if user has already started editor with a dataset
-        if Data.meta.fileName is ""
-            Data.meta.editorNotYetInitialized = true
-        else
-            Data.meta.editorNotYetInitialized = false
-
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->

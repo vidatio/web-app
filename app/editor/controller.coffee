@@ -30,8 +30,8 @@ app.controller "EditorCtrl", [
         # standardTitle is needed, if user sets no title
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
-            if $scope.editor.fileName is ""
-                $scope.editor.fileName = $scope.standardTitle
+            if $scope.editor.name is ""
+                $scope.editor.name = $scope.standardTitle
 
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
@@ -77,13 +77,13 @@ app.controller "EditorCtrl", [
         $scope.saveVidatioTitle = ->
             $log.info "EditorCtrl saveVidatioTitle called"
 
-            if $scope.editor.fileName is ""
-                $scope.editor.fileName = $scope.standardTitle
+            if $scope.editor.name is ""
+                $scope.editor.name = $scope.standardTitle
 
             $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
 
             $log.debug
-                filename: $scope.editor.fileName
+                title: $scope.editor.name
 
             return true # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
 

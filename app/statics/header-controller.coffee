@@ -19,6 +19,12 @@ app.controller "HeaderCtrl", [
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
 
+        # set bool value editorNotYetInitialized; it depends on wheter editor was already initialized with a dataset
+        if Table.getDataset().length == 1
+            $scope.header.editorNotYetInitialized = true
+        else
+            $scope.header.editorNotYetInitialized = false
+
         # REFACTOR Needed to wait for leaflet directive to render
         # $timeout ->
         #     # TODO: Only resize what is currently visible or used
@@ -37,8 +43,8 @@ app.controller "HeaderCtrl", [
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
 
-            if $scope.header.fileName is $scope.standardTitle
-                $scope.header.fileName = $scope.header.fileName + " " + moment().format("HH_mm_ss")
+            if $scope.header.name is $scope.standardTitle
+                $scope.header.name = $scope.header.name + " " + moment().format("HH_mm_ss")
 
             if Data.meta.fileType is "shp"
                 dataset = Map.getGeoJSON()

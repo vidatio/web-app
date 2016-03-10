@@ -21,7 +21,7 @@ app.service 'DataService', [
 
                 @meta =
                     "fileType": ""
-                    "fileName": ""
+                    "name": ""
 
             updateMap: (row, column, oldData, newData) ->
                 $log.info "DataService updateMap called"
@@ -59,14 +59,13 @@ app.service 'DataService', [
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    name: @meta.fileName
+                    name: @meta.name
 
                 DataFactory.save
-                    name: @meta.fileName
                     data: dataset
                     metaData:
                         fileType: @meta.fileType
-                        fileName: @meta.fileName
+                        name: @meta.name
                     options:
                         diagramType: Visualization.options.diagramType
                         xAxisCurrent: Visualization.options.xAxisCurrent
