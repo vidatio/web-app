@@ -24,7 +24,6 @@ app.controller "ImportCtrl", [
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
-        #$rootScope.savedWorks = true
         $scope.importService = Import
 
         # set bool value if user has already started editor with a dataset
