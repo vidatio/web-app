@@ -69,8 +69,8 @@ app.service 'DataService', [
                         fileName: @meta.fileName
                     options:
                         type: Visualization.options.type
-                        xAxisCurrent: Visualization.options.xColumn
-                        yAxisCurrent: Visualization.options.yColumn
+                        xColumn: Visualization.options.xColumn
+                        yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
                         selectedDiagramName: Visualization.options.selectedDiagramName
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
@@ -115,9 +115,9 @@ app.service 'DataService', [
                 else
                     if data.options?
                         # Each value has to be assigned individually, otherwise all options get overwritten.
-                        Visualization.options["diagramType"] = if data.options.diagramType? then data.options.diagramType else false
-                        Visualization.options["xAxisCurrent"] = if data.options.xAxisCurrent? then data.options.xAxisCurrent else null
-                        Visualization.options["yAxisCurrent"] = if data.options.yAxisCurrent? then data.options.yAxisCurrent else null
+                        Visualization.options["type"] = if data.options.type? then data.options.type else false
+                        Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
+                        Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
                         Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
                         Visualization.options["selectedDiagramName"] = if data.options.selectedDiagramName? then data.options.selectedDiagramName else null
 

@@ -29,9 +29,9 @@ app.service 'VisualizationService', [
                         "timeseries": "DIAGRAMS.TIME_SERIES"
 
             resetOptions: ->
-                @options.diagramType = false
-                @options.xAxisCurrent = null
-                @options.yAxisCurrent = null
+                @options.type = false
+                @options.xColumn = null
+                @options.yColumn = null
                 @options.color = "#11DDC6"
                 @options.selectedDiagramName = null
 
@@ -72,7 +72,7 @@ app.service 'VisualizationService', [
                     y: y
                     type: type
 
-                if not x? or not y? or not diagramType?
+                if not x? or not y? or not type?
                     return false
 
                 transposedDataset = vidatio.helper.transposeDataset Table.getDataset()

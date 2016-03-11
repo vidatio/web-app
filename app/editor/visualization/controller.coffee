@@ -87,17 +87,17 @@ app.controller "VisualizationCtrl", [
                 id: id
 
             if axis is "x"
-                $scope.visualization.xAxisCurrent = id
+                $scope.visualization.xColumn = id
             else if axis is "y"
-                $scope.visualization.yAxisCurrent = id
+                $scope.visualization.xColumn = id
 
-            Table.setDiagramColumns $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent
+            Table.setDiagramColumns $scope.visualization.xColumn, $scope.visualization.yColumn
 
-            if Visualization.isInputValid $scope.visualization.xAxisCurrent, $scope.visualization.yAxisCurrent, $scope.visualization.diagramType
+            if Visualization.isInputValid $scope.visualization.xColumn, $scope.visualization.yColumn, $scope.visualization.type
                 Visualization.create
-                    type: $scope.visualization.diagramType
-                    xColumn: $scope.visualization.xAxisCurrent
-                    yColumn: $scope.visualization.yAxisCurrent
+                    type: $scope.visualization.type
+                    xColumn: $scope.visualization.xColumn
+                    yColumn: $scope.visualization.yColumn
                     color: $scope.visualization.color
             else
                 $translate($scope.visualization.translationKeys[$scope.visualization.type]).then (diagramName) ->
