@@ -18,7 +18,7 @@ app.controller "TableCtrl", [
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
         headerCheckbox = $('#column-headers-checkbox')
-        if headerCheckbox? and headerCheckbox.radiocheck? then headerCheckbox.radiocheck()
+        if headerCheckbox?.radiocheck? then headerCheckbox.radiocheck()
 
         $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
