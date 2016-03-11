@@ -37,11 +37,7 @@ app.controller "VisualizationCtrl", [
         $scope.recommend = ->
             header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
             Visualization.recommendDiagram(header)
-            Visualization.create
-                type: $scope.visualization.type
-                xColumn: $scope.visualization.xColumn
-                yColumn: $scope.visualization.yColumn
-                color: $scope.visualization.color
+            Visualization.create()
 
         if Data.meta.fileType is "shp"
             $scope.visualization.type = "map"
@@ -55,11 +51,7 @@ app.controller "VisualizationCtrl", [
             ), ( ->
                 $log.info "VisualizationCtrl dataset watcher triggered"
 
-                Visualization.create
-                    type: $scope.visualization.type
-                    xColumn: $scope.visualization.xColumn
-                    yColumn: $scope.visualization.yColumn
-                    color: $scope.visualization.color
+                Visualization.create()
             ), true
 
         $timeout ->
@@ -71,11 +63,7 @@ app.controller "VisualizationCtrl", [
                 color: $scope.visualization.color
 
             $timeout ->
-                Visualization.create
-                    type: $scope.visualization.type
-                    xColumn: $scope.visualization.xColumn
-                    yColumn: $scope.visualization.yColumn
-                    color: $scope.visualization.color
+                Visualization.create()
 
         # @method changeAxisColumnSelection
         # @param {Number} axis
@@ -94,11 +82,7 @@ app.controller "VisualizationCtrl", [
             Table.setDiagramColumns $scope.visualization.xColumn, $scope.visualization.yColumn
 
             if Visualization.isInputValid $scope.visualization.xColumn, $scope.visualization.yColumn, $scope.visualization.type
-                Visualization.create
-                    type: $scope.visualization.type
-                    xColumn: $scope.visualization.xColumn
-                    yColumn: $scope.visualization.yColumn
-                    color: $scope.visualization.color
+                Visualization.create()
             else
                 $translate($scope.visualization.translationKeys[$scope.visualization.type]).then (diagramName) ->
                     return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
@@ -122,11 +106,7 @@ app.controller "VisualizationCtrl", [
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.type = type
 
-                Visualization.create
-                    type: $scope.visualization.type
-                    xColumn: $scope.visualization.xColumn
-                    yColumn: $scope.visualization.yColumn
-                    color: $scope.visualization.color
+                Visualization.create()
 
         #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
