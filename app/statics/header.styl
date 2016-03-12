@@ -149,6 +149,8 @@ header
         width 42px
         height 42px
         border-radius 4px
+        -webkit-border-radius 4px
+        -moz-border-radius 4px
         top -5px
         cursor pointer
 
@@ -190,6 +192,8 @@ header
             display inline-block
             margin-left 3px
             border-radius 4px
+            -webkit-border-radius 4px
+            -moz-border-radius 4px
             cursor pointer
 
             &:hover, &:focus
@@ -226,7 +230,6 @@ header
 
         a#logout-button
         a#login-button
-        a#save-button
             font-size 24px
 
             span
@@ -248,6 +251,11 @@ header
             span
                 top -16px
                 margin-left -6px
+
+        // Firefox displays the save-button on the wrong position, so this additional rule is necessary (Firefox only)
+        @-moz-document url-prefix()
+            a#save-button
+                margin-top -6px
 
     #link-overlay
         position absolute
