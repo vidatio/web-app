@@ -139,7 +139,8 @@
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
         "BAR_CHART": "Balkendiagramm",
-        "TIME_SERIES": "Zeitlicher Verlauf"
+        "TIME_SERIES": "Zeitlicher Verlauf",
+        "RECOMMEND": "Diagramm empfehlen"
     },
     "LONGITUDE": "Long",
     "LATITUDE": "Lat"

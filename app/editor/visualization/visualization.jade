@@ -25,10 +25,10 @@
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ visualization.selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
-                        li
+                        li.trigger-recommender
                             a(href='#' ng-click="recommend()")
-                                .icon-magicwand.trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
-                                .selection-text Recommender
+                                .icon-magicwand.selection-icons(ng-hide="meta.fileType == 'shp'")
+                                .selection-text {{ "DIAGRAMS.RECOMMEND" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('scatter')")
                                 .icon-scatterplotchart.selection-icons
@@ -54,11 +54,11 @@
             //.trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
             //    a.icon-magicwand(href='#' ng-click="recommend()")
 
-            .color-selection.hover-button.icons-settingsbar(ng-hide="visualization.diagramType == 'map'")
+            .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
                 a.icon-colorbucket(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
 
 
-            .download-button.hover-button.icons-settingsbar
+            .download-button.hover-button
                 a(href='#').icon-download.download-icon
                 ul
                     li
