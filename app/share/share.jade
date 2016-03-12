@@ -33,7 +33,7 @@
 
             .col-sm-6
                 #save-share.area(ng-init="show=1" ng-show="show==1")
-                    .option-icon.icon-sharing
+                    .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
@@ -41,7 +41,7 @@
                             li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-link(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-embed(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-embeddedcode.embeddedcodeShowOne(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
                     form(name="metadataForm" ng-controller="ShareCtrl")
@@ -60,16 +60,16 @@
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
                                     option(value="1") 1
                                     option(value="2") 2
-                                    option(value="3") 3 
+                                    option(value="3") 3
                         .row
                             .input-group.form-group.selection.last
                                 select.form-control(name="licence" ng-model="vidatio.licence" required)
                                     option(selected="selected" disabled="true" value="") {{ 'LICENCE' | translate }}
                                     option(value="1") 1
                                     option(value="2") 2
-                                    option(value="3") 3 
+                                    option(value="3") 3
                         .row
-                            .tagsinput-primary  
+                            .tagsinput-primary
                                     input(name="tagsinput" class="tagsinput" data-role="tagsinput")
                                     span.add-tag +
                                     span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
@@ -78,11 +78,11 @@
                             button.btn.btn-block.btn-embossed.btn-primary(ng-click="$parent.show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
                 #save-share.area(ng-show="show==2")
-                    .option-icon.icon-lock
+                    .option-icon.icon-save
                     h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
                     .row
-                        p 
-                            | Logge dich ein, um dein Vidatio in deinem Profil zu speichern. 
+                        p
+                            | Logge dich ein, um dein Vidatio in deinem Profil zu speichern.
                             br
                             | Nur gespeicherte Vidatios können später weiter bearbeitet werden.
                     form(name="loginForm" ng-submit="" ng-controller="ShareCtrl")
@@ -97,7 +97,7 @@
                                 span.input-group-addon.fui-lock
                                 input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
 
-                        .row 
+                        .row
                             label.checkbox(for="publish")
                                 input#publish.custom-checkbox(data-toggle="checkbox", type="checkbox" checked="checked")
                                 | Vidatio im öffentlichen Katalog anzeigen
@@ -118,7 +118,7 @@
 
 
                 #save-share.area(ng-show="show==3")
-                    .option-icon.icon-sharing
+                    .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
@@ -126,14 +126,14 @@
                             li: button.btn.btn-primary.icon-googleplus
                             li: button.btn.btn-primary.icon-twitter
                             li: button.btn.btn-primary.icon-link
-                            li: button.btn.btn-primary.icon-embed
+                            li: button.btn.btn-primary.icon-embeddedcode
                     .row
                         h3 Embed Code
-                            span.icon-embed
+                            span.icon-embeddedcode
                         .input-group.single
                             textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
-                    .row 
+                    .row
                         h3 {{ "COPY_LINK" | translate }}
                             span.icon-link
                         .input-group.single
-                            input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly) 
+                            input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly)

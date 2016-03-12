@@ -13,15 +13,15 @@
             box-shadow $box-shadow-size $color-shadow
             text-align center
             margin-bottom 56px
-            
-            a:not(.inverse) 
+
+            a:not(.inverse)
                 {fillParent}
                 display inline-block
                 color $color-grey-dark
-            
+
             &:hover
                 background $color-white
-                
+
 
         .option-icon
             width 100px
@@ -30,7 +30,7 @@
             font-size 45px
             color $color-dark-grey
             text-align center
-        
+
         #preview
             height 293px
             padding 20px
@@ -44,7 +44,7 @@
                     text-align left
                     padding 15px
                     position relative
-                    li 
+                    li
                         list-style-type none
                         {lightText}
                         line-height 16px
@@ -62,7 +62,7 @@
                         &.category
                         &.licence
                             float left
-                            margin-right 5px   
+                            margin-right 5px
                         &.tags
                             color $color-active
                         &.edit
@@ -82,33 +82,49 @@
         #download
             margin-right 13px
 
-        #download  
+        #download
             height 215px
             a
                 display inline
                 .option-icon
-                    margin-top 5px      
+                    margin-top 5px
             form
                 width 70%
                 margin 0 auto
-                
+
                 .form-group
                     width 43%
-                    margin 0 3% 
+                    margin 0 3%
                     float left
-                    
+
                     option
                         text-align center
             &:hover
                 background-color $color-hover-light
-        
+
         #save-share
             padding 0 45px 20px
             height auto
             min-height 564px
             margin-left 13px
-            
-            .share-options 
+
+            .icon-save
+                font-size 50px
+                height 67px
+
+            .icon-embeddedcode
+                &:before
+                    font-weight bold
+
+            .embeddedcodeShowOne
+                font-size 32px !important
+
+                &:before
+                    position relative
+                    top -4px
+                    margin-left 2px
+
+            .share-options
                 display block
                 height 45px
                 margin 0 auto 15px
@@ -119,20 +135,20 @@
                     list-style-type none
                     float left
                     margin 0 5px
-                    
+
                     button
                         width 45px
                         height 45px
                         padding 5px
                         font-size 25px
                         color $color-white
-            
-            .input-group 
+
+            .input-group
                 margin-bottom 0
                 width 100%
                 .form-control:not(:first-child)
                     border-left none
-                
+
                 &.selection
                     &::after
                         top 48%
@@ -145,22 +161,22 @@
                         option
                             color $color-black
                             padding 5px 12px
-                
+
             button[type="submit"]
                 margin-top 8px
-            
+
             p
                 {lightText}
                 margin-bottom 12px
-            
+
             .option-icon
                &.icon-lock
-                    margin-top 45px  
-                  
+                    margin-top 45px
+
             .col-xs-6.left
                 text-align left
                 padding 0
-                
+
             .col-xs-6.right
                 text-align right
                 padding 0
@@ -171,29 +187,29 @@
                 {lightText}
                 line-height 19px
                 padding-left 30px
-            
+
             .share-only
                 margin-top 90px
                 display block
-            
+
             .form-control[readonly]
                 color $color-passive
                 font-size 14px
-            
+
             h3
                 margin-top 30px
-                
+
 @media(max-width 768px)
     #share
         .row
             .area
                 margin-bottom 25px !important
-            
+
             #preview
             #download
             #save-share
-                margin 0 
+                margin 0
                 padding 0 15px 20px
             #download
                 form
-                    width 90%   
+                    width 90%
