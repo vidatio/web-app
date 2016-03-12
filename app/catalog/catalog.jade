@@ -18,8 +18,7 @@
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
             #tags-filter
                 label(for="tagsFilter") {{ "FILTER.BY_TAGS" | translate }}
-                .tagsinput-primary
-                    input#tagsFilter.tagsinput(name="tagsinput" data-role="tagsinput" ng-model="filter.tags" ng-list=",")
+                input#tagsFilter.tagsinput(name="tagsinput" data-role="tagsinput" ng-model="filter.tags" ng-list=",")
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row

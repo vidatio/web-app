@@ -10,8 +10,7 @@ app.controller "CatalogCtrl", [
     "ngToast"
     ($scope, CatalogFactory, $log, $translate, ngToast) ->
 
-#        $scope.filter =
-#            category: null
+        $scope.filter = {}
 
         tags = [
             ["test", "hallo welt"]
@@ -20,6 +19,8 @@ app.controller "CatalogCtrl", [
             ["tag2", "vidatio"]
             ["tag3", "tag1"]
         ]
+
+        $(".tagsinput").tagsinput()
 
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
