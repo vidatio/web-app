@@ -83,6 +83,15 @@
         .seperator
             background $color-shadow
 
+        #datatable
+        #chart
+        .angular-leaflet-map
+        #chart-placeholder
+        .angular-leaflet-map
+            height calc(100% - 50px) /* -50px according to the settings-bars' height + 20px margin */
+            width 100% !important
+            overflow hidden
+
     .content
         height calc(100vh - 310px)
         min-height 400px
@@ -262,6 +271,10 @@
                 height 2px
                 width calc(100% - 10px)
                 margin -15px 5px 15px
+
+            #table
+                .content
+                    margin-bottom 30px
 
 @media(min-width: 992px)
     #editor
