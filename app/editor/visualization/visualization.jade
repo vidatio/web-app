@@ -50,13 +50,8 @@
                                 .icon-linechart.selection-icons
                                 .selection-text {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
-
-            //.trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
-            //    a.icon-magicwand(href='#' ng-click="recommend()")
-
             .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
                 a.icon-colorbucket(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
-
 
             .download-button.hover-button
                 a(href='#').icon-download.download-icon
