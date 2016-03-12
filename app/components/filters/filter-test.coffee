@@ -91,3 +91,37 @@ describe "Filter Catalog", ->
             ]
 
             expect(@filter('categoryFilter')(input, "category2")).toEqual(result)
+
+    describe "TagFilter", ->
+        it "should be defined and included", ->
+            expect(@filter('categoryFilter')).toBeDefined()
+
+        it "should filter input correctly with a cateory", ->
+            input = [
+                {
+                    metaData:
+                        tags: [
+                            "category1"
+                            "category2"
+                        ]
+
+                },
+                {
+                    metaData:
+                        tags: [
+                            "category3"
+                        ]
+
+                }
+            ]
+
+            result = [
+                {
+                    metaData:
+                        tags: [
+                            "category3"
+                        ]
+                }
+            ]
+
+            expect(@filter('tagsFilter')(input, ["category3"])).toEqual(result)
