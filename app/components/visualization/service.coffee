@@ -16,9 +16,9 @@ app.service 'VisualizationService', [
             # @public
             constructor: ->
                 @options =
-                    diagramType: false
-                    xAxisCurrent: null
-                    yAxisCurrent: null
+                    type: false
+                    xColumn: 0
+                    yColumn: 1
                     color: "#11DDC6"
                     selectedDiagramName: null
                     translationKeys:
@@ -29,9 +29,9 @@ app.service 'VisualizationService', [
                         "timeseries": "DIAGRAMS.TIME_SERIES"
 
             resetOptions: ->
-                @options.diagramType = false
-                @options.xAxisCurrent = null
-                @options.yAxisCurrent = null
+                @options.type = false
+                @options.xColumn = null
+                @options.yColumn = null
                 @options.color = "#11DDC6"
                 @options.selectedDiagramName = null
 
@@ -47,14 +47,14 @@ app.service 'VisualizationService', [
                     $log.error "Visualization Ctrl error at recommend diagram"
                     $log.debug
                         error: recommendationResults.error
-                    @options.diagramType = false
+                    @options.type = false
                 else
                     $log.info "VisualizationCtrl recommender results: #{JSON.stringify(recommendationResults)}"
-                    @options.diagramType = recommendationResults.type
-                    @options.xAxisCurrent = String(recommendationResults.xColumn)
-                    @options.yAxisCurrent = String(recommendationResults.yColumn)
+                    @options.type = recommendationResults.type
+                    @options.xColumn = String(recommendationResults.xColumn)
+                    @options.yColumn = String(recommendationResults.yColumn)
 
-                    $translate(@options.translationKeys[@options.diagramType]).then (translation) =>
+                    $translate(@options.translationKeys[@options.type]).then (translation) =>
                         @options.selectedDiagramName = translation
 
                     Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
@@ -63,16 +63,16 @@ app.service 'VisualizationService', [
             # @public
             # @params {Number} x
             # @params {Number} y
-            # @params {String} diagrmType
+            # @params {String} type
             # @return {Function}
-            isInputValid: (x, y, diagramType) ->
+            isInputValid: (x, y, type) ->
                 $log.info "VisualizationService isInputValid called"
                 $log.debug
                     x: x
                     y: y
-                    diagramType: diagramType
+                    type: type
 
-                if not x? or not y? or not diagramType?
+                if not x? or not y? or not type?
                     return false
 
                 transposedDataset = vidatio.helper.transposeDataset Table.getDataset()
@@ -88,13 +88,13 @@ app.service 'VisualizationService', [
                 xColumnType = vidatio.recommender.getColumnType xSubsetFiltered
                 yColumnType = vidatio.recommender.getColumnType ySubsetFiltered
 
-                return vidatio.helper.isDiagramPossible xColumnType, yColumnType, diagramType
+                return vidatio.helper.isDiagramPossible xColumnType, yColumnType, type
 
             # create a new diagram based on the recommended diagram
             # @method create
             # @public
             # @param {String} type
-            create: (options) ->
+            create: (options = @options) ->
                 $log.info "VisualizationService create function called"
                 $log.debug
                     options: options
@@ -189,6 +189,8 @@ app.service 'VisualizationService', [
                         if event.keyCode is 13 or event.keyCode is 27
                             $element.text $(@).val() || axis
                             $(@).remove()
+
+                return true
 
         new Visualization
 ]

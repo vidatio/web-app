@@ -71,8 +71,13 @@ a
 
         span
             background-color $color-green
-
-
+    
+    &[disabled]
+        color $color-white
+        &:hover
+            box-shadow none
+            top 0
+        
 .dropdown-menu > li > a
     &:hover
         background-color $color-hover-dark
@@ -105,16 +110,56 @@ a
         font-size 14px
 
 
-/* Registration specific styles */
+/* Form specific styles */
 .form-control
     border-radius 4px
 
     &:focus
     &:hover
         border-color $color-green
+        position relative
+    
+.input-group-addon
+    border-radius 0
+    
+.input-group
+    margin-top -2px
+
+/*no round corners by default, see below*/
+input.form-control
+    border-radius 0
+
+/*first input top round corners, if many*/
+.input-group.first
+    .input-group-addon
+        border-top-left-radius 4px
+    input
+        border-top-right-radius 4px
+        &:first-child
+            border-radius 4px 4px 0 0
+
+/*last input bottom round corners, if many*/
+.input-group.last
+    .input-group-addon
+        border-bottom-left-radius 4px
+    input
+        border-bottom-right-radius 4px
+        &:first-child
+            border-radius 0 0 4px 4px
+    select
+        border-bottom-right-radius 4px
+        &:first-child
+            border-radius 0 0 4px 4px
+
+/*input round corners, if single*/        
+.input-group.single
+    input.form-control
+    textarea.form-control    
+        border-radius 4px
 
 .input-group
     &:hover
+        z-index 1
         .input-group-addon
         input.form-control
             border-color $color-green
@@ -133,6 +178,42 @@ a
         background $color-green
         border-color $color-green
 
+.form-group
+    label
+        {lightText}
+    &.selection
+        &::after
+            border-left 6px solid transparent
+            border-right 6px solid transparent
+            border-top 5px solid black
+            content ""
+            position absolute
+            top 68%
+            right 15px
+            z-index 3
+
+select.form-control
+    text-align center
+    -webkit-appearance none  
+    -moz-appearance none
+    appearance none
+    height 34px
+    padding 5px 12px
+    &:focus
+    &:hover
+        position relative
+        z-index 2
+        outline none
+    
+    option[disabled="true"]
+        display none
+
+/*hack to remove dotted focus from select in firefox*/
+.form-group
+    select.form-control:-moz-focusring
+        color transparent !important
+        text-shadow 0 0 0 #000
+
 /* STATE VALID */
 .input-group.form-group
     .input-group-addon
@@ -142,11 +223,13 @@ a
 
 /* STATE VALID WITH FOCUS */
 .input-group.form-group
-    &.focus .input-group-addon
-    .input-group-addon.focus
-    input.form-control:focus
-    .form-control-feedback
-        border-color $color-green
+    &.focus 
+        z-index 1
+        .input-group-addon
+        .input-group-addon.focus
+        input.form-control:focus
+        .form-control-feedback
+            border-color $color-green
 
 /* STATE INVALID */
 .has-error.input-group.form-group
@@ -155,17 +238,14 @@ a
     .form-control-feedback
         color $color-red
         border-color $color-red
+    &.focus
+        input.form-control
+            border-color $color-red
 
 .input-group.form-group
 input.form-control
     &:focus
         color $color-black
-
-.input-group .form-control:not(:first-child):not(:last-child)
-    border-radius 0 4px 4px 0
-
-.input-group-addon
-    border-radius 4px
 
 span.error
     width 100%
@@ -174,11 +254,53 @@ span.error
     background $color-red
     padding 5px 10px
     display block
-    border-radius 4px
-    margin-bottom 10px
 
     &.ng-hide-add
         animation: 0.5s fadeOut ease;
 
     &.ng-hide-remove
         animation: 0.5s fadeIn ease;
+
+/*checboxes*/
+.checkbox input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
+.radio input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
+.checkbox input.custom-radio[type="radio"]:checked + .icons .icon-checked, 
+.radio input.custom-radio[type="radio"]:checked + .icons .icon-checked
+    color $color-green
+
+/*tags flat-ui custom styles*/
+.tagsinput-primary
+    min-height 66px
+    margin-bottom 0
+    > span
+        {lightText}
+        margin -20px 0 0 32px
+        float left
+        &.add-tag
+            background-color $color-passive
+            border-radius 4px
+            color $color-white
+            display block
+            font-size 30px
+            height 27px
+            line-height 21px
+            margin -28px 0 0 0
+            text-align center
+            width 27px
+            cursor pointer
+            position relative
+            &:hover
+                background-color $color-hover-dark
+    
+    .bootstrap-tagsinput 
+        border none
+        padding 6px 1px 1px 1px
+                
+        input[type="text"]
+            padding-left 35px
+            margin 0
+            height 27px
+            {lightText}
+        .tag
+            margin 0 5px 3px 0
+            float left
