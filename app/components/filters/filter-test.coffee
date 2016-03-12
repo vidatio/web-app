@@ -1,10 +1,11 @@
 "use strict"
 describe "Filter Catalog", ->
     beforeEach ->
-        module "app.filters"
-        inject ($filter, $injector) ->
+        module "ngCookies", "app.filters"
+        inject ($filter, $injector, $cookieStore) ->
             @injector = $injector
             @filter = $filter
+            @cookieStore = $cookieStore
 
     describe "DateFilter", ->
         it "should be defined and included", ->
@@ -92,6 +93,37 @@ describe "Filter Catalog", ->
 
             expect(@filter('categoryFilter')(input, "category2")).toEqual(result)
 
-    xdescribe "MyVidatioFilter", ->
+    describe "MyVidatioFilter", ->
+        beforeEach ->
+            globals =
+                currentUser:
+                    name: "currentName"
+
+            @cookieStore.put "globals", globals
+
+            @input = [
+                {
+                    userId:
+                        name: "currentName"
+                },
+                {
+                    userId:
+                        name: "otherName"
+                }
+            ]
+
+            @result = [
+                {
+                    userId:
+                        name: "currentName"
+                }
+            ]
+
         it "should be defined and included", ->
             expect(@filter('myVidatioFilter')).toBeDefined()
+
+        it "should filter input by user name", ->
+            expect(@filter('myVidatioFilter')(@input, true)).toEqual(@result)
+
+        it "should not filter input by user name", ->
+            expect(@filter('myVidatioFilter')(@input, false)).toEqual(@input)
