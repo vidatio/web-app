@@ -34,6 +34,7 @@
     "DATASET": "Datensatz",
     "VISUALIZATION": "Visualisierung",
     "SAVE": "Speichern",
+    "CREATE_VIDATIO": "Vidatio erstellen",
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
