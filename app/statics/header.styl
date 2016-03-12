@@ -20,6 +20,9 @@ header
         margin 0 auto
         padding 30px 0
 
+        .col-sm-pull-4
+            right 0
+
         .editor-panel
             display flex
             flex-direction row
@@ -136,6 +139,7 @@ header
         a#logout-button
         a#profile-button
         a#menu
+        a#save-button
             color $color-black
             line-height 42px
             vertical-align middle
@@ -172,30 +176,33 @@ header
 
         a#login-button
         a#logout-button
+        a#save-button
             font-size 24px
             padding-left 2px
-
-            span
-                margin-left -2px
 
         a#login-button
             &:before
                 margin-left 3px
 
-            span
-                top -16px
-
         a#logout-button
+        a#login-button
             span
                 top -16px
+                margin-left -2px
 
         a#profile-button
             font-size 23px
             padding-left 2px
 
             span
-                margin-left -2px
                 top -15px
+
+        a#save-button
+            position absolute
+
+            span
+                top -16px
+                margin-left -6px
 
     #link-overlay
         position absolute
@@ -233,23 +240,33 @@ header
                 border-color $color-hover-light
 
 @media(max-width: 767px)
-    #navigation
-        .editor-panel
-        a#save-dataset
-            margin-top 10px
-            float left
-
-        a#save-dataset
-            float right
-
-        #back-to-datasets-overview
-            position absolute
-            left 150px
-            margin-left 0
+    header
+        a#save-button
+            left -120px
 
         .catalog-title
             margin-top 40px
 
+@media(min-width: 768px)
+    header
+        a#save-button
+            left -100px
+
 @media(max-width: 900px)
+    .editor-panel
+        margin-top 30px
+
     .catalog-title
         margin-top 82px
+
+@media(min-width: 1000px)
+    header
+        a#save-button
+            left -150px
+
+@media(min-width: 1300px)
+    header
+        a#save-button
+            left -200px
+
+
