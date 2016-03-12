@@ -260,28 +260,30 @@ header
         text-align right
         max-width 98%
 
-@media(max-width: 767px)
+@media(max-width: 500px)
     header
         .menu-buttons
             a#save-button
-                position absolute
-                right 60%
+                left -100px
 
+@media(min-width: 501px) and (max-width: 1199px)
+    header
+        .menu-buttons
+            a#save-button
+                left -150px
+
+
+@media(max-width: 767px)
+    header
         .catalog-title
             margin-top 40px
 
-@media(min-width: 768px)
-    header
-        .menu-buttons
-            a#save-button
-                position absolute
-                right 15px
-                top 57px
+        #process-nav
+            margin-top 25px
 
 @media(max-width: 800px)
     header
         #process-nav
-            margin-top 25px
 
             a
                 height 65px
@@ -305,14 +307,22 @@ header
                             &::after
                                 margin-top 5px
 
+@media(min-width: 768px) and (max-width: 1199px)
+    header
+        #process-nav
+            margin-top 70px
+
+
 @media(max-width: 900px)
     .catalog-title
         margin-top 82px
 
-@media(min-width: 1100px)
+@media(min-width: 1200px) and (max-width: 1399px)
     header
-        .menu-buttons
-            a#save-button
-                left 0
-                top 0
+        a#save-button
+            left -90px
 
+@media(min-width: 1400px)
+    header
+        a#save-button
+            left -150px
