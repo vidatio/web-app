@@ -23,6 +23,8 @@ app.controller "CatalogCtrl", [
             category: ""
             showMyVidatios: if $stateParams?.myvidatios? then if $stateParams.myvidatios is "true" then true else false
 
+        $(".tagsinput").tagsinput()
+
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
         $('#my-vidatio-checkbox').radiocheck()

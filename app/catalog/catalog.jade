@@ -19,8 +19,7 @@
 
             #tags-filter
                 label(for="tagsFilter") {{ "FILTER.BY_TAGS" | translate }}
-                .tagsinput-primary
-                    input#tagsFilter.tagsinput(name="tagsinput" data-role="tagsinput" ng-model="filter.tags" ng-list=",")
+                input#tagsFilter.tagsinput(name="tagsinput" data-role="tagsinput" ng-model="filter.tags" ng-list=",")
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")

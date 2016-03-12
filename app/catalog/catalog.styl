@@ -73,6 +73,10 @@
         #my-vidatio-filter
             position relative
 
+        #tags-filter
+            .bootstrap-tagsinput:hover
+                border-color $color-green !important
+
     [date-picker] .active, [date-picker] .active.now
         background-color $color-green
         background-image none
@@ -102,9 +106,8 @@
 
             .text
                 padding 10px 10px 25px
-        #time-filter
-        #category-filter
-        #my-vidatio-filter
+
+        [id$="-filter"]
             max-width 30em
             margin 0 auto
             padding 0 15px !important
