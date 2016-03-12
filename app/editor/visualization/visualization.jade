@@ -46,7 +46,9 @@
                                 | {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
             .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
-                a.icon-search(href='#' ng-click="recommend()")
+                a(href='#' ng-click="recommend()")
+                    svg(width="30" height="30")
+                        image(xlink:href="images/magic.svg" width="30" height="30")
 
             .color-selection.hover-button(ng-hide="visualization.type == 'map'")
                 a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
