@@ -1,7 +1,7 @@
 #dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
     .row.dataset-title
         .col-sm-12
-            h1.underline-turqoise.dataset-title-text {{ info.title }}
+            h1.underline-red-light.dataset-title-text {{ info.title }}
 
     .row
         .col-sm-12
@@ -9,31 +9,31 @@
                 img(src="{{ info.image }}")
 
             .row.buttons-first-row
-                .col-xs-4.col-sm-4.middle
+                .col-xs-12.col-sm-4.middle
                     a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
-                        span.icon-new-vidatio.icons
+                        span.icon-edit.icons
                         span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
-                .col-xs-4.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
-                        span.icon-link.icons
-                        span.button-text  {{ "LINK" | translate | uppercase }}
-
-                .col-xs-4.col-sm-4.middle
+                .col-xs-12.col-sm-4.middle
                     #download-dataset
                         a.title.btn.btn-primary(href='#')
-                            span.icon-download-3.icons
+                            span.icon-download.icons
                             span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
                             li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
                                 a
-                                    span.icon-download-dataset
+                                    span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
                             li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
                                 a
-                                    span.icon-download-visualization
+                                    span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
+
+                .col-xs-12.col-sm-4.middle
+                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
+                        span.icon-link.icons
+                        span.button-text  {{ "LINK" | translate | uppercase }}
 
                 .col-xs-12
                     #vidatio-link-box(ng-show="$root.showVidatioLink")
@@ -44,12 +44,12 @@
                         form
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
                         a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
-                            span.icon-copy-clipboard.icons
+                            span.icon-copyclipboard.icons
                             span.button-text  {{"COPY_LINK" | translate | uppercase }}
 
     .row
         .col-sm-12
-            h1.underline-turqoise {{ "INFORMATION_DATASET" | translate | uppercase }}
+            h1.underline-red-light {{ "INFORMATION_DATASET" | translate | uppercase }}
 
     .row
         .col-sm-12

@@ -69,7 +69,6 @@ app.controller "DatasetCtrl", [
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"
             $log.error error
-
             $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
                 ngToast.create
                     content: translation

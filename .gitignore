@@ -45,3 +45,5 @@ docs/
 *lock.*
 
 config.json
+
+coverage/*

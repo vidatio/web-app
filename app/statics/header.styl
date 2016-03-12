@@ -8,6 +8,9 @@ header
         background $color-red
         height 8px
 
+    h1
+        margin-top 10px
+
     .middle
         text-align center
 
@@ -33,6 +36,7 @@ header
         display block
         margin 0 auto
         position relative
+        margin-top -2px
 
         a
             font-family Colaborate-Medium, $fonts
@@ -127,49 +131,40 @@ header
                     left calc(100%/3)
 
     #back-to-datasets-overview
+        position relative
+
+    #back-to-import
+        position absolute
+        z-index 100
+
+    #back-to-datasets-overview
+    #back-to-import
         float left
         margin-left 60px
-        line-height 17px
-        position relative
-        height 40px
         text-align center
+        color $color-black
+        line-height 42px
+        font-size 26px
+        width 42px
+        height 42px
+        border-radius 4px
+        top -5px
+        cursor pointer
 
-        .btn-tip
-            padding-left 0
+        &:hover, &:focus
+            color $color-grey-light
+            background-color $color-passive
 
-        .fui-arrow-left
-            &::before
-                margin-right 5px
-                font-size 14px
+        &:active
+            color $color-green
 
         span
-            margin-right 1px
-
-        &:hover
-            color $color-white
-
-        &.active
-            border-bottom 4px solid $color-green
-            line-height 41px
-            color $color-white
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 39px
-                width 0
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
-
-            &::before
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+            top -16px
 
     .menu-buttons
         height 42px
@@ -177,8 +172,12 @@ header
 
         div
             display inline
+            position relative
+            top -5px
 
         a#login-button
+        a#logout-button
+        a#profile-button
         a#menu
         a#save-button
             color $color-black
@@ -190,6 +189,7 @@ header
             display inline-block
             margin-left 3px
             border-radius 4px
+            cursor pointer
 
             &:hover, &:focus
                 color $color-grey-light
@@ -201,26 +201,74 @@ header
             &.menu-active
                 color $color-green !important
 
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+
         a#menu
             font-size 20px
 
-        a#login-button
-        a#save-button
-            font-size 23px
+            span
+                top -16px
 
         a#login-button
+        a#logout-button
+        a#save-button
             padding-left 2px
+
+        a#login-button
+            &:before
+                margin-left 3px
+
+        a#logout-button
+        a#login-button
+        a#save-button
+            font-size 24px
+
+            span
+                top -16px
+                margin-left -2px
+
+        a#profile-button
+            font-size 23px
+            padding-left 2px
+
+            span
+                top -15px
+                margin-left -3px
+
+        a#save-button
+            position absolute
+            font-size 32px
+
+            span
+                top -16px
+                margin-left -6px
+
+    #link-overlay
+        position absolute
+        top 90px
+        right calc(100vw * 0.01)
+        z-index 310
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 5px 10px 10px 10px
+        text-align right
+        max-width 98%
 
 @media(max-width: 767px)
     header
-        .title
-            width 90%
-            margin 0 5%
-
         .menu-buttons
             a#save-button
                 position absolute
                 right 60%
+
+        .catalog-title
+            margin-top 40px
 
 @media(min-width: 768px)
     header
@@ -252,13 +300,14 @@ header
                         font-size 16px
 
                 &.active
-                        span
-                             &:nth-child(2)
-                                    &::after
-                                        margin-top 5px
+                    span
+                        &:nth-child(2)
+                            &::after
+                                margin-top 5px
 
-        .title
-            top 125px
+@media(max-width: 900px)
+    .catalog-title
+        margin-top 82px
 
 @media(min-width: 1100px)
     header
@@ -266,3 +315,4 @@ header
             a#save-button
                 left 0
                 top 0
+

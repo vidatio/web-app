@@ -5,6 +5,9 @@
     h1
         margin-bottom 20px
 
+    h2
+        font-size 19px
+
     #intro
         padding 0
 
@@ -21,6 +24,11 @@
 
         .description
             margin 20px 0 10px
+            font-family Colaborate-Light, $fonts
+
+            .font-green-dark
+                font-family Colaborate-Bold, $fonts
+                font-size 21px
 
         ol
             counter-reset li-counter
@@ -30,8 +38,8 @@
 
             > li
                 position relative
-                margin-left 25px
-                margin-bottom 4px
+                margin 0 0 15px 50px
+                font-size 18px
 
                 &.active
                     &:before
@@ -40,17 +48,23 @@
                 &:before
                     position absolute
                     top 2px
-                    left -25px
-                    width 20px
-                    height 20px
-                    line-height 20px
+                    left -50px
+                    width 36px
+                    height 36px
+                    line-height 36px
                     border-radius 50%
-                    background-color $color-red
+                    background-color $color-grey-dark
                     color $color-white
                     text-align center
-                    font-size 12px
-                    content counter(li-counter)
-                    counter-increment li-counter
+                    font-size 22px
+
+                &:first-child
+                    &:before
+                        font-size 24px
+
+                span
+                    top 6px
+                    position relative
 
         .get-started
             position relative
@@ -105,14 +119,17 @@
         .usp-icon
             font-size 90px
 
+        .icon-3clicks
+            font-size 100px
+            margin-top -6px
+            height 164px
+
         .shape
             min-width 100%
             margin-top -1px
             border-style none
             width calc(100% + 6px)
             margin-left -3px
-
-
 
     #featured-vidatios
         img.featured
@@ -137,6 +154,10 @@
 
             a
                 color $color-white
+
+                .browse-icon
+                    margin-left 5px
+                    font-size 14px
 
     #popular-categories
         min-height 500px

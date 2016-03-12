@@ -6,9 +6,13 @@ app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
     "$log"
+    "DataFactory"
+    "$timeout"
+    "ProgressService"
+    "TableService"
     "$translate"
     "ngToast"
-    ($scope, CatalogFactory, $log, $translate, ngToast) ->
+    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast) ->
 
         $scope.filter =
             dates:
@@ -47,5 +51,4 @@ app.controller "CatalogCtrl", [
             vidatio.log.debug
                 category: category
             $scope.filter.category = category
-
 ]

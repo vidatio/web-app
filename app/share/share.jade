@@ -33,7 +33,7 @@
 
             .col-sm-6
                 #save-share.area(ng-init="show=1" ng-show="show==1")
-                    .option-icon.icon-sharing
+                    .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
@@ -41,7 +41,7 @@
                             li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
                             li: button.btn.btn-primary.icon-link(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-embed(ng-class="{true: 'disabled'}[!globals.authorized]")
+                            li: button.btn.btn-primary.icon-embeddedcode.embeddedcodeShowOne(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
                     form(name="metadataForm" ng-controller="ShareCtrl")
@@ -79,7 +79,7 @@
                             button.btn.btn-block.btn-embossed.btn-primary(ng-click="$parent.show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
                 #save-share.area(ng-show="show==2")
-                    .option-icon.icon-lock
+                    .option-icon.icon-save
                     h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
                     .row
                         p
@@ -119,7 +119,7 @@
 
 
                 #save-share.area(ng-show="show==3")
-                    .option-icon.icon-sharing
+                    .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
@@ -127,10 +127,10 @@
                             li: button.btn.btn-primary.icon-googleplus
                             li: button.btn.btn-primary.icon-twitter
                             li: button.btn.btn-primary.icon-link
-                            li: button.btn.btn-primary.icon-embed
+                            li: button.btn.btn-primary.icon-embeddedcode
                     .row
                         h3 Embed Code
-                            span.icon-embed
+                            span.icon-embeddedcode
                         .input-group.single
                             textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
                     .row

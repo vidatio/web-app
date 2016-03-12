@@ -57,24 +57,44 @@
 
     .settings-bar
         .axis-selection
-            margin-top 5px
             p
                 display inline-block
 
                 &:last-of-type
-                    margin-left 15px
+                    margin-left 5px
 
             ul
                 max-height 500px
                 overflow auto
+                z-index 1500
 
-            .btn-group
-                display inline-block
             .btn
                 min-width 20px
 
         .diagram-selection
-            margin-top 1px
+            padding-top 6px
+
+            li > a
+                display flex
+                flex-direction row
+                display -webkit-flex /* Safari */
+                -webkit-flex-direction row
+                font-size 16px
+
+                .selection-icons
+                    font-size 28px
+                    margin-right 10px
+
+                .selection-text
+                    line-height 43px
+
+            .trigger-recommender
+                background $color-red-light
+                border-top-right-radius 4px
+                border-top-left-radius 4px
+
+                a
+                    color $color-black
 
         .color-selection a .angular-color-picker
             display none
