@@ -14,9 +14,7 @@ describe "Service Recommender", ->
             ["49", "10", "Linz", "39,5%", "1"]
             ["49", "10", "Linz", "39,5%", "2"]
         ]
-
         dataset = @helper.transposeDataset(dataset)
-
         expect(@recommender.getSchema(dataset)).toEqual(schema)
 
     it "should analyse the variances of the columns of the dataset", ->
@@ -146,7 +144,7 @@ describe "Service Recommender", ->
 
         # NUMERIC, NUMERIC WITH PC
         while dataset.length < 1000
-            dataset.push [Math.random(), Math.random(), "True", "11.222"]
+            dataset.push [Math.random(), "1000", "True", "201.222"]
 
         expect(@recommender.run dataset).toEqual(
             "type": "parallel"
@@ -184,14 +182,14 @@ describe "Service Recommender", ->
         dataset = [
             ["Apfel", 100]
             ["Birne", 200]
-            ["Banane", 12]
+            ["Banane", 1200]
             ["Orange", 123]
             ["Balsamico", 213123]
-            ["Olivenöl", 4]
+            ["Olivenöl", 400]
             ["Erdbeeren", 10000]
-            ["Fisch", 1]
+            ["Fisch", 100]
             ["Pflaumen", 200]
-            ["Wurst", 1]
+            ["Wurst", 100]
         ]
         expect(@recommender.run dataset).toEqual(
             "type": "bar"

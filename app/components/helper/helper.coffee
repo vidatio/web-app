@@ -3,7 +3,10 @@
 class window.vidatio.Helper
     constructor: ->
         vidatio.log.info "HelperService constructor called"
-        @rowLimit = 30
+
+        @subsetMin = 20
+        @subsetMax = 100
+        @subsetPercentage = 10
 
     # remove cells without values
     # @method trimDataset
@@ -54,10 +57,21 @@ class window.vidatio.Helper
             dataset: dataset
 
         tmp = []
-        for element, index in dataset
-            if index is @rowLimit
-                break
-            tmp.push element
+        indices = []
+        size = null
+
+        if dataset.length <= @subsetMin
+            size = dataset.length
+        else if dataset.length > @subsetMin and dataset.length <= @subsetMax / (@subsetPercentage / 100)
+            size = Math.floor(dataset.length * (@subsetPercentage / 100))
+        else
+            size = @subsetMax
+
+        while tmp.length < size
+            idx = Math.floor Math.random() * dataset.length
+            if indices.indexOf(idx) < 0
+                indices.push idx
+                tmp.push dataset[idx]
 
         return tmp
 
