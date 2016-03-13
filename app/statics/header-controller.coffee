@@ -19,7 +19,7 @@ app.controller "HeaderCtrl", [
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
 
-        # set bool value editorNotYetInitialized; it depends on wheter editor was already initialized with a dataset
+        # set bool value editorNotInitialized; it depends on wheter editor was already initialized with a dataset
         if Table.getDataset().length == 1
             $scope.header.editorNotInitialized = true
         else

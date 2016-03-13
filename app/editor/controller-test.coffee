@@ -67,3 +67,4 @@ describe "Editor Controller", ->
 
             expect(@Data.name).toBeDefined()
             expect(@Data.name).toBe("I created my first Vidatio")
+            #expect(@scope.setTitleInputWidth).toHaveBeenCalled()
