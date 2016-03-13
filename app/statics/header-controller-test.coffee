@@ -14,12 +14,10 @@ describe "Header Controller", ->
                     fileType: ""
                 editorNotInitialized: ""
                 dataset: [[]]
-
                 saveViaAPI: (dataset) ->
 
             @Table =
                 dataset: [["300", "Banane"], ["400", "Apfel"], ["200", "Orange"]]
-
                 getDataset: ->
                     [["0", "1"]]
 
@@ -35,7 +33,6 @@ describe "Header Controller", ->
         @Map.getGeoJSON.calls.reset()
         @Data.saveViaAPI.calls.reset()
 
-
     describe "if editor was not initialized before", ->
         it "the datasets length should be 1 and data.editorNotInitialized should be true", ->
             expect(@Table.getDataset().length).toEqual(1)
@@ -44,9 +41,7 @@ describe "Header Controller", ->
 
     describe "on saveDataset", ->
         it "the datasets' name should have been set to users' input or to a standard-title including current time of day", ->
-
             @scope.header.name = "Vidatio test diagramm"
-
             @scope.saveDataset()
             expect(@scope.header.name).toBe("Vidatio test diagramm")
 
