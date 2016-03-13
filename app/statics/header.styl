@@ -255,7 +255,11 @@ header
         // Firefox displays the save-button on the wrong position, so this additional rule is necessary (Firefox only)
         @-moz-document url-prefix()
             a#save-button
-                margin-top -6px
+                position relative
+                margin-top 1px
+
+                span
+                    top -18px
 
     #link-overlay
         position absolute
