@@ -5,8 +5,7 @@ describe "Header Controller", ->
 
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, DataService, MapService) ->
-            @httpBackend = $httpBackend
+        inject ($controller, $rootScope) ->
             @rootScope = $rootScope
             @scope = $rootScope.$new()
             @Data =
@@ -17,7 +16,7 @@ describe "Header Controller", ->
                 saveViaAPI: (dataset) ->
 
             @Table =
-                dataset: [["300", "Banane"], ["400", "Apfel"], ["200", "Orange"]]
+                dataset: [["300", "Banana"], ["400", "Apple"], ["200", "Orange"]]
                 getDataset: ->
                     [["0", "1"]]
 
@@ -60,7 +59,7 @@ describe "Header Controller", ->
     describe "on saveDataset", ->
         it "if fileType is 'csv' then the dataset should have been sliced and Data.saveViaAPI called", ->
             @scope.header.meta.fileType = "csv"
-            testDataset = [["300", "Banane"], ["400", "Apfel"], ["200", "Orange"]]
+            testDataset = [["300", "Banana"], ["400", "Apple"], ["200", "Orange"]]
 
             @scope.saveDataset()
             expect(@Table.dataset.slice()).toEqual(testDataset)

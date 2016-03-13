@@ -28,7 +28,6 @@ app.controller "ShareCtrl", [
         #flat-ui checkbox
         $('#publish').radiocheck()
 
-
         # copied from login controller, redundant?
         # To give the prepends tags of flat ui the correct focus style
         $('.input-group').on('focus', '.form-control', ->

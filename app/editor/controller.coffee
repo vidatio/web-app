@@ -92,7 +92,8 @@ app.controller "EditorCtrl", [
         setTitleInputWidth = ->
             inputWidth = $("#vidatio-title").textWidth()
 
-            # firefox calculates the letter-widths in a different manner than other browsers; fine adjustments for width needed according to textWidth
+            # firefox calculates the letter-widths in a different manner than other browsers
+            # -> fine adjustments needed according to calculated textWidth
             if isFirefox
                 if inputWidth < 150
                     inputWidth = inputWidth * 1.5 + "px"

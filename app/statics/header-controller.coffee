@@ -19,7 +19,8 @@ app.controller "HeaderCtrl", [
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
 
-        # set bool value editorNotInitialized; it depends on wheter editor was already initialized with a dataset
+        # set bool value editorNotInitialized; 'true' means editor was not initialized with a dataset yet
+        # -> if 'true' edit- and share-page linking has to be disabled
         if Table.getDataset().length == 1
             $scope.header.editorNotInitialized = true
         else
@@ -40,6 +41,8 @@ app.controller "HeaderCtrl", [
         #             console.log "****************"
         #             console.log "nothing to recommend, abort! "
 
+        # @method saveDataset
+        # @description checks if the current dataset has filetype 'shp' or 'csv' and prepares the dataset for saving according to fileType
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
 
