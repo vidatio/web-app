@@ -58,7 +58,7 @@ class window.vidatio.Helper
             message: "HelperService getSubset called"
             dataset: dataset
 
-        tmp = []
+        randomSampleSet = []
         indices = []
         size = null
 
@@ -69,13 +69,13 @@ class window.vidatio.Helper
         else
             size = @subsetMax
 
-        while tmp.length < size
+        while randomSampleSet.length < size
             idx = Math.floor Math.random() * dataset.length
             if indices.indexOf(idx) < 0
                 indices.push idx
-                tmp.push dataset[idx]
+                randomSampleSet.push dataset[idx]
 
-        return tmp
+        return randomSampleSet
 
     # @method transposeDataset
     # @public
@@ -273,13 +273,13 @@ class window.vidatio.Helper
         else
             return false
 
-    isColumnOfType: (column, func) ->
-        maxAllowedFailures = Math.floor(column.length * (@failureTolerancePercentage / 100))
+    isColumnOfType: (column, conditionFunction) ->
+        thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
         failures = 0
 
         for key, value of column
-            if func(value)
-                if failures >= maxAllowedFailures
+            if conditionFunction(value)
+                if failures >= thresholdFailure
                     return false
                 else
                     failures++
