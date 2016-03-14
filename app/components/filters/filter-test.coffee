@@ -97,25 +97,25 @@ describe "Filter Catalog", ->
         beforeEach ->
             globals =
                 currentUser:
-                    name: "currentName"
+                    id: "123456789"
 
             @cookieStore.put "globals", globals
 
             @input = [
                 {
                     userId:
-                        name: "currentName"
+                        _id: "123456789"
                 },
                 {
                     userId:
-                        name: "otherName"
+                        _id: "abcdefghi"
                 }
             ]
 
             @result = [
                 {
                     userId:
-                        name: "currentName"
+                        _id: "123456789"
                 }
             ]
 

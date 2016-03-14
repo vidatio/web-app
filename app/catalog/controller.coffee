@@ -17,12 +17,8 @@ app.controller "CatalogCtrl", [
                 to: undefined
             category: ""
             showMyVidatios: false
-
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-
         $scope.user = User.user
-
-        console.log "$scope.user", $scope.user
 
         $('#my-vidatio-checkbox').radiocheck()
 

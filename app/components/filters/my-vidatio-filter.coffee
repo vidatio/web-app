@@ -21,7 +21,7 @@ app.filter "myVidatioFilter", [
             output = []
 
             for element in input
-                if globals.currentUser.name is element.userId.name
+                if globals.currentUser?.id is element.userId._id
                     output.push element
 
             output

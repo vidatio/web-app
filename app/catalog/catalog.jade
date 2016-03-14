@@ -16,10 +16,9 @@
                             a(href="#" ng-click="setCategory()") Filter aufheben
                         li(ng-repeat="category in categories")
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
-
-            .my-vidatio-button
+            #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
-                    h2#my-vidatios {{ "MY_VIDATIOS" | translate }}
+                    h2 {{ "MY_VIDATIOS" | translate }}
                     input#my-vidatio-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="filter.showMyVidatios")
 
 
