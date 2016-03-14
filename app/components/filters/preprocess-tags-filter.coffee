@@ -2,7 +2,7 @@
 
 app = angular.module "app.filters"
 
-app.filter "preprocessTagsFilter", [
+app.filter "preprocessTags", [
     "$log"
     ($log) ->
         # @method Anonymous Function
