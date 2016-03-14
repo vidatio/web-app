@@ -342,7 +342,6 @@ class window.vidatio.Helper
         MMDDYYYY = /^(0?[1-9]|1[012])[\/\-.](0?[1-9]|[12][0-9]|3[01])[\/\-.]\d{4}$/
         return YYYYMMDD.test(cell) or DDMMYYYY.test(cell) or MMDDYYYY.test(cell)
 
-
     # @method transformToArrayOfObjects
     # @description This method transforms the dataset from a 2 dimensional Array to an Array of Objects, which is needed by D3plus
     #               xColumn, yColumn and visualizationType
@@ -404,17 +403,17 @@ class window.vidatio.Helper
     # @param {Array} yColumnTypes
     # @param {String} yColumnType
     # @return {Boolean}
-    isDiagramPossible: (xColumnTypes, yColumnTypes, diagramType) ->
+    isDiagramPossible: (xColumnTypes, yColumnTypes, type) ->
         vidatio.log.info "HelperService isDiagramPossible called"
         vidatio.log.debug
             xColumnTypes: xColumnTypes
             yColumnTypes: yColumnTypes
-            diagramType: diagramType
+            type: type
 
         if not xColumnTypes? or not yColumnTypes?
             return false
 
-        switch diagramType
+        switch type
             when "scatter"
                 if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
                     return false
@@ -432,3 +431,14 @@ class window.vidatio.Helper
                     return false
 
         return true
+
+# @method $.fn.textWidth
+# @description This method calculates the width of a specific input-field according to a users' input
+# @public
+# @param {String} text (not necessary)
+# @param {String} font (not necessary)
+$.fn.textWidth = (text, font) ->
+    if !$.fn.textWidth.fakeEl
+        $.fn.textWidth.fakeEl = $("<span>").hide().appendTo(document.body)
+    $.fn.textWidth.fakeEl.text(text or @val() or @text()).css "font", font or @css("font")
+    $.fn.textWidth.fakeEl.width()

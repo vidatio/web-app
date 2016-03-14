@@ -25,6 +25,7 @@ app.controller "ImportCtrl", [
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
+
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
@@ -35,6 +36,7 @@ app.controller "ImportCtrl", [
             Visualization.resetOptions()
             Table.setDataset()
             Map.resetGeoJSON()
+            Data.name = ""
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
@@ -88,7 +90,7 @@ app.controller "ImportCtrl", [
             fileType = fileType[fileType.length - 1]
             fileName = $scope.file.name.toString()
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
-            Data.meta.fileName = fileName
+            Data.name = fileName
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
@@ -118,7 +120,8 @@ app.controller "ImportCtrl", [
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                Progress.setMessage message
+                $timeout ->
+                    Progress.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $log.info "ImportCtrl Import.readFile promise success called"

@@ -68,9 +68,9 @@ describe "Service Data", ->
                         ["one", "two", "three"]
                     ]
                 options:
-                    diagramType: "bar"
-                    xAxisCurrent: 2
-                    yAxisCurrent: 3
+                    type: "bar"
+                    xColumn: 2
+                    yColumn: 3
                     color: "#FF00FF"
                     selectedDiagramName: "Balkendiagramm"
                     useColumnHeadersFromDataset: true
@@ -86,9 +86,9 @@ describe "Service Data", ->
 
         it "and set visualizaiotn options", ->
             options =
-                diagramType: "bar"
-                xAxisCurrent: 2
-                yAxisCurrent: 3
+                type: "bar"
+                xColumn: 2
+                yColumn: 3
                 color: "#FF00FF"
                 selectedDiagramName: "Balkendiagramm"
             @Data.meta.fileType = "csv"

@@ -6,11 +6,13 @@ app.controller "CatalogCtrl", [
     "$scope"
     "CatalogFactory"
     "$log"
+    "DataFactory"
+    "$timeout"
+    "ProgressService"
+    "TableService"
     "$translate"
     "ngToast"
-    "UserService"
-    ($scope, CatalogFactory, $log, $translate, ngToast, User) ->
-
+    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast) ->
         $scope.filter =
             dates:
                 from: undefined
@@ -18,7 +20,6 @@ app.controller "CatalogCtrl", [
             category: ""
             showMyVidatios: false
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-        $scope.user = User.user
 
         $('#my-vidatio-checkbox').radiocheck()
 
@@ -51,5 +52,4 @@ app.controller "CatalogCtrl", [
             vidatio.log.debug
                 category: category
             $scope.filter.category = category
-
 ]

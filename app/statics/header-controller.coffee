@@ -14,39 +14,40 @@ app.controller "HeaderCtrl", [
     "$translate"
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
-        # The three bool values represent the three tabs in the header
-        # @property activeViews
-        # @type {Array}
-        $rootScope.activeViews = [true, true]
 
-        # Invert the value of the clicked tab to hide or show views in the editor
-        # @method tabClicked
-        # @param {Number} tabIndex Number from 0 - 1 which represent the clicked tab
-        $scope.tabClicked = (tabIndex) ->
-            $log.info "HeaderCtrl tabClicked called"
-            $log.debug
-                message: "HeaderCtrl tabClicked called"
-                tabIndex: tabIndex
+        $scope.header = Data
+        $translate("NEW_VIDATIO").then (translation) ->
+            $scope.standardTitle = translation
 
-            $rootScope.activeViews[tabIndex] = !$rootScope.activeViews[tabIndex]
+        # set bool value editorNotInitialized; 'true' means editor was not initialized with a dataset yet
+        # -> if 'true' edit- and share-page linking has to be disabled
+        if Table.getDataset().length == 1
+            $scope.header.editorNotInitialized = true
+        else
+            $scope.header.editorNotInitialized = false
 
-            # REFACTOR Needed to wait for leaflet directive to render
-            # $timeout ->
-            #     # TODO: Only resize what is currently visible or used
-            #     switch vidatio.Recommender.recommendedDiagram
-            #         when "scatter"
-            #             new ScatterPlot.getChart().resize()
-            #         when "bar"
-            #             new BarChart.getChart().resize()
-            #         when "map"
-            #             Map.resizeMap()
-            #         else
-            #             # TODO: show a default image here
-            #             console.log "****************"
-            #             console.log "nothing to recommend, abort! "
+        # REFACTOR Needed to wait for leaflet directive to render
+        # $timeout ->
+        #     # TODO: Only resize what is currently visible or used
+        #     switch vidatio.Recommender.recommendedDiagram
+        #         when "scatter"
+        #             new ScatterPlot.getChart().resize()
+        #         when "bar"
+        #             new BarChart.getChart().resize()
+        #         when "map"
+        #             Map.resizeMap()
+        #         else
+        #             # TODO: show a default image here
+        #             console.log "****************"
+        #             console.log "nothing to recommend, abort! "
 
+        # @method saveDataset
+        # @description checks if the current dataset has filetype 'shp' or 'csv' and prepares the dataset for saving according to fileType
         $scope.saveDataset = ->
             $log.info "HeaderCtrl saveDataset called"
+
+            if $scope.header.name is $scope.standardTitle
+                $scope.header.name = $scope.header.name + " " + moment().format("HH_mm_ss")
 
             if Data.meta.fileType is "shp"
                 dataset = Map.getGeoJSON()
@@ -56,33 +57,4 @@ app.controller "HeaderCtrl", [
                     dataset.unshift Table.instanceTable.getColHeader()
 
             Data.saveViaAPI dataset
-
-        $scope.hideLink = ->
-            $rootScope.showLink = false
-
-        $scope.copyLink = ->
-            $log.info "HeaderCtrl copyLink called"
-            window.getSelection().removeAllRanges()
-            link = document.querySelector "#link"
-            range = document.createRange()
-            range.selectNode link
-            window.getSelection().addRange(range)
-
-            try
-                successful = document.execCommand "copy"
-
-                $log.debug
-                    message: "HeaderCtrl copyLink copy link to clipboard"
-                    successful: successful
-
-                $translate("TOAST_MESSAGES.LINK_COPIED")
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-            catch err
-                $log.info "Link could not be copied"
-                $log.error
-                    error: error
-
-            window.getSelection().removeAllRanges()
 ]

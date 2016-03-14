@@ -12,21 +12,31 @@ app.controller "TableCtrl", [
     "$log"
     ($scope, Table, Share, Data, Map, Converter, $log) ->
         $scope.dataset = Table.dataset
-        $scope.meta = Data.meta
+        $scope.data = Data
 
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
-        $('#column-headers-checkbox').radiocheck()
+        headerCheckbox = $('#column-headers-checkbox')
+        if headerCheckbox?.radiocheck? then headerCheckbox.radiocheck()
 
         $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
 
-            if Data.meta.fileType isnt "shp"
+            if $scope.data.meta.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeHeaderFromDataset()
                 else
                     Table.putHeaderToDataset()
+
+        #@method $scope.transpose
+        #@description transpose the dataset including the header
+        $scope.transpose = ->
+            $log.info "TableCtrl transpose called"
+
+            if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
+            Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
+            if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()
 
         #@method $scope.download
         #@description downloads a csv
@@ -42,10 +52,10 @@ app.controller "TableCtrl", [
             else
                 csv = Papa.unparse trimmedDataset
 
-            if Data.meta.fileName is ""
+            if $scope.data.name is ""
                 fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
             else
-                fileName = Data.meta.fileName
+                fileName = $scope.data.name
 
             csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
             csvURL = window.URL.createObjectURL(csvData)

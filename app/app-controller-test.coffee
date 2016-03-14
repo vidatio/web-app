@@ -1,2 +1,2 @@
-# Animals App Controller Tests
+# App Controller Tests
 # ============================

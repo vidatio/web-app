@@ -10,14 +10,19 @@ header.ng-cloak
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
-                    a#back-to-datasets-overview.button.icon-return-2(ui-sref="app.catalog({ locale: locale })")
+                    #back-to-datasets-overview.icon-opendata(ui-sref='app.catalog({ locale: locale })')
+                        span {{ "OVERVIEW" | translate | uppercase }}
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
@@ -25,73 +30,143 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
-                    div(ng-if="!globals.authorized")
-                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
-
-                .col-xs-6.col-sm-pull-2.col-sm-2
-                    a#back-to-import.btn.btn-primary(ui-sref="app.import({ locale: locale })")
-                        span.fui-arrow-left
-                        span {{ "IMPORT" | translate | uppercase }}
-
-                .col-xs-6.col-sm-2.col-sm-push-2
-                    a#save-dataset.btn.btn-primary(href="#" type="submit" ng-click="saveDataset()" ng-class="{true: 'disabled'}[!globals.authorized]") {{"SAVE" | translate | uppercase}}
-
-                #link-overlay.wrapper-content.col-xs-12.col-sm-8.col-md-6(ng-controlller="HeaderCtrl" ng-show="$root.showLink")
-                    p {{"LINK_TO_SHARE" | translate }}
-                    a.fui-cross(href="#" ng-click="hideLink()")
-                    form
-                        input#link.form-control(ng-model="link" onClick="this.select();")
-                    a#copy-link.btn(ng-click="copyLink()") {{"COPY_LINK" | translate }}
-
-                .col-xs-12.col-sm-4.col-sm-pull-4.editor-panel
-                    a.tab.border-left(href="#" ng-class="{'active': activeViews[0]}" ng-click="tabClicked(0)") {{ "DATA" | translate | uppercase }}
-                    .separator
-                    a.tab.border-right(href="#" ng-class="{'active': activeViews[1]}" ng-click="tabClicked(1)") {{ "VISUALIZATION" | translate | uppercase }}
-
-            #navigation.row(ng-switch-when="import")
-                .col-xs-3.logo
-                    a#logo.button(ui-sref="app.index({ locale: locale })")
-                .col-xs-6.middle
-                    h1.underline-red {{ "IMPORT" | translate | uppercase }}
-                .col-xs-3.menu-buttons
+                        a#save-button.button.icon-save(href="#" ng-click="saveDataset()")
+                            span {{ "SAVE" | translate | uppercase }}
                     div(ng-if="globals.authorized")
-                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#import-data(ui-sref="app.import({ locale: locale })")
+                            span.icon-import
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data.active(href='#')
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset(ui-sref="app.share({ locale: locale })")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
+
+            #navigation.row(ng-switch-when="share" ng-controller="HeaderCtrl")
+                .col-xs-6.col-sm-2.logo
+                    a#logo(ui-sref="app.index({ locale: locale })")
+
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    div(ng-if="globals.authorized")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
+                    div(ng-if="!globals.authorized")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#import-data(ui-sref="app.import({ locale: locale })")
+                            span.icon-import
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data(ui-sref="app.editor({ locale: locale })")
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset.active(href="#")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
+
+            #navigation.row(ng-switch-when="import" ng-controller="HeaderCtrl")
+                .col-xs-6.col-sm-2.logo
+                    a#logo(ui-sref="app.index({ locale: locale })")
+
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    div(ng-if="globals.authorized")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
+                    div(ng-if="!globals.authorized")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    #process-nav
+                        a#import-data.active(ui-sref="app.import({ locale: locale })")
+                            span.icon-import
+                            span  {{ "IMPORT" | translate | uppercase }}
+                        a#edit-data.clickable(ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
+                            span.icon-edit
+                            span  {{"EDIT" | translate | uppercase}}
+                        a#save-dataset(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
 
                 .col-xs-6.middle
-                    h1.underline-red {{ "LOGIN" | translate | uppercase }}
+                    h1.underline-red-light {{ "LOGIN" | translate | uppercase }}
+
                 .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
 
             #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
 
                 .col-xs-6.middle
-                    h1.underline-red {{ "REGISTRATION" | translate | uppercase }}
-                .col-xs-3.menu-buttons
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                    h1.underline-red-light {{ "REGISTRATION" | translate | uppercase }}
 
-            #navigation.row(ng-switch-when="catalog")
+                .col-xs-3.menu-buttons
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+            #navigation.row(ng-switch-when="profile")
                 .col-xs-3.logo
-                    a#logo.button(ui-sref="app.index({ locale: locale })")
+                    a#logo(ui-sref="app.index({ locale: locale })")
 
                 .col-xs-6.middle
-                    h1.underline-red {{ "CATALOG" | translate | uppercase }}
+                    h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
+
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#logout-button.button.icon-logout(ng-click="logout()")
+                            span {{ "LOG_OUT" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+            #navigation.row(ng-switch-when="catalog")
+                .col-xs-6.col-sm-2.logo
+                    a#logo.button(ui-sref="app.index({ locale: locale })")
+                    a#back-to-import.button.icon-import(ui-sref='app.import({ locale: locale })')
+                        span {{ "IMPORT" | translate | uppercase }}
+
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    div(ng-if="globals.authorized")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle
+                    h1.underline-red-light.catalog-title {{ "ALL_VIDATIOS" | translate | uppercase }}
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
@@ -99,7 +174,11 @@ header.ng-cloak
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#login-button.fui-user(ui-sref="app.profile({ locale: locale})")
+                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                            span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.fui-exit(ui-sref="app.login({ locale: locale})")
-                    a#menu.icon-hamburger.toggle-menu.menu-right.push-body(href="#")
+                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
+                            span {{ "LOGIN" | translate | uppercase }}
+                    div
+                        a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                            span {{ "MENU" | translate | uppercase }}

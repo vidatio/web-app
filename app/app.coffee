@@ -182,6 +182,13 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
+        # /share
+        .state "app.share",
+            url: "/share"
+            templateUrl: "share/share.html"
+            controller: "ShareCtrl"
+            title: "share"
+
         # /editor for saved vidatio
         .state "app.editor.id",
             url: "/vidatio_:id",

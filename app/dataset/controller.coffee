@@ -39,7 +39,6 @@ app.controller "DatasetCtrl", [
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
-            console.log "$scope.data.metaData", $scope.data.metaData
             if $scope.data.metaData?
                 Data.meta["fileType"] = $scope.data.metaData.fileType || "-"
             else
@@ -70,7 +69,6 @@ app.controller "DatasetCtrl", [
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"
             $log.error error
-
             $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
                 ngToast.create
                     content: translation
@@ -83,9 +81,7 @@ app.controller "DatasetCtrl", [
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
-
                 Data.createVidatio $scope.data
-
                 $timeout ->
                     Progress.setMessage ""
 

@@ -1,11 +1,17 @@
 #import
-    margin 10px auto 0
+    margin 0 auto 
     h4
         text-align center
         margin 15px auto
         width 100%
+        font-family Colaborate-Regular,Arial,Helvetica,sans-serif
 
     .options
+        .description-text
+            font-size 14px
+            position relative
+            top -13px
+
         .area
             height 254px
             border-top 3px solid $color-green
@@ -61,6 +67,7 @@
             &:hover
                 .option-icon
                 h4
+                .description-text
                     display none
 
                 .hover-wrapper
@@ -102,6 +109,14 @@
                 width 80%
                 margin 0 auto
 
+                &:hover
+                    .form-control
+                        border-color $color-grey
+
+                .form-control
+                    &:hover
+                        border-color $color-green
+
         .other, .file-read
             margin-bottom 56px
 
@@ -124,6 +139,12 @@
 
         #link-submit-button
             top 0
+
+            &:hover
+            &:active
+            &:focus
+                border-color $color-hover-dark
+                background-color $color-hover-dark
 
     #drop-zone
         display none
@@ -161,4 +182,3 @@
             position fixed
             z-index: 999
             {overlayParent}
-

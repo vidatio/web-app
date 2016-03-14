@@ -14,19 +14,22 @@ section#intro
 
                 div
                     h2.description
-                        | In nur
-                        span.font-red  drei Schritten
-                        |  zur Infografik!
+                        | {{ "ONLY_LANDING_PAGE" | translate }}
+                        span.font-green-dark  {{ "THREE_STEPS_LANDING_PAGE" | translate }}
+                        |  {{ "TO_YOUR_VIDATIO_LANDING_PAGE" | translate }}!
 
                     ol
-                        li.active {{ "UPLOAD_FILE" | translate }}.
-                        li {{ "GENERATED_AUTOMATICALLY" | translate }}.
-                        li {{ "SAVE_OR_SHARE" | translate }}.
+                        li.active.icon-import
+                            span {{ "UPLOAD_FILE" | translate }}.
+                        li.icon-edit
+                            span {{ "GENERATED_AUTOMATICALLY" | translate }}.
+                        li.icon-check
+                            span {{ "SAVE_OR_SHARE" | translate }}.
 
         .get-started
             //- generate link with correct language
             a.bold-font.btn.btn-primary.btn-embossed(ui-sref="app.import({ locale: locale })")
-                | GET
+                | {{ "GET_LANDING_PAGE" | translate | uppercase }}
                 br
-                | STARTED
+                | {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
                 span.bg-cyan !

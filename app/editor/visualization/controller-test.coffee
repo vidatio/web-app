@@ -30,9 +30,9 @@ describe "Visualization Ctrl", ->
 
             @Visualization =
                 options:
-                    diagramType: "scatter"
-                    xAxisCurrent: 0
-                    yAxisCurrent: 1
+                    type: "scatter"
+                    xColumn: 0
+                    yColumn: 1
                     color: '#000111'
                     translationKeys:
                         "scatter": "DIAGRAMS.SCATTER_PLOT"

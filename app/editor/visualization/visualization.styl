@@ -1,9 +1,5 @@
 #visualization
-
     #chart
-        width 100%
-        height calc(100% - 50px)
-
         input[id^="d3plus_"][id$="_inline_input"]
             position absolute
             padding 5px
@@ -12,9 +8,6 @@
             font-size 12px
 
     .angular-leaflet-map
-        height calc(100% - 50px) /* -50px according to the settings-bars' height + 20px margin */
-        width 100%
-
         a:link, a:visited
             color $color-black
 
@@ -56,52 +49,71 @@
             stroke-width 3px
             stroke-dasharray 5
 
-    .axis-selection
-        margin-top 5px
-        p
-            display inline-block
+    .settings-bar
+        .axis-selection
+            p
+                display inline-block
 
-            &:last-of-type
-                margin-left 15px
+                &:last-of-type
+                    margin-left 5px
 
-        ul
-            max-height 500px
-            overflow auto
+            ul
+                max-height 500px
+                overflow auto
+                z-index 1500
 
-        .btn-group
-            display inline-block
-        .btn
-            min-width 20px
+            .btn
+                min-width 20px
 
-    .diagram-selection
-        margin-top 1px
+        .diagram-selection
+            padding-top 6px
 
-    .color-selection a .angular-color-picker
-        display none
+            li > a
+                display flex
+                flex-direction row
+                display -webkit-flex /* Safari */
+                -webkit-flex-direction row
+                font-size 16px
 
-        //bugfix angular-color-picker cursors
-        .angular-color-picker > ._hues > ._cursor
-            left -6px
-            width 40px
+                .selection-icons
+                    font-size 28px
+                    margin-right 10px
 
-    .color-selection a:hover .angular-color-picker
-        display block
+                .selection-text
+                    line-height 43px
 
-    .graph-icon
-        width 30px
-        margin-right 10px
-        margin-top 5px
+            .trigger-recommender
+                background $color-red-light
+                border-top-right-radius 4px
+                border-top-left-radius 4px
 
-    .download-button li:first-child
+                a
+                    color $color-black
+
+        .color-selection a .angular-color-picker
+            display none
+
+            //bugfix angular-color-picker cursors
+            .angular-color-picker > ._hues > ._cursor
+                left -6px
+                width 40px
+
+        .color-selection a:hover .angular-color-picker
+            display block
+
+        .graph-icon
+            width 30px
+            margin-right 10px
+            margin-top 5px
+
+        .download-button li:first-child
             border-bottom 2px solid $color-green
 
-    .diagram-placeholder
+    #chart-placeholder
+        overflow hidden
         padding 0 0
-
-        div
-            box-shadow inset $box-shadow-size $color-shadow
-            min-height 318px
-            height calc(100vh - 310px)
+        box-shadow inset 0 0 15px $color-shadow
+        height 100%
 
         img
             width 120px

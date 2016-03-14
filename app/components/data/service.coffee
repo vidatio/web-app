@@ -19,9 +19,9 @@ app.service 'DataService', [
             constructor: ->
                 $log.info "DataService constructor called"
 
+                @name = ""
                 @meta =
                     "fileType": ""
-                    "fileName": ""
 
             updateMap: (row, column, oldData, newData) ->
                 $log.info "DataService updateMap called"
@@ -55,22 +55,21 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset, name = "Neues Vidatio") ->
+            saveViaAPI: (dataset) ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    name: name
+                    name: @name
 
                 DataFactory.save
-                    name: name
+                    name: @name
                     data: dataset
                     metaData:
                         fileType: @meta.fileType
-                        fileName: @meta.fileName
                     options:
-                        diagramType: Visualization.options.diagramType
-                        xAxisCurrent: Visualization.options.xAxisCurrent
-                        yAxisCurrent: Visualization.options.yAxisCurrent
+                        type: Visualization.options.type
+                        xColumn: Visualization.options.xColumn
+                        yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
                         selectedDiagramName: Visualization.options.selectedDiagramName
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
@@ -115,9 +114,9 @@ app.service 'DataService', [
                 else
                     if data.options?
                         # Each value has to be assigned individually, otherwise all options get overwritten.
-                        Visualization.options["diagramType"] = if data.options.diagramType? then data.options.diagramType else false
-                        Visualization.options["xAxisCurrent"] = if data.options.xAxisCurrent? then data.options.xAxisCurrent else null
-                        Visualization.options["yAxisCurrent"] = if data.options.yAxisCurrent? then data.options.yAxisCurrent else null
+                        Visualization.options["type"] = if data.options.type? then data.options.type else false
+                        Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
+                        Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
                         Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
                         Visualization.options["selectedDiagramName"] = if data.options.selectedDiagramName? then data.options.selectedDiagramName else null
 

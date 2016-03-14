@@ -8,6 +8,9 @@ header
         background $color-red
         height 8px
 
+    h1
+        margin-top 10px
+
     .middle
         text-align center
 
@@ -16,16 +19,6 @@ header
         max-width 1024px
         margin 0 auto
         padding 30px 0
-
-        .editor-panel
-            display flex
-            flex-direction row
-            display -webkit-flex /* Safari */
-            -webkit-flex-direction row
-
-        .separator
-            width 2px
-            background-color $color-green
 
     #navigation.editor
         max-width 98%
@@ -37,16 +30,129 @@ header
         height 40px
         float left
 
+    #process-nav
+        max-width 653px
+        height 50px
+        display block
+        margin 0 auto
+        position relative
+        margin-top -2px
+
+        a
+            font-family Colaborate-Medium, $fonts
+            border-bottom 3px solid $color-passive
+            color $color-passive
+            font-size 21px
+            line-height 54px
+            float left
+            height 50px
+            text-align center
+            width 33.333%
+
+            //hover transitions for underline and color
+            &:nth-child(3)
+            &:nth-child(2)
+            &:first-child
+                &::before
+                    background $color-hover-dark
+                    bottom 0
+                    content ""
+                    display block
+                    height 3px
+                    position absolute
+                    transition width 0.3s ease 0s
+                    width 0
+
+                &:hover:not(.active):not(.disabled)
+                    &::before
+                        width 33.34%
+
+            &:nth-child(3)
+                &::before
+                    left calc(100%/3*2)
+
+            &:nth-child(2)
+                &::before
+                    right calc(100%/3)
+
+            &:first-child
+                &::before
+                    right calc(100%/3*2)
+
+            &:hover,
+            &:focus
+                color $color-hover-dark
+                -webkit-transition color 0.5s
+                transition color 0.5s
+
+            //active state with arrow in line
+            &.active
+                color $color-green
+                border-color $color-green
+
+                &::after
+                    border-left 16px solid transparent
+                    border-right 16px solid transparent
+                    border-top: 12px solid $color-grey-light
+                    content ""
+                    display block
+                    margin -16px auto 0
+                    width 15px
+
+                span
+                    //arrow in line on active, 1st span is icon
+                    &:nth-child(2)
+                        &::after
+                            border-left 16px solid transparent
+                            border-right 16px solid transparent
+                            border-top 12px solid $color-green
+                            content ""
+                            display block
+                            margin -5px auto 0
+                            width 15px
+
+                &:hover,
+                &:focus
+                    color $color-green
+                    border-color $color-green
+
+            &.disabled
+                opacity 0.15
+                cursor default
+                pointer-events none
+
+                &:hover,
+                &:focus
+                    color $color-passive
+                    border-color $color-passive
+
+        a#edit-data.clickable
+            &:nth-child(2)
+                &::before
+                    left calc(100%/3)
+
     #back-to-datasets-overview
+        position relative
+
+    #back-to-import
+        position absolute
+        z-index 100
+
+    #back-to-datasets-overview
+    #back-to-import
         float left
         margin-left 60px
         text-align center
         color $color-black
         line-height 42px
-        font-size 23px
+        font-size 26px
         width 42px
         height 42px
         border-radius 4px
+        -webkit-border-radius 4px
+        -moz-border-radius 4px
+        top -5px
+        cursor pointer
 
         &:hover, &:focus
             color $color-grey-light
@@ -55,69 +161,13 @@ header
         &:active
             color $color-green
 
-    #back-to-import
-        position relative
-        height 40px
-        text-align center
-        line-height 17px
-        float right
-
-        .btn-tip
-            padding-left 0
-
-        .fui-arrow-left
-            &::before
-                margin-right 5px
-                font-size 14px
-
         span
-            margin-right 1px
-
-    #save-dataset
-        float left
-        height 40px
-        width 112px
-
-    .tab
-        border-bottom 4px solid $color-passive
-        display inline-block
-        width 50%
-        height 42px
-        line-height 41px
-        background $color-passive
-        position relative
-        float left
-        color $color-table-even-active
-        text-align center
-        font-family Colaborate, $fonts
-        font-size 16px
-        box-sizing border-box
-
-        &:hover
-            color $color-white
-
-        &.active
-            border-bottom 4px solid $color-green
-            line-height 41px
-            color $color-white
-
-            &::after
-                border medium solid transparent
-                content " "
-                height 0
-                left 50%
-                pointer-events none
-                position absolute
-                top 39px
-                width 0
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
-
-            &::before
-                border-top-color $color-green
-                border-width 10px
-                margin-left -10px
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+            top -16px
 
     .menu-buttons
         height 42px
@@ -125,8 +175,14 @@ header
 
         div
             display inline
+            position relative
+            top -5px
 
-        a#login-button, a#menu
+        a#login-button
+        a#logout-button
+        a#profile-button
+        a#menu
+        a#save-button
             color $color-black
             line-height 42px
             vertical-align middle
@@ -136,6 +192,9 @@ header
             display inline-block
             margin-left 3px
             border-radius 4px
+            -webkit-border-radius 4px
+            -moz-border-radius 4px
+            cursor pointer
 
             &:hover, &:focus
                 color $color-grey-light
@@ -147,12 +206,60 @@ header
             &.menu-active
                 color $color-green !important
 
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+
         a#menu
             font-size 20px
 
+            span
+                top -16px
+
         a#login-button
+        a#logout-button
+        a#save-button
+            padding-left 2px
+
+        a#login-button
+            &:before
+                margin-left 3px
+
+        a#logout-button
+        a#login-button
+            font-size 24px
+
+            span
+                top -16px
+                margin-left -2px
+
+        a#profile-button
             font-size 23px
             padding-left 2px
+
+            span
+                top -15px
+                margin-left -3px
+
+        a#save-button
+            position absolute
+            font-size 32px
+
+            span
+                top -16px
+                margin-left -6px
+
+        // Firefox displays the save-button on the wrong position, so this additional rule is necessary (Firefox only)
+        @-moz-document url-prefix()
+            a#save-button
+                position relative
+                margin-top 1px
+
+                span
+                    top -18px
 
     #link-overlay
         position absolute
@@ -166,41 +273,67 @@ header
         text-align right
         max-width 98%
 
-        p
-            float left
-            margin 0
+@media(max-width: 500px)
+    header
+        .menu-buttons
+            a#save-button
+                left -100px
 
-        .fui-cross
-            background $color-white
-            color $color-grey-dark
-            text-align right
-            &:hover
-                color $color-red
-
-        .form-control
-            border-color $color-grey-dark
-
-        #copy-link
-            background $color-white
-            color $color-grey-dark
-            border 2px solid $color-green
-            margin-top 10px
-            &:hover
-                background $color-hover-light
-                border-color $color-hover-light
+@media(min-width: 501px) and (max-width: 1199px)
+    header
+        .menu-buttons
+            a#save-button
+                left -150px
 
 @media(max-width: 767px)
-    #navigation
-        .editor-panel
-        a#save-dataset
-        a#back-to-import
-            margin-top 10px
-            float left
+    header
+        .catalog-title
+            margin-top 40px
 
-        a#save-dataset
-            float right
+        #process-nav
+            margin-top 25px
 
-        #back-to-datasets-overview
-            position absolute
-            left 150px
-            margin-left 0
+@media(max-width: 800px)
+    header
+        #process-nav
+
+            a
+                height 65px
+                line-height 28px
+
+                &:nth-child(3)
+                &:nth-child(2)
+                &:first-child
+                    &::before
+                        bottom -15px
+
+                span
+                    display block
+
+                    &:nth-child(2)
+                        font-size 16px
+
+                &.active
+                    span
+                        &:nth-child(2)
+                            &::after
+                                margin-top 5px
+
+@media(min-width: 768px) and (max-width: 1199px)
+    header
+        #process-nav
+            margin-top 70px
+
+@media(max-width: 900px)
+    .catalog-title
+        margin-top 82px
+
+@media(min-width: 1200px) and (max-width: 1399px)
+    header
+        a#save-button
+            left -90px
+
+@media(min-width: 1400px)
+    header
+        a#save-button
+            left -150px

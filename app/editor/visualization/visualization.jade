@@ -2,19 +2,19 @@
     .content.height-500
         .settings-bar
             .axis-selection(ng-if="meta.fileType != 'shp'")
-                p(ng-if="visualization.diagramType != 'map'") {{ "X_AXIS" | translate }}
-                p(ng-if="visualization.diagramType == 'map'") {{ "LONGITUDE" | translate }}
+                p(ng-if="visualization.type != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.xAxisCurrent] || "HEADER_DEFAULT" | translate }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.xColumn] || "HEADER_DEFAULT" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
                             a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column }}
 
-                p(ng-if="visualization.diagramType != 'map'") {{ "Y_AXIS" | translate }}
-                p(ng-if="visualization.diagramType == 'map'") {{ "LATITUDE" | translate }}
+                p(ng-if="visualization.type != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LATITUDE" | translate }}
                 .btn-group
-                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.yAxisCurrent] || "HEADER_DEFAULT" | translate }}
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.yColumn] || "HEADER_DEFAULT" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
@@ -25,44 +25,45 @@
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ visualization.selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
+                        li.trigger-recommender
+                            a(href='#' ng-click="recommend()")
+                                .icon-magicwand.selection-icons(ng-hide="meta.fileType == 'shp'")
+                                .selection-text {{ "DIAGRAMS.RECOMMEND" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('scatter')")
-                                img.graph-icon(src="/images/diagram-icons/scatter-plot.svg")
-                                | {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
+                                .icon-scatterplotchart.selection-icons
+                                .selection-text {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('map')")
-                                img.graph-icon(src="/images/diagram-icons/map.svg")
-                                | {{ "DIAGRAMS.MAP" | translate }}
+                                .icon-map.selection-icons
+                                .selection-text {{ "DIAGRAMS.MAP" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('parallel')")
-                                | {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
+                                .icon-parallelcoordinateschart.selection-icons
+                                .selection-text {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('bar')")
-                                img.graph-icon(src="/images/diagram-icons/bar-chart.svg")
-                                | {{ "DIAGRAMS.BAR_CHART" | translate }}
+                                .icon-barchart.selection-icons
+                                .selection-text {{ "DIAGRAMS.BAR_CHART" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('timeseries')")
-                                img.graph-icon(src="/images/diagram-icons/line-chart.svg")
-                                | {{ "DIAGRAMS.TIME_SERIES" | translate }}
-
-            .trigger-recommender.hover-button(ng-hide="meta.fileType == 'shp'")
-                a.icon-search(href='#' ng-click="recommend()")
+                                .icon-linechart.selection-icons
+                                .selection-text {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
             .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
-                a.icon-edit(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
+                a.icon-colorbucket(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
 
             .download-button.hover-button
-                a.icon-download-3(href='#')
+                a(href='#').icon-download.download-icon
                 ul
                     li
                         a(ng-click='shareVisualization("png")') PNG
                     li
                         a(ng-click='shareVisualization("jpg")') JPG
 
-        leaflet(geojson="geojson" id="map" ng-show="visualization.diagramType == 'map'")
-        #chart(ng-hide="visualization.diagramType == 'map' || visualization.diagramType == false")
-        #chart-empty(ng-hide="visualization.diagramType")
-            .row
-                .col-md-12.diagram-placeholder
-                    div
-                        img(src="images/logo-without-name.png" )
+        leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
+
+        #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
+
+        #chart-placeholder(ng-hide="visualization.type")
+            img(src="images/logo-without-name.png" )
