@@ -137,15 +137,15 @@ describe "Filter Catalog", ->
                 {
                     metaData:
                         tags: [
-                            "category1"
-                            "category2"
+                            { name: "category1" }
+                            { name: "category2" }
                         ]
 
                 },
                 {
                     metaData:
                         tags: [
-                            "category3"
+                            { name: "category3" }
                         ]
 
                 }
@@ -155,7 +155,7 @@ describe "Filter Catalog", ->
                 {
                     metaData:
                         tags: [
-                            "category3"
+                            { name: "category3" }
                         ]
                 }
             ]
