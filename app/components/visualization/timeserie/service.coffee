@@ -7,6 +7,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             dataset: dataset
             options: options
 
+        @remove()
         super dataset, options.color
         @preProcess options
 
@@ -16,6 +17,11 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
 
         # we need to wait for angular to finish rendering
         setTimeout =>
+            $chart = $("#chart")
+
+            width = $chart.parent().width()
+            height = $chart.parent().height() - 40
+
             d3plus.viz()
             .container("#chart")
             .data(@chartData)
@@ -25,5 +31,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             .x(options.headers["x"])
             .y(options.headers["y"])
             .color("color")
+            .width(width)
+            .height(height)
             .draw()
         , 0

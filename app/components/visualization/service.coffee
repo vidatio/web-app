@@ -104,6 +104,7 @@ app.service 'VisualizationService', [
                 options["headers"] =
                     "x": headers[options.xColumn]
                     "y": headers[options.yColumn]
+                console.log "x: ", options.xColumn, "y: ", options.yColumn
                 subset = vidatio.helper.getSubset trimmedDataset
                 transposedDataset = vidatio.helper.transposeDataset subset
                 schema = vidatio.recommender.getSchema transposedDataset

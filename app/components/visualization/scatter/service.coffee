@@ -7,11 +7,17 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             dataset: dataset
             options: options
 
+        @remove()
         super dataset, options.color
         @preProcess options
 
         # we need to wait for angular to finish rendering
         setTimeout =>
+            $chart = $("#chart")
+
+            width = $chart.parent().width()
+            height = $chart.parent().height() - 40
+
             d3plus.viz()
             .container("#chart")
             .data(@chartData)
@@ -21,5 +27,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .y(options.headers["y"])
             .size(10)
             .color("color")
+            .width(width)
+            .height(height)
             .draw()
         , 0
