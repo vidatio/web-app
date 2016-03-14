@@ -69,7 +69,7 @@ describe "Filter Catalog", ->
         it "should be defined and included", ->
             expect(@filter('categoryFilter')).toBeDefined()
 
-        it "should filter input correctly with a cateory", ->
+        it "should filter input correctly with a category", ->
             input = [
                 {
                     metaData:
@@ -132,7 +132,7 @@ describe "Filter Catalog", ->
         it "should be defined and included", ->
             expect(@filter('categoryFilter')).toBeDefined()
 
-        it "should filter input correctly with a cateory", ->
+        it "should filter input correctly with tags", ->
             input = [
                 {
                     metaData:
