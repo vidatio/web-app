@@ -139,10 +139,12 @@ app.service 'VisualizationService', [
                         $log.debug
                             type: options.type
 
-                initInlineEditingLabels()
+                initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
                 $log.info "VisualizationService initInlineEditingLabels called"
+
+                _self = @
 
                 $ "#chart"
                 .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
@@ -162,20 +164,19 @@ app.service 'VisualizationService', [
                         "height": "#{inputSize.height}px"
 
                     if $element.attr("id") is "d3plus_graph_ylabel"
+                        axis = "y"
                         inputPosition =
                             "left": "-#{(inputSize.width / 2) - 6}px"
                             "top": "50%"
                             "margin-top": "-#{inputSize.height}px"
                             "transform": "rotate(-90deg)"
-                        axis = "Y"
                     else
+                        axis = "x"
                         offsetTop = $("svg#d3plus").height() - inputSize.height
-
                         inputPosition =
                             "left": "50%"
                             "top": "#{offsetTop}px"
                             "margin-left": "-#{inputSize.width / 2}px"
-                        axis = "X"
 
                     $ "<input id='#{$element.attr("id")}_inline_input' type='text' value='#{$element.text()}' />"
                     .css angular.extend defaultCss, inputPosition
@@ -183,12 +184,15 @@ app.service 'VisualizationService', [
                     .focus()
                     .select()
                     .blur (event) ->
-                        $element.text $(@).val() || axis
+                        label = $(@).val() || axis.toUpperCase()
+                        $element.text label
                         $(@).remove()
+                        header = Table.getHeader()
+                        header[_self.options["#{axis}Column"]] = label
+                        Table.setHeader header
                     .keyup (event) ->
                         if event.keyCode is 13 or event.keyCode is 27
-                            $element.text $(@).val() || axis
-                            $(@).remove()
+                            $(@).blur()
 
                 return true
 
