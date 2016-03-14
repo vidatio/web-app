@@ -6,7 +6,8 @@ describe "Service Recommender", ->
         @helper = new window.vidatio.Helper()
 
     it "should analyse type of the columns and so the schema of the dataset", ->
-        schema = [["coordinate", "numeric"], ["coordinate", "numeric"], ["nominal"], ["nominal"], ["coordinate", "numeric"]]
+        schema = [["coordinate", "numeric"], ["coordinate", "numeric"], ["nominal"], ["nominal"],
+            ["coordinate", "numeric"]]
         dataset = [
             ["47", "13", "Salzburg", "41,5%", "2"]
             ["46", "12", "Wien", "38,5%", "2"]
@@ -143,6 +144,7 @@ describe "Service Recommender", ->
         )
 
         # NUMERIC, NUMERIC WITH PC
+        dataset = []
         while dataset.length < 1000
             dataset.push [Math.random(), "1000", "True", "201.222"]
 
@@ -216,3 +218,56 @@ describe "Service Recommender", ->
             "xColumn": 0
             "yColumn": 1
         )
+
+    it "should analyse the schema of the dataset with a 10% tolerance", ->
+
+        # one column of each row has a failure
+        schema = [["coordinate", "numeric"], ["coordinate", "numeric"], ["nominal"], ["nominal"], ["coordinate", "numeric"]]
+        dataset = [
+            ["test", "13", "Salzburg", "41,5%", "2"]
+            ["46", "12", "Wien", "38,5%", "2"]
+            ["46", "11", "Bregenz", "40,5%", "1"]
+            ["46", "11", "Bregenz", "40,5%", "1"]
+            ["46", "test", "Salzburg", "40,5%", "1"]
+            ["49", "10", "Linz", "39,5%", "1"]
+            ["49", "10", "Linz", "39,5%", "1"]
+            ["49", "10", "Linz", "39,5%", "1"]
+            ["49", "11", "Linz", "39,5%", "1"]
+            ["49", "10", "1", "39", "Salzburg"]
+        ]
+        dataset = @helper.transposeDataset(dataset)
+        expect(@recommender.getSchema(dataset)).toEqual(schema)
+
+        # row has any failure
+        schema = [["coordinate", "numeric"], ["date", "nominal"], ["nominal"], ["coordinate", "nominal"]]
+        dataset = [
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+        ]
+        dataset = @helper.transposeDataset(dataset)
+        expect(@recommender.getSchema(dataset)).toEqual(schema)
+
+        # dataset has more than 10% failures
+        schema = [["coordinate", "numeric"], ["date", "nominal"], ["nominal"], ["coordinate", "nominal"]]
+        dataset = [
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["56", "14.03.2016", "test", "N 47.123"]
+            ["test", "test", "test", "47.123"]
+            ["test", "test", "test", "47.123"]
+        ]
+        dataset = @helper.transposeDataset(dataset)
+        expect(@recommender.getSchema(dataset)).not.toEqual(schema)

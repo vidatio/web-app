@@ -364,3 +364,4 @@ describe "Service Helper", ->
         expect(@Helper.isDiagramPossible(["date"], ["nominal"], "timeseries")).toEqual(false)
         expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "timeseries")).toEqual(false)
 
+

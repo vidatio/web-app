@@ -8,6 +8,8 @@ class window.vidatio.Helper
         @subsetMax = 100
         @subsetPercentage = 10
 
+        @failureTolerancePercentage = 10
+
     # remove cells without values
     # @method trimDataset
     # @public
@@ -271,45 +273,45 @@ class window.vidatio.Helper
         else
             return false
 
+    isColumnOfType: (column, func) ->
+        maxAllowedFailures = Math.floor(column.length * (@failureTolerancePercentage / 100))
+        failures = 0
+
+        for key, value of column
+            if func(value)
+                if failures >= maxAllowedFailures
+                    return false
+                else
+                    failures++
+        return true
+
     # @method isCoordinateColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells coordinates?
     isCoordinateColumn: (column) ->
-        for key, value of column
-            if not @isCoordinate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isCoordinate value)
 
     # @method isDateColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells are date?
     isDateColumn: (column) ->
-        for key, value of column
-            if not @isDate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isDate value)
 
     # @method isNumericColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells numeric?
     isNumericColumn: (column) ->
-        for key, value of column
-            if not @isNumeric value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isNumeric value)
 
     # @method isNominalColumn
     # @public
-    # @param {Array} column with all cells
+    # @param {Array} column with all cells=
     # @return {Boolean} are all cells strings?
     isNominalColumn: (column) ->
-        for key, value of column
-            if isFinite value
-                return false
-        return true
+        return @isColumnOfType(column, (value) -> isFinite value)
 
     # +43 923 89012891, +43-923-89012891, +43.923.89012891
     # @method isPhoneNumber
