@@ -20,7 +20,7 @@ app.filter "tagsFilter", [
 
             for element in input
                 for tag in tags
-                    idx = element.metaData?.tags?.indexOf tag.toLowerCase()
+                    idx = element.metaData?.tags?.join("|").toLowerCase().split("|").indexOf tag.toLowerCase()
                     if idx >= 0
                         output.push element
                         break
