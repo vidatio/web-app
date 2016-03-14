@@ -1,5 +1,5 @@
 #import
-    margin 0 auto 
+    margin 0 auto
     h4
         text-align center
         margin 15px auto
@@ -114,6 +114,10 @@
                         border-color $color-grey
 
                 .form-control
+                    border-radius 4px
+                    -moz-border-radius 4px
+                    -webkit-border-radius 4px
+
                     &:hover
                         border-color $color-green
 
@@ -150,7 +154,7 @@
         display none
         background $color-dropzone
         position fixed
-        z-index: 999
+        z-index 999
         {overlayParent}
 
         .row
@@ -180,5 +184,5 @@
 
         .drop-area
             position fixed
-            z-index: 999
+            z-index 999
             {overlayParent}
