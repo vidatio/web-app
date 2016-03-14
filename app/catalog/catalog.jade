@@ -43,5 +43,5 @@
                                 h4.title {{ vidatio.title }}
                             p {{ vidatio.description | limitTo: 120}} ...
                             p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.category.name }}
-                            p {{ "DATASET_TAGS" | translate }}: {{ vidatio.metaData.tags.join(", ") }}
+                            p {{ "DATASET_TAGS" | translate }}: {{ vidatio.metaData.tags | preprocessTagsFilter }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
