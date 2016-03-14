@@ -4,7 +4,8 @@ app = angular.module "app.filters"
 
 app.filter "tagsFilter", [
     "$log"
-    ($log) ->
+    "preprocessTagsFilter"
+    ($log, preprocessTagsFilter) ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Array} tags
@@ -19,8 +20,9 @@ app.filter "tagsFilter", [
             output = []
 
             for element in input
+                preprocessedTags = preprocessTagsFilter(element.metaData?.tags).split(", ")
                 for tag in tags
-                    idx = element.metaData?.tags?.join("|").toLowerCase().split("|").indexOf tag.toLowerCase()
+                    idx = preprocessedTags.join("|").toLowerCase().split("|").indexOf tag.toLowerCase()
                     if idx >= 0
                         output.push element
                         break
