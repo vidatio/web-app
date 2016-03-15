@@ -202,31 +202,26 @@ describe "Service Helper", ->
         expect(@Helper.isNumber null).toBeFalsy()
         expect(@Helper.isNumber true).toBeFalsy()
 
-    it "should cut the dataset by the specified amount of rows", ->
-        @Helper.rowLimit = 2
+    it "should return a subset of the dataset", ->
+        dataset = []
+        while dataset.length < 20
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 20
 
-        dataset = [
-            [
-                true, true, true
-            ]
-            [
-                true, true, true
-            ]
-            [
-                false, false, false
-            ]
-        ]
+        dataset = []
+        while dataset.length < 400
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 40
 
-        result = [
-            [
-                true, true, true
-            ]
-            [
-                true, true, true
-            ]
-        ]
+        dataset = []
+        while dataset.length < 300
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 30
 
-        expect(@Helper.getSubset dataset).toEqual result
+        dataset = []
+        while dataset.length < 1100
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 100
 
     it 'should identify phone numbers', ->
         expect(@Helper.isPhoneNumber "+43 902 128391" ).toBeTruthy()
@@ -302,12 +297,12 @@ describe "Service Helper", ->
         expect(actualResult).toEqual(expectedResult)
 
         actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "scatter", headers, color)
-        expect(actualResult).toEqual(expectedResult)
+        expect(actualResult).not.toEqual(expectedResult)
 
     it 'should transform 2 dimensional arrays to arrays of objects for a timeseries chart', ->
         dataset = [
-            [ 123, new Date("2016-02-28") ]
-            [ 456, new Date("2016-02-29") ]
+            [ 123, "2016-02-28" ]
+            [ 456, "2016-02-29" ]
         ]
         headers =
             "x": "Apfel"
@@ -318,13 +313,13 @@ describe "Service Helper", ->
 
         expectedResult = [
             {
-                "Apfel": new Date("2016-02-28")
+                "Apfel": "2016-02-28"
                 "Banane": 123
                 "name": "Line 1"
                 "color": "#FF0"
             }
             {
-                "Apfel": new Date("2016-02-29")
+                "Apfel": "2016-02-29"
                 "Banane": 456
                 "name": "Line 1"
                 "color": "#FF0"
@@ -353,19 +348,16 @@ describe "Service Helper", ->
         expect(actualResult).toEqual(expectedResult)
 
     it 'should check if diagram is possible', ->
-        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "scatter")).toEqual(true)
-        expect(@Helper.isDiagramPossible(["numeric"], ["date"], "scatter")).toEqual(false)
-        expect(@Helper.isDiagramPossible(["nominal"], ["numeric"], "scatter")).toEqual(false)
+        expect(@Helper.isRowUsable("0", "0", "scatter")).toEqual(true)
+        expect(@Helper.isRowUsable("test", "0", "scatter")).toEqual(false)
+        expect(@Helper.isRowUsable("0", "test", "scatter")).toEqual(false)
 
-        expect(@Helper.isDiagramPossible([], [], "map")).toEqual(true)
+        expect(@Helper.isRowUsable("0", "test", "bar")).toEqual(false)
+        expect(@Helper.isRowUsable("test", "0", "bar")).toEqual(true)
 
-        expect(@Helper.isDiagramPossible([], [], "parallel")).toEqual(true)
+        expect(@Helper.isRowUsable("01.01.2016", "1", "timeseries")).toEqual(true)
+        expect(@Helper.isRowUsable("1", "01.01.2016", "timeseries")).toEqual(false)
 
-        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "bar")).toEqual(true)
-        expect(@Helper.isDiagramPossible(["nominal"], ["numeric"], "bar")).toEqual(true)
-        expect(@Helper.isDiagramPossible(["numeric"], ["nominal"], "bar")).toEqual(false)
-
-        expect(@Helper.isDiagramPossible(["date"], ["numeric"], "timeseries")).toEqual(true)
-        expect(@Helper.isDiagramPossible(["date"], ["nominal"], "timeseries")).toEqual(false)
-        expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "timeseries")).toEqual(false)
-
+        expect(@Helper.isRowUsable("1", "test", "parallel")).toEqual(true)
+        expect(@Helper.isRowUsable("test", "test", "parallel")).toEqual(true)
+        expect(@Helper.isRowUsable("test", "1", "parallel")).toEqual(true)

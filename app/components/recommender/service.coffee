@@ -52,9 +52,9 @@ class window.vidatio.Recommender
 
         variances = []
 
-        dataset.forEach (column, idx, array) ->
+        dataset.forEach (column) ->
             differentValues = {}
-            column.forEach (cell, idx, array) ->
+            column.forEach (cell) ->
                 differentValues[cell] = true
 
             count = 0
@@ -139,7 +139,6 @@ class window.vidatio.Recommender
 
             # After checking the header or/and classify the columns
             # we have to decide which diagram type we want to recommend
-
             if "coordinate" in schema[xIndex] and "coordinate" in schema[yIndex]
                 @recommendedDiagram = "map"
 
