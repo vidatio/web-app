@@ -435,13 +435,7 @@ class window.vidatio.Helper
     # @param {String} yColumnType
     # @return {Boolean}
     isRowUsable: (x, y, type) ->
-        vidatio.log.info "HelperService isRowUsable called"
-        vidatio.log.debug
-            x: x
-            y: y
-            type: type
-
-        if not x? or not y?
+        if not x? or not y? or not type?
             return false
 
         switch type
