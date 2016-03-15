@@ -1,6 +1,3 @@
-# Visualization Controller
-# ========================
-
 "use strict"
 
 app = angular.module "app.controllers"
@@ -35,8 +32,8 @@ app.controller "VisualizationCtrl", [
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            header = if Table.useColumnHeadersFromDataset then Table.getColumnHeaders() else []
-            Visualization.recommendDiagram(header)
+            header = if Table.useColumnHeadersFromDataset then Table.getHeader() else []
+            Visualization.recommendDiagram header
             Visualization.create()
 
         if Data.meta.fileType is "shp"
@@ -77,7 +74,7 @@ app.controller "VisualizationCtrl", [
             if axis is "x"
                 $scope.visualization.xColumn = id
             else if axis is "y"
-                $scope.visualization.xColumn = id
+                $scope.visualization.yColumn = id
 
             Table.setDiagramColumns $scope.visualization.xColumn, $scope.visualization.yColumn
 

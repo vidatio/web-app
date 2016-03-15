@@ -50,7 +50,7 @@
                                 .icon-linechart.selection-icons
                                 .selection-text {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
-            .color-selection.hover-button(ng-hide="visualization.diagramType == 'map'")
+            .color-selection.hover-button(ng-hide="visualization.type == 'map'")
                 a.icon-colorbucket(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
 
             .download-button.hover-button
