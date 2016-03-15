@@ -81,7 +81,11 @@
         margin 0 15px
 
         .seperator
-            background $color-shadow
+            visibility hidden
+
+            &.active
+                background $color-shadow
+                visibility visible
 
         #datatable
         #chart
@@ -241,7 +245,41 @@
             height 100%
             margin-bottom 40px
 
-@media (min-width: 768px) and (max-width: 990px)
+@media (min-width: 768px) and (max-width: 947px)
+    #editor
+        .editor-panel
+            .tab
+                &.middle
+                    line-height 20px !important
+
+@media (min-width: 948px) and (max-width: 955px)
+    #editor
+        .editor-panel
+            .tab
+                font-size 15px !important
+
+                &.middle
+                    line-height 40px !important
+
+                    &.active
+                        line-height 40px !important
+
+@media (min-width: 956px) and (max-width: 989px)
+    #editor
+        .editor-panel
+            .tab
+                &.middle
+                    &.active
+                        line-height 20px !important
+
+@media (min-width: 768px) and (max-width: 989px)
+    #editor
+        .editor-panel
+            .tab
+                &.middle
+                    padding-top 1px
+
+@media (min-width: 768px) and (max-width: 991px)
     #editor
         .row
             height 100%
@@ -252,9 +290,6 @@
                 line-height 40px
 
                 &.middle
-                    line-height 20px !important
-                    padding-top 1px
-
                     &.active
                         padding-top 3px
 
@@ -264,11 +299,14 @@
             width 86% !important
             margin 5px 7% 15px !important
 
-@media(min-width: 991px) and (max-width: 1079px)
+@media(min-width: 990px) and (max-width: 1079px)
     #editor
         .editor-panel
             .tab
                 font-size 15px
+
+                &.middle
+                    line-height 45px
 
 @media(max-width: 991px)
     #editor
@@ -280,7 +318,8 @@
 
             #table
                 .content
-                    margin-bottom 30px
+                    &.active
+                        margin-bottom 30px
 
 @media(min-width: 992px)
     #editor
@@ -295,9 +334,6 @@
                 height calc(100% - 10px)
                 width 2px
                 margin 5px 0
-
-        .content
-            margin-bottom 30px
 
 @media(min-width: 1080px) and (max-width: 1200px)
     #editor
