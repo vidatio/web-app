@@ -1,23 +1,20 @@
 "use strict"
 
 class window.vidatio.ScatterPlot extends window.vidatio.Visualization
-    constructor: (dataset, options) ->
+    constructor: (dataset, options, width, height) ->
         vidatio.log.info "ScatterPlot constructor called"
         vidatio.log.debug
             dataset: dataset
             options: options
+            width: width
+            height: height
 
         @remove()
-        super dataset, options.color
+        super dataset, options.color, width, height
         @preProcess options
 
         # we need to wait for angular to finish rendering
         setTimeout =>
-            $chart = $("#chart")
-
-            width = $chart.parent().width()
-            height = $chart.parent().height() - 40
-
             d3plus.viz()
             .container("#chart")
             .data(@chartData)
@@ -27,7 +24,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .y(options.headers["y"])
             .size(10)
             .color("color")
-            .width(width)
-            .height(height)
+            .width(@width)
+            .height(@height)
             .draw()
-        , 0
+        , 100

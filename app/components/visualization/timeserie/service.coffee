@@ -1,14 +1,16 @@
 "use strict"
 
 class vidatio.TimeseriesChart extends vidatio.Visualization
-    constructor: (dataset, options) ->
+    constructor: (dataset, options, width, height) ->
         vidatio.log.info "Timeseries chart constructor called"
         vidatio.log.debug
             dataset: dataset
             options: options
+            width: width
+            height: height
 
         @remove()
-        super dataset, options.color
+        super dataset, options.color, width, height
         @preProcess options
 
         # handle different date formats and parse them for c3.js charts
@@ -17,11 +19,6 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
 
         # we need to wait for angular to finish rendering
         setTimeout =>
-            $chart = $("#chart")
-
-            width = $chart.parent().width()
-            height = $chart.parent().height() - 40
-
             d3plus.viz()
             .container("#chart")
             .data(@chartData)
@@ -31,7 +28,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             .x(options.headers["x"])
             .y(options.headers["y"])
             .color("color")
-            .width(width)
-            .height(height)
+            .width(@width)
+            .height(@height)
             .draw()
-        , 0
+        , 100

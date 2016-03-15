@@ -13,7 +13,8 @@ app.controller "EditorCtrl", [
     "DataService"
     "ngToast"
     "$translate"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate) ->
+    "VisualizationService"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization) ->
 
         $scope.editor = Data
 
@@ -54,6 +55,12 @@ app.controller "EditorCtrl", [
                 viewsToDisplay = [true, true]
             else
                 viewsToDisplay = [false, true]
+
+            # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
+            if tabIndex isnt 0
+                setTimeout ->
+                    Visualization.create()
+                , 10
 
             $log.debug
                 message: "EditorCtrl tabClicked called"
