@@ -77,7 +77,7 @@ app.controller "VisualizationCtrl", [
             if axis is "x"
                 $scope.visualization.xColumn = id
             else if axis is "y"
-                $scope.visualization.xColumn = id
+                $scope.visualization.yColumn = id
 
             Table.setDiagramColumns $scope.visualization.xColumn, $scope.visualization.yColumn
 
