@@ -394,10 +394,13 @@ class window.vidatio.Helper
             x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
             y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
 
+            # bar chart needs always a string for the x axis
+            if visualizationType is "bar"
+                x = String(x)
+
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
-
             dataItem["color"] = color
 
             if visualizationType is "bar" or visualizationType is "scatter"
@@ -448,11 +451,13 @@ class window.vidatio.Helper
             when "parallel"
                 return true
             when "bar"
-                if (@isNominal(x) or @isNumeric(x)) and @isNumeric(y)
+                if @isNumeric(y)
                     return true
             when "timeseries"
                 if @isDate(x) and @isNumeric(y)
                     return true
+
+
 
         return false
 
