@@ -52,9 +52,9 @@ class window.vidatio.Recommender
 
         variances = []
 
-        dataset.forEach (column, idx, array) ->
+        dataset.forEach (column) ->
             differentValues = {}
-            column.forEach (cell, idx, array) ->
+            column.forEach (cell) ->
                 differentValues[cell] = true
 
             count = 0

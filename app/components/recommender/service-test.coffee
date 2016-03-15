@@ -193,6 +193,7 @@ describe "Service Recommender", ->
             ["Pflaumen", 200]
             ["Wurst", 500]
         ]
+
         expect(@recommender.run dataset).toEqual(
             "type": "bar"
             "xColumn": 0
@@ -200,7 +201,7 @@ describe "Service Recommender", ->
         )
 
         # NOMINAL, NUMERIC WITH SCATTER
-        dataset.push ["Mango", 100]
+        dataset.push ["Mango", 190]
         expect(@recommender.run dataset).toEqual(
             "type": "scatter"
             "xColumn": 0
@@ -211,7 +212,7 @@ describe "Service Recommender", ->
         tmp = dataset.length
         while dataset.length < 501
             for i in [ 0...tmp ]
-                dataset.push [dataset[i]]
+                dataset.push dataset[i]
 
         expect(@recommender.run dataset).toEqual(
             "type": "parallel"
