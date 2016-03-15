@@ -20,13 +20,15 @@ describe "Editor Controller", ->
 
             EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data, VisualizationService: @Visualization}
 
+    afterEach ->
+        @Visualization.create.calls.reset()
+
     describe "on page init", ->
         it "should display both the TableView and VisualizationView, a title should be set", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
             expect(@Data.name).toBe("My Vidatio")
-
 
     describe "on clicked tab", ->
         it "should set the showTableView and showVisualizationView variables accordingly", ->
@@ -51,12 +53,18 @@ describe "Editor Controller", ->
 
     describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
         it 'should call Visualization.create() after a timeout of 10ms', (done) ->
+            @scope.tabClicked(0)
+            setTimeout (->
+                done()
+            ), 10
+            return
+            expect(@Visualization.create).not.toHaveBeenCalled()
+
             @scope.tabClicked(1)
             setTimeout (->
                 done()
             ), 10
             return
-
             expect(@Visualization.create).toHaveBeenCalled()
 
             @scope.tabClicked(2)
@@ -64,7 +72,6 @@ describe "Editor Controller", ->
                 done()
             ), 10
             return
-
             expect(@Visualization.create).toHaveBeenCalled()
 
     describe "on save vidatio-title if title input-field is not filled up", ->
