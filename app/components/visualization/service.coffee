@@ -8,8 +8,7 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    "ngToast"
-    (Table, Converter, Map, $log, $translate, ngToast) ->
+    (Table, Converter, Map, $log, $translate) ->
         class Visualization
 
             # @method constructor
@@ -71,20 +70,6 @@ app.service 'VisualizationService', [
                 options["headers"] =
                     "x": headers[options.xColumn]
                     "y": headers[options.yColumn]
-
-                console.log "x: ", options.xColumn, "y: ", options.yColumn
-                subset = vidatio.helper.getSubset trimmedDataset
-                transposedDataset = vidatio.helper.transposeDataset subset
-                schema = vidatio.recommender.getSchema transposedDataset
-
-                if vidatio.helper.isDiagramPossible schema[options.xColumn], schema[options.yColumn], options.type
-                    chartData = trimmedDataset
-                else
-                    $translate('TOAST_MESSAGES.NO_DIAGRAM_POSSIBLE').then (translation) ->
-                        ngToast.create
-                            className: "danger"
-                            content: translation
-                    chartData = []
 
                 # set width and height of the visualization for dynamic resizing
                 $chart = $("#chart")
