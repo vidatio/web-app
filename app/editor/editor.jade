@@ -8,5 +8,5 @@
         a.tab(href="#" ng-class="{'active': activeTabs[2]}" ng-click="tabClicked(2)") {{ "VISUALIZATION" | translate | uppercase }}
     .row
         include table/table
-        .seperator
+        .seperator(ng-class="{'active': activeTabs[1]}")
         include visualization/visualization
