@@ -3,7 +3,12 @@
 class window.vidatio.Helper
     constructor: ->
         vidatio.log.info "HelperService constructor called"
-        @rowLimit = 30
+
+        @subsetMin = 20
+        @subsetMax = 100
+        @subsetPercentage = 10
+
+        @failureTolerancePercentage = 10
 
     # remove cells without values
     # @method trimDataset
@@ -42,7 +47,7 @@ class window.vidatio.Helper
 
         return tmp
 
-    # cut out specified amount of rows
+    # Return specified amount of random rows
     # @method cutDataset
     # @public
     # @param {Array} dataset
@@ -53,13 +58,24 @@ class window.vidatio.Helper
             message: "HelperService getSubset called"
             dataset: dataset
 
-        tmp = []
-        for element, index in dataset
-            if index is @rowLimit
-                break
-            tmp.push element
+        randomSampleSet = []
+        indices = []
+        size = null
 
-        return tmp
+        if dataset.length <= @subsetMin
+            return dataset
+        else if dataset.length > @subsetMin and dataset.length <= @subsetMax / (@subsetPercentage / 100)
+            size = Math.floor(dataset.length * (@subsetPercentage / 100))
+        else
+            size = @subsetMax
+
+        while randomSampleSet.length < size
+            idx = Math.floor Math.random() * dataset.length
+            if indices.indexOf(idx) < 0
+                indices.push idx
+                randomSampleSet.push dataset[idx]
+
+        return randomSampleSet
 
     # @method transposeDataset
     # @public
@@ -257,45 +273,50 @@ class window.vidatio.Helper
         else
             return false
 
+    # @method isColumnOfType
+    # @public
+    # @param {Array} column with all cells
+    # @param {Function} conditionFunction function for type condition
+    # @return {Boolean} are all cells of requested type
+    isColumnOfType: (column, conditionFunction) ->
+        thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
+        failures = 0
+
+        for key, value of column
+            if conditionFunction(value)
+                if failures >= thresholdFailure
+                    return false
+                else
+                    failures++
+        return true
+
     # @method isCoordinateColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells coordinates?
     isCoordinateColumn: (column) ->
-        for key, value of column
-            if not @isCoordinate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isCoordinate value)
 
     # @method isDateColumn
     # @public
     # @param {Array} column with all cells
-    # @return {Boolean} are all cells are date?
+    # @return {Boolean} are all cells a date?
     isDateColumn: (column) ->
-        for key, value of column
-            if not @isDate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isDate value)
 
     # @method isNumericColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells numeric?
     isNumericColumn: (column) ->
-        for key, value of column
-            if not @isNumeric value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isNumeric value)
 
     # @method isNominalColumn
     # @public
-    # @param {Array} column with all cells
-    # @return {Boolean} are all cells strings?
+    # @param {Array} column with all cells=
+    # @return {Boolean} are all cells a string?
     isNominalColumn: (column) ->
-        for key, value of column
-            if isFinite value
-                return false
-        return true
+        return @isColumnOfType(column, (value) -> isFinite value)
 
     # +43 923 89012891, +43-923-89012891, +43.923.89012891
     # @method isPhoneNumber
