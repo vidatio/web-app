@@ -145,6 +145,13 @@ class window.vidatio.Helper
     isNumeric: (value) ->
         return (!isNaN(parseFloat(value)) && isFinite(value))
 
+    # @method isNominal
+    # @public
+    # @param {All Types} value
+    # @return {Boolean}
+    isNominal: (value) ->
+        return not isFinite(value)
+
     # @method isCoordinate
     # @public
     # @param {All Types} coordinate
@@ -381,6 +388,9 @@ class window.vidatio.Helper
         { x: xHeader, y: yHeader } = headers
 
         dataset.forEach (row) =>
+            if not @isRowUsable row[xColumn], row[yColumn], visualizationType
+                return
+
             x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
             y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
 
@@ -417,41 +427,40 @@ class window.vidatio.Helper
 
         subset
 
-    # @method isDiagramPossible
-    # @description This method checks if the current column type selection is possible with a given diagram.
+    # @method isRowUsable
+    # @description This method checks if the current cell types are possible for the diagram type
     # @public
     # @param {Array} xColumnTypes
     # @param {Array} yColumnTypes
     # @param {String} yColumnType
     # @return {Boolean}
-    isDiagramPossible: (xColumnTypes, yColumnTypes, type) ->
-        vidatio.log.info "HelperService isDiagramPossible called"
+    isRowUsable: (x, y, type) ->
+        vidatio.log.info "HelperService isRowUsable called"
         vidatio.log.debug
-            xColumnTypes: xColumnTypes
-            yColumnTypes: yColumnTypes
+            x: x
+            y: y
             type: type
 
-        if not xColumnTypes? or not yColumnTypes?
+        if not x? or not y?
             return false
 
         switch type
             when "scatter"
-                if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
-                    return false
+                if @isNumeric(x) and @isNumeric(y)
+                    return true
             when "map"
-                break
+                # FIXME: inside the converter there is similar code
+                return false
             when "parallel"
-                break
-
+                return true
             when "bar"
-                if "numeric" not in yColumnTypes
-                    return false
-
+                if (@isNominal(x) or @isNumeric(x)) and @isNumeric(y)
+                    return true
             when "timeseries"
-                if "date" not in xColumnTypes or "numeric" not in yColumnTypes
-                    return false
+                if @isDate(x) and @isNumeric(y)
+                    return true
 
-        return true
+        return false
 
 # @method $.fn.textWidth
 # @description This method calculates the width of a specific input-field according to a users' input
