@@ -198,8 +198,9 @@ app.config [
 
         # /dataset catalog
         .state "app.catalog",
-            url: "/catalog"
+            url: "/catalog?from&to&category&tags&myvidatios"
             templateUrl: "catalog/catalog.html"
+            controller: "CatalogCtrl"
             title: "catalog"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
