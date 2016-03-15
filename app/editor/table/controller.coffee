@@ -42,23 +42,5 @@ app.controller "TableCtrl", [
         #@description downloads a csv
         $scope.download = ->
             $log.info "TableCtrl download called"
-
-            trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-
-            if Table.useColumnHeadersFromDataset
-                csv = Papa.unparse
-                    fields: Table.getHeader(),
-                    data: trimmedDataset
-            else
-                csv = Papa.unparse trimmedDataset
-
-            if $scope.data.name is ""
-                fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
-            else
-                fileName = $scope.data.name
-
-            csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
-            csvURL = window.URL.createObjectURL(csvData)
-
-            Share.download fileName + ".csv", csvURL
+            Data.downloadCSV($scope.data.name)
 ]

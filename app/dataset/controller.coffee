@@ -76,7 +76,7 @@ app.controller "DatasetCtrl", [
 
         # @method $scope.createVidatio
         # @description creates Vidatio from saved Dataset
-        $scope.createVidatio = ->
+        $scope.openInEditor = ->
             $log.info "DatasetCtrl $scope.createVidatio called"
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
@@ -86,13 +86,9 @@ app.controller "DatasetCtrl", [
                     Progress.setMessage ""
 
         # at the moment direct download is not possible, so download via editor
-        $scope.downloadDataset = ->
-            $log.info "DatasetCtrl downloadDataset called"
-            @createVidatio()
+        $scope.downloadCSV = Data.downloadCSV
 
-        $scope.downloadImage = ->
-            $log.info "DatasetCtrl downloadImage called"
-            @createVidatio()
+        $scope.downloadJPEG = Data.downloadJPEG
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->

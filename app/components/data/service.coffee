@@ -14,7 +14,8 @@ app.service 'DataService', [
     "DataFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    "ShareService"
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state, Share) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -127,6 +128,30 @@ app.service 'DataService', [
                                 Table.setHeader data.data.shift()
 
                     Table.setDataset data.data
+
+            #@method downloadCSV
+            #@description downloads a csv
+            downloadCSV: (name) ->
+                $log.info "TableCtrl download called"
+
+                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+
+                if Table.useColumnHeadersFromDataset
+                    csv = Papa.unparse
+                        fields: Table.getHeader(),
+                        data: trimmedDataset
+                else
+                    csv = Papa.unparse trimmedDataset
+
+                if name is ""
+                    fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
+                else
+                    fileName = name
+
+                csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
+                csvURL = window.URL.createObjectURL(csvData)
+
+                Share.download fileName + ".csv", csvURL
 
         new Data
 ]

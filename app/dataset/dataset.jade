@@ -6,13 +6,15 @@
     .row
         .col-sm-12
             .visualization-container
-                img(src="{{ info.image }}")
+                leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
+                #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
+                img(src="{{ info.image }}" ng-hide="visualization.type")
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()")
                         span.icon-edit.icons
-                        span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
+                        span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                 .col-xs-12.col-sm-4.middle
                     #download-dataset
@@ -21,12 +23,12 @@
                             span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
-                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
-                                a
+                            li
+                                a(ng-click="downloadCSV()")
                                     span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
-                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
-                                a
+                            li
+                                a(ng-click="downloadJPEG()")
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
 

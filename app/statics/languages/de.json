@@ -37,7 +37,7 @@
     "VISUALIZATION": "Visualisierung",
     "DATASET + VISUALIZATION": "Datensatz + Visualisierung",
     "SAVE": "Speichern",
-    "CREATE_VIDATIO": "Vidatio erstellen",
+    "OPEN_IN_EDITOR": "Im Editor öffnen",
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
