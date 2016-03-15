@@ -21,6 +21,7 @@ app.controller "VisualizationCtrl", [
         $scope.data = Data
         $scope.header = Table.header
 
+        # Resizing the visualizations
         # using setTimeout to use only to the last resize action of the user
         id = null
         angular.element($window).bind 'resize', ->
@@ -32,8 +33,7 @@ app.controller "VisualizationCtrl", [
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            header = if Table.useColumnHeadersFromDataset then Table.getHeader() else []
-            Visualization.recommendDiagram header
+            Visualization.recommendDiagram()
             Visualization.create()
 
         if Data.meta.fileType is "shp"
@@ -76,20 +76,7 @@ app.controller "VisualizationCtrl", [
             else if axis is "y"
                 $scope.visualization.yColumn = id
 
-            Table.setDiagramColumns $scope.visualization.xColumn, $scope.visualization.yColumn
-
-            if Visualization.isInputValid $scope.visualization.xColumn, $scope.visualization.yColumn, $scope.visualization.type
-                Visualization.create()
-            else
-                $translate($scope.visualization.translationKeys[$scope.visualization.type]).then (diagramName) ->
-                    return $translate 'TOAST_MESSAGES.COLUMN_NOT_POSSIBLE',
-                        column: Table.getHeader()[id]
-                        type: diagramName
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
-                return true
+            Visualization.create()
 
         # @method selectDiagram
         # @param {String} name

@@ -37,7 +37,7 @@ app.service 'VisualizationService', [
 
             # @method useRecommendedOptions
             # @public
-            recommendDiagram: (header) ->
+            recommendDiagram: ->
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
@@ -57,39 +57,6 @@ app.service 'VisualizationService', [
                     $translate(@options.translationKeys[@options.type]).then (translation) =>
                         @options.selectedDiagramName = translation
 
-                    Table.setDiagramColumns recommendationResults.xColumn, recommendationResults.yColumn
-
-            # @method isInputValid
-            # @public
-            # @params {Number} x
-            # @params {Number} y
-            # @params {String} type
-            # @return {Function}
-            isInputValid: (x, y, type) ->
-                $log.info "VisualizationService isInputValid called"
-                $log.debug
-                    x: x
-                    y: y
-                    type: type
-
-                if not x? or not y? or not type?
-                    return false
-
-                transposedDataset = vidatio.helper.transposeDataset Table.getDataset()
-                subset = vidatio.helper.getSubset transposedDataset
-
-                xSubsetFiltered = subset[x].filter((value) ->
-                    return value if value?
-                )
-                ySubsetFiltered = subset[y].filter((value) ->
-                    return value if value?
-                )
-
-                xColumnType = vidatio.recommender.getColumnType xSubsetFiltered
-                yColumnType = vidatio.recommender.getColumnType ySubsetFiltered
-
-                return vidatio.helper.isDiagramPossible xColumnType, yColumnType, type
-
             # create a new diagram based on the recommended diagram
             # @method create
             # @public
@@ -99,11 +66,12 @@ app.service 'VisualizationService', [
                 $log.debug
                     options: options
 
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                chartData = vidatio.helper.trimDataset Table.getDataset()
                 headers = Table.getHeader()
                 options["headers"] =
                     "x": headers[options.xColumn]
                     "y": headers[options.yColumn]
+
                 console.log "x: ", options.xColumn, "y: ", options.yColumn
                 subset = vidatio.helper.getSubset trimmedDataset
                 transposedDataset = vidatio.helper.transposeDataset subset
