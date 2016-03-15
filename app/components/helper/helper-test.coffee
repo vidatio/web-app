@@ -202,31 +202,26 @@ describe "Service Helper", ->
         expect(@Helper.isNumber null).toBeFalsy()
         expect(@Helper.isNumber true).toBeFalsy()
 
-    it "should cut the dataset by the specified amount of rows", ->
-        @Helper.rowLimit = 2
+    it "should return a subset of the dataset", ->
+        dataset = []
+        while dataset.length < 20
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 20
 
-        dataset = [
-            [
-                true, true, true
-            ]
-            [
-                true, true, true
-            ]
-            [
-                false, false, false
-            ]
-        ]
+        dataset = []
+        while dataset.length < 400
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 40
 
-        result = [
-            [
-                true, true, true
-            ]
-            [
-                true, true, true
-            ]
-        ]
+        dataset = []
+        while dataset.length < 300
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 30
 
-        expect(@Helper.getSubset dataset).toEqual result
+        dataset = []
+        while dataset.length < 1100
+            dataset.push [ "test" ]
+        expect(@Helper.getSubset(dataset).length).toEqual 100
 
     it 'should identify phone numbers', ->
         expect(@Helper.isPhoneNumber "+43 902 128391" ).toBeTruthy()
@@ -368,4 +363,5 @@ describe "Service Helper", ->
         expect(@Helper.isDiagramPossible(["date"], ["numeric"], "timeseries")).toEqual(true)
         expect(@Helper.isDiagramPossible(["date"], ["nominal"], "timeseries")).toEqual(false)
         expect(@Helper.isDiagramPossible(["numeric"], ["numeric"], "timeseries")).toEqual(false)
+
 
