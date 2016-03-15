@@ -182,16 +182,16 @@ describe "Service Recommender", ->
 
         # NOMINAL, NUMERIC WITH SCATTER
         dataset = [
-            ["Apfel", 100]
+            ["Apfel", 500]
             ["Birne", 200]
             ["Banane", 1200]
-            ["Orange", 123]
+            ["Orange", 523]
             ["Balsamico", 213123]
             ["Olivenöl", 400]
             ["Erdbeeren", 10000]
-            ["Fisch", 100]
+            ["Fisch", 500]
             ["Pflaumen", 200]
-            ["Wurst", 100]
+            ["Wurst", 500]
         ]
         expect(@recommender.run dataset).toEqual(
             "type": "bar"

@@ -47,7 +47,7 @@ class window.vidatio.Helper
 
         return tmp
 
-    # cut out specified amount of rows
+    # Return specified amount of random rows
     # @method cutDataset
     # @public
     # @param {Array} dataset
@@ -63,7 +63,7 @@ class window.vidatio.Helper
         size = null
 
         if dataset.length <= @subsetMin
-            size = dataset.length
+            return dataset
         else if dataset.length > @subsetMin and dataset.length <= @subsetMax / (@subsetPercentage / 100)
             size = Math.floor(dataset.length * (@subsetPercentage / 100))
         else
@@ -273,6 +273,11 @@ class window.vidatio.Helper
         else
             return false
 
+    # @method isColumnOfType
+    # @public
+    # @param {Array} column with all cells
+    # @param {Function} conditionFunction function for type condition
+    # @return {Boolean} are all cells of requested type
     isColumnOfType: (column, conditionFunction) ->
         thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
         failures = 0
@@ -295,7 +300,7 @@ class window.vidatio.Helper
     # @method isDateColumn
     # @public
     # @param {Array} column with all cells
-    # @return {Boolean} are all cells are date?
+    # @return {Boolean} are all cells a date?
     isDateColumn: (column) ->
         return @isColumnOfType(column, (value) => not @isDate value)
 
@@ -309,7 +314,7 @@ class window.vidatio.Helper
     # @method isNominalColumn
     # @public
     # @param {Array} column with all cells=
-    # @return {Boolean} are all cells strings?
+    # @return {Boolean} are all cells a string?
     isNominalColumn: (column) ->
         return @isColumnOfType(column, (value) -> isFinite value)
 
