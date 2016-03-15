@@ -1,4 +1,4 @@
-x"use strict"
+"use strict"
 
 app = angular.module "app.controllers"
 
