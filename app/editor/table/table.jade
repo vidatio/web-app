@@ -1,5 +1,5 @@
 #table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
-    .content
+    .content(ng-class="{'active': activeTabs[1]}")
         .settings-bar
             .header-button(ng-hide="meta.fileType == 'shp'")
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}

@@ -3,7 +3,12 @@
 class window.vidatio.Helper
     constructor: ->
         vidatio.log.info "HelperService constructor called"
-        @rowLimit = 30
+
+        @subsetMin = 20
+        @subsetMax = 100
+        @subsetPercentage = 10
+
+        @failureTolerancePercentage = 10
 
     # remove cells without values
     # @method trimDataset
@@ -42,7 +47,7 @@ class window.vidatio.Helper
 
         return tmp
 
-    # cut out specified amount of rows
+    # Return specified amount of random rows
     # @method cutDataset
     # @public
     # @param {Array} dataset
@@ -53,13 +58,24 @@ class window.vidatio.Helper
             message: "HelperService getSubset called"
             dataset: dataset
 
-        tmp = []
-        for element, index in dataset
-            if index is @rowLimit
-                break
-            tmp.push element
+        randomSampleSet = []
+        indices = []
+        size = null
 
-        return tmp
+        if dataset.length <= @subsetMin
+            return dataset
+        else if dataset.length > @subsetMin and dataset.length <= @subsetMax / (@subsetPercentage / 100)
+            size = Math.floor(dataset.length * (@subsetPercentage / 100))
+        else
+            size = @subsetMax
+
+        while randomSampleSet.length < size
+            idx = Math.floor Math.random() * dataset.length
+            if indices.indexOf(idx) < 0
+                indices.push idx
+                randomSampleSet.push dataset[idx]
+
+        return randomSampleSet
 
     # @method transposeDataset
     # @public
@@ -128,6 +144,13 @@ class window.vidatio.Helper
     # @return {Boolean}
     isNumeric: (value) ->
         return (!isNaN(parseFloat(value)) && isFinite(value))
+
+    # @method isNominal
+    # @public
+    # @param {All Types} value
+    # @return {Boolean}
+    isNominal: (value) ->
+        return not isFinite(value)
 
     # @method isCoordinate
     # @public
@@ -257,45 +280,50 @@ class window.vidatio.Helper
         else
             return false
 
+    # @method isColumnOfType
+    # @public
+    # @param {Array} column with all cells
+    # @param {Function} conditionFunction function for type condition
+    # @return {Boolean} are all cells of requested type
+    isColumnOfType: (column, conditionFunction) ->
+        thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
+        failures = 0
+
+        for key, value of column
+            if conditionFunction(value)
+                if failures >= thresholdFailure
+                    return false
+                else
+                    failures++
+        return true
+
     # @method isCoordinateColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells coordinates?
     isCoordinateColumn: (column) ->
-        for key, value of column
-            if not @isCoordinate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isCoordinate value)
 
     # @method isDateColumn
     # @public
     # @param {Array} column with all cells
-    # @return {Boolean} are all cells are date?
+    # @return {Boolean} are all cells a date?
     isDateColumn: (column) ->
-        for key, value of column
-            if not @isDate value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isDate value)
 
     # @method isNumericColumn
     # @public
     # @param {Array} column with all cells
     # @return {Boolean} are all cells numeric?
     isNumericColumn: (column) ->
-        for key, value of column
-            if not @isNumeric value
-                return false
-        return true
+        return @isColumnOfType(column, (value) => not @isNumeric value)
 
     # @method isNominalColumn
     # @public
-    # @param {Array} column with all cells
-    # @return {Boolean} are all cells strings?
+    # @param {Array} column with all cells=
+    # @return {Boolean} are all cells a string?
     isNominalColumn: (column) ->
-        for key, value of column
-            if isFinite value
-                return false
-        return true
+        return @isColumnOfType(column, (value) -> isFinite value)
 
     # +43 923 89012891, +43-923-89012891, +43.923.89012891
     # @method isPhoneNumber
@@ -360,13 +388,19 @@ class window.vidatio.Helper
         { x: xHeader, y: yHeader } = headers
 
         dataset.forEach (row) =>
+            if not @isRowUsable row[xColumn], row[yColumn], visualizationType
+                return
+
             x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
             y = if @isNumeric row[yColumn] then parseFloat row[yColumn] else row[yColumn]
+
+            # bar chart needs always a string for the x axis
+            if visualizationType is "bar"
+                x = String(x)
 
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
-
             dataItem["color"] = color
 
             if visualizationType is "bar" or visualizationType is "scatter"
@@ -396,41 +430,36 @@ class window.vidatio.Helper
 
         subset
 
-    # @method isDiagramPossible
-    # @description This method checks if the current column type selection is possible with a given diagram.
+    # @method isRowUsable
+    # @description This method checks if the current cell types are possible for the diagram type
     # @public
     # @param {Array} xColumnTypes
     # @param {Array} yColumnTypes
     # @param {String} yColumnType
     # @return {Boolean}
-    isDiagramPossible: (xColumnTypes, yColumnTypes, type) ->
-        vidatio.log.info "HelperService isDiagramPossible called"
-        vidatio.log.debug
-            xColumnTypes: xColumnTypes
-            yColumnTypes: yColumnTypes
-            type: type
-
-        if not xColumnTypes? or not yColumnTypes?
+    isRowUsable: (x, y, type) ->
+        if not x? or not y? or not type?
             return false
 
         switch type
             when "scatter"
-                if "numeric" not in yColumnTypes or "numeric" not in xColumnTypes
-                    return false
+                if @isNumeric(x) and @isNumeric(y)
+                    return true
             when "map"
-                break
+                # FIXME: inside the converter there is similar code
+                return false
             when "parallel"
-                break
-
+                return true
             when "bar"
-                if "numeric" not in yColumnTypes
-                    return false
-
+                if @isNumeric(y)
+                    return true
             when "timeseries"
-                if "date" not in xColumnTypes or "numeric" not in yColumnTypes
-                    return false
+                if @isDate(x) and @isNumeric(y)
+                    return true
 
-        return true
+
+
+        return false
 
 # @method $.fn.textWidth
 # @description This method calculates the width of a specific input-field according to a users' input
