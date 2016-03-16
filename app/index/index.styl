@@ -9,12 +9,13 @@
         font-size 19px
 
     #intro
-        padding 0
+        padding 0 0 100px 0
 
         #slogan
             font-family Colaborate-Thin, $fonts
-            font-size 30px
+            font-size 24px
             margin-bottom 10px
+            transform translate(45px, -40px)
 
         .diagram
             img
@@ -23,18 +24,18 @@
                 border-radius 4px
 
         .description
-            margin 20px 0 10px
-            font-family Colaborate-Light, $fonts
+            margin-bottom 10px
+            font-family Colaborate-Thin, $fonts
 
-            .font-green-dark
-                font-family Colaborate-Bold, $fonts
-                font-size 21px
+            strong
+                font-family Colaborate-Medium, $fonts
 
         ol
             counter-reset li-counter
             list-style-type none
             margin 0
             padding 0
+            font-family Colaborate-Thin, $fonts
 
             > li
                 position relative
@@ -67,9 +68,11 @@
                     position relative
 
         .get-started
-            position relative
+            position absolute
             width 175px
-            margin 100px auto 0
+            right 80px
+            bottom -40px
+            transform rotate(-10deg)
 
             a
                 width inherit
@@ -97,13 +100,15 @@
         .promo
             .video
                 width 100%
-                border 1px solid
+                padding 20px
+                background $color-white
+                border-top 3px solid $color-green
+                box-shadow -1px 1px 6px $color-shadow
 
                 img
                     width 100%
 
     #usp
-        margin-top -180px
         color $color-white
         padding-top 0
         background url(../images/dotgrid.png) $color-grey-dark
@@ -172,27 +177,27 @@
             display block
             margin-bottom 10px
 
-/* space between live diagram and video in intro section */
+
+@media(max-width: 400px)
+    #landing-page #intro #slogan
+        transform none
+
+@media(max-width: 960px)
+    #landing-page #intro .get-started
+        bottom -70px
+
 @media(max-width: 767px)
     #landing-page #intro .promo
         margin-top 20px
 
-/* move get-started button and shape that they do not overlap */
+    #landing-page #intro .description
+        margin-top 20px
 
-@media(max-width: 700px)
     #landing-page #intro .get-started
-        margin-top 50px
-        margin-bottom 180px
-
-@media(min-width: 701px)
-    #landing-page #intro .get-started
-        margin-top 80px
-        margin-bottom 140px
-
-@media(min-width: 801px)
-    #landing-page #intro .get-started
-        margin-top 100px
-        margin-bottom 80px
+        position relative
+        right 0
+        left 50%
+        transform translateX(-50%)
 
 @media(max-width: 767px)
     #landing-page #popular-categories
@@ -207,17 +212,9 @@
     #landing-page #popular-categories
         background-size 85%, cover
 
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 100px
-
 @media(min-width: 1201px) and (max-width: 1400px)
     #landing-page #popular-categories
         background-size 70%, cover
-
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 100px
 
 @media(min-width: 1401px) and (max-width: 1600px)
     #landing-page #popular-categories
@@ -226,8 +223,3 @@
 @media(min-width: 1601px)
     #landing-page #popular-categories
         background-size 52%, cover
-
-@media(min-width: 1400px)
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 10px
