@@ -11,10 +11,6 @@ app.filter "tagsFilter", [
         # @param {Array} tags
         # @return {Array}
         return (input, tags) ->
-            $log.info "TagsFilter called"
-            $log.debug
-                tags: tags
-
             return input if not tags?.length or not input
 
             output = []
@@ -22,8 +18,7 @@ app.filter "tagsFilter", [
             for element in input
                 preprocessedTags = preprocessTagsFilter(element.metaData?.tags).split(", ")
                 for tag in tags
-                    idx = preprocessedTags.join("|").toLowerCase().split("|").indexOf tag.toLowerCase()
-                    if idx >= 0
+                    if tag.toLowerCase() in vidatio.helper.arrayToLowerCase(preprocessedTags)
                         output.push element
                         break
 

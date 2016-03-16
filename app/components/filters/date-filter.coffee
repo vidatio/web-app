@@ -11,11 +11,6 @@ app.filter "dateFilter", [
         # @param {Date or String} to
         # @return {Array}
         return (input, from, to) ->
-            $log.info "DateFilter called"
-            $log.debug
-                from: from
-                to: to
-
             return input if not from and not to or not input
 
             fromDate = new Date(from)

@@ -9,8 +9,6 @@ app.filter "preprocessTags", [
         # @param {Array} input
         # @return {Array}
         return (input) ->
-            $log.info "PreprocessTagsFilter called"
-
             return input if not input
 
             output = []

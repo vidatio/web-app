@@ -11,10 +11,6 @@ app.filter "myVidatioFilter", [
         # @param {Boolean} showOwnVidatios
         # @return {Array}
         return (input, showMyVidatios) ->
-            $log.info "myVidatioFilter called"
-            $log.debug
-                showMyVidatios: showMyVidatios
-
             return input if not showMyVidatios or not input
 
             globals = $cookieStore.get( "globals" ) or {}
