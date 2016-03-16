@@ -16,24 +16,7 @@ app.controller "EditorCtrl", [
     "VisualizationService"
     "$window"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window) ->
-
         $scope.editor = Data
-
-        id = null
-
-        # Resizing the visualizations
-        # using setTimeout to use only to the last resize action of the user
-        onWindowResizeCallback = ->
-            console.log "in if 2"
-            clearTimeout id
-            id = setTimeout ->
-                Visualization.create()
-            , 100
-
-        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
-
-        $scope.$on '$destroy', ->
-            window.angular.element($window).off 'resize', onWindowResizeCallback
 
         # check if userAgent is Firefox -> necessary for the width calculation of the input field
         isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
@@ -52,6 +35,25 @@ app.controller "EditorCtrl", [
                 $scope.editor.name = $scope.standardTitle
 
         $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
+
+        # Resizing the visualizations
+        # using setTimeout to use only to the last resize action of the user
+        id = null
+
+        onWindowResizeCallback = ->
+            # a new visualization should only be created when the visualization is visible in editor
+            if viewsToDisplay[1] is true
+                clearTimeout id
+                id = setTimeout ->
+                    Visualization.create()
+                , 250
+
+        # resize event only should be fired if user is currently in editor
+        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+
+        # resize watcher has to be removed when editor is leaved
+        $scope.$on '$destroy', ->
+            window.angular.element($window).off 'resize', onWindowResizeCallback
 
         # the displayed views are set accordingly to the clicked tab
         # @method tabClicked
@@ -77,7 +79,7 @@ app.controller "EditorCtrl", [
             if tabIndex isnt 0
                 setTimeout ->
                     Visualization.create()
-                , 10
+                , 250
 
             $log.debug
                 message: "EditorCtrl tabClicked called"
