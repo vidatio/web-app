@@ -23,7 +23,6 @@ app.controller "DatasetCtrl", [
     "DataService"
     "VisualizationService"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
-
         # set link to current vidatio
         $rootScope.link = $location.$$absUrl
 
