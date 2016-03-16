@@ -94,7 +94,8 @@ app.service 'VisualizationService', [
                         $log.debug
                             type: options.type
 
-                initInlineEditingLabels.call @
+                unless options.type is "map" or options.type is "parallel"
+                    initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
                 $log.info "VisualizationService initInlineEditingLabels called"
