@@ -72,7 +72,6 @@ describe "Service Data", ->
                     xColumn: 2
                     yColumn: 3
                     color: "#FF00FF"
-                    selectedDiagramName: "Balkendiagramm"
                     useColumnHeadersFromDataset: true
 
         it "from shp data", ->
@@ -90,7 +89,6 @@ describe "Service Data", ->
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
-                selectedDiagramName: "Balkendiagramm"
             @Data.meta.fileType = "csv"
 
             @Data.createVidatio data
