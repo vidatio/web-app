@@ -23,27 +23,16 @@ app.controller "DatasetCtrl", [
     "DataService"
     "VisualizationService"
     ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
-        console.log "INIT #############"
-        # set link to current vidatio
-        $rootScope.link = $location.$$absUrl
-
-        # link-overlay shouldn't be displayed on detailviews' start
-        $rootScope.showVidatioLink = false
-
+        $scope.downloadCSV = Data.downloadCSV
+        $scope.downloadJPEG = Data.downloadJPEG
         $scope.visualization = Visualization.options
-
-        # use datasetId from $stateParams
-        datasetId = $stateParams.id
+        $scope.link = $location.$$absUrl
+        $scope.geojson = Map.leaflet
 
         # get dataset according to datasetId and set necessary metadata
-        DataFactory.get {id: datasetId}, (data) ->
-            $log.info "DatasetCtrl got dataset response"
-
+        DataFactory.get {id: $stateParams.id}, (data) ->
             $scope.data = data
-            Data.meta.fileType = if data.metaData?.fileType? then data.metaData.fileType else null
-
-            # fill up detail-view with metadata
-            $scope.data.id = datasetId
+            $scope.data.id = $stateParams.id
             $scope.data.created = new Date(data.createdAt)
             $scope.data.creator = data.userId.name || "-"
             $scope.data.origin = "Vidatio"
@@ -53,7 +42,7 @@ app.controller "DatasetCtrl", [
             $scope.data.category = data.category || "-"
             $scope.data.tags = data.tags || "-"
 
-            $scope.createVidatio()
+            Data.createVidatio $scope.data
             Visualization.create()
 
         , (error) ->
@@ -75,25 +64,17 @@ app.controller "DatasetCtrl", [
                 $timeout ->
                     Progress.setMessage ""
 
-        # at the moment direct download is not possible, so download via editor
-        $scope.downloadCSV = Data.downloadCSV
-
-        $scope.downloadJPEG = Data.downloadJPEG
-
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
             $log.info "DatasetCtrl getVidatioLink called"
             $log.debug
-                id: datasetId
-                link: $rootScope.link
+                link: $scope.link
 
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
-        # hide link-box if necessary
         $scope.hideVidatioLink = ->
             $rootScope.showVidatioLink = false
 
-        # copy link to clipboard
         $scope.copyVidatioLink = ->
             $log.info "DatasetCtrl copyVidatioLink called"
 

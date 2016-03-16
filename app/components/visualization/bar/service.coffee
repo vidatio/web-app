@@ -12,7 +12,7 @@ class vidatio.BarChart extends vidatio.Visualization
 
         # we need to wait for angular to finish rendering
 
-        console.log "###############", options
+        console.log "### BAR ###", options
 
         setTimeout =>
             d3plus

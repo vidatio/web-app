@@ -106,33 +106,32 @@ app.service 'DataService', [
                 $log.debug
                     data: data
 
-                if @meta["fileType"] is "shp"
-                    dataset = Converter.convertGeoJSON2Arrays data.data
-                    Table.setDataset dataset
-                    Table.useColumnHeadersFromDataset = true
+                @meta.fileType = if data.metaData?.fileType? then data.metaData.fileType else null
+                Table.useColumnHeadersFromDataset = if data.options?.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
+
+                if @meta.fileType is "shp"
+                    Table.setDataset Converter.convertGeoJSON2Arrays data.data
+                    Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
                     Map.setGeoJSON data.data
                 else
-                    if data.options?
-                        # Each value has to be assigned individually, otherwise all options get overwritten.
-                        if data.options.type?
-                            Visualization.options["type"] = data.options.type
-                            $translate(Visualization.translationKeys[data.options.type]).then (translation) ->
-                                Visualization.options["selectedDiagramName"] = translation
-                        else
-                            Visualization.options["type"] = false
-                            Visualization.options["selectedDiagramName"] = false
-
-                        Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
-                        Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
-                        Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
-
-                        if data.options.useColumnHeadersFromDataset?
-                            Table.useColumnHeadersFromDataset = if data.options.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
-
-                            if Table.useColumnHeadersFromDataset
-                                Table.setHeader data.data.shift()
-
+                    if Table.useColumnHeadersFromDataset
+                        Table.setHeader data.data.shift()
                     Table.setDataset data.data
+
+                if data.options?
+                    # Each value has to be assigned individually, otherwise all already set options get overwritten
+                    # and because we want to use data binding
+                    if data.options?.type?
+                        Visualization.options["type"] = data.options.type
+                        $translate(Visualization.options.translationKeys[data.options.type]).then (translation) ->
+                            Visualization.options["selectedDiagramName"] = translation
+                    else
+                        Visualization.options["type"] = false
+                        Visualization.options["selectedDiagramName"] = false
+
+                    Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
+                    Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
+                    Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
 
             #@method downloadCSV
             #@description downloads a csv

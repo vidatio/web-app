@@ -15,6 +15,8 @@ app.service 'VisualizationService', [
             # @method constructor
             # @public
             constructor: ->
+                $log.info "VisualizationService constructor called"
+
                 @options =
                     type: false
                     xColumn: 0
@@ -30,8 +32,8 @@ app.service 'VisualizationService', [
 
             resetOptions: ->
                 @options.type = false
-                @options.xColumn = null
-                @options.yColumn = null
+                @options.xColumn = 0
+                @options.yColumn = 1
                 @options.color = "#11DDC6"
                 @options.selectedDiagramName = null
 
@@ -62,15 +64,15 @@ app.service 'VisualizationService', [
             # @public
             # @param {String} type
             create: (options = @options) ->
-                $log.info "VisualizationService create function called"
+                $log.info "VisualizationService create called"
                 $log.debug
                     options: options
 
                 chartData = vidatio.helper.trimDataset Table.getDataset()
                 headers = Table.getHeader()
                 options["headers"] =
-                    "x": headers[options.xColumn]
-                    "y": headers[options.yColumn]
+                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
+                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
 
                 switch options.type
                     when "scatter"

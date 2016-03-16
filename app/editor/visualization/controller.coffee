@@ -124,43 +124,5 @@ app.controller "VisualizationCtrl", [
             , (notify) ->
                 Progress.setMessage notify
 
-        $scope.geojson =
-            data: Map.geoJSON
-            style: ->
-                {}
-            pointToLayer: (feature, latLng) ->
-                new L.marker(latLng, icon: L.icon(
-                    iconUrl: '../images/marker-small.png'
-                    iconSize: [25, 30]
-                    iconAnchor: [12.5, 30]
-                    popupAnchor: [0, -30]
-                ))
-            onEachFeature: (feature, layer) ->
-                # So every markers gets a popup
-                html = ""
-                isFirstAttribute = true
-
-                for property, value of feature.properties
-
-                    if value
-                        if isFirstAttribute
-                            html += "<b>"
-
-                        if vidatio.helper.isEmailAddress(value)
-                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isPhoneNumber(value)
-                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isURL(value)
-                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if value
-                            html += value + "<br>"
-
-                        if isFirstAttribute
-                            html += "</b>"
-                            isFirstAttribute = false
-
-                unless html
-                    html = "Keine Informationen vorhanden"
-
-                layer.bindPopup(html)
+        $scope.geojson = Map.leaflet
 ]

@@ -150,22 +150,21 @@ app.config [
         # /dataset
         .state "app.dataset",
             url: "/vidatio/:id"
-            controller: "DatasetCtrl"
             templateUrl: "dataset/dataset.html"
             title: "dataset"
 
         # /registration
         .state "app.registration",
             url: "/registration"
-            controller: "RegistrationCtrl"
             templateUrl: "registration/registration.html"
+            controller: "RegistrationCtrl"
             title: "registration"
 
         # /login
         .state "app.login",
             url: "/login"
-            controller: "LoginCtrl"
             templateUrl: "login/login.html"
+            controller: "LoginCtrl"
             title: "login"
 
         # /import

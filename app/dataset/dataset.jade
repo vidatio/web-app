@@ -6,10 +6,11 @@
     .row
         .col-sm-12
             .visualization-container
-                {{visualization}}
-                leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
-                #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
-                img(src="{{ info.image }}" ng-hide="visualization.type")
+                // div needed to use padding of the parent
+                div
+                    leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
+                    #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
+                    img(src="{{ info.image }}" ng-hide="visualization.type")
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
