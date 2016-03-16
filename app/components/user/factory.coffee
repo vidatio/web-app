@@ -9,6 +9,13 @@ app.factory 'UserFactory', [
         $resource $rootScope.apiBase + $rootScope.apiVersion + "/users/:id"
 ]
 
+app.factory 'UserDatasetsFactory', [
+    "$resource"
+    "$rootScope"
+    ($resource, $rootScope) ->
+        $resource $rootScope.apiBase + $rootScope.apiVersion + "/users/:id/datasets"
+]
+
 app.factory 'UserAuthFactory', [
     "$resource"
     "$rootScope"

@@ -10,10 +10,10 @@ app.factory "CatalogFactory", [
         class CatalogFactory
 
             getDatasets: ->
-                return $resource($rootScope.apiBase + "/v0/datasets/")
+                return $resource($rootScope.apiBase + $rootScope.apiVersion + "/datasets/")
 
             getCategories: ->
-                return $resource($rootScope.apiBase + "/v0/categories/")
+                return $resource($rootScope.apiBase + $rootScope.apiVersion + "/categories/")
 
         new CatalogFactory
 ]
