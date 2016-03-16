@@ -135,7 +135,8 @@
     "TO": "bis",
     "FILTER": {
         "BY_TIME": "Filtern nach Zeit",
-        "BY_CATEGORY": "Filtern nach Kategorie"
+        "BY_CATEGORY": "Filtern nach Kategorie",
+        "BY_TAGS": "Filtern nach Tags"
     },
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte...",

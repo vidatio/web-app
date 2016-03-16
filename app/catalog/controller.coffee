@@ -22,6 +22,7 @@ app.controller "CatalogCtrl", [
                 to: undefined
             category: ""
             showMyVidatios: if $stateParams?.myvidatios? then if $stateParams.myvidatios is "true" then true else false
+
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
         $('#my-vidatio-checkbox').radiocheck()
@@ -40,6 +41,7 @@ app.controller "CatalogCtrl", [
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
+                vidatio.metaData.tags = tags[ index % tags.length ]
 
         , (error) ->
             $log.info "CatalogCtrl error on query datasets"
