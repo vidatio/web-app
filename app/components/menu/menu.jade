@@ -10,7 +10,7 @@ nav
 
         .menu-list
             a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" )
-                span.icons.fui-user
+                span.icons.icon-profile
                 span.link-text {{ 'MY_PROFILE' | translate }}
             a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()")
                 span.icons.icon-opendata
