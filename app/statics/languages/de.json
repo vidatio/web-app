@@ -138,9 +138,9 @@
         "BY_CATEGORY": "Filtern nach Kategorie"
     },
     "HEADER": "Kopfzeile",
-    "HEADER_DEFAULT": "Spalte...",
+    "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
-        "DIAGRAM_TYPE": "Diagrammart...",
+        "DIAGRAM_TYPE": "Diagrammart",
         "SCATTER_PLOT": "Streudiagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
@@ -151,5 +151,8 @@
     "LONGITUDE": "Long",
     "LATITUDE": "Lat",
     "MY_VIDATIOS": "Eigene Vidatios",
-    "MORE_VIDATIOS": "Weitere Vidatios"
+    "MORE_VIDATIOS": "Weitere Vidatios",
+    "TRANSPOSE": "Transponieren",
+    "AXES": "Achsen",
+    "COLORS": "Farben"
 }

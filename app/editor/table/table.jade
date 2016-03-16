@@ -5,13 +5,24 @@
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
-            .transpose-button.hover-button(ng-hide="meta.fileType == 'shp'")
-                a(href='#' ng-click="transpose()")
-                    img(src="images/transpose.png")
+            .transpose-button.settings-button(ng-hide="meta.fileType == 'shp'")
+                //- Replace `.icon-copyclipboard` with transpose icon
+                a(href='#' ng-click="transpose()").icon-copyclipboard
+                    span {{ "TRANSPOSE" | translate }}
 
-            .download-button.hover-button(ng-hide="meta.fileType == 'shp'")
-                a(href='#').icon-download.download-icon
+            .xaxis-button.settings-button
+                //- Replace `.icon-emptytable` with axis icon
+                a(href='#' ng-click="").icon-emptytable
+                    span {{ "X_AXIS" | translate }}
 
+            .yaxis-button.settings-button
+                //- Replace `.icon-emptytable` with axis icon
+                a(href='#' ng-click="").icon-emptytable
+                    span {{ "Y_AXIS" | translate }}
+
+            .download-button.settings-button(ng-hide="meta.fileType == 'shp'")
+                a(href='#').icon-download
+                    span {{ "DOWNLOAD" | translate }}
                 ul
                     li
                         a(ng-click="download()") CSV
