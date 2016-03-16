@@ -1,11 +1,12 @@
-#dataset-view.wrapper-content(ng-controller="DatasetCtrl" ng-repeat="info in information")
+#dataset-view.wrapper-content(ng-controller="DatasetCtrl")
     .row.dataset-title
         .col-sm-12
-            h1.underline-red-light.dataset-title-text {{ info.title }}
+            h1.underline-red-light.dataset-title-text {{ data.title }}
 
     .row
         .col-sm-12
             .visualization-container
+                {{visualization}}
                 leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
                 #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
                 img(src="{{ info.image }}" ng-hide="visualization.type")
@@ -57,32 +58,32 @@
         .col-sm-12
             .metadata-container
                 .one-row
-                    .description {{ info.description }}
+                    .description {{ data.description }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ORIGIN" | translate }}:
-                    .dataset-creator.info {{ info.origin }}
+                    .dataset-creator.info {{ data.origin }}
                 .one-row
                     .text {{ "DATASET_EDITOR" | translate }}:
-                    .dataset-creator.info {{ info.creator }}
+                    .dataset-creator.info {{ data.creator }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ID" | translate }}:
-                    .dataset-creator.info {{ info.id }}
+                    .dataset-creator.info {{ data.id }}
                 .one-row
                     .text {{ "DATASET_PARENT" | translate }}:
-                    .dataset-creator.info {{ info.parent }}
+                    .dataset-creator.info {{ data.parent }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
-                    .dataset-created.info {{ info.created | date: "dd.MM.yyyy" }}
+                    .dataset-created.info {{ data.created | date: "dd.MM.yyyy" }}
                 .one-row
                     .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-update.info {{ info.updated | date: "dd.MM.yyyy" }}
+                    .dataset-update.info {{ data.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
-                    .dataset-creator.info {{ info.category }}
+                    .dataset-creator.info {{ data.category }}
                 .one-row
                     .text {{ "DATASET_TAGS" | translate }}:
-                    .dataset-creator.info {{ info.tags }}
+                    .dataset-creator.info {{ data.tags }}
