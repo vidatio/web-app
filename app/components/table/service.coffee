@@ -106,26 +106,5 @@ app.service 'TableService', [
                 $log.info "TableService getDataset called"
                 return @dataset
 
-            # @method setDiagramColumns
-            # @public
-            setDiagramColumns: (xColumn, yColumn) ->
-                $log.info "TableService setDiagramColumns called"
-                $log.debug
-                    xColumn: xColumn
-                    yColumn: yColumn
-
-                unless xColumn or yColumn
-                    return
-
-                @diagramColumns["x"] = xColumn
-                @diagramColumns["y"] = yColumn
-
-            # @method getDiagramColumns
-            # @public
-            # @return {Object}
-            getDiagramColumns: ->
-                $log.info "TableService getDiagramColumns called"
-                @diagramColumns
-
         new Table
 ]

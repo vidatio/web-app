@@ -71,7 +71,6 @@ app.service 'DataService', [
                         xColumn: Visualization.options.xColumn
                         yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
-                        selectedDiagramName: Visualization.options.selectedDiagramName
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
 
                 , (response) ->
@@ -114,11 +113,17 @@ app.service 'DataService', [
                 else
                     if data.options?
                         # Each value has to be assigned individually, otherwise all options get overwritten.
-                        Visualization.options["type"] = if data.options.type? then data.options.type else false
+                        if data.options.type?
+                            Visualization.options["type"] = data.options.type
+                            $translate(Visualization.translationKeys[data.options.type]).then (translation) ->
+                                Visualization.options["selectedDiagramName"] = translation
+                        else
+                            Visualization.options["type"] = false
+                            Visualization.options["selectedDiagramName"] = false
+
                         Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
                         Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
                         Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
-                        Visualization.options["selectedDiagramName"] = if data.options.selectedDiagramName? then data.options.selectedDiagramName else null
 
                         if data.options.useColumnHeadersFromDataset?
                             Table.useColumnHeadersFromDataset = if data.options.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false

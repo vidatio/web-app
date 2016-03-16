@@ -14,6 +14,9 @@ app.controller "ShareCtrl", [
 
         $scope.share = Data
 
+        # initialize tagsinput on page-init for propper displaying the tagsinput-field
+        $(".tagsinput").tagsinput()
+
         #to remove tags label on focus & remove flag-ui tags-input length
         $('.tagsinput-primary ').on 'focus', '.bootstrap-tagsinput input', ->
             $('span.placeholder').hide()

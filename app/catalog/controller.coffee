@@ -12,13 +12,16 @@ app.controller "CatalogCtrl", [
     "TableService"
     "$translate"
     "ngToast"
-    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast) ->
+    "$stateParams"
+    "$state"
+    "$location"
+    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, $location) ->
         $scope.filter =
             dates:
                 from: undefined
                 to: undefined
             category: ""
-            showMyVidatios: false
+            showMyVidatios: if $stateParams?.myvidatios? then if $stateParams.myvidatios is "true" then true else false
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
         $('#my-vidatio-checkbox').radiocheck()
@@ -52,4 +55,9 @@ app.controller "CatalogCtrl", [
             vidatio.log.debug
                 category: category
             $scope.filter.category = category
+
+        $scope.toggleMyVidatios = ->
+            $state.go $state.current, {myvidatios: $scope.filter.showMyVidatios},
+                notify: false
+                reload: $state.current
 ]
