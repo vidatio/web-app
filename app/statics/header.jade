@@ -50,7 +50,7 @@ header.ng-cloak
                         a#edit-data.active(href='#')
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref="app.share({ locale: locale })")
+                        a#use-data(ui-sref="app.share({ locale: locale })")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -77,7 +77,7 @@ header.ng-cloak
                         a#edit-data(ui-sref="app.editor({ locale: locale })")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset.active(href="#")
+                        a#use-data.active(href="#")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -104,7 +104,7 @@ header.ng-cloak
                         a#edit-data.clickable(ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
+                        a#use-data(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
