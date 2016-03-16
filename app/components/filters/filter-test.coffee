@@ -127,3 +127,37 @@ describe "Filter Catalog", ->
 
         it "should not filter input by user name", ->
             expect(@filter('myVidatioFilter')(@input, false)).toEqual(@input)
+
+    describe "TagFilter", ->
+        it "should be defined and included", ->
+            expect(@filter('categoryFilter')).toBeDefined()
+
+        it "should filter input correctly with a cateory", ->
+            input = [
+                {
+                    metaData:
+                        tags: [
+                            "category1"
+                            "category2"
+                        ]
+
+                },
+                {
+                    metaData:
+                        tags: [
+                            "category3"
+                        ]
+
+                }
+            ]
+
+            result = [
+                {
+                    metaData:
+                        tags: [
+                            "category3"
+                        ]
+                }
+            ]
+
+            expect(@filter('tagsFilter')(input, ["category3"])).toEqual(result)
