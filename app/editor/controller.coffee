@@ -14,9 +14,26 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization) ->
+    "$window"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window) ->
 
         $scope.editor = Data
+
+        id = null
+
+        # Resizing the visualizations
+        # using setTimeout to use only to the last resize action of the user
+        onWindowResizeCallback = ->
+            console.log "in if 2"
+            clearTimeout id
+            id = setTimeout ->
+                Visualization.create()
+            , 100
+
+        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+
+        $scope.$on '$destroy', ->
+            window.angular.element($window).off 'resize', onWindowResizeCallback
 
         # check if userAgent is Firefox -> necessary for the width calculation of the input field
         isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1

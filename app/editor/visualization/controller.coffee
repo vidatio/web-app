@@ -17,25 +17,10 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    "$location"
-    ($rootScope, $scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $location) ->
+    ($rootScope, $scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
         $scope.visualization = Visualization.options
         $scope.data = Data
         $scope.header = Table.header
-
-        # Resizing the visualizations
-        # using setTimeout to use only to the last resize action of the user
-        #id = null
-        #window.angular.element($window).on 'resize', $scope.$apply, ->
-        #    console.log "in if 2"
-        #    if $location.$$path is "/" + $rootScope.locale + "/editor"
-        #        clearTimeout id
-        #        id = setTimeout ->
-        #            Visualization.create()
-        #        , 100
-#
-        #$scope.$on '$destroy', ->
-        #    window.angular.element($window).off 'resize'
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend

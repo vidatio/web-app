@@ -179,14 +179,12 @@ app.config [
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
-            controller: "EditorCtrl"
             title: "editor"
 
         # /editor for saved vidatio
         .state "app.editor.id",
             url: "/vidatio_:id",
             templateUrl: "editor/editor.html"
-            controller: "EditorCtrl"
             title: "editor"
 
         # /share
