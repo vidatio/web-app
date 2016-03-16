@@ -461,6 +461,17 @@ class window.vidatio.Helper
 
         return false
 
+    # @method arrayToLowerCase
+    # @public
+    # @param {Array} array
+    # @return {Array}
+    arrayToLowerCase: (array) ->
+        output = []
+        for element in array
+            output.push element.toLowerCase()
+
+        output
+
 # @method $.fn.textWidth
 # @description This method calculates the width of a specific input-field according to a users' input
 # @public
