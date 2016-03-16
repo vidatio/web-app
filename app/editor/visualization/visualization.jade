@@ -62,8 +62,6 @@
                         a(ng-click='shareVisualization("jpg")') JPG
 
         leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
-
         #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
-
         #chart-placeholder(ng-hide="visualization.type")
             img(src="images/logo-without-name.png" )

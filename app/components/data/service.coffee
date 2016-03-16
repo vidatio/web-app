@@ -102,7 +102,7 @@ app.service 'DataService', [
             # @description from existing dataset
             # @param {Object} data
             createVidatio: (data) ->
-                $log.info "DatasetCtrl createVidatio called"
+                $log.info "DataService createVidatio called"
                 $log.debug
                     data: data
 
