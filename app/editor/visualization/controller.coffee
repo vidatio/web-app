@@ -25,14 +25,17 @@ app.controller "VisualizationCtrl", [
 
         # Resizing the visualizations
         # using setTimeout to use only to the last resize action of the user
-        id = null
-        angular.element($window).bind 'resize', ->
-            if $location.$$path is "/" + $rootScope.locale + "/editor"
-                console.log "in if 2"
-                clearTimeout id
-                id = setTimeout ->
-                    Visualization.create()
-                , 500
+        #id = null
+        #window.angular.element($window).on 'resize', $scope.$apply, ->
+        #    console.log "in if 2"
+        #    if $location.$$path is "/" + $rootScope.locale + "/editor"
+        #        clearTimeout id
+        #        id = setTimeout ->
+        #            Visualization.create()
+        #        , 100
+#
+        #$scope.$on '$destroy', ->
+        #    window.angular.element($window).off 'resize'
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
