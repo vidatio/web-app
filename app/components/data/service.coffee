@@ -115,7 +115,7 @@ app.service 'DataService', [
                         # Each value has to be assigned individually, otherwise all options get overwritten.
                         if data.options.type?
                             Visualization.options["type"] = data.options.type
-                            $translate(Visualization.translationKeys[data.options.type]).then (translation) ->
+                            $translate(Visualization.options.translationKeys[data.options.type]).then (translation) ->
                                 Visualization.options["selectedDiagramName"] = translation
                         else
                             Visualization.options["type"] = false

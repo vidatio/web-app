@@ -68,7 +68,7 @@ describe "Service Data", ->
                         ["one", "two", "three"]
                     ]
                 options:
-                    # type: "bar" ### Can't be tested, because of promise
+                    type: "bar"
                     xColumn: 2
                     yColumn: 3
                     color: "#FF00FF"
@@ -85,7 +85,7 @@ describe "Service Data", ->
 
         it "and set visualizaiotn options", ->
             options =
-                # type: "bar" ### Can't be tested, because of promise
+                type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
