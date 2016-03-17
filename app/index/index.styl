@@ -1,6 +1,4 @@
 #landing-page
-    section
-        padding 50px 0
 
     h1
         margin-bottom 20px
@@ -9,12 +7,13 @@
         font-size 19px
 
     #intro
-        padding 0
+        padding 0 0 70px 0
 
         #slogan
             font-family Colaborate-Thin, $fonts
-            font-size 30px
+            font-size 24px
             margin-bottom 10px
+            transform translate(45px, -40px)
 
         .diagram
             img
@@ -23,7 +22,7 @@
                 border-radius 4px
 
         .description
-            margin 20px 0 10px
+            margin-bottom 10px
             font-family Colaborate-Light, $fonts
 
             .font-green-dark
@@ -67,9 +66,11 @@
                     position relative
 
         .get-started
-            position relative
+            position absolute
             width 175px
-            margin 100px auto 0
+            right 170px
+            bottom -80px
+            transform rotate(-10deg)
 
             a
                 width inherit
@@ -97,41 +98,38 @@
         .promo
             .video
                 width 100%
-                border 1px solid
+                padding 20px
+                background $color-white
+                border-top 3px solid $color-green
+                box-shadow -1px 1px 6px $color-shadow
 
                 img
                     width 100%
 
     #usp
-        margin-top -180px
         color $color-white
-        padding-top 0
+        padding 0 0 50px
         background url(../images/dotgrid.png) $color-grey-dark
         overflow hidden
         width 100%
 
-        div
-            text-align center
+        .row
+            margin-top 40px
 
-        .content
-            margin-top 50px
+            div
+                text-align center
 
-        .usp-icon
-            font-size 90px
+            .usp-icon
+                font-size 90px
 
-        .icon-3clicks
-            font-size 100px
-            margin-top -6px
-            height 164px
-
-        .shape
-            min-width 100%
-            margin-top -1px
-            border-style none
-            width calc(100% + 6px)
-            margin-left -3px
+            .icon-2clicks
+                font-size 100px
+                margin-top -6px
+                height 164px
 
     #featured-vidatios
+        padding 50px 0 72px
+
         img.featured
             width 100%
             -webkit-box-shadow 2px 2px 2px 0px $color-shadow
@@ -160,6 +158,7 @@
                     font-size 14px
 
     #popular-categories
+        padding-top 50px
         min-height 500px
 
         /* first image is in the foreground, second image in the background*/
@@ -167,37 +166,47 @@
         width 100%
 
     #customers
+        padding 50px 0 26px
         h3
         h4
             display block
             margin-bottom 10px
 
-/* space between live diagram and video in intro section */
+
+@media(max-width: 400px)
+    #landing-page #intro #slogan
+        transform none
+
 @media(max-width: 767px)
-    #landing-page #intro .promo
+    #landing-page #intro
+        .row
+            .slogan
+                height 10px
+
+            .promo
+                margin-top 20px
+
+    #landing-page #intro .description
         margin-top 20px
 
-/* move get-started button and shape that they do not overlap */
-
-@media(max-width: 700px)
     #landing-page #intro .get-started
-        margin-top 50px
-        margin-bottom 180px
+        position relative
+        top 40px
+        right 0
+        left calc(50% - 90px)
 
-@media(min-width: 701px)
-    #landing-page #intro .get-started
-        margin-top 80px
-        margin-bottom 140px
-
-@media(min-width: 801px)
-    #landing-page #intro .get-started
-        margin-top 100px
-        margin-bottom 80px
-
-@media(max-width: 767px)
     #landing-page #popular-categories
         /* first value concerns always the foreground image, the last value always the background image */
         background-size 95%, cover
+
+@media(max-width: 850px)
+    #landing-page #intro
+        padding 0 0 100px 0
+
+@media(min-width: 768px) and (max-width: 960px)
+    #landing-page #intro .get-started
+        bottom -80px
+        right 100px
 
 @media(min-width: 768px) and (max-width: 1100px)
     #landing-page #popular-categories
@@ -207,17 +216,9 @@
     #landing-page #popular-categories
         background-size 85%, cover
 
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 100px
-
 @media(min-width: 1201px) and (max-width: 1400px)
     #landing-page #popular-categories
         background-size 70%, cover
-
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 100px
 
 @media(min-width: 1401px) and (max-width: 1600px)
     #landing-page #popular-categories
@@ -226,8 +227,3 @@
 @media(min-width: 1601px)
     #landing-page #popular-categories
         background-size 52%, cover
-
-@media(min-width: 1400px)
-    #landing-page #intro .get-started
-        margin-top 60px
-        margin-bottom 10px
