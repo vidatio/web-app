@@ -1,4 +1,4 @@
-#share.wrapper-content(ng-controller="ShareCtrl")
+#share.wrapper-content
         .row
             .col-sm-6
                 #preview.area
@@ -32,7 +32,7 @@
                                 option SVG
 
             .col-sm-6
-                #save-share.area(ng-init="show=1" ng-show="show==1")
+                .save-share.area(ng-init="show=1" ng-show="show==1")
                     .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
@@ -44,7 +44,7 @@
                             li: button.btn.btn-primary.icon-embeddedcode.embeddedcodeShowOne(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
-                    form(name="metadataForm" ng-controller="ShareCtrl")
+                    form(name="metadataForm")
                         .row
                             .input-group.form-group.first
                                 input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
@@ -76,9 +76,9 @@
                                     span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="$parent.show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
-                #save-share.area(ng-show="show==2")
+                .save-share.area(ng-show="show==2")
                     .option-icon.icon-save
                     h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
                     .row
@@ -86,7 +86,7 @@
                             | Logge dich ein, um dein Vidatio in deinem Profil zu speichern.
                             br
                             | Nur gespeicherte Vidatios können später weiter bearbeitet werden.
-                    form(name="loginForm" ng-submit="" ng-controller="ShareCtrl")
+                    form(name="loginForm" ng-submit="")
                         .row
                             .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
                                 span.input-group-addon.fui-user
@@ -118,7 +118,7 @@
                         p Achtung, ohne Login kannst du dein Vidatio später nicht mehr bearbeiten
 
 
-                #save-share.area(ng-show="show==3")
+                .save-share.area(ng-show="show==3")
                     .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
