@@ -76,7 +76,7 @@ describe "Service Data", ->
             metaData:
                 fileType: null
 
-        # FIXME data has now shape data??
+        # FIXME data has no shape data??
         xit "from shp data", ->
             data.metaData.fileType = "shp"
 
@@ -88,7 +88,7 @@ describe "Service Data", ->
 
         it "and set visualization options", ->
             options =
-                # type: "bar" ### Can't be tested, because of promise
+                type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
