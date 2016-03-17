@@ -136,46 +136,39 @@ app.config [
             controller: "AppCtrl"
             template: "<ui-view/>"
 
-        # /
         .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
 
-        # /profile
         .state "app.profile",
             url: "/profile"
             templateUrl: "profile/profile.html"
             title: "profile"
 
-        # /dataset
         .state "app.dataset",
             url: "/vidatio/:id"
             controller: "DatasetCtrl"
             templateUrl: "dataset/dataset.html"
             title: "dataset"
 
-        # /registration
         .state "app.registration",
             url: "/registration"
             controller: "RegistrationCtrl"
             templateUrl: "registration/registration.html"
             title: "registration"
 
-        # /login
         .state "app.login",
             url: "/login"
             controller: "LoginCtrl"
             templateUrl: "login/login.html"
             title: "login"
 
-        # /import
         .state "app.import",
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
             title: "import"
 
-        # /editor
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
@@ -189,14 +182,12 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
-        # /share
         .state "app.share",
             url: "/share"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
 
-        # /dataset catalog
         .state "app.catalog",
             url: "/catalog?from&to&category&tags&myvidatios"
             templateUrl: "catalog/catalog.html"
