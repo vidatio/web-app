@@ -1,44 +1,60 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
-            a.recommend-button.btn.btn-primary.btn-small(href="#" ng-click="recommend()")
-                i.icon-magicwand.icon
-                span.text {{ "DIAGRAMS.RECOMMEND" | translate }}
+            .axis-selection(ng-if="meta.fileType != 'shp'")
+                p(ng-if="visualization.type != 'map'") {{ "X_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LONGITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.xColumn] || "HEADER_DEFAULT" | translate }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
+                            a(href="#" ng-click="setAxisColumnSelection('x', id)") {{ column }}
 
-            .diagram-selection.settings-button(ng-hide="meta.fileType == 'shp'")
-                //- Replace `.icon-emptytable` with axis icon
-                a(href='#' ng-click="").icon-emptytable
-                    span {{ "DIAGRAMS.DIAGRAM_TYPE" | translate }}
-                ul.diagram-menu
-                    li.diagram-button
-                         a.icon-barchart(href="#" ng-click="selectDiagram('bar')")
-                            span {{ "DIAGRAMS.BAR_CHART" | translate }}
-                    li.diagram-button
-                         a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')")
-                            span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
-                    li.diagram-button
-                         a.icon-linechart(href="#" ng-click="selectDiagram('timeseries')")
-                            span {{ "DIAGRAMS.TIME_SERIES" | translate }}
-                    li.diagram-button
-                         a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')")
-                            span {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
-                    li.diagram-button
-                         a.icon-map(href="#" ng-click="selectDiagram('map')")
-                            span {{ "DIAGRAMS.MAP" | translate }}
+                p(ng-if="visualization.type != 'map'") {{ "Y_AXIS" | translate }}
+                p(ng-if="visualization.type == 'map'") {{ "LATITUDE" | translate }}
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ header[visualization.yColumn] || "HEADER_DEFAULT" | translate }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
+                            a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ column }}
 
+            .diagram-selection(ng-hide="meta.fileType == 'shp'")
+                .btn-group
+                    button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ visualization.selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
+                        span.caret
+                    ul.dropdown-menu(role="menu")
+                        li.trigger-recommender
+                            a(href='#' ng-click="recommend()")
+                                .icon-magicwand.selection-icons(ng-hide="meta.fileType == 'shp'")
+                                .selection-text {{ "DIAGRAMS.RECOMMEND" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('scatter')")
+                                .icon-scatterplotchart.selection-icons
+                                .selection-text {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('map')")
+                                .icon-map.selection-icons
+                                .selection-text {{ "DIAGRAMS.MAP" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('parallel')")
+                                .icon-parallelcoordinateschart.selection-icons
+                                .selection-text {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('bar')")
+                                .icon-barchart.selection-icons
+                                .selection-text {{ "DIAGRAMS.BAR_CHART" | translate }}
+                        li
+                            a(href="#" ng-click="selectDiagram('timeseries')")
+                                .icon-linechart.selection-icons
+                                .selection-text {{ "DIAGRAMS.TIME_SERIES" | translate }}
 
-            .axis-selection.settings-button(ng-if="meta.fileType != 'shp'")
-                //- Replace `.icon-emptytable` with axis icon
-                a(href='#' ng-click="").icon-emptytable
-                    span {{ "AXES" | translate }}
+            .color-selection.hover-button(ng-hide="visualization.type == 'map'")
+                a.icon-colorbucket(colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
 
-            .color-selection.settings-button(ng-hide="visualization.type == 'map'")
-                a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
-                    span {{ "COLORS" | translate }}
-
-            .download-button.settings-button
-                a(href='#').icon-download
-                    span {{ "DOWNLOAD" | translate }}
+            .download-button.hover-button
+                a(href='#').icon-download.download-icon
                 ul
                     li
                         a(ng-click='shareVisualization("png")') PNG
