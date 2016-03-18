@@ -6,6 +6,7 @@
 app = angular.module "app.controllers"
 
 app.controller "DatasetCtrl", [
+    "$http"
     "$scope"
     "$rootScope"
     "$log"
@@ -22,7 +23,7 @@ app.controller "DatasetCtrl", [
     "ngToast"
     "DataService"
     "VisualizationService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
+    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.visualization = Visualization.options
@@ -44,7 +45,6 @@ app.controller "DatasetCtrl", [
 
             Data.createVidatio $scope.data
             Visualization.create()
-
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"
             $log.error error

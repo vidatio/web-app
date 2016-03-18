@@ -86,12 +86,13 @@ describe "Service Data", ->
             expect(@Map.setGeoJSON).toHaveBeenCalled()
             expect(@Table.useColumnHeadersFromDataset).toEqual(true)
 
-        it "and set visualization options", ->
+        xit "and set visualization options", ->
             options =
                 type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
+
             data.metaData.fileType = "csv"
 
             @Data.createVidatio data

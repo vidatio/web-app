@@ -112,7 +112,6 @@ app.service 'DataService', [
                 if @meta.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
-                    Map.setGeoJSON data.data
                 else
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
