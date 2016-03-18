@@ -9,7 +9,6 @@ app.controller "RegistrationCtrl", [
     "$log"
     "$translate"
     "ngToast"
-    "$state"
     "UserService"
     ($rootScope, $scope, UserFactory, $log, $translate, ngToast, UserService) ->
         $log.info "RegistrationCtrl called"
@@ -26,7 +25,7 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
 
-                #$scope.logon()
+                $scope.logon()
 
             , (error) ->
                 $log.error "RegistrationCtrl register error called"
@@ -38,26 +37,25 @@ app.controller "RegistrationCtrl", [
                         content: translation
                         className: "danger"
 
+        $scope.logon = ->
+            $log.info "RegistrationCtrl logon called"
 
-#        $scope.logon = ->
-#            $log.info "LoginCtrl logon called"
-#
-#            console.log $scope.user
-#
-#            UserService.logon($scope.user).then(
-#                (value) ->
-#                    $log.info "LoginCtrl successfully logged in"
-#                    $log.debug
-#                        value: value
-#
-#                (error) ->
-#                    $log.info "LoginCtrl error on login"
-#
-#                    $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
-#                        ngToast.create
-#                            content: translation
-#                            className: "danger"
-#            )
+            console.log $scope.user
+
+            UserService.logon($scope.user).then(
+                (value) ->
+                    $log.info "RegistrationCtrl successfully logged in"
+                    $log.debug
+                        value: value
+
+                (error) ->
+                    $log.info "RegistrationCtrl error on login"
+
+                    $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+            )
 
 
         $('.input-group').on 'focus', '.form-control', ->
