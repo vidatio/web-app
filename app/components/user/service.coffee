@@ -11,7 +11,8 @@ app.service 'UserService', [
     "$q"
     "Base64"
     "$cookieStore"
-    ($http, UserAuthFactory, UserUniquenessFactory, $rootScope, $log, $q, Base64, $cookieStore) ->
+    "$state"
+    ($http, UserAuthFactory, UserUniquenessFactory, $rootScope, $log, $q, Base64, $cookieStore, $state) ->
         class User
             # @method constructor
             # @public
@@ -47,10 +48,9 @@ app.service 'UserService', [
 
                     $q.reject(error)
 
-            # @method setCredentials
+            # @method logon
             # @public
-            # @param {String} name
-            # @param {String} password
+            # @param {String} user
             logon: (user) =>
                 $log.info "UserService logon called"
                 $log.debug
@@ -71,6 +71,9 @@ app.service 'UserService', [
                     @setCredentials(@user.name, @user.password, @user._id, authData)
 
                     deferred.resolve @user
+
+                    @redirect()
+
                 , (error) =>
                     $log.info "UserService init error of authorization called (401)"
                     $log.debug
@@ -97,6 +100,9 @@ app.service 'UserService', [
 
                 $http.defaults.headers.common.Authorization = "Basic "
 
+                if $state.$current.name is "app.profile"
+                    $state.go "app.index"
+
             # @method setCredentials
             # @public
             # @param {String} name
@@ -115,6 +121,39 @@ app.service 'UserService', [
                         id: userID
                 $cookieStore.put "globals", $rootScope.globals
                 $rootScope.globals.authorized = true
+
+            # @method redirect
+            # @public
+            redirect: ->
+
+                # Default routing for user at logout success
+                # unless $rootScope.history.length
+                #    $log.info "LoginCtrl redirect to app.index"
+                #    $state.go "app.index"
+                #    return
+
+                lastPagesCounter = 1
+
+                # After login success we want to route the user to the last page except login and registration
+                for element in $rootScope.history
+                    element = $rootScope.history[$rootScope.history.length - lastPagesCounter]
+
+                    #console.log lastPagesCounter, element.name
+
+                    if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
+                        $log.info "UserService redirect to " + element.name
+
+                        # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
+                        if element.name is "app.dataset"
+                            $state.go element.name, 'id': element.params.id, element.params.locale
+                            return
+
+                        $state.go element.name, element.params.locale
+                        return
+
+                    lastPagesCounter++
+
+                $state.go "app.index"
 
         new User
 ]

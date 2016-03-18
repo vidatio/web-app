@@ -3,13 +3,15 @@
 app = angular.module("app.controllers")
 
 app.controller "RegistrationCtrl", [
+    "$rootScope"
     "$scope"
     "UserFactory"
     "$log"
     "$translate"
     "ngToast"
     "$state"
-    ($scope, UserFactory, $log, $translate, ngToast, $state) ->
+    "UserService"
+    ($rootScope, $scope, UserFactory, $log, $translate, ngToast, UserService) ->
         $log.info "RegistrationCtrl called"
 
         $scope.register = ->
@@ -24,7 +26,8 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
 
-                $state.go "app.login"
+                #$scope.logon()
+
             , (error) ->
                 $log.error "RegistrationCtrl register error called"
                 $log.debug
@@ -34,6 +37,28 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
                         className: "danger"
+
+
+#        $scope.logon = ->
+#            $log.info "LoginCtrl logon called"
+#
+#            console.log $scope.user
+#
+#            UserService.logon($scope.user).then(
+#                (value) ->
+#                    $log.info "LoginCtrl successfully logged in"
+#                    $log.debug
+#                        value: value
+#
+#                (error) ->
+#                    $log.info "LoginCtrl error on login"
+#
+#                    $translate('TOAST_MESSAGES.NOT_AUTHORIZED').then (translation) ->
+#                        ngToast.create
+#                            content: translation
+#                            className: "danger"
+#            )
+
 
         $('.input-group').on 'focus', '.form-control', ->
             $(this).closest('.input-group, .form-group').addClass 'focus'
