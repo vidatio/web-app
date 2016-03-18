@@ -165,43 +165,95 @@
         background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
 
-    #customers
+    #press
         padding 50px 0 26px
+
+        .image-container
+            img
+                width 100%
+                display block
+                margin 0 auto 20px
+                padding 10px 0
+                overflow hidden
+
+            .salzburger-landespreis
+                width 60%
+                padding 0
+
         h3
         h4
             display block
             margin-bottom 10px
-
+            line-height 25px
 
 @media(max-width: 400px)
     #landing-page #intro #slogan
         transform none
 
 @media(max-width: 767px)
-    #landing-page #intro
-        .row
-            .slogan
-                height 10px
+    #landing-page
+        h1
+        h2
+            margin 0 20px
 
-            .promo
-                margin-top 20px
+        #intro
+            .row
+                .slogan
+                    height 10px
 
-    #landing-page #intro .description
-        margin-top 20px
+                .promo
+                    margin-top 20px
 
-    #landing-page #intro .get-started
-        position relative
-        top 40px
-        right 0
-        left calc(50% - 90px)
+                .description
+                    margin-top 20px
 
-    #landing-page #popular-categories
-        /* first value concerns always the foreground image, the last value always the background image */
-        background-size 95%, cover
+                ol
+                    margin 0 20px
+
+            .get-started
+                position relative
+                top 40px
+                right 0
+                left calc(50% - 90px)
+
+        #usp
+            p
+                margin 0 20px
+
+        #featured-vidatios
+            a
+                div
+                    margin 10px 20px
+
+        #popular-categories
+            /* first value concerns always the foreground image, the last value always the background image */
+            background-size 95%, cover
+
+        #press
+            .image-container
+                img
+                    width 60%
+                    margin 50px auto 10px
+
+                .salzburger-landespreis
+                    width 40%
+                    margin-top 20px
+
+            h3
+            h4
+                margin 0 20px
+
+            h4
+                margin-bottom  20px
 
 @media(max-width: 850px)
     #landing-page #intro
         padding 0 0 100px 0
+
+@media(min-width: 768px)
+    #landing-page #press
+        .image-container
+            max-height 200px
 
 @media(min-width: 768px) and (max-width: 960px)
     #landing-page #intro .get-started
