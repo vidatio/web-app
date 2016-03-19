@@ -11,10 +11,10 @@ app.service 'DataService', [
     "ngToast"
     "$translate"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -61,7 +61,7 @@ app.service 'DataService', [
                     dataset: dataset
                     name: @name
 
-                DataFactory.save
+                DatasetFactory.save
                     name: @name
                     data: dataset
                     metaData:

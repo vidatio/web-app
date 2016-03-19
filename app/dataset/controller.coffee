@@ -9,7 +9,7 @@ app.controller "DatasetCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "UserFactory"
     "TableService"
     "MapService"
@@ -22,7 +22,7 @@ app.controller "DatasetCtrl", [
     "ngToast"
     "DataService"
     "VisualizationService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
+    ($scope, $rootScope, $log, DatasetFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
 
         # set link to current vidatio
         $rootScope.link = $location.$$absUrl
@@ -35,7 +35,7 @@ app.controller "DatasetCtrl", [
         $scope.information = []
 
         # get dataset according to datasetId and set necessary metadata
-        DataFactory.get { id: datasetId }, (data) ->
+        DatasetFactory.get { id: datasetId }, (data) ->
             $scope.data = data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
