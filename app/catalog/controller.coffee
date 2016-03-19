@@ -4,9 +4,7 @@ app = angular.module "app.controllers"
 
 app.controller "CatalogCtrl", [
     "$scope"
-    "CatalogFactory"
     "$log"
-    "DataFactory"
     "$timeout"
     "ProgressService"
     "TableService"
@@ -14,8 +12,10 @@ app.controller "CatalogCtrl", [
     "ngToast"
     "$stateParams"
     "$state"
-    "$location"
-    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, $location) ->
+    "DatasetsFactory"
+    "CategoriesFactory"
+    "TagsFactory"
+    ($scope, $log, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsFactory) ->
 
         $scope.filter =
             dates:
@@ -30,11 +30,11 @@ app.controller "CatalogCtrl", [
         $(".tagsinput").tagsinput("add", if $scope.filter.tags then $scope.filter.tags.join(",") else "" )
         $('#my-vidatio-checkbox').radiocheck()
 
-        CatalogFactory.getCategories().query (response) ->
+        CategoriesFactory.query (response) ->
             $log.info "CatalogCtrl successfully queried categories"
             $scope.categories = response
 
-        CatalogFactory.getDatasets().query (response) ->
+        DatasetsFactory.query (response) ->
             $log.info "CatalogCtrl successfully queried datasets"
 
             $scope.vidatios = response

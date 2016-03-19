@@ -18,8 +18,8 @@
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
 
             #tags-filter
-                label(for="tagsFilter") {{ "FILTER.BY_TAGS" | translate }}
-                input#tagsFilter.tagsinput(name="tagsinput" data-role="tagsinput" value="" ng-model="filter.tags" ng-list="," ng-change="setStateParams()")
+                label(for="tags") {{ "FILTER.BY_TAGS" | translate }}
+                select2#tags(ng-model="values.query" options="tagsOptions")
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
