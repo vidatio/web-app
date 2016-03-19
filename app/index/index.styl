@@ -169,19 +169,27 @@
         padding 50px 0 26px
 
         .image-container
+            width 100%
+            height 200px
+            text-align center
+
             img
-                width 100%
-                display block
+                max-width 200px
+                display inline-block
                 margin 0 auto 20px
                 padding 10px 0
                 overflow hidden
+                position relative
+                top 50%
+                -webkit-transform translateY(-50%)
+                -ms-transform translateY(-50%)
+                transform translateY(-50%)
 
             .salzburger-landespreis
                 width 60%
                 padding 0
 
         h3
-        h4
             display block
             margin-bottom 10px
             line-height 25px
@@ -240,11 +248,7 @@
                     margin-top 20px
 
             h3
-            h4
                 margin 0 20px
-
-            h4
-                margin-bottom  20px
 
 @media(max-width: 850px)
     #landing-page #intro
