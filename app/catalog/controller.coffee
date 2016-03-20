@@ -14,8 +14,7 @@ app.controller "CatalogCtrl", [
     "$state"
     "DatasetsFactory"
     "CategoriesFactory"
-    "TagsFactory"
-    ($scope, $log, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsFactory) ->
+    ($scope, $log, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory) ->
 
         $scope.filter =
             dates:
@@ -27,7 +26,6 @@ app.controller "CatalogCtrl", [
 
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
-        $(".tagsinput").tagsinput("add", if $scope.filter.tags then $scope.filter.tags.join(",") else "" )
         $('#my-vidatio-checkbox').radiocheck()
 
         CategoriesFactory.query (response) ->
