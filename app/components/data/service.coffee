@@ -62,6 +62,18 @@ app.service 'DataService', [
                     dataset: dataset
                     name: @name
 
+                console.log
+                    name: @name
+                    data: dataset
+                    metaData:
+                        fileType: @meta.fileType
+                    options:
+                        type: Visualization.options.type
+                        xColumn: Visualization.options.xColumn
+                        yColumn: Visualization.options.yColumn
+                        color: Visualization.options.color
+                        useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
+
                 DataFactory.save
                     name: @name
                     data: dataset
@@ -112,6 +124,8 @@ app.service 'DataService', [
                 if @meta.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
+                    Map.setInstance()
+                    Map.setGeoJSON data.data
                 else
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
@@ -128,8 +142,8 @@ app.service 'DataService', [
                         Visualization.options["type"] = false
                         Visualization.options["selectedDiagramName"] = false
 
-                    Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
-                    Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
+                    Visualization.options["xColumn"] = if data.options.xColumn? then parseInt(data.options.xColumn, 10) else null
+                    Visualization.options["yColumn"] = if data.options.yColumn? then parseInt(data.options.yColumn, 10) else null
                     Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
 
             #@method downloadCSV

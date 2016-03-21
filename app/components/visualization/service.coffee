@@ -8,8 +8,7 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    "ngToast"
-    (Table, Converter, Map, $log, $translate, ngToast) ->
+    (Table, Converter, Map, $log, $translate) ->
         class Visualization
 
             # @method constructor

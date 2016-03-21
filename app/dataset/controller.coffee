@@ -44,7 +44,11 @@ app.controller "DatasetCtrl", [
             $scope.data.tags = data.tags || "-"
 
             Data.createVidatio $scope.data
-            Visualization.create()
+
+            if Data.meta.fileType isnt "shp"
+                Visualization.create()
+
+            console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"
             $log.error error
