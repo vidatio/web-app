@@ -16,7 +16,7 @@ app.directive "menu", [
             # @method logout
             # @describe call UserService.logout() to logout the current user
             $scope.logout = ->
-                $log.info "Menu directive logout called"
+                $log.info "Menu-directive logout called"
 
                 UserService.logout()
 

@@ -25,6 +25,7 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
 
+                # if registration was successful call private logon-function
                 logonAfterSuccessfulRegistration()
 
             , (error) ->
@@ -36,11 +37,10 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
                         className: "danger"
-
+                        
+        # calls the logon-function from the UserService
         logonAfterSuccessfulRegistration = ->
             $log.info "RegistrationCtrl logon called"
-
-            console.log $scope.user
 
             UserService.logon($scope.user).then(
                 (value) ->

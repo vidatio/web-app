@@ -55,7 +55,6 @@ app.service 'UserService', [
                 $log.info "UserService logon called"
                 $log.debug
                     name: user.name
-                    password: user.password
 
                 deferred = $q.defer()
 
@@ -68,7 +67,7 @@ app.service 'UserService', [
                         result: result
 
                     @user = result.user
-                    @setCredentials(@user.name, @user.password, @user._id, authData)
+                    @setCredentials(@user.name, @user._id, authData)
 
                     deferred.resolve @user
 
@@ -100,18 +99,17 @@ app.service 'UserService', [
 
                 $http.defaults.headers.common.Authorization = "Basic "
 
-                if $state.$current.name is "app.profile" or $state.$current.name is "app.registration"
+                if $state.$current.name is "app.profile"
                     $state.go "app.index"
 
             # @method setCredentials
             # @public
             # @param {String} name
-            # @param {String} password
-            setCredentials: (name, password, userID, authData) ->
+            # @param {String} userID
+            setCredentials: (name, userID, authData) ->
                 $log.info "UserService setCredentials called"
                 $log.debug
                     name: name
-                    password: password
                     userID: userID
 
                 $rootScope.globals =
@@ -132,8 +130,6 @@ app.service 'UserService', [
                 # After login success we want to route the user to the last page except login and registration
                 for element in $rootScope.history
                     element = $rootScope.history[$rootScope.history.length - lastPagesCounter]
-
-                    #console.log lastPagesCounter, element.name
 
                     if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                         $log.info "UserService redirect to " + element.name
