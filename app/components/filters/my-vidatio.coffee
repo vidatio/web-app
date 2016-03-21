@@ -16,9 +16,10 @@ app.filter "myVidatioFilter", [
             globals = $cookieStore.get( "globals" ) or {}
             output = []
 
-            for element in input
-                if globals.currentUser?.id is element.userId._id
-                    output.push element
+            if globals.currentUser?.id
+                for element in input
+                    if globals.currentUser.id is element.userId._id
+                        output.push element
 
             output
 ]

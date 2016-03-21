@@ -15,7 +15,7 @@ header.ng-cloak
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
@@ -33,7 +33,7 @@ header.ng-cloak
                         a#save-button.button.icon-save(href="#" ng-click="saveDataset()")
                             span {{ "SAVE" | translate | uppercase }}
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
@@ -50,7 +50,7 @@ header.ng-cloak
                         a#edit-data.active(href='#')
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref="app.share({ locale: locale })")
+                        a#use-data(ui-sref="app.share({ locale: locale })")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -60,7 +60,7 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
@@ -77,7 +77,7 @@ header.ng-cloak
                         a#edit-data(ui-sref="app.editor({ locale: locale })")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset.active(href="#")
+                        a#use-data.active(href="#")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -87,7 +87,7 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
@@ -104,7 +104,7 @@ header.ng-cloak
                         a#edit-data.clickable(ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#save-dataset(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
+                        a#use-data(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -156,7 +156,7 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")
@@ -174,7 +174,7 @@ header.ng-cloak
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.fui-user(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
                         a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })")

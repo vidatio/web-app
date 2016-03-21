@@ -8,8 +8,7 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    "ngToast"
-    (Table, Converter, Map, $log, $translate, ngToast) ->
+    (Table, Converter, Map, $log, $translate) ->
         class Visualization
 
             # @method constructor
@@ -72,9 +71,14 @@ app.service 'VisualizationService', [
                     "x": headers[options.xColumn]
                     "y": headers[options.yColumn]
 
+                # set width and height of the visualization for dynamic resizing
+                $chart = $("#chart")
+                width = $chart.parent().width()
+                height = $chart.parent().height() - 40
+
                 switch options.type
                     when "scatter"
-                        new vidatio.ScatterPlot chartData, options
+                        new vidatio.ScatterPlot chartData, options, width, height
                     when "map"
                         # Use the whole dataset because we want the other attributes inside the popups
                         geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
@@ -84,66 +88,80 @@ app.service 'VisualizationService', [
                         Map.setInstance()
                         Map.setGeoJSON geoJSON
                     when "parallel"
-                        new vidatio.ParallelCoordinates chartData, options
+                        new vidatio.ParallelCoordinates chartData, options, width, height
                     when "bar"
-                        new vidatio.BarChart chartData, options
+                        new vidatio.BarChart chartData, options, width, height
                     when "timeseries"
-                        new vidatio.TimeseriesChart chartData, options
+                        new vidatio.TimeseriesChart chartData, options, width, height
                     else
                         $log.info "VisualizationCtrl type not set"
                         $log.debug
                             type: options.type
 
-                initInlineEditingLabels()
+                unless options.type is "map" or options.type is "parallel"
+                    initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
                 $log.info "VisualizationService initInlineEditingLabels called"
 
-                $ "#chart"
-                .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
-                    $element = $(@)
-                    minWidth = 200
+                _self = @
+                minWidth = 200
 
-                    inputSize =
-                        width: $element.width() + 20
-                        height: ($element.height() || 14) + 16
+                getStyle = ($axisLabel) ->
+                    inputTagSize =
+                        width: $axisLabel.width() + 20
+                        height: ($axisLabel.height() || 14) + 16
 
-                    if inputSize.width < minWidth
-                        inputSize.width = minWidth
+                    if inputTagSize.width < minWidth
+                        inputTagSize.width = minWidth
 
-                    defaultCss =
+                    style =
                         "min-width": "#{minWidth}px"
-                        "width": "#{inputSize.width}px"
-                        "height": "#{inputSize.height}px"
+                        "width": "#{inputTagSize.width}px"
+                        "height": "#{inputTagSize.height}px"
 
-                    if $element.attr("id") is "d3plus_graph_ylabel"
-                        inputPosition =
-                            "left": "-#{(inputSize.width / 2) - 6}px"
-                            "top": "50%"
-                            "margin-top": "-#{inputSize.height}px"
-                            "transform": "rotate(-90deg)"
-                        axis = "Y"
-                    else
-                        offsetTop = $("svg#d3plus").height() - inputSize.height
+                    return {
+                        style: style,
+                        inputTagSize: inputTagSize
+                    }
 
-                        inputPosition =
-                            "left": "50%"
-                            "top": "#{offsetTop}px"
-                            "margin-left": "-#{inputSize.width / 2}px"
-                        axis = "X"
-
-                    $ "<input id='#{$element.attr("id")}_inline_input' type='text' value='#{$element.text()}' />"
-                    .css angular.extend defaultCss, inputPosition
+                addInputTag = ($axisLabel, axis, style) ->
+                    $ "<input id='#{$axisLabel.attr("id")}_inline_input' type='text' value='#{$axisLabel.text()}' />"
+                    .css angular.extend style
                     .appendTo "#chart"
                     .focus()
                     .select()
-                    .blur (event) ->
-                        $element.text $(@).val() || axis
+                    .blur ->
+                        label = $(@).val() || axis.toUpperCase()
+                        $axisLabel.text label
                         $(@).remove()
+                        header = Table.getHeader()
+                        header[_self.options["#{axis}Column"]] = label
+                        Table.setHeader header
                     .keyup (event) ->
                         if event.keyCode is 13 or event.keyCode is 27
-                            $element.text $(@).val() || axis
-                            $(@).remove()
+                            $(@).blur()
+
+                $ "#chart"
+                .on "click", "#d3plus_graph_xlabel, #d3plus_graph_ylabel", (event) ->
+                    $axisLabel = $(@)
+                    { inputTagSize, style } = getStyle $axisLabel
+
+                    if @.id is "d3plus_graph_ylabel"
+                        axis = "y"
+                        angular.extend style,
+                            "left": "-#{(inputTagSize.width / 2) - 6}px"
+                            "top": "50%"
+                            "margin-top": "-#{inputTagSize.height}px"
+                            "transform": "rotate(-90deg)"
+                    else
+                        axis = "x"
+                        angular.extend style,
+                            "left": "50%"
+                            "top": $("svg#d3plus").height() - inputTagSize.height + "px"
+                            "margin-left": "-#{inputTagSize.width / 2}px"
+
+                    addInputTag $axisLabel, axis, style
 
                 return true
 
