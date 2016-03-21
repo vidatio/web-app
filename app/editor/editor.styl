@@ -134,74 +134,43 @@
                 &:last-child
                     margin-left auto
 
-            p
-                padding-top 7px
-                font-size 14px
+            .download-menu
+                display none
+                list-style-type none
+                position absolute
+                padding 0
+                height 80px
+                margin-top 8px
+                background rgba($color-white, .9)
+                border-top 2px solid $color-disabled-border
+                box-shadow -1px 1px 2px #e3e3e3
+                z-index 1100
+                justify-content flex-end
 
-            .dropdown-toggle
-                padding 3px 5px 3px 5px
+                > li
+                    height 100%
 
-            .download-button
-                position relative
+                    > a
+                        padding 18px 12px
+                        display block
 
-                ul
-                    background $color-white
-                    border 2px solid $color-green
-                    display none
+                    &:hover
+                    &.active
+                        background $color-hover-light
+                        box-shadow 0 -2px $color-green
+
+                &:before
+                    content ''
+                    width 100%
+                    height 10px
                     position absolute
                     left 0
                     right 0
-                    text-align center
-                    list-style-type none
-                    padding 0
-                    margin-top 12px
-                    border-radius 4px
-                    z-index 1001
+                    bottom 100%
 
-                    &::before
-                        border-color transparent transparent $color-green transparent
-                        border-style solid
-                        border-width 11px
-                        content ""
-                        left 50%
-                        transform translateX(-50%)
-                        position absolute
-                        top -24px
-                        z-index 1000
-
-                    &::after
-                        border-color transparent transparent $color-white transparent
-                        border-style solid
-                        border-width 10px
-                        content ""
-                        left 50%
-                        transform translateX(-50%)
-                        position absolute
-                        top -20px
-                        z-index 1001
-
-                    li
-                        & + li
-                            border-top 2px solid $color-green
-
-                        & > a
-                            cursor pointer
-                            display block
-                            color $color-black
-                            position relative
-                            text-decoration none
-                            white-space nowrap
-                            z-index 302
-                            line-height 30px
-                            font-size 16px
-                            font-weight 700
-
-                        &:hover
-                            & > a
-                                color $color-green
-                &:hover
-                    & > ul
-                        display block
+            .download-selection:hover
+                .download-menu
+                    display flex
 
     .wrapper-content
         max-width 100%

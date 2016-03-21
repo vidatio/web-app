@@ -11,17 +11,18 @@
 
             .xaxis-button.settings-button
                 a(href='#' ng-click="").icon-xaxis
-                    span {{ "X_AXIS" | translate }}
+                    span {{ "VALUE_RANGE" | translate }}
 
             .yaxis-button.settings-button
                 a(href='#' ng-click="").icon-yaxis
-                    span {{ "Y_AXIS" | translate }}
+                    span {{ "VALUE_RANGE" | translate }}
 
-            .download-button.settings-button(ng-hide="meta.fileType == 'shp'")
-                a(href='#').icon-download
+            .download-selection.settings-button(ng-hide="meta.fileType == 'shp'")
+                a(href='#' ng-click="").icon-download
                     span {{ "DOWNLOAD" | translate }}
-                ul
-                    li
-                        a(ng-click="download()") CSV
+                ul.download-menu
+                    li.download-button
+                        a.icon-downloaddataset(href="#" ng-click="download()")
+                            span CSV
 
         hot(dataset="dataset" active-views="activeViews" column-headers="columnHeaders")

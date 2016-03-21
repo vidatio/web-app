@@ -87,6 +87,7 @@
                 font-family Colaborate,Arial,Helvetica,sans-serif
 
         .diagram-menu
+            justify-content space-around
             display none
             list-style-type none
             position absolute
@@ -94,19 +95,17 @@
             right 20px
             padding 0
             height 80px
-            justify-content space-around
             margin-top 8px
-            background rgba($color-white, .8)
+            background rgba($color-white, .9)
             border-top 2px solid $color-disabled-border
             box-shadow -1px 1px 2px #e3e3e3
             z-index 1100
 
             > li
                 height 100%
-                width 20%
 
                 > a
-                    padding 12px
+                    padding 18px 12px
                     display block
 
                 &:hover
@@ -123,9 +122,20 @@
                 right 0
                 bottom 100%
 
+        .diagram-menu
+            > li
+                width 20%
+
         .diagram-selection:hover
             .diagram-menu
                 display flex
+
+        .download-menu
+            left 20px
+            right 20px
+
+            > li
+                width 50%
 
     #chart-placeholder
         overflow hidden

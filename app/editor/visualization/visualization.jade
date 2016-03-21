@@ -29,14 +29,16 @@
                 a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
                     span {{ "COLORS" | translate }}
 
-            .download-button.settings-button
-                a(href='#').icon-download
+            .download-selection.settings-button
+                a(href='#' ng-click="").icon-download
                     span {{ "DOWNLOAD" | translate }}
-                ul
-                    li
-                        a(ng-click='shareVisualization("png")') PNG
-                    li
-                        a(ng-click='shareVisualization("jpg")') JPG
+                ul.download-menu
+                    li.download-button
+                        a.icon-downloadvisualization(href="#" ng-click="shareVisualization('jpg')")
+                            span JPEG
+                    li.diagram-button
+                        a.icon-downloadvisualization(href="#" ng-click="shareVisualization('png')")
+                            span PNG
 
         leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
 
