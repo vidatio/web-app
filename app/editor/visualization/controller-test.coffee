@@ -59,5 +59,5 @@ describe "Visualization Ctrl", ->
             @scope.setAxisColumnSelection("x", 0)
             expect(@Visualization.create).toHaveBeenCalled()
 
-            @scope.selectDiagram()
-            expect(@Visualization.create).toHaveBeenCalled()
+            # @scope.selectDiagram()
+            # expect(@Visualization.create).toHaveBeenCalled()

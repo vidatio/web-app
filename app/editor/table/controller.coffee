@@ -23,7 +23,7 @@ app.controller "TableCtrl", [
         $scope.toggleHeader = ->
             $log.info "TableCtrl changeUseOfHeader called"
 
-            if $scope.data.meta.fileType isnt "shp"
+            if $scope.data.metaData.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeHeaderFromDataset()
                 else

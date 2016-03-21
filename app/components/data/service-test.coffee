@@ -44,18 +44,18 @@ describe "Service Data", ->
         expect(@injector.has("DataService"))
 
     it "should have a meta object", ->
-        expect(@Data.meta).toBeDefined()
+        expect(@Data.metaData).toBeDefined()
 
     describe "should update Table and Map", ->
         it "with file type csv", ->
-            @Data.meta.fileType = "csv"
+            @Data.metaData.fileType = "csv"
             @Data.updateMap 0, 0, "oldData", "newData"
 
             expect(@Converter.convertArrays2GeoJSON).not.toHaveBeenCalled()
             expect(@Map.setGeoJSON).not.toHaveBeenCalled()
 
         it "with file type shp", ->
-            @Data.meta.fileType = "shp"
+            @Data.metaData.fileType = "shp"
 
             @Data.updateMap(0, 0, "oldData", "newData")
             expect(@Map.updateGeoJSONWithSHP).toHaveBeenCalled()
@@ -75,7 +75,7 @@ describe "Service Data", ->
                     useColumnHeadersFromDataset: true
 
         it "from shp data", ->
-            @Data.meta.fileType = "shp"
+            @Data.metaData.fileType = "shp"
 
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()
@@ -89,14 +89,14 @@ describe "Service Data", ->
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
-            @Data.meta.fileType = "csv"
+            @Data.metaData.fileType = "csv"
 
             @Data.createVidatio data
             expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
             expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
-            @Data.meta.fileType = "csv"
+            @Data.metaData.fileType = "csv"
 
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()
@@ -105,7 +105,7 @@ describe "Service Data", ->
         it "from csv data without user header", ->
             data.options.useColumnHeadersFromDataset = false
 
-            @Data.meta.fileType = "csv"
+            @Data.metaData.fileType = "csv"
 
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()

@@ -47,7 +47,7 @@ app.directive 'hot', [
                             change: change
                             source: source
 
-                        if Data.meta.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
+                        if Data.metaData.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                             change[0][3] = change[0][2]
 
                     afterChange: (change, source) ->
@@ -57,7 +57,7 @@ app.directive 'hot', [
                             change: change
                             source: source
 
-                        if Data.meta.fileType is "shp" and change and change[0][3] != change[0][2]
+                        if Data.metaData.fileType is "shp" and change and change[0][3] != change[0][2]
                             Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                             # Needed for updating the map, else the markers are
                             # updating too late from angular refreshing cycle
@@ -69,7 +69,7 @@ app.directive 'hot', [
             if not Table.useColumnHeadersFromDataset
                 Table.setHeader()
 
-            if Data.meta.fileType is "shp"
+            if Data.metaData.fileType is "shp"
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"

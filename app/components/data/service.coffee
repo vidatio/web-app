@@ -20,7 +20,7 @@ app.service 'DataService', [
                 $log.info "DataService constructor called"
 
                 @name = ""
-                @meta =
+                @metaData =
                     "fileType": ""
 
             updateMap: (row, column, oldData, newData) ->
@@ -55,17 +55,19 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset) ->
+            saveViaAPI: (dataset, metaData) ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
-                    name: @name
+                    metaData: metaData
+
+                angular.extend @metaData, metaData
 
                 DataFactory.save
-                    name: @name
                     data: dataset
-                    metaData:
-                        fileType: @meta.fileType
+                    published: @metaData.publish
+                    metaData: @metaData
+
                     options:
                         type: Visualization.options.type
                         xColumn: Visualization.options.xColumn
@@ -105,7 +107,7 @@ app.service 'DataService', [
                 $log.debug
                     data: data
 
-                if @meta["fileType"] is "shp"
+                if @metaData["fileType"] is "shp"
                     dataset = Converter.convertGeoJSON2Arrays data.data
                     Table.setDataset dataset
                     Table.useColumnHeadersFromDataset = true
