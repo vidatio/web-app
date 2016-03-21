@@ -1,14 +1,20 @@
 #table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content(ng-class="{'active': activeTabs[1]}")
         .settings-bar
-            .header-button(ng-hide="meta.fileType == 'shp'")
+            .header-button(ng-hide="data.meta.fileType == 'shp'")
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
-            .transpose-button.hover-button(ng-hide="meta.fileType == 'shp'")
+            .transpose-button.hover-button(ng-hide="data.meta.fileType == 'shp'")
                 a.icon-transpose(href='#' ng-click="transpose()")
 
-            .download-button.hover-button(ng-hide="meta.fileType == 'shp'")
+            .x-axis-button.hover-button(ng-hide="data.meta.fileType == 'shp'")
+                a.icon-transpose(href='#' ng-click="axisSelection('x')")
+
+            .y-axis-button.hover-button(ng-hide="data.meta.fileType == 'shp'")
+                a.icon-transpose(href='#' ng-click="axisSelection('y')")
+
+            .download-button.hover-button(ng-hide="data.meta.fileType == 'shp'")
                 a(href='#').icon-download.download-icon
 
                 ul
