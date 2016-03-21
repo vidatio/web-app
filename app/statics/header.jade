@@ -30,9 +30,6 @@ header.ng-cloak
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#save-button.button.icon-save(href="#" ng-click="saveDataset()")
-                            span {{ "SAVE" | translate | uppercase }}
-                    div(ng-if="globals.authorized")
                         a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
