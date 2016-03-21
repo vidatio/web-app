@@ -17,12 +17,8 @@
                 a(href='#' ng-click="").icon-yaxis
                     span {{ "VALUE_RANGE" | translate }}
 
-            .download-selection.settings-button(ng-hide="meta.fileType == 'shp'")
-                a(href='#' ng-click="").icon-download
+            .download-button.settings-button(ng-hide="meta.fileType == 'shp'")
+                a(href="#" ng-click="download()").icon-download
                     span {{ "DOWNLOAD" | translate }}
-                ul.download-menu
-                    li.download-button
-                        a.icon-downloaddataset(href="#" ng-click="download()")
-                            span CSV
 
         hot(dataset="dataset" active-views="activeViews" column-headers="columnHeaders")

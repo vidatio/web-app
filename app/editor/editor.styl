@@ -134,44 +134,6 @@
                 &:last-child
                     margin-left auto
 
-            .download-menu
-                display none
-                list-style-type none
-                position absolute
-                padding 0
-                height 80px
-                margin-top 8px
-                background rgba($color-white, .9)
-                border-top 2px solid $color-disabled-border
-                box-shadow -1px 1px 2px #e3e3e3
-                z-index 1100
-                justify-content flex-end
-
-                > li
-                    height 100%
-
-                    > a
-                        padding 18px 12px
-                        display block
-
-                    &:hover
-                    &.active
-                        background $color-hover-light
-                        box-shadow 0 -2px $color-green
-
-                &:before
-                    content ''
-                    width 100%
-                    height 10px
-                    position absolute
-                    left 0
-                    right 0
-                    bottom 100%
-
-            .download-selection:hover
-                .download-menu
-                    display flex
-
     .wrapper-content
         max-width 100%
 
