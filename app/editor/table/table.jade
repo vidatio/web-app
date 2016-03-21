@@ -9,12 +9,12 @@
                 a(href='#' ng-click="transpose()").icon-transpose
                     span {{ "TRANSPOSE" | translate }}
 
-            .xaxis-button.settings-button
-                a(href='#' ng-click="").icon-xaxis
+            .x-axis-button.settings-button
+                a(href='#' ng-click="axisSelection('x')").icon-xaxis
                     span {{ "VALUE_RANGE" | translate }}
 
-            .yaxis-button.settings-button
-                a(href='#' ng-click="").icon-yaxis
+            .y-axis-button.settings-button
+                a(href='#' ng-click="axisSelection('y')").icon-yaxis
                     span {{ "VALUE_RANGE" | translate }}
 
             .download-button.settings-button(ng-hide="meta.fileType == 'shp'")
