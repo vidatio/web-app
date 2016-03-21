@@ -25,7 +25,7 @@ app.controller "RegistrationCtrl", [
                     ngToast.create
                         content: translation
 
-                $scope.logon()
+                logonAfterSuccessfulRegistration()
 
             , (error) ->
                 $log.error "RegistrationCtrl register error called"
@@ -37,7 +37,7 @@ app.controller "RegistrationCtrl", [
                         content: translation
                         className: "danger"
 
-        $scope.logon = ->
+        logonAfterSuccessfulRegistration = ->
             $log.info "RegistrationCtrl logon called"
 
             console.log $scope.user

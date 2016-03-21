@@ -100,7 +100,7 @@ app.service 'UserService', [
 
                 $http.defaults.headers.common.Authorization = "Basic "
 
-                if $state.$current.name is "app.profile"
+                if $state.$current.name is "app.profile" or $state.$current.name is "app.registration"
                     $state.go "app.index"
 
             # @method setCredentials
@@ -124,14 +124,9 @@ app.service 'UserService', [
 
             # @method redirect
             # @public
+            # @description redirect user to last visited pages before login-/ registration-page was entered;
+            # @description redirect to app.index if visited pages were only app.login or app.registration
             redirect: ->
-
-                # Default routing for user at logout success
-                # unless $rootScope.history.length
-                #    $log.info "LoginCtrl redirect to app.index"
-                #    $state.go "app.index"
-                #    return
-
                 lastPagesCounter = 1
 
                 # After login success we want to route the user to the last page except login and registration
