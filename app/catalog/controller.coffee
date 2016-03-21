@@ -5,16 +5,13 @@ app = angular.module "app.controllers"
 app.controller "CatalogCtrl", [
     "$scope"
     "$log"
-    "$timeout"
-    "ProgressService"
-    "TableService"
     "$translate"
     "ngToast"
     "$stateParams"
     "$state"
     "DatasetsFactory"
     "CategoriesFactory"
-    ($scope, $log, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory) ->
+    ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory) ->
         $scope.filter =
             dates:
                 from: if $stateParams.from then moment($stateParams.from, "DD-MM-YYYY") else ""
