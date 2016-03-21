@@ -9,13 +9,13 @@ app.controller "CatalogCtrl", [
     "DataFactory"
     "$timeout"
     "ProgressService"
+    "DataService"
     "TableService"
     "$translate"
     "ngToast"
     "$stateParams"
     "$state"
-    "$location"
-    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Table, $translate, ngToast, $stateParams, $state, $location) ->
+    ($scope, CatalogFactory, $log, DataFactory, $timeout, Progress, Data, Table, $translate, ngToast, $stateParams, $state) ->
         $scope.filter =
             dates:
                 from: undefined
@@ -60,4 +60,13 @@ app.controller "CatalogCtrl", [
             $state.go $state.current, {myvidatios: $scope.filter.showMyVidatios},
                 notify: false
                 reload: $state.current
+
+        # @method $scope.createVidatio
+        # @description creates Vidatio from saved Dataset
+        $scope.openInEditor = (data) ->
+            $log.info "DatasetCtrl $scope.createVidatio called"
+
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                Progress.setMessage message
+                Data.createVidatio data
 ]
