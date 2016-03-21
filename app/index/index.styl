@@ -119,6 +119,9 @@
             div
                 text-align center
 
+            p
+                line-height 20px
+
             .usp-icon
                 font-size 90px
 
@@ -166,43 +169,37 @@
         width 100%
 
     #press
-        padding 50px 0 26px
+        padding-top 50px
 
-        .image-container
-            width 100%
-            height 200px
+        h1
+            margin-botton 30px
+
+        .items
             text-align center
 
             img
-                max-width 200px
-                display inline-block
-                margin 0 auto 20px
-                padding 10px 0
-                overflow hidden
-                position relative
-                top 50%
-                -webkit-transform translateY(-50%)
-                -ms-transform translateY(-50%)
-                transform translateY(-50%)
+                height 120px
+                display block
+                margin auto
+                padding 10px
 
-            .salzburger-landespreis
-                width 60%
-                padding 0
-
-        h3
-            display block
-            margin-bottom 10px
-            line-height 25px
+            h3
+                color $color-grey-dark
+                margin-bottom 30px
+                line-height 20px
 
 @media(max-width: 400px)
     #landing-page #intro #slogan
         transform none
 
 @media(max-width: 767px)
+    .app-view
+        padding-bottom 140px
+
     #landing-page
         h1
         h2
-            margin 0 20px
+            margin 0 20px 30px
 
         #intro
             .row
@@ -238,17 +235,8 @@
             background-size 95%, cover
 
         #press
-            .image-container
-                img
-                    width 60%
-                    margin 50px auto 10px
-
-                .salzburger-landespreis
-                    width 40%
-                    margin-top 20px
-
             h3
-                margin 0 20px
+                margin-bottom 50px
 
 @media(max-width: 850px)
     #landing-page #intro
