@@ -12,13 +12,13 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
         @preProcess options
 
         setTimeout =>
-            $chart = $("#chart")
+            $chart = $(@containerSelector)
 
             width = $chart.parent().width()
             height = $chart.parent().height() - 60
             $chart.addClass "parcoords"
 
-            d3.parcoords()("#chart")
+            d3.parcoords()(@containerSelector)
             .data(@chartData)
             .color(@color)
             .width(width)

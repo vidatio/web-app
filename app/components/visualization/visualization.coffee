@@ -7,6 +7,7 @@ class window.vidatio.Visualization
         vidatio.log.debug
             dataset: @dataset
             color: @color
+        @containerSelector = ".chart"
 
     remove: ->
         vidatio.log.info "Visualization remove called"

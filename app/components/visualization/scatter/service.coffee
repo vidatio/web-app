@@ -13,7 +13,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
         # we need to wait for angular to finish rendering
         setTimeout =>
             d3plus.viz()
-            .container("#chart")
+            .container(@containerSelector)
             .data(@chartData)
             .type("scatter")
             .id("name")

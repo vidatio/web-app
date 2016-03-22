@@ -17,7 +17,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
         # we need to wait for angular to finish rendering
         setTimeout =>
             d3plus.viz()
-            .container("#chart")
+            .container(@containerSelector)
             .data(@chartData)
             .type("line")
             .id("name")

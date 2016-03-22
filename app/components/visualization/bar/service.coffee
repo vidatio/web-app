@@ -11,13 +11,10 @@ class vidatio.BarChart extends vidatio.Visualization
         @preProcess options
 
         # we need to wait for angular to finish rendering
-
-        console.log "### BAR ###", options
-
         setTimeout =>
             d3plus
             .viz()
-            .container("#chart")
+            .container(@containerSelector)
             .data(@chartData)
             .type("bar")
             .id("name")
