@@ -155,5 +155,8 @@
     "MORE_VIDATIOS": "Weitere Vidatios",
     "TRANSPOSE": "Transponieren",
     "AXES": "Achsen",
-    "COLORS": "Farben"
+    "COLORS": "Farben",
+    "SELECT2": {
+        "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
+    }
 }

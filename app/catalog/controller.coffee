@@ -11,7 +11,8 @@ app.controller "CatalogCtrl", [
     "$state"
     "DatasetsFactory"
     "CategoriesFactory"
-    ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory) ->
+    "TagsService"
+    ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
         $scope.filter =
             dates:
                 from: if $stateParams.from then moment($stateParams.from, "DD-MM-YYYY") else ""
@@ -23,6 +24,8 @@ app.controller "CatalogCtrl", [
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
         $('#my-vidatio-checkbox').radiocheck()
+
+        $scope.tags = TagsService.getAndPreprocessTags()
 
         CategoriesFactory.query (response) ->
             $log.info "CatalogCtrl successfully queried categories"

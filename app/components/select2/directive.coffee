@@ -3,26 +3,35 @@
 app = angular.module("app.directives")
 
 app.directive "select2", [
-    "$rootScope"
-    "TagsFactory"
-    ($rootScope, TagsFactory) ->
+    "$translate"
+    "$log"
+    ($translate, $log) ->
         restrict: "EA"
         require: "ngModel"
-        link: (scope, element, attrs, ngModel) ->
-            TagsFactory.query (response) ->
-                tagsData = []
-                for item, index in response
-                    tagsData.push
-                        id: item.name
-                        text: item.name
+        scope:
+            ajaxContent: "="
+        link: (scope, element) ->
+            initializeSelect2 = (data) ->
                 $(element).select2(
                     tags: true
                     tokenSeparators: [","]
-                    data: tagsData
+                    data: data
                     createSearchChoice: (term) ->
                         return {
                             id: term
                             text: term
                         }
+                    formatNoMatches: ->
+                        $translate.instant("SELECT2.NO_MATCHING_RESULTS")
                 )
+
+
+            scope.ajaxContent.then (fetchedContent) ->
+                initializeSelect2(fetchedContent)
+            , (reason) ->
+                $log.error "Error while querying content for Select2"
+                $log.debug
+                    reason: reason
+
+                initializeSelect2([])
 ]
