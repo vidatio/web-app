@@ -3,7 +3,6 @@
 app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
-    "$rootScope"
     "$scope"
     "TableService"
     "MapService"
