@@ -4,17 +4,24 @@ describe "Editor Controller", ->
     beforeEach ->
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, DataService, $compile) ->
+        inject ($controller, $rootScope, $httpBackend, DataService, $compile, VisualizationService) ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
             @Data =
                 name: "My Vidatio"
+            @Visualization =
+                create: ->
             @compile = $compile
 
             @inputElement = angular.element('<div class="title"><input type="text" id="vidatio-title" ng-change="saveVidatioTitle()" ng-model="editor.name"></input></div>')
 
-            EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data}
+            spyOn(@Visualization, "create")
+
+            EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data, VisualizationService: @Visualization}
+
+    afterEach ->
+        @Visualization.create.calls.reset()
 
     describe "on page init", ->
         it "should display both the TableView and VisualizationView, a title should be set", ->
@@ -22,7 +29,6 @@ describe "Editor Controller", ->
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
             expect(@Data.name).toBe("My Vidatio")
-
 
     describe "on clicked tab", ->
         it "should set the showTableView and showVisualizationView variables accordingly", ->
@@ -44,6 +50,29 @@ describe "Editor Controller", ->
             expect(@scope.showTableView).toBeFalsy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(1)
+
+    describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
+        it 'should call Visualization.create() after a timeout of 10ms', (done) ->
+            @scope.tabClicked(0)
+            setTimeout (->
+                done()
+            ), 10
+            return
+            expect(@Visualization.create).not.toHaveBeenCalled()
+
+            @scope.tabClicked(1)
+            setTimeout (->
+                done()
+            ), 10
+            return
+            expect(@Visualization.create).toHaveBeenCalled()
+
+            @scope.tabClicked(2)
+            setTimeout (->
+                done()
+            ), 10
+            return
+            expect(@Visualization.create).toHaveBeenCalled()
 
     describe "on save vidatio-title if title input-field is not filled up", ->
         it "should set Data.name according to a predefined standard-title", ->

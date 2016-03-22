@@ -136,57 +136,43 @@ app.config [
             controller: "AppCtrl"
             template: "<ui-view/>"
 
-        # /
         .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
 
-        # /profile
         .state "app.profile",
             url: "/profile"
             templateUrl: "profile/profile.html"
             title: "profile"
 
-        # /dataset
         .state "app.dataset",
             url: "/vidatio/:id"
             templateUrl: "dataset/dataset.html"
             title: "dataset"
 
-        # /registration
         .state "app.registration",
             url: "/registration"
             templateUrl: "registration/registration.html"
             controller: "RegistrationCtrl"
             title: "registration"
 
-        # /login
         .state "app.login",
             url: "/login"
             templateUrl: "login/login.html"
             controller: "LoginCtrl"
             title: "login"
 
-        # /import
         .state "app.import",
             url: "/import"
             templateUrl: "import/import.html"
             controller: "ImportCtrl"
             title: "import"
 
-        # /editor
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
-
-        # /share
-        .state "app.share",
-            url: "/share"
-            templateUrl: "share/share.html"
-            controller: "ShareCtrl"
-            title: "share"
 
         # /editor for saved vidatio
         .state "app.editor.id",
@@ -195,7 +181,12 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
-        # /dataset catalog
+        .state "app.share",
+            url: "/share"
+            templateUrl: "share/share.html"
+            controller: "ShareCtrl"
+            title: "share"
+
         .state "app.catalog",
             url: "/catalog?from&to&category&tags&myvidatios"
             templateUrl: "catalog/catalog.html"
