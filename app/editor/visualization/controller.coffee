@@ -17,9 +17,9 @@ app.controller "VisualizationCtrl", [
     "VisualizationService"
     "$window"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
-        $scope.visualization = Visualization.options
         $scope.data = Data
         $scope.header = Table.header
+        $scope.visualization = Visualization.options
 
         # Resizing the visualizations
         # using setTimeout to use only to the last resize action of the user
@@ -123,6 +123,4 @@ app.controller "VisualizationCtrl", [
                     className: "danger"
             , (notify) ->
                 Progress.setMessage notify
-
-        $scope.geojson = Map.leaflet
 ]

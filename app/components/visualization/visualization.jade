@@ -1,3 +1,9 @@
-//
-   Created by enthusiasm on 22.03.16.
+.visualization
 
+    .map(ng-show="options.type == 'map'")
+        leaflet(id="map" geojson="geojson")
+
+    .chart(ng-hide="options.type == 'map' || !options.type")
+
+    .placeholder(ng-show="!options.type")
+        img(src="images/logo-without-name.png")

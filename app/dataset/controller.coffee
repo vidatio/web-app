@@ -26,9 +26,7 @@ app.controller "DatasetCtrl", [
     ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
-        $scope.visualization = Visualization.options
         $scope.link = $location.$$absUrl
-        $scope.geojson = Map.leaflet
 
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
             Progress.setMessage message

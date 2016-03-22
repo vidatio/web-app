@@ -1,0 +1,79 @@
+.visualization
+    position relative
+    width 100%
+    height 100%
+    min-width 50px
+    min-height 50px
+    background $color-white
+
+    .map
+    .chart
+    .placeholder
+        height 100%
+        width 100%
+
+    .chart
+        input[id^="d3plus_"][id$="_inline_input"]
+            position absolute
+            padding 5px
+            font-family Helvetica
+            font-weight 200
+            font-size 12px
+
+    .map
+        .angular-leaflet-map
+            a:link, a:visited
+                color $color-black
+
+        .leaflet-bar a
+            &:hover
+                background-color $color-hover-light
+
+        .angular-leaflet-map
+            height 100%
+            width 100%
+
+        a.leaflet-popup-close-button
+            top 5px
+            right 2px
+
+            &:hover
+                color $color-red !important
+
+        .leaflet-popup-content-wrapper
+            min-width 140px
+            border-top 5px solid $color-red
+            border-radius 0px
+
+            .leaflet-popup-content
+                padding-right 15px
+                overflow-wrap break-word
+
+                a:link, a:visited
+                    color $color-active
+                a:hover, a:active
+                    color $color-black
+
+        .leaflet-popup-tip
+            width 20px
+            height 20px
+
+        path.leaflet-clickable
+            stroke $color-passive
+            stroke-opacity 1
+            fill $color-green
+            fill-opacity 0.25
+            stroke-width 3px
+            stroke-dasharray 5
+
+    .placeholder
+        box-shadow inset 0 0 15px $color-shadow
+
+        img
+            width 120px
+            opacity .3
+            position absolute
+            top 50%
+            left 50%
+            margin-top -80px
+            margin-left -60px

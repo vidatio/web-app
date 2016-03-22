@@ -51,7 +51,7 @@ app.service 'VisualizationService', [
                 # and because we want to use data binding
                 if options.type?
                     @options["type"] = options.type
-                    $translate(@options.translationKeys[options.type]).then (translation) ->
+                    $translate(@options.translationKeys[options.type]).then (translation) =>
                         @options["selectedDiagramName"] = translation
                 else
                     @options["type"] = false
