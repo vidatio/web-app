@@ -133,6 +133,7 @@
     "TO": "bis",
     "FILTER_BY": "Filtern nach",
     "RESET_FILTER": "Filter zurücksetzen",
+    "RESET_ALL_FILTERS": "Alle Filter zurücksetzen",
     "TIME": "Zeit",
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte",

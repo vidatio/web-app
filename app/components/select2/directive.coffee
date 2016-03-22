@@ -14,6 +14,12 @@ app.directive "select2", [
         template: "<input></input>"
         replace: true
         link: (scope, element) ->
+            # @method initializeSelect2
+            # @description initialize Select2 with the data being either data from the API or an empty array that
+            #               Select2 is still working when the request fails. This method is called when the promise,
+            #               which is passed to this directive via the ajaxContent isolate scope variable, is resolved
+            #               or rejected
+            # @param {Array} data
             scope.initializeSelect2 = (data) ->
                 # when using $(element) the tests wouldn't run through
                 # using angular.element fixes this issue
@@ -39,6 +45,7 @@ app.directive "select2", [
 
                 scope.initializeSelect2([])
 
+            # @description Reset selection of Select2 when newValue is falsy (i.e. State is changed without filters)
             scope.$watch( ->
                 scope.model
             , (newValue, oldValue) ->

@@ -55,6 +55,7 @@ app.controller "CatalogCtrl", [
                     className: "danger"
 
 
+        # the values of the datepicker need to be watched, because the ng-change directive never executes a function
         $scope.$watch "filter.dates.from", ->
             $scope.setStateParams()
 
