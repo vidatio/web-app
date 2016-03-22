@@ -64,27 +64,30 @@ app.controller "TableCtrl", [
 
             Share.download fileName + ".csv", csvURL
 
+
+        #@method $scope.axisSelection
+        #@description selects axis by clicking on the header and creates new visualization
         $scope.axisSelection = (axis) ->
             $header = $(".ht_clone_top th")
             $header.removeClass "selected"
             $header.unbind "click"
 
             if axis is "x"
-                if $(".x-axis-button").hasClass "selected"
-                    $(".x-axis-button").removeClass "selected"
+                if $(".x-axis-button").hasClass "focused"
+                    $(".x-axis-button").removeClass "focused"
                     $header.removeClass "highlighted"
                     return true
                 currentColumn = Number($scope.visualization.xColumn) + 1
-                $(".y-axis-button").removeClass "selected"
-                $(".x-axis-button").addClass "selected"
+                $(".y-axis-button").removeClass "focused"
+                $(".x-axis-button").addClass "focused"
             else
-                if $(".y-axis-button").hasClass "selected"
-                    $(".y-axis-button").removeClass "selected"
+                if $(".y-axis-button").hasClass "focused"
+                    $(".y-axis-button").removeClass "focused"
                     $header.removeClass "highlighted"
                     return true
                 currentColumn = Number($scope.visualization.yColumn) + 1
-                $(".x-axis-button").removeClass "selected"
-                $(".y-axis-button").addClass "selected"
+                $(".x-axis-button").removeClass "focused"
+                $(".y-axis-button").addClass "focused"
 
             $header.addClass "highlighted"
 
@@ -95,12 +98,13 @@ app.controller "TableCtrl", [
                 $(element).click (event) ->
                     if axis is "x"
                         $scope.visualization.xColumn = $(element).context.cellIndex - 1
+                        $(element).addClass "selected-x"
                     else
                         $scope.visualization.yColumn = $(element).context.cellIndex - 1
 
                     Visualization.create()
 
-                    $("[class*='-axis-button']").removeClass "selected"
+                    $("[class*='-axis-button']").removeClass "focused"
                     $header.removeClass "highlighted"
                     $header.removeClass "selected"
                     $header.unbind "click"

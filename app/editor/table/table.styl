@@ -82,7 +82,25 @@
 
 
     .highlighted
-        background black !important
+        background $color-grey-dark !important
+        color $color-white !important
+        cursor pointer
+
+    .focused
+        color $color-green !important
 
     .selected
-        background red !important
+        background $color-green !important
+        color $color-white !important
+        border 2px $color-hover-dark solid !important
+
+    .selected-x
+        &:before
+            content "X"
+            color $color-white
+            display inline-block
+            margin-left 1px
+
+    th
+        .relative
+            display inline-block
