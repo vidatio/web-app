@@ -10,9 +10,13 @@ app.directive "select2", [
         require: "ngModel"
         scope:
             ajaxContent: "="
+        template: "<input></input>"
+        replace: true
         link: (scope, element) ->
-            initializeSelect2 = (data) ->
-                $(element).select2(
+            scope.initializeSelect2 = (data) ->
+                # when using $(element) the tests wouldn't run through
+                # using angular.element fixes this issue
+                angular.element(element).select2(
                     tags: true
                     tokenSeparators: [","]
                     data: data
@@ -25,13 +29,12 @@ app.directive "select2", [
                         $translate.instant("SELECT2.NO_MATCHING_RESULTS")
                 )
 
-
             scope.ajaxContent.then (fetchedContent) ->
-                initializeSelect2(fetchedContent)
+                scope.initializeSelect2(fetchedContent)
             , (reason) ->
                 $log.error "Error while querying content for Select2"
                 $log.debug
                     reason: reason
 
-                initializeSelect2([])
+                scope.initializeSelect2([])
 ]

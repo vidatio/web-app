@@ -9,7 +9,9 @@ app.service "TagsService", [
     ($q, $log, TagsFactory) ->
         class Tags
             getAndPreprocessTags: ->
-                promise = TagsFactory.query().$promise.then (response) ->
+                query = TagsFactory.query().$promise
+
+                promise = query.then (response) ->
                     tagsData = []
                     for item, index in response
                         tagsData.push

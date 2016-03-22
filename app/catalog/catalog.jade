@@ -19,7 +19,7 @@
 
             #tags-filter
                 label(for="tags") {{ "FILTER.BY_TAGS" | translate }}
-                input#tags.form-control.multiselect(select2 multiple ng-model="filter.tags" ajax-content="tags" ng-list="," ng-change="setStateParams()")
+                select2#tags.form-control.multiselect(multiple ng-model="filter.tags" ajax-content="tags" ng-list="," ng-change="setStateParams()")
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
