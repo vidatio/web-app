@@ -96,13 +96,26 @@ app.controller "TableCtrl", [
                     $(element).addClass "selected"
 
                 $(element).click (event) ->
-                    if axis is "x"
-                        $scope.visualization.xColumn = $(element).context.cellIndex - 1
-                        $(element).addClass "selected-x"
-                    else
-                        $scope.visualization.yColumn = $(element).context.cellIndex - 1
+                    if not $(element).find("span").hasClass "selected-x-y"
+                        $header.find("span").removeClass "selected-x-y"
 
-                    Visualization.create()
+                        if axis is "x"
+                            $scope.visualization.xColumn = $(element).context.cellIndex - 1
+                            $header.find("span").removeClass "selected-x"
+                            $(element).find("span").addClass "selected-x"
+
+                            if $(element).find("span").hasClass "selected-y"
+                                $(element).find("span").addClass "selected-x-y"
+
+                        else
+                            $scope.visualization.yColumn = $(element).context.cellIndex - 1
+                            $header.find("span").removeClass "selected-y"
+                            $(element).find("span").addClass "selected-y"
+
+                            if $(element).find("span").hasClass "selected-x"
+                                $(element).find("span").addClass "selected-x-y"
+
+                        Visualization.create()
 
                     $("[class*='-axis-button']").removeClass "focused"
                     $header.removeClass "highlighted"

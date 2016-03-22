@@ -9,7 +9,8 @@ app.directive 'hot', [
     "TableService"
     "ConverterService"
     "$window"
-    ($timeout, $log, Data, Map, Table, Converter, $window) ->
+    "VisualizationService"
+    ($timeout, $log, Data, Map, Table, Converter, $window, Visualization) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -40,6 +41,7 @@ app.directive 'hot', [
                     colHeaders: header
                     currentColClassName: 'current-col'
                     currentRowClassName: 'current-row'
+                    manualColumnResize: true
                     beforeChange: (change, source) ->
                         $log.info "HotDirective beforeChange called"
                         $log.debug
@@ -65,6 +67,19 @@ app.directive 'hot', [
                 )
 
             Table.setInstance hot
+
+            # Initialize "X" and "Y" on table header
+            xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
+            yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
+            $header = $(".ht_clone_top th")
+
+            $header.each (idx, element) ->
+                if idx is xColumn and idx is yColumn
+                    $(element).find("span").addClass "selected-x-y"
+                else if idx is xColumn
+                    $(element).find("span").addClass "selected-x"
+                else if idx is yColumn
+                    $(element).find("span").addClass "selected-y"
 
             if not Table.useColumnHeadersFromDataset
                 Table.setHeader()
