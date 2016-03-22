@@ -68,19 +68,6 @@ app.directive 'hot', [
 
             Table.setInstance hot
 
-            # Initialize "X" and "Y" on table header
-            xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
-            yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
-            $header = $(".ht_clone_top th")
-
-            $header.each (idx, element) ->
-                if idx is xColumn and idx is yColumn
-                    $(element).find("span").addClass "selected-x-y"
-                else if idx is xColumn
-                    $(element).find("span").addClass "selected-x"
-                else if idx is yColumn
-                    $(element).find("span").addClass "selected-y"
-
             if not Table.useColumnHeadersFromDataset
                 Table.setHeader()
 
@@ -88,6 +75,12 @@ app.directive 'hot', [
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"
+            else
+                # Initialize "X" and "Y" on table header
+                xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
+                yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
+
+                Table.updateAxisSelection(xColumn, yColumn)
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible
