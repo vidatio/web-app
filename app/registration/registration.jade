@@ -1,6 +1,6 @@
 #registration
 
-    form(name="registrationForm" ng-submit="register()" ng-controller="RegistrationCtrl")
+    form(name="registrationForm" ng-submit="register()")
         .row
             .col-xs-12
                 .input-group.form-group(ng-class="{ 'has-error' : registrationForm.email.$invalid && !registrationForm.email.$pristine }")

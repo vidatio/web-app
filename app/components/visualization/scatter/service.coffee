@@ -1,13 +1,16 @@
 "use strict"
 
 class window.vidatio.ScatterPlot extends window.vidatio.Visualization
-    constructor: (dataset, options) ->
+    constructor: (dataset, options, width, height) ->
         vidatio.log.info "ScatterPlot constructor called"
         vidatio.log.debug
             dataset: dataset
             options: options
+            width: width
+            height: height
 
-        super dataset, options.color
+        @remove()
+        super dataset, options.color, width, height
         @preProcess options
 
         # we need to wait for angular to finish rendering
@@ -21,5 +24,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .y(options.headers["y"])
             .size(10)
             .color("color")
+            .width(@width)
+            .height(@height)
             .draw()
-        , 0
+        , 100

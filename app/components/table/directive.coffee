@@ -8,7 +8,8 @@ app.directive 'hot', [
     "MapService"
     "TableService"
     "ConverterService"
-    ($timeout, $log, Data, Map, Table, Converter) ->
+    "$window"
+    ($timeout, $log, Data, Map, Table, Converter, $window) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -92,7 +93,7 @@ app.directive 'hot', [
             ), true
 
             # Needed for correct displayed table
-            Handsontable.Dom.addEvent window, 'resize', ->
+            onResizeCallback = ->
                 $log.info "HotDirective resize called"
 
                 offset = Handsontable.Dom.offset $element[0]
@@ -105,4 +106,12 @@ app.directive 'hot', [
                 $element.parent()[0].style.width = availableWidth + 'px'
                 $element.parent()[0].style.height = availableHeight + 'px'
                 hot.render()
+                return
+
+            # resize event only should be fired if user is currently in editor
+            window.angular.element($window).on 'resize', onResizeCallback
+
+            # resize watcher has to be removed when editor is leaved
+            $scope.$on '$destroy', ->
+                window.angular.element($window).off 'resize', onResizeCallback
 ]

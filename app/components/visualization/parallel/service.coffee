@@ -1,32 +1,28 @@
 "use strict"
 
 class vidatio.ParallelCoordinates extends vidatio.Visualization
-    constructor: (dataset, options) ->
+    constructor: (dataset, options, width, height) ->
         vidatio.log.info "ParallelCoordinates constructor called"
         vidatio.log.debug
             dataset: dataset
             options: options
 
         @remove()
-        super dataset, options.color
+        super dataset, options.color, width, height
         @preProcess options
 
         setTimeout =>
-            $chart = $("#chart")
-
-            width = $chart.parent().width()
-            height = $chart.parent().height() - 60
-            $chart.addClass "parcoords"
+            $("#chart").addClass "parcoords"
 
             d3.parcoords()("#chart")
             .data(@chartData)
             .color(@color)
-            .width(width)
-            .height(height)
+            .width(@width)
+            .height(@height)
             .render()
             .ticks(3)
             .createAxes()
-        , 0
+        , 100
 
     # we overwrite the parent preProcess method
     preProcess: (options) =>

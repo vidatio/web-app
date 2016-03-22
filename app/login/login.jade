@@ -1,6 +1,6 @@
 #login
 
-    form(name="loginForm" ng-submit="logon()" ng-controller="LoginCtrl")
+    form(name="loginForm" ng-submit="logon()")
         .row
             .col-xs-12
                 .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
