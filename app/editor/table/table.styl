@@ -94,20 +94,19 @@
         color $color-white !important
         border 2px $color-hover-dark solid !important
 
+    [class*="selected-"]:before
+            color $color-white
+            margin-right 2px
+
     .selected-x
         &:before
             content "X"
-            color $color-white
-            margin-right 2px
 
     .selected-y
         &:before
             content "Y"
-            color $color-white
-            margin-right 2px
 
     .selected-x-y
         &:before
             content "X Y"
-            color $color-white
-            margin-right 2px
+
