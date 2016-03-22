@@ -9,6 +9,7 @@ app.directive "select2", [
         restrict: "EA"
         require: "ngModel"
         scope:
+            model: "=ngModel"
             ajaxContent: "="
         template: "<input></input>"
         replace: true
@@ -37,4 +38,10 @@ app.directive "select2", [
                     reason: reason
 
                 scope.initializeSelect2([])
+
+            scope.$watch( ->
+                scope.model
+            , (newValue, oldValue) ->
+                angular.element(element).select2("val", "") if not newValue
+            )
 ]
