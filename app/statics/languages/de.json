@@ -14,9 +14,9 @@
     "CATEGORIES": "Kategorien",
     "VIDATIO_PUBLIC": "Öffentlichkeit",
     "PRESS_LANDESPREIS": "Sieger Salzburger Landespreis 2016 - Bildungseinrichtungen",
-    "PRESS_OGD_SALZBURG": "Präsentation Open Government Data-Stammtisch Salzburg",
-    "PRESS_OGD_WIEN": "Präsentation Open Government Data-Stammtisch Wien",
-    "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living-Workshop",
+    "PRESS_OGD_SALZBURG": "Präsentation Open Government Data - Stammtisch Salzburg",
+    "PRESS_OGD_WIEN": "Präsentation Open Government Data - Stammtisch Wien",
+    "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living - Workshop",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
     "ALL_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
@@ -130,8 +130,7 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
-    "X_AXIS": "X-Achse",
-    "Y_AXIS": "Y-Achse",
+    "VALUE_RANGE": "Wertebereich",
     "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
@@ -144,10 +143,10 @@
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
-        "SCATTER_PLOT": "Streudiagramm",
+        "SCATTER_PLOT": "Streu-Diagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
-        "BAR_CHART": "Balkendiagramm",
+        "BAR_CHART": "Balken-Diagramm",
         "TIME_SERIES": "Zeitlicher Verlauf",
         "RECOMMEND": "Diagramm empfehlen"
     },

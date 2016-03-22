@@ -1,63 +1,84 @@
 #visualization
     .visualization
-        height (100%-0px)
+        height (100%-40px)
 
     .settings-bar
-        .axis-selection
-            p
-                display inline-block
+        .recommend-button
+            height 40px
+            width  90px
+            line-height 1
+            position relative
+            margin-left 40px
+            padding 9px
+            margin-top 4px
 
-                &:last-of-type
-                    margin-left 5px
-
-            ul
-                max-height 500px
-                overflow auto
-                z-index 1500
-
-            .btn
-                min-width 20px
-
-        .diagram-selection
-            padding-top 6px
-
-            li > a
-                display flex
-                flex-direction row
-                display -webkit-flex /* Safari */
-                -webkit-flex-direction row
-                font-size 16px
-
-                .selection-icons
-                    font-size 28px
-                    margin-right 10px
-
-                .selection-text
-                    line-height 43px
-
-            .trigger-recommender
-                background $color-red-light
-                border-top-right-radius 4px
-                border-top-left-radius 4px
-
-                a
-                    color $color-black
-
-        .color-selection a .angular-color-picker
-            display none
-
-            //bugfix angular-color-picker cursors
-            .angular-color-picker > ._hues > ._cursor
-                left -6px
+            .icon
+                position absolute
+                left -30px
+                bottom 0
                 width 40px
+                height 40px
+                border-radius 2px
+                background inherit
+                line-height 40px
+                font-size 25px
+                transform rotate(-15deg)
+                transform-origin 0
 
-        .color-selection a:hover .angular-color-picker
-            display block
+            .text
+                display block
+                text-transform uppercase
+                position relative
+                font-size 12px
+                white-space pre-wrap
+                font-family Colaborate,Arial,Helvetica,sans-serif
 
-        .graph-icon
-            width 30px
-            margin-right 10px
-            margin-top 5px
+        .download-menu
+        .diagram-menu
+            justify-content space-around
+            display none
+            list-style-type none
+            position absolute
+            left 20px
+            right 20px
+            padding 0
+            height 80px
+            margin-top 8px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            > li
+                height 100%
+
+                > a
+                    padding 18px 12px
+                    display block
+
+                &:hover
+                &.active
+                    background $color-hover-light
+                    box-shadow 0 -2px $color-green
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+        .diagram-selection:hover
+        .download-selection:hover
+            .diagram-menu
+            .download-menu
+                display flex
+
+        .diagram-menu
+            > li
+                width 20%
 
         .download-button li:first-child
             border-bottom 2px solid $color-green
