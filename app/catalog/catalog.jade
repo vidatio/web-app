@@ -1,13 +1,14 @@
 #catalog.wrapper-content
     .row
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
+            h2 {{ "FILTER_BY" | translate }}
             #time-filter
-                label(for="from-filter") {{ "FILTER.BY_TIME" | translate }}
+                label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
                 span.to  -
                 input.form-control.input-sm(date-time ng-model="filter.dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
             #category-filter
-                label {{ "FILTER.BY_CATEGORY" | translate }}
+                label {{ "CATEGORY" | translate }}
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ filter.category }}
                         span.caret
@@ -18,7 +19,7 @@
                             a(href="#" ng-click="setCategory(category.name)") {{ category.name }}
 
             #tags-filter
-                label(for="tags") {{ "FILTER.BY_TAGS" | translate }}
+                label(for="tags") {{ "DATASET_TAGS" | translate }}
                 select2#tags.form-control.multiselect(multiple ng-model="filter.tags" ajax-content="tags" ng-list="," ng-change="setStateParams()")
 
             #my-vidatio-filter(ng-show="globals.authorized")

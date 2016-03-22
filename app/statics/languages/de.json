@@ -133,11 +133,8 @@
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
-    "FILTER": {
-        "BY_TIME": "Filtern nach Zeit",
-        "BY_CATEGORY": "Filtern nach Kategorie",
-        "BY_TAGS": "Filtern nach Tags"
-    },
+    "FILTER_BY": "Filtern nach",
+    "TIME": "Zeit",
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
