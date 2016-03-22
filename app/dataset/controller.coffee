@@ -67,8 +67,8 @@ app.controller "DatasetCtrl", [
                     content: translation
                     className: "danger"
 
-        # @method $scope.createVidatio
-        # @description creates Vidatio from saved Dataset
+        # @method $scope.openInEditor
+        # @description set the vidatio options from saved dataset
         $scope.openInEditor = ->
             $log.info "DatasetCtrl $scope.createVidatio called"
 

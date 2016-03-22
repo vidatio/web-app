@@ -132,19 +132,7 @@ app.service 'DataService', [
                     Table.setDataset data.data
 
                 if data.options?
-                    # Each value has to be assigned individually, otherwise all already set options get overwritten
-                    # and because we want to use data binding
-                    if data.options?.type?
-                        Visualization.options["type"] = data.options.type
-                        $translate(Visualization.options.translationKeys[data.options.type]).then (translation) ->
-                            Visualization.options["selectedDiagramName"] = translation
-                    else
-                        Visualization.options["type"] = false
-                        Visualization.options["selectedDiagramName"] = false
-
-                    Visualization.options["xColumn"] = if data.options.xColumn? then parseInt(data.options.xColumn, 10) else null
-                    Visualization.options["yColumn"] = if data.options.yColumn? then parseInt(data.options.yColumn, 10) else null
-                    Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
+                    Visualization.setOptions(data.options)
 
             #@method downloadCSV
             #@description downloads a csv

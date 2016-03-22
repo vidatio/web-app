@@ -29,6 +29,8 @@ app.service 'VisualizationService', [
                         "bar": "DIAGRAMS.BAR_CHART"
                         "timeseries": "DIAGRAMS.TIME_SERIES"
 
+            # @method resetOptions
+            # @public
             resetOptions: ->
                 @options.type = false
                 @options.xColumn = 0
@@ -36,9 +38,32 @@ app.service 'VisualizationService', [
                 @options.color = "#11DDC6"
                 @options.selectedDiagramName = null
 
+            # @method setOptions
+            # @public
+            # @param {Object} options
+            #   @param {String} color
+            #   @param {String} selectedDiagramName
+            #   @param {String} type
+            #   @param {Int} xColumn
+            #   @param {Int} yColumn
+            setOptions: (options) ->
+                # Each value has to be assigned individually, otherwise all already set options get overwritten
+                # and because we want to use data binding
+                if options.type?
+                    @options["type"] = options.type
+                    $translate(@options.translationKeys[options.type]).then (translation) ->
+                        @options["selectedDiagramName"] = translation
+                else
+                    @options["type"] = false
+                    @options["selectedDiagramName"] = false
+
+                @options["xColumn"] = if options.xColumn? then parseInt(options.xColumn, 10) else null
+                @options["yColumn"] = if options.yColumn? then parseInt(options.yColumn, 10) else null
+                @options["color"] = if options.color? then options.color else "#11DDC6"
+
             # @method useRecommendedOptions
             # @public
-            recommendDiagram: ->
+            useRecommendedOptions: ->
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()

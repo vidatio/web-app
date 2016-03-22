@@ -33,7 +33,7 @@ app.controller "VisualizationCtrl", [
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            Visualization.recommendDiagram()
+            Visualization.useRecommendedOptions()
             Visualization.create()
 
         if Data.meta.fileType is "shp"
