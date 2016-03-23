@@ -37,5 +37,5 @@
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                                 h4.title {{ vidatio.title }}
                             p {{ vidatio.description | limitTo: 120}} ...
-                            p Kategorie: {{ vidatio.metaData.category.name }}
+                            p Kategorie: {{ vidatio.metaData.categoryId.name }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}

@@ -28,7 +28,7 @@ app.controller "VisualizationCtrl", [
             Visualization.recommendDiagram()
             Visualization.create()
 
-        if Data.meta.fileType is "shp"
+        if Data.metaData.fileType is "shp"
             $scope.visualization.type = "map"
             Map.setInstance()
         else

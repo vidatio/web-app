@@ -41,9 +41,9 @@ app.controller "DatasetCtrl", [
             created = new Date($scope.data.createdAt)
             Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "-"
             tags = $scope.data.metaData.tags || "-"
-            category = $scope.data.metaData.category || "-"
+            category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
             dataOrigin = "Vidatio"
-            userName = if $scope.data.metaData?.userId?.name? then $scope.data.metaData.userId.name else "-"
+            userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
             image = $scope.data.image || "images/logo-greyscale.svg"
