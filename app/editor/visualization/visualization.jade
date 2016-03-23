@@ -1,7 +1,7 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content.height-500
         .settings-bar
-            .axis-selection(ng-if="meta.fileType != 'shp'")
+            .axis-selection(ng-if="data.metaData.fileType != 'shp'")
                 p(ng-if="visualization.type != 'map'") {{ "X_AXIS" | translate }}
                 p(ng-if="visualization.type == 'map'") {{ "LONGITUDE" | translate }}
                 .btn-group
@@ -20,14 +20,14 @@
                         li(ng-repeat="(id, column) in header track by $index" ng-if="column != null")
                             a(href="#" ng-click="setAxisColumnSelection('y', id)") {{ column }}
 
-            .diagram-selection(ng-hide="meta.fileType == 'shp'")
+            .diagram-selection(ng-hide="data.metaData.fileType == 'shp'")
                 .btn-group
                     button.btn.btn-default.dropdown-toggle(type="button" data-toggle="dropdown") {{ visualization.selectedDiagramName || "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                         span.caret
                     ul.dropdown-menu(role="menu")
                         li.trigger-recommender
                             a(href='#' ng-click="recommend()")
-                                .icon-magicwand.selection-icons(ng-hide="meta.fileType == 'shp'")
+                                .icon-magicwand.selection-icons(ng-hide="data.metaData.fileType == 'shp'")
                                 .selection-text {{ "DIAGRAMS.RECOMMEND" | translate }}
                         li
                             a(href="#" ng-click="selectDiagram('scatter')")
