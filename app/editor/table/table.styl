@@ -109,12 +109,9 @@
         color $color-white !important
         border 2px $color-hover-dark solid !important
 
-        .selected-x
-        .selected-y
-        .selected-x-y
-            &:before
-                color $color-white !important
-                font-size 18px
+        [class*="selected-"]:before
+            color $color-white !important
+            font-size 18px
 
     [class*="selected-"]:before
         color $color-border
