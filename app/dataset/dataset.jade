@@ -59,29 +59,28 @@
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ORIGIN" | translate }}:
-                    .dataset-creator.information {{ information.origin }}
+                    .dataset-creator {{ information.origin }}
                 .one-row
                     .text {{ "DATASET_EDITOR" | translate }}:
-                    .dataset-creator.information {{ information.creator }}
+                    .dataset-creator {{ information.creator }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ID" | translate }}:
-                    .dataset-creator.information {{ information.id }}
+                    .dataset-creator {{ information.id }}
                 .one-row
                     .text {{ "DATASET_PARENT" | translate }}:
-                    .dataset-creator.information {{ information.parent }}
+                    .dataset-creator {{ information.parent }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
-                    .dataset-created.information {{ information.created | date: "dd.MM.yyyy" }}
+                    .dataset-created {{ information.created | date: "dd.MM.yyyy" }}
                 .one-row
                     .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-update.information {{ information.updated | date: "dd.MM.yyyy" }}
+                    .dataset-update {{ information.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
-                    .dataset-creator.information {{ information.category }}
+                    .dataset-creator {{ information.category }}
                 .one-row
                     .text {{ "DATASET_TAGS" | translate }}:
-                    .tagsinput-primary
-                        input(name="tagsinput" class="tagsinput" data-role="tagsinput")
+                    span.tag(ng-repeat="tag in information.tags track by $index") {{tag}}
