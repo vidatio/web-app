@@ -18,7 +18,7 @@ describe "Visualization Ctrl", ->
                 setGeoJSON: ->
 
             Data =
-                meta:
+                metaData:
                     fileType: "csv"
 
             Progress =
