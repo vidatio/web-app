@@ -23,6 +23,8 @@ app.controller "TableCtrl", [
         if headerCheckbox?.radiocheck? then headerCheckbox.radiocheck()
 
         $scope.toggleHeader = ->
+            clearFocusedAxisButtons()
+
             $log.info "TableCtrl changeUseOfHeader called"
 
             if $scope.data.meta.fileType isnt "shp"
@@ -34,6 +36,8 @@ app.controller "TableCtrl", [
         #@method $scope.transpose
         #@description transpose the dataset including the header
         $scope.transpose = ->
+            clearFocusedAxisButtons()
+
             $log.info "TableCtrl transpose called"
 
             if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
@@ -43,6 +47,8 @@ app.controller "TableCtrl", [
         #@method $scope.download
         #@description downloads a csv
         $scope.download = ->
+            clearFocusedAxisButtons()
+
             $log.info "TableCtrl download called"
 
             trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
@@ -63,7 +69,6 @@ app.controller "TableCtrl", [
             csvURL = window.URL.createObjectURL(csvData)
 
             Share.download fileName + ".csv", csvURL
-
 
         #@method $scope.axisSelection
         #@description selects axis by clicking on the header and creates new visualization
@@ -117,10 +122,14 @@ app.controller "TableCtrl", [
 
                         Visualization.create()
 
-                    $("[class*='-axis-button']").removeClass "focused"
+                    clearFocusedAxisButtons()
                     $header.removeClass "highlighted"
                     $header.removeClass "selected"
                     $header.unbind "click"
 
             return true
+        
+        # remove focus-states from axis-buttons if other icons are clicked
+        clearFocusedAxisButtons = ->
+            $("[class*='-axis-button']").removeClass "focused"
 ]
