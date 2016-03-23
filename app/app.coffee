@@ -138,6 +138,7 @@ app.config [
 
         .state "app.index",
             url: "/"
+            controller: "IndexCtrl"
             templateUrl: "index/index.html"
 
         .state "app.profile",

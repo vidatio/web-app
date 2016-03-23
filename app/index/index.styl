@@ -130,24 +130,28 @@
                 margin-top -6px
                 height 164px
 
-    #featured-vidatios
+    #newest-vidatios
         padding 50px 0 72px
-
-        img.featured
-            width 100%
-            -webkit-box-shadow 2px 2px 2px 0px $color-shadow
-            -moz-box-shadow 2px 2px 2px 0px $color-shadow
-            box-shadow 2px 2px 2px 0px $color-shadow
-            border-radius 4px
-
-        div
-            font-family Colaborate-Medium, $fonts
-            margin-top 10px
 
         a
             color $color-grey-dark
+
             &:hover
                 color $color-green
+
+            .img-container
+                box-shadow -1px 1px 6px $color-shadow
+                background $color-white
+                padding 10px
+                border-radius 4px
+
+                img.newest
+                    width 100%
+
+            .title
+                font-family Colaborate-Medium, $fonts
+                margin-top 10px
+                text-align center
 
         .browse
             text-align center
@@ -225,14 +229,34 @@
             p
                 margin 0 20px
 
-        #featured-vidatios
-            a
-                div
-                    margin 10px 20px
+        #newest-vidatios
+            .img-container
+                width 80%
+                margin 0 auto
+
+            .title
+                margin-bottom 30px
+                font-size 20px
 
         #popular-categories
             /* first value concerns always the foreground image, the last value always the background image */
             background-size 95%, cover
+
+@media(min-width: 768px)
+    #landing-page #newest-vidatios
+        .img-container
+            height 21vw
+            max-height 220px
+
+            img.newest
+                position relative
+                top 50%
+                -webkit-transform translateY(-50%)
+                -ms-transform translateY(-50%)
+                transform translateY(-50%)
+
+        .title
+            font-size 18px
 
 @media(max-width: 850px)
     #landing-page #intro
