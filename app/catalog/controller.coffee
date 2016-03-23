@@ -37,7 +37,7 @@ app.controller "CatalogCtrl", [
 
             for vidatio, index in $scope.vidatios
                 vidatio.description = "Hello world, this is a test!"
-                vidatio.title = vidatio.name
+                vidatio.title = vidatio.metaData.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
 

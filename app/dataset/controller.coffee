@@ -36,16 +36,14 @@ app.controller "DatasetCtrl", [
         # get dataset according to datasetId and set necessary metadata
         DataFactory.get { id: datasetId }, (data) ->
             $scope.data = data
+            console.log "data", data
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
-            if $scope.data.metaData?
-                Data.metaData["fileType"] = $scope.data.metaData.fileType || "-"
-            else
-                Data.metaData["fileType"] = "-"
-            tags = $scope.data.tags || "-"
-            category = $scope.data.category || "-"
+            Data.meta["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "-"
+            tags = $scope.data.metaData.tags || "-"
+            category = $scope.data.metaData.category || "-"
             dataOrigin = "Vidatio"
-            userName = $scope.data.userId.name || "-"
+            userName = if $scope.data.metaData?.userId?.name? then $scope.data.metaData.userId.name else "-"
             title = $scope.data.name || "Vidatio"
             parent = $scope.data.parentId || "-"
             image = $scope.data.image || "images/logo-greyscale.svg"
