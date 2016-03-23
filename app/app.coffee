@@ -148,6 +148,7 @@ app.config [
         .state "app.dataset",
             url: "/vidatio/:id"
             templateUrl: "dataset/dataset.html"
+            controller: "DatasetCtrl"
             title: "dataset"
 
         .state "app.registration",
@@ -169,20 +170,13 @@ app.config [
             title: "import"
 
         .state "app.editor",
-            url: "/editor"
-            templateUrl: "editor/editor.html"
-            controller: "EditorCtrl"
-            title: "editor"
-
-        # /editor for saved vidatio
-        .state "app.editor.id",
-            url: "/vidatio_:id",
+            url: "/editor/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
-            url: "/share"
+            url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"

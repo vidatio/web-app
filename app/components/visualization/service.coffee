@@ -99,13 +99,14 @@ app.service 'VisualizationService', [
                     "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
 
                 # set width and height of the visualization for dynamic resizing
-                $chart = $("#chart")
+                chartSelector = ".chart"
+                $chart = $(chartSelector)
                 width = $chart.parent().width()
-                height = $chart.parent().height() - 40
+                height = $chart.parent().height()
 
                 switch options.type
                     when "scatter"
-                        new vidatio.ScatterPlot chartData, options, width, height
+                        new vidatio.ScatterPlot chartData, options, width, height, chartSelector
                     when "map"
                         # Use the whole dataset because we want the other attributes inside the popups
                         geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
@@ -115,11 +116,11 @@ app.service 'VisualizationService', [
                         Map.setInstance()
                         Map.setGeoJSON geoJSON
                     when "parallel"
-                        new vidatio.ParallelCoordinates chartData, options, width, height
+                        new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"
-                        new vidatio.BarChart chartData, options, width, height
+                        new vidatio.BarChart chartData, options, width, height, chartSelector
                     when "timeseries"
-                        new vidatio.TimeseriesChart chartData, options, width, height
+                        new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
                     else
                         $log.info "VisualizationCtrl type not set"
                         $log.debug

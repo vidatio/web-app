@@ -1,14 +1,16 @@
 "use strict"
 
 class vidatio.ParallelCoordinates extends vidatio.Visualization
-    constructor: (dataset, options, width, height) ->
+    constructor: (dataset, options, width, height, chartSelector) ->
         vidatio.log.info "ParallelCoordinates constructor called"
         vidatio.log.debug
             dataset: dataset
+            width: width
+            height: height
             options: options
 
         @remove()
-        super dataset, options.color, width, height
+        super dataset, options.color, width, height, chartSelector
         @preProcess options
 
         setTimeout =>

@@ -15,8 +15,8 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     "VisualizationService"
-    "$window"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
+    "$stateParams"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
@@ -27,23 +27,24 @@ app.controller "VisualizationCtrl", [
             Visualization.useRecommendedOptions()
             Visualization.create()
 
-        if Data.meta.fileType is "shp"
-            $scope.visualization.type = "map"
-            Map.setInstance()
-        else
-            # After having recommend diagram options, we watch the dataset of the table
-            # because the watcher fires at initialization the diagram gets immediately drawn
-            # FIXME: Whats should happen, if a person clears the table after watching shp?!
-            $scope.$watch (->
-                Table.dataset
-            ), ( ->
-                $log.info "VisualizationCtrl dataset watcher triggered"
+        unless $stateParams.id
+            if Data.meta.fileType is "shp"
+                $scope.visualization.type = "map"
+                Map.setInstance()
+            else
+                # After having recommend diagram options, we watch the dataset of the table
+                # because the watcher fires at initialization the diagram gets immediately drawn
+                # FIXME: Whats should happen, if a person clears the table after watching shp?!
+                $scope.$watch (->
+                    Table.dataset
+                ), ( ->
+                    $log.info "VisualizationCtrl dataset watcher triggered"
 
-                Visualization.create()
-            ), true
+                    Visualization.create()
+                ), true
 
-        $timeout ->
-            Progress.setMessage ""
+            $timeout ->
+                Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
             $log.info "VisualizationCtrl colorpicker-selected emitted"

@@ -10,7 +10,7 @@
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor({ id: data.id, locale: locale })" ng-click="openInEditor()")
                         span.icon-edit.icons
                         span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 

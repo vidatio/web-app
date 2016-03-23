@@ -8,9 +8,10 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             options: options
             width: width
             height: height
+            chartSelector: chartSelector
 
         @remove()
-        super dataset, options.color, width, height
+        super dataset, options.color, width, height, chartSelector
         @preProcess options
 
         # handle different date formats and parse them for c3.js charts

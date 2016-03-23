@@ -28,6 +28,8 @@ app.controller "DatasetCtrl", [
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
 
+        console.log "### id ###", $stateParams, $stateParams.id
+
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
             Progress.setMessage message
 
@@ -52,18 +54,18 @@ app.controller "DatasetCtrl", [
                 $timeout ->
                     Progress.setMessage()
 
-            # console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
-        , (error) ->
-            $log.info "DatasetCtrl error on get dataset from id"
-            $log.error error
+                # console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
+            , (error) ->
+                $log.info "DatasetCtrl error on get dataset from id"
+                $log.error error
 
-            $timeout ->
-                Progress.setMessage()
+                $timeout ->
+                    Progress.setMessage()
 
-            $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                ngToast.create
-                    content: translation
-                    className: "danger"
+                $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 
         # @method $scope.openInEditor
         # @description set the vidatio options from saved dataset

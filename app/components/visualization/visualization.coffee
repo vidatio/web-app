@@ -13,7 +13,7 @@ class window.vidatio.Visualization
 
     remove: ->
         vidatio.log.info "Visualization remove called"
-        $("#chart").empty()
+        $(@containerSelector).empty()
 
     # @method preProcess
     # @param {Object} options
