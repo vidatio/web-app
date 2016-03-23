@@ -40,7 +40,11 @@ app.controller "DatasetCtrl", [
             updated = new Date($scope.data.updatedAt)
             created = new Date($scope.data.createdAt)
             Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "-"
-            tags = $scope.data.metaData.tags || "-"
+            if $scope.data.metaData.tagIds?
+                tags = []
+                for tag in $scope.data.metaData.tagIds
+                    tags.push tag.name
+
             category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
             dataOrigin = "Vidatio"
             userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
@@ -50,7 +54,7 @@ app.controller "DatasetCtrl", [
             description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
 
             # fill up detail-view with metadata
-            $scope.information.push
+            $scope.information =
                 title: title
                 image: image
                 id: datasetId
@@ -62,6 +66,10 @@ app.controller "DatasetCtrl", [
                 parent: parent
                 category: category
                 tags: tags
+
+            # init tagsinput field with tags
+            for tag in tags
+                $(".tagsinput").tagsinput("add", tag)
 
         , (error) ->
             $log.info "DatasetCtrl error on get dataset from id"

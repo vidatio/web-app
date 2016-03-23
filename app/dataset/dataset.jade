@@ -1,16 +1,16 @@
-#dataset-view.wrapper-content(ng-repeat="info in information")
+#dataset-view.wrapper-content
     .row.dataset-title
         .col-sm-12
-            h1.underline-red-light.dataset-title-text {{ info.title }}
+            h1.underline-red-light.dataset-title-text {{ information.title }}
 
     .row
         .col-sm-12
             .visualization-container
-                img(src="{{ info.image }}")
+                img(src="{{ information.image }}")
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="createVidatio()")
                         span.icon-edit.icons
                         span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
 
@@ -21,11 +21,11 @@
                             span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
-                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadDataset()")
+                            li(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="downloadDataset()")
                                 a
                                     span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
-                            li(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="downloadImage()")
+                            li(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="downloadImage()")
                                 a
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
@@ -49,38 +49,39 @@
 
     .row
         .col-sm-12
-            h1.underline-red-light {{ "INFORMATION_DATASET" | translate | uppercase }}
+            h1.underline-red-light {{ "informationRMATION_DATASET" | translate | uppercase }}
 
     .row
         .col-sm-12
             .metadata-container
                 .one-row
-                    .description {{ info.description }}
+                    .description {{ information.description }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ORIGIN" | translate }}:
-                    .dataset-creator.info {{ info.origin }}
+                    .dataset-creator.information {{ information.origin }}
                 .one-row
                     .text {{ "DATASET_EDITOR" | translate }}:
-                    .dataset-creator.info {{ info.creator }}
+                    .dataset-creator.information {{ information.creator }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ID" | translate }}:
-                    .dataset-creator.info {{ info.id }}
+                    .dataset-creator.information {{ information.id }}
                 .one-row
                     .text {{ "DATASET_PARENT" | translate }}:
-                    .dataset-creator.info {{ info.parent }}
+                    .dataset-creator.information {{ information.parent }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
-                    .dataset-created.info {{ info.created | date: "dd.MM.yyyy" }}
+                    .dataset-created.information {{ information.created | date: "dd.MM.yyyy" }}
                 .one-row
                     .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-update.info {{ info.updated | date: "dd.MM.yyyy" }}
+                    .dataset-update.information {{ information.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
-                    .dataset-creator.info {{ info.category }}
+                    .dataset-creator.information {{ information.category }}
                 .one-row
                     .text {{ "DATASET_TAGS" | translate }}:
-                    .dataset-creator.info {{ info.tags }}
+                    .tagsinput-primary
+                        input(name="tagsinput" class="tagsinput" data-role="tagsinput")
