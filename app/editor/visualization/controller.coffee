@@ -93,28 +93,45 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
-            $map = $("#map")
+            console.log "Visualization.options.type", Visualization.options.type
+
+            if Visualization.options.type is "map"
+                $targetElem = $("#map")
+            else
+                $targetElem = $("#d3plus")
+
+            # $map = $("#map")
 
             # Check Share.mapToImg for quality reduction if needed
-            promise = Share.mapToImg $map
+            # promise = Share.mapToImg $map
 
-            promise.then (obj) ->
-                $log.info "VisualizationCtrl shareVisualization promise success called"
-                $log.debug
-                    obj: obj
+            vidatio.visualization.visualizationToBase64String($targetElem)
+            .then (successString) ->
+               # successString = base64 string
+               console.log "successString", successString
+            .catch (error) ->
+                $translate(error.i18n).then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 
-                $timeout ->
-                    Progress.setMessage ""
+            # promise.then (obj) ->
+            #     $log.info "VisualizationCtrl shareVisualization promise success called"
+            #     $log.debug
+            #         obj: obj
 
-                fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+            #     $timeout ->
+            #         Progress.setMessage ""
 
-                Share.download fileName, obj[type]
-            , (error) ->
-                ngToast.create
-                    content: error
-                    className: "danger"
-            , (notify) ->
-                Progress.setMessage notify
+            #     fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+
+            #     Share.download fileName, obj[type]
+            # , (error) ->
+            #     ngToast.create
+            #         content: error
+            #         className: "danger"
+            # , (notify) ->
+            #     Progress.setMessage notify
 
         $scope.geojson =
             data: Map.geoJSON

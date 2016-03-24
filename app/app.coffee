@@ -47,6 +47,7 @@ app.run [
         window.vidatio.helper = new window.vidatio.Helper()
         window.vidatio.recommender = new window.vidatio.Recommender()
         window.vidatio.geoParser = new window.vidatio.GeoParser()
+        window.vidatio.visualization = new window.vidatio.Visualization()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
