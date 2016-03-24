@@ -92,7 +92,7 @@ app.controller "CatalogCtrl", [
         #               by using an empty String
         $scope.reset = ->
             for attr of $scope.filter
-                if $scope.filter[attr].constructor is Object
+                if $scope.filter[attr]?.constructor is Object
                     for childAttr of $scope.filter[attr]
                         $scope.filter[attr][childAttr] = ""
                 else
