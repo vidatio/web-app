@@ -44,6 +44,25 @@ app.controller "IndexCtrl", [
                 }
             ]
 
+            sizes = [
+                {
+                    'size': 10
+                    'name': 'Sport'
+                }
+                {
+                    'size': 20
+                    'name': 'Finanzen'
+                }
+                {
+                    'size': 20
+                    'name': 'Umwelt'
+                }
+                {
+                    'size': 20
+                    'name': 'Politik'
+                }
+            ]
+
             positions = [
                 {
                     'name': 'Sport'
@@ -67,7 +86,7 @@ app.controller "IndexCtrl", [
                 }
             ]
 
-            createCategoryBubbles(chartData)
+            createCategoryBubbles(chartData, sizes)
 
         , (error) ->
             $log.info "IndexCtrl error on query datasets"
@@ -90,21 +109,21 @@ app.controller "IndexCtrl", [
             $log.error error
 
 
-        createCategoryBubbles = (categoriesData, positions) ->
+        createCategoryBubbles = (categoriesData, sizes) ->
 
             $chart = $("#bubble-categories")
             width = $chart.parent().width()
             height = $chart.parent().height()
 
 
-            visualization = d3plus.viz()
+            d3plus.viz()
             .container("#bubble-categories")
             .type("network")
-            .data(categoriesData)
+            #.data(categoriesData)
             .nodes(categoriesData)
             .edges([])
             .id("name")
-            .size("size")
+            .size(sizes)
             .color("name")
             .width(width)
             .height(height)
