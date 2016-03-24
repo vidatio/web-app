@@ -22,44 +22,29 @@ app.controller "IndexCtrl", [
 
             occurencesPerCategory = countOccurences(categoryIDs)
 
-            console.log occurencesPerCategory[0]
+            console.log occurencesPerCategory
             #console.log occurences["Finanzen"]
 
             chartData = [
                 {
-                    'size': 10
+                    'Datensätze': 1
                     'name': 'Sport'
+                    'color': '#11dcc6'
                 }
                 {
-                    'size': 20
+                    'Datensätze': 2
                     'name': 'Finanzen'
+                    'color': '#333'
                 }
                 {
-                    'size': 20
+                    'Datensätze': 3
                     'name': 'Umwelt'
+                    'color': '#3e3e3e'
                 }
                 {
-                    'size': 20
+                    'Datensätze': 2
                     'name': 'Politik'
-                }
-            ]
-
-            sizes = [
-                {
-                    'size': 10
-                    'name': 'Sport'
-                }
-                {
-                    'size': 20
-                    'name': 'Finanzen'
-                }
-                {
-                    'size': 20
-                    'name': 'Umwelt'
-                }
-                {
-                    'size': 20
-                    'name': 'Politik'
+                    'color': '#11dcc6'
                 }
             ]
 
@@ -86,7 +71,7 @@ app.controller "IndexCtrl", [
                 }
             ]
 
-            createCategoryBubbles(chartData, sizes)
+            createCategoryBubbles(chartData, positions)
 
         , (error) ->
             $log.info "IndexCtrl error on query datasets"
@@ -109,24 +94,44 @@ app.controller "IndexCtrl", [
             $log.error error
 
 
-        createCategoryBubbles = (categoriesData, sizes) ->
+        createCategoryBubbles = (categoriesData, positions) ->
 
             $chart = $("#bubble-categories")
             width = $chart.parent().width()
             height = $chart.parent().height()
 
+            console.log width, height
+
 
             d3plus.viz()
             .container("#bubble-categories")
             .type("network")
-            #.data(categoriesData)
-            .nodes(categoriesData)
+            .data({
+                'value': categoriesData,
+                'opacity': 1
+            })
+            .nodes({
+                'value': categoriesData,
+                'overlap': 0.5
+            })
             .edges([])
             .id("name")
-            .size(sizes)
-            .color("name")
+            .color('color')
+            .size({
+                'value': "Datensätze",
+                'scale': {
+                    'min': width,
+                    'max': width
+                }
+            })
             .width(width)
             .height(height)
+            .legend(false)
+            #.background('none')
+            .zoom({
+                'click': true,
+                'scroll': false
+            })
             .draw()
 
         countOccurences = (categoriesArray) ->
