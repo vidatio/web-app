@@ -100,15 +100,10 @@ app.controller "VisualizationCtrl", [
             else
                 $targetElem = $("#d3plus")
 
-            # $map = $("#map")
-
-            # Check Share.mapToImg for quality reduction if needed
-            # promise = Share.mapToImg $map
 
             vidatio.visualization.visualizationToBase64String($targetElem)
-            .then (successString) ->
-               # successString = base64 string
-               console.log "successString", successString
+            .then (success) ->
+               console.log "success", success
             .catch (error) ->
                 $translate(error.i18n).then (translation) ->
                     ngToast.create
