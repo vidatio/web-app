@@ -48,9 +48,7 @@
                             .input-group.form-group.selection
                                 select.form-control(name="category" ng-model="vidatio.category" required)
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
-                                    option(value="1") 1
-                                    option(value="2") 2
-                                    option(value="3") 3
+                                    option(ng-repeat="category in categories" value="{{category.name}}") {{category.name}}
 
                         .row
                             label.checkbox(for="publish")

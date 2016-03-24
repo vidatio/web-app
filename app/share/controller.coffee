@@ -14,7 +14,8 @@ app.controller "ShareCtrl", [
     "MapService"
     "TableService"
     "$timeout"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout) ->
+    "CatalogFactory"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, CatalogFactory) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -23,6 +24,10 @@ app.controller "ShareCtrl", [
 
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.vidatio.name = "#{translation} #{moment().format("DD/MM/YYYY")}"
+
+        CatalogFactory.getCategories().query (response) ->
+            $log.info "ShareCtrl successfully queried categories"
+            $scope.categories = response
 
         $timeout ->
             # initialize tagsinput on page-init for propper displaying the tagsinput-field
