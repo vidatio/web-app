@@ -36,6 +36,9 @@
         background $color-table-odd-passive
         border-top 3px solid $color-border
 
+        input
+            border-radius 4px
+
         .reset-filters
             text-align center
             > a
@@ -71,14 +74,10 @@
         #category-filter
             .btn-group
                 display block
+                button, ul
+                    width 100%
                 button
                     float none
-                    width 100%
-                ul
-                    width 100%
-
-        #my-vidatio-filter
-            position relative
 
         #tags-filter
             .select2-search-choice

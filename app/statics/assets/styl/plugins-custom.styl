@@ -126,7 +126,7 @@ a
     margin-top -2px
 
 /*no round corners by default, see below*/
-input.form-control, div.form-control
+input.form-control
     border-radius 0
 
 /*first input top round corners, if many*/
@@ -167,7 +167,7 @@ input.form-control, div.form-control
 .input-group-btn .btn
     background $color-green
     border-color $color-green
-    color $ color-white
+    color $color-white
     &:hover
         border-color $color-green
         background $color-hover-dark
@@ -304,3 +304,6 @@ span.error
         .tag
             margin 0 5px 3px 0
             float left
+
+[id^="s2id_"].select2-container:not(:hover)
+    border-color #bdc3c7
