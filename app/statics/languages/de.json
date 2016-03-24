@@ -130,8 +130,7 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
-    "X_AXIS": "X-Achse",
-    "Y_AXIS": "Y-Achse",
+    "VALUE_RANGE": "Wertebereich",
     "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
@@ -144,10 +143,10 @@
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
-        "SCATTER_PLOT": "Streudiagramm",
+        "SCATTER_PLOT": "Streu-Diagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
-        "BAR_CHART": "Balkendiagramm",
+        "BAR_CHART": "Balken-Diagramm",
         "TIME_SERIES": "Zeitlicher Verlauf",
         "RECOMMEND": "Diagramm empfehlen"
     },
