@@ -165,8 +165,21 @@
         min-height 500px
 
         /* first image is in the foreground, second image in the background*/
-        background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
+        background url(../images/placeholder-students.jpg) no-repeat scroll 0 0
         width 100%
+
+        #bubble-categories
+            height 350px /* -50px according to the settings-bars' height + 20px margin */
+            width 100% !important
+            overflow hidden
+            background none
+
+            rect#bg
+                fill none
+
+            g#key
+                display none
+
 
     #press
         padding-top 50px
