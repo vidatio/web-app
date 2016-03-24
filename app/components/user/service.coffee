@@ -125,11 +125,10 @@ app.service 'UserService', [
             # @description redirect user to last visited pages before login-/ registration-page was entered;
             # @description redirect to app.index if visited pages were only app.login or app.registration
             redirect: ->
-                lastPagesCounter = 1
-
                 # After login success we want to route the user to the last page except login and registration
-                for element in $rootScope.history
-                    element = $rootScope.history[$rootScope.history.length - lastPagesCounter]
+                for element, index in $rootScope.history
+                    index++
+                    element = $rootScope.history[$rootScope.history.length - index]
 
                     if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                         $log.info "UserService redirect to " + element.name
@@ -141,8 +140,6 @@ app.service 'UserService', [
 
                         $state.go element.name, element.params.locale
                         return
-
-                    lastPagesCounter++
 
                 $state.go "app.index"
 
