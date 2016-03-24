@@ -127,8 +127,7 @@ app.service 'UserService', [
             redirect: ->
                 # After login success we want to route the user to the last page except login and registration
                 for element, index in $rootScope.history
-                    index++
-                    element = $rootScope.history[$rootScope.history.length - index]
+                    element = $rootScope.history[$rootScope.history.length - (index + 1)]
 
                     if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
                         $log.info "UserService redirect to " + element.name
