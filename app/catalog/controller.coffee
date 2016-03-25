@@ -13,6 +13,8 @@ app.controller "CatalogCtrl", [
     "CategoriesFactory"
     "TagsService"
     ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
+        angular.element('#my-vidatio-checkbox').radiocheck()
+
         # @description Filter vidatios according to the GET parameters of the $stateParams
         $scope.filter =
             dates:
@@ -23,10 +25,7 @@ app.controller "CatalogCtrl", [
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
 
         stateParams = {}
-
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-
-        $('#my-vidatio-checkbox').radiocheck()
 
         $scope.tags = TagsService.getAndPreprocessTags()
 
@@ -83,9 +82,7 @@ app.controller "CatalogCtrl", [
             stateParams.from = if $scope.filter.dates.from then $scope.filter.dates.from.format("DD-MM-YYYY") else ""
             stateParams.to = if $scope.filter.dates.to then $scope.filter.dates.to.format("DD-MM-YYYY") else ""
 
-            $state.go $state.current, stateParams,
-                notify: false
-                reload: $state.current
+            $scope.changeURL()
 
         # @method reset
         # @description Iterate over all filters in the filter object (and subsequent objects) and reset them
@@ -101,6 +98,9 @@ app.controller "CatalogCtrl", [
             for attr of stateParams
                 stateParams[attr] = ""
 
+            $scope.changeURL()
+
+        $scope.changeURL = ->
             $state.go $state.current, stateParams,
                 notify: false
                 reload: $state.current
