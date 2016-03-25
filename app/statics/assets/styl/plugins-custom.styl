@@ -71,13 +71,13 @@ a
 
         span
             background-color $color-green
-    
+
     &[disabled]
         color $color-white
         &:hover
             box-shadow none
             top 0
-        
+
 .dropdown-menu > li > a
     &:hover
         background-color $color-hover-dark
@@ -118,10 +118,10 @@ a
     &:hover
         border-color $color-green
         position relative
-    
+
 .input-group-addon
     border-radius 0
-    
+
 .input-group
     margin-top -2px
 
@@ -151,10 +151,10 @@ input.form-control
         &:first-child
             border-radius 0 0 4px 4px
 
-/*input round corners, if single*/        
+/*input round corners, if single*/
 .input-group.single
     input.form-control
-    textarea.form-control    
+    textarea.form-control
         border-radius 4px
 
 .input-group
@@ -167,7 +167,7 @@ input.form-control
 .input-group-btn .btn
     background $color-green
     border-color $color-green
-    color $ color-white
+    color $color-white
     &:hover
         border-color $color-green
         background $color-hover-dark
@@ -194,7 +194,7 @@ input.form-control
 
 select.form-control
     text-align center
-    -webkit-appearance none  
+    -webkit-appearance none
     -moz-appearance none
     appearance none
     height 34px
@@ -204,7 +204,7 @@ select.form-control
         position relative
         z-index 2
         outline none
-    
+
     option[disabled="true"]
         display none
 
@@ -223,7 +223,7 @@ select.form-control
 
 /* STATE VALID WITH FOCUS */
 .input-group.form-group
-    &.focus 
+    &.focus
         z-index 1
         .input-group-addon
         .input-group-addon.focus
@@ -262,9 +262,9 @@ span.error
         animation: 0.5s fadeIn ease;
 
 /*checboxes*/
-.checkbox input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
-.radio input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked, 
-.checkbox input.custom-radio[type="radio"]:checked + .icons .icon-checked, 
+.checkbox input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked,
+.radio input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked,
+.checkbox input.custom-radio[type="radio"]:checked + .icons .icon-checked,
 .radio input.custom-radio[type="radio"]:checked + .icons .icon-checked
     color $color-green
 
@@ -291,11 +291,11 @@ span.error
             position relative
             &:hover
                 background-color $color-hover-dark
-    
-    .bootstrap-tagsinput 
+
+    .bootstrap-tagsinput
         border none
         padding 6px 1px 1px 1px
-                
+
         input[type="text"]
             padding-left 35px
             margin 0
@@ -304,3 +304,6 @@ span.error
         .tag
             margin 0 5px 3px 0
             float left
+
+[id^="s2id_"].select2-container:not(:hover)
+    border-color #bdc3c7
