@@ -8,7 +8,38 @@ app.controller "IndexCtrl", [
     "$translate"
     "ngToast"
     "CatalogFactory"
-    ($scope, $log, $translate, ngToast, CatalogFactory) ->
+    "$window"
+    ($scope, $log, $translate, ngToast, CatalogFactory, $window) ->
+
+        # Resizing the visualizations
+        # using setTimeout to use only to the last resize action of the user
+        id = null
+
+        onWindowResizeCallback = ->
+        # a new visualization should only be created when the visualization is visible in editor
+            clearTimeout id
+            id = setTimeout ->
+                createCategoryBubbles()
+            , 250
+
+        # resize event only should be fired if user is currently in editor
+        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+
+        # resize watcher has to be removed when editor is leaved
+        $scope.$on '$destroy', ->
+            window.angular.element($window).off 'resize', onWindowResizeCallback
+
+        CatalogFactory.getCategories().query (response) ->
+            $log.info "IndexCtrl successfully queried categories"
+
+            $scope.categories = response
+
+            console.log $scope.categories
+
+        , (error) ->
+            $log.info "IndexCtrl error on query categories"
+            $log.error error
+
         CatalogFactory.getDatasets().query (response) ->
             $log.info "CatalogCtrl successfully queried datasets"
 
@@ -20,110 +51,43 @@ app.controller "IndexCtrl", [
                 if vidatio.metaData.category?
                     categoryIDs.push(vidatio.metaData.category.name)
 
-            occurencesPerCategory = countOccurences(categoryIDs)
+            $scope.chartData = prepareChartData(countOccurrences(categoryIDs))
 
-            console.log occurencesPerCategory
-            #console.log occurences["Finanzen"]
-
-            chartData = [
-                {
-                    'Datensätze': 1
-                    'name': 'Sport'
-                    'color': '#11dcc6'
-                }
-                {
-                    'Datensätze': 2
-                    'name': 'Finanzen'
-                    'color': '#333'
-                }
-                {
-                    'Datensätze': 3
-                    'name': 'Umwelt'
-                    'color': '#3e3e3e'
-                }
-                {
-                    'Datensätze': 2
-                    'name': 'Politik'
-                    'color': '#11dcc6'
-                }
-            ]
-
-            positions = [
-                {
-                    'name': 'Sport'
-                    'x': 10
-                    'y': 30
-                }
-                {
-                    'name': 'Finanzen'
-                    'x': 5
-                    'y': 10
-                }
-                {
-                    'name': 'Umwelt'
-                    'x': 0
-                    'y': 0
-                }
-                {
-                    'name': 'Politik'
-                    'x': 30
-                    'y': 10
-                }
-            ]
-
-            createCategoryBubbles(chartData, positions)
+            setTimeout ->
+                createCategoryBubbles()
+            , 50
 
         , (error) ->
             $log.info "IndexCtrl error on query datasets"
             $log.error error
 
 
-        CatalogFactory.getCategories().query (response) ->
-            $log.info "IndexCtrl successfully queried categories"
-            $scope.categories = response
-
-            categoryNames = []
-
-            for category in $scope.categories
-                categoryNames.push(category.name)
-
-            #console.log categoryNames
-
-        , (error) ->
-            $log.info "IndexCtrl error on query categories"
-            $log.error error
-
-
-        createCategoryBubbles = (categoriesData, positions) ->
+        createCategoryBubbles = ->
 
             $chart = $("#bubble-categories")
+            $chart.empty()
+
             width = $chart.parent().width()
             height = $chart.parent().height()
 
-            console.log width, height
-
+            console.log "parent ", width, height
+            console.log "viz ", $chart.width(), $chart.height()
 
             d3plus.viz()
             .container("#bubble-categories")
             .type("network")
             .data({
-                'value': categoriesData,
+                'value': $scope.chartData,
                 'opacity': 1
             })
             .nodes({
-                'value': categoriesData,
+                'value': $scope.chartData,
                 'overlap': 0.5
             })
             .edges([])
             .id("name")
-            .color('color')
-            .size({
-                'value': "Datensätze",
-                'scale': {
-                    'min': width,
-                    'max': width
-                }
-            })
+            .color("color")
+            .size("Datensätze")
             .width(width)
             .height(height)
             .legend(false)
@@ -134,19 +98,32 @@ app.controller "IndexCtrl", [
             })
             .draw()
 
-        countOccurences = (categoriesArray) ->
-            result = []
+        countOccurrences = (categoriesArray) ->
+            result = {}
 
-            if categoriesArray instanceof Array
-                categoriesArray.forEach (category) ->
-
-                    if !result[category]
-                        result[category] = 1
-
-                    else
-                        result[category] += 1
+            categoriesArray.forEach (category) ->
+                result[category] = (result[category] or 0) + 1
 
             result
+
+
+        prepareChartData = (occurrences) ->
+
+            chartData = []
+            colors = ["#11dcc6", "#333", "#F2B1B1", "#FF5444", "#ABF4E9"]
+            currentColor = 0
+
+            for category in $scope.categories
+
+                if occurrences[category.name]?
+                    chartData.push({'name': category.name, 'Datensätze': occurrences[category.name], 'color': colors[currentColor]})
+
+                currentColor++
+
+                if currentColor is 5
+                    currentColor = 0
+
+            return chartData
 ]
 
 
