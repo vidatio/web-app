@@ -10,10 +10,6 @@ app.filter "categoryFilter", [
         # @param {String} category
         # @return {Array}
         return (input, category) ->
-            $log.info "CategoryFilter called"
-            $log.debug
-                category: category
-
             return input if not category or not input
 
             output = []
