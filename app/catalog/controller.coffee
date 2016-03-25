@@ -15,6 +15,8 @@ app.controller "CatalogCtrl", [
     ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
 
+        console.log $stateParams
+
         # @description Filter vidatios according to the GET parameters of the $stateParams
         $scope.filter =
             dates:
@@ -101,6 +103,7 @@ app.controller "CatalogCtrl", [
             $scope.changeURL()
 
         $scope.changeURL = ->
+            console.log stateParams
             $state.go $state.current, stateParams,
                 notify: false
                 reload: $state.current

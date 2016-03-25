@@ -5,18 +5,16 @@ app = angular.module "app.controllers"
 app.controller "IndexCtrl", [
     "$scope"
     "$log"
-    "$translate"
-    "ngToast"
     "CategoriesFactory"
     "DatasetsFactory"
     "$window"
-    ($scope, $log, $translate, ngToast, CategoriesFactory, DatasetsFactory, $window) ->
+    "$state"
+    ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state) ->
+
         CategoriesFactory.query (response) ->
             $log.info "IndexCtrl successfully queried categories"
 
             $scope.categories = response
-
-            #console.log $scope.categories
 
         , (error) ->
             $log.info "IndexCtrl error on query categories"
@@ -43,6 +41,12 @@ app.controller "IndexCtrl", [
             $log.info "IndexCtrl error on query datasets"
             $log.error error
 
+            d3plus.viz()
+            .container("#bubble-categories")
+            .error("Die Kategorien können momentan leider nicht geladen werden")
+            .background("none")
+            .draw()
+
         # Resizing the visualizations
         # using setTimeout to use only to the last resize action of the user
         id = null
@@ -52,7 +56,6 @@ app.controller "IndexCtrl", [
             clearTimeout id
             id = setTimeout ->
                 createCategoryBubbles()
-                console.log "test"
             , 250
 
         # resize event only should be fired if user is currently in editor
@@ -62,16 +65,51 @@ app.controller "IndexCtrl", [
         $scope.$on "$destroy", ->
             window.angular.element($window).off "resize", onWindowResizeCallback
 
-        createCategoryBubbles = ->
+        lastWidth = 0
 
+        # @method createCategoryBubbles
+        # @description set necessary parameters and draw categories bubble-visualization
+        createCategoryBubbles = ->
             $chart = $("#bubble-categories")
-            $chart.empty()
 
             width = $chart.parent().width()
-            height = $chart.parent().height()
 
-            console.log "parent ", width, height
-            console.log "viz ", $chart.width(), $chart.height()
+            # draw new visualization only when $chart.parents' width has changed, return otherwise
+            if lastWidth is width
+                return
+
+            lastWidth = width
+
+            $chart.empty()
+
+            # what is better: fixed positions for bubbles or repositioning at each redraw
+            positions = [
+                {
+                    'name': 'Bildung'
+                    'x': -40
+                    'y': 5
+                }
+                {
+                    "name": "Finanzen"
+                    "x": -20
+                    "y": 25
+                }
+                {
+                    "name": "Politik"
+                    "x": 0
+                    "y": -5
+                }
+                {
+                    "name": "Sport"
+                    "x": 20
+                    "y": 20
+                }
+                {
+                    "name": "Umwelt"
+                    "x": 40
+                    "y": 0
+                }
+            ]
 
             d3plus.viz()
             .container("#bubble-categories")
@@ -81,23 +119,33 @@ app.controller "IndexCtrl", [
                 "opacity": 1
             })
             .nodes({
-                "value": $scope.chartData,
-                "overlap": 0.5
+                "value": positions,
+                #"value": $scope.chartData,
+                "overlap": 0.47
             })
             .edges([])
             .id("name")
             .color("color")
-            .size("Datensätze")
+            .size("Anzahl der Datensätze")
             .width(width)
-            .height(height)
+            .height(380)
             .legend(false)
-            .background('none')
+            .font("family": "Colaborate")
+            .messages( "Die Kategorien werden geladen..." )
+            .focus("tooltip": false)
+            .background("none")
+            .mouse({
+                "click": (category) ->
+                    $state.go "app.catalog", {category: category.name}
+            })
             .zoom({
-                'click': true,
-                'scroll': false
+                #"click": true,
+                "scroll": false
             })
             .draw()
 
+        # @method countOccurrences
+        # @description count the occurrences per category over all datasets
         countOccurrences = (categoriesArray) ->
             result = {}
 
@@ -106,16 +154,19 @@ app.controller "IndexCtrl", [
 
             result
 
-
+        # @method prepareChartData
+        # @description prepare the necesssary data for d3plus according to our categories and their occurrences
+        #               set name, size (= "Anzahl der Datensätze") and color for each bubble
+        # @param {array}
         prepareChartData = (occurrences) ->
             chartData = []
             colors = ["#11dcc6", "#F2B1B1", "#FF5444", "#ABF4E9", "#FAFAFA"]
             currentColor = 0
 
-            for category in $scope.categories
+            for category, index in $scope.categories
 
                 if occurrences[category.name]?
-                    chartData.push({"name": category.name, "Datensätze": occurrences[category.name], "color": colors[currentColor]})
+                    chartData.push({"name": category.name, "Anzahl der Datensätze": occurrences[category.name], "color": colors[currentColor]})
 
                 currentColor++
 
