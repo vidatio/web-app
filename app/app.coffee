@@ -170,12 +170,24 @@ app.config [
             title: "import"
 
         .state "app.editor",
+            url: "/editor"
+            templateUrl: "editor/editor.html"
+            controller: "EditorCtrl"
+            title: "editor"
+
+        .state "app.editor.id",
             url: "/editor/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
+            url: "/share"
+            templateUrl: "share/share.html"
+            controller: "ShareCtrl"
+            title: "share"
+
+        .state "app.share.id",
             url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
@@ -191,6 +203,8 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
+                # TODO: show 404
+
                 locale =
                     locale: $translateProvider.preferredLanguage()
 

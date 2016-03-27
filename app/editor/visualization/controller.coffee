@@ -17,6 +17,8 @@ app.controller "VisualizationCtrl", [
     "VisualizationService"
     "$stateParams"
     ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $stateParams) ->
+        console.error "VIZ CTRL CALLED"
+
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
@@ -27,6 +29,8 @@ app.controller "VisualizationCtrl", [
             Visualization.useRecommendedOptions()
             Visualization.create()
 
+        console.log " ############################################## "
+        console.log "### id ###", $stateParams, $stateParams.id
         unless $stateParams.id
             if Data.meta.fileType is "shp"
                 $scope.visualization.type = "map"
