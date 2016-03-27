@@ -4,27 +4,24 @@ app = angular.module "app.controllers"
 
 app.controller "IndexCtrl", [
     "$scope"
-    "CatalogFactory"
+    "DatasetFactory"
     "$log"
     "$translate"
     "ngToast"
-    ($scope, CatalogFactory, $log, $translate, ngToast) ->
-        CatalogFactory.getDatasets().query (response) ->
+    ($scope, DatasetFactory, $log, $translate, ngToast) ->
+        DatasetFactory.query (response) ->
+            #"/datasets?limit=3"
             $log.info "IndexCtrl successfully queried datasets"
 
             $scope.newestVidatios = response.slice(0, 3)
 
-            counter = 0
-
-            for vidatio in $scope.newestVidatios
-                if counter is 0
+            for vidatio, index in $scope.newestVidatios
+                if index is 0
                     vidatio.image = "images/newest-vidatios-placeholder.png"
-                else if counter is 1
+                else if index is 1
                     vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 else
                     vidatio.image = "images/placeholder-featured-vidatios-buchungsstatistik-pongau.svg"
-
-                counter++
 
         , (error) ->
             $log.info "IndexCtrl error on query datasets"
