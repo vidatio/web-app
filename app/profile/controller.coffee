@@ -4,10 +4,10 @@ app = angular.module("app.controllers")
 
 app.controller "ProfileCtrl", [
     "$scope"
-    "DataFactory"
+    "DatasetFactory"
     "UserDatasetsFactory"
     "$cookieStore"
-    ($scope, DataFactory, UserDatasetsFactory, $cookieStore) ->
+    ($scope, DatasetFactory, UserDatasetsFactory, $cookieStore) ->
         $scope.vidatios = []
 
         globals = $cookieStore.get "globals" || {}
