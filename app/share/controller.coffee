@@ -43,45 +43,4 @@ app.controller "ShareCtrl", [
         unless $stateParams.id
             $timeout ->
                 Visualization.create()
-
-        # TODO refactor the following code which is duplicated from the dataset ctrl
-        console.log "### id ###", $stateParams, $stateParams.id
-        if $stateParams.id
-
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
-
-                # get dataset according to datasetId and set necessary metadata
-                DataFactory.get {id: $stateParams.id}, (data) ->
-                    $scope.data = data
-                    $scope.data.id = $stateParams.id
-                    $scope.data.created = new Date(data.createdAt)
-                    $scope.data.creator = data.userId.name || "-"
-                    $scope.data.origin = "Vidatio"
-                    $scope.data.updated = new Date(data.updatedAt)
-                    $scope.data.description = data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
-                    $scope.data.parent = data.parentId
-                    $scope.data.category = data.category || "-"
-                    $scope.data.tags = data.tags || "-"
-
-                    Data.createVidatio $scope.data
-
-                    if Data.meta.fileType isnt "shp"
-                        Visualization.create()
-
-                    $timeout ->
-                        Progress.setMessage()
-
-                    # console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
-                , (error) ->
-                    $log.info "DatasetCtrl error on get dataset from id"
-                    $log.error error
-
-                    $timeout ->
-                        Progress.setMessage()
-
-                    $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
 ]
