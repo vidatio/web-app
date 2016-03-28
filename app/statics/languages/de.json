@@ -18,7 +18,7 @@
     "PRESS_OGD_WIEN": "Präsentation Open Government Data-Stammtisch Wien",
     "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living-Workshop",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
-    "ALL_VIDATIOS": "Verfügbare Vidatios",
+    "ALL_VIDATIOS": "Alle Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
@@ -84,7 +84,7 @@
             "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
         }
     },
-    "AVAILABLE_DATASETS": "Verfügbare Vidatios",
+    "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
