@@ -7,8 +7,6 @@ app.service 'TableService', [
     ($log) ->
         class Table
             constructor: ->
-                $log.info "TableService constructor called"
-
                 @dataset = [[]]
                 @header = []
                 @useColumnHeadersFromDataset = true
@@ -88,7 +86,6 @@ app.service 'TableService', [
             setDataset: (dataset = []) ->
                 $log.info "TableService setDataset called"
                 $log.debug
-                    message: "TableService setDataset called"
                     data: dataset
 
                 # safely remove all items, keeps data binding alive

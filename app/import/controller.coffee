@@ -29,8 +29,6 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
-            $log.info "ImportCtrl continueToEmptyTable called"
-
             Data.meta.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
             Visualization.resetOptions()
@@ -44,8 +42,6 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
-            $log.info "ImportCtrl load called"
-
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
@@ -83,8 +79,6 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
-            $log.info "ImportCtrl getFile called"
-
             # Can't use file.type because of chromes File API
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
@@ -163,22 +157,13 @@ app.controller "ImportCtrl", [
                     Data.meta.fileType = "shp"
 
                     Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
-                        $log.info "ImportCtrl Converter.convertSHP2GeoJSON promise success called"
-                        $log.debug
-                            fileContent: fileContent
-
                         dataset = Converter.convertGeoJSON2Arrays geoJSON
 
                         if dataset.length
                             Table.setDataset dataset
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
-
                         else
-                            $log.error "ImportCtrl Converter.convertGeoJSON2Arrays error"
-                            $log.debug
-                                geoJSON: geoJSON
-
                             $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
                                 .then (translation) ->
                                     ngToast.create

@@ -14,8 +14,6 @@ app.service 'ImportService', [
     ($q, $log) ->
         class Reader
             constructor: ->
-                $log.info "ImportService constructor called"
-
                 @reader = new FileReader()
                 @deferred = undefined
                 @progress = 0
@@ -23,7 +21,6 @@ app.service 'ImportService', [
             readFile: (file, fileType) ->
                 $log.info "ImportService readFile called"
                 $log.debug
-                    message: "ImportService readFile called"
                     file: file
                     fileType: fileType
 

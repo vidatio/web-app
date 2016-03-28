@@ -1,6 +1,5 @@
 EC = protractor.ExpectedConditions
 
-
 describe "The language", ->
     it "should be german with german URL", ->
         browser.get "/de/"

@@ -19,12 +19,6 @@ app.service "ShareService", [
             # @param {integer} quality Quality is between 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
             # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
             mapToImg: ($targetElem, quality = 1.0) ->
-                $log.info "ShareService mapToImg called"
-                $log.debug
-                    message: "ShareService mapToImg called"
-                    targetElem: $targetElem
-                    quality: quality
-
                 deferred  = $q.defer()
 
                 unless $targetElem.is ":visible"
@@ -35,7 +29,6 @@ app.service "ShareService", [
                 html2canvas $targetElem,
                 useCORS: true
                 onrendered: (canvas) ->
-                    $log.info "ShareService html2canvas on targetElem onrendered callback called"
                     deferred.notify $translate.instant('OVERLAY_MESSAGES.SHARE_SERVICE.MAP_TO_CANVAS')
 
                     mapArray = Converter.matrixToArray $targetElem.find(".leaflet-map-pane").css("transform")
@@ -92,10 +85,6 @@ app.service "ShareService", [
                         # values for directional triangle to marker which belongs to the popup
                         triangleWidth = 40
                         triangleHeight = 20
-
-                        $log.debug
-                            message: "ShareService html2canvas on popupElem gets called"
-                            popupElem: $popupElem
 
                         unless $popupElem.is ":visible"
                             $translate('TOAST_MESSAGES.SHARE_SERVICE.POPUP_NOT_VISIBLE').then (translation) ->
@@ -169,7 +158,6 @@ app.service "ShareService", [
             download: (filename, dataURL) ->
                 $log.info "ShareService download called"
                 $log.debug
-                    message: "ShareService download called"
                     filename: filename
                     dataURL: dataURL
 

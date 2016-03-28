@@ -81,11 +81,6 @@ app.controller "EditorCtrl", [
                     Visualization.create()
                 , 250
 
-            $log.debug
-                message: "EditorCtrl tabClicked called"
-                tabIndex: tabIndex
-                viewsToDisplay: viewsToDisplay
-
             [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
             # count activeViews to set bootstrap classes accordingly for editor-width
@@ -101,8 +96,6 @@ app.controller "EditorCtrl", [
         # @method saveVidatioTitle
         # @description set the users' input (if existing) as Vidatio-title; set a standard-title or the original filename otherwise
         $scope.saveVidatioTitle = ->
-            $log.info "EditorCtrl saveVidatioTitle called"
-
             if $scope.editor.name is ""
                 $scope.editor.name = $scope.standardTitle
 

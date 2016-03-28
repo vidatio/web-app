@@ -87,20 +87,13 @@ app.controller "DatasetCtrl", [
 
         # at the moment direct download is not possible, so download via editor
         $scope.downloadDataset = ->
-            $log.info "DatasetCtrl downloadDataset called"
             @createVidatio()
 
         $scope.downloadImage = ->
-            $log.info "DatasetCtrl downloadImage called"
             @createVidatio()
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl getVidatioLink called"
-            $log.debug
-                id: datasetId
-                link: $rootScope.link
-
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
         # hide link-box if necessary
@@ -109,8 +102,6 @@ app.controller "DatasetCtrl", [
 
         # copy link to clipboard
         $scope.copyVidatioLink = ->
-            $log.info "DatasetCtrl copyVidatioLink called"
-
             window.getSelection().removeAllRanges()
             link = document.querySelector "#vidatio-link"
             range = document.createRange()
@@ -119,10 +110,6 @@ app.controller "DatasetCtrl", [
 
             try
                 successful = document.execCommand "copy"
-
-                $log.debug
-                    message: "DatasetCtrl copy vidatio-link to clipboard"
-                    successful: successful
 
                 $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->

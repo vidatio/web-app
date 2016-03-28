@@ -8,9 +8,7 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'ngFileDropStart', [
-    "$log"
-    ($log) ->
+app.directive 'ngFileDropStart', [ ->
         link: ($scope, el) ->
 
             #over: cursor currently moves over the drop-zone
@@ -20,8 +18,6 @@ app.directive 'ngFileDropStart', [
 
             #enter: cursor enters the drop-zone
             el.bind "dragenter", (e) ->
-                $log.info "ngFileDropStart dragenter called"
-
                 document.getElementById("drop-zone").style.display = "block"
                 e.preventDefault()
                 false
@@ -34,8 +30,6 @@ app.directive 'ngFileDropEnd', [
 
             #leave: cursor moves out of drop-zone
             el.bind "dragleave", (e) ->
-                $log.info "ngFileDropEnd dragleave called"
-
                 document.getElementById("drop-zone").style.display = "none"
                 e.preventDefault()
                 false
@@ -47,8 +41,6 @@ app.directive 'ngFileDropEnd', [
 
             #drop: file got dropped on the drop-zone
             el.bind "drop", (e) ->
-                $log.info "ngFileDropEnd drop called"
-
                 e.preventDefault()
                 document.getElementById("drop-zone").style.display = "none"
                 $scope.file = e.originalEvent.dataTransfer.files[0]
@@ -61,8 +53,6 @@ app.directive 'ngFileSelect', [
     ($log) ->
         link: ($scope, el) ->
             el.bind "change", (e) ->
-                $log.info "ngFileSelect change called"
-
                 $scope.file = (e.srcElement or e.target).files[0]
                 $scope.getFile()
 ]

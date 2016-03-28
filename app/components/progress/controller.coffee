@@ -6,7 +6,5 @@ app.controller "ProgressCtrl", [
     "$scope"
     "ProgressService"
     ($scope, Progress) ->
-
         $scope.progress = Progress
-
 ]

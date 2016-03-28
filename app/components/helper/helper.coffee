@@ -2,8 +2,6 @@
 
 class window.vidatio.Helper
     constructor: ->
-        vidatio.log.info "HelperService constructor called"
-
         @subsetMin = 20
         @subsetMax = 100
         @subsetPercentage = 10
@@ -53,11 +51,6 @@ class window.vidatio.Helper
     # @param {Array} dataset
     # @return {Array}
     getSubset: (dataset) ->
-        vidatio.log.info "HelperService getSubset called"
-        vidatio.log.debug
-            message: "HelperService getSubset called"
-            dataset: dataset
-
         randomSampleSet = []
         indices = []
         size = null
@@ -103,12 +96,6 @@ class window.vidatio.Helper
     # @param {Number} initial value of each cell
     # @return {Array}
     createMatrix: (dataset, initial) ->
-        vidatio.log.info "HelperService createMatrix called"
-        vidatio.log.debug
-            message: "HelperService createMatrix called"
-            dataset: dataset
-            initial: initial
-
         matrix = []
         dataset.forEach (row, indexRow) ->
             matrix.push([])
@@ -118,11 +105,6 @@ class window.vidatio.Helper
         return matrix
 
     dateToString: (date) ->
-        vidatio.log.info "HelperService dateToString called"
-        vidatio.log.debug
-            message: "HelperService dateToString called"
-            date: date
-
         yyyy = date.getFullYear().toString()
         mm = (date.getMonth() + 1).toString()
         dd = date.getDate().toString()

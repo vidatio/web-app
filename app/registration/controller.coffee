@@ -10,11 +10,7 @@ app.controller "RegistrationCtrl", [
     "ngToast"
     "$state"
     ($scope, UserFactory, $log, $translate, ngToast, $state) ->
-        $log.info "RegistrationCtrl called"
-
         $scope.register = ->
-            $log.info "RegistrationCtrl register called"
-
             UserFactory.save $scope.user, (response) ->
                 $log.info "RegistrationCtrl register success called"
                 $log.debug

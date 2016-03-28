@@ -7,10 +7,6 @@ class window.vidatio.GeoParser
     # @param {String} cell
     # @return {Array}
     extractCoordinatesOfOneCell: (cell) ->
-        # vidatio.log.info "ParserService extractCoordinatesOfOneCell called"
-        # vidatio.log.debug
-        #     cell: cell
-
         # TODO: match other than decimal coordinate formats (e.g. N 123° 13.15 )
 
         # extract the following numbers:
@@ -76,11 +72,6 @@ class window.vidatio.GeoParser
     # @param {String} word
     # @return {String}
     _checkWhiteList = (word) ->
-        vidatio.log.info "ParserService _checkWhiteList called"
-        vidatio.log.debug
-            message: "ParserService _checkWhiteList called"
-            word: word
-
         result = undefined
         word = String(word).trim().toLowerCase()
 

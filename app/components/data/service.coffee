@@ -17,34 +17,16 @@ app.service 'DataService', [
     (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state) ->
         class Data
             constructor: ->
-                $log.info "DataService constructor called"
-
                 @name = ""
                 @meta =
                     "fileType": ""
 
             updateMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateMap called"
-                $log.debug
-                    message: "DataService updateMap called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
 
             validateInput: (row, column, oldData, newData) ->
-                $log.info "DataService validateInput called"
-                $log.debug
-                    message: "DataService validateInput called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
@@ -56,11 +38,6 @@ app.service 'DataService', [
             # @param {Object} dataset
             # @param {String} name
             saveViaAPI: (dataset) ->
-                $log.info("saveViaAPI called")
-                $log.debug
-                    dataset: dataset
-                    name: @name
-
                 DatasetFactory.save
                     name: @name
                     data: dataset
@@ -101,10 +78,6 @@ app.service 'DataService', [
             # @description from existing dataset
             # @param {Object} data
             createVidatio: (data) ->
-                $log.info "DatasetCtrl createVidatio called"
-                $log.debug
-                    data: data
-
                 if @meta["fileType"] is "shp"
                     dataset = Converter.convertGeoJSON2Arrays data.data
                     Table.setDataset dataset

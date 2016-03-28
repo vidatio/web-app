@@ -12,7 +12,6 @@ app.service 'MapService', [
     ($log, $timeout, leafletData) ->
         class Map
             constructor: ->
-                $log.info "MapService constructor called"
                 @map = undefined
                 @geoJSON =
                     "type": "FeatureCollection"
@@ -78,8 +77,6 @@ app.service 'MapService', [
             # @method resizeMap
             # @public
             resizeMap: ->
-                $log.info "MapService resizeMap called"
-
                 if(@map)
                     @map.invalidateSize()
 
@@ -157,14 +154,14 @@ app.service 'MapService', [
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        $log.warn "MapService updateGeoJSONWithSHP Value is not a Number"
+                        $log.warn "MapService updateGeoJSONWithSHP value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     if vidatio.helper.isNumeric(newData)
                         @geoJSON.features[row].geometry.bbox[keys[1]] = newData
                     else
-                        $log.warn "MapService updateGeoJSONWithSHP Value is not a Number"
+                        $log.warn "MapService updateGeoJSONWithSHP value is not a Number"
                         return false
 
                     # check if colHeader is part of properties
@@ -206,16 +203,16 @@ app.service 'MapService', [
                             arrayIndex = Math.floor(keys[1] / 2)
                             index = keys[1] % 2
                             unless Array.isArray(@geoJSON.features[row].geometry.coordinates[0][arrayIndex])
-                                $log.warn "MapService validateGeoJSONUpdateSHP Array does not exist and can't be updated"
+                                $log.warn "MapService validateGeoJSONUpdateSHP array does not exist and can't be updated"
                                 # The table has to be reseted if the array can't be updated
                                 return false
                     else
-                        $log.warn "MapService validateGeoJSONUpdateSHP Value is not a Number"
+                        $log.warn "MapService validateGeoJSONUpdateSHP value is not a Number"
                         return false
 
                 else if keys[0] is "bbox"
                     unless vidatio.helper.isNumeric(newData)
-                        $log.warn "MapService validateGeoJSONUpdateSHP Value is not a Number"
+                        $log.warn "MapService validateGeoJSONUpdateSHP value is not a Number"
                         return false
 
                 return true

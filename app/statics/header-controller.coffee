@@ -14,7 +14,6 @@ app.controller "HeaderCtrl", [
     "$translate"
     "TableService"
     ($scope, $rootScope, $timeout, Map, Data, $log, ngToast, $translate, Table) ->
-
         $scope.header = Data
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.standardTitle = translation
@@ -26,26 +25,9 @@ app.controller "HeaderCtrl", [
         else
             $scope.header.editorNotInitialized = false
 
-        # REFACTOR Needed to wait for leaflet directive to render
-        # $timeout ->
-        #     # TODO: Only resize what is currently visible or used
-        #     switch vidatio.Recommender.recommendedDiagram
-        #         when "scatter"
-        #             new ScatterPlot.getChart().resize()
-        #         when "bar"
-        #             new BarChart.getChart().resize()
-        #         when "map"
-        #             Map.resizeMap()
-        #         else
-        #             # TODO: show a default image here
-        #             console.log "****************"
-        #             console.log "nothing to recommend, abort! "
-
         # @method saveDataset
         # @description checks if the current dataset has filetype 'shp' or 'csv' and prepares the dataset for saving according to fileType
         $scope.saveDataset = ->
-            $log.info "HeaderCtrl saveDataset called"
-
             if $scope.header.name is $scope.standardTitle
                 $scope.header.name = $scope.header.name + " " + moment().format("HH_mm_ss")
 

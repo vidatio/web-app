@@ -23,11 +23,6 @@ app.service 'UserService', [
             # @param {String} key
             # @param {String} value
             checkUniqueness: (key, value) ->
-                $log.info "UserService checkUniqueness called"
-                $log.debug
-                    key: key
-                    value: value
-
                 params = {}
                 params[key] = escape(value)
 
@@ -52,11 +47,6 @@ app.service 'UserService', [
             # @param {String} name
             # @param {String} password
             logon: (user) =>
-                $log.info "UserService logon called"
-                $log.debug
-                    name: user.name
-                    password: user.password
-
                 deferred = $q.defer()
 
                 authData = Base64.encode(user.name + ":" + user.password)

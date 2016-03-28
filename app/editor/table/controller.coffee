@@ -25,8 +25,6 @@ app.controller "TableCtrl", [
         $scope.toggleHeader = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl changeUseOfHeader called"
-
             if $scope.data.meta.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeHeaderFromDataset()
@@ -38,8 +36,6 @@ app.controller "TableCtrl", [
         $scope.transpose = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl transpose called"
-
             if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
             Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
             if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()
@@ -48,9 +44,6 @@ app.controller "TableCtrl", [
         #@description downloads a csv
         $scope.download = ->
             clearFocusedAxisButtons()
-
-            $log.info "TableCtrl download called"
-
             trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
 
             if Table.useColumnHeadersFromDataset
@@ -128,7 +121,7 @@ app.controller "TableCtrl", [
                     $header.unbind "click"
 
             return true
-        
+
         # remove focus-states from axis-buttons if other icons are clicked
         clearFocusedAxisButtons = ->
             $("[class*='-axis-button']").removeClass "focused"

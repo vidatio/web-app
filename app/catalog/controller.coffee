@@ -4,7 +4,6 @@ app = angular.module "app.controllers"
 
 app.controller "CatalogCtrl", [
     "$scope"
-    "$log"
     "$translate"
     "ngToast"
     "$stateParams"
@@ -12,7 +11,7 @@ app.controller "CatalogCtrl", [
     "DatasetsFactory"
     "CategoriesFactory"
     "TagsService"
-    ($scope, $log, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
+    ($scope, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
@@ -30,12 +29,9 @@ app.controller "CatalogCtrl", [
         $scope.tags = TagsService.getAndPreprocessTags()
 
         CategoriesFactory.query (response) ->
-            $log.info "CatalogCtrl successfully queried categories"
             $scope.categories = response
 
         DatasetsFactory.query (response) ->
-            $log.info "CatalogCtrl successfully queried datasets"
-
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
@@ -45,9 +41,6 @@ app.controller "CatalogCtrl", [
                 vidatio.createdAt = new Date(vidatio.createdAt)
 
         , (error) ->
-            $log.info "CatalogCtrl error on query datasets"
-            $log.error error
-
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
@@ -61,16 +54,11 @@ app.controller "CatalogCtrl", [
         $scope.$watch "filter.dates.to", ->
             $scope.setStateParams()
 
-
         # @method setCategory
         # @description Set new category and update URL by setting new stateParams
         # @param {String} category
         $scope.setCategory = (category) ->
-            vidatio.log.info "CatalogCtrl setCategory called"
-            vidatio.log.debug
-                category: category
             $scope.filter.category = category
-
             $scope.setStateParams()
 
         # @method setStateParams
@@ -81,7 +69,6 @@ app.controller "CatalogCtrl", [
             stateParams.tags = if $scope.filter.tags then $scope.filter.tags.join("|") else ""
             stateParams.from = if $scope.filter.dates.from then $scope.filter.dates.from.format("DD-MM-YYYY") else ""
             stateParams.to = if $scope.filter.dates.to then $scope.filter.dates.to.format("DD-MM-YYYY") else ""
-
             $scope.changeURL()
 
         # @method reset
