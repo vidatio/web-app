@@ -134,19 +134,30 @@ header.ng-cloak
                             span {{ "MENU" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="profile")
-                .col-xs-3.logo
+                .col-xs-6.col-sm-2.logo
                     a#logo(ui-sref="app.index({ locale: locale })")
 
-                .col-xs-6.middle
-                    h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
-
-                .col-xs-3.menu-buttons
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
                         a#logout-button.button.icon-logout(ng-click="logout()")
                             span {{ "LOG_OUT" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
                             span {{ "MENU" | translate | uppercase }}
+
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle
+                    h1.underline-red-light.profile-title {{ "MY_PROFILE" | translate | uppercase }}
+
+                //- .col-xs-6.middle
+                //-     h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
+
+                //- .col-xs-3.menu-buttons
+                //-     div(ng-if="globals.authorized")
+                //-         a#logout-button.button.icon-logout(ng-click="logout()")
+                //-             span {{ "LOG_OUT" | translate | uppercase }}
+                //-     div
+                //-         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#')
+                //-             span {{ "MENU" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-6.col-sm-2.logo
