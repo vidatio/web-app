@@ -30,9 +30,8 @@ app.run [
     "$http"
     "$location"
     "$cookieStore"
-    "$log"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -55,13 +54,6 @@ app.run [
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-            $log.info "App run stateChangeSuccess called"
-            $log.debug
-                toState: toState
-                toParams: toParams
-                fromState: fromState
-                fromParams: fromParams
-
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
