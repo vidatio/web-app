@@ -8,7 +8,8 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    (Table, Converter, Map, $log, $translate) ->
+    "$timeout"
+    (Table, Converter, Map, $log, $translate, $timeout) ->
         class Visualization
 
             # @method constructor
@@ -17,6 +18,7 @@ app.service 'VisualizationService', [
                 $log.info "VisualizationService constructor called"
 
                 @options =
+                    fileType: "csv"
                     type: false
                     xColumn: 0
                     yColumn: 1
@@ -108,13 +110,19 @@ app.service 'VisualizationService', [
                     when "scatter"
                         new vidatio.ScatterPlot chartData, options, width, height, chartSelector
                     when "map"
-                        # Use the whole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
-                            x: options.xColumn,
-                            y: options.yColumn
-                        }
-                        Map.setInstance()
-                        Map.setGeoJSON geoJSON
+                        # only create the geoJSON from the table, if we don't use shp
+                        # because otherwise we geoJSON is directly updated and so no conversion is needed
+                        # and also because we don't have the xColumn of yColumn saved
+                        if @options.fileType isnt "shp"
+                            # Use the whole dataset because we want the other attributes inside the popups
+                            geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
+                                x: options.xColumn,
+                                y: options.yColumn
+                            }
+                            Map.setGeoJSON geoJSON
+
+                        $timeout ->
+                            Map.setInstance()
                     when "parallel"
                         new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"

@@ -68,10 +68,9 @@ app.service 'MapService', [
                     $log.debug
                         message: "MapService leafletData.getMap called"
 
-                    @map = mapInstance
                     $timeout =>
+                        @map = mapInstance
                         @init()
-
                 , (error) ->
                     $log.error "MapService error on map create"
                     $log.debug
@@ -87,7 +86,6 @@ app.service 'MapService', [
             # like fitting to the bounds of the geoJSON
             init: ->
                 $log.info "MapService init called"
-
                 @setBoundsToGeoJSON()
                 @resizeMap()
 

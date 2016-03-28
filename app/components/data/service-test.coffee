@@ -80,7 +80,7 @@ describe "Service Data", ->
         xit "from shp data", ->
             data.metaData.fileType = "shp"
 
-            @Data.createVidatio data
+            @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).toHaveBeenCalled()
             expect(@Map.setGeoJSON).toHaveBeenCalled()
@@ -95,14 +95,14 @@ describe "Service Data", ->
 
             data.metaData.fileType = "csv"
 
-            @Data.createVidatio data
+            @Data.useSavedData data
             expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
             expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
             data.metaData.fileType = "csv"
 
-            @Data.createVidatio data
+            @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).toHaveBeenCalled()
 
@@ -110,7 +110,7 @@ describe "Service Data", ->
             data.options.useColumnHeadersFromDataset = false
             data.metaData.fileType = "csv"
 
-            @Data.createVidatio data
+            @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).not.toHaveBeenCalled()
 

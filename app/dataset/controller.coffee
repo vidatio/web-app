@@ -28,8 +28,6 @@ app.controller "DatasetCtrl", [
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
 
-        console.log "### id ###", $stateParams, $stateParams.id
-
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
             Progress.setMessage message
 
@@ -46,15 +44,11 @@ app.controller "DatasetCtrl", [
                 $scope.data.category = data.category || "-"
                 $scope.data.tags = data.tags || "-"
 
-                Data.createVidatio $scope.data
-
-                if Data.meta.fileType isnt "shp"
-                    Visualization.create()
+                Data.useSavedData $scope.data
+                Visualization.create()
 
                 $timeout ->
                     Progress.setMessage()
-
-                # console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
             , (error) ->
                 $log.info "DatasetCtrl error on get dataset from id"
                 $log.error error
@@ -70,11 +64,8 @@ app.controller "DatasetCtrl", [
         # @method $scope.openInEditor
         # @description set the vidatio options from saved dataset
         $scope.openInEditor = ->
-            $log.info "DatasetCtrl $scope.createVidatio called"
-
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
-                Data.createVidatio $scope.data
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
