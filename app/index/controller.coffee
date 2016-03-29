@@ -82,7 +82,6 @@ app.controller "IndexCtrl", [
 
             $chart.empty()
 
-            # what is better: fixed positions for bubbles or repositioning at each redraw
             positions = [
                 {
                     'name': 'Bildung'
@@ -120,7 +119,6 @@ app.controller "IndexCtrl", [
             })
             .nodes({
                 "value": positions,
-                #"value": $scope.chartData,
                 "overlap": 0.47
             })
             .edges([])
