@@ -19,6 +19,5 @@
 
     .row
         .col-xs-6.left
-            a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
         .col-xs-6.right
-            a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
+            a.inverse(ui-sref="app.registration({ locale: locale })" title="{{'REGISTRATION'|translate}} {{'OPEN'|translate}}") {{ 'REGISTER' | translate }}

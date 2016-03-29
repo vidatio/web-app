@@ -8,26 +8,26 @@ nav
                 a#logo-menu(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
 
         .menu-list
-            a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" )
+            a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" title="{{ 'MY_PROFILE' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-profile
                 span.link-text {{ "MY_PROFILE" | translate }}
-            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()")
+            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()" title="{{ 'IMPORT_DATA' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-import
                 span.link-text {{ "IMPORT_DATA" | translate }}
-            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()")
+            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()" title="{{ 'OPEN_CATALOG' | translate }}")
                 span.icons.icon-opendata
                 span.link-text {{ "AVAILABLE_VIDATIOS" | translate }}
-            a.item(ui-sref="app.index({ locale: locale, '#': 'usp' })", ng-click="toggleMenu()")
+            a.item(ui-sref="app.index({ locale: locale, '#': 'usp' })", ng-click="toggleMenu()" title="{{ 'FEATURES' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-plus
                 span.link-text {{ "FEATURES" | translate }}
-            a.item(href="https://api.vidatio.com/docs" target="_blank" ng-click="toggleMenu()")
+            a.item(href="https://api.vidatio.com/docs" target="_blank" ng-click="toggleMenu()" title="{{ 'API' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-api
                 span.link-text-api {{ "API" | translate }}
             br
-            a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()")
+            a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()" title="{{ 'LOG_ON' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-login
                 span.link-text {{ "LOG_ON" | translate }}
-            a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()")
+            a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()" title="{{ 'LOG_OUT' | translate }}")
                 span.icons.icon-logout
                 span.link-text {{ "LOG_OUT" | translate }}
 

@@ -7,7 +7,7 @@ section#intro
         .row
             .col-sm-6.promo
                 .video
-                   img(src='images/landing-page-placeholder-promo_video.svg', alt='So funktioniert Vidatio')
+                   img(src="images/landing-page-placeholder-promo_video.svg", alt="Video Tutorial")
             .col-sm-6
                 h2.description
                     | {{ "ONLY_LANDING_PAGE" | translate }}
@@ -24,7 +24,7 @@ section#intro
 
                 .get-started
                     //- generate link with correct language
-                    a.bold-font.btn.btn-primary.btn-embossed(ui-sref="app.import({ locale: locale })")
+                    a.bold-font.btn.btn-primary.btn-embossed(ui-sref="app.import({ locale: locale })" title="{{ 'IMPORT_OVERVIEW' | translate }}")
                         | {{ "GET_LANDING_PAGE" | translate | uppercase }}
                         br
                         | {{ "STARTED_LANDING_PAGE" | translate | uppercase }}

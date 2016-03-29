@@ -3,16 +3,16 @@ footer
         .row
 
             .col-xs-12.col-sm-6
-                a.link(href="#") {{ "IMPRINT" | translate }}
+                a.link(href="#" title="{{ 'IMPRINT' | translate }} {{ 'OPEN' | translate }}") {{ "IMPRINT" | translate }}
                 | |
-                a.link(href="https://api.vidatio.com/docs" target="_blank") {{ "API" | translate }}
+                a.link(href="https://api.vidatio.com/docs" target="_blank" title="{{ 'API' | translate }} {{ 'OPEN' | translate }}") {{ "API" | translate }}
 
             .col-xs-12.col-sm-6
-                a.link(href="mailto:office@vidatio.com")
+                a.link(href="mailto:office@vidatio.com" title="{{ 'WRITE_EMAIL' | translate }}")
                     span.icon.icon-mail
                     | office@vidatio.com
 
-                a.link(target="_blank" href="https://twitter.com/_vidatio")
+                a.link(target="_blank" href="https://twitter.com/_vidatio" title="{{ 'TWITTER' | translate }} {{ 'OPEN' | translate }}")
                     span.icon.icon-twitter
                     | @_vidatio
 
