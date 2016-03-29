@@ -93,40 +93,31 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
-            console.log "Visualization.options.type", Visualization.options.type
-
             if Visualization.options.type is "map"
                 $targetElem = $("#map")
+            else if Visualization.options.type is "parallel"
+                $targetElem = $("#chart svg")
             else
                 $targetElem = $("#d3plus")
 
-
             vidatio.visualization.visualizationToBase64String($targetElem)
-            .then (success) ->
-               console.log "success", success
+            .then (obj) ->
+                $log.info "VisualizationCtrl visualizationToBase64String promise success called"
+                $log.debug
+                    obj: obj
+
+                $timeout ->
+                    Progress.setMessage ""
+
+                fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+
+                vidatio.visualization.download fileName, obj[type]
+
             .catch (error) ->
                 $translate(error.i18n).then (translation) ->
                     ngToast.create
                         content: translation
                         className: "danger"
-
-            # promise.then (obj) ->
-            #     $log.info "VisualizationCtrl shareVisualization promise success called"
-            #     $log.debug
-            #         obj: obj
-
-            #     $timeout ->
-            #         Progress.setMessage ""
-
-            #     fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
-            #     Share.download fileName, obj[type]
-            # , (error) ->
-            #     ngToast.create
-            #         content: error
-            #         className: "danger"
-            # , (notify) ->
-            #     Progress.setMessage notify
 
         $scope.geojson =
             data: Map.geoJSON

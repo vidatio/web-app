@@ -41,10 +41,9 @@ class window.vidatio.Visualization
             return chartToImage $targetElem
 
     # @method mapToImg
-    # @description converts the map visualization to a PNG / JPEG with a given quality measurement.
-    # @public
+    # @description converts the map visualization to a PNG / JPEG
+    # @privat
     # @param {jQuery object} $targetElem
-    # @param {integer} quality Quality is between 0 and 1 where 1 means 100% Quality and 0 means 0% Quality. This value is only used for Jpeg.
     # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
     mapToImage = ($targetElem) ->
         vidatio.log.info "Visualization mapToImage called"
@@ -55,7 +54,7 @@ class window.vidatio.Visualization
 
             unless $targetElem.is ":visible"
                 return reject
-                    i18n: "TOAST_MESSAGES.SHARE_SERVICE.MAP_NOT_VISIBLE"
+                    i18n: "TOAST_MESSAGES.VISUALIZATION.MAP_NOT_VISIBLE"
 
             html2canvas $targetElem,
             useCORS: true
@@ -63,8 +62,8 @@ class window.vidatio.Visualization
                 vidatio.log.info "Visualization html2canvas on targetElem onrendered callback called"
 
                 str = $targetElem.find(".leaflet-map-pane").css("transform")
-                str.split('(')[1].split(')')[0].split(',')
-                mapArray = str
+                mapArray = str.split('(')[1].split(')')[0].split(',')
+
                 dyPopupOffset = 0
                 ctx = canvas.getContext "2d"
 
@@ -96,9 +95,7 @@ class window.vidatio.Visualization
                     $imgElem.each (index, node) ->
                         if $(node).css("transform") isnt "none"
                             str = $(node).css "transform"
-                            str.split('(')[1].split(')')[0].split(',')
-                            imgArray = str
-                            # imgArray = Converter.matrixToArray $(node).css "transform"
+                            imgArray = str.split('(')[1].split(')')[0].split(',')
 
                             dxOffset = parseInt $(node).css "margin-left"
                             dyOffset = parseInt $(node).css "margin-top"
@@ -122,13 +119,13 @@ class window.vidatio.Visualization
                     triangleWidth = 40
                     triangleHeight = 20
 
-                    $log.debug
+                    vidatio.log.debug
                         message: "ShareService html2canvas on popupElem gets called"
                         popupElem: $popupElem
 
                     unless $popupElem.is ":visible"
                         return reject
-                            i18n: "TOAST_MESSAGES.SHARE_SERVICE.POPUP_NOT_VISIBLE"
+                            i18n: "TOAST_MESSAGES.VISUALIZATION.POPUP_NOT_VISIBLE"
 
                     # redraw popup on canvas because else the markers would be on top of the popup
                     html2canvas $popupElem,
@@ -137,8 +134,7 @@ class window.vidatio.Visualization
                             vidatio.log.info "ShareService html2canvas on popupElem onrendered callback called"
 
                             str = $popupElem.css "transform"
-                            str.split('(')[1].split(')')[0].split(',')
-                            popupArray = str
+                            popupArray = str.split('(')[1].split(')')[0].split(',')
 
                             dxPopup = parseInt(popupArray[4]) + parseInt(mapArray[4])
                             dyPopup = parseInt(popupArray[5]) + parseInt(mapArray[5])
@@ -190,19 +186,70 @@ class window.vidatio.Visualization
                         jpg: canvas.toDataURL "image/jpeg"
 
 
+    # @method chartToImage
+    # @description converts the chart visualization to a PNG / JPEG
+    # @privat
+    # @param {jQuery object} $targetElem
+    # @return {Promise} A promise which resolves to an object and holds two properties: jpeg (containing the data-url for jpeg image) and png (containing the data-url for png image)
     chartToImage = ($targetElem) ->
         vidatio.log.info "Visualization chartToImage called"
         vidatio.log.debug
             targetElem: $targetElem
 
-        return new Promise (resolve, reject) ->
-            Pablo($targetElem).dataUrl "png", (dataUrlPNG) ->
-                png = dataUrlPNG
+        $targetElemClone = $($targetElem).clone()
 
-                Pablo($targetElem).dataUrl "jpeg", (dataUrlJPG) ->
-                    jpg = dataUrlJPG
+        if $targetElem.selector is "#chart svg"
 
-                    return resolve
-                        png: png
-                        jpg: jpg
+            $canvasObject = $("#chart")
 
+            canvas = $($canvasObject).find(".marks")[0]
+            ctx = canvas.getContext "2d"
+
+            canvas2 = $($canvasObject).find(".brushed")[0]
+            canvas3 = $($canvasObject).find(".foreground")[0]
+            canvas4 = $($canvasObject).find(".highlight")[0]
+
+
+            ctx.drawImage canvas2, 0, 0
+            ctx.drawImage canvas3, 0, 0
+            ctx.drawImage canvas4, 0, 0
+            ctx.drawSvg (new XMLSerializer).serializeToString($targetElemClone[0]), 0, 0
+
+            return new Promise (resolve, reject) ->
+                return resolve
+                    png: canvas.toDataURL "image/png"
+                    jpg: canvas.toDataURL "image/jpeg"
+
+        else
+            return new Promise (resolve, reject) ->
+                Pablo($targetElemClone).dataUrl "png", (dataUrlPNG) ->
+                    png = dataUrlPNG
+
+                    Pablo($targetElemClone).dataUrl "jpeg", (dataUrlJPG) ->
+                        jpg = dataUrlJPG
+
+                        return resolve
+                            png: png
+                            jpg: jpg
+
+    # @method download
+    # @description creates a link element and automatically starts a download
+    # @public
+    # @param {sring} filename
+    # @param {dataURL} dataURL
+    download: (filename, dataURL) ->
+        vidatio.log.info "Visualization download called"
+        vidatio.log.debug
+            filename: filename
+            dataURL: dataURL
+
+        aTag = document.createElement "a"
+        aTag.setAttribute "href", dataURL
+        aTag.setAttribute "download", filename
+
+        if document.createEvent
+            mouseEvent = document.createEvent "MouseEvents"
+            mouseEvent.initEvent "click", true, true
+            aTag.dispatchEvent mouseEvent
+        else
+            aTag.click()

@@ -50,7 +50,7 @@
         "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
         "READ_ERROR_LINK": "Der Link konnte leider nicht verwendet werden.",
-        "SHARE_SERVICE": {
+        "VISUALIZATION": {
             "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
             "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
         },
