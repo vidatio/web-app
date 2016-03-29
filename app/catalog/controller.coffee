@@ -63,6 +63,7 @@ app.controller "CatalogCtrl", [
 
         # @method $scope.openInEditor
         # @description open dataset in Editor
+
         $scope.openInEditor = (data) ->
             $log.info "CatalogCtrl $scope.openInEditor called"
 

@@ -12,8 +12,6 @@ app.controller "ProfileCtrl", [
     "$log"
     "$translate"
     ($scope, DataFactory, UserDatasetsFactory, Progress, Data, $cookieStore, $log, $translate) ->
-        $scope.vidatios = []
-
         globals = $cookieStore.get "globals" || {}
 
         UserDatasetsFactory.query {id: globals.currentUser.id}, (response) ->
