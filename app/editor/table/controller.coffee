@@ -13,7 +13,6 @@ app.controller "TableCtrl", [
     ($scope, Table, Share, Data, Map, Converter, $log, Visualization) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
-        $scope.visualization = Visualization.options
 
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset

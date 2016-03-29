@@ -3,7 +3,6 @@
 app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
-    "$rootScope"
     "$scope"
     "TableService"
     "MapService"
@@ -16,10 +15,12 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    ($rootScope, $scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
-        $scope.visualization = Visualization.options
+    "$stateParams"
+    ($rootScope, $scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
+        $scope.visualization = Visualization.options
+        Visualization.options.fileType = Data.meta.fileType
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
@@ -37,10 +38,6 @@ app.controller "VisualizationCtrl", [
             Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
-            $log.info "VisualizationCtrl colorpicker-selected emitted"
-            $log.debug
-                color: $scope.visualization.color
-
             $timeout ->
                 Visualization.create()
 
@@ -48,11 +45,6 @@ app.controller "VisualizationCtrl", [
         # @param {Number} axis
         # @param {Number} id
         $scope.setAxisColumnSelection = (axis, id) ->
-            $log.info "VisualizationCtrl changeAxisColumnSelection called"
-            $log.debug
-                axis: axis
-                id: id
-
             if axis is "x"
                 $scope.visualization.xColumn = id
             else if axis is "y"
@@ -64,10 +56,6 @@ app.controller "VisualizationCtrl", [
         # @param {String} name
         # @param {String} type
         $scope.selectDiagram = (type) ->
-            $log.info "VisualizationCtrl selectDiagram called"
-            $log.debug
-                type: type
-
             $translate($scope.visualization.translationKeys[type]).then (translation) ->
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.type = type
@@ -100,7 +88,6 @@ app.controller "VisualizationCtrl", [
                     Progress.setMessage ""
 
                 fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
                 vidatio.visualization.download fileName, obj[type]
 
             .catch (error) ->
@@ -109,5 +96,4 @@ app.controller "VisualizationCtrl", [
                         content: translation
                         className: "danger"
 
-        $scope.geojson = Map.leaflet
 ]

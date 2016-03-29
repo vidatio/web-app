@@ -15,7 +15,9 @@ app.controller "ShareCtrl", [
     "TableService"
     "$timeout"
     "CatalogFactory"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, CatalogFactory) ->
+    "VisualizationService"
+    "$stateParams"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, CatalogFactory, Visualization, $stateParams) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -54,6 +56,9 @@ app.controller "ShareCtrl", [
         ).on "blur", ".form-control", ->
             $(this).closest(".input-group, .form-group").removeClass "focus"
 
+        unless $stateParams.id
+            $timeout ->
+                Visualization.create()
 
         $scope.saveDataset = ->
             return $scope.goToPreview = !$scope.goToPreview

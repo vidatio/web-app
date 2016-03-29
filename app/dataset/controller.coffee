@@ -27,9 +27,7 @@ app.controller "DatasetCtrl", [
     ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
-        $scope.visualization = Visualization.options
         $scope.link = $location.$$absUrl
-        $scope.geojson = Map.leaflet
 
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
             Progress.setMessage message
@@ -51,14 +49,11 @@ app.controller "DatasetCtrl", [
                 $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
                 $scope.data.title = $scope.data.name || "Vidatio"
 
-                Data.createVidatio $scope.data
-
-                if Data.meta.fileType isnt "shp"
-                    Visualization.create()
+                Data.useSavedData $scope.data
+                Visualization.create()
 
                 $timeout ->
                     Progress.setMessage()
-
             , (error) ->
                 $log.info "DatasetCtrl error on get dataset from id"
                 $log.error error
@@ -101,11 +96,8 @@ app.controller "DatasetCtrl", [
         # @method $scope.openInEditor
         # @description open dataset in Editor
         $scope.openInEditor = ->
-            $log.info "DatasetCtrl $scope.openInEditor called"
-
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
-                Data.createVidatio $scope.data
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
