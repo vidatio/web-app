@@ -76,37 +76,32 @@ describe "Service Data", ->
 
         it "from shp data", ->
             @Data.metaData.fileType = "shp"
-
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()
+            expect(@Table.setHeader).toHaveBeenCalled()
             expect(@Map.setGeoJSON).toHaveBeenCalled()
             expect(@Table.useColumnHeadersFromDataset).toEqual(true)
 
-
-        it "and set visualizaiotn options", ->
+        xit "and set visualization options", ->
             options =
                 type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
             @Data.metaData.fileType = "csv"
-
             @Data.createVidatio data
             expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
             expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
             @Data.metaData.fileType = "csv"
-
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).toHaveBeenCalled()
 
         it "from csv data without user header", ->
             data.options.useColumnHeadersFromDataset = false
-
             @Data.metaData.fileType = "csv"
-
             @Data.createVidatio data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).not.toHaveBeenCalled()

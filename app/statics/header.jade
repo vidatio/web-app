@@ -147,7 +147,7 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-6.col-sm-2.logo
-                    a#logo.button(ui-sref="app.index({ locale: locale })")
+                    a#logo(ui-sref="app.index({ locale: locale })")
                     a#back-to-import.button.icon-import(ui-sref='app.import({ locale: locale })')
                         span {{ "IMPORT" | translate | uppercase }}
 

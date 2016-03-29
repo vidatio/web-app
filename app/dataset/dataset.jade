@@ -1,18 +1,22 @@
 #dataset-view.wrapper-content
     .row.dataset-title
         .col-sm-12
-            h1.underline-red-light.dataset-title-text {{ information.title }}
+            h1.underline-red-light.dataset-title-text {{ data.title }}
 
     .row
         .col-sm-12
             .visualization-container
-                img(src="{{ information.image }}")
+                //- div needed to use padding of the parent
+                div
+                    leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
+                    #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
+                    img(src="images/logo-without-name.png" ng-hide="visualization.type")
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="createVidatio()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()")
                         span.icon-edit.icons
-                        span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
+                        span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                 .col-xs-12.col-sm-4.middle
                     #download-dataset
@@ -21,12 +25,12 @@
                             span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
 
                         ul
-                            li(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="downloadDataset()")
-                                a
+                            li
+                                a(ng-click="downloadCSV()")
                                     span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
-                            li(ui-sref="app.editor.id({ id: information.id, locale: locale })" ng-click="downloadImage()")
-                                a
+                            li
+                                a(ng-click="downloadJPEG()")
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
 
@@ -55,32 +59,32 @@
         .col-sm-12
             .metadata-container
                 .one-row
-                    .description {{ information.description }}
+                    .description {{ data.description }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ORIGIN" | translate }}:
-                    .dataset-creator {{ information.origin }}
+                    .dataset-info {{ data.origin }}
                 .one-row
                     .text {{ "DATASET_EDITOR" | translate }}:
-                    .dataset-creator {{ information.creator }}
+                    .dataset-info {{ data.creator }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ID" | translate }}:
-                    .dataset-creator {{ information.id }}
+                    .dataset-info {{ data.id }}
                 .one-row
                     .text {{ "DATASET_PARENT" | translate }}:
-                    .dataset-creator {{ information.parent }}
+                    .dataset-info {{ data.parent }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
-                    .dataset-created {{ information.created | date: "dd.MM.yyyy" }}
+                    .dataset-info {{ data.created | date: "dd.MM.yyyy" }}
                 .one-row
                     .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-update {{ information.updated | date: "dd.MM.yyyy" }}
+                    .dataset-info {{ data.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
-                    .dataset-creator {{ information.category }}
+                    .dataset-info {{ data.category }}
                 .one-row
                     .text {{ "DATASET_TAGS" | translate }}:
-                    span.tag(ng-repeat="tag in information.tags track by $index") {{tag}}
+                    span.tag(ng-repeat="tag in data.tags track by $index") {{tag}}

@@ -1,7 +1,8 @@
 #catalog
-    h2
+    label
         display block
         margin-bottom 5px
+        line-height 1.2
 
     li
         list-style-type none
@@ -35,6 +36,16 @@
         background $color-table-odd-passive
         border-top 3px solid $color-border
 
+        input
+            border-radius 4px
+
+        .reset-filters
+            text-align center
+            > a
+                color #000
+                &:hover
+                    color $color-green
+
         > div:not(#time-filter)
             margin-top 20px
 
@@ -63,14 +74,14 @@
         #category-filter
             .btn-group
                 display block
+                button, ul
+                    width 100%
                 button
                     float none
-                    width 100%
-                ul
-                    width 100%
 
-        #my-vidatio-filter
-            position relative
+        #tags-filter
+            .select2-search-choice
+                background $color-green
 
     [date-picker] .active, [date-picker] .active.now
         background-color $color-green
@@ -101,12 +112,14 @@
 
             .text
                 padding 10px 10px 25px
-        #time-filter
-        #category-filter
-        #my-vidatio-filter
+
+        [id$="-filter"]
             max-width 30em
             margin 0 auto
             padding 0 15px !important
+
+            .select2-container
+                width 100%
 
         input + span + [date-picker-wrapper]
             right 0

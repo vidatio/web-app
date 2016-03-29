@@ -131,17 +131,24 @@ header
                 &::before
                     left calc(100%/3)
 
-    #back-to-datasets-overview
-        position relative
-
     #back-to-import
+        margin-left 55px
+
+    #back-to-datasets-overview
+        margin-left 168px
+
+    // Firefox displays the text-descriptions 1px further down than chrome, so pull it 1px up
+    @-moz-document url-prefix()
+        #back-to-import
+        #back-to-datasets-overview
+            span
+                margin-top -1px
+
+    #back-to-datasets-overview
+    #back-to-import
+        z-index 501
         position absolute
-        z-index 100
-
-    #back-to-datasets-overview
-    #back-to-import
         float left
-        margin-left 60px
         text-align center
         color $color-black
         line-height 42px
@@ -166,12 +173,14 @@ header
             position relative
             color $color-black
             font-size 10px
+            height 11px
+            line-height 10px
             font-family Colaborate,Arial,Helvetica,sans-serif
-            top -16px
 
     .menu-buttons
         height 42px
         text-align right
+        z-index 500
 
         div
             display inline
@@ -194,7 +203,6 @@ header
             -webkit-border-radius 4px
             -moz-border-radius 4px
             cursor pointer
-            z-index 500
 
             &:hover, &:focus
                 color $color-grey-light
@@ -251,6 +259,30 @@ header
         padding 5px 10px 10px 10px
         text-align right
         max-width 98%
+
+@media(max-width: 400px)
+    header
+        .menu-buttons
+            a#save-button
+                left -60px
+
+        #back-to-import
+            margin-left 25px
+
+        #back-to-datasets-overview
+            margin-left 138px
+
+@media(min-width: 401px) and (max-width: 500px)
+    header
+        .menu-buttons
+            a#save-button
+                left -100px
+
+@media(min-width: 501px) and (max-width: 1199px)
+    header
+        .menu-buttons
+            a#save-button
+                left -150px
 
 @media(max-width: 767px)
     header
