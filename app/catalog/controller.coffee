@@ -11,7 +11,7 @@ app.controller "CatalogCtrl", [
     "ngToast"
     "$stateParams"
     "$state"
-    "DatasetsFactory"
+    "DatasetFactory"
     "CategoriesFactory"
     "TagsService"
     "$log"

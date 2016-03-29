@@ -68,7 +68,7 @@ app.service 'DataService', [
                     data: dataset
                     published: @metaData.publish
                     metaData: @metaData
-                    options:
+                    visualizationOptions:
                         type: Visualization.options.type
                         xColumn: Visualization.options.xColumn
                         yColumn: Visualization.options.yColumn
