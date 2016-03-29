@@ -7,6 +7,12 @@
             font-weight 200
             font-size 12px
 
+        // this line is needed as d3-plus does not display its line properly after resizing the window when the user
+        // enters more than one time the editor with a dataset
+        g.d3plus_line
+        g.d3plus_rect
+            opacity 1 !important
+
     .angular-leaflet-map
         a:link, a:visited
             color $color-black

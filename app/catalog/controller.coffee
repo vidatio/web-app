@@ -62,9 +62,10 @@ app.controller "CatalogCtrl", [
                 reload: $state.current
 
         # @method $scope.openInEditor
-        # @description set the vidatio options from saved dataset
+        # @description open dataset in Editor
+
         $scope.openInEditor = (data) ->
-            $log.info "DatasetCtrl $scope.createVidatio called"
+            $log.info "CatalogCtrl $scope.openInEditor called"
 
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message

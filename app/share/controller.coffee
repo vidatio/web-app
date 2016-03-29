@@ -11,7 +11,6 @@ app.controller "ShareCtrl", [
     "$rootScope"
     "DataService"
     ($scope, $translate, $rootScope, Data) ->
-
         $scope.share = Data
 
         # initialize tagsinput on page-init for propper displaying the tagsinput-field

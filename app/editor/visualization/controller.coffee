@@ -3,9 +3,10 @@
 app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
-    '$scope'
-    'TableService'
-    'MapService'
+    "$rootScope"
+    "$scope"
+    "TableService"
+    "MapService"
     "$timeout"
     "ShareService"
     "DataService"
@@ -16,19 +17,10 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
+    ($rootScope, $scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
         $scope.visualization = Visualization.options
         $scope.data = Data
         $scope.header = Table.header
-
-        # Resizing the visualizations
-        # using setTimeout to use only to the last resize action of the user
-        id = null
-        angular.element($window).bind 'resize', ->
-            clearTimeout id
-            id = setTimeout ->
-                Visualization.create()
-            , 500
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend

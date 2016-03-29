@@ -1,20 +1,18 @@
 section#usp
-    object.shape(type='image/svg+xml', data='images/landingpage-shape.svg')
-
     .wrapper-content
         .row
+            .col-sm-4
+                .usp-icon.icon-magicwand
+                h1 {{ "RECOMMEND" | translate | uppercase }}
+                p {{ "RECOMMEND_DESCRIPTION" | translate }}
+
+            .col-sm-4
+                .usp-icon.icon-2clicks
+                h1 {{ "TWO_KLICKS" | translate | uppercase }}
+                p {{ "TWO_KLICKS_DESCRIPTION" | translate }}
+
             .col-sm-4
                 .usp-icon.icon-opendata
                 h1 {{ "OPEN_DATA" | translate | uppercase }}
                 p {{ "OPEN_DATA_DESCRIPTION" | translate }}
-
-            .col-sm-4
-                .usp-icon.icon-3clicks
-                h1 {{ "THREE_KLICKS" | translate | uppercase }}
-                p {{ "THREE_KLICKS_DESCRIPTION" | translate }}
-
-            .col-sm-4
-                .usp-icon.icon-api
-                h1 {{ "API" | translate | uppercase }}
-                p {{ "API_DESCRIPTION" | translate }}
 
