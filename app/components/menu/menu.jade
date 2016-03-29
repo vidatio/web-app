@@ -4,36 +4,32 @@ nav
             .col-md-6
                 .menu-close-button
                     a.btn(ng-click="toggleMenu()") &times;
-
             .col-md-6
                 a#logo-menu(ui-sref="app.index({ locale: locale })", ng-click="toggleMenu()")
 
         .menu-list
             a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" )
                 span.icons.icon-profile
-                span.link-text {{ 'MY_PROFILE' | translate }}
-            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()")
-                span.icons.icon-opendata
-                span.link-text {{ 'AVAILABLE_DATASETS' | translate }}
+                span.link-text {{ "MY_PROFILE" | translate }}
             a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()")
                 span.icons.icon-import
-                span.link-text {{ 'IMPORT_DATA' | translate }}
-            a.item(href="")
+                span.link-text {{ "IMPORT_DATA" | translate }}
+            a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()")
+                span.icons.icon-opendata
+                span.link-text {{ "AVAILABLE_VIDATIOS" | translate }}
+            a.item(ui-sref="app.index({ locale: locale, '#': 'usp' })", ng-click="toggleMenu()")
                 span.icons.icon-plus
-                span.link-text {{ 'FEATURES' | translate }}
-            a.item(href="")
-                span.icons.icon-coin3
-                span.link-text {{ 'PRICING' | translate }}
-            a.item(href="")
+                span.link-text {{ "FEATURES" | translate }}
+            a.item(href="https://api.vidatio.com/docs" target="_blank" ng-click="toggleMenu()")
                 span.icons.icon-api
-                span.link-text-api {{ 'API' | translate }}
+                span.link-text-api {{ "API" | translate }}
             br
             a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()")
                 span.icons.icon-login
-                span.link-text {{ 'LOG_ON' | translate }}
+                span.link-text {{ "LOG_ON" | translate }}
             a.item(href="" ng-show="globals.authorized" ng-click="logout(); toggleMenu()")
                 span.icons.icon-logout
-                span.link-text {{ 'LOG_OUT' | translate }}
+                span.link-text {{ "LOG_OUT" | translate }}
 
         registration
         login

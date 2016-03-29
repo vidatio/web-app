@@ -7,8 +7,6 @@ app.service 'TableService', [
     ($log) ->
         class Table
             constructor: ->
-                $log.info "TableService constructor called"
-
                 @dataset = [[]]
                 @header = []
                 @useColumnHeadersFromDataset = true
@@ -105,6 +103,32 @@ app.service 'TableService', [
             getDataset: ->
                 $log.info "TableService getDataset called"
                 return @dataset
+
+            # @method updateAxisSelection
+            # @description updates "X" and "Y" on table header
+            # @public
+            # @param {Number} xColumn
+            # @param {Number} yColumn
+            updateAxisSelection: (xColumn, yColumn) ->
+                $log.info "TableService updateAxisSelection called"
+                $log.debug
+                    xColumn: xColumn
+                    yColumn: yColumn
+
+                $header = $(".ht_clone_top th")
+
+                $header.find("span").removeClass "selected-x-y"
+                $header.find("span").removeClass "selected-x"
+                $header.find("span").removeClass "selected-y"
+
+                $header.each (idx, element) ->
+                    if idx is xColumn and idx is yColumn
+                        $(element).find("span").addClass "selected-x-y"
+                    else if idx is xColumn
+                        $(element).find("span").addClass "selected-x"
+                    else if idx is yColumn
+                        $(element).find("span").addClass "selected-y"
+
 
         new Table
 ]

@@ -1,133 +1,92 @@
 #visualization
-    #chart
-        input[id^="d3plus_"][id$="_inline_input"]
-            position absolute
-            padding 5px
-            font-family Helvetica
-            font-weight 200
-            font-size 12px
+    position relative
 
-        // this line is needed as d3-plus does not display its line properly after resizing the window when the user
-        // enters more than one time the editor with a dataset
-        g.d3plus_line
-        g.d3plus_rect
-            opacity 1 !important
-
-    .angular-leaflet-map
-        a:link, a:visited
-            color $color-black
-
-        .leaflet-bar a
-            &:hover
-                background-color $color-hover-light
-
-    .leaflet-container
-        a.leaflet-popup-close-button
-            top 5px
-            right 2px
-
-            &:hover
-                color $color-red !important
-
-        .leaflet-popup-content-wrapper
-            min-width 140px
-            border-top 5px solid $color-red
-            border-radius 0px
-
-            .leaflet-popup-content
-                padding-right 15px
-                overflow-wrap break-word
-
-                a:link, a:visited
-                    color $color-active
-                a:hover, a:active
-                    color $color-black
-
-        .leaflet-popup-tip
-            width 20px
-            height 20px
-
-        path.leaflet-clickable
-            stroke $color-passive
-            stroke-opacity 1
-            fill $color-green
-            fill-opacity 0.25
-            stroke-width 3px
-            stroke-dasharray 5
+    .visualization
+        position absolute
+        top 70px
+        bottom 20px
+        left 20px
+        right 20px
+        height auto
+        width auto
 
     .settings-bar
-        .axis-selection
-            p
-                display inline-block
+        .recommend-button
+            height 40px
+            width  90px
+            line-height 1
+            position relative
+            margin-left 40px
+            padding 9px
+            margin-top 4px
 
-                &:last-of-type
-                    margin-left 5px
-
-            ul
-                max-height 500px
-                overflow auto
-                z-index 1500
-
-            .btn
-                min-width 20px
-
-        .diagram-selection
-            padding-top 6px
-
-            li > a
-                display flex
-                flex-direction row
-                display -webkit-flex /* Safari */
-                -webkit-flex-direction row
-                font-size 16px
-
-                .selection-icons
-                    font-size 28px
-                    margin-right 10px
-
-                .selection-text
-                    line-height 43px
-
-            .trigger-recommender
-                background $color-red-light
-                border-top-right-radius 4px
-                border-top-left-radius 4px
-
-                a
-                    color $color-black
-
-        .color-selection a .angular-color-picker
-            display none
-
-            //bugfix angular-color-picker cursors
-            .angular-color-picker > ._hues > ._cursor
-                left -6px
+            .icon
+                position absolute
+                left -30px
+                bottom 0
                 width 40px
+                height 40px
+                border-radius 2px
+                background inherit
+                line-height 40px
+                font-size 25px
+                transform rotate(-15deg)
+                transform-origin 0
 
-        .color-selection a:hover .angular-color-picker
-            display block
+            .text
+                display block
+                text-transform uppercase
+                position relative
+                font-size 12px
+                white-space pre-wrap
+                font-family Colaborate,Arial,Helvetica,sans-serif
 
-        .graph-icon
-            width 30px
-            margin-right 10px
-            margin-top 5px
+        .download-menu
+        .diagram-menu
+            justify-content space-around
+            display none
+            list-style-type none
+            position absolute
+            left 20px
+            right 20px
+            padding 0
+            height 80px
+            margin-top 8px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            > li
+                height 100%
+
+                > a
+                    padding 18px 12px
+                    display block
+
+                &:hover
+                &.active
+                    background $color-hover-light
+                    box-shadow 0 -2px $color-green
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+        .diagram-selection:hover
+        .download-selection:hover
+            .diagram-menu
+            .download-menu
+                display flex
+
+        .diagram-menu
+            > li
+                width 20%
 
         .download-button li:first-child
             border-bottom 2px solid $color-green
-
-    #chart-placeholder
-        overflow hidden
-        padding 0 0
-        box-shadow inset 0 0 15px $color-shadow
-        height 100%
-
-        img
-            width 120px
-            display inline-block
-            opacity .4
-            position absolute
-            top 0
-            left 0
-            right 0
-            bottom 0
-            margin auto

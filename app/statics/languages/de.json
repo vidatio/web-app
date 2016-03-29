@@ -1,5 +1,7 @@
 {
     "SLOGAN": "Seeing the bigger Picture",
+    "API": "API",
+    "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",
     "TO_YOUR_VIDATIO_LANDING_PAGE": "zu deinem Vidatio",
@@ -13,9 +15,15 @@
     "SEARCH_VIDATIOS": "Vidatios durchsuchen",
     "CATEGORIES": "Kategorien",
     "VIDATIO_PUBLIC": "Öffentlichkeit",
+    "PRESS_LANDESPREIS": "Sieger Salzburger Landespreis 2016 - Bildungseinrichtungen",
+    "PRESS_OGD_SALZBURG": "Präsentation Open Government Data - Stammtisch Salzburg",
+    "PRESS_OGD_WIEN": "Präsentation Open Government Data - Stammtisch Wien",
+    "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living - Workshop",
     "NEW_VIDATIO": "Neues Vidatio",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
-    "ALL_VIDATIOS": "Verfügbare Vidatios",
+    "ALL_VIDATIOS": "Alle Vidatios",
+    "MY_VIDATIOS": "Meine Vidatios",
+    "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
@@ -37,7 +45,7 @@
     "VISUALIZATION": "Visualisierung",
     "DATASET + VISUALIZATION": "Datensatz + Visualisierung",
     "SAVE": "Speichern",
-    "CREATE_VIDATIO": "Vidatio erstellen",
+    "OPEN_IN_EDITOR": "Im Editor öffnen",
     "TOAST_MESSAGES": {
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
@@ -79,7 +87,7 @@
         "PARSING_DATA": "Daten werden analysiert",
         "VISUALIZATION_PREPARED": "Die Visualisierung wird zum Download vorbereitet."
     },
-    "AVAILABLE_DATASETS": "Verfügbare Vidatios",
+    "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
@@ -91,7 +99,6 @@
     "LOG_ON": "Login",
     "LOG_OUT": "Logout",
     "MY_PROFILE": "Mein Profil",
-    "MY_VIDATIOS": "Meine Vidatios",
     "PROFILE": "Profil",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
@@ -124,32 +131,33 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
-    "X_AXIS": "X-Achse",
-    "Y_AXIS": "Y-Achse",
+    "VALUE_RANGE": "Wertebereich",
     "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
-    "FILTER": {
-        "BY_TIME": "Filtern nach Zeit",
-        "BY_CATEGORY": "Filtern nach Kategorie"
-    },
+    "FILTER_BY": "Filtern nach",
+    "RESET_FILTER": "Filter zurücksetzen",
+    "RESET_ALL_FILTERS": "Alle Filter zurücksetzen",
+    "TIME": "Zeit",
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
-        "SCATTER_PLOT": "Streudiagramm",
+        "SCATTER_PLOT": "Streu-Diagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
-        "BAR_CHART": "Balkendiagramm",
+        "BAR_CHART": "Balken-Diagramm",
         "TIME_SERIES": "Zeitlicher Verlauf",
         "RECOMMEND": "Diagramm empfehlen"
     },
     "LONGITUDE": "Long",
     "LATITUDE": "Lat",
-    "MY_VIDATIOS": "Eigene Vidatios",
     "MORE_VIDATIOS": "Weitere Vidatios",
     "TRANSPOSE": "Transponieren",
     "AXES": "Achsen",
-    "COLORS": "Farben"
+    "COLORS": "Farben",
+    "SELECT2": {
+        "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
+    }
 }

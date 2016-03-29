@@ -6,10 +6,11 @@
 app = angular.module "app.controllers"
 
 app.controller "DatasetCtrl", [
+    "$http"
     "$scope"
     "$rootScope"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "UserFactory"
     "TableService"
     "MapService"
@@ -22,97 +23,93 @@ app.controller "DatasetCtrl", [
     "ngToast"
     "DataService"
     "VisualizationService"
-    ($scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
-        # set link to current vidatio
-        $rootScope.link = $location.$$absUrl
+    "$window"
+    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
+        $scope.downloadCSV = Data.downloadCSV
+        $scope.downloadJPEG = Data.downloadJPEG
+        $scope.link = $location.$$absUrl
 
-        # link-overlay shouldn't be displayed on detailviews' start
-        $rootScope.showVidatioLink = false
+        $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+            Progress.setMessage message
 
-        # use datasetId from $stateParams
-        datasetId = $stateParams.id
-        $scope.information = []
+            # get dataset according to datasetId and set necessary metadata
+            DataFactory.get {id: $stateParams.id}, (data) ->
 
-        # get dataset according to datasetId and set necessary metadata
-        DataFactory.get { id: datasetId }, (data) ->
-            $scope.data = data
-            console.log "data", data
-            updated = new Date($scope.data.updatedAt)
-            created = new Date($scope.data.createdAt)
-            Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "-"
-            if $scope.data.metaData.tagIds?
-                tags = []
-                for tag in $scope.data.metaData.tagIds
-                    tags.push tag.name
+                $scope.data = data
+                $scope.data.updated = new Date($scope.data.updatedAt)
+                $scope.data.created = new Date($scope.data.createdAt)
+                Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else null
+                if $scope.data.metaData.tagIds?
+                    $scope.data.tags = []
+                    for tag in $scope.data.metaData.tagIds
+                        $scope.data.tags.push tag.name
 
-            category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
-            dataOrigin = "Vidatio"
-            userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
-            title = $scope.data.name || "Vidatio"
-            parent = $scope.data.parentId || "-"
-            image = $scope.data.image || "images/logo-greyscale.svg"
-            description = $scope.data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
+                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else null
+                $scope.data.dataOrigin = "Vidatio"
+                $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
+                $scope.data.title = $scope.data.name || "Vidatio"
 
-            # fill up detail-view with metadata
-            $scope.information =
-                title: title
-                image: image
-                id: datasetId
-                created: created
-                creator: userName
-                origin: dataOrigin
-                updated: updated
-                description: description
-                parent: parent
-                category: category
-                tags: tags
+                Data.useSavedData $scope.data
+                Visualization.create()
 
-            # init tagsinput field with tags
-            for tag in tags
-                $(".tagsinput").tagsinput("add", tag)
-
-        , (error) ->
-            $log.info "DatasetCtrl error on get dataset from id"
-            $log.error error
-            $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                ngToast.create
-                    content: translation
-                    className: "danger"
-
-        # @method $scope.createVidatio
-        # @description creates Vidatio from saved Dataset
-        $scope.createVidatio = ->
-            $log.info "DatasetCtrl $scope.createVidatio called"
-
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                Progress.setMessage message
-                Data.createVidatio $scope.data
                 $timeout ->
-                    Progress.setMessage ""
+                    Progress.setMessage()
+            , (error) ->
+                $log.info "DatasetCtrl error on get dataset from id"
+                $log.error error
 
-        # at the moment direct download is not possible, so download via editor
-        $scope.downloadDataset = ->
-            $log.info "DatasetCtrl downloadDataset called"
-            @createVidatio()
+                $timeout ->
+                    Progress.setMessage()
 
-        $scope.downloadImage = ->
-            $log.info "DatasetCtrl downloadImage called"
-            @createVidatio()
+                $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
+        # Resizing the visualization
+        # using setTimeout to use only to the last resize action of the user
+        id = null
+        $chart = $("#chart")
+        lastWidth = 954 # 954px is the max-width of the viz-container
+
+        onWindowResizeCallback = ->
+            currentWidth = $chart.parent().width()
+
+            # resizing should only be done when viz-containers' width changes, return otherwise
+            if currentWidth is lastWidth
+                return
+
+            clearTimeout id
+            id = setTimeout ->
+                Visualization.create()
+            , 250
+
+            lastWidth = currentWidth
+
+        # resize event only should be fired if user is currently on detailview
+        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+
+        # resize watcher has to be removed when detailview is leaved
+        $scope.$on '$destroy', ->
+            window.angular.element($window).off 'resize', onWindowResizeCallback
+
+        # @method $scope.openInEditor
+        # @description open dataset in Editor
+        $scope.openInEditor = ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                Progress.setMessage message
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl getVidatioLink called"
+            $log.info "DatasetCtrl toggleVidatioLink called"
             $log.debug
-                id: datasetId
-                link: $rootScope.link
+                link: $scope.link
 
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
-        # hide link-box if necessary
         $scope.hideVidatioLink = ->
             $rootScope.showVidatioLink = false
 
-        # copy link to clipboard
         $scope.copyVidatioLink = ->
             $log.info "DatasetCtrl copyVidatioLink called"
 

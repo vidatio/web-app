@@ -14,8 +14,10 @@ app.controller "ShareCtrl", [
     "MapService"
     "TableService"
     "$timeout"
-    "CatalogFactory"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, CatalogFactory) ->
+    "CategoriesFactory"
+    "VisualizationService"
+    "$stateParams"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -25,7 +27,7 @@ app.controller "ShareCtrl", [
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.vidatio.name = "#{translation} #{moment().format("DD/MM/YYYY")}"
 
-        CatalogFactory.getCategories().query (response) ->
+        Categories.query (response) ->
             $log.info "ShareCtrl successfully queried categories"
             $scope.categories = response
 
@@ -54,6 +56,9 @@ app.controller "ShareCtrl", [
         ).on "blur", ".form-control", ->
             $(this).closest(".input-group, .form-group").removeClass "focus"
 
+        unless $stateParams.id
+            $timeout ->
+                Visualization.create()
 
         $scope.saveDataset = ->
             return $scope.goToPreview = !$scope.goToPreview

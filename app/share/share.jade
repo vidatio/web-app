@@ -2,18 +2,19 @@
         .row
             .col-sm-6
                 #preview.area
-                    div.chart-preview
-                        ul.metadata-preview(ng-show="show == 'share'")
-                            li.editor Editor
-                                span.author (Author)
-                            li.title Vidatio Title
-                            li.category Category
-                            li.licence Licence
-                            li.tags Tags, Tags, Tags
-                            li.edit
-                                a.fui-new(ng-click="show = 'metaData'")
+                    ul.metadata-preview(ng-show="show == 'share'")
+                        li.editor Editor
+                            span.author (Author)
+                        li.title Vidatio Title
+                        li.category Category
+                        li.licence Licence
+                        li.tags Tags, Tags, Tags
+                        li.edit
+                            a.fui-new(ng-click="show = 'metaData'")
+                    visualization
+
                 #download.area
-                    a(href="#")
+                    div
                         .option-icon.icon-download
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 

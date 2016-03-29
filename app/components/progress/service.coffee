@@ -16,10 +16,6 @@ app.service "ProgressService", [
                 _message
 
             setMessage: (msg) ->
-                $log.info "Progress setMessage function called"
-                $log.debug
-                    message: msg
-
                 _message = msg
 
         new Progress

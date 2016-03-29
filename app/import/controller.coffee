@@ -155,7 +155,7 @@ app.controller "ImportCtrl", [
                     dataset = Converter.convertCSV2Arrays fileContent
                     Table.setHeader dataset.shift()
                     Table.setDataset dataset
-                    Visualization.recommendDiagram()
+                    Visualization.useRecommendedOptions()
                     $location.path editorPath
 
                 when "zip"

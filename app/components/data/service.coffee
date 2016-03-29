@@ -11,10 +11,10 @@ app.service 'DataService', [
     "ngToast"
     "$translate"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "$location"
     "$state"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DataFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -63,18 +63,17 @@ app.service 'DataService', [
 
                 angular.extend @metaData, metaData
 
-                DataFactory.save
+                DatasetFactory.save
+                    name: @name
                     data: dataset
                     published: @metaData.publish
                     metaData: @metaData
-
                     options:
                         type: Visualization.options.type
                         xColumn: Visualization.options.xColumn
                         yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
-
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
@@ -99,41 +98,55 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
-            # @method createVidatio
+            # @method useSavedData
             # @description from existing dataset
             # @param {Object} data
-            createVidatio: (data) ->
-                $log.info "DatasetCtrl createVidatio called"
+            useSavedData: (data) ->
+                $log.info "DataService useSavedData called"
                 $log.debug
                     data: data
 
                 if @metaData["fileType"] is "shp"
-                    dataset = Converter.convertGeoJSON2Arrays data.data
-                    Table.setDataset dataset
+                    Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
                     Map.setGeoJSON data.data
+
                 else
                     if data.options?
-                        # Each value has to be assigned individually, otherwise all options get overwritten.
-                        if data.options.type?
-                            Visualization.options["type"] = data.options.type
-                            $translate(Visualization.options.translationKeys[data.options.type]).then (translation) ->
-                                Visualization.options["selectedDiagramName"] = translation
-                        else
-                            Visualization.options["type"] = false
-                            Visualization.options["selectedDiagramName"] = false
+                        Visualization.setOptions(data.options)
 
-                        Visualization.options["xColumn"] = if data.options.xColumn? then data.options.xColumn else null
-                        Visualization.options["yColumn"] = if data.options.yColumn? then data.options.yColumn else null
-                        Visualization.options["color"] = if data.options.color? then data.options.color else "#11DDC6"
+                        Table.useColumnHeadersFromDataset = false
+                        if data.options.useColumnHeadersFromDataset
+                            Table.useColumnHeadersFromDataset = true
 
-                        if data.options.useColumnHeadersFromDataset?
-                            Table.useColumnHeadersFromDataset = if data.options.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
-
-                            if Table.useColumnHeadersFromDataset
-                                Table.setHeader data.data.shift()
+                        if Table.useColumnHeadersFromDataset
+                            Table.setHeader data.data.shift()
 
                     Table.setDataset data.data
+
+            #@method downloadCSV
+            #@description downloads a csv
+            downloadCSV: (name) ->
+                $log.info "TableCtrl download called"
+
+                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+
+                if Table.useColumnHeadersFromDataset
+                    csv = Papa.unparse
+                        fields: Table.getHeader(),
+                        data: trimmedDataset
+                else
+                    csv = Papa.unparse trimmedDataset
+
+                if name is ""
+                    fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
+                else
+                    fileName = name
+
+                csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
+                csvURL = window.URL.createObjectURL(csvData)
+
+                vidatio.visualization.download fileName + ".csv", csvURL
 
         new Data
 ]

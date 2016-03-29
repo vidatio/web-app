@@ -3,7 +3,6 @@
 app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
-    "$rootScope"
     "$scope"
     "TableService"
     "MapService"
@@ -16,40 +15,29 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    ($rootScope, $scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
-        $scope.visualization = Visualization.options
+    "$stateParams"
+    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
+        $scope.visualization = Visualization.options
+        Visualization.options.fileType = Data.metaData.fileType
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            Visualization.recommendDiagram()
+            Visualization.useRecommendedOptions()
             Visualization.create()
+            Table.updateAxisSelection(Number($scope.visualization.xColumn) + 1, Number($scope.visualization.yColumn) + 1)
+            return true
 
-        if Data.metaData.fileType is "shp"
-            $scope.visualization.type = "map"
-            Map.setInstance()
-        else
+        $timeout ->
             # After having recommend diagram options, we watch the dataset of the table
             # because the watcher fires at initialization the diagram gets immediately drawn
             # FIXME: Whats should happen, if a person clears the table after watching shp?!
-            $scope.$watch (->
-                Table.dataset
-            ), ( ->
-                $log.info "VisualizationCtrl dataset watcher triggered"
-
-                Visualization.create()
-            ), true
-
-        $timeout ->
+            Visualization.create()
             Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
-            $log.info "VisualizationCtrl colorpicker-selected emitted"
-            $log.debug
-                color: $scope.visualization.color
-
             $timeout ->
                 Visualization.create()
 
@@ -57,11 +45,6 @@ app.controller "VisualizationCtrl", [
         # @param {Number} axis
         # @param {Number} id
         $scope.setAxisColumnSelection = (axis, id) ->
-            $log.info "VisualizationCtrl changeAxisColumnSelection called"
-            $log.debug
-                axis: axis
-                id: id
-
             if axis is "x"
                 $scope.visualization.xColumn = id
             else if axis is "y"
@@ -73,10 +56,6 @@ app.controller "VisualizationCtrl", [
         # @param {String} name
         # @param {String} type
         $scope.selectDiagram = (type) ->
-            $log.info "VisualizationCtrl selectDiagram called"
-            $log.debug
-                type: type
-
             $translate($scope.visualization.translationKeys[type]).then (translation) ->
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.type = type
@@ -112,7 +91,6 @@ app.controller "VisualizationCtrl", [
                     Progress.setMessage ""
 
                 fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
                 vidatio.visualization.download fileName, obj[type]
 
             .catch (error) ->
@@ -121,43 +99,4 @@ app.controller "VisualizationCtrl", [
                         content: translation
                         className: "danger"
 
-        $scope.geojson =
-            data: Map.geoJSON
-            style: ->
-                {}
-            pointToLayer: (feature, latLng) ->
-                new L.marker(latLng, icon: L.icon(
-                    iconUrl: '../images/marker-small.png'
-                    iconSize: [25, 30]
-                    iconAnchor: [12.5, 30]
-                    popupAnchor: [0, -30]
-                ))
-            onEachFeature: (feature, layer) ->
-                # So every markers gets a popup
-                html = ""
-                isFirstAttribute = true
-
-                for property, value of feature.properties
-
-                    if value
-                        if isFirstAttribute
-                            html += "<b>"
-
-                        if vidatio.helper.isEmailAddress(value)
-                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isPhoneNumber(value)
-                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isURL(value)
-                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if value
-                            html += value + "<br>"
-
-                        if isFirstAttribute
-                            html += "</b>"
-                            isFirstAttribute = false
-
-                unless html
-                    html = "Keine Informationen vorhanden"
-
-                layer.bindPopup(html)
 ]
