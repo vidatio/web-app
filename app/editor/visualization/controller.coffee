@@ -27,23 +27,15 @@ app.controller "VisualizationCtrl", [
         $scope.recommend = ->
             Visualization.useRecommendedOptions()
             Visualization.create()
+            Table.updateAxisSelection(Number($scope.visualization.xColumn) + 1, Number($scope.visualization.yColumn) + 1)
+            return true
 
-        unless $stateParams.id
-            if Data.meta.fileType is "shp"
-                $scope.visualization.type = "map"
-                Map.setInstance()
-            else
-                # After having recommend diagram options, we watch the dataset of the table
-                # because the watcher fires at initialization the diagram gets immediately drawn
-                # FIXME: Whats should happen, if a person clears the table after watching shp?!
-                $scope.$watch (->
-                    Table.dataset
-                ), ( ->
-                    Visualization.create()
-                ), true
-
-            $timeout ->
-                Progress.setMessage ""
+        $timeout ->
+            # After having recommend diagram options, we watch the dataset of the table
+            # because the watcher fires at initialization the diagram gets immediately drawn
+            # FIXME: Whats should happen, if a person clears the table after watching shp?!
+            Visualization.create()
+            Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
             $timeout ->

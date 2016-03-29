@@ -1,5 +1,7 @@
 {
     "SLOGAN": "Seeing the bigger Picture",
+    "API": "API",
+    "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",
     "TO_YOUR_VIDATIO_LANDING_PAGE": "zu deinem Vidatio",
@@ -17,8 +19,11 @@
     "PRESS_OGD_SALZBURG": "Präsentation Open Government Data - Stammtisch Salzburg",
     "PRESS_OGD_WIEN": "Präsentation Open Government Data - Stammtisch Wien",
     "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living - Workshop",
+    "NEW_VIDATIO": "Neues Vidatio",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
-    "ALL_VIDATIOS": "Verfügbare Vidatios",
+    "ALL_VIDATIOS": "Alle Vidatios",
+    "MY_VIDATIOS": "Meine Vidatios",
+    "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
@@ -84,7 +89,7 @@
             "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
         }
     },
-    "AVAILABLE_DATASETS": "Verfügbare Vidatios",
+    "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
@@ -96,7 +101,6 @@
     "LOG_ON": "Login",
     "LOG_OUT": "Logout",
     "MY_PROFILE": "Mein Profil",
-    "MY_VIDATIOS": "Meine Vidatios",
     "PROFILE": "Profil",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
@@ -120,7 +124,6 @@
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
     "CATALOG": "Katalog",
-    "NEW_VIDATIO": "Neues Vidatio",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
@@ -135,10 +138,10 @@
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
-    "FILTER": {
-        "BY_TIME": "Filtern nach Zeit",
-        "BY_CATEGORY": "Filtern nach Kategorie"
-    },
+    "FILTER_BY": "Filtern nach",
+    "RESET_FILTER": "Filter zurücksetzen",
+    "RESET_ALL_FILTERS": "Alle Filter zurücksetzen",
+    "TIME": "Zeit",
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
@@ -155,5 +158,8 @@
     "MORE_VIDATIOS": "Weitere Vidatios",
     "TRANSPOSE": "Transponieren",
     "AXES": "Achsen",
-    "COLORS": "Farben"
+    "COLORS": "Farben",
+    "SELECT2": {
+        "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
+    }
 }

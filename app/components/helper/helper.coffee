@@ -451,23 +451,21 @@ class window.vidatio.Helper
             when "parallel"
                 return true
             when "bar"
-                if @isNumeric(y)
+                if @isNumeric(y) and String(x).length > 0
                     return true
             when "timeseries"
                 if @isDate(x) and @isNumeric(y)
                     return true
 
-
-
         return false
 
-# @method $.fn.textWidth
-# @description This method calculates the width of a specific input-field according to a users' input
-# @public
-# @param {String} text (not necessary)
-# @param {String} font (not necessary)
-$.fn.textWidth = (text, font) ->
-    if !$.fn.textWidth.fakeEl
-        $.fn.textWidth.fakeEl = $("<span>").hide().appendTo(document.body)
-    $.fn.textWidth.fakeEl.text(text or @val() or @text()).css "font", font or @css("font")
-    $.fn.textWidth.fakeEl.width()
+    # @method arrayToLowerCase
+    # @public
+    # @param {Array} array
+    # @return {Array}
+    arrayToLowerCase: (array) ->
+        output = []
+        for element in array
+            output.push element.toLowerCase()
+
+        output

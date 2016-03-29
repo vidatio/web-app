@@ -1,7 +1,7 @@
 "use strict"
 
 class vidatio.TimeseriesChart extends vidatio.Visualization
-    constructor: (dataset, options, width, height) ->
+    constructor: (dataset, options, width, height, chartSelector) ->
         vidatio.log.info "Timeseries chart constructor called"
         vidatio.log.debug
             dataset: dataset

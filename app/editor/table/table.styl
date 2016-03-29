@@ -79,3 +79,54 @@
         .wtBorder
             &.current
                 background-color $color-green !important
+
+    .x-axis-button.focused
+    .y-axis-button.focused
+        .icon-xaxis
+        .icon-yaxis
+            color $color-hover-dark !important
+
+    .highlighted
+        background $color-grey-dark !important
+        color $color-white !important
+        cursor pointer
+
+        .selected-x
+        .selected-y
+        .selected-x-y
+            &:before
+                color $color-white !important
+
+        &:hover
+            background $color-green !important
+            border 2px $color-hover-dark solid !important
+
+    .focused
+        color $color-green !important
+
+    .selected
+        background $color-green !important
+        color $color-white !important
+        border 2px $color-hover-dark solid !important
+
+        [class*="selected-"]:before
+            color $color-white !important
+            font-size 18px
+
+    [class*="selected-"]:before
+        color $color-border
+        margin-right 5px
+        font-size 14px
+
+    .selected-x
+        &:before
+            content "X"
+
+    .selected-y
+        &:before
+            content "Y"
+
+    .selected-x-y
+        &:before
+            content "X Y"
+

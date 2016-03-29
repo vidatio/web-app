@@ -10,6 +10,18 @@
         height 450px
         width 100%
 
+        & > div
+            height 100%
+
+            & > img
+                height 50%
+                opacity 0.4
+                margin-top 60px
+
+        .parcoords > svg
+        .parcoords > canvas
+            right 35px
+
     .col-xs-pull-12
         right 0
 
@@ -200,7 +212,7 @@
 
             .text
                 font-weight bold
-                width 250px
+                width 200px
 
 @media (max-width: 600px)
     #dataset-view
@@ -218,6 +230,10 @@
                     top 10px
                     margin-right calc(50% - 95px)
                     width 190px
+
+        .metadata-container
+            .text
+                width 150px !important
 
 @media (max-width: 767px)
     #dataset-view

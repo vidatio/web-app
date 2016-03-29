@@ -1,11 +1,11 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content
         .settings-bar
-            a.recommend-button.btn.btn-primary.btn-small(href="#" ng-click="recommend()")
+            a.recommend-button.btn.btn-primary.btn-small(ng-hide="data.meta.fileType == 'shp'" href="#" ng-click="recommend()")
                 i.icon-magicwand.icon
                 span.text {{ "DIAGRAMS.RECOMMEND" | translate }}
 
-            .diagram-selection.settings-button(ng-hide="meta.fileType == 'shp'")
+            .diagram-selection.settings-button(ng-hide="data.meta.fileType == 'shp'")
                 a(href='#' ng-click="").icon-diagrammenu
                     span {{ "DIAGRAMS.DIAGRAM_TYPE" | translate }}
                 ul.diagram-menu

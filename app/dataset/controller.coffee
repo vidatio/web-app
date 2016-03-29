@@ -10,7 +10,7 @@ app.controller "DatasetCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "UserFactory"
     "TableService"
     "MapService"
@@ -23,7 +23,8 @@ app.controller "DatasetCtrl", [
     "ngToast"
     "DataService"
     "VisualizationService"
-    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization) ->
+    "$window"
+    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
@@ -61,15 +62,42 @@ app.controller "DatasetCtrl", [
                         content: translation
                         className: "danger"
 
+        # Resizing the visualization
+        # using setTimeout to use only to the last resize action of the user
+        id = null
+        $chart = $("#chart")
+        lastWidth = 954 # 954px is the max-width of the viz-container
+
+        onWindowResizeCallback = ->
+            currentWidth = $chart.parent().width()
+
+            # resizing should only be done when viz-containers' width changes, return otherwise
+            if currentWidth is lastWidth
+                return
+
+            clearTimeout id
+            id = setTimeout ->
+                Visualization.create()
+            , 250
+
+            lastWidth = currentWidth
+
+        # resize event only should be fired if user is currently on detailview
+        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+
+        # resize watcher has to be removed when detailview is leaved
+        $scope.$on '$destroy', ->
+            window.angular.element($window).off 'resize', onWindowResizeCallback
+
         # @method $scope.openInEditor
-        # @description set the vidatio options from saved dataset
+        # @description open dataset in Editor
         $scope.openInEditor = ->
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl getVidatioLink called"
+            $log.info "DatasetCtrl toggleVidatioLink called"
             $log.debug
                 link: $scope.link
 
