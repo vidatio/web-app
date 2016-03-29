@@ -92,6 +92,9 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
+            $translate("VISUALIZATION_PREPARED").then (translation) ->
+                Progress.setMessage translation
+
             if Visualization.options.type is "map"
                 $targetElem = $("#map")
             else if Visualization.options.type is "parallel"
