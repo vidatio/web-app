@@ -161,7 +161,7 @@ app.controller "IndexCtrl", [
             colors = ["#11dcc6", "#F2B1B1", "#FF5444", "#ABF4E9", "#FAFAFA"]
             currentColor = 0
 
-            for category, index in $scope.categories
+            for category in $scope.categories
 
                 if occurrences[category.name]?
                     chartData.push({"name": category.name, "Anzahl der Datensätze": occurrences[category.name], "color": colors[currentColor]})
