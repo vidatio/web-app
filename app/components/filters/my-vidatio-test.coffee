@@ -16,21 +16,12 @@ describe "Filter Catalog", ->
             @cookieStore.put "globals", globals
 
             @input = [
-                {
-                    userId:
-                        _id: "123456789"
-                },
-                {
-                    userId:
-                        _id: "abcdefghi"
-                }
+                { metaData: userId: _id: "123456789" }
+                { metaData: userId: _id: "abcdefghi" }
             ]
 
             @result = [
-                {
-                    userId:
-                        _id: "123456789"
-                }
+                { metaData: userId: _id: "123456789" }
             ]
 
         it "should be defined and included", ->

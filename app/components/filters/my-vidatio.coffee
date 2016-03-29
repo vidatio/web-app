@@ -18,7 +18,7 @@ app.filter "myVidatioFilter", [
 
             if globals.currentUser?.id
                 for element in input
-                    if globals.currentUser.id is element.userId._id
+                    if globals.currentUser.id is element.metaData.userId._id
                         output.push element
 
             output
