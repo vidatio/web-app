@@ -1,9 +1,8 @@
 .visualization
 
-    .map(ng-show="options.type == 'map'")
-        leaflet(id="map" geojson="geojson")
+    leaflet#map(geojson="geojson" ng-show="options.type == 'map'")
 
-    .chart(ng-hide="options.type == 'map' || !options.type")
+    #chart(ng-hide="options.type == 'map' || !options.type")
 
     .placeholder(ng-show="!options.type")
         img(src="images/logo-without-name.png")

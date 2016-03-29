@@ -15,10 +15,7 @@ app.controller "EditorCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    "$stateParams"
-    "ProgressService"
-    "DataFactory"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window, $stateParams, Progress, DataFactory) ->
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window) ->
         $scope.editor = Data
 
         # set the initial values and display both Table- and Display-View on start

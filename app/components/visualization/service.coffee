@@ -101,7 +101,7 @@ app.service 'VisualizationService', [
                     "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
 
                 # set width and height of the visualization for dynamic resizing
-                chartSelector = ".chart"
+                chartSelector = "#chart"
                 $chart = $(chartSelector)
                 width = $chart.parent().width()
                 height = $chart.parent().height()

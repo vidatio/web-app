@@ -9,8 +9,8 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             height: height
             options: options
 
-        @remove()
         super dataset, options.color, width, height, chartSelector
+        @remove()
         @preProcess options
 
         setTimeout =>
