@@ -85,9 +85,7 @@
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert",
-        "SHARE_SERVICE": {
-            "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
-        }
+        "VISUALIZATION_PREPARED": "Die Visualisierung wird zum Download vorbereitet."
     },
     "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
