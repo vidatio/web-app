@@ -457,8 +457,6 @@ class window.vidatio.Helper
                 if @isDate(x) and @isNumeric(y)
                     return true
 
-
-
         return false
 
 # @method $.fn.textWidth
