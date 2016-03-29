@@ -62,6 +62,9 @@ app.run [
                 fromState: fromState
                 fromParams: fromParams
 
+            $rootScope.title = if toState.title? then toState.title else ""
+            console.log $rootScope.title
+
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
@@ -139,6 +142,7 @@ app.config [
         .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
+            title: "home"
 
         .state "app.profile",
             url: "/profile"
@@ -177,13 +181,20 @@ app.config [
 
         # /editor for saved vidatio
         .state "app.editor.id",
-            url: "/vidatio_:id",
+            url: "/editor/:id",
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
             url: "/share"
+            templateUrl: "share/share.html"
+            controller: "ShareCtrl"
+            title: "share"
+
+        # /share for saved vidatio
+        .state "app.share.id",
+            url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"

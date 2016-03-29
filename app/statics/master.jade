@@ -4,7 +4,7 @@ html(ng-app="app")
         base(href="/")
         include includes/meta
 
-        title Vidatio
+        title(ng-bind="title + ' | vidatio'")
 
         include includes/js
         include includes/styl
@@ -13,6 +13,7 @@ html(ng-app="app")
 
         .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
             include header
+
             toast
             vidatio-progress
             menu
