@@ -68,7 +68,7 @@ describe "Service Data", ->
                         [1, 2, 3],
                         ["one", "two", "three"]
                     ]
-                options:
+                visualizationOptions:
                     type: "bar"
                     xColumn: 2
                     yColumn: 3
@@ -83,14 +83,14 @@ describe "Service Data", ->
             expect(@Table.useColumnHeadersFromDataset).toEqual(true)
 
         it "and set visualization options", ->
-            options =
+            visualizationOptions =
                 type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
             @Data.useSavedData data
-            expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
-            expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
+            expect(@Visualization.options).toEqual(jasmine.objectContaining(visualizationOptions))
+            expect(@Table.useColumnHeadersFromDataset).toEqual(data.visualizationOptions.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
             @Data.metaData.fileType = "csv"
@@ -99,7 +99,7 @@ describe "Service Data", ->
             expect(@Table.setHeader).toHaveBeenCalled()
 
         it "from csv data without user header", ->
-            data.options.useColumnHeadersFromDataset = false
+            data.visualizationOptions.useColumnHeadersFromDataset = false
             @Data.metaData.fileType = "csv"
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
