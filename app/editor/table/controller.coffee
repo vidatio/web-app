@@ -38,8 +38,6 @@ app.controller "TableCtrl", [
         $scope.transpose = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl transpose called"
-
             if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
             Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
             if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()

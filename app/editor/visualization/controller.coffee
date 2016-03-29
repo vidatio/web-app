@@ -20,7 +20,7 @@ app.controller "VisualizationCtrl", [
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
-        Visualization.options.fileType = Data.meta.fileType
+        Visualization.options.fileType = Data.metaData.fileType
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend

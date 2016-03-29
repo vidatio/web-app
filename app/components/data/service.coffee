@@ -14,8 +14,7 @@ app.service 'DataService', [
     "DatasetFactory"
     "$location"
     "$state"
-    "ShareService"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state, Share) ->
+    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -107,22 +106,23 @@ app.service 'DataService', [
                 $log.debug
                     data: data
 
-
-                @meta.fileType = if data.metaData?.fileType? then data.metaData.fileType else null
-                Visualization.options.fileType = @meta.fileType
-                Table.useColumnHeadersFromDataset = if data.options?.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
-
-                if @meta.fileType is "shp"
+                if @metaData["fileType"] is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
-                    Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
+                    Table.useColumnHeadersFromDataset = true
                     Map.setGeoJSON data.data
-                else
-                    if Table.useColumnHeadersFromDataset
-                        Table.setHeader data.data.shift()
-                    Table.setDataset data.data
 
-                if data.options?
-                    Visualization.setOptions(data.options)
+                else
+                    if data.options?
+                        Visualization.setOptions(data.options)
+
+                        Table.useColumnHeadersFromDataset = false
+                        if data.options.useColumnHeadersFromDataset
+                            Table.useColumnHeadersFromDataset = true
+
+                        if Table.useColumnHeadersFromDataset
+                            Table.setHeader data.data.shift()
+
+                    Table.setDataset data.data
 
             #@method downloadCSV
             #@description downloads a csv

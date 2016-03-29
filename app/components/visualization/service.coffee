@@ -56,8 +56,8 @@ app.service 'VisualizationService', [
                     $translate(@options.translationKeys[options.type]).then (translation) =>
                         @options["selectedDiagramName"] = translation
                 else
-                    @options["type"] = false
-                    @options["selectedDiagramName"] = false
+                    @options["type"] = null
+                    @options["selectedDiagramName"] = null
 
                 @options["xColumn"] = if options.xColumn? then parseInt(options.xColumn, 10) else null
                 @options["yColumn"] = if options.yColumn? then parseInt(options.yColumn, 10) else null
