@@ -96,7 +96,6 @@
     "LOG_ON": "Login",
     "LOG_OUT": "Logout",
     "MY_PROFILE": "Mein Profil",
-    "MY_VIDATIOS": "Meine Vidatios",
     "PROFILE": "Profil",
     "REGISTRATION": "Registrierung",
     "REGISTER": "Registrieren",
@@ -120,7 +119,6 @@
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
     "CATALOG": "Katalog",
-    "NEW_VIDATIO": "Neues Vidatio",
     "FORM": {
         "ERROR": {
             "UNIQUENESS_EMAIL": "E-Mail bereits vergeben!",
@@ -130,24 +128,23 @@
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
-    "X_AXIS": "X-Achse",
-    "Y_AXIS": "Y-Achse",
+    "VALUE_RANGE": "Wertebereich",
     "COLUMN": "Spalte",
     "DATE": "Datum",
     "FROM": "von",
     "TO": "bis",
-    "FILTER": {
-        "BY_TIME": "Filtern nach Zeit",
-        "BY_CATEGORY": "Filtern nach Kategorie"
-    },
+    "FILTER_BY": "Filtern nach",
+    "RESET_FILTER": "Filter zurücksetzen",
+    "RESET_ALL_FILTERS": "Alle Filter zurücksetzen",
+    "TIME": "Zeit",
     "HEADER": "Kopfzeile",
     "HEADER_DEFAULT": "Spalte",
     "DIAGRAMS": {
         "DIAGRAM_TYPE": "Diagrammart",
-        "SCATTER_PLOT": "Streudiagramm",
+        "SCATTER_PLOT": "Streu-Diagramm",
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
-        "BAR_CHART": "Balkendiagramm",
+        "BAR_CHART": "Balken-Diagramm",
         "TIME_SERIES": "Zeitlicher Verlauf",
         "RECOMMEND": "Diagramm empfehlen"
     },
@@ -156,5 +153,8 @@
     "MORE_VIDATIOS": "Weitere Vidatios",
     "TRANSPOSE": "Transponieren",
     "AXES": "Achsen",
-    "COLORS": "Farben"
+    "COLORS": "Farben",
+    "SELECT2": {
+        "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
+    }
 }

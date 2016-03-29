@@ -27,6 +27,8 @@ app.controller "VisualizationCtrl", [
         $scope.recommend = ->
             Visualization.useRecommendedOptions()
             Visualization.create()
+            Table.updateAxisSelection(Number($scope.visualization.xColumn) + 1, Number($scope.visualization.yColumn) + 1)
+            return true
 
         if Data.meta.fileType is "shp"
             $scope.visualization.type = "map"

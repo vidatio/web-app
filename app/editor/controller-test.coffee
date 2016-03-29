@@ -13,11 +13,7 @@ describe "Editor Controller", ->
             @Visualization =
                 create: ->
             @compile = $compile
-
-            @inputElement = angular.element('<div class="title"><input type="text" id="vidatio-title" ng-change="saveVidatioTitle()" ng-model="editor.name"></input></div>')
-
             spyOn(@Visualization, "create")
-
             EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data, VisualizationService: @Visualization}
 
     afterEach ->
@@ -73,28 +69,3 @@ describe "Editor Controller", ->
             ), 10
             return
             expect(@Visualization.create).toHaveBeenCalled()
-
-    describe "on save vidatio-title if title input-field is not filled up", ->
-        it "should set Data.name according to a predefined standard-title", ->
-            @scope.vidatioTitle = ""
-            @scope.standardTitle = "My Vidatio"
-
-            @scope.saveVidatioTitle()
-            expect(@Data.name).toBeDefined()
-            expect(@Data.name).toBe("My Vidatio")
-
-    describe "on save vidatio-title if title input-field is filled up", ->
-        it "should set Data.name according to the text in the title input field", ->
-            @httpBackend.whenGET(/index/).respond ""
-            @httpBackend.whenGET(/editor/).respond ""
-            @httpBackend.expectGET(/languages/).respond ""
-
-            @compile(@inputElement) @scope
-            @scope.$digest()
-
-            @inputElementInput = @inputElement.find("input")
-            angular.element(@inputElementInput).val("I created my first Vidatio").trigger "input"
-            @scope.$apply()
-
-            expect(@Data.name).toBeDefined()
-            expect(@Data.name).toBe("I created my first Vidatio")

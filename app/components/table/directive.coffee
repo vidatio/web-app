@@ -9,7 +9,8 @@ app.directive 'hot', [
     "TableService"
     "ConverterService"
     "$window"
-    ($timeout, $log, Data, Map, Table, Converter, $window) ->
+    "VisualizationService"
+    ($timeout, $log, Data, Map, Table, Converter, $window, Visualization) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -40,6 +41,7 @@ app.directive 'hot', [
                     colHeaders: header
                     currentColClassName: 'current-col'
                     currentRowClassName: 'current-row'
+                    manualColumnResize: true
                     beforeChange: (change, source) ->
                         $log.info "HotDirective beforeChange called"
                         $log.debug
@@ -73,6 +75,12 @@ app.directive 'hot', [
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"
+            else
+                # Initialize "X" and "Y" on table header
+                xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
+                yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
+
+                Table.updateAxisSelection(xColumn, yColumn)
 
             # Render of table is even then called, when table
             # view is not active, refactoring possible

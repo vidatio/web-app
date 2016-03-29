@@ -10,7 +10,7 @@ app.controller "DatasetCtrl", [
     "$scope"
     "$rootScope"
     "$log"
-    "DataFactory"
+    "DatasetFactory"
     "UserFactory"
     "TableService"
     "MapService"
@@ -76,7 +76,7 @@ app.controller "DatasetCtrl", [
 
         onWindowResizeCallback = ->
             currentWidth = $chart.parent().width()
-            
+
             # resizing should only be done when viz-containers' width changes, return otherwise
             if currentWidth is lastWidth
                 return

@@ -4,17 +4,17 @@ app = angular.module("app.controllers")
 
 app.controller "ProfileCtrl", [
     "$scope"
-    "DataFactory"
+    "DatasetFactory"
     "UserDatasetsFactory"
     "ProgressService"
     "DataService"
     "$cookieStore"
-    "$log"
     "$translate"
-    ($scope, DataFactory, UserDatasetsFactory, Progress, Data, $cookieStore, $log, $translate) ->
+    ($scope, DatasetFactory, UserDatasets, Progress, Data, $cookieStore, $translate) ->
+        $scope.vidatios = []
         globals = $cookieStore.get "globals" || {}
 
-        UserDatasetsFactory.query {id: globals.currentUser.id}, (response) ->
+        UserDatasets.query {id: globals.currentUser.id}, (response) ->
             response.splice(0, response.length - 4)
             $scope.vidatios = response
 
@@ -25,8 +25,6 @@ app.controller "ProfileCtrl", [
         # @method $scope.openInEditor
         # @description open dataset in Editor
         $scope.openInEditor = (data) ->
-            $log.info "ProfileCtrl $scope.openInEditor called"
-
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
                 Data.createVidatio data
