@@ -30,22 +30,11 @@ app.controller "VisualizationCtrl", [
             Table.updateAxisSelection(Number($scope.visualization.xColumn) + 1, Number($scope.visualization.yColumn) + 1)
             return true
 
-        if Data.meta.fileType is "shp"
-            $scope.visualization.type = "map"
-            Map.setInstance()
-        else
+        $timeout ->
             # After having recommend diagram options, we watch the dataset of the table
             # because the watcher fires at initialization the diagram gets immediately drawn
             # FIXME: Whats should happen, if a person clears the table after watching shp?!
-            $scope.$watch (->
-                Table.dataset
-            ), ( ->
-                $log.info "VisualizationCtrl dataset watcher triggered"
-
-                Visualization.create()
-            ), true
-
-        $timeout ->
+            Visualization.create()
             Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->

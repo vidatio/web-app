@@ -33,6 +33,8 @@ app.controller "TableCtrl", [
                 else
                     Table.putHeaderToDataset()
 
+            Visualization.create()
+
         #@method $scope.transpose
         #@description transpose the dataset including the header
         $scope.transpose = ->
