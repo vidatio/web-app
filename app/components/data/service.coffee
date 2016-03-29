@@ -106,20 +106,24 @@ app.service 'DataService', [
                 $log.debug
                     data: data
 
+                if data.metaData?
+                    @metaData = data.metaData
+
+                if data.visualizationOptions?
+                    Visualization.setOptions(data.visualizationOptions)
+
                 if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
+                    Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
                     Map.setGeoJSON data.data
                 else
-                    if data.visualizationOptions?
-                        Visualization.setOptions(data.visualizationOptions)
+                    Table.useColumnHeadersFromDataset = false
+                    if data.visualizationOptions.useColumnHeadersFromDataset
+                        Table.useColumnHeadersFromDataset = true
 
-                        Table.useColumnHeadersFromDataset = false
-                        if data.visualizationOptions.useColumnHeadersFromDataset
-                            Table.useColumnHeadersFromDataset = true
-
-                        if Table.useColumnHeadersFromDataset
-                            Table.setHeader data.data.shift()
+                    if Table.useColumnHeadersFromDataset
+                        Table.setHeader data.data.shift()
 
                     Table.setDataset data.data
 

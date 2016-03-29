@@ -63,23 +63,62 @@ describe "Service Data", ->
 
     describe "should create new Vidatio", ->
         data =
-                data:
-                    [
-                        [1, 2, 3],
-                        ["one", "two", "three"]
-                    ]
-                metaData:
-                    fileType: "csv"
-                visualizationOptions:
-                    type: "bar"
-                    xColumn: 2
-                    yColumn: 3
-                    color: "#FF00FF"
-                    useColumnHeadersFromDataset: true
+            data:
+                [
+                    [1, 2, 3],
+                    ["one", "two", "three"]
+                ]
+            metaData:
+                fileType: "csv"
+            visualizationOptions:
+                type: "bar"
+                xColumn: 2
+                yColumn: 3
+                color: "#FF00FF"
+                useColumnHeadersFromDataset: true
 
         it "from shp data", ->
-            data.metaData.fileType = "shp"
-            @Data.useSavedData data
+            dataSHP =
+                data:
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                          "type": "Feature",
+                          "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                              16.41097597738341,
+                              48.19396209464308
+                            ]
+                          },
+                          "properties": {
+                            "OBJECTID": 641,
+                            "ID": "IM_Z1030",
+                            "BEZEICHNUN": "MA 15 - Impfservice und reisemedizinische Beratung",
+                          }
+                        },
+                        {
+                          "type": "Feature",
+                          "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                              16.37971816098013,
+                              48.216655006523915
+                            ]
+                          },
+                          "properties": {
+                            "OBJECTID": 642,
+                            "ID": "IM_BGA02",
+                            "BEZEICHNUN": "MA 15 - Bezirksgesundheitsamt 2 zuständig für den 2. und 20. Bezirk",
+                          }
+                        }]
+                metaData:
+                    fileType: "shp"
+                visualizationOptions:
+                    type: "map"
+                    useColumnHeadersFromDataset: true
+
+            @Data.useSavedData dataSHP
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Map.setGeoJSON).toHaveBeenCalled()
             expect(@Table.useColumnHeadersFromDataset).toEqual(true)
