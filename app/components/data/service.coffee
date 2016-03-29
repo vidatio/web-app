@@ -112,11 +112,11 @@ app.service 'DataService', [
                     Map.setGeoJSON data.data
 
                 else
-                    if data.options?
-                        Visualization.setOptions(data.options)
+                    if data.visualizationOptions?
+                        Visualization.setOptions(data.visualizationOptions)
 
                         Table.useColumnHeadersFromDataset = false
-                        if data.options.useColumnHeadersFromDataset
+                        if data.visualizationOptions.useColumnHeadersFromDataset
                             Table.useColumnHeadersFromDataset = true
 
                         if Table.useColumnHeadersFromDataset
