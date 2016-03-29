@@ -10,9 +10,7 @@ app.controller "IndexCtrl", [
     "ngToast"
     ($scope, DatasetsFactory, $log, $translate, ngToast) ->
         DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
-            #"/datasets?limit=3"
-            console.log response
-            $log.info "IndexCtrl successfully queried datasets"
+            $log.info "IndexCtrl successfully queried newest datasets"
 
             $scope.newestVidatios = response.slice(0, 3)
 
@@ -25,7 +23,7 @@ app.controller "IndexCtrl", [
                     vidatio.image = "images/placeholder-featured-vidatios-buchungsstatistik-pongau.svg"
 
         , (error) ->
-            $log.info "IndexCtrl error on query datasets"
+            $log.info "IndexCtrl error on query newest datasets"
             $log.error error
 
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
