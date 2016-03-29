@@ -22,6 +22,7 @@
     "NEW_VIDATIO": "Neues Vidatio",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
     "ALL_VIDATIOS": "Alle Vidatios",
+    "MY_VIDATIOS": "Meine Vidatios",
     "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
@@ -88,7 +89,7 @@
             "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
         }
     },
-    "AVAILABLE_DATASETS": "Verfügbare Vidatios",
+    "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
     "PRICING": "Pricing",
     "FEATURES": "Features",
