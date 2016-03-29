@@ -50,7 +50,11 @@ app.controller "DatasetCtrl", [
                 $scope.data.title = $scope.data.name || "Vidatio"
 
                 Data.useSavedData $scope.data
-                Visualization.create()
+
+                options = $scope.data.visualizationOptions
+                options.fileType = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "csv"
+
+                Visualization.create(options)
 
                 $timeout ->
                     Progress.setMessage()

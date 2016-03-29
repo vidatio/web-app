@@ -62,6 +62,7 @@ app.service 'VisualizationService', [
                 @options["xColumn"] = if options.xColumn? then parseInt(options.xColumn, 10) else null
                 @options["yColumn"] = if options.yColumn? then parseInt(options.yColumn, 10) else null
                 @options["color"] = if options.color? then options.color else "#11DDC6"
+                @options["fileType"] = if options.fileType? then options.fileType else null
 
             # @method useRecommendedOptions
             # @public
@@ -113,7 +114,7 @@ app.service 'VisualizationService', [
                         # only create the geoJSON from the table, if we don't use shp
                         # because otherwise we geoJSON is directly updated and so no conversion is needed
                         # and also because we don't have the xColumn of yColumn saved
-                        if @options.fileType isnt "shp"
+                        if options.fileType isnt "shp"
                             # Use the whole dataset because we want the other attributes inside the popups
                             geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
                                 x: options.xColumn,
