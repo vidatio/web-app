@@ -106,11 +106,10 @@ app.service 'DataService', [
                 $log.debug
                     data: data
 
-                if @metaData["fileType"] is "shp"
+                if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
                     Map.setGeoJSON data.data
-
                 else
                     if data.visualizationOptions?
                         Visualization.setOptions(data.visualizationOptions)

@@ -68,6 +68,8 @@ describe "Service Data", ->
                         [1, 2, 3],
                         ["one", "two", "three"]
                     ]
+                metaData:
+                    fileType: "csv"
                 visualizationOptions:
                     type: "bar"
                     xColumn: 2
@@ -76,13 +78,14 @@ describe "Service Data", ->
                     useColumnHeadersFromDataset: true
 
         it "from shp data", ->
-            @Data.metaData.fileType = "shp"
+            data.metaData.fileType = "shp"
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Map.setGeoJSON).toHaveBeenCalled()
             expect(@Table.useColumnHeadersFromDataset).toEqual(true)
 
         it "and set visualization options", ->
+            data.metaData.fileType = "csv"
             visualizationOptions =
                 type: "bar"
                 xColumn: 2
@@ -93,14 +96,12 @@ describe "Service Data", ->
             expect(@Table.useColumnHeadersFromDataset).toEqual(data.visualizationOptions.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
-            @Data.metaData.fileType = "csv"
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).toHaveBeenCalled()
 
         it "from csv data without user header", ->
             data.visualizationOptions.useColumnHeadersFromDataset = false
-            @Data.metaData.fileType = "csv"
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).not.toHaveBeenCalled()
