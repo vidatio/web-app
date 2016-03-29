@@ -18,9 +18,6 @@ app.controller "EditorCtrl", [
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window) ->
         $scope.editor = Data
 
-        # check if userAgent is Firefox -> necessary for the width calculation of the input field
-        isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1
-
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
         $scope.activeTabs = [false, true, false]
