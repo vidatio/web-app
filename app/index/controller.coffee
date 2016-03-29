@@ -4,13 +4,14 @@ app = angular.module "app.controllers"
 
 app.controller "IndexCtrl", [
     "$scope"
-    "DatasetFactory"
+    "DatasetsFactory"
     "$log"
     "$translate"
     "ngToast"
-    ($scope, DatasetFactory, $log, $translate, ngToast) ->
-        DatasetFactory.query (response) ->
+    ($scope, DatasetsFactory, $log, $translate, ngToast) ->
+        DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
             #"/datasets?limit=3"
+            console.log response
             $log.info "IndexCtrl successfully queried datasets"
 
             $scope.newestVidatios = response.slice(0, 3)
