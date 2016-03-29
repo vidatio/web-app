@@ -5,12 +5,11 @@ app = angular.module "app.controllers"
 app.controller "TableCtrl", [
     "$scope"
     "TableService"
-    "ShareService"
     "DataService"
     "MapService"
     "ConverterService"
     "$log"
-    ($scope, Table, Share, Data, Map, Converter, $log) ->
+    ($scope, Table, Data, Map, Converter, $log) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
 
@@ -60,5 +59,5 @@ app.controller "TableCtrl", [
             csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
             csvURL = window.URL.createObjectURL(csvData)
 
-            Share.download fileName + ".csv", csvURL
+            vidatio.visualization.download fileName + ".csv", csvURL
 ]

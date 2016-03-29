@@ -8,7 +8,6 @@ app.controller "VisualizationCtrl", [
     "TableService"
     "MapService"
     "$timeout"
-    "ShareService"
     "DataService"
     "ProgressService"
     "ngToast"
@@ -17,7 +16,7 @@ app.controller "VisualizationCtrl", [
     "$translate"
     "VisualizationService"
     "$window"
-    ($rootScope, $scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
+    ($rootScope, $scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
         $scope.visualization = Visualization.options
         $scope.data = Data
         $scope.header = Table.header
