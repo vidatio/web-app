@@ -2,9 +2,7 @@
 
 app = angular.module "app.filters"
 
-app.filter "categoryFilter", [
-    "$log"
-    ($log) ->
+app.filter "categoryFilter", [ ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {String} category
@@ -15,7 +13,7 @@ app.filter "categoryFilter", [
             output = []
 
             for element in input
-                if element.metaData?.category?.name? and element.metaData.category.name.toLowerCase() is category.toLowerCase()
+                if element.metaData?.categoryId?.name? and element.metaData.categoryId.name.toLowerCase() is category.toLowerCase()
                         output.push(element)
 
             output

@@ -146,7 +146,7 @@ app.service 'DataService', [
                 csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
                 csvURL = window.URL.createObjectURL(csvData)
 
-                Share.download fileName + ".csv", csvURL
+                vidatio.visualization.download fileName + ".csv", csvURL
 
         new Data
 ]

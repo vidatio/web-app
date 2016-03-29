@@ -16,7 +16,7 @@ app.controller "VisualizationCtrl", [
     "VisualizationService"
     "$window"
     "$stateParams"
-    ($rootScope, $scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
+    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options

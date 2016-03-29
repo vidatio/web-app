@@ -14,10 +14,10 @@ app.controller "ShareCtrl", [
     "MapService"
     "TableService"
     "$timeout"
-    "CatalogFactory"
+    "CategoriesFactory"
     "VisualizationService"
     "$stateParams"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, CatalogFactory, Visualization, $stateParams) ->
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -27,7 +27,7 @@ app.controller "ShareCtrl", [
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.vidatio.name = "#{translation} #{moment().format("DD/MM/YYYY")}"
 
-        CatalogFactory.getCategories().query (response) ->
+        Categories.query (response) ->
             $log.info "ShareCtrl successfully queried categories"
             $scope.categories = response
 

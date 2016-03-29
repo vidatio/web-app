@@ -16,7 +16,7 @@ app.filter "tagsFilter", [
             output = []
 
             for element in input
-                preprocessedTags = preprocessTagsFilter(element.metaData?.tags).split(", ")
+                preprocessedTags = preprocessTagsFilter(element.metaData?.tagIds).split(", ")
                 for tag in tags
                     if tag.toLowerCase() in vidatio.helper.arrayToLowerCase(preprocessedTags)
                         output.push element

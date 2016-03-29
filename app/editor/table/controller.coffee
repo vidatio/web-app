@@ -10,10 +10,10 @@ app.controller "TableCtrl", [
     "ConverterService"
     "$log"
     "VisualizationService"
-    ($scope, Table, Share, Data, Map, Converter, $log, Visualization) ->
+    ($scope, Table, Data, Map, Converter, $log, Visualization) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
-
+        $scope.visualization = Visualization.options
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
@@ -107,7 +107,6 @@ app.controller "TableCtrl", [
 
             return true
 
-            vidatio.visualization.download fileName + ".csv", csvURL
         # remove focus-states from axis-buttons if other icons are clicked
         clearFocusedAxisButtons = ->
             $("[class*='-axis-button']").removeClass "focused"
