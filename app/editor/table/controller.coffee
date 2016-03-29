@@ -33,6 +33,8 @@ app.controller "TableCtrl", [
                 else
                     Table.putHeaderToDataset()
 
+            Visualization.create()
+
         #@method $scope.transpose
         #@description transpose the dataset including the header
         $scope.transpose = ->
@@ -128,7 +130,7 @@ app.controller "TableCtrl", [
                     $header.unbind "click"
 
             return true
-        
+
         # remove focus-states from axis-buttons if other icons are clicked
         clearFocusedAxisButtons = ->
             $("[class*='-axis-button']").removeClass "focused"

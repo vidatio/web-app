@@ -451,13 +451,11 @@ class window.vidatio.Helper
             when "parallel"
                 return true
             when "bar"
-                if @isNumeric(y)
+                if @isNumeric(y) and String(x).length > 0
                     return true
             when "timeseries"
                 if @isDate(x) and @isNumeric(y)
                     return true
-
-
 
         return false
 
