@@ -1,5 +1,7 @@
 {
     "SLOGAN": "Seeing the bigger Picture",
+    "API": "API",
+    "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",
     "TO_YOUR_VIDATIO_LANDING_PAGE": "zu deinem Vidatio",
@@ -18,7 +20,8 @@
     "PRESS_OGD_WIEN": "Präsentation Open Government Data-Stammtisch Wien",
     "PRESS_ODAAL": "Unterstützung Open Data Ambient Assisted Living-Workshop",
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
-    "ALL_VIDATIOS": "Verfügbare Vidatios",
+    "ALL_VIDATIOS": "Alle Vidatios",
+    "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
