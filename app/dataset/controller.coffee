@@ -64,7 +64,7 @@ app.controller "DatasetCtrl", [
         # @method $scope.openInEditor
         # @description set the vidatio options from saved dataset
         $scope.openInEditor = ->
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
         # toggle link-box with vidatio-link
