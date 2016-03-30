@@ -32,6 +32,8 @@
             text-align center
 
         #preview
+            position relative
+            width auto
             height 293px
             padding 20px
 
@@ -40,8 +42,10 @@
                 margin-top -50px
                 margin-left -40px
 
-            .metadata
-                position relative
+            .metadata-preview
+                position absolute
+                z-index 1
+                width calc(100% - 40px)
                 background-color rgba($color-green, .4)
                 border-top 2px solid $color-table-odd-active
                 text-align left
@@ -60,12 +64,6 @@
                         font-family Colaborate, $fonts
                         font-size 15px
                         line-height 17px
-                    &.title
-                        margin-bottom 5px
-                    &.category
-                    &.licence
-                        float left
-                        margin-right 5px
                     &.tags
                         color $color-active
                     &.edit
@@ -111,17 +109,17 @@
                     margin-left 2px
 
             .share-options
-                display block
+                text-align center
+                padding 0
+                margin 0
+                list-style none outside none
                 height 45px
-                margin 0 auto 15px
-                width 275px
-
                 li
+                    display inline
                     list-style-type none
-                    float left
                     margin 0 5px
 
-                    button
+                    a
                         width 45px
                         height 45px
                         padding 5px

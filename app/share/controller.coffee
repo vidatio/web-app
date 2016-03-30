@@ -22,7 +22,7 @@ app.controller "ShareCtrl", [
     "ErrorHandler"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler) ->
         $scope.share = Data
-        $scope.goToPreview = false
+        $scope.goToPreview = true
 
         $scope.visualization = Visualization.options
 
@@ -108,6 +108,14 @@ app.controller "ShareCtrl", [
                     .then (translation) ->
                         ngToast.create
                             content: translation
+
+                    $scope.facebookHref =
+                        "http://www.facebook.com/sharer.php?s=100&p[url]=" +
+                        encodeURIComponent('https://www.vidatio.com/') +
+                        "&p[images][0]=" +
+                        encodeURIComponent("#{(response.visualizationOptions.thumbnail).replace(/^data:image\/(png|jpg);base64,/, "")}") +
+                        "&p[title]=" +
+                        encodeURIComponent response.metaData.name
 
                     return $scope.goToPreview = !$scope.goToPreview
 

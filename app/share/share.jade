@@ -2,14 +2,14 @@
         .row
             .col-sm-6
                 #preview.area
-                    ul.metadata-preview(ng-show="goToPreview")
+                    ul.metadata-preview(ng-show="goToPreview && vidatio.metaData")
                         li.editor {{vidatio.metaData.userId.name}}
                             span.author {{vidatio.metaData.creator}}
                         li.title {{vidatio.metaData.name}}
-                        li.category {{vidatio.categoryId.name}}
-                        li.licence Licence
-                        li.tags Tags, Tags, Tags
-                        li.edit
+                        li.category {{vidatio.metaData.categoryId.name}}
+                        li.tags
+                            span.tag(ng-repeat="tag in vidatio.metaData.tagIds track by $index") {{tag.name}}
+                        //- li.edit
                             a.fui-new(ng-click="show = 'metaData'")
                     visualization
 
@@ -64,9 +64,9 @@
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
-                            li: button.btn.btn-primary.icon-facebook
-                            li: button.btn.btn-primary.icon-twitter
-                            li: button.btn.btn-primary.icon-link
+                            li: a.btn.btn-primary.icon-facebook(href="{{facebookHref}}")
+                            li: a.btn.btn-primary.icon-twitter
+                            li: a.btn.btn-primary.icon-link
                     .row
                         h3 Embed Code
                             span.icon-embeddedcode
