@@ -7,14 +7,9 @@ app.service 'DataService', [
     "TableService"
     "ConverterService"
     "VisualizationService"
-    "$rootScope"
-    "ngToast"
-    "$translate"
     "$log"
     "DatasetFactory"
-    "$location"
-    "$state"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state) ->
+    (Map, Table, Converter, Visualization, $log, DatasetFactory) ->
         class Data
             constructor: ->
                 $log.info "DataService constructor called"
@@ -79,10 +74,6 @@ app.service 'DataService', [
                     $log.info("Dataset successfully saved")
                     $log.debug
                         response: response
-
-                    link = $state.href("app.dataset", {id: response._id}, {absolute: true})
-                    $rootScope.link = link
-                    $rootScope.showLink = true
 
                     return cb null, response
                 , (error) ->

@@ -21,7 +21,8 @@ app.controller "ImportCtrl", [
     "ngToast"
     "ProgressService"
     "VisualizationService"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
+    "ErrorHandler"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization, ErrorHandler) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.importService = Import
@@ -72,13 +73,7 @@ app.controller "ImportCtrl", [
 
                     $timeout ->
                         Progress.setMessage ""
-
-                    $translate('TOAST_MESSAGES.READ_ERROR_LINK')
-                    .then (translation) ->
-                        ngToast.create(
-                            content: translation
-                            className: "danger"
-                        )
+                    ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->

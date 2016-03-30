@@ -6,9 +6,10 @@ app.controller "LoginCtrl", [
     "$scope"
     "UserService"
     "UserFactory"
+    "ErrorHandler"
     "$translate"
     "ngToast"
-    ($scope, UserService, UserFactory, $translate, ngToast) ->
+    ($scope, UserService, UserFactory, ErrorHandler, $translate, ngToast) ->
         $scope.logon = ->
             UserService.logon($scope.user)
             .then (user) ->
@@ -29,10 +30,7 @@ app.controller "LoginCtrl", [
                 # if registration was successful call private logon-function
                 $scope.logon()
             , (error) ->
-                $translate('TOAST_MESSAGES.SERVER_ERROR').then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+                return ErrorHandler.format error
 
         # To give the prepends tags of flat ui the correct focus style
         angular.element "#login .input-group"

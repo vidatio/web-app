@@ -1,6 +1,56 @@
 {
     "SLOGAN": "Seeing the bigger Picture",
-    "API": "API",
+    "API": {
+        "NAME": "API",
+        "ERROR": {
+            "USER": {
+                "REGISTER": {
+                    "NAME": {
+                        "NOTVALID": "Username ist nicht valide.",
+                        "REQUIRED": "Username muss angegeben werden."
+                    },
+                    "EMAIL": {
+                       "NOTVALID": "Email-Adresse ist nicht valide.",
+                       "REQUIRED": "Email-Adresse muss angegeben werden."
+                    }
+                }
+            },
+            "TAG":{
+                "CREATE": {
+                    "NAME": {
+                       "NOTVALID": "Tag-Name ist nicht valide.",
+                       "REQUIRED": "Tag-Name darf nicht leer sein."
+                    }
+                }
+            },
+            "DATASET":{
+                "CREATE": {
+                    "NAME": {
+                       "NOTVALID": "Dataset-Name ist nicht valide.",
+                       "REQUIRED": "Dataset-Name muss ausgefüllt werden."
+                    },
+                    "FILETYPE": {
+                       "REQUIRED": "Filetype muss angegeben werden."
+                    },
+                    "USER_ID": {
+                       "REQUIRED": "User-Id muss angegeben werden."
+                    },
+                    "CATEGORY": {
+                       "REQUIRED": "Kategorie muss angegeben werden."
+                    },
+                    "VISUALIZATION_OPTIONS": {
+                       "REQUIRED": "Visualisierung muss mitgespeichert werden."
+                    }
+                }
+            },
+            "MONGO": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+            "PARAMETER": "Datenset muss mindestens die Visualisierung, Metadaten und die tatsächlichen Daten beinhalten",
+            "HEADER": "Der angegebene Link kann von uns leider nicht verwendet werden, da die externen Servereinstellungen nicht angegeben wurden.",
+            "NOTFOUND": "Die angegebene Url kann leider nicht gefunden werden",
+            "CAST": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+            "UNKNOWN": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!"
+        }
+    },
     "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",

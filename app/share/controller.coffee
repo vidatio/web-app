@@ -19,7 +19,8 @@ app.controller "ShareCtrl", [
     "$stateParams"
     "ProgressService"
     "ngToast"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast) ->
+    "ErrorHandler"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -98,13 +99,7 @@ app.controller "ShareCtrl", [
                         Progress.setMessage ""
 
                     if errors?
-                        for error in errors.data.error.errors
-                            for key, value of error
-                                $translate(error["#{key}"].i18n)
-                                .then (translation) ->
-                                    ngToast.create
-                                        content: translation
-                                        className: "danger"
+                        ErrorHandler.format errors
                         return false
 
                     $translate('TOAST_MESSAGES.DATASET_SAVED')

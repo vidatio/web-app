@@ -24,7 +24,8 @@ app.controller "DatasetCtrl", [
     "DataService"
     "VisualizationService"
     "$window"
-    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
+    "ErrorHandler"
+    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window, ErrorHandler) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
@@ -65,10 +66,7 @@ app.controller "DatasetCtrl", [
                 $timeout ->
                     Progress.setMessage()
 
-                $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+                ErrorHandler.format error
 
         # Resizing the visualization
         # using setTimeout to use only to the last resize action of the user
