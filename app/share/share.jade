@@ -66,14 +66,17 @@
                         ul.share-options
                             li: a.btn.btn-primary.icon-facebook(href="{{facebookHref}}")
                             li: a.btn.btn-primary.icon-twitter
-                            li: a.btn.btn-primary.icon-link
+                            li: a.btn.btn-primary.icon-link(ng-click="copyVidatioLink()")
                     .row
                         h3 Embed Code
                             span.icon-embeddedcode
                         .input-group.single
                             textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
                     .row
-                        h3 {{ "COPY_LINK" | translate }}
+                        h3 {{ "LINK" | translate }}
                             span.icon-link
                         .input-group.single
-                            input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly)
+                            input.form-control#vidatio-link(ng-model="link" onClick="this.select();" readonly)
+
+                    .row
+                        a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}

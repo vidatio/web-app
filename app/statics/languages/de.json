@@ -211,5 +211,6 @@
     "COLORS": "Farben",
     "SELECT2": {
         "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
-    }
+    },
+    "SHOW_DETAIL_VIEW": "Deitailansicht"
 }

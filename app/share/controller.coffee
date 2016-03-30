@@ -20,7 +20,8 @@ app.controller "ShareCtrl", [
     "ProgressService"
     "ngToast"
     "ErrorHandler"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler) ->
+    "$state"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state) ->
         $scope.share = Data
         $scope.goToPreview = true
 
@@ -104,18 +105,22 @@ app.controller "ShareCtrl", [
                         ErrorHandler.format errors
                         return false
 
+                    $scope.vidatio._id = response._id
+
+                    $scope.link = $state.href("app.dataset", {id: response._id}, {absolute: true})
+                    $scope.facebookHref =
+                        "http://www.facebook.com/sharer.php?s=100&p[url]=" +
+                        encodeURIComponent($scope.link) +
+                        "&p[images][0]=" +
+                        encodeURIComponent("#{(response.visualizationOptions.thumbnail).replace(/^data:image\/(png|jpg);base64,/, "")}") +
+                        "&p[title]=" +
+                        encodeURIComponent(response.metaData.name)
+
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
                         ngToast.create
                             content: translation
 
-                    $scope.facebookHref =
-                        "http://www.facebook.com/sharer.php?s=100&p[url]=" +
-                        encodeURIComponent('https://www.vidatio.com/') +
-                        "&p[images][0]=" +
-                        encodeURIComponent("#{(response.visualizationOptions.thumbnail).replace(/^data:image\/(png|jpg);base64,/, "")}") +
-                        "&p[title]=" +
-                        encodeURIComponent response.metaData.name
 
                     return $scope.goToPreview = !$scope.goToPreview
 
@@ -139,6 +144,40 @@ app.controller "ShareCtrl", [
             $log.info "SharCtrl downloadCSV called"
 
             Data.downloadCSV($scope.vidatio.name)
+
+        $scope.copyVidatioLink = ->
+            $log.info "DatasetCtrl copyVidatioLink called"
+
+            window.getSelection().removeAllRanges()
+            link = document.querySelector "#vidatio-link"
+            range = document.createRange()
+            range.selectNode link
+            window.getSelection().addRange(range)
+
+            try
+                successful = document.execCommand "copy"
+
+                $log.debug
+                    message: "DatasetCtrl copy vidatio-link to clipboard"
+                    successful: successful
+
+                $translate("TOAST_MESSAGES.LINK_COPIED")
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+
+            catch error
+                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
+                $log.error
+                    error: error
+
+                $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
+            window.getSelection().removeAllRanges()
 
 
 ]
