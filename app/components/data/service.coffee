@@ -55,16 +55,16 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset, metaData) ->
+            saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
                 $log.info("saveViaAPI called")
                 $log.debug
                     dataset: dataset
                     metaData: metaData
+                    thumbnail: thumbnail
 
                 angular.extend @metaData, metaData
 
                 DatasetFactory.save
-                    name: @name
                     data: dataset
                     published: @metaData.publish
                     metaData: @metaData
@@ -74,29 +74,23 @@ app.service 'DataService', [
                         yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
+                        thumbnail: thumbnail
                 , (response) ->
                     $log.info("Dataset successfully saved")
                     $log.debug
                         response: response
 
-                    $translate('TOAST_MESSAGES.DATASET_SAVED')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
                     $rootScope.showLink = true
+
+                    return cb null, response
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
                         error: error
 
-                    $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
+                    return cb error, null
 
             # @method useSavedData
             # @description from existing dataset

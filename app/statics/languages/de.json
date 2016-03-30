@@ -85,7 +85,8 @@
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert",
-        "VISUALIZATION_PREPARED": "Die Visualisierung wird zum Download vorbereitet."
+        "VISUALIZATION_PREPARED": "Visualisierung wird zum Download vorbereitet",
+        "SAVE_DATASET": "Vidatio wird gespeichert"
     },
     "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",

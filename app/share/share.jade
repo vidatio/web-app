@@ -2,11 +2,11 @@
         .row
             .col-sm-6
                 #preview.area
-                    ul.metadata-preview(ng-show="show == 'share'")
-                        li.editor Editor
-                            span.author (Author)
-                        li.title Vidatio Title
-                        li.category Category
+                    ul.metadata-preview(ng-show="goToPreview")
+                        li.editor {{vidatio.metaData.userId.name}}
+                            span.author {{vidatio.metaData.creator}}
+                        li.title {{vidatio.metaData.name}}
+                        li.category {{vidatio.categoryId.name}}
                         li.licence Licence
                         li.tags Tags, Tags, Tags
                         li.edit
@@ -47,10 +47,8 @@
                                 input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
                             .input-group.form-group.selection
-                                select.form-control(name="category" ng-model="vidatio.category" required)
+                                select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" required)
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
-                                    option(ng-repeat="category in categories" value="{{category.name}}") {{category.name}}
-
                         .row
                             label.checkbox(for="publish")
                                 input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish" checked="checked")
