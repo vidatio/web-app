@@ -147,13 +147,11 @@ app.config [
         .state "app.registration",
             url: "/registration"
             templateUrl: "registration/registration.html"
-            controller: "RegistrationCtrl"
             title: "registration"
 
         .state "app.login",
             url: "/login"
             templateUrl: "login/login.html"
-            controller: "LoginCtrl"
             title: "login"
 
         .state "app.import",

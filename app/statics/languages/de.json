@@ -10,8 +10,8 @@
     "SAVE_OR_SHARE": "Vidatio verwenden",
     "GET_LANDING_PAGE": "Get",
     "STARTED_LANDING_PAGE": "Started",
-    "SAVE_PERMANENTLY": "Vidatio dauerhaft speichern",
     "NEWEST_VIDATIOS": "Neueste Vidatios",
+    "SAVE_PERMANENTLY": "Vidatio dauerhaft speichern",
     "SEARCH_VIDATIOS": "Vidatios durchsuchen",
     "CATEGORIES": "Kategorien",
     "VIDATIO_PUBLIC": "Öffentlichkeit",
@@ -47,6 +47,7 @@
     "SAVE": "Speichern",
     "OPEN_IN_EDITOR": "Im Editor öffnen",
     "TOAST_MESSAGES": {
+        "LOGIN_SUCCESS": "Willkommen {{name}}.",
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",

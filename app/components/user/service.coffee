@@ -11,7 +11,8 @@ app.service 'UserService', [
     "$q"
     "Base64"
     "$cookieStore"
-    ($http, UserAuthFactory, UserUniquenessFactory, $rootScope, $log, $q, Base64, $cookieStore) ->
+    "$state"
+    ($http, UserAuthFactory, UserUniquenessFactory, $rootScope, $log, $q, Base64, $cookieStore, $state) ->
         class User
             # @method constructor
             # @public
@@ -23,61 +24,38 @@ app.service 'UserService', [
             # @param {String} key
             # @param {String} value
             checkUniqueness: (key, value) ->
-                $log.info "UserService checkUniqueness called"
-                $log.debug
-                    key: key
-                    value: value
-
                 params = {}
                 params[key] = escape(value)
 
-                UserUniquenessFactory.check(params).$promise.then (results) ->
-                    $log.info "UserService checkUniqueness success (user does not exist)"
-                    $log.debug
-                        results: results
-
+                UserUniquenessFactory.check(params).$promise
+                .then (results) ->
                     if results["available"]
                         $q.resolve(results)
                     else
                         $q.reject(results)
-                , (error) ->
-                    $log.error "UserService checkUniqueness get error (user exists already)"
-                    $log.debug
-                        error: error
-
+                .catch (error) ->
                     $q.reject(error)
 
-            # @method setCredentials
+            # @method logon
             # @public
-            # @param {String} name
-            # @param {String} password
+            # @param {String} user
             logon: (user) =>
-                $log.info "UserService logon called"
-                $log.debug
-                    name: user.name
-                    password: user.password
-
                 deferred = $q.defer()
 
                 authData = Base64.encode(user.name + ":" + user.password)
                 $http.defaults.headers.common["Authorization"] = "Basic " + authData
 
-                UserAuthFactory.get().$promise.then (result) =>
-                    $log.info "UserService init success called"
-                    $log.debug
-                        result: result
-
+                UserAuthFactory.get().$promise
+                .then (result) =>
                     @user = result.user
-                    @setCredentials(@user.name, @user.password, @user._id, authData)
+                    @setCredentials(@user.name, @user._id, authData)
 
                     deferred.resolve @user
-                , (error) =>
-                    $log.info "UserService init error of authorization called (401)"
-                    $log.debug
-                        error: error
 
+                    @redirect()
+
+                .catch (error) =>
                     @logout()
-
                     deferred.reject error
 
                 deferred.promise
@@ -85,29 +63,19 @@ app.service 'UserService', [
             # @method logout
             # @public
             logout: =>
-                $log.info "UserService logout called"
-
-                @user =
-                    name: ""
-
+                @user = name: ""
                 $rootScope.globals.authorized = undefined
                 delete $rootScope.globals.currentUser
-
                 $cookieStore.remove "globals"
-
                 $http.defaults.headers.common.Authorization = "Basic "
+                $state.go "app.index" if $state.$current.name is "app.profile"
+
 
             # @method setCredentials
             # @public
             # @param {String} name
-            # @param {String} password
-            setCredentials: (name, password, userID, authData) ->
-                $log.info "UserService setCredentials called"
-                $log.debug
-                    name: name
-                    password: password
-                    userID: userID
-
+            # @param {String} userID
+            setCredentials: (name, userID, authData) ->
                 $rootScope.globals =
                     currentUser:
                         name: name
@@ -115,6 +83,24 @@ app.service 'UserService', [
                         id: userID
                 $cookieStore.put "globals", $rootScope.globals
                 $rootScope.globals.authorized = true
+
+            # @method redirect
+            # @public
+            # @description redirect user to last visited pages before login-/ registration-page was entered;
+            # @description redirect to app.index if visited pages were only app.login or app.registration
+            redirect: ->
+                # After login success we want to route the user to the last page except login and registration
+                for element, index in $rootScope.history
+                    element = $rootScope.history[$rootScope.history.length - (index + 1)]
+
+                    unless element.name in ["app.login", "app.registration", ""]
+                        # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
+                        unless element.name is "app.dataset"
+                            return $state.go element.name, element.params.locale
+
+                        return $state.go element.name, 'id': element.params.id, element.params.locale
+
+                return $state.go "app.index"
 
         new User
 ]
