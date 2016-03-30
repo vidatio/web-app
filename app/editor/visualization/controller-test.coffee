@@ -43,7 +43,7 @@ describe "Visualization Ctrl", ->
                 isInputValid: ->
                     true
                 create: ->
-                recommendDiagram: ->
+                useRecommendedOptions: ->
 
             VisualizationCtrl = $controller "VisualizationCtrl",
                 $scope: @scope, TableService: Table, MapService: Map, DataService: Data,

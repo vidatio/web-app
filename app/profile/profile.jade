@@ -8,15 +8,15 @@
                     .row
                         .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
-                                a.img(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
+                                a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
                                     img(src="{{ vidatio.image }}")
 
-                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
-                                    span  {{ "EDIT" | translate | uppercase }}
+                                a.btn.btn-primary.icon-edit(ui-sref="app.editor({ id: vidatio._id, locale: locale })" ng-click="openInEditor(vidatio)")
+                                    span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                                 .text
-                                    a.inverse(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
-                                        h4.title {{ vidatio.title }}
+                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
+                                        h4.title {{ vidatio.name }}
                                     p {{ vidatio.description | limitTo: 120}} ...
 
                     .row

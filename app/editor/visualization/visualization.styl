@@ -1,59 +1,14 @@
 #visualization
-    #chart
-        input[id^="d3plus_"][id$="_inline_input"]
-            position absolute
-            padding 5px
-            font-family Helvetica
-            font-weight 200
-            font-size 12px
+    position relative
 
-        // this line is needed as d3-plus does not display its line properly after resizing the window when the user
-        // enters more than one time the editor with a dataset
-        g.d3plus_line
-        g.d3plus_rect
-            opacity 1 !important
-
-    .angular-leaflet-map
-        a:link, a:visited
-            color $color-black
-
-        .leaflet-bar a
-            &:hover
-                background-color $color-hover-light
-
-    .leaflet-container
-        a.leaflet-popup-close-button
-            top 5px
-            right 2px
-
-            &:hover
-                color $color-red !important
-
-        .leaflet-popup-content-wrapper
-            min-width 140px
-            border-top 5px solid $color-red
-            border-radius 0px
-
-            .leaflet-popup-content
-                padding-right 15px
-                overflow-wrap break-word
-
-                a:link, a:visited
-                    color $color-active
-                a:hover, a:active
-                    color $color-black
-
-        .leaflet-popup-tip
-            width 20px
-            height 20px
-
-        path.leaflet-clickable
-            stroke $color-passive
-            stroke-opacity 1
-            fill $color-green
-            fill-opacity 0.25
-            stroke-width 3px
-            stroke-dasharray 5
+    .visualization
+        position absolute
+        top 70px
+        bottom 20px
+        left 20px
+        right 20px
+        height auto
+        width auto
 
     .settings-bar
         .recommend-button
@@ -133,23 +88,5 @@
             > li
                 width 20%
 
-        .download-menu
-            > li
-                width 50%
-
-    #chart-placeholder
-        overflow hidden
-        padding 0 0
-        box-shadow inset 0 0 15px $color-shadow
-        height 100%
-
-        img
-            width 120px
-            display inline-block
-            opacity .4
-            position absolute
-            top 0
-            left 0
-            right 0
-            bottom 0
-            margin auto
+        .download-button li:first-child
+            border-bottom 2px solid $color-green

@@ -11,7 +11,7 @@ describe "Dataset Controller", ->
             @Table =
                 setDataset: (result) ->
             @Data =
-                createVidatio: (data) ->
+                useSavedData: (data) ->
 
             DatasetCtrl = $controller "DatasetCtrl",  {$scope: @scope, $rootScope: @rootScope, TableService: @Table, DataService: @Data}
 

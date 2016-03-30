@@ -8,13 +8,17 @@ app.service 'VisualizationService', [
     "MapService"
     "$log"
     "$translate"
-    (Table, Converter, Map, $log, $translate) ->
+    "$timeout"
+    (Table, Converter, Map, $log, $translate, $timeout) ->
         class Visualization
 
             # @method constructor
             # @public
             constructor: ->
+                $log.info "VisualizationService constructor called"
+
                 @options =
+                    fileType: "csv"
                     type: false
                     xColumn: 0
                     yColumn: 1
@@ -27,16 +31,41 @@ app.service 'VisualizationService', [
                         "bar": "DIAGRAMS.BAR_CHART"
                         "timeseries": "DIAGRAMS.TIME_SERIES"
 
+            # @method resetOptions
+            # @public
             resetOptions: ->
                 @options.type = false
-                @options.xColumn = null
-                @options.yColumn = null
+                @options.xColumn = 0
+                @options.yColumn = 1
                 @options.color = "#11DDC6"
                 @options.selectedDiagramName = null
 
+            # @method setOptions
+            # @public
+            # @param {Object} options
+            #   @param {String} color
+            #   @param {String} selectedDiagramName
+            #   @param {String} type
+            #   @param {Int} xColumn
+            #   @param {Int} yColumn
+            setOptions: (options) ->
+                # Each value has to be assigned individually, otherwise all already set options get overwritten
+                # and because we want to use data binding
+                if options.type?
+                    @options["type"] = options.type
+                    $translate(@options.translationKeys[options.type]).then (translation) =>
+                        @options["selectedDiagramName"] = translation
+                else
+                    @options["type"] = false
+                    @options["selectedDiagramName"] = false
+
+                @options["xColumn"] = if options.xColumn? then parseInt(options.xColumn, 10) else null
+                @options["yColumn"] = if options.yColumn? then parseInt(options.yColumn, 10) else null
+                @options["color"] = if options.color? then options.color else "#11DDC6"
+
             # @method useRecommendedOptions
             # @public
-            recommendDiagram: ->
+            useRecommendedOptions: ->
                 $log.info "VisualizationService recommend called"
 
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
@@ -61,38 +90,45 @@ app.service 'VisualizationService', [
             # @public
             # @param {String} type
             create: (options = @options) ->
-                $log.info "VisualizationService create function called"
+                $log.info "VisualizationService create called"
                 $log.debug
                     options: options
 
                 chartData = vidatio.helper.trimDataset Table.getDataset()
                 headers = Table.getHeader()
                 options["headers"] =
-                    "x": headers[options.xColumn]
-                    "y": headers[options.yColumn]
+                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
+                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
 
                 # set width and height of the visualization for dynamic resizing
-                $chart = $("#chart")
+                chartSelector = "#chart"
+                $chart = $(chartSelector)
                 width = $chart.parent().width()
-                height = $chart.parent().height() - 40
+                height = $chart.parent().height()
 
                 switch options.type
                     when "scatter"
-                        new vidatio.ScatterPlot chartData, options, width, height
+                        new vidatio.ScatterPlot chartData, options, width, height, chartSelector
                     when "map"
-                        # Use the whole dataset because we want the other attributes inside the popups
-                        geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
-                            x: options.xColumn,
-                            y: options.yColumn
-                        }
-                        Map.setInstance()
-                        Map.setGeoJSON geoJSON
+                        # only create the geoJSON from the table, if we don't use shp
+                        # because otherwise we geoJSON is directly updated and so no conversion is needed
+                        # and also because we don't have the xColumn of yColumn saved
+                        if @options.fileType isnt "shp"
+                            # Use the whole dataset because we want the other attributes inside the popups
+                            geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
+                                x: options.xColumn,
+                                y: options.yColumn
+                            }
+                            Map.setGeoJSON geoJSON
+
+                        $timeout ->
+                            Map.setInstance()
                     when "parallel"
-                        new vidatio.ParallelCoordinates chartData, options, width, height
+                        new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"
-                        new vidatio.BarChart chartData, options, width, height
+                        new vidatio.BarChart chartData, options, width, height, chartSelector
                     when "timeseries"
-                        new vidatio.TimeseriesChart chartData, options, width, height
+                        new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
                     else
                         $log.info "VisualizationCtrl type not set"
                         $log.debug
