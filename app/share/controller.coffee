@@ -104,6 +104,8 @@ app.controller "ShareCtrl", [
                         ErrorHandler.format errors
                         return false
 
+                    $scope.vidatio._id = response._id
+
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
                         ngToast.create

@@ -77,3 +77,6 @@
                             span.icon-link
                         .input-group.single
                             input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly)
+
+                    .row
+                        a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate }}
