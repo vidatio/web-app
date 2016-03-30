@@ -23,7 +23,7 @@ app.controller "ShareCtrl", [
     "$state"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state) ->
         $scope.share = Data
-        $scope.goToPreview = true
+        $scope.goToPreview = false
 
         $scope.visualization = Visualization.options
 
