@@ -86,7 +86,8 @@
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert",
-        "VISUALIZATION_PREPARED": "Die Visualisierung wird zum Download vorbereitet."
+        "VISUALIZATION_PREPARED": "Visualisierung wird zum Download vorbereitet",
+        "SAVE_DATASET": "Vidatio wird gespeichert"
     },
     "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
@@ -116,7 +117,7 @@
     "INFORMATION_DATASET": "Informationen zum Datensatz",
     "DATASET_DESCRIPTION": "Beschreibung des Datensatzes",
     "DATASET_ORIGIN": "Urheber",
-    "DATASET_EDITOR": "Editiert von",
+    "DATASET_EDITOR": "Editor",
     "DATASET_CREATED": "Erstellt am",
     "DATASET_UPDATED": "Letztes Update",
     "DATASET_ID": "ID des Datensatzes",

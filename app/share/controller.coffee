@@ -17,7 +17,9 @@ app.controller "ShareCtrl", [
     "CategoriesFactory"
     "VisualizationService"
     "$stateParams"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams) ->
+    "ProgressService"
+    "ngToast"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast) ->
         $scope.share = Data
         $scope.goToPreview = false
 
@@ -61,18 +63,62 @@ app.controller "ShareCtrl", [
                 Visualization.create()
 
         $scope.saveDataset = ->
-            return $scope.goToPreview = !$scope.goToPreview
-            switch Data.metaData.fileType
-                when "csv"
-                    dataset = Table.dataset.slice()
-                    if Table.useColumnHeadersFromDataset
-                        dataset.unshift Table.instanceTable.getColHeader()
-                when "shp"
-                    dataset = Map.getGeoJSON()
+            $log.info "ShareCtrl saveDataset called"
 
-            $scope.vidatio.tags = $(".tag").map ->
-                return $(@).text()
-            .get()
+            $translate("OVERLAY_MESSAGES.SAVE_DATASET").then (translation) ->
+                Progress.setMessage translation
 
-            Data.saveViaAPI dataset, $scope.vidatio
+            if Visualization.options.type is "map"
+                $targetElem = $("#map")
+            else if Visualization.options.type is "parallel"
+                $targetElem = $("#chart svg")
+            else
+                $targetElem = $("#d3plus")
+
+            vidatio.visualization.visualizationToBase64String($targetElem)
+            .then (obj) ->
+                $log.info "ShareCtrl visualizationToBase64String promise success called"
+                $log.debug
+                    obj: obj
+
+                switch Data.metaData.fileType
+                    when "csv"
+                        dataset = Table.dataset.slice()
+                        if Table.useColumnHeadersFromDataset
+                            dataset.unshift Table.instanceTable.getColHeader()
+                    when "shp"
+                        dataset = Map.getGeoJSON()
+
+                $scope.vidatio.tags = $(".tag").map ->
+                    return $(@).text()
+                .get()
+
+                Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
+                    $timeout ->
+                        Progress.setMessage ""
+
+                    if errors?
+                        for error in errors.data.error.errors
+                            for key, value of error
+                                $translate(error["#{key}"].i18n)
+                                .then (translation) ->
+                                    ngToast.create
+                                        content: translation
+                                        className: "danger"
+                        return false
+
+                    $translate('TOAST_MESSAGES.DATASET_SAVED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+
+                    return $scope.goToPreview = !$scope.goToPreview
+
+            .catch (error) ->
+                $translate(error.i18n).then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
+
 ]

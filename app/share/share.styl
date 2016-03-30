@@ -148,6 +148,13 @@
             .input-group
                 margin-bottom 0
                 width 100%
+
+                .ng-pristine, ng-invalid
+                    border $color-red 2px solid
+
+                .ng-valid
+                    border $color-green 2px solid
+
                 .form-control:not(:first-child)
                     border-left none
 
@@ -166,6 +173,9 @@
 
             button[type="submit"]
                 margin-top 8px
+
+            button[disabled]
+                background-color $color-red
 
             p
                 {lightText}

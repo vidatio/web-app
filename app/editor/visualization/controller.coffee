@@ -71,7 +71,7 @@ app.controller "VisualizationCtrl", [
             $log.debug
                 type: type
 
-            $translate("VISUALIZATION_PREPARED").then (translation) ->
+            $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
                 Progress.setMessage translation
 
             if Visualization.options.type is "map"
