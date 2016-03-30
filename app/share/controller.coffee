@@ -24,6 +24,8 @@ app.controller "ShareCtrl", [
         $scope.share = Data
         $scope.goToPreview = false
 
+        $scope.visualization = Visualization.options
+
         $scope.vidatio =
             publish: true
 
@@ -114,6 +116,21 @@ app.controller "ShareCtrl", [
                     ngToast.create
                         content: translation
                         className: "danger"
+
+
+        $scope.downloadVisualization = (type) ->
+            $log.info "SharCtrl downloadVisualization called"
+            $log.debug
+                type: type
+
+            fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+
+            Visualization.downloadAsImage fileName, type
+
+        $scope.downloadCSV = ->
+            $log.info "SharCtrl downloadCSV called"
+
+            Data.downloadCSV($scope.vidatio.name)
 
 
 ]

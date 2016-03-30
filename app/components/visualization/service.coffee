@@ -9,7 +9,9 @@ app.service 'VisualizationService', [
     "$log"
     "$translate"
     "$timeout"
-    (Table, Converter, Map, $log, $translate, $timeout) ->
+    "ProgressService"
+    "ngToast"
+    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast) ->
         class Visualization
 
             # @method constructor
@@ -201,6 +203,39 @@ app.service 'VisualizationService', [
                     addInputTag $axisLabel, axis, style
 
                 return true
+
+            downloadAsImage: (fileName, type) ->
+                $log.info "VisualizationService downloadAsImage called"
+                $log.debug
+                    fileName: fileName
+                    type: type
+
+                $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
+                    Progress.setMessage translation
+
+                if @options.type is "map"
+                    $targetElem = $("#map")
+                else if @options.type is "parallel"
+                    $targetElem = $("#chart svg")
+                else
+                    $targetElem = $("#d3plus")
+
+                vidatio.visualization.visualizationToBase64String($targetElem)
+                .then (obj) ->
+                    $log.info "VisualizationCtrl visualizationToBase64String promise success called"
+                    $log.debug
+                        obj: obj
+
+                    $timeout ->
+                        Progress.setMessage ""
+
+                    vidatio.visualization.download fileName, obj[type]
+
+                .catch (error) ->
+                    $translate(error.i18n).then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
 
         new Visualization
 ]

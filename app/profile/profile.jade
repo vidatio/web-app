@@ -16,8 +16,7 @@
 
                                 .text
                                     a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
-                                        h4.title {{ vidatio.name }}
-                                    p {{ vidatio.description | limitTo: 120}} ...
+                                        h4.title {{ vidatio.metaData.name }}
 
                     .row
                         .col-xs-12.has-link

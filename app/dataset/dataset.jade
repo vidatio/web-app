@@ -25,7 +25,7 @@
                                     span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
                             li
-                                a(ng-click="downloadJPEG()")
+                                a(ng-click="downloadPNG()")
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
 
@@ -53,8 +53,6 @@
     .row
         .col-sm-12
             .metadata-container
-                .one-row
-                    .description {{ data.description }}
                 .one-row.space
                 .one-row
                     .text {{ "DATASET_ORIGIN" | translate }}:

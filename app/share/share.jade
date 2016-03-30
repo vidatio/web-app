@@ -18,19 +18,13 @@
                         .option-icon.icon-download
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 
-                    form
-                        .form-group.selection
-                            label(for="dataset") {{ "DATASET" | translate }}
-                            select#dataset.form-control
-                                option CSV
-                                option XML
-                                option JSON
-                        .form-group.selection
-                            label(for="dataset") Vidatio
-                            select#dataset.form-control
-                                option JPEG
-                                option PNG
-                                option SVG
+                    .download-selection
+                        .col-xs-4
+                            a.icon-emptytable.btn.btn-primary.center-block(href="#" ng-click="downloadCSV()") CSV
+                        .col-xs-4
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="downloadVisualization('jpg')" ng-disabled="!visualization.type") JPG
+                        .col-xs-4
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="downloadVisualization('png')" ng-disabled="!visualization.type") PNG
 
             .col-sm-6
                 .save-share.area(ng-if="globals.authorized" ng-hide="goToPreview")
