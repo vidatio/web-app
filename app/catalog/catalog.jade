@@ -1,7 +1,7 @@
 #catalog.wrapper-content
     .row
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
-            h2 {{ "FILTER_BY" | translate }}
+            h2.filter-title {{ "FILTER_BY" | translate }}
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
