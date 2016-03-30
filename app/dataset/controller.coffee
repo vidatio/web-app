@@ -147,4 +147,17 @@ app.controller "DatasetCtrl", [
                         className: "danger"
 
             window.getSelection().removeAllRanges()
+
+        $scope.downloadPNG = ->
+            $log.info "DatasetCtrl downloadPNG called"
+
+            fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+
+            Visualization.downloadAsImage fileName, "png"
+
+        $scope.downloadCSV = ->
+            $log.info "DatasetCtrl downloadCSV called"
+
+            Data.downloadCSV($scope.data.title)
 ]
+
