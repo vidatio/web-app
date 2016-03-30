@@ -8,6 +8,16 @@
         width 100%
 
     .row
+        &:first-child
+            input
+                border-width 2px 2px 1px 2px !important
+        &:nth-child(2)
+            input
+                border-width 1px 2px 1px 2px !important
+        &:nth-child(3)
+            select
+                border-width 1px 2px 2px 2px !important
+
         .area
             height 254px
             border-top 3px solid $color-green
@@ -132,7 +142,7 @@
                 margin-bottom 0
                 width 100%
 
-                .ng-pristine, ng-invalid
+                .ng-pristine, .ng-invalid
                     border $color-red 2px solid
 
                 .ng-valid
