@@ -24,48 +24,29 @@ app.service 'UserService', [
             # @param {String} key
             # @param {String} value
             checkUniqueness: (key, value) ->
-                $log.info "UserService checkUniqueness called"
-                $log.debug
-                    key: key
-                    value: value
-
                 params = {}
                 params[key] = escape(value)
 
-                UserUniquenessFactory.check(params).$promise.then (results) ->
-                    $log.info "UserService checkUniqueness success (user does not exist)"
-                    $log.debug
-                        results: results
-
+                UserUniquenessFactory.check(params).$promise
+                .then (results) ->
                     if results["available"]
                         $q.resolve(results)
                     else
                         $q.reject(results)
-                , (error) ->
-                    $log.error "UserService checkUniqueness get error (user exists already)"
-                    $log.debug
-                        error: error
-
+                .catch (error) ->
                     $q.reject(error)
 
             # @method logon
             # @public
             # @param {String} user
             logon: (user) =>
-                $log.info "UserService logon called"
-                $log.debug
-                    name: user.name
-
                 deferred = $q.defer()
 
                 authData = Base64.encode(user.name + ":" + user.password)
                 $http.defaults.headers.common["Authorization"] = "Basic " + authData
 
-                UserAuthFactory.get().$promise.then (result) =>
-                    $log.info "UserService init success called"
-                    $log.debug
-                        result: result
-
+                UserAuthFactory.get().$promise
+                .then (result) =>
                     @user = result.user
                     @setCredentials(@user.name, @user._id, authData)
 
@@ -73,13 +54,8 @@ app.service 'UserService', [
 
                     @redirect()
 
-                , (error) =>
-                    $log.info "UserService init error of authorization called (401)"
-                    $log.debug
-                        error: error
-
+                .catch (error) =>
                     @logout()
-
                     deferred.reject error
 
                 deferred.promise
@@ -87,31 +63,19 @@ app.service 'UserService', [
             # @method logout
             # @public
             logout: =>
-                $log.info "UserService logout called"
-
-                @user =
-                    name: ""
-
+                @user = name: ""
                 $rootScope.globals.authorized = undefined
                 delete $rootScope.globals.currentUser
-
                 $cookieStore.remove "globals"
-
                 $http.defaults.headers.common.Authorization = "Basic "
+                $state.go "app.index" if $state.$current.name is "app.profile"
 
-                if $state.$current.name is "app.profile"
-                    $state.go "app.index"
 
             # @method setCredentials
             # @public
             # @param {String} name
             # @param {String} userID
             setCredentials: (name, userID, authData) ->
-                $log.info "UserService setCredentials called"
-                $log.debug
-                    name: name
-                    userID: userID
-
                 $rootScope.globals =
                     currentUser:
                         name: name
@@ -129,18 +93,14 @@ app.service 'UserService', [
                 for element, index in $rootScope.history
                     element = $rootScope.history[$rootScope.history.length - (index + 1)]
 
-                    if element.name isnt "app.login" and element.name isnt "app.registration" and element.name isnt ""
-                        $log.info "UserService redirect to " + element.name
-
+                    unless element.name in ["app.login", "app.registration", ""]
                         # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
-                        if element.name is "app.dataset"
-                            $state.go element.name, 'id': element.params.id, element.params.locale
-                            return
+                        unless element.name is "app.dataset"
+                            return $state.go element.name, element.params.locale
 
-                        $state.go element.name, element.params.locale
-                        return
+                        return $state.go element.name, 'id': element.params.id, element.params.locale
 
-                $state.go "app.index"
+                return $state.go "app.index"
 
         new User
 ]
