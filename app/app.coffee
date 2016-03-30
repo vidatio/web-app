@@ -153,7 +153,6 @@ app.config [
         .state "app.login",
             url: "/login"
             templateUrl: "login/login.html"
-            controller: "LoginCtrl"
             title: "login"
 
         .state "app.import",
