@@ -29,7 +29,7 @@
                 a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true")
                     span {{ "COLORS" | translate }}
 
-            .download-selection.settings-button
+            .download-selection.settings-button(ng-hide="!visualization.type")
                 a(href='#' ng-click="").icon-download
                     span {{ "DOWNLOAD" | translate }}
                 ul.download-menu
