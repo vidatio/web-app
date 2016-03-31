@@ -18,21 +18,59 @@ app.service 'MapService', [
                     "type": "FeatureCollection"
                     "features": []
                 @bounds = undefined
+                @leaflet =
+                    data: @geoJSON
+                    style: ->
+                        {}
+                    pointToLayer: (feature, latLng) ->
+                        new L.marker(latLng, icon: L.icon(
+                            iconUrl: '../images/marker-small.png'
+                            iconSize: [25, 30]
+                            iconAnchor: [12.5, 30]
+                            popupAnchor: [0, -30]
+                        ))
+                    onEachFeature: (feature, layer) ->
+                        # So every markers gets a popup
+                        html = ""
+                        isFirstAttribute = true
+
+                        for property, value of feature.properties
+
+                            if value
+                                if isFirstAttribute
+                                    html += "<b>"
+
+                                if vidatio.helper.isEmailAddress(value)
+                                    html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if vidatio.helper.isPhoneNumber(value)
+                                    html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if vidatio.helper.isURL(value)
+                                    html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
+                                else if value
+                                    html += value + "<br>"
+
+                                if isFirstAttribute
+                                    html += "</b>"
+                                    isFirstAttribute = false
+
+                        unless html
+                            html = "Keine Informationen vorhanden"
+
+                        layer.bindPopup(html)
 
             # Because we add some objects to the scope we need this function
             # has to be called before the init function
             setInstance: ->
-                $log.info "MapService getInstance called"
+                $log.info "MapService setInstance called"
 
                 leafletData.getMap("map").then (mapInstance) =>
                     $log.info "MapService leafletData.getMap called"
                     $log.debug
                         message: "MapService leafletData.getMap called"
 
-                    @map = mapInstance
                     $timeout =>
+                        @map = mapInstance
                         @init()
-
                 , (error) ->
                     $log.error "MapService error on map create"
                     $log.debug
@@ -48,7 +86,6 @@ app.service 'MapService', [
             # like fitting to the bounds of the geoJSON
             init: ->
                 $log.info "MapService init called"
-
                 @setBoundsToGeoJSON()
                 @resizeMap()
 

@@ -15,10 +15,9 @@
 
         .row
             .col-xs-12.middle
-                button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'LOG_ON' | translate }}
+                button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending" title="{{ 'SEND_LOGIN_DATA' | translate }}") {{ 'LOG_ON' | translate }}
 
     .row
         .col-xs-6.left
-            a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
         .col-xs-6.right
-            a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
+            a.inverse(ui-sref="app.registration({ locale: locale })" title="{{'REGISTRATION'|translate}} {{'OPEN'|translate}}") {{ 'REGISTER' | translate }}

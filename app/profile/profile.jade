@@ -8,17 +8,17 @@
                     .row
                         .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
-                                a.img(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
-                                    img(src="{{ vidatio.image }}")
-
-                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
-                                    span  {{ "EDIT" | translate | uppercase }}
+                                a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
+                                    img(src="{{ vidatio.image }}" alt="vidatio.name")
 
                                 .text
-                                    a.inverse(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
-                                        h4.title {{ vidatio.title }}
+                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
+                                        h4.title {{ vidatio.name }}
                                     p {{ vidatio.description | limitTo: 120}} ...
+
+                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                                    span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                     .row
                         .col-xs-12.has-link
-                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" ) {{ "MORE_VIDATIOS" | translate }}...
+                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}...

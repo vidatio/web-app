@@ -3,13 +3,15 @@
     background #F2F2F2
     border-top 3px solid $color-green
     box-shadow $box-shadow-size $color-shadow
+    position relative
 
     h4, img
         font-size 18px
         width 100%
 
     .img
-        background #F2F2F2
+        background-color $color-white
+        display block
 
     .text
         padding 10px 10px 25px
@@ -23,11 +25,14 @@
     p
         line-height 1.2
         font-size 14px
-    a
-        display block
-        padding 0
-        width 100%
 
-    a.right
-        padding 0 8px
-        text-align right
+    #create-vidatio
+        font-size 14px
+        padding 6px 8px
+        position relative
+        left 50%
+        transform translate(-50%, -50%)
+        margin-top -15px
+
+        span
+            margin-left 2px
