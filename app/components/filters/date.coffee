@@ -17,9 +17,9 @@ app.filter "dateFilter", [
 
             for element in input
                 createdAt = moment(element.createdAt)
-                output.push(element) if to is "" and createdAt.isSameOrAfter(from, "day")
-                output.push(element) if from is "" and createdAt.isSameOrBefore(to, "day")
-                output.push(element) if createdAt.isSameOrAfter(from, "day") and createdAt.isSameOrBefore(to, "day")
+                output.push(element) if not to and createdAt.isSameOrAfter(from, "day")
+                output.push(element) if not from and createdAt.isSameOrBefore(to, "day")
+                output.push(element) if from and to and createdAt.isSameOrAfter(from, "day") and createdAt.isSameOrBefore(to, "day")
 
             output
 ]

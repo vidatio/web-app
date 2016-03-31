@@ -30,8 +30,6 @@ app.controller "CatalogCtrl", [
         stateParams = {}
         $scope.maxDate = moment.tz('CET')
 
-        console.log("MAX_DATE", $scope.maxDate)
-
         $scope.tags = Tags.getAndPreprocessTags()
 
         Categories.query (response) ->
