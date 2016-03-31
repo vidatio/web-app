@@ -10,7 +10,10 @@ app.controller "ShareCtrl", [
     "$translate"
     "$rootScope"
     "DataService"
-    ($scope, $translate, $rootScope, Data) ->
+    "VisualizationService"
+    "$timeout"
+    "$stateParams"
+    ($scope, $translate, $rootScope, Data, Visualization, $timeout, $stateParams) ->
         $scope.share = Data
 
         # initialize tagsinput on page-init for propper displaying the tagsinput-field
@@ -36,4 +39,8 @@ app.controller "ShareCtrl", [
             $(this).closest('.input-group, .form-group').addClass 'focus'
         ).on 'blur', '.form-control', ->
             $(this).closest('.input-group, .form-group').removeClass 'focus'
+
+        unless $stateParams.id
+            $timeout ->
+                Visualization.create()
 ]

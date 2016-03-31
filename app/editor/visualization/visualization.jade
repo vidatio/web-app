@@ -1,5 +1,5 @@
 #visualization.wrapper-content(ng-controller="VisualizationCtrl" ng-show="$root.showVisualizationView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
-    .content.height-500
+    .content
         .settings-bar
             a.recommend-button.btn.btn-primary.btn-small(ng-hide="data.meta.fileType == 'shp'" href="#" ng-click="recommend()" title="{{ 'DIAGRAMS.RECOMMEND' | translate }}")
                 i.icon-magicwand.icon
@@ -40,7 +40,4 @@
                         a.icon-downloadvisualization(href="#" ng-click="shareVisualization('png')")
                             span PNG
 
-        leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
-        #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
-        #chart-placeholder(ng-hide="visualization.type")
-            img(src="images/logo-without-name.png" )
+        visualization

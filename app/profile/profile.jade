@@ -11,7 +11,7 @@
                                 a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
                                     img(src="{{ vidatio.image }}" alt="vidatio.name")
 
-                                a.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })" ng-click="openInEditor(vidatio)" title="{{'OPEN_IN_EDITOR'|translate}}")
+                                a.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)" title="{{'OPEN_IN_EDITOR'|translate}}")
                                     span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                                 .text

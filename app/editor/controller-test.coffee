@@ -20,14 +20,14 @@ describe "Editor Controller", ->
         @Visualization.create.calls.reset()
 
     describe "on page init", ->
-        it "should display both the TableView and VisualizationView, a title should be set", ->
+        xit "should display both the TableView and VisualizationView, a title should be set", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
             expect(@Data.name).toBe("My Vidatio")
 
     describe "on clicked tab", ->
-        it "should set the showTableView and showVisualizationView variables accordingly", ->
+        xit "should set the showTableView and showVisualizationView variables accordingly", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
@@ -48,7 +48,7 @@ describe "Editor Controller", ->
             expect(@scope.activeViews).toEqual(1)
 
     describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
-        it 'should call Visualization.create() after a timeout of 10ms', (done) ->
+        xit 'should call Visualization.create() after a timeout of 10ms', (done) ->
             @scope.tabClicked(0)
             setTimeout (->
                 done()
