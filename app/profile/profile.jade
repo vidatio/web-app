@@ -11,13 +11,13 @@
                                 a.img(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
                                     img(src="{{ vidatio.image }}")
 
-                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
-                                    span  {{ "EDIT" | translate | uppercase }}
-
                                 .text
                                     a.inverse(ui-sref="app.dataset({ id: vidatio.id, locale: locale })" href="#")
                                         h4.title {{ vidatio.title }}
                                     p {{ vidatio.description | limitTo: 120}} ...
+                                    
+                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                                    span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                     .row
                         .col-xs-12.has-link

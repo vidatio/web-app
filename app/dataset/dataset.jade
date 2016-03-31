@@ -10,9 +10,9 @@
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="createVidatio()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor({ locale: locale })" ng-click="createVidatio()")
                         span.icon-edit.icons
-                        span.button-text  {{ "CREATE_VIDATIO" | translate | uppercase }}
+                        span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                 .col-xs-12.col-sm-4.middle
                     #download-dataset

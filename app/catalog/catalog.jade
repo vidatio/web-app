@@ -39,9 +39,6 @@
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                             img(src="{{ vidatio.image }}")
 
-                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })")
-                            span {{ "CREATE_VIDATIO" | translate | uppercase }}
-
                         .text
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                                 h4.title {{ vidatio.title }}
@@ -49,3 +46,6 @@
                             p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.category.name }}
                             p {{ "DATASET_TAGS" | translate }}: {{ vidatio.metaData.tags | preprocessTags }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
+
+                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                            span {{ "OPEN_IN_EDITOR" | translate }}
