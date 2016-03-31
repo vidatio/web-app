@@ -56,14 +56,12 @@ app.controller "CatalogCtrl", [
                     content: translation
                     className: "danger"
 
-
         # the values of the datepicker need to be watched, because the ng-change directive never executes a function
         $scope.$watch "filter.dates.from", ->
             $scope.setStateParams()
 
         $scope.$watch "filter.dates.to", ->
             $scope.setStateParams()
-
 
         # @method setCategory
         # @description Set new category and update URL by setting new stateParams
