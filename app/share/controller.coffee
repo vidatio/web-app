@@ -108,13 +108,6 @@ app.controller "ShareCtrl", [
                     $scope.vidatio._id = response._id
 
                     $scope.link = $state.href("app.dataset", {id: response._id}, {absolute: true})
-                    $scope.facebookHref =
-                        "http://www.facebook.com/sharer.php?s=100&p[url]=" +
-                        encodeURIComponent($scope.link) +
-                        "&p[images][0]=" +
-                        encodeURIComponent("#{(response.visualizationOptions.thumbnail).replace(/^data:image\/(png|jpg);base64,/, "")}") +
-                        "&p[title]=" +
-                        encodeURIComponent(response.metaData.name)
 
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
