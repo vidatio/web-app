@@ -10,10 +10,7 @@ app.controller "IndexCtrl", [
     "$window"
     "$state"
     ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state) ->
-
         CategoriesFactory.query (response) ->
-            $log.info "IndexCtrl successfully queried categories"
-
             $scope.categories = response
 
         , (error) ->
@@ -21,14 +18,12 @@ app.controller "IndexCtrl", [
             $log.error error
 
         DatasetsFactory.query (response) ->
-            $log.info "IndexCtrl successfully queried datasets"
-
             $scope.vidatios = response
 
             categoryIDs = []
 
             for vidatio in $scope.vidatios
-                if vidatio.metaData.category?
+                if vidatio.metaData?.category?
                     categoryIDs.push(vidatio.metaData.category.name)
 
             $scope.chartData = prepareChartData(countOccurrences(categoryIDs))
@@ -40,12 +35,6 @@ app.controller "IndexCtrl", [
         , (error) ->
             $log.info "IndexCtrl error on query datasets"
             $log.error error
-
-            d3plus.viz()
-            .container("#bubble-categories")
-            .error("Die Kategorien können momentan leider nicht geladen werden")
-            .background("none")
-            .draw()
 
         # Resizing the visualizations
         # using setTimeout to use only to the last resize action of the user
