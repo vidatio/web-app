@@ -59,8 +59,6 @@ app.controller "EditorCtrl", [
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
-            $log.info "EditorCtrl tabClicked called"
-
             for i of $scope.activeTabs
                 $scope.activeTabs[i] = false
 
@@ -100,9 +98,6 @@ app.controller "EditorCtrl", [
                 $scope.editor.name = $scope.standardTitle
 
             $timeout -> $("#vidatio-title").css "width", setTitleInputWidth()
-
-            $log.debug
-                title: $scope.editor.name
 
             return true # necessary to solve the Angular error: "Referencing DOM nodes in Angular expressions is disallowed!"
 
