@@ -165,6 +165,8 @@ app.controller "ImportCtrl", [
 
                         if dataset.length
                             Table.setDataset dataset
+                            Table.useColumnHeadersFromDataset = true
+                            Visualization.options.type = "map"
                             Map.setGeoJSON geoJSON
                             $location.path editorPath
 

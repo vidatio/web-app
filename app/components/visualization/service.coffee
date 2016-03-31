@@ -133,7 +133,7 @@ app.service 'VisualizationService', [
                     when "timeseries"
                         new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
                     else
-                        $log.info "VisualizationCtrl type not set"
+                        $log.info "VisualizationService type not set"
                         $log.debug
                             type: options.type
 
