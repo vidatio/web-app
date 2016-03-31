@@ -28,7 +28,9 @@ app.controller "CatalogCtrl", [
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
 
         stateParams = {}
-        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
+        $scope.maxDate = moment.tz('CET')
+
+        console.log("MAX_DATE", $scope.maxDate)
 
         $scope.tags = Tags.getAndPreprocessTags()
 
