@@ -1,10 +1,10 @@
-section#newest-vidatios
+section#newest-vidatios(ng-show="newestVidatios.length")
     .wrapper-content
         .row
             .col-sm-12
                 h1.underline-red-light {{ "NEWEST_VIDATIOS" | translate | uppercase }}
 
-        .row(ng-show="newestVidatios.length")
+        .row
             .col-sm-4(ng-repeat="vidatio in newestVidatios")
                 .col-wrapper
                     a(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
