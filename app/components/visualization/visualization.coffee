@@ -2,17 +2,18 @@
 
 class window.vidatio.Visualization
 
-    constructor: (@dataset, @color = "#11DDC6", @width, @height) ->
+    constructor: (@dataset, @color = "#11DDC6", @width, @height, @containerSelector = "#chart") ->
         vidatio.log.info "Visualization constructor called"
         vidatio.log.debug
             dataset: @dataset
             color: @color
             width: @width
             height: @height
+            containerSelector: @containerSelector
 
     remove: ->
-        vidatio.log.info "Visualization remove called"
-        $("#chart").empty()
+        vidatio.log.info "Visualization remove called", @containerSelector, @containerSelector.length
+        $(@containerSelector).empty()
 
     # @method preProcess
     # @param {Object} options

@@ -7,8 +7,6 @@ app.service 'TableService', [
     ($log) ->
         class Table
             constructor: ->
-                $log.info "TableService constructor called"
-
                 @dataset = [[]]
                 @header = []
                 @useColumnHeadersFromDataset = true
