@@ -1,8 +1,6 @@
 #profile.wrapper-content
 
-    min-width 400px
-
-    .row .col-md-12 .area
+    .area
         padding 30px
         border-top 3px solid $color-green
         background $color-white
@@ -10,7 +8,7 @@
         margin 0 auto 40px auto
         color $color-grey-dark
 
-    .col-xs-12.has-link
+    .has-link
         padding-top 5px
         text-align center
 
@@ -19,7 +17,21 @@
 
     h2
         display block
-        margin-bottom 5px
+        margin-bottom 15px
 
     li
         list-style-type none
+
+    .vidatios
+        .row.cards
+            display flex
+            flex-wrap wrap
+
+            > div
+                display flex
+
+    .vidatio
+        width 100%
+
+        img
+            background-color $color-white

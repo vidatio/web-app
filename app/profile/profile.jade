@@ -1,12 +1,12 @@
 #profile.wrapper-content(ng-controller="ProfileCtrl")
     .row
-        .col-md-12
+        .col-xs-12
             .area
                 .vidatios(ng-show="vidatios.length")
                     h2 {{ "MY_VIDATIOS" | translate }}
 
-                    .row
-                        .col-xs-6.col-md-3(ng-repeat="vidatio in vidatios")
+                    .row.cards
+                        .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
                                 a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
                                     img(src="{{ vidatio.image }}" alt="vidatio.name")
@@ -17,7 +17,7 @@
                                     p {{ vidatio.description | limitTo: 120}} ...
 
                                 a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
-                                    span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
+                                    span  {{ "OPEN_IN_EDITOR" | translate }}
 
                     .row
                         .col-xs-12.has-link
