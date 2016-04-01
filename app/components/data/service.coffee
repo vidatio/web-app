@@ -98,21 +98,21 @@ app.service 'DataService', [
                             content: translation
                             className: "danger"
 
-            # @method createVidatio
+            # @method useSavedData
             # @description from existing dataset
             # @param {Object} data
-            createVidatio: (data) ->
-                $log.info "DataService createVidatio called"
+            useSavedData: (data) ->
+                $log.info "DataService useSavedData called"
                 $log.debug
                     data: data
 
                 @meta.fileType = if data.metaData?.fileType? then data.metaData.fileType else null
+                Visualization.options.fileType = @meta.fileType
                 Table.useColumnHeadersFromDataset = if data.options?.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
 
                 if @meta.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
-                    Map.setInstance()
                     Map.setGeoJSON data.data
                 else
                     if Table.useColumnHeadersFromDataset

@@ -56,14 +56,12 @@ app.controller "CatalogCtrl", [
                     content: translation
                     className: "danger"
 
-
         # the values of the datepicker need to be watched, because the ng-change directive never executes a function
         $scope.$watch "filter.dates.from", ->
             $scope.setStateParams()
 
         $scope.$watch "filter.dates.to", ->
             $scope.setStateParams()
-
 
         # @method setCategory
         # @description Set new category and update URL by setting new stateParams
@@ -109,10 +107,9 @@ app.controller "CatalogCtrl", [
                 reload: $state.current
 
         # @method $scope.openInEditor
-        # @description open dataset in Editor
-
+        # @description set the vidatio options from saved dataset
         $scope.openInEditor = (data) ->
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
-                Data.createVidatio data
+                Data.useSavedData data
 ]

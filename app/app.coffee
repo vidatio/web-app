@@ -30,10 +30,9 @@ app.run [
     "$http"
     "$location"
     "$cookieStore"
-    "$log"
     "CONFIG"
     "$translate"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG, $translate) ->
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -56,13 +55,6 @@ app.run [
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-            $log.info "App run stateChangeSuccess called"
-            $log.debug
-                toState: toState
-                toParams: toParams
-                fromState: fromState
-                fromParams: fromParams
-
             if toState.title?
                 $rootScope.title = toState.title
             else
@@ -147,6 +139,11 @@ app.config [
             url: "/"
             templateUrl: "index/index.html"
 
+        .state "app.imprint",
+            url: "/imprint"
+            templateUrl: "imprint/imprint.html",
+            title: "imprint"
+
         .state "app.profile",
             url: "/profile"
             templateUrl: "profile/profile.html"
@@ -182,9 +179,12 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
-        # /editor for saved vidatio
         .state "app.editor.id",
+<<<<<<< HEAD
             url: "/editor/:id",
+=======
+            url: "/editor/:id"
+>>>>>>> develop
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
@@ -195,7 +195,10 @@ app.config [
             controller: "ShareCtrl"
             title: "share"
 
+<<<<<<< HEAD
         # /share for saved vidatio
+=======
+>>>>>>> develop
         .state "app.share.id",
             url: "/share/:id"
             templateUrl: "share/share.html"
@@ -212,6 +215,8 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
+                # TODO: show 404
+
                 locale =
                     locale: $translateProvider.preferredLanguage()
 

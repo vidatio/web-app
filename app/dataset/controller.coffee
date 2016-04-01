@@ -27,9 +27,7 @@ app.controller "DatasetCtrl", [
     ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
-        $scope.visualization = Visualization.options
         $scope.link = $location.$$absUrl
-        $scope.geojson = Map.leaflet
 
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
             Progress.setMessage message
@@ -47,26 +45,22 @@ app.controller "DatasetCtrl", [
                 $scope.data.category = data.category || "-"
                 $scope.data.tags = data.tags || "-"
 
-                Data.createVidatio $scope.data
+                Data.useSavedData $scope.data
+                Visualization.create()
 
-                if Data.meta.fileType isnt "shp"
-                    Visualization.create()
+                $timeout ->
+                    Progress.setMessage()
+            , (error) ->
+                $log.info "DatasetCtrl error on get dataset from id"
+                $log.error error
 
                 $timeout ->
                     Progress.setMessage()
 
-            # console.log $scope.data, Visualization.options, Table.dataset, Table.header, Map.geoJSON
-        , (error) ->
-            $log.info "DatasetCtrl error on get dataset from id"
-            $log.error error
-
-            $timeout ->
-                Progress.setMessage()
-
-            $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                ngToast.create
-                    content: translation
-                    className: "danger"
+                $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
 
         # Resizing the visualization
         # using setTimeout to use only to the last resize action of the user
@@ -98,11 +92,8 @@ app.controller "DatasetCtrl", [
         # @method $scope.openInEditor
         # @description open dataset in Editor
         $scope.openInEditor = ->
-            $log.info "DatasetCtrl $scope.openInEditor called"
-
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
-                Data.createVidatio $scope.data
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->

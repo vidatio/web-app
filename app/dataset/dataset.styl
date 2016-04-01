@@ -1,57 +1,14 @@
 #dataset-view
 
-    .angular-leaflet-map
-        height 100%
-        width 100%
-
-    // TODO: this style is duplication of the style in the vis.styl file
-    .leaflet-container
-        a.leaflet-popup-close-button
-            top 5px
-            right 2px
-
-            &:hover
-                color $color-red !important
-
-        .leaflet-popup-content-wrapper
-            min-width 140px
-            border-top 5px solid $color-red
-            border-radius 0px
-
-            .leaflet-popup-content
-                padding-right 15px
-                overflow-wrap break-word
-
-                a:link, a:visited
-                    color $color-active
-                a:hover, a:active
-                    color $color-black
-
-        .leaflet-popup-tip
-            width 20px
-            height 20px
-
-        path.leaflet-clickable
-            stroke $color-passive
-            stroke-opacity 1
-            fill $color-green
-            fill-opacity 0.25
-            stroke-width 3px
-            stroke-dasharray 5
-
     .dataset-title
         text-align center
+        margin-bottom 20px
 
-    .visualization-container
-        text-align center
-        vertical-align middle
-        width 100%
-        height 450px
-        line-height 350px
-        background $color-white
-        box-shadow 2px 2px 2px 0px $color-shadow
-        border-radius 4xp
+    .visualization
+        box-shadow $box-shadow-size $color-shadow
         padding 20px 20px 40px 20px
+        height 450px
+        width 100%
 
         & > div
             height 100%
@@ -287,9 +244,6 @@
             #link-dataset
             #download-dataset
                 margin-top 15px
-
-        .dataset-title-text
-            margin-top 30px
 
         .metadata-container
             margin-bottom 80px

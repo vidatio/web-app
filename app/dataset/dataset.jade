@@ -5,16 +5,12 @@
 
     .row
         .col-sm-12
-            .visualization-container
-                // div needed to use padding of the parent
-                div
-                    leaflet(geojson="geojson" id="map" ng-show="visualization.type == 'map'")
-                    #chart(ng-hide="visualization.type == 'map' || visualization.type == false")
-                    img(src="images/logo-without-name.png" ng-hide="visualization.type")
+
+            visualization
 
             .row.buttons-first-row
                 .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()")
+                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                         span.icon-edit.icons
                         span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
