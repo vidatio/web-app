@@ -180,11 +180,7 @@ app.config [
             title: "editor"
 
         .state "app.editor.id",
-<<<<<<< HEAD
-            url: "/editor/:id",
-=======
             url: "/editor/:id"
->>>>>>> develop
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
@@ -195,10 +191,6 @@ app.config [
             controller: "ShareCtrl"
             title: "share"
 
-<<<<<<< HEAD
-        # /share for saved vidatio
-=======
->>>>>>> develop
         .state "app.share.id",
             url: "/share/:id"
             templateUrl: "share/share.html"
