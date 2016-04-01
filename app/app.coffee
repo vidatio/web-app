@@ -32,7 +32,8 @@ app.run [
     "$cookieStore"
     "$log"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
+    "$translate"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG, $translate) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -62,8 +63,11 @@ app.run [
                 fromState: fromState
                 fromParams: fromParams
 
-            $rootScope.title = if toState.title? then toState.title else ""
-            console.log $rootScope.title
+            if toState.title?
+                $rootScope.title = toState.title
+            else
+                $translate("SLOGAN").then (slogan) ->
+                    $rootScope.title = slogan
 
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
@@ -142,7 +146,6 @@ app.config [
         .state "app.index",
             url: "/"
             templateUrl: "index/index.html"
-            title: "home"
 
         .state "app.profile",
             url: "/profile"
