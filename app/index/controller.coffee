@@ -9,7 +9,11 @@ app.controller "IndexCtrl", [
     "DatasetsFactory"
     "$window"
     "$state"
-    ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state) ->
+    "$translate"
+    ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate) ->
+        $translate("CATEGORIES_DIAGRAM_LOADING").then (translation) ->
+            $scope.message = translation
+
         CategoriesFactory.query (response) ->
             $scope.categories = response
 
@@ -19,12 +23,11 @@ app.controller "IndexCtrl", [
 
         DatasetsFactory.query (response) ->
             $scope.vidatios = response
-
             categoryIDs = []
 
             for vidatio in $scope.vidatios
-                if vidatio.metaData?.category?
-                    categoryIDs.push(vidatio.metaData.category.name)
+                if vidatio.metaData?.categoryId?
+                    categoryIDs.push(vidatio.metaData.categoryId.name)
 
             $scope.chartData = prepareChartData(countOccurrences(categoryIDs))
             $scope.positions = setBubblePositions($scope.chartData)
@@ -90,7 +93,7 @@ app.controller "IndexCtrl", [
             .height(650)
             .legend(false)
             .font("family": "Colaborate")
-            .messages("Die Kategorien werden geladen...")
+            .messages($scope.message)
             .focus("tooltip": false)
             .background("none")
             .mouse({
@@ -112,7 +115,7 @@ app.controller "IndexCtrl", [
 
         # @method prepareChartData
         # @description prepare the necesssary data for d3plus according to our categories and their occurrences
-        #               set name, size (= "Anzahl der Datensätze") and color for each bubble
+        #               set name, size (="datensätze") and color for each bubble
         # @param {array}
         prepareChartData = (occurrences) ->
             chartData = []
@@ -122,6 +125,7 @@ app.controller "IndexCtrl", [
             for category in $scope.categories
 
                 if occurrences[category.name]?
+                    # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
                     chartData.push({"name": category.name, "datensätze": occurrences[category.name], "color": colors[currentColor]})
 
                 currentColor++
