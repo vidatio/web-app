@@ -8,7 +8,7 @@ app.controller "IndexCtrl", [
     "$log"
     ($scope, DatasetsFactory, $log) ->
         DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
-            $scope.newestVidatios = response.slice(0, 3)
+            $scope.newestVidatios = response
 
             for vidatio, index in $scope.newestVidatios
                 if index is 0

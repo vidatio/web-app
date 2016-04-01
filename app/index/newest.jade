@@ -10,7 +10,7 @@ section#newest-vidatios(ng-show="newestVidatios.length")
                     a(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                         .img-container
                             img.newest(src="{{ vidatio.image }}")
-                        .title {{ vidatio.name }}
+                        .title {{ vidatio.metaData.name }}
 
         .browse
             a.button.btn.btn-embossed.btn-primary(ui-sref="app.catalog" href="") {{ "SEARCH_VIDATIOS" | translate | uppercase }}
