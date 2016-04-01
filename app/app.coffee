@@ -133,6 +133,11 @@ app.config [
             controller: "IndexCtrl"
             templateUrl: "index/index.html"
 
+        .state "app.imprint",
+            url: "/imprint"
+            templateUrl: "imprint/imprint.html",
+            title: "imprint"
+
         .state "app.profile",
             url: "/profile"
             templateUrl: "profile/profile.html"
