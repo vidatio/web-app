@@ -27,6 +27,7 @@ app.controller "IndexCtrl", [
                     categoryIDs.push(vidatio.metaData.category.name)
 
             $scope.chartData = prepareChartData(countOccurrences(categoryIDs))
+            $scope.positions = setBubblePositions($scope.chartData)
 
             setTimeout ->
                 createCategoryBubbles()
@@ -60,7 +61,6 @@ app.controller "IndexCtrl", [
         # @description set necessary parameters and draw categories bubble-visualization
         createCategoryBubbles = ->
             $chart = $("#bubble-categories")
-
             width = $chart.parent().width()
 
             # draw new visualization only when $chart.parents' width has changed, return otherwise
@@ -71,34 +71,6 @@ app.controller "IndexCtrl", [
 
             $chart.empty()
 
-            positions = [
-                {
-                    'name': 'Bildung'
-                    'x': -40
-                    'y': 5
-                }
-                {
-                    "name": "Finanzen"
-                    "x": -20
-                    "y": 25
-                }
-                {
-                    "name": "Politik"
-                    "x": 0
-                    "y": -5
-                }
-                {
-                    "name": "Sport"
-                    "x": 20
-                    "y": 20
-                }
-                {
-                    "name": "Umwelt"
-                    "x": 40
-                    "y": 0
-                }
-            ]
-
             d3plus.viz()
             .container("#bubble-categories")
             .type("network")
@@ -107,28 +79,25 @@ app.controller "IndexCtrl", [
                 "opacity": 1
             })
             .nodes({
-                "value": positions,
-                "overlap": 0.47
+                "value": $scope.positions,
+                "overlap": 0.5
             })
             .edges([])
             .id("name")
             .color("color")
-            .size("Anzahl der Datensätze")
+            .size("datensätze")
             .width(width)
-            .height(380)
+            .height(650)
             .legend(false)
             .font("family": "Colaborate")
-            .messages( "Die Kategorien werden geladen..." )
+            .messages("Die Kategorien werden geladen...")
             .focus("tooltip": false)
             .background("none")
             .mouse({
                 "click": (category) ->
                     $state.go "app.catalog", {category: category.name}
             })
-            .zoom({
-                #"click": true,
-                "scroll": false
-            })
+            .zoom(true)
             .draw()
 
         # @method countOccurrences
@@ -153,12 +122,57 @@ app.controller "IndexCtrl", [
             for category in $scope.categories
 
                 if occurrences[category.name]?
-                    chartData.push({"name": category.name, "Anzahl der Datensätze": occurrences[category.name], "color": colors[currentColor]})
+                    chartData.push({"name": category.name, "datensätze": occurrences[category.name], "color": colors[currentColor]})
 
                 currentColor++
 
                 if currentColor is colors.length
                     currentColor = 0
 
-            return chartData
+            chartData
+
+        # @method setBubblePositions
+        # @description set the bubbles' positions according to the amount of datasets the respective category has
+        #               the category with the most datasets is in the middle, the categories with the fewest datsets are at the left and right hand side
+        # @param {array}
+        setBubblePositions = (chartData) ->
+
+            finalPositions = []
+
+            # sort bubbleData according to their amount of datasets in descending order
+            numericalSort = (a, b) ->
+                return b.datensätze - a.datensätze
+
+            bubbleData = chartData.sort(numericalSort)
+
+            predefinedPositions = [
+                {
+                    "x": -17
+                    "y": 21
+                }
+                {
+                    "x": 17
+                    "y": 21
+                }
+                {
+                    "x": 34
+                    "y": 0
+                }
+                {
+                    "x": -34
+                    "y": 0
+                }
+            ]
+
+            predefinedPositions.sort ->
+                0.5 - Math.random()
+
+            for category, index in bubbleData
+                if index is 0
+                    finalPositions.push({"name": category.name, "x": 0, "y": 0})
+                else
+                    finalPositions.push({"name": category.name, "x": predefinedPositions[index - 1].x, "y": predefinedPositions[index - 1].y})
+
+            finalPositions
 ]
+
