@@ -59,6 +59,8 @@ app.service 'DataService', [
 
                 angular.extend @metaData, metaData
 
+                dataset = vidatio.helper.trimDataset(dataset)
+
                 DatasetFactory.save
                     data: dataset
                     published: @metaData.publish
