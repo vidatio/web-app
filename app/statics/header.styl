@@ -191,7 +191,6 @@ header
         a#logout-button
         a#profile-button
         a#menu
-        a#save-button
             color $color-black
             line-height 42px
             vertical-align middle
@@ -248,22 +247,6 @@ header
 
             span
                 margin-left -3px
-
-        a#save-button
-            position absolute
-            font-size 32px
-
-            span
-                margin-left -4px
-
-        // Firefox displays the save-button on the wrong position, so this additional rule is necessary (Firefox only)
-        @-moz-document url-prefix()
-            a#save-button
-                position absolute
-                top -11px
-
-                span
-                    top -1px
 
     #link-overlay
         position absolute
@@ -344,13 +327,3 @@ header
 @media(max-width: 900px)
     .catalog-title
         margin-top 82px
-
-@media(min-width: 1200px) and (max-width: 1399px)
-    header
-        a#save-button
-            left -90px
-
-@media(min-width: 1400px)
-    header
-        a#save-button
-            left -150px

@@ -42,9 +42,7 @@
                         .text
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
                                 h4.title {{ vidatio.title }}
-                            p {{ vidatio.description | limitTo: 120}} ...
-                            p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.category.name }}
-                            p {{ "DATASET_TAGS" | translate }}: {{ vidatio.metaData.tags | preprocessTags }}
+                            p Kategorie: {{ vidatio.metaData.categoryId.name }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
 
                         a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")

@@ -2,16 +2,15 @@
         .row
             .col-sm-6
                 #preview.area
-                    ul.metadata(ng-show="show==3")
-                        li.editor Editor
-                            span.author (Author)
-                        li.title Vidatio Title
-                        li.category Category
-                        li.licence Licence
-                        li.tags Tags, Tags, Tags
-                        li.edit
-                            a.fui-new(ng-click="show=1")
-
+                    ul.metadata-preview(ng-show="goToPreview && vidatio.metaData")
+                        li.editor {{vidatio.metaData.userId.name}}
+                            span.author {{vidatio.metaData.creator}}
+                        li.title {{vidatio.metaData.name}}
+                        li.category {{vidatio.metaData.categoryId.name}}
+                        li.tags
+                            span.tag(ng-repeat="tag in vidatio.metaData.tagIds track by $index") {{tag.name}}
+                        //- li.edit
+                            a.fui-new(ng-click="show = 'metaData'")
                     visualization
 
                 #download.area
@@ -19,31 +18,18 @@
                         .option-icon.icon-download
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 
-                    form
-                        .form-group.selection
-                            label(for="dataset") {{ "DATASET" | translate }}
-                            select#dataset.form-control
-                                option CSV
-                                option XML
-                                option JSON
-                        .form-group.selection
-                            label(for="dataset") Vidatio
-                            select#dataset.form-control
-                                option JPEG
-                                option PNG
-                                option SVG
+                    .download-selection
+                        .col-xs-4
+                            a.icon-emptytable.btn.btn-primary.center-block(href="#" ng-click="downloadCSV()") CSV
+                        .col-xs-4
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="downloadVisualization('jpg')" ng-disabled="!visualization.type") JPG
+                        .col-xs-4
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="downloadVisualization('png')" ng-disabled="!visualization.type") PNG
 
             .col-sm-6
-                .save-share.area(ng-init="show=1" ng-show="show==1")
+                .save-share.area(ng-if="globals.authorized" ng-hide="goToPreview")
                     .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
-                    .row
-                        ul.share-options
-                            li: button.btn.btn-primary.icon-facebook(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-googleplus(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-twitter(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-link(ng-class="{true: 'disabled'}[!globals.authorized]")
-                            li: button.btn.btn-primary.icon-embeddedcode.embeddedcodeShowOne(ng-class="{true: 'disabled'}[!globals.authorized]")
                     .row
                         p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
                     form(name="metadataForm")
@@ -52,24 +38,15 @@
                                 input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
                             .input-group.form-group
-                                input.form-control(type="text" name="editor" ng-model="vidatio.editor" placeholder="{{ 'EDITOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
-                        .row
-                            .input-group.form-group
-                                input.form-control(type="text" name="title" ng-model="share.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
+                                input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
                         .row
                             .input-group.form-group.selection
-                                select.form-control(name="category" ng-model="vidatio.category" required)
+                                select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" required)
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
-                                    option(value="1") 1
-                                    option(value="2") 2
-                                    option(value="3") 3
                         .row
-                            .input-group.form-group.selection.last
-                                select.form-control(name="licence" ng-model="vidatio.licence" required)
-                                    option(selected="selected" disabled="true" value="") {{ 'LICENCE' | translate }}
-                                    option(value="1") 1
-                                    option(value="2") 2
-                                    option(value="3") 3
+                            label.checkbox(for="publish")
+                                input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish" checked="checked")
+                                | Vidatio im öffentlichen Katalog anzeigen
 
                         .row
                             .tagsinput-primary
@@ -78,56 +55,19 @@
                                     span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="show=2" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
-                .save-share.area(ng-show="show==2")
-                    .option-icon.icon-save
-                    h4 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
-                    .row
-                        p
-                            | Logge dich ein, um dein Vidatio in deinem Profil zu speichern.
-                            br
-                            | Nur gespeicherte Vidatios können später weiter bearbeitet werden.
-                    form(name="loginForm" ng-submit="")
-                        .row
-                            .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
-                                span.input-group-addon.fui-user
-                                input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
-                            span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") Kein gültiger Benutzername!
+                login(ng-if="!globals.authorized")
 
-                        .row
-                            .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
-                                span.input-group-addon.fui-lock
-                                input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
-
-                        .row
-                            label.checkbox(for="publish")
-                                input#publish.custom-checkbox(data-toggle="checkbox", type="checkbox" checked="checked")
-                                | Vidatio im öffentlichen Katalog anzeigen
-
-                        .row
-                            button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending") {{ 'SAVE_PERMANENTLY' | translate }}
-
-                        .row
-                            .col-xs-6.left
-                                a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
-                            .col-xs-6.right
-                                a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
-
-                    .row
-                        a.share-only.inverse.ng-binding(href="#" ng-click="show=3") Vidatio ohne Login teilen
-                            span.fui-arrow-right
-                        p Achtung, ohne Login kannst du dein Vidatio später nicht mehr bearbeiten
-
-                .save-share.area(ng-show="show==3")
+                .save-share.area(ng-show="goToPreview && globals.authorized")
                     .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
-                            li: button.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}")
-                            li: button.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}")
-                            li: button.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}")
-                            li: button.btn.btn-primary.icon-link(title="{{'SHOW_LINK' | translate}}")
+                            li: a.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}")
+                            li: a.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}")
+                            li: a.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}")
+                            li: a.btn.btn-primary.icon-link(ng-click="copyVidatioLink()" title="{{'SHOW_LINK' | translate}}")
                             li: button.btn.btn-primary.icon-embeddedcode(title="{{'SHOW_EMBEDDED_CODE' | translate}}")
                     .row
                         h3 Embed Code
@@ -135,7 +75,10 @@
                         .input-group.single
                             textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
                     .row
-                        h3 {{ "COPY_LINK" | translate }}
+                        h3 {{ "LINK" | translate }}
                             span.icon-link
                         .input-group.single
-                            input.form-control(type="text" name="link" value="http://www.vidatio.at/visualisierung12345" readonly)
+                            input.form-control#vidatio-link(ng-model="link" onClick="this.select();" readonly)
+
+                    .row
+                        a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}

@@ -1,3 +1,5 @@
+#register-wrapper
+#login-wrapper
 #share
     margin 10px auto 0
     h4
@@ -6,6 +8,19 @@
         width 100%
 
     .row
+        &:first-child
+            input
+                border-width 2px 2px 1px 2px !important
+        &:nth-child(2)
+            input
+                border-width 1px 2px 1px 2px !important
+        &:nth-child(3)
+            select
+                border-width 1px 2px 2px 2px !important
+
+        .to-detail-view
+            margin-top 30px
+
         .area
             height 254px
             border-top 3px solid $color-green
@@ -30,6 +45,8 @@
             text-align center
 
         #preview
+            position relative
+            width auto
             height 293px
             padding 20px
 
@@ -38,8 +55,10 @@
                 margin-top -50px
                 margin-left -40px
 
-            .metadata
-                position relative
+            .metadata-preview
+                position absolute
+                z-index 1
+                width calc(100% - 40px)
                 background-color rgba($color-green, .4)
                 border-top 2px solid $color-table-odd-active
                 text-align left
@@ -58,12 +77,6 @@
                         font-family Colaborate, $fonts
                         font-size 15px
                         line-height 17px
-                    &.title
-                        margin-bottom 5px
-                    &.category
-                    &.licence
-                        float left
-                        margin-right 5px
                     &.tags
                         color $color-active
                     &.edit
@@ -85,23 +98,6 @@
 
         #download
             height 215px
-            a
-                display inline
-                .option-icon
-                    margin-top 5px
-            form
-                width 70%
-                margin 0 auto
-
-                .form-group
-                    width 43%
-                    margin 0 3%
-                    float left
-
-                    option
-                        text-align center
-            &:hover
-                background-color $color-hover-light
 
         .save-share
             padding 0 45px 20px
@@ -126,18 +122,17 @@
                     margin-left 2px
 
             .share-options
-                display block
-                height 45px
-                margin 0 auto 15px
+                text-align center
                 padding 0
-                width 275px
-
+                margin 0
+                list-style none outside none
+                height 45px
                 li
+                    display inline
                     list-style-type none
-                    float left
                     margin 0 5px
 
-                    button
+                    a
                         width 45px
                         height 45px
                         padding 5px
@@ -147,6 +142,13 @@
             .input-group
                 margin-bottom 0
                 width 100%
+
+                .ng-pristine, .ng-invalid
+                    border $color-red 2px solid
+
+                .ng-valid
+                    border $color-green 2px solid
+
                 .form-control:not(:first-child)
                     border-left none
 
@@ -166,6 +168,9 @@
             button[type="submit"]
                 margin-top 8px
 
+            button[disabled]
+                background-color $color-red
+
             p
                 {lightText}
                 margin-bottom 12px
@@ -183,15 +188,11 @@
                 padding 0
 
             .checkbox
-                margin 12px 7px 3px
+                margin 12px 0 3px
                 width 265px
                 {lightText}
                 line-height 19px
                 padding-left 30px
-
-            .share-only
-                margin-top 90px
-                display block
 
             .form-control[readonly]
                 color $color-passive
@@ -201,6 +202,8 @@
                 margin-top 30px
 
 @media(max-width 768px)
+    #register-wrapper
+    #login-wrapper
     #share
         .row
             .area

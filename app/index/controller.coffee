@@ -10,13 +10,12 @@ app.controller "IndexCtrl", [
         DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
             $scope.newestVidatios = response
 
-            for vidatio, index in $scope.newestVidatios
-                if index is 0
-                    vidatio.image = "images/newest-vidatios-placeholder.png"
-                else if index is 1
-                    vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+            for vidatio in $scope.newestVidatios
+                # prevent that one of the newest vidatios has no image
+                if vidatio.visualizationOptions?.thumbnail and vidatio.visualizationOptions.thumbnail isnt "data:,"
+                        vidatio.image = vidatio.visualizationOptions.thumbnail
                 else
-                    vidatio.image = "images/placeholder-featured-vidatios-buchungsstatistik-pongau.svg"
+                    vidatio.image = "images/logo-text-black.svg"
 
         , (error) ->
             $log.info "IndexCtrl error on query newest datasets"

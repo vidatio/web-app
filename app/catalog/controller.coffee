@@ -4,18 +4,17 @@ app = angular.module "app.controllers"
 
 app.controller "CatalogCtrl", [
     "$scope"
-    "$timeout"
     "ProgressService"
     "DataService"
     "$translate"
     "ngToast"
     "$stateParams"
     "$state"
-    "DatasetsFactory"
+    "DatasetFactory"
     "CategoriesFactory"
     "TagsService"
     "$log"
-    ($scope, $timeout, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
+    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
@@ -33,24 +32,29 @@ app.controller "CatalogCtrl", [
         $scope.tags = Tags.getAndPreprocessTags()
 
         Categories.query (response) ->
-            $log.info "CatalogCtrl successfully queried categories"
             $scope.categories = response
+        , (error) ->
+            $log.error "CatalogCtrl Categories.query promise error"
+            $log.debug
+                error: error
+
+            $translate('TOAST_MESSAGES.CATEGORIES_COULD_NOT_BE_LOADED').then (translation) ->
+                ngToast.create
+                    content: translation
+                    className: "danger"
 
         Datasets.query (response) ->
-            $log.info "CatalogCtrl successfully queried datasets"
-
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
                 vidatio.description = "Hello world, this is a test!"
-                vidatio.title = vidatio.name
-                vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+                vidatio.title = vidatio.metaData.name
+                vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
-
         , (error) ->
-            $log.info "CatalogCtrl error on query datasets"
-            $log.error error
-
+            $log.error "CatalogCtrl Datasets.query promise error"
+            $log.debug
+                error: error
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
@@ -67,11 +71,7 @@ app.controller "CatalogCtrl", [
         # @description Set new category and update URL by setting new stateParams
         # @param {String} category
         $scope.setCategory = (category) ->
-            vidatio.log.info "CatalogCtrl setCategory called"
-            vidatio.log.debug
-                category: category
             $scope.filter.category = category
-
             $scope.setStateParams()
 
         # @method setStateParams
@@ -82,7 +82,6 @@ app.controller "CatalogCtrl", [
             stateParams.tags = if $scope.filter.tags then $scope.filter.tags.join("|") else ""
             stateParams.from = if $scope.filter.dates.from then $scope.filter.dates.from.format("DD-MM-YYYY") else ""
             stateParams.to = if $scope.filter.dates.to then $scope.filter.dates.to.format("DD-MM-YYYY") else ""
-
             $scope.changeURL()
 
         # @method reset

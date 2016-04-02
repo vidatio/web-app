@@ -7,45 +7,24 @@ app.service 'DataService', [
     "TableService"
     "ConverterService"
     "VisualizationService"
-    "$rootScope"
-    "ngToast"
-    "$translate"
     "$log"
     "DatasetFactory"
-    "$location"
+    "$translate"
     "$state"
-    "ShareService"
-    (Map, Table, Converter, Visualization, $rootScope, ngToast, $translate, $log, DatasetFactory, $location, $state, Share) ->
+    "ngToast"
+    (Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
         class Data
             constructor: ->
-                $log.info "DataService constructor called"
-
                 @name = ""
-                @meta =
+                @metaData =
                     "fileType": ""
 
             updateMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateMap called"
-                $log.debug
-                    message: "DataService updateMap called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
 
             validateInput: (row, column, oldData, newData) ->
-                $log.info "DataService validateInput called"
-                $log.debug
-                    message: "DataService validateInput called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
@@ -56,29 +35,21 @@ app.service 'DataService', [
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name
-            saveViaAPI: (dataset) ->
-                $log.info("saveViaAPI called")
-                $log.debug
-                    dataset: dataset
-                    name: @name
+            saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
+                angular.extend @metaData, metaData
 
                 DatasetFactory.save
-                    name: @name
                     data: dataset
-                    metaData:
-                        fileType: @meta.fileType
-                    options:
+                    published: @metaData.publish
+                    metaData: @metaData
+                    visualizationOptions:
                         type: Visualization.options.type
                         xColumn: Visualization.options.xColumn
                         yColumn: Visualization.options.yColumn
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
-
+                        thumbnail: thumbnail
                 , (response) ->
-                    $log.info("Dataset successfully saved")
-                    $log.debug
-                        response: response
-
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
                         ngToast.create
@@ -92,41 +63,36 @@ app.service 'DataService', [
                     $log.debug
                         error: error
 
-                    $translate('TOAST_MESSAGES.DATASET_NOT_SAVED')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
+                    return cb error, null
 
             # @method useSavedData
             # @description from existing dataset
             # @param {Object} data
             useSavedData: (data) ->
-                $log.info "DataService useSavedData called"
-                $log.debug
-                    data: data
+                if data.metaData?
+                    @metaData = data.metaData
 
-                @meta.fileType = if data.metaData?.fileType? then data.metaData.fileType else null
-                Visualization.options.fileType = @meta.fileType
-                Table.useColumnHeadersFromDataset = if data.options?.useColumnHeadersFromDataset? then data.options.useColumnHeadersFromDataset else false
+                if data.visualizationOptions?
+                    Visualization.setOptions(data.visualizationOptions)
 
-                if @meta.fileType is "shp"
+                if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
+                    Table.useColumnHeadersFromDataset = true
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
                     Map.setGeoJSON data.data
                 else
+                    Table.useColumnHeadersFromDataset = false
+                    if data.visualizationOptions.useColumnHeadersFromDataset
+                        Table.useColumnHeadersFromDataset = true
+
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
-                    Table.setDataset data.data
 
-                if data.options?
-                    Visualization.setOptions(data.options)
+                    Table.setDataset data.data
 
             #@method downloadCSV
             #@description downloads a csv
             downloadCSV: (name) ->
-                $log.info "TableCtrl download called"
-
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
 
                 if Table.useColumnHeadersFromDataset
@@ -144,7 +110,7 @@ app.service 'DataService', [
                 csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
                 csvURL = window.URL.createObjectURL(csvData)
 
-                Share.download fileName + ".csv", csvURL
+                vidatio.visualization.download fileName + ".csv", csvURL
 
         new Data
 ]

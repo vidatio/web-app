@@ -147,6 +147,11 @@
 
                 img.newest
                     width 100%
+                    position relative
+                    top 50%
+                    -webkit-transform translateY(-50%)
+                    -ms-transform translateY(-50%)
+                    transform translateY(-50%)
 
             .title
                 font-family Colaborate-Medium, $fonts
@@ -230,6 +235,10 @@
             .img-container
                 width 80%
                 margin 0 auto
+                height 45vw
+
+                img.newest
+                    max-height 44vw
 
             .title
                 margin-bottom 30px
@@ -242,15 +251,10 @@
 @media(min-width: 768px)
     #index #newest-vidatios
         .img-container
-            height 21vw
-            max-height 220px
+            height 220px
 
             img.newest
-                position relative
-                top 50%
-                -webkit-transform translateY(-50%)
-                -ms-transform translateY(-50%)
-                transform translateY(-50%)
+                max-height 210px
 
         .title
             font-size 16px

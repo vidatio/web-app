@@ -47,6 +47,7 @@ app.run [
         window.vidatio.helper = new window.vidatio.Helper()
         window.vidatio.recommender = new window.vidatio.Recommender()
         window.vidatio.geoParser = new window.vidatio.GeoParser()
+        window.vidatio.visualization = new window.vidatio.Visualization()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
@@ -87,7 +88,7 @@ app.config [
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level
-        LogglyLoggerProvider.level "INFO"
+        LogglyLoggerProvider.level "DEBUG"
 
         # Send console error stack traces to Loggly.
         # @method sendConsoleErrors
@@ -159,13 +160,11 @@ app.config [
         .state "app.registration",
             url: "/registration"
             templateUrl: "registration/registration.html"
-            controller: "RegistrationCtrl"
             title: "registration"
 
         .state "app.login",
             url: "/login"
             templateUrl: "login/login.html"
-            controller: "LoginCtrl"
             title: "login"
 
         .state "app.import",

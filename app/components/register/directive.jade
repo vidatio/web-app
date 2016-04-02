@@ -1,0 +1,38 @@
+#registration.save-share.area
+    form(name="registrationForm" ng-submit="register()")
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : registrationForm.email.$invalid && !registrationForm.email.$pristine }")
+                    span.input-group-addon.fui-mail
+                    input.form-control(type="email" name="email" ng-model="user.email" placeholder="{{ 'EMAIL' | translate }}" required ng-minlength=10 ng-maxlength=128 validate-uniqueness="email")
+                    span.form-control-feedback.fui-check(ng-show="registrationForm.email.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine")
+                span.error(ng-show="registrationForm.email.$invalid && !registrationForm.email.$pristine && !registrationForm.email.$error.uniqueness") {{ 'FORM.ERROR.INVALID_EMAIL' | translate }}
+                span.error(ng-show="registrationForm.email.$error.uniqueness") {{ 'FORM.ERROR.UNIQUENESS_EMAIL' | translate }}
+
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : registrationForm.name.$invalid && !registrationForm.name.$pristine }")
+                    span.input-group-addon.fui-user
+                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }}" required ng-minlength=3 ng-maxlength=128 validate-uniqueness="name")
+                    span.form-control-feedback.fui-check(ng-show="registrationForm.name.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine")
+                span.error(ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine && !registrationForm.name.$error.uniqueness") {{ 'FORM.ERROR.INVALID_USERNAME' | translate }}
+                span.error(ng-show="registrationForm.name.$error.uniqueness") {{ 'FORM.ERROR.UNIQUENESS_USERNAME' | translate }}
+
+        .row
+            .col-xs-12
+                .input-group.form-group(ng-class="{ 'has-error' : registrationForm.password.$invalid && !registrationForm.password.$pristine }")
+                    span.input-group-addon.fui-lock
+                    input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
+                    span.form-control-feedback.fui-check(ng-show="registrationForm.password.$valid")
+                    span.form-control-feedback.fui-cross(ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine")
+                span.error(ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine") {{ 'FORM.ERROR.INVALID_PASSWORD' | translate }}
+
+        .row
+            .col-xs-12
+                button.btn.btn-block.btn-primary(type="submit" ng-disabled="registrationForm.$invalid || registrationForm.$pending") {{ 'REGISTER' | translate }}
+
+    .row
+        .col-xs-12.right
+            a.inverse(ui-sref="app.login({ locale: locale })") {{ 'LOG_ON' | translate }}

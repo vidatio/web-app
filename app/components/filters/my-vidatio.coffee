@@ -3,9 +3,8 @@
 app = angular.module "app.filters"
 
 app.filter "myVidatioFilter", [
-    "$log"
     "$cookieStore"
-    ($log, $cookieStore) ->
+    ($cookieStore) ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Boolean} showOwnVidatios
@@ -18,7 +17,7 @@ app.filter "myVidatioFilter", [
 
             if globals.currentUser?.id
                 for element in input
-                    if globals.currentUser.id is element.userId._id
+                    if globals.currentUser.id is element.metaData.userId._id
                         output.push element
 
             output

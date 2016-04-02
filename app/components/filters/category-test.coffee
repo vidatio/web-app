@@ -14,12 +14,12 @@ describe "Filter Catalog", ->
             input = [
                 {
                     metaData:
-                        category:
+                        categoryId:
                             name: "category1"
                 },
                 {
                     metaData:
-                        category:
+                        categoryId:
                             name: "category2"
                 }
             ]
@@ -27,7 +27,7 @@ describe "Filter Catalog", ->
             result = [
                 {
                     metaData:
-                        category:
+                        categoryId:
                             name: "category2"
                 }
             ]

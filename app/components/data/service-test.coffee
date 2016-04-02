@@ -17,6 +17,7 @@ describe "Service Data", ->
 
             @Map = MapService
             @Map.init @scope
+            @Map.setGeoJSON = ->
 
             @Table = TableService
             @Table.getInstance = ->
@@ -44,18 +45,18 @@ describe "Service Data", ->
         expect(@injector.has("DataService"))
 
     it "should have a meta object", ->
-        expect(@Data.meta).toBeDefined()
+        expect(@Data.metaData).toBeDefined()
 
     describe "should update Table and Map", ->
         it "with file type csv", ->
-            @Data.meta.fileType = "csv"
+            @Data.metaData.fileType = "csv"
             @Data.updateMap 0, 0, "oldData", "newData"
 
             expect(@Converter.convertArrays2GeoJSON).not.toHaveBeenCalled()
             expect(@Map.setGeoJSON).not.toHaveBeenCalled()
 
         it "with file type shp", ->
-            @Data.meta.fileType = "shp"
+            @Data.metaData.fileType = "shp"
 
             @Data.updateMap(0, 0, "oldData", "newData")
             expect(@Map.updateGeoJSONWithSHP).toHaveBeenCalled()
@@ -67,49 +68,79 @@ describe "Service Data", ->
                     [1, 2, 3],
                     ["one", "two", "three"]
                 ]
-            options:
-                # type: "bar" ### Can't be tested, because of promise
-                xColumn: 2
-                yColumn: 3
-                color: "#FF00FF"
-                useColumnHeadersFromDataset: true
             metaData:
-                fileType: null
-
-        # FIXME data has no shape data??
-        xit "from shp data", ->
-            data.metaData.fileType = "shp"
-
-            @Data.useSavedData data
-            expect(@Table.setDataset).toHaveBeenCalled()
-            expect(@Table.setHeader).toHaveBeenCalled()
-            expect(@Map.setGeoJSON).toHaveBeenCalled()
-            expect(@Table.useColumnHeadersFromDataset).toEqual(true)
-
-        xit "and set visualization options", ->
-            options =
+                fileType: "csv"
+            visualizationOptions:
                 type: "bar"
                 xColumn: 2
                 yColumn: 3
                 color: "#FF00FF"
+                useColumnHeadersFromDataset: true
 
+        it "from shp data", ->
+            dataSHP =
+                data:
+                    "type": "FeatureCollection",
+                    "features": [
+                        {
+                          "type": "Feature",
+                          "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                              16.41097597738341,
+                              48.19396209464308
+                            ]
+                          },
+                          "properties": {
+                            "OBJECTID": 641,
+                            "ID": "IM_Z1030",
+                            "BEZEICHNUN": "MA 15 - Impfservice und reisemedizinische Beratung",
+                          }
+                        },
+                        {
+                          "type": "Feature",
+                          "geometry": {
+                            "type": "Point",
+                            "coordinates": [
+                              16.37971816098013,
+                              48.216655006523915
+                            ]
+                          },
+                          "properties": {
+                            "OBJECTID": 642,
+                            "ID": "IM_BGA02",
+                            "BEZEICHNUN": "MA 15 - Bezirksgesundheitsamt 2 zuständig für den 2. und 20. Bezirk",
+                          }
+                        }]
+                metaData:
+                    fileType: "shp"
+                visualizationOptions:
+                    type: "map"
+                    useColumnHeadersFromDataset: true
+
+            @Data.useSavedData dataSHP
+            expect(@Table.setDataset).toHaveBeenCalled()
+            expect(@Map.setGeoJSON).toHaveBeenCalled()
+            expect(@Table.useColumnHeadersFromDataset).toEqual(true)
+
+        it "and set visualization options", ->
             data.metaData.fileType = "csv"
-
+            visualizationOptions =
+                type: "bar"
+                xColumn: 2
+                yColumn: 3
+                color: "#FF00FF"
             @Data.useSavedData data
-            expect(@Visualization.options).toEqual(jasmine.objectContaining(options))
-            expect(@Table.useColumnHeadersFromDataset).toEqual(data.options.useColumnHeadersFromDataset)
+            expect(@Visualization.options).toEqual(jasmine.objectContaining(visualizationOptions))
+            expect(@Table.useColumnHeadersFromDataset).toEqual(data.visualizationOptions.useColumnHeadersFromDataset)
 
         it "from csv data with user header", ->
-            data.metaData.fileType = "csv"
-
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).toHaveBeenCalled()
 
         it "from csv data without user header", ->
-            data.options.useColumnHeadersFromDataset = false
-            data.metaData.fileType = "csv"
-
+            data.visualizationOptions.useColumnHeadersFromDataset = false
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
             expect(@Table.setHeader).not.toHaveBeenCalled()

@@ -1,7 +1,8 @@
 #table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content(ng-class="{'active': activeTabs[1]}")
         .settings-bar
-            .header-button(ng-hide="data.meta.fileType == 'shp'")
+
+            .header-button(ng-hide="data.metaData.fileType == 'shp'")
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
