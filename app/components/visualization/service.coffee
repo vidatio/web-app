@@ -229,7 +229,7 @@ app.service 'VisualizationService', [
                     $timeout ->
                         Progress.setMessage ""
 
-                    vidatio.visualization.download fileName, obj[type]
+                    vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 
                 .catch (error) ->
                     $translate(error.i18n).then (translation) ->
