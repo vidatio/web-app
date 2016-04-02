@@ -5,7 +5,6 @@ class window.vidatio.Helper
         @subsetMin = 20
         @subsetMax = 100
         @subsetPercentage = 10
-
         @failureTolerancePercentage = 10
 
     # remove cells without values
@@ -16,7 +15,6 @@ class window.vidatio.Helper
     trimDataset: (dataset) ->
         vidatio.log.info "HelperService trimDataset called"
         vidatio.log.debug
-            message: "HelperService trimDataset called"
             dataset: dataset
 
         tmp = []

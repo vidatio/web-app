@@ -52,10 +52,6 @@ app.service 'DataService', [
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
 
                 , (response) ->
-                    $log.info("Dataset successfully saved")
-                    $log.debug
-                        response: response
-
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
                         ngToast.create

@@ -12,10 +12,6 @@ app.controller "RegistrationCtrl", [
     ($scope, UserFactory, $log, $translate, ngToast, $state) ->
         $scope.register = ->
             UserFactory.save $scope.user, (response) ->
-                $log.info "RegistrationCtrl register success called"
-                $log.debug
-                    response: response
-
                 $translate('TOAST_MESSAGES.REGISTRATION_SUCCESS').then (translation) ->
                     ngToast.create
                         content: translation

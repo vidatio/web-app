@@ -27,10 +27,6 @@ app.service 'UserService', [
                 params[key] = escape(value)
 
                 UserUniquenessFactory.check(params).$promise.then (results) ->
-                    $log.info "UserService checkUniqueness success (user does not exist)"
-                    $log.debug
-                        results: results
-
                     if results["available"]
                         $q.resolve(results)
                     else
@@ -75,8 +71,6 @@ app.service 'UserService', [
             # @method logout
             # @public
             logout: =>
-                $log.info "UserService logout called"
-
                 @user =
                     name: ""
 
@@ -92,12 +86,6 @@ app.service 'UserService', [
             # @param {String} name
             # @param {String} password
             setCredentials: (name, password, userID, authData) ->
-                $log.info "UserService setCredentials called"
-                $log.debug
-                    name: name
-                    password: password
-                    userID: userID
-
                 $rootScope.globals =
                     currentUser:
                         name: name

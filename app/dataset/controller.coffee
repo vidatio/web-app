@@ -97,10 +97,6 @@ app.controller "DatasetCtrl", [
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl toggleVidatioLink called"
-            $log.debug
-                link: $scope.link
-
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
         $scope.hideVidatioLink = ->

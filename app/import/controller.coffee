@@ -23,9 +23,7 @@ app.controller "ImportCtrl", [
     "VisualizationService"
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
-
         $scope.importService = Import
-
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
@@ -50,10 +48,6 @@ app.controller "ImportCtrl", [
                     params:
                         url: url
                 ).success (resp) ->
-                    $log.info "ImportCtrl load success called"
-                    $log.debug
-                        data: resp.body
-
                     fileContent = if resp.fileType is 'zip' then resp.body.data else resp.body
                     initTableAndMap resp.fileType, fileContent
 
@@ -88,9 +82,9 @@ app.controller "ImportCtrl", [
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
-                $log.info "ImportCtrl maxFileSize exceeded"
+                $log.warn "ImportCtrl maxFileSize exceeded"
                 $log.debug
-                    FileSize: $scope.file.size
+                    fileSize: $scope.file.size
 
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
@@ -118,10 +112,6 @@ app.controller "ImportCtrl", [
                     Progress.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
-                $log.info "ImportCtrl Import.readFile promise success called"
-                $log.debug
-                    fileContent: fileContent
-
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                     Progress.setMessage message
 
@@ -129,7 +119,6 @@ app.controller "ImportCtrl", [
 
                 $timeout ->
                     $location.path editorPath
-
             , (error) ->
                 $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug

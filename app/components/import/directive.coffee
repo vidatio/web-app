@@ -23,9 +23,7 @@ app.directive 'ngFileDropStart', [ ->
                 false
 ]
 
-app.directive 'ngFileDropEnd', [
-    "$log"
-    ($log) ->
+app.directive 'ngFileDropEnd', [ ->
         link: ($scope, el) ->
 
             #leave: cursor moves out of drop-zone
@@ -48,9 +46,7 @@ app.directive 'ngFileDropEnd', [
                 false
 ]
 
-app.directive 'ngFileSelect', [
-    "$log"
-    ($log) ->
+app.directive 'ngFileSelect', [ ->
         link: ($scope, el) ->
             el.bind "change", (e) ->
                 $scope.file = (e.srcElement or e.target).files[0]

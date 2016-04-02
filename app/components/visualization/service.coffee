@@ -15,8 +15,6 @@ app.service 'VisualizationService', [
             # @method constructor
             # @public
             constructor: ->
-                $log.info "VisualizationService constructor called"
-
                 @options =
                     fileType: "csv"
                     type: false
@@ -66,8 +64,6 @@ app.service 'VisualizationService', [
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                $log.info "VisualizationService recommend called"
-
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
                 recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
 
@@ -130,7 +126,7 @@ app.service 'VisualizationService', [
                     when "timeseries"
                         new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
                     else
-                        $log.info "VisualizationCtrl type not set"
+                        $log.warn "VisualizationCtrl type not set"
                         $log.debug
                             type: options.type
 

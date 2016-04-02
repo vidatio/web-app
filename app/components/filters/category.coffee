@@ -2,9 +2,7 @@
 
 app = angular.module "app.filters"
 
-app.filter "categoryFilter", [
-    "$log"
-    ($log) ->
+app.filter "categoryFilter", [ ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {String} category

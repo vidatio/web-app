@@ -6,9 +6,8 @@ app.directive "menu", [
     "$timeout"
     "UserService"
     "$rootScope"
-    "$log"
     "$state"
-    ($timeout, UserService, $rootScope, $log, $state) ->
+    ($timeout, UserService, $rootScope, $state) ->
         restrict: "E"
         templateUrl: "components/menu/menu.html"
         replace: true

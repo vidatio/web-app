@@ -3,14 +3,13 @@ app = angular.module "app.directives"
 
 app.directive 'hot', [
     "$timeout"
-    "$log"
     "DataService"
     "MapService"
     "TableService"
     "ConverterService"
     "$window"
     "VisualizationService"
-    ($timeout, $log, Data, Map, Table, Converter, $window, Visualization) ->
+    ($timeout, Data, Map, Table, Converter, $window, Visualization) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true

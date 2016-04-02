@@ -2,17 +2,11 @@
 
 class window.vidatio.Visualization
 
+    # @method constructor
     constructor: (@dataset, @color = "#11DDC6", @width, @height, @containerSelector = "#chart") ->
-        vidatio.log.info "Visualization constructor called"
-        vidatio.log.debug
-            dataset: @dataset
-            color: @color
-            width: @width
-            height: @height
-            containerSelector: @containerSelector
 
+    # @method remove
     remove: ->
-        vidatio.log.info "Visualization remove called", @containerSelector, @containerSelector.length
         $(@containerSelector).empty()
 
     # @method preProcess
@@ -24,9 +18,6 @@ class window.vidatio.Visualization
     #       @param {String} headers
     #       @param {String} headers
     preProcess: (options) ->
-        vidatio.log.info "Visualization preprocess called"
-        vidatio.log.debug
-            options: options
         { type, xColumn, yColumn, headers } = options
         @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type, headers, @color
 

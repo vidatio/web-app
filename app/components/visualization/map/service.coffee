@@ -60,8 +60,6 @@ app.service 'MapService', [
             # Because we add some objects to the scope we need this function
             # has to be called before the init function
             setInstance: ->
-                $log.info "MapService setInstance called"
-
                 leafletData.getMap("map").then (mapInstance) =>
                     $log.info "MapService leafletData.getMap called"
                     $log.debug
@@ -84,13 +82,10 @@ app.service 'MapService', [
             # we need init function to do initial actions
             # like fitting to the bounds of the geoJSON
             init: ->
-                $log.info "MapService init called"
                 @setBoundsToGeoJSON()
                 @resizeMap()
 
             resetGeoJSON: ->
-                $log.info "MapService resetGeoJSON called"
-
                 @geoJSON =
                     "type": "FeatureCollection"
                     "features": []
@@ -101,7 +96,6 @@ app.service 'MapService', [
             setGeoJSON: (data) ->
                 $log.info "MapService setGeoJSON called"
                 $log.debug
-                    message: "MapService setGeoJSON called"
                     data: data
 
                 # safely remove all items, keeps data binding alive
@@ -164,7 +158,6 @@ app.service 'MapService', [
             updateGeoJSONWithSHP: (row, column, oldData, newData, key) ->
                 $log.info "MapService updateGeoJSONWithSHP called"
                 $log.debug
-                    message: "MapService updateGeoJSONWithSHP called"
                     row: row
                     column: column
                     oldData: oldData
@@ -221,7 +214,6 @@ app.service 'MapService', [
             validateGeoJSONUpdateSHP: (row, column, oldData, newData, key) ->
                 $log.info "MapService validateGeoJSONUpdateSHP called"
                 $log.debug
-                    message: "MapService validateGeoJSONUpdateSHP called"
                     row: row
                     column: column
                     oldData: oldData
@@ -255,8 +247,6 @@ app.service 'MapService', [
                 return true
 
             getGeoJSON: ->
-                $log.info "MapService getGeoJSON called"
-
                 return @geoJSON
 
         new Map
