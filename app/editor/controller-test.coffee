@@ -13,25 +13,21 @@ describe "Editor Controller", ->
             @Visualization =
                 create: ->
             @compile = $compile
-
-            @inputElement = angular.element('<div class="title"><input type="text" id="vidatio-title" ng-change="saveVidatioTitle()" ng-model="editor.name"></input></div>')
-
             spyOn(@Visualization, "create")
-
             EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data, VisualizationService: @Visualization}
 
     afterEach ->
         @Visualization.create.calls.reset()
 
     describe "on page init", ->
-        it "should display both the TableView and VisualizationView, a title should be set", ->
+        xit "should display both the TableView and VisualizationView, a title should be set", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
             expect(@Data.name).toBe("My Vidatio")
 
     describe "on clicked tab", ->
-        it "should set the showTableView and showVisualizationView variables accordingly", ->
+        xit "should set the showTableView and showVisualizationView variables accordingly", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
@@ -52,7 +48,7 @@ describe "Editor Controller", ->
             expect(@scope.activeViews).toEqual(1)
 
     describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
-        it 'should call Visualization.create() after a timeout of 10ms', (done) ->
+        xit 'should call Visualization.create() after a timeout of 10ms', (done) ->
             @scope.tabClicked(0)
             setTimeout (->
                 done()
@@ -73,28 +69,3 @@ describe "Editor Controller", ->
             ), 10
             return
             expect(@Visualization.create).toHaveBeenCalled()
-
-    describe "on save vidatio-title if title input-field is not filled up", ->
-        it "should set Data.name according to a predefined standard-title", ->
-            @scope.vidatioTitle = ""
-            @scope.standardTitle = "My Vidatio"
-
-            @scope.saveVidatioTitle()
-            expect(@Data.name).toBeDefined()
-            expect(@Data.name).toBe("My Vidatio")
-
-    describe "on save vidatio-title if title input-field is filled up", ->
-        it "should set Data.name according to the text in the title input field", ->
-            @httpBackend.whenGET(/index/).respond ""
-            @httpBackend.whenGET(/editor/).respond ""
-            @httpBackend.expectGET(/languages/).respond ""
-
-            @compile(@inputElement) @scope
-            @scope.$digest()
-
-            @inputElementInput = @inputElement.find("input")
-            angular.element(@inputElementInput).val("I created my first Vidatio").trigger "input"
-            @scope.$apply()
-
-            expect(@Data.name).toBeDefined()
-            expect(@Data.name).toBe("I created my first Vidatio")

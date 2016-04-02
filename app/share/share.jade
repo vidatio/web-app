@@ -2,18 +2,20 @@
         .row
             .col-sm-6
                 #preview.area
-                    div.chart-preview
-                        ul.metadata-preview(ng-show="show==3")
-                            li.editor Editor
-                                span.author (Author)
-                            li.title Vidatio Title
-                            li.category Category
-                            li.licence Licence
-                            li.tags Tags, Tags, Tags
-                            li.edit
-                                a.fui-new(ng-click="show=1")
+                    ul.metadata(ng-show="show==3")
+                        li.editor Editor
+                            span.author (Author)
+                        li.title Vidatio Title
+                        li.category Category
+                        li.licence Licence
+                        li.tags Tags, Tags, Tags
+                        li.edit
+                            a.fui-new(ng-click="show=1")
+
+                    visualization
+
                 #download.area
-                    a(href="#")
+                    div
                         .option-icon.icon-download
                         h4 {{ "DOWNLOAD" | translate | uppercase }}
 
@@ -117,17 +119,16 @@
                             span.fui-arrow-right
                         p Achtung, ohne Login kannst du dein Vidatio später nicht mehr bearbeiten
 
-
                 .save-share.area(ng-show="show==3")
                     .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
-                            li: button.btn.btn-primary.icon-facebook
-                            li: button.btn.btn-primary.icon-googleplus
-                            li: button.btn.btn-primary.icon-twitter
-                            li: button.btn.btn-primary.icon-link
-                            li: button.btn.btn-primary.icon-embeddedcode
+                            li: button.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}")
+                            li: button.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}")
+                            li: button.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}")
+                            li: button.btn.btn-primary.icon-link(title="{{'SHOW_LINK' | translate}}")
+                            li: button.btn.btn-primary.icon-embeddedcode(title="{{'SHOW_EMBEDDED_CODE' | translate}}")
                     .row
                         h3 Embed Code
                             span.icon-embeddedcode

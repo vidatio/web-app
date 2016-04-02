@@ -14,7 +14,6 @@ app.controller "TableCtrl", [
     ($scope, Table, Share, Data, Map, Converter, $log, Visualization) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
-        $scope.visualization = Visualization.options
 
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
@@ -31,6 +30,8 @@ app.controller "TableCtrl", [
                 else
                     Table.putHeaderToDataset()
 
+            Visualization.create()
+
         #@method $scope.transpose
         #@description transpose the dataset including the header
         $scope.transpose = ->
@@ -44,24 +45,7 @@ app.controller "TableCtrl", [
         #@description downloads a csv
         $scope.download = ->
             clearFocusedAxisButtons()
-            trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-
-            if Table.useColumnHeadersFromDataset
-                csv = Papa.unparse
-                    fields: Table.getHeader(),
-                    data: trimmedDataset
-            else
-                csv = Papa.unparse trimmedDataset
-
-            if $scope.data.name is ""
-                fileName = "vidatio_#{vidatio.helper.dateToString(new Date())}"
-            else
-                fileName = $scope.data.name
-
-            csvData = new Blob([csv], {type: "text/csv;charset=utf-8;"})
-            csvURL = window.URL.createObjectURL(csvData)
-
-            Share.download fileName + ".csv", csvURL
+            Data.downloadCSV($scope.data.name)
 
         #@method $scope.axisSelection
         #@description selects axis by clicking on the header and creates new visualization

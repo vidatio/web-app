@@ -50,6 +50,9 @@ app.directive 'hot', [
                             # Needed for updating the map, else the markers are
                             # updating too late from angular refreshing cycle
                             $scope.$applyAsync()
+                        else if change and change[0][3] != change[0][2]
+                            $timeout ->
+                                Visualization.create()
                 )
 
             Table.setInstance hot

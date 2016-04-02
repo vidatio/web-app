@@ -3,7 +3,6 @@
 app = angular.module "app.controllers"
 
 app.controller "VisualizationCtrl", [
-    "$rootScope"
     "$scope"
     "TableService"
     "MapService"
@@ -16,36 +15,26 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     "VisualizationService"
-    "$window"
-    ($rootScope, $scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window) ->
-        $scope.visualization = Visualization.options
+    "$stateParams"
+    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
+        $scope.visualization = Visualization.options
+        Visualization.options.fileType = Data.meta.fileType
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
         $scope.recommend = ->
-            Visualization.recommendDiagram()
+            Visualization.useRecommendedOptions()
             Visualization.create()
             Table.updateAxisSelection(Number($scope.visualization.xColumn) + 1, Number($scope.visualization.yColumn) + 1)
             return true
 
-        if Data.meta.fileType is "shp"
-            $scope.visualization.type = "map"
-            Map.setInstance()
-        else
+        $timeout ->
             # After having recommend diagram options, we watch the dataset of the table
             # because the watcher fires at initialization the diagram gets immediately drawn
             # FIXME: Whats should happen, if a person clears the table after watching shp?!
-            $scope.$watch (->
-                Table.dataset
-            ), ( ->
-                $log.info "VisualizationCtrl dataset watcher triggered"
-
-                Visualization.create()
-            ), true
-
-        $timeout ->
+            Visualization.create()
             Progress.setMessage ""
 
         $scope.$on "colorpicker-selected", ->
@@ -84,10 +73,6 @@ app.controller "VisualizationCtrl", [
             promise = Share.mapToImg $map
 
             promise.then (obj) ->
-                $log.info "VisualizationCtrl shareVisualization promise success called"
-                $log.debug
-                    obj: obj
-
                 $timeout ->
                     Progress.setMessage ""
 
@@ -100,44 +85,4 @@ app.controller "VisualizationCtrl", [
                     className: "danger"
             , (notify) ->
                 Progress.setMessage notify
-
-        $scope.geojson =
-            data: Map.geoJSON
-            style: ->
-                {}
-            pointToLayer: (feature, latLng) ->
-                new L.marker(latLng, icon: L.icon(
-                    iconUrl: '../images/marker-small.png'
-                    iconSize: [25, 30]
-                    iconAnchor: [12.5, 30]
-                    popupAnchor: [0, -30]
-                ))
-            onEachFeature: (feature, layer) ->
-                # So every markers gets a popup
-                html = ""
-                isFirstAttribute = true
-
-                for property, value of feature.properties
-
-                    if value
-                        if isFirstAttribute
-                            html += "<b>"
-
-                        if vidatio.helper.isEmailAddress(value)
-                            html += "<a href='mailto:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isPhoneNumber(value)
-                            html += "<a href='tel:" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if vidatio.helper.isURL(value)
-                            html += "<a href='" + value + "' target='_blank'>" + value + "</a><br>"
-                        else if value
-                            html += value + "<br>"
-
-                        if isFirstAttribute
-                            html += "</b>"
-                            isFirstAttribute = false
-
-                unless html
-                    html = "Keine Informationen vorhanden"
-
-                layer.bindPopup(html)
 ]

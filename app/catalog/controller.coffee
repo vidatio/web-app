@@ -4,6 +4,8 @@ app = angular.module "app.controllers"
 
 app.controller "CatalogCtrl", [
     "$scope"
+    "ProgressService"
+    "DataService"
     "$translate"
     "ngToast"
     "$stateParams"
@@ -11,7 +13,8 @@ app.controller "CatalogCtrl", [
     "DatasetsFactory"
     "CategoriesFactory"
     "TagsService"
-    ($scope, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags) ->
+    "$log"
+    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
@@ -57,7 +60,6 @@ app.controller "CatalogCtrl", [
                     content: translation
                     className: "danger"
 
-
         # the values of the datepicker need to be watched, because the ng-change directive never executes a function
         $scope.$watch "filter.dates.from", ->
             $scope.setStateParams()
@@ -102,4 +104,11 @@ app.controller "CatalogCtrl", [
             $state.go $state.current, stateParams,
                 notify: false
                 reload: $state.current
+
+        # @method $scope.openInEditor
+        # @description set the vidatio options from saved dataset
+        $scope.openInEditor = (data) ->
+            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                Progress.setMessage message
+                Data.useSavedData data
 ]

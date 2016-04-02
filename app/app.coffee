@@ -30,9 +30,9 @@ app.run [
     "$http"
     "$location"
     "$cookieStore"
-    "$log"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, $log, CONFIG) ->
+    "$translate"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -55,6 +55,12 @@ app.run [
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            if toState.title?
+                $rootScope.title = toState.title
+            else
+                $translate("SLOGAN").then (slogan) ->
+                    $rootScope.title = slogan
+
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
@@ -133,6 +139,11 @@ app.config [
             url: "/"
             templateUrl: "index/index.html"
 
+        .state "app.imprint",
+            url: "/imprint"
+            templateUrl: "imprint/imprint.html",
+            title: "imprint"
+
         .state "app.profile",
             url: "/profile"
             templateUrl: "profile/profile.html"
@@ -140,20 +151,20 @@ app.config [
 
         .state "app.dataset",
             url: "/vidatio/:id"
-            controller: "DatasetCtrl"
             templateUrl: "dataset/dataset.html"
+            controller: "DatasetCtrl"
             title: "dataset"
 
         .state "app.registration",
             url: "/registration"
-            controller: "RegistrationCtrl"
             templateUrl: "registration/registration.html"
+            controller: "RegistrationCtrl"
             title: "registration"
 
         .state "app.login",
             url: "/login"
-            controller: "LoginCtrl"
             templateUrl: "login/login.html"
+            controller: "LoginCtrl"
             title: "login"
 
         .state "app.import",
@@ -168,15 +179,20 @@ app.config [
             controller: "EditorCtrl"
             title: "editor"
 
-        # /editor for saved vidatio
         .state "app.editor.id",
-            url: "/vidatio_:id",
+            url: "/editor/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
             url: "/share"
+            templateUrl: "share/share.html"
+            controller: "ShareCtrl"
+            title: "share"
+
+        .state "app.share.id",
+            url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
@@ -191,6 +207,8 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
+                # TODO: show 404
+
                 locale =
                     locale: $translateProvider.preferredLanguage()
 
