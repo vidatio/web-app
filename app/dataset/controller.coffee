@@ -77,8 +77,6 @@ app.controller "DatasetCtrl", [
         # @method $scope.createVidatio
         # @description creates Vidatio from saved Dataset
         $scope.createVidatio = ->
-            $log.info "DatasetCtrl $scope.createVidatio called"
-
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
                 Data.createVidatio $scope.data

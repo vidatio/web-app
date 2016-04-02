@@ -11,7 +11,7 @@ app.controller "CatalogCtrl", [
     "DatasetsFactory"
     "CategoriesFactory"
     "TagsService"
-    ($scope, $translate, ngToast, $stateParams, $state, DatasetsFactory, CategoriesFactory, TagsService) ->
+    ($scope, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
@@ -26,12 +26,21 @@ app.controller "CatalogCtrl", [
         stateParams = {}
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
 
-        $scope.tags = TagsService.getAndPreprocessTags()
+        $scope.tags = Tags.getAndPreprocessTags()
 
-        CategoriesFactory.query (response) ->
+        Categories.query (response) ->
             $scope.categories = response
+        , (error) ->
+            $log.error "CatalogCtrl Categories.query promise error"
+            $log.debug
+                error: error
 
-        DatasetsFactory.query (response) ->
+            $translate('TOAST_MESSAGES.CATEGORIES_COULD_NOT_BE_LOADED').then (translation) ->
+                ngToast.create
+                    content: translation
+                    className: "danger"
+
+        Datasets.query (response) ->
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
@@ -39,8 +48,10 @@ app.controller "CatalogCtrl", [
                 vidatio.title = vidatio.name
                 vidatio.image = "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
-
         , (error) ->
+            $log.error "CatalogCtrl Datasets.query promise error"
+            $log.debug
+                error: error
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
