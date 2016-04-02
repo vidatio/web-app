@@ -42,7 +42,6 @@ app.controller "CatalogCtrl", [
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
-                vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.metaData.name
                 vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
