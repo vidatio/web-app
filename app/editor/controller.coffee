@@ -47,8 +47,6 @@ app.controller "EditorCtrl", [
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
-            $log.info "EditorCtrl tabClicked called"
-
             for i of $scope.activeTabs
                 $scope.activeTabs[i] = false
 
@@ -68,11 +66,6 @@ app.controller "EditorCtrl", [
                 setTimeout ->
                     Visualization.create()
                 , 250
-
-            $log.debug
-                message: "EditorCtrl tabClicked called"
-                tabIndex: tabIndex
-                viewsToDisplay: viewsToDisplay
 
             [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 

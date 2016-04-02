@@ -2,9 +2,7 @@
 
 app = angular.module "app.filters"
 
-app.filter "dateFilter", [
-    "$log"
-    ($log) ->
+app.filter "dateFilter", [ ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Date or String} from

@@ -64,9 +64,11 @@
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
                         ul.share-options
-                            li: a.btn.btn-primary.icon-facebook
-                            li: a.btn.btn-primary.icon-twitter
-                            li: a.btn.btn-primary.icon-link(ng-click="copyVidatioLink()")
+                            li: a.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}")
+                            li: a.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}")
+                            li: a.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}")
+                            li: a.btn.btn-primary.icon-link(ng-click="copyVidatioLink()" title="{{'SHOW_LINK' | translate}}")
+                            li: button.btn.btn-primary.icon-embeddedcode(title="{{'SHOW_EMBEDDED_CODE' | translate}}")
                     .row
                         h3 Embed Code
                             span.icon-embeddedcode

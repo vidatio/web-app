@@ -103,18 +103,12 @@ app.controller "DatasetCtrl", [
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl toggleVidatioLink called"
-            $log.debug
-                link: $scope.link
-
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
         $scope.hideVidatioLink = ->
             $rootScope.showVidatioLink = false
 
         $scope.copyVidatioLink = ->
-            $log.info "DatasetCtrl copyVidatioLink called"
-
             window.getSelection().removeAllRanges()
             link = document.querySelector "#vidatio-link"
             range = document.createRange()
@@ -123,10 +117,6 @@ app.controller "DatasetCtrl", [
 
             try
                 successful = document.execCommand "copy"
-
-                $log.debug
-                    message: "DatasetCtrl copy vidatio-link to clipboard"
-                    successful: successful
 
                 $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->

@@ -2,9 +2,7 @@
 
 app = angular.module "app.services"
 
-app.service "ProgressService", [
-    "$log"
-    ($log) ->
+app.service "ProgressService", [ ->
         class Progress
 
             _message = null

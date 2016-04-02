@@ -9,6 +9,7 @@ app.controller "HeaderCtrl", [
     "DataService"
     ($scope, Table, Data) ->
         $scope.header = Data
+
         # set bool value editorNotInitialized; 'true' means editor was not initialized with a dataset yet
         # -> if 'true' edit- and share-page linking has to be disabled
         if Table.getDataset().length == 1

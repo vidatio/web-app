@@ -8,6 +8,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             width: width
             height: height
             options: options
+            chartSelector: chartSelector
 
         super dataset, options.color, width, height, chartSelector
         @remove()
