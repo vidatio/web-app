@@ -10,6 +10,7 @@ app.controller "LoginCtrl", [
     "$translate"
     "ngToast"
     ($scope, UserService, UserFactory, ErrorHandler, $translate, ngToast) ->
+
         $scope.logon = ->
             UserService.logon($scope.user)
             .then (user) ->
