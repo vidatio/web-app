@@ -3,6 +3,7 @@
 app = angular.module "app.services"
 
 app.service 'DataService', [
+    "$rootScope",
     "MapService"
     "TableService"
     "ConverterService"
@@ -12,8 +13,7 @@ app.service 'DataService', [
     "$translate"
     "$state"
     "ngToast"
-    "$rootScope"
-    (Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, $rootScope) ->
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
         class Data
             constructor: ->
                 @name = ""
