@@ -6,6 +6,7 @@
         text-align center
         margin 15px auto
         width 100%
+        font-family Colaborate-Regular, $fonts
 
     .row
         .to-detail-view
@@ -156,7 +157,7 @@
 
             p
                 {lightText}
-                margin-bottom 12px
+                margin-bottom 20px
 
             .option-icon
                &.icon-lock
@@ -171,11 +172,15 @@
                 padding 0
 
             .checkbox
-                margin 12px 0 3px
-                width 265px
+                margin 20px 0
+                width 100%
                 {lightText}
-                line-height 19px
-                padding-left 30px
+                line-height 20px
+                padding-left 31px
+
+                .icons
+                    font-size 27px
+                    margin-left -6px
 
             .form-control[readonly]
                 color $color-passive
@@ -183,6 +188,9 @@
 
             h3
                 margin-top 30px
+
+            .bootstrap-tagsinput
+                padding 0 !important
 
 @media(max-width 768px)
     #register-wrapper

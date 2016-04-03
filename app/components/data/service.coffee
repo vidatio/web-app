@@ -12,7 +12,8 @@ app.service 'DataService', [
     "$translate"
     "$state"
     "ngToast"
-    (Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
+    "$rootScope"
+    (Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, $rootScope) ->
         class Data
             constructor: ->
                 @name = ""
