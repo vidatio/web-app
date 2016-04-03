@@ -34,7 +34,7 @@ app.controller "LoginCtrl", [
                 return ErrorHandler.format error
 
         # To give the prepends tags of flat ui the correct focus style
-        angular.element "#login .input-group"
+        angular.element ".input-group"
         .on "focus", ".form-control", ->
             $(this).closest(".input-group, .form-group").addClass "focus"
         .on "blur", ".form-control", ->
