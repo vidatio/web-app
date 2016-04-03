@@ -27,7 +27,7 @@
                     input.form-control.password(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
                     span.form-control-feedback.fui-check(ng-show="registrationForm.password.$valid")
                     span.form-control-feedback.fui-cross(ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine")
-                span.error(ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine") {{ 'FORM.ERROR.INVALID_PASSWORD' | translate }}
+                span.error.error-password(ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine") {{ 'FORM.ERROR.INVALID_PASSWORD' | translate }}
 
         .row
             .col-xs-12
@@ -35,4 +35,4 @@
 
     .row
         .col-xs-12.right
-            a.inverse(ui-sref="app.login({ locale: locale })") title="{{'LOG_ON' | translate}} {{ 'LOG_ON' | translate }}
+            a.inverse(ui-sref="app.login({ locale: locale })" title="{{'LOG_ON' | translate}} {{'OPEN'|translate}}") {{ 'LOG_ON' | translate }}
