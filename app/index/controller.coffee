@@ -100,7 +100,7 @@ app.controller "IndexCtrl", [
                 "click": (category) ->
                     $state.go "app.catalog", {category: category.name}
             })
-            .zoom(true)
+            .zoom("scroll": false)
             .draw()
 
         # @method countOccurrences
