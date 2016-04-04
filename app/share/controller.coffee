@@ -104,7 +104,6 @@ app.controller "ShareCtrl", [
                         ngToast.create
                             content: translation
 
-
                     return $scope.goToPreview = !$scope.goToPreview
 
             .catch (error) ->
