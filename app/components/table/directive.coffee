@@ -68,6 +68,16 @@ app.directive 'hot', [
                 xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
                 yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
 
+                $header = $(".ht_clone_top th")
+
+                $header.each (idx, element) ->
+                    if idx is xColumn and idx is yColumn
+                        $(element).find("span").addClass "selected-x-y"
+                    else if idx is xColumn
+                        $(element).find("span").addClass "selected-x"
+                    else if idx is yColumn
+                        $(element).find("span").addClass "selected-y"
+
                 Table.updateAxisSelection(xColumn, yColumn)
 
             # Render of table is even then called, when table

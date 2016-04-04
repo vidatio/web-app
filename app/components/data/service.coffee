@@ -51,14 +51,12 @@ app.service 'DataService', [
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
                 , (response) ->
-                    $translate('TOAST_MESSAGES.DATASET_SAVED')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
                     $rootScope.showLink = true
+
+                    return cb null, response
+
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
