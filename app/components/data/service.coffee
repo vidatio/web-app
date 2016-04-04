@@ -56,7 +56,6 @@ app.service 'DataService', [
                     $rootScope.showLink = true
 
                     return cb null, response
-
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug

@@ -27,7 +27,7 @@
                             a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('png')" ng-disabled="!visualization.type") PNG
 
             .col-sm-6
-                .save-share.area(ng-show="goToPreview || globals.authorized")
+                .save-share.area(ng-show="!goToPreview && globals.authorized")
                     .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
@@ -59,7 +59,7 @@
 
                 login(ng-show="!globals.authorized")
 
-                .save-share.area(ng-show="goToPreview && globals.authorized")
+                .save-share.area(ng-show="goToPreview")
                     .option-icon.icon-share
                     h4 {{ "SHARE" | translate | uppercase }}
                     .row
