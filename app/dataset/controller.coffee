@@ -57,14 +57,9 @@ app.controller "DatasetCtrl", [
 
                 Visualization.create(options)
 
-                $timeout ->
-                    Progress.setMessage()
+                Progress.setMessage()
             , (error) ->
-                $log.info "DatasetCtrl error on get dataset from id"
-                $log.error error
-
-                $timeout ->
-                    Progress.setMessage()
+                Progress.setMessage()
 
                 ErrorHandler.format error
 
@@ -124,10 +119,6 @@ app.controller "DatasetCtrl", [
                         content: translation
 
             catch error
-                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
-                $log.error
-                    error: error
-
                 $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
@@ -137,15 +128,11 @@ app.controller "DatasetCtrl", [
             window.getSelection().removeAllRanges()
 
         $scope.downloadPNG = ->
-            $log.info "DatasetCtrl downloadPNG called"
-
             fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
             Visualization.downloadAsImage fileName, "png"
 
         $scope.downloadCSV = ->
-            $log.info "DatasetCtrl downloadCSV called"
-
             Data.downloadCSV($scope.data.title)
 ]
 

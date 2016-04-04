@@ -34,10 +34,6 @@ app.controller "CatalogCtrl", [
         Categories.query (response) ->
             $scope.categories = response
         , (error) ->
-            $log.error "CatalogCtrl Categories.query promise error"
-            $log.debug
-                error: error
-
             $translate('TOAST_MESSAGES.CATEGORIES_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
@@ -47,14 +43,10 @@ app.controller "CatalogCtrl", [
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
-                vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.metaData.name
                 vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
-            $log.error "CatalogCtrl Datasets.query promise error"
-            $log.debug
-                error: error
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation

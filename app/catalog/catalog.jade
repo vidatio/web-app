@@ -45,5 +45,5 @@
                             p Kategorie: {{ vidatio.metaData.categoryId.name }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
 
-                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)")
                             span {{ "OPEN_IN_EDITOR" | translate }}

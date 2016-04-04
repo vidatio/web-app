@@ -61,8 +61,7 @@ app.controller "ImportCtrl", [
                     $log.debug
                         resp: resp
 
-                    $timeout ->
-                        Progress.setMessage ""
+                    Progress.setMessage ""
                     ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
@@ -102,8 +101,7 @@ app.controller "ImportCtrl", [
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                $timeout ->
-                    Progress.setMessage message
+                Progress.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
