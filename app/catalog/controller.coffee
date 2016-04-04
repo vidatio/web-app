@@ -16,6 +16,9 @@ app.controller "CatalogCtrl", [
     "$log"
     ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
+        stateParams = {}
+        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
+        $scope.tags = Tags.getAndPreprocessTags()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
         $scope.filter =
@@ -25,11 +28,6 @@ app.controller "CatalogCtrl", [
             category: if $stateParams.category then $stateParams.category else ""
             tags: if $stateParams.tags then $stateParams.tags.split("|") else ""
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
-
-        stateParams = {}
-        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-
-        $scope.tags = Tags.getAndPreprocessTags()
 
         Categories.query (response) ->
             $scope.categories = response

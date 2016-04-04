@@ -195,7 +195,7 @@
     "COPY_LINK": "Link kopieren",
     "INFORMATION_DATASET": "Informationen zum Datensatz",
     "DATASET_DESCRIPTION": "Beschreibung des Datensatzes",
-    "DATASET_ORIGIN": "Urheber",
+    "DATASET_AUTHOR": "Urheber",
     "DATASET_EDITOR": "Editor",
     "DATASET_CREATED": "Erstellt am",
     "DATASET_UPDATED": "Letztes Update",
