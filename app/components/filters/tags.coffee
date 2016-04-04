@@ -3,9 +3,8 @@
 app = angular.module "app.filters"
 
 app.filter "tagsFilter", [
-    "$log"
     "preprocessTagsFilter"
-    ($log, preprocessTagsFilter) ->
+    (preprocessTagsFilter) ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Array} tags

@@ -3,43 +3,29 @@
 app = angular.module "app.services"
 
 app.service 'DataService', [
+    "$rootScope",
     "MapService"
     "TableService"
     "ConverterService"
     "VisualizationService"
     "$log"
     "DatasetFactory"
-    (Map, Table, Converter, Visualization, $log, DatasetFactory) ->
+    "$translate"
+    "$state"
+    "ngToast"
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
         class Data
             constructor: ->
-                $log.info "DataService constructor called"
-
                 @name = ""
                 @metaData =
                     "fileType": ""
 
             updateMap: (row, column, oldData, newData) ->
-                $log.info "DataService updateMap called"
-                $log.debug
-                    message: "DataService updateMap called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 Map.updateGeoJSONWithSHP(row, column, oldData, newData, key)
 
             validateInput: (row, column, oldData, newData) ->
-                $log.info "DataService validateInput called"
-                $log.debug
-                    message: "DataService validateInput called"
-                    row: row
-                    column: column
-                    oldData: oldData
-                    newData: newData
-
                 columnHeaders = Table.instanceTable.getColHeader()
                 key = columnHeaders[column]
                 return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
@@ -51,12 +37,6 @@ app.service 'DataService', [
             # @param {Object} dataset
             # @param {String} name
             saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
-                $log.info("saveViaAPI called")
-                $log.debug
-                    dataset: dataset
-                    metaData: metaData
-                    thumbnail: thumbnail
-
                 angular.extend @metaData, metaData
 
                 dataset = vidatio.helper.trimDataset(dataset)
@@ -73,11 +53,14 @@ app.service 'DataService', [
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
                 , (response) ->
-                    $log.info("Dataset successfully saved")
-                    $log.debug
-                        response: response
+                    $translate('TOAST_MESSAGES.DATASET_SAVED')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
 
-                    return cb null, response
+                    link = $state.href("app.dataset", {id: response._id}, {absolute: true})
+                    $rootScope.link = link
+                    $rootScope.showLink = true
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
@@ -89,10 +72,6 @@ app.service 'DataService', [
             # @description from existing dataset
             # @param {Object} data
             useSavedData: (data) ->
-                $log.info "DataService useSavedData called"
-                $log.debug
-                    data: data
-
                 if data.metaData?
                     @metaData = data.metaData
 
@@ -117,8 +96,6 @@ app.service 'DataService', [
             #@method downloadCSV
             #@description downloads a csv
             downloadCSV: (name) ->
-                $log.info "TableCtrl download called"
-
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
 
                 if Table.useColumnHeadersFromDataset

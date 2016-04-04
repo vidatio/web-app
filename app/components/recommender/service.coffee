@@ -2,7 +2,6 @@
 
 class window.vidatio.Recommender
     constructor: ->
-        vidatio.log.info "Recommender constructor called"
         @recommendedDiagram = null
         @thresholdPC = 500
         @thresholdBar = 10

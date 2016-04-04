@@ -31,7 +31,8 @@ app.run [
     "$location"
     "$cookieStore"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG) ->
+    "$translate"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -55,6 +56,12 @@ app.run [
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            if toState.title?
+                $rootScope.title = toState.title
+            else
+                $translate("SLOGAN").then (slogan) ->
+                    $rootScope.title = slogan
+
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
@@ -81,7 +88,7 @@ app.config [
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level
-        LogglyLoggerProvider.level "INFO"
+        LogglyLoggerProvider.level "DEBUG"
 
         # Send console error stack traces to Loggly.
         # @method sendConsoleErrors
@@ -131,7 +138,13 @@ app.config [
 
         .state "app.index",
             url: "/"
+            controller: "IndexCtrl"
             templateUrl: "index/index.html"
+
+        .state "app.imprint",
+            url: "/imprint"
+            templateUrl: "imprint/imprint.html",
+            title: "imprint"
 
         .state "app.profile",
             url: "/profile"

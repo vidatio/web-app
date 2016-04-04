@@ -70,7 +70,6 @@ app.service 'UserService', [
                 $http.defaults.headers.common.Authorization = "Basic "
                 $state.go "app.index" if $state.$current.name is "app.profile"
 
-
             # @method setCredentials
             # @public
             # @param {String} name

@@ -23,8 +23,6 @@ app.controller "TableCtrl", [
         $scope.toggleHeader = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl changeUseOfHeader called"
-
             if $scope.data.metaData.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeHeaderFromDataset()
@@ -41,6 +39,8 @@ app.controller "TableCtrl", [
             if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
             Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
             if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()
+
+            Visualization.create()
 
         #@method $scope.download
         #@description downloads a csv

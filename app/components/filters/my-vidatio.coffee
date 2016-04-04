@@ -3,9 +3,8 @@
 app = angular.module "app.filters"
 
 app.filter "myVidatioFilter", [
-    "$log"
     "$cookieStore"
-    ($log, $cookieStore) ->
+    ($cookieStore) ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Boolean} showOwnVidatios
