@@ -38,7 +38,7 @@
                                 input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
                             .input-group.form-group
-                                input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=5 ng-maxlength=128)
+                                input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
                             .input-group.form-group.selection
                                 select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" required)
