@@ -62,9 +62,8 @@ app.controller "ShareCtrl", [
         ).on "blur", ".form-control", ->
             $(this).closest(".input-group, .form-group").removeClass "focus"
 
-        unless $stateParams.id
-            $timeout ->
-                Visualization.create()
+        $timeout ->
+            Visualization.create()
 
         $scope.saveDataset = ->
             $log.info "ShareCtrl saveDataset called"
@@ -130,7 +129,6 @@ app.controller "ShareCtrl", [
                 type: type
 
             fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
             Visualization.downloadAsImage fileName, type
 
         $scope.downloadCSV = ->
@@ -171,6 +169,4 @@ app.controller "ShareCtrl", [
                         className: "danger"
 
             window.getSelection().removeAllRanges()
-
-
 ]

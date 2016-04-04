@@ -14,9 +14,7 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     "VisualizationService"
-    "$window"
-    "$stateParams"
-    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
+    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
@@ -72,7 +70,6 @@ app.controller "VisualizationCtrl", [
                 type: type
 
             fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
             Visualization.downloadAsImage fileName, type
 
 ]
