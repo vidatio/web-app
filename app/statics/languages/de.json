@@ -122,7 +122,7 @@
     "OPEN_IN_EDITOR": "Im Editor öffnen",
     "OPEN_IN_DETAILVIEW": "Öffnen in Detailansicht",
     "TOAST_MESSAGES": {
-        "LOGIN_SUCCESS": "Willkommen {{name}}.",
+        "LOGIN_SUCCESS": "Willkommen {{name}}!",
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
