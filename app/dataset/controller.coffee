@@ -39,15 +39,15 @@ app.controller "DatasetCtrl", [
                 $scope.data = data
                 $scope.data.updated = new Date($scope.data.updatedAt)
                 $scope.data.created = new Date($scope.data.createdAt)
-                Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else null
+
                 if $scope.data.metaData.tagIds?
                     $scope.data.tags = []
                     for tag in $scope.data.metaData.tagIds
                         $scope.data.tags.push tag.name
 
-                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else null
-                $scope.data.origin = "Vidatio"
+                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
                 $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
+                $scope.data.author = if $scope.data.author? then $scope.data.author else "-"
                 $scope.data.title = $scope.data.metaData.name || "Vidatio"
 
                 Data.useSavedData $scope.data

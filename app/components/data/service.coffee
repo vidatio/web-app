@@ -71,7 +71,7 @@ app.service 'DataService', [
             # @param {Object} data
             useSavedData: (data) ->
                 if data.metaData?
-                    @metaData = data.metaData
+                    angular.extend @metaData, data.metaData
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
