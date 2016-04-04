@@ -137,8 +137,6 @@ app.service 'VisualizationService', [
                     initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
-                $log.info "VisualizationService initInlineEditingLabels called"
-
                 _self = @
                 minWidth = 200
 
@@ -201,11 +199,6 @@ app.service 'VisualizationService', [
                 return true
 
             downloadAsImage: (fileName, type) ->
-                $log.info "VisualizationService downloadAsImage called"
-                $log.debug
-                    fileName: fileName
-                    type: type
-
                 $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
                     Progress.setMessage translation
 
@@ -218,12 +211,7 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    $log.info "VisualizationCtrl visualizationToBase64String promise success called"
-                    $log.debug
-                        obj: obj
-
-                    $timeout ->
-                        Progress.setMessage ""
+                    Progress.setMessage ""
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 
