@@ -42,7 +42,7 @@ app.controller "CatalogCtrl", [
 
             for vidatio, index in $scope.vidatios
                 vidatio.title = vidatio.metaData.name
-                vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->

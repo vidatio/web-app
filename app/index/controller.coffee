@@ -12,10 +12,7 @@ app.controller "IndexCtrl", [
 
             for vidatio in $scope.newestVidatios
                 # prevent that one of the newest vidatios has no image
-                if vidatio.visualizationOptions?.thumbnail and vidatio.visualizationOptions.thumbnail isnt "data:,"
-                        vidatio.image = vidatio.visualizationOptions.thumbnail
-                else
-                    vidatio.image = "images/logo-text-black.svg"
+                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
 
         , (error) ->
             $log.info "IndexCtrl error on query newest datasets"
