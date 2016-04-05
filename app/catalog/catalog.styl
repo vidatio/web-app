@@ -78,6 +78,9 @@
     #my-vidatio-filter h2
         padding-top 3px
 
+    .vidatios .row.cards > div:nth-child(3n)
+        margin-right 0
+
 @media (max-width: 767px)
     #catalog
         #filter
@@ -96,12 +99,6 @@
             img
                 max-height 42vw
 
-        .vidatios
-            margin-bottom 30px
-
-            > .row div .text
-                padding 10px 30px 25px !important
-
 @media (min-width: 768px) and (max-width: 991px)
     #catalog
         #filter
@@ -112,20 +109,17 @@
 
         .vidatio
             a.img
-                height 27vw
+                height 28vw
                 padding 10px
 
             img
-                max-height 25vw
+                max-height 27vw
 
-@media screen and (max-width: 992px)
+@media screen and (max-width: 991px)
     #catalog
         .vidatios > .row
             margin-left -15px
             margin-right -15px
-
-            div .text
-                padding 10px 20px 25px
 
         [id$="-filter"]
             max-width 30em
@@ -141,3 +135,16 @@
 @media screen and (max-width: 730px)
     #time-filter span.to
         display none
+
+@media(min-width: 992px)
+    #catalog
+        .row.content
+            padding 0 15px
+
+            .vidatios
+                padding 0
+
+                .row.cards
+                    width 100%
+                    padding 0
+                    margin-left 15px

@@ -1,5 +1,5 @@
 #catalog.wrapper-content
-    .row
+    .row.content
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h2.filter-title {{ "FILTER_BY" | translate }}
             #time-filter
@@ -37,7 +37,7 @@
                 )
                     .vidatio
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                            img(src="{{ vidatio.image }}" alt="vidatio.title")
+                            img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.title")
 
                         .text
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
