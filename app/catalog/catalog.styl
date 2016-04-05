@@ -78,9 +78,6 @@
     #my-vidatio-filter h2
         padding-top 3px
 
-    .vidatios .row.cards > div:nth-child(3n)
-        margin-right 0
-
 @media (max-width: 767px)
     #catalog
         #filter
@@ -89,15 +86,18 @@
             margin-left 10vw
             margin-right 10vw
 
-        .vidatio
-            margin-left calc(10vw - 15px)
-            margin-right calc(10vw - 15px)
+        .vidatios
+            margin-bottom 30px
 
-            a.img
-                height 45vw
+            .vidatio
+                margin-left calc(10vw - 15px)
+                margin-right calc(10vw - 15px)
 
-            img
-                max-height 42vw
+                a.img
+                    height 45vw
+
+                img
+                    max-height 42vw
 
 @media (min-width: 768px) and (max-width: 991px)
     #catalog
@@ -110,10 +110,13 @@
         .vidatio
             a.img
                 height 28vw
-                padding 10px
 
             img
                 max-height 27vw
+
+@media screen and (max-width: 730px)
+    #time-filter span.to
+        display none
 
 @media screen and (max-width: 991px)
     #catalog
@@ -131,10 +134,6 @@
 
         input + span + [date-picker-wrapper]
             right 0
-
-@media screen and (max-width: 730px)
-    #time-filter span.to
-        display none
 
 @media(min-width: 992px)
     #catalog
