@@ -32,9 +32,9 @@ app.directive "visualization", [
                     , 250
 
             # resize event only should be fired if user is currently in editor
-            window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
+            window.angular.element($window).on "resize", $scope.$apply, onWindowResizeCallback
 
             # resize watcher has to be removed when editor is leaved
-            $scope.$on '$destroy', ->
-                window.angular.element($window).off 'resize', onWindowResizeCallback
+            $scope.$on "$destroy", ->
+                window.angular.element($window).off "resize", onWindowResizeCallback
 ]
