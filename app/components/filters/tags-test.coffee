@@ -14,14 +14,14 @@ describe "Filter Catalog", ->
             input = [
                 {
                     metaData:
-                        tags: [
+                        tagIds: [
                             { name: "category1" }
                             { name: "category2" }
                         ]
                 },
                 {
                     metaData:
-                        tags: [
+                        tagIds: [
                             { name: "category3" }
                         ]
 
@@ -31,7 +31,7 @@ describe "Filter Catalog", ->
             result = [
                 {
                     metaData:
-                        tags: [
+                        tagIds: [
                             { name: "category3" }
                         ]
                 }

@@ -110,6 +110,7 @@ BUILD =
             "./bower_components/angular-datepicker/dist/angular-datepicker.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
             "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
+            "./bower_components/pablo/pablo.js"
             "./bower_components/select2/dist/js/select2.js"
         ]
         css: [

@@ -21,6 +21,17 @@ app.controller "IndexCtrl", [
             $log.info "IndexCtrl error on query categories"
             $log.error error
 
+        DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
+            $scope.newestVidatios = response
+
+            for vidatio in $scope.newestVidatios
+            # prevent that one of the newest vidatios has no image
+                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
+
+        , (error) ->
+            $log.info "IndexCtrl error on query newest datasets"
+            $log.error error
+
         DatasetsFactory.query (response) ->
             $scope.vidatios = response
             categoryIDs = []
@@ -37,7 +48,7 @@ app.controller "IndexCtrl", [
             , 250
 
         , (error) ->
-            $log.info "IndexCtrl error on query datasets"
+            $log.info "IndexCtrl error on query all datasets"
             $log.error error
 
         # Resizing the visualizations

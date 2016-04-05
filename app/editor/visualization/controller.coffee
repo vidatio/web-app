@@ -7,7 +7,6 @@ app.controller "VisualizationCtrl", [
     "TableService"
     "MapService"
     "$timeout"
-    "ShareService"
     "DataService"
     "ProgressService"
     "ngToast"
@@ -15,12 +14,13 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     "VisualizationService"
+    "$window"
     "$stateParams"
-    ($scope, Table, Map, $timeout, Share, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $stateParams) ->
+    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
-        Visualization.options.fileType = Data.meta.fileType
+        Visualization.options.fileType = Data.metaData.fileType
 
         # allows the user to trigger the recommender and redraw the diagram accordingly
         # @method recommend
@@ -67,22 +67,12 @@ app.controller "VisualizationCtrl", [
         #@description exports a
         #@params {string} type
         $scope.shareVisualization = (type) ->
-            $map = $("#map")
+            $log.info "VisualizationCtrl shareVisualization called"
+            $log.debug
+                type: type
 
-            # Check Share.mapToImg for quality reduction if needed
-            promise = Share.mapToImg $map
+            fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
-            promise.then (obj) ->
-                $timeout ->
-                    Progress.setMessage ""
+            Visualization.downloadAsImage fileName, type
 
-                fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
-                Share.download fileName, obj[type]
-            , (error) ->
-                ngToast.create
-                    content: error
-                    className: "danger"
-            , (notify) ->
-                Progress.setMessage notify
 ]

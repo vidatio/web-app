@@ -3,14 +3,13 @@ app = angular.module "app.directives"
 
 app.directive 'hot', [
     "$timeout"
-    "$log"
     "DataService"
     "MapService"
     "TableService"
     "ConverterService"
     "$window"
     "VisualizationService"
-    ($timeout, $log, Data, Map, Table, Converter, $window, Visualization) ->
+    ($timeout, Data, Map, Table, Converter, $window, Visualization) ->
         restriction: "EA"
         template: '<div id="datatable"></div>'
         replace: true
@@ -19,8 +18,6 @@ app.directive 'hot', [
             activeViews: '='
             useColumnHeadersFromDataset: '='
         link: ($scope, $element) ->
-            $log.info "HotDirective link called"
-
             minWidth = 26
             minHeight = 26
 
@@ -43,23 +40,11 @@ app.directive 'hot', [
                     currentRowClassName: 'current-row'
                     manualColumnResize: true
                     beforeChange: (change, source) ->
-                        $log.info "HotDirective beforeChange called"
-                        $log.debug
-                            message: "HotDirective beforeChange called"
-                            change: change
-                            source: source
-
-                        if Data.meta.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
+                        if Data.metaData.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                             change[0][3] = change[0][2]
 
                     afterChange: (change, source) ->
-                        $log.info "HotDirective afterChange called"
-                        $log.debug
-                            message: "HotDirective afterChange called"
-                            change: change
-                            source: source
-
-                        if Data.meta.fileType is "shp" and change and change[0][3] != change[0][2]
+                        if Data.metaData.fileType is "shp" and change and change[0][3] != change[0][2]
                             Data.updateMap(change[0][0], change[0][1], change[0][2], change[0][3])
                             # Needed for updating the map, else the markers are
                             # updating too late from angular refreshing cycle
@@ -74,7 +59,7 @@ app.directive 'hot', [
             if not Table.useColumnHeadersFromDataset
                 Table.setHeader()
 
-            if Data.meta.fileType is "shp"
+            if Data.metaData.fileType is "shp"
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"
@@ -82,6 +67,16 @@ app.directive 'hot', [
                 # Initialize "X" and "Y" on table header
                 xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
                 yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
+
+                $header = $(".ht_clone_top th")
+
+                $header.each (idx, element) ->
+                    if idx is xColumn and idx is yColumn
+                        $(element).find("span").addClass "selected-x-y"
+                    else if idx is xColumn
+                        $(element).find("span").addClass "selected-x"
+                    else if idx is yColumn
+                        $(element).find("span").addClass "selected-y"
 
                 Table.updateAxisSelection(xColumn, yColumn)
 
@@ -105,8 +100,6 @@ app.directive 'hot', [
 
             # Needed for correct displayed table
             onResizeCallback = ->
-                $log.info "HotDirective resize called"
-
                 offset = Handsontable.Dom.offset $element[0]
 
                 wrapperWidth = Handsontable.Dom.innerWidth $element.parent()[0]

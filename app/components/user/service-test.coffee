@@ -19,7 +19,7 @@ describe "Service User", ->
         authData = @Base64.encode username + ":" + password
         userID = 1
 
-        @UserService.setCredentials username, password, userID, authData
+        @UserService.setCredentials username, userID, authData
 
         expect(@rootScope.globals.currentUser.authData).toBeTruthy()
         expect(@rootScope.globals.currentUser.authData).toEqual(authData)

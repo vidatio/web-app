@@ -24,7 +24,8 @@ app.controller "DatasetCtrl", [
     "DataService"
     "VisualizationService"
     "$window"
-    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window) ->
+    "ErrorHandler"
+    ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, $window, ErrorHandler) ->
         $scope.downloadCSV = Data.downloadCSV
         $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
@@ -34,33 +35,33 @@ app.controller "DatasetCtrl", [
 
             # get dataset according to datasetId and set necessary metadata
             DataFactory.get {id: $stateParams.id}, (data) ->
+
                 $scope.data = data
-                $scope.data.id = $stateParams.id
-                $scope.data.created = new Date(data.createdAt)
-                $scope.data.creator = data.userId.name || "-"
-                $scope.data.origin = "Vidatio"
-                $scope.data.updated = new Date(data.updatedAt)
-                $scope.data.description = data.description || "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur."
-                $scope.data.parent = data.parentId
-                $scope.data.category = data.category || "-"
-                $scope.data.tags = data.tags || "-"
+                $scope.data.updated = new Date($scope.data.updatedAt)
+                $scope.data.created = new Date($scope.data.createdAt)
+
+                if $scope.data.metaData.tagIds?
+                    $scope.data.tags = []
+                    for tag in $scope.data.metaData.tagIds
+                        $scope.data.tags.push tag.name
+
+                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
+                $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
+                $scope.data.author = if $scope.data.metaData.author? then $scope.data.metaData.author else "-"
+                $scope.data.title = $scope.data.metaData.name || "Vidatio"
 
                 Data.useSavedData $scope.data
-                Visualization.create()
 
-                $timeout ->
-                    Progress.setMessage()
+                options = $scope.data.visualizationOptions
+                options.fileType = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "csv"
+
+                Visualization.create(options)
+
+                Progress.setMessage()
             , (error) ->
-                $log.info "DatasetCtrl error on get dataset from id"
-                $log.error error
+                Progress.setMessage()
 
-                $timeout ->
-                    Progress.setMessage()
-
-                $translate("TOAST_MESSAGES.DATASET_COULD_NOT_BE_LOADED").then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+                ErrorHandler.format error
 
         # Resizing the visualization
         # using setTimeout to use only to the last resize action of the user
@@ -97,18 +98,12 @@ app.controller "DatasetCtrl", [
 
         # toggle link-box with vidatio-link
         $scope.toggleVidatioLink = ->
-            $log.info "DatasetCtrl toggleVidatioLink called"
-            $log.debug
-                link: $scope.link
-
             $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
 
         $scope.hideVidatioLink = ->
             $rootScope.showVidatioLink = false
 
         $scope.copyVidatioLink = ->
-            $log.info "DatasetCtrl copyVidatioLink called"
-
             window.getSelection().removeAllRanges()
             link = document.querySelector "#vidatio-link"
             range = document.createRange()
@@ -118,20 +113,12 @@ app.controller "DatasetCtrl", [
             try
                 successful = document.execCommand "copy"
 
-                $log.debug
-                    message: "DatasetCtrl copy vidatio-link to clipboard"
-                    successful: successful
-
                 $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
 
             catch error
-                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
-                $log.error
-                    error: error
-
                 $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
@@ -139,4 +126,13 @@ app.controller "DatasetCtrl", [
                         className: "danger"
 
             window.getSelection().removeAllRanges()
+
+        $scope.downloadPNG = ->
+            fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+
+            Visualization.downloadAsImage fileName, "png"
+
+        $scope.downloadCSV = ->
+            Data.downloadCSV($scope.data.title)
 ]
+

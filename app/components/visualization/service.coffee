@@ -9,14 +9,14 @@ app.service 'VisualizationService', [
     "$log"
     "$translate"
     "$timeout"
-    (Table, Converter, Map, $log, $translate, $timeout) ->
+    "ProgressService"
+    "ngToast"
+    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast) ->
         class Visualization
 
             # @method constructor
             # @public
             constructor: ->
-                $log.info "VisualizationService constructor called"
-
                 @options =
                     fileType: "csv"
                     type: false
@@ -56,18 +56,17 @@ app.service 'VisualizationService', [
                     $translate(@options.translationKeys[options.type]).then (translation) =>
                         @options["selectedDiagramName"] = translation
                 else
-                    @options["type"] = false
-                    @options["selectedDiagramName"] = false
+                    @options["type"] = null
+                    @options["selectedDiagramName"] = null
 
                 @options["xColumn"] = if options.xColumn? then parseInt(options.xColumn, 10) else null
                 @options["yColumn"] = if options.yColumn? then parseInt(options.yColumn, 10) else null
                 @options["color"] = if options.color? then options.color else "#11DDC6"
+                @options["fileType"] = if options.fileType? then options.fileType else null
 
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                $log.info "VisualizationService recommend called"
-
                 trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
                 recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
 
@@ -113,7 +112,7 @@ app.service 'VisualizationService', [
                         # only create the geoJSON from the table, if we don't use shp
                         # because otherwise we geoJSON is directly updated and so no conversion is needed
                         # and also because we don't have the xColumn of yColumn saved
-                        if @options.fileType isnt "shp"
+                        if options.fileType isnt "shp"
                             # Use the whole dataset because we want the other attributes inside the popups
                             geoJSON = Converter.convertArrays2GeoJSON chartData, Table.getHeader(), {
                                 x: options.xColumn,
@@ -130,7 +129,7 @@ app.service 'VisualizationService', [
                     when "timeseries"
                         new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
                     else
-                        $log.info "VisualizationCtrl type not set"
+                        $log.warn "VisualizationCtrl type not set"
                         $log.debug
                             type: options.type
 
@@ -138,8 +137,6 @@ app.service 'VisualizationService', [
                     initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
-                $log.info "VisualizationService initInlineEditingLabels called"
-
                 _self = @
                 minWidth = 200
 
@@ -200,6 +197,29 @@ app.service 'VisualizationService', [
                     addInputTag $axisLabel, axis, style
 
                 return true
+
+            downloadAsImage: (fileName, type) ->
+                $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
+                    Progress.setMessage translation
+
+                if @options.type is "map"
+                    $targetElem = $("#map")
+                else if @options.type is "parallel"
+                    $targetElem = $("#chart svg")
+                else
+                    $targetElem = $("#d3plus")
+
+                vidatio.visualization.visualizationToBase64String($targetElem)
+                .then (obj) ->
+                    Progress.setMessage ""
+
+                    vidatio.visualization.download "#{fileName}.#{type}", obj[type]
+
+                .catch (error) ->
+                    $translate(error.i18n).then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
 
         new Visualization
 ]

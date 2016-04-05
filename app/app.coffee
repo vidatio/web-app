@@ -31,7 +31,8 @@ app.run [
     "$location"
     "$cookieStore"
     "CONFIG"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG) ->
+    "$translate"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -46,6 +47,7 @@ app.run [
         window.vidatio.helper = new window.vidatio.Helper()
         window.vidatio.recommender = new window.vidatio.Recommender()
         window.vidatio.geoParser = new window.vidatio.GeoParser()
+        window.vidatio.visualization = new window.vidatio.Visualization()
 
         $rootScope.globals = $cookieStore.get( "globals" ) or {}
         if Object.keys($rootScope.globals).length > 0
@@ -54,12 +56,23 @@ app.run [
 
         $rootScope.history = []
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            if toState.title?
+                $rootScope.title = toState.title
+            else
+                $translate("SLOGAN").then (slogan) ->
+                    $rootScope.title = slogan
+
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
             $rootScope.history.push
                 name: fromState.name
                 params: fromParams
+
+            if not $rootScope.authorized and $state.current.name is "app.share"
+                $rootScope.history.push
+                    name: "app.share"
+                    params: fromParams
 ]
 
 app.config [
@@ -80,7 +93,7 @@ app.config [
 
         # Set the logging level for messages sent to Loggly.  'DEBUG' sends all log messages.
         # @method level
-        LogglyLoggerProvider.level "INFO"
+        LogglyLoggerProvider.level "DEBUG"
 
         # Send console error stack traces to Loggly.
         # @method sendConsoleErrors
@@ -152,13 +165,11 @@ app.config [
         .state "app.registration",
             url: "/registration"
             templateUrl: "registration/registration.html"
-            controller: "RegistrationCtrl"
             title: "registration"
 
         .state "app.login",
             url: "/login"
             templateUrl: "login/login.html"
-            controller: "LoginCtrl"
             title: "login"
 
         .state "app.import",

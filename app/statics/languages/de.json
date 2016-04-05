@@ -1,6 +1,56 @@
 {
     "SLOGAN": "Seeing the bigger Picture",
-    "API": "API",
+    "API": {
+        "NAME": "API",
+        "ERROR": {
+            "USER": {
+                "REGISTER": {
+                    "NAME": {
+                        "NOTVALID": "Username ist nicht valide.",
+                        "REQUIRED": "Username muss angegeben werden."
+                    },
+                    "EMAIL": {
+                       "NOTVALID": "Email-Adresse ist nicht valide.",
+                       "REQUIRED": "Email-Adresse muss angegeben werden."
+                    }
+                }
+            },
+            "TAG":{
+                "CREATE": {
+                    "NAME": {
+                       "NOTVALID": "Tag-Name ist nicht valide.",
+                       "REQUIRED": "Tag-Name darf nicht leer sein."
+                    }
+                }
+            },
+            "DATASET":{
+                "CREATE": {
+                    "NAME": {
+                       "NOTVALID": "Dataset-Name ist nicht valide.",
+                       "REQUIRED": "Dataset-Name muss ausgefüllt werden."
+                    },
+                    "FILETYPE": {
+                       "REQUIRED": "Filetype muss angegeben werden."
+                    },
+                    "USER_ID": {
+                       "REQUIRED": "User-Id muss angegeben werden."
+                    },
+                    "CATEGORY": {
+                       "REQUIRED": "Kategorie muss angegeben werden."
+                    },
+                    "VISUALIZATION_OPTIONS": {
+                       "REQUIRED": "Visualisierung muss mitgespeichert werden."
+                    }
+                }
+            },
+            "MONGO": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+            "PARAMETER": "Datenset muss mindestens die Visualisierung, Metadaten und die tatsächlichen Daten beinhalten",
+            "HEADER": "Der angegebene Link kann von uns leider nicht verwendet werden, da die externen Servereinstellungen nicht angegeben wurden.",
+            "NOTFOUND": "Die angegebene Url kann leider nicht gefunden werden",
+            "CAST": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+            "UNKNOWN": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!"
+        }
+    },
     "API_DOCUMENTATION": "API Dokumentation",
     "HOME": "Startseite",
     "IMPRINT": "Impressum",
@@ -72,6 +122,7 @@
     "OPEN_IN_EDITOR": "Im Editor öffnen",
     "OPEN_IN_DETAILVIEW": "Öffnen in Detailansicht",
     "TOAST_MESSAGES": {
+        "LOGIN_SUCCESS": "Willkommen {{name}}!",
         "NOT_SUPPORTED": "Das Dateiformat '{{format}}' wird nicht unterstützt.",
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
@@ -83,7 +134,7 @@
         "GEOJSON2ARRAYS_ERROR": "Das Koordinaten-Format in der SHP-Datei wird nicht unterstützt.",
         "FILE_SIZE_EXCEEDED": "Die maximale Dateigröße von {{maxFileSize}} MB wurde überschritten.",
         "READ_ERROR_LINK": "Der Link konnte leider nicht verwendet werden.",
-        "SHARE_SERVICE": {
+        "VISUALIZATION": {
             "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
             "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
         },
@@ -91,6 +142,7 @@
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
         "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
+        "CATEGORIES_COULD_NOT_BE_LOADED": "Kategorien können zurzeit nicht geladen werden.",
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
         "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen."
@@ -110,9 +162,8 @@
     "OVERLAY_MESSAGES": {
         "READING_FILE": "Datei wird eingelesen",
         "PARSING_DATA": "Daten werden analysiert",
-        "SHARE_SERVICE": {
-            "MAP_TO_CANVAS": "Die Karte wird zum Download vorbereitet."
-        }
+        "VISUALIZATION_PREPARED": "Visualisierung wird zum Download vorbereitet",
+        "SAVE_DATASET": "Vidatio wird gespeichert"
     },
     "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
@@ -144,8 +195,8 @@
     "COPY_LINK": "Link kopieren",
     "INFORMATION_DATASET": "Informationen zum Datensatz",
     "DATASET_DESCRIPTION": "Beschreibung des Datensatzes",
-    "DATASET_ORIGIN": "Urheber",
-    "DATASET_EDITOR": "Editiert von",
+    "DATASET_AUTHOR": "Urheber",
+    "DATASET_EDITOR": "Editor",
     "DATASET_CREATED": "Erstellt am",
     "DATASET_UPDATED": "Letztes Update",
     "DATASET_ID": "ID des Datensatzes",
@@ -189,5 +240,6 @@
     "COLORS": "Farben",
     "SELECT2": {
         "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
-    }
+    },
+    "SHOW_DETAIL_VIEW": "Deitailansicht"
 }

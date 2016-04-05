@@ -3,8 +3,8 @@
 app = angular.module "app.services"
 
 app.service "ProgressService", [
-    "$log"
-    ($log) ->
+    "$timeout"
+    ($timeout) ->
         class Progress
 
             _message = null
@@ -16,7 +16,8 @@ app.service "ProgressService", [
                 _message
 
             setMessage: (msg) ->
-                _message = msg
+                $timeout ->
+                    _message = msg
 
         new Progress
 ]

@@ -7,6 +7,7 @@ describe "Visualization Ctrl", ->
         inject ($controller, $rootScope, TableService) ->
             @scope = $rootScope.$new()
             @TableService = TableService
+
             TableCtrl = $controller "TableCtrl", $scope: @scope, TableService: @TableService
 
     describe "on calling the scope transpose function", ->

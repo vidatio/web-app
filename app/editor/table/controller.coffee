@@ -5,16 +5,15 @@ app = angular.module "app.controllers"
 app.controller "TableCtrl", [
     "$scope"
     "TableService"
-    "ShareService"
     "DataService"
     "MapService"
     "ConverterService"
     "$log"
     "VisualizationService"
-    ($scope, Table, Share, Data, Map, Converter, $log, Visualization) ->
+    ($scope, Table, Data, Map, Converter, $log, Visualization) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
-
+        $scope.visualization = Visualization.options
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
@@ -24,9 +23,7 @@ app.controller "TableCtrl", [
         $scope.toggleHeader = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl changeUseOfHeader called"
-
-            if $scope.data.meta.fileType isnt "shp"
+            if $scope.data.metaData.fileType isnt "shp"
                 if $scope.useColumnHeadersFromDataset
                     Table.takeHeaderFromDataset()
                 else
@@ -39,11 +36,11 @@ app.controller "TableCtrl", [
         $scope.transpose = ->
             clearFocusedAxisButtons()
 
-            $log.info "TableCtrl transpose called"
-
             if $scope.useColumnHeadersFromDataset then Table.putHeaderToDataset()
             Table.setDataset vidatio.helper.transposeDataset Table.getDataset()
             if $scope.useColumnHeadersFromDataset then Table.takeHeaderFromDataset()
+
+            Visualization.create()
 
         #@method $scope.download
         #@description downloads a csv

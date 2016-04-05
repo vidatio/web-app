@@ -3,9 +3,8 @@
 app = angular.module "app.filters"
 
 app.filter "tagsFilter", [
-    "$log"
     "preprocessTagsFilter"
-    ($log, preprocessTagsFilter) ->
+    (preprocessTagsFilter) ->
         # @method Anonymous Function
         # @param {Array} input
         # @param {Array} tags
@@ -16,7 +15,7 @@ app.filter "tagsFilter", [
             output = []
 
             for element in input
-                preprocessedTags = preprocessTagsFilter(element.metaData?.tags).split(", ")
+                preprocessedTags = preprocessTagsFilter(element.metaData?.tagIds).split(", ")
                 for tag in tags
                     if tag.toLowerCase() in vidatio.helper.arrayToLowerCase(preprocessedTags)
                         output.push element

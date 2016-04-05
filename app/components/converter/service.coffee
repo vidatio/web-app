@@ -15,16 +15,93 @@ app.service 'ConverterService', [
     ($timeout, $log, $q, Table) ->
         class Converter
 
-            # @method convertSHP2GeoJSON
-            # @public
-            # @param {Buffer} buffer
-            # @return {Promise}
-            convertSHP2GeoJSON: (buffer) ->
-                $log.info "ConverterService convertSHP2GeoJSON called"
-                $log.debug
-                    buffer: buffer
+            # adds multiple column headers with the same name and an incrementing counter.
+            # @method addHeaderCols
+            # @param {array} value
+            # @param {array} array The header to add more headers with the same text.
+            # @param {string} text The text to be added.
+            # @param {integer} counter
+            # @return {array}
+            addHeaderCols: (value, array, text, counter) =>
+                if Array.isArray value
+                    value.forEach (element) =>
+                        if Array.isArray element
+                            array = @addHeaderCols(element, array, text, counter)
+                            counter = counter + 2
+                        else
+                            array.push text + " " + counter.toString()
+                            counter++
 
-                return shp(buffer)
+                return array
+
+            # @method convertArrays2GeoJSON
+            # @public
+            # @param {Array} dataset
+            # @param {Array} header
+            # @param {Array} indicesCoordinates
+            # @return {GeoJSON}
+            convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
+                $log.info "ConverterService convertArrays2GeoJSON called"
+                $log.debug
+                    dataset: dataset
+                    indicesCoordinates: indicesCoordinates
+
+                dataset = vidatio.helper.trimDataset(dataset)
+
+                geoJSON =
+                    "type": "FeatureCollection"
+                    "features": []
+
+                dataset.forEach (row) ->
+                    coordinates = []
+
+                    # distinguish if coordinates are in the same column or in two different columns
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
+                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["x"]]
+                    else
+                        # TODO check for more formats than only decimal coordinates
+                        latitude = parseFloat(row[indicesCoordinates["y"]])
+                        longitude = parseFloat(row[indicesCoordinates["x"]])
+                        # TODO check here also maybe with isCoordinate()
+                        if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
+                            coordinates.push(latitude)
+                            coordinates.push(longitude)
+
+                    unless coordinates.length
+                        return
+
+                    # JSON.parse(JSON.stringify(...)) deep copy the feature
+                    # that the properties object is not always the same
+                    feature = JSON.parse(JSON.stringify(
+                        "type": "Feature"
+                        "geometry":
+                            "type": undefined
+                            "coordinates": []
+                        "properties": {}
+                    ))
+
+                    if coordinates.length is 2
+                        longitude = parseFloat(coordinates[1])
+                        latitude = parseFloat(coordinates[0])
+                        feature.geometry.coordinates = [longitude, latitude]
+                        feature.geometry.type = "Point"
+                    else
+                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
+                        return
+
+                    # All none coordinate cell should be filled into the properties of the feature
+                    if indicesCoordinates["x"] is indicesCoordinates["y"]
+                        row.forEach (cell, indexColumn) ->
+                            if(indexColumn != indicesCoordinates["x"])
+                                feature.properties[indexColumn] = (cell)
+                    else
+                        row.forEach (cell, indexColumn) ->
+                            if(indexColumn != indicesCoordinates["x"] and indexColumn != indicesCoordinates["y"])
+                                feature.properties[indexColumn] = (cell)
+
+                    geoJSON.features.push(feature)
+
+                return geoJSON
 
             # @method convertCSV2Arrays
             # @public
@@ -103,25 +180,6 @@ app.service 'ConverterService', [
 
                 return dataset
 
-            # adds multiple column headers with the same name and an incrementing counter.
-            # @method addHeaderCols
-            # @param {array} value
-            # @param {array} array The header to add more headers with the same text.
-            # @param {string} text The text to be added.
-            # @param {integer} counter
-            # @return {array}
-            addHeaderCols: (value, array, text, counter) =>
-                if Array.isArray value
-                    value.forEach (element) =>
-                        if Array.isArray element
-                            array = @addHeaderCols(element, array, text, counter)
-                            counter = counter + 2
-                        else
-                            array.push text + " " + counter.toString()
-                            counter++
-
-                return array
-
             # extracts the column headers for the table from a geoJSON object and returns them.
             # @method convertGeoJSON2ColHeaders
             # @param {geoJSON} geoJSON
@@ -153,6 +211,17 @@ app.service 'ConverterService', [
                         columnHeaders.push property
                 return columnHeaders
 
+            # @method convertSHP2GeoJSON
+            # @public
+            # @param {Buffer} buffer
+            # @return {Promise}
+            convertSHP2GeoJSON: (buffer) ->
+                $log.info "ConverterService convertSHP2GeoJSON called"
+                $log.debug
+                    buffer: buffer
+
+                return shp(buffer)
+
             # Returns the size of a multidimensional array.
             # @method sizeOfMultiArray
             # @param {Array} array
@@ -166,85 +235,12 @@ app.service 'ConverterService', [
                 else
                     return array.length
 
-            # @method convertArrays2GeoJSON
-            # @public
-            # @param {Array} dataset
-            # @param {Array} header
-            # @param {Array} indicesCoordinates
-            # @return {GeoJSON}
-            convertArrays2GeoJSON: (dataset = [], header = [], indicesCoordinates = {}) ->
-                $log.info "ConverterService convertArrays2GeoJSON called"
-                $log.debug
-                    dataset: dataset
-                    indicesCoordinates: indicesCoordinates
-
-                dataset = vidatio.helper.trimDataset(dataset)
-
-                geoJSON =
-                    "type": "FeatureCollection"
-                    "features": []
-
-                dataset.forEach (row) ->
-                    coordinates = []
-
-                    # distinguish if coordinates are in the same column or in two different columns
-                    if indicesCoordinates["x"] is indicesCoordinates["y"]
-                        coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["x"]]
-                    else
-                        # TODO check for more formats than only decimal coordinates
-                        latitude = parseFloat(row[indicesCoordinates["y"]])
-                        longitude = parseFloat(row[indicesCoordinates["x"]])
-                        # TODO check here also maybe with isCoordinate()
-                        if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
-                            coordinates.push(latitude)
-                            coordinates.push(longitude)
-
-                    unless coordinates.length
-                        return
-
-                    # JSON.parse(JSON.stringify(...)) deep copy the feature
-                    # that the properties object is not always the same
-                    feature = JSON.parse(JSON.stringify(
-                        "type": "Feature"
-                        "geometry":
-                            "type": undefined
-                            "coordinates": []
-                        "properties": {}
-                    ))
-
-                    if coordinates.length is 2
-                        longitude = parseFloat(coordinates[1])
-                        latitude = parseFloat(coordinates[0])
-                        feature.geometry.coordinates = [longitude, latitude]
-                        feature.geometry.type = "Point"
-                    else
-                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
-                        return
-
-                    # All none coordinate cell should be filled into the properties of the feature
-                    if indicesCoordinates["x"] is indicesCoordinates["y"]
-                        row.forEach (cell, indexColumn) ->
-                            if(indexColumn != indicesCoordinates["x"])
-                                feature.properties[indexColumn] = (cell)
-                    else
-                        row.forEach (cell, indexColumn) ->
-                            if(indexColumn != indicesCoordinates["x"] and indexColumn != indicesCoordinates["y"])
-                                feature.properties[indexColumn] = (cell)
-
-                    geoJSON.features.push(feature)
-
-                return geoJSON
-
             # @method matrixToArray
             # @description converts a string to an array (used for converting css matrix to array)
             # @public
             # @param {sring} str
             # @return {array}
             matrixToArray: (str) ->
-                $log.info "ConverterService matrixToArray called"
-                $log.debug
-                    str: str
-
                 return str.split('(')[1].split(')')[0].split(',')
 
         new Converter

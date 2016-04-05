@@ -12,9 +12,8 @@
                                     img(src="{{ vidatio.image }}" alt="vidatio.name")
 
                                 .text
-                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                                        h4.title {{ vidatio.name }}
-                                    p {{ vidatio.description | limitTo: 120}} ...
+                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
+                                        h4.title {{ vidatio.metaData.name }}
 
                                 a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
                                     span  {{ "OPEN_IN_EDITOR" | translate }}

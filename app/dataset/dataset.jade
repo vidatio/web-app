@@ -5,7 +5,6 @@
 
     .row
         .col-sm-12
-
             visualization
 
             .row.buttons-first-row
@@ -26,7 +25,7 @@
                                     span.icon-downloaddataset
                                     span  {{ "DATASET" | translate }}
                             li
-                                a(ng-click="downloadJPEG()")
+                                a(ng-click="downloadPNG()")
                                     span.icon-downloadvisualization
                                     span  {{ "VISUALIZATION" | translate }}
 
@@ -54,33 +53,20 @@
     .row
         .col-sm-12
             .metadata-container
-                .one-row
-                    .description {{ data.description }}
                 .one-row.space
                 .one-row
-                    .text {{ "DATASET_ORIGIN" | translate }}:
-                    .dataset-info {{ data.origin }}
+                    .text {{ "DATASET_AUTHOR" | translate }}:
+                    .dataset-info {{ data.author }}
                 .one-row
                     .text {{ "DATASET_EDITOR" | translate }}:
-                    .dataset-info {{ data.creator }}
-                .one-row.space
-                .one-row
-                    .text {{ "DATASET_ID" | translate }}:
-                    .dataset-info {{ data.id }}
-                .one-row
-                    .text {{ "DATASET_PARENT" | translate }}:
-                    .dataset-info {{ data.parent }}
-                .one-row.space
+                    .dataset-info {{ data.userName }}
                 .one-row
                     .text {{ "DATASET_CREATED" | translate }}:
                     .dataset-info {{ data.created | date: "dd.MM.yyyy" }}
-                .one-row
-                    .text {{ "DATASET_UPDATED" | translate }}:
-                    .dataset-info {{ data.updated | date: "dd.MM.yyyy" }}
                 .one-row.space
                 .one-row
                     .text {{ "CATEGORY" | translate }}:
                     .dataset-info {{ data.category }}
                 .one-row
                     .text {{ "DATASET_TAGS" | translate }}:
-                    .dataset-info {{ data.tags }}
+                    span.tag(ng-repeat="tag in data.tags track by $index") {{tag}}

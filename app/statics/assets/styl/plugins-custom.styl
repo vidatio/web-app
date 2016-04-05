@@ -119,11 +119,11 @@ a
         border-color $color-green
         position relative
 
-.input-group-addon
-    border-radius 0
-
 .input-group
     margin-top -2px
+
+.input-group-addon
+    border-radius 0
 
 /*no round corners by default, see below*/
 input.form-control
@@ -229,7 +229,12 @@ select.form-control
         .input-group-addon.focus
         input.form-control:focus
         .form-control-feedback
+        .selection.focus
             border-color $color-green
+
+/* STATE VALID WITH FOCUS FOR SELECTION*/
+select.form-control:focus
+    border-color $color-green !important
 
 /* STATE INVALID */
 .has-error.input-group.form-group
@@ -274,7 +279,7 @@ span.error
     margin-bottom 0
     > span
         {lightText}
-        margin -20px 0 0 32px
+        margin -22px 0 0 32px
         float left
         &.add-tag
             background-color $color-passive
@@ -304,6 +309,8 @@ span.error
         .tag
             margin 0 5px 3px 0
             float left
+            font-size 14px
+            font-family Colaborate-Light, $fonts
 
 [id^="s2id_"].select2-container:not(:hover)
     border-color #bdc3c7
