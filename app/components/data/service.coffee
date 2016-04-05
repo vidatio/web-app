@@ -56,7 +56,6 @@ app.service 'DataService', [
                     $rootScope.showLink = true
 
                     return cb null, response
-
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
@@ -69,7 +68,7 @@ app.service 'DataService', [
             # @param {Object} data
             useSavedData: (data) ->
                 if data.metaData?
-                    @metaData = data.metaData
+                    angular.extend @metaData, data.metaData
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
