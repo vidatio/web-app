@@ -39,15 +39,15 @@ app.controller "DatasetCtrl", [
                 $scope.data = data
                 $scope.data.updated = new Date($scope.data.updatedAt)
                 $scope.data.created = new Date($scope.data.createdAt)
-                Data.metaData["fileType"] = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else null
+
                 if $scope.data.metaData.tagIds?
                     $scope.data.tags = []
                     for tag in $scope.data.metaData.tagIds
                         $scope.data.tags.push tag.name
 
-                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else null
-                $scope.data.origin = "Vidatio"
+                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
                 $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
+                $scope.data.author = if $scope.data.author? then $scope.data.author else "-"
                 $scope.data.title = $scope.data.metaData.name || "Vidatio"
 
                 Data.useSavedData $scope.data
@@ -57,14 +57,9 @@ app.controller "DatasetCtrl", [
 
                 Visualization.create(options)
 
-                $timeout ->
-                    Progress.setMessage()
+                Progress.setMessage()
             , (error) ->
-                $log.info "DatasetCtrl error on get dataset from id"
-                $log.error error
-
-                $timeout ->
-                    Progress.setMessage()
+                Progress.setMessage()
 
                 ErrorHandler.format error
 
@@ -124,10 +119,6 @@ app.controller "DatasetCtrl", [
                         content: translation
 
             catch error
-                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
-                $log.error
-                    error: error
-
                 $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
@@ -137,15 +128,11 @@ app.controller "DatasetCtrl", [
             window.getSelection().removeAllRanges()
 
         $scope.downloadPNG = ->
-            $log.info "DatasetCtrl downloadPNG called"
-
             fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
 
             Visualization.downloadAsImage fileName, "png"
 
         $scope.downloadCSV = ->
-            $log.info "DatasetCtrl downloadCSV called"
-
             Data.downloadCSV($scope.data.title)
 ]
 

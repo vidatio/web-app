@@ -68,6 +68,11 @@ app.run [
             $rootScope.history.push
                 name: fromState.name
                 params: fromParams
+
+            if not $rootScope.authorized and $state.current.name is "app.share"
+                $rootScope.history.push
+                    name: "app.share"
+                    params: fromParams
 ]
 
 app.config [

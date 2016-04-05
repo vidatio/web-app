@@ -16,6 +16,9 @@ app.controller "CatalogCtrl", [
     "$log"
     ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
         angular.element('#my-vidatio-checkbox').radiocheck()
+        stateParams = {}
+        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
+        $scope.tags = Tags.getAndPreprocessTags()
 
         # @description Filter vidatios according to the GET parameters of the $stateParams
         $scope.filter =
@@ -26,18 +29,9 @@ app.controller "CatalogCtrl", [
             tags: if $stateParams.tags then $stateParams.tags.split("|") else ""
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
 
-        stateParams = {}
-        $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
-
-        $scope.tags = Tags.getAndPreprocessTags()
-
         Categories.query (response) ->
             $scope.categories = response
         , (error) ->
-            $log.error "CatalogCtrl Categories.query promise error"
-            $log.debug
-                error: error
-
             $translate('TOAST_MESSAGES.CATEGORIES_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
@@ -47,14 +41,10 @@ app.controller "CatalogCtrl", [
             $scope.vidatios = response
 
             for vidatio, index in $scope.vidatios
-                vidatio.description = "Hello world, this is a test!"
                 vidatio.title = vidatio.metaData.name
                 vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
         , (error) ->
-            $log.error "CatalogCtrl Datasets.query promise error"
-            $log.debug
-                error: error
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation

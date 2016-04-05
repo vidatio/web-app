@@ -3,7 +3,7 @@
 app = angular.module "app.services"
 
 app.service 'DataService', [
-    "$rootScope",
+    "$rootScope"
     "MapService"
     "TableService"
     "ConverterService"
@@ -51,14 +51,11 @@ app.service 'DataService', [
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
                 , (response) ->
-                    $translate('TOAST_MESSAGES.DATASET_SAVED')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
                     $rootScope.showLink = true
+
+                    return cb null, response
                 , (error) ->
                     $log.error("Dataset couldn't be saved")
                     $log.debug
@@ -71,7 +68,7 @@ app.service 'DataService', [
             # @param {Object} data
             useSavedData: (data) ->
                 if data.metaData?
-                    @metaData = data.metaData
+                    angular.extend @metaData, data.metaData
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
