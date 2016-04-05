@@ -47,7 +47,7 @@ app.controller "DatasetCtrl", [
 
                 $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
                 $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
-                $scope.data.author = if $scope.data.author? then $scope.data.author else "-"
+                $scope.data.author = if $scope.data.metaData.author? then $scope.data.metaData.author else "-"
                 $scope.data.title = $scope.data.metaData.name || "Vidatio"
 
                 Data.useSavedData $scope.data
