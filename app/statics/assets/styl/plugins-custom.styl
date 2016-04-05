@@ -229,7 +229,13 @@ select.form-control
         .input-group-addon.focus
         input.form-control:focus
         .form-control-feedback
+        .selection.focus
             border-color $color-green
+
+/* STATE VALID WITH FOCUS FOR SELECTION*/
+.form-group.focus .form-control
+.form-control:focus
+    border-color $color-green !important
 
 /* STATE INVALID */
 .has-error.input-group.form-group
