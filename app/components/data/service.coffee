@@ -3,7 +3,7 @@
 app = angular.module "app.services"
 
 app.service 'DataService', [
-    "$rootScope",
+    "$rootScope"
     "MapService"
     "TableService"
     "ConverterService"

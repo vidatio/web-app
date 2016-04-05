@@ -8,22 +8,24 @@
                 br
                 | Nur gespeicherte Vidatios können später weiter bearbeitet werden.
         form(name="loginForm" ng-submit="logon()")
-            .row
-                .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
-                    span.input-group-addon.fui-user
-                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
-                span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") Kein gültiger Benutzername!
+            form(name="loginForm" ng-submit="logon()")
+                .row
+                    .col-xs-12
+                        .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
+                            span.input-group-addon.fui-user
+                            input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                        span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") Kein gültiger Benutzername!
+                .row
+                    .col-xs-12
+                        .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
+                            span.input-group-addon.fui-lock
+                            input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
 
-            .row
-                .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
-                    span.input-group-addon.fui-lock
-                    input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
-
-            .row
-                button.btn.btn-block.btn-primary(type="submit" ng-disabled="") {{ 'LOG_ON' | translate }}
+                .row
+                    .col-xs-12.middle
+                        button.btn.btn-block.btn-embossed.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending" title="{{ 'SEND_LOGIN_DATA' | translate }}") {{ 'LOG_ON' | translate }}
 
             .row
                 .col-xs-6.left
-                    a.inverse(href="#") {{ 'FORGOT_PASSWORD' | translate }}?
                 .col-xs-6.right
-                    a.inverse(ui-sref="app.registration({ locale: locale })") {{ 'REGISTER' | translate }}
+                    a.inverse(ui-sref="app.registration({ locale: locale })" title="{{'REGISTRATION'|translate}} {{'OPEN'|translate}}") {{ 'REGISTER' | translate }}
