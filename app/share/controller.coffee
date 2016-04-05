@@ -22,19 +22,17 @@ app.controller "ShareCtrl", [
     "ErrorHandler"
     "$state"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state) ->
-        $scope.share = Data
         $scope.goToPreview = false
-
+        $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options
 
         $scope.vidatio =
             publish: true
 
         $translate("NEW_VIDATIO").then (translation) ->
-            $scope.vidatio.name = "#{translation} #{moment().format("DD/MM/YYYY")}"
+            $scope.vidatio.name = Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
 
         Categories.query (response) ->
-            $log.info "ShareCtrl successfully queried categories"
             $scope.categories = response
 
         $timeout ->
@@ -66,8 +64,6 @@ app.controller "ShareCtrl", [
             Visualization.create()
 
         $scope.saveDataset = ->
-            $log.info "ShareCtrl saveDataset called"
-
             $translate("OVERLAY_MESSAGES.SAVE_DATASET").then (translation) ->
                 Progress.setMessage translation
 
@@ -80,10 +76,6 @@ app.controller "ShareCtrl", [
 
             vidatio.visualization.visualizationToBase64String($targetElem)
             .then (obj) ->
-                $log.info "ShareCtrl visualizationToBase64String promise success called"
-                $log.debug
-                    obj: obj
-
                 switch Data.metaData.fileType
                     when "csv"
                         dataset = Table.dataset.slice()
@@ -97,8 +89,7 @@ app.controller "ShareCtrl", [
                 .get()
 
                 Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
-                    $timeout ->
-                        Progress.setMessage ""
+                    Progress.setMessage ""
 
                     if errors?
                         ErrorHandler.format errors
@@ -113,7 +104,6 @@ app.controller "ShareCtrl", [
                         ngToast.create
                             content: translation
 
-
                     return $scope.goToPreview = !$scope.goToPreview
 
             .catch (error) ->
@@ -124,21 +114,13 @@ app.controller "ShareCtrl", [
 
 
         $scope.downloadVisualization = (type) ->
-            $log.info "SharCtrl downloadVisualization called"
-            $log.debug
-                type: type
-
             fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
 
         $scope.downloadCSV = ->
-            $log.info "SharCtrl downloadCSV called"
-
             Data.downloadCSV($scope.vidatio.name)
 
         $scope.copyVidatioLink = ->
-            $log.info "DatasetCtrl copyVidatioLink called"
-
             window.getSelection().removeAllRanges()
             link = document.querySelector "#vidatio-link"
             range = document.createRange()
@@ -148,20 +130,12 @@ app.controller "ShareCtrl", [
             try
                 successful = document.execCommand "copy"
 
-                $log.debug
-                    message: "DatasetCtrl copy vidatio-link to clipboard"
-                    successful: successful
-
                 $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
 
             catch error
-                $log.info "DatasetCtrl vidatio-link could not be copied to clipboard"
-                $log.error
-                    error: error
-
                 $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
