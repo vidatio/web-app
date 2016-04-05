@@ -115,7 +115,6 @@ app.controller "ShareCtrl", [
 
         $scope.downloadVisualization = (type) ->
             fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
             Visualization.downloadAsImage fileName, type
 
         $scope.downloadCSV = ->
@@ -144,6 +143,4 @@ app.controller "ShareCtrl", [
                         className: "danger"
 
             window.getSelection().removeAllRanges()
-
-
 ]

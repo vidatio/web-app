@@ -1,8 +1,3 @@
-# TODO: Adapted parser for use in api
-# in einer zelle NaN (usw.) behandeln
-# nur noch in zellen nachschauen, in denen in den bisherigen zeilen true (in zelle kommt potentielle coordinate vor) vorkam
-# Implement GaussKrueger and UTM
-
 "use strict"
 
 describe "Service GeoParser", ->

@@ -30,9 +30,7 @@ app.service 'DataService', [
                 key = columnHeaders[column]
                 return Map.validateGeoJSONUpdateSHP(row, column, oldData, newData, key)
 
-            # TODO: Name has to be set by the user
-
-            # Sends the dataset to the API, which saves it in the database.
+            # Sends the dataset to the API, which saves it in the database
             # @method saveViaAPI
             # @param {Object} dataset
             # @param {String} name

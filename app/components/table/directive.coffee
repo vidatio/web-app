@@ -1,7 +1,7 @@
 "use strict"
 app = angular.module "app.directives"
 
-app.directive 'hot', [
+app.directive "hot", [
     "$timeout"
     "DataService"
     "MapService"
@@ -11,12 +11,12 @@ app.directive 'hot', [
     "VisualizationService"
     ($timeout, Data, Map, Table, Converter, $window, Visualization) ->
         restriction: "EA"
-        template: '<div id="datatable"></div>'
+        template: "<div id='datatable'></div>"
         replace: true
         scope:
-            dataset: '='
-            activeViews: '='
-            useColumnHeadersFromDataset: '='
+            dataset: "="
+            activeViews: "="
+            useColumnHeadersFromDataset: "="
         link: ($scope, $element) ->
             minWidth = 26
             minHeight = 26
@@ -36,8 +36,8 @@ app.directive 'hot', [
                     minRows: minHeight
                     rowHeaders: true
                     colHeaders: header
-                    currentColClassName: 'current-col'
-                    currentRowClassName: 'current-row'
+                    currentColClassName: "current-col"
+                    currentRowClassName: "current-row"
                     manualColumnResize: true
                     beforeChange: (change, source) ->
                         if Data.metaData.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
@@ -107,15 +107,15 @@ app.directive 'hot', [
                 availableWidth = wrapperWidth - offset.left - offset.right
                 availableHeight = wrapperHeight - offset.top - offset.bottom
 
-                $element.parent()[0].style.width = availableWidth + 'px'
-                $element.parent()[0].style.height = availableHeight + 'px'
+                $element.parent()[0].style.width = availableWidth + "px"
+                $element.parent()[0].style.height = availableHeight + "px"
                 hot.render()
                 return
 
             # resize event only should be fired if user is currently in editor
-            window.angular.element($window).on 'resize', onResizeCallback
+            window.angular.element($window).on "resize", onResizeCallback
 
             # resize watcher has to be removed when editor is leaved
-            $scope.$on '$destroy', ->
-                window.angular.element($window).off 'resize', onResizeCallback
+            $scope.$on "$destroy", ->
+                window.angular.element($window).off "resize", onResizeCallback
 ]

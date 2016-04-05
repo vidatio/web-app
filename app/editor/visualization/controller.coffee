@@ -14,9 +14,7 @@ app.controller "VisualizationCtrl", [
     "ConverterService"
     "$translate"
     "VisualizationService"
-    "$window"
-    "$stateParams"
-    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization, $window, $stateParams) ->
+    ($scope, Table, Map, $timeout, Data, Progress, ngToast, $log, Converter, $translate, Visualization) ->
         $scope.data = Data
         $scope.header = Table.header
         $scope.visualization = Visualization.options
@@ -33,7 +31,7 @@ app.controller "VisualizationCtrl", [
         $timeout ->
             # After having recommend diagram options, we watch the dataset of the table
             # because the watcher fires at initialization the diagram gets immediately drawn
-            # FIXME: Whats should happen, if a person clears the table after watching shp?!
+            # FIXME: What should happen, if a person clears the table after watching shp?!
             Visualization.create()
             Progress.setMessage ""
 
@@ -62,7 +60,6 @@ app.controller "VisualizationCtrl", [
 
                 Visualization.create()
 
-        #TODO: Extend sharing visualization for other diagrams
         #@method $scope.shareVisualization
         #@description exports a
         #@params {string} type
@@ -72,7 +69,6 @@ app.controller "VisualizationCtrl", [
                 type: type
 
             fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
             Visualization.downloadAsImage fileName, type
 
 ]
