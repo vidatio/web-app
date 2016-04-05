@@ -212,8 +212,6 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
-                # TODO: show 404
-
                 locale =
                     locale: $translateProvider.preferredLanguage()
 
