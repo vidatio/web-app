@@ -29,6 +29,11 @@ app.controller "CatalogCtrl", [
             tags: if $stateParams.tags then $stateParams.tags.split("|") else ""
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
 
+        stateParams = {}
+        $scope.maxDate = moment.tz('CET')
+
+        $scope.tags = Tags.getAndPreprocessTags()
+
         Categories.query (response) ->
             $scope.categories = response
         , (error) ->
