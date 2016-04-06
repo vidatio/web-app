@@ -34,13 +34,14 @@ app.controller "IndexCtrl", [
 
         DatasetsFactory.query (response) ->
             $scope.vidatios = response
-            categoryIDs = []
+            categoryOccurrences = {}
 
             for vidatio in $scope.vidatios
                 if vidatio.metaData?.categoryId?
-                    categoryIDs.push(vidatio.metaData.categoryId.name)
+                    #count the occurrences per category over all datasets with category-attribute
+                    categoryOccurrences[vidatio.metaData.categoryId.name] = (categoryOccurrences[vidatio.metaData.categoryId.name] or 0) + 1
 
-            $scope.chartData = prepareChartData(countOccurrences(categoryIDs))
+            $scope.chartData = prepareChartData(categoryOccurrences)
             $scope.positions = setBubblePositions($scope.chartData)
 
             setTimeout ->
@@ -51,21 +52,20 @@ app.controller "IndexCtrl", [
             $log.info "IndexCtrl error on query all datasets"
             $log.error error
 
-        # Resizing the visualizations
+        # Resizing the category-bubbles
         # using setTimeout to use only to the last resize action of the user
         id = null
 
         onWindowResizeCallback = ->
-            # a new visualization should only be created when the visualization is visible in editor
             clearTimeout id
             id = setTimeout ->
                 createCategoryBubbles()
             , 250
 
-        # resize event only should be fired if user is currently in editor
+        # resize event only should be fired if user is currently on landing-page
         window.angular.element($window).on "resize", $scope.$apply, onWindowResizeCallback
 
-        # resize watcher has to be removed when editor is leaved
+        # resize watcher has to be removed when landing-page is leaved
         $scope.$on "$destroy", ->
             window.angular.element($window).off "resize", onWindowResizeCallback
 
@@ -114,23 +114,13 @@ app.controller "IndexCtrl", [
             .zoom("scroll": false)
             .draw()
 
-        # @method countOccurrences
-        # @description count the occurrences per category over all datasets
-        countOccurrences = (categoriesArray) ->
-            result = {}
-
-            categoriesArray.forEach (category) ->
-                result[category] = (result[category] or 0) + 1
-
-            result
-
         # @method prepareChartData
-        # @description prepare the necesssary data for d3plus according to our categories and their occurrences
+        # @description prepare the necessary data for d3plus according to our categories and their occurrences;
         #               set name, size (="datensätze") and color for each bubble
-        # @param {array}
+        # @param {array} occurrences
         prepareChartData = (occurrences) ->
             chartData = []
-            colors = ["#11dcc6", "#F2B1B1", "#FF5444", "#ABF4E9", "#FAFAFA"]
+            colors = ["#11dcc6", "#F2B1B1", "#FF5444", "#ABF4E9", "#000000"]
             currentColor = 0
 
             for category in $scope.categories
@@ -147,9 +137,9 @@ app.controller "IndexCtrl", [
             chartData
 
         # @method setBubblePositions
-        # @description set the bubbles' positions according to the amount of datasets the respective category has
-        #               the category with the most datasets is in the middle, the categories with the fewest datsets are at the left and right hand side
-        # @param {array}
+        # @description set the bubbles' positions according to the amount of datasets the respective category has;
+        #               the category with the most datasets is located in the middle, the categories with the fewest datasets are at the left and right hand side
+        # @param {array} chartData
         setBubblePositions = (chartData) ->
 
             finalPositions = []
@@ -190,4 +180,3 @@ app.controller "IndexCtrl", [
 
             finalPositions
 ]
-
