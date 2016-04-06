@@ -93,7 +93,8 @@ app.service 'VisualizationService', [
                 $log.debug
                     options: options
 
-                chartData = vidatio.helper.trimDataset Table.getDataset()
+                chartData = Table.getDataset()
+
                 headers = Table.getHeader()
                 options["headers"] =
                     "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"

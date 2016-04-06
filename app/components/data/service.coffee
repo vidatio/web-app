@@ -39,10 +39,10 @@ app.service 'DataService', [
             saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
                 angular.extend @metaData, metaData
 
-                dataset = vidatio.helper.trimDataset(dataset)
+                trimResult = vidatio.helper.trimDataset(dataset)
 
                 DatasetFactory.save
-                    data: dataset
+                    data: trimResult.trimmedDataset
                     published: @metaData.publish
                     metaData: @metaData
                     visualizationOptions:
@@ -52,6 +52,7 @@ app.service 'DataService', [
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
+                        tableOffset: trimResult.tableOffset
                 , (response) ->
                     $translate('TOAST_MESSAGES.DATASET_SAVED')
                     .then (translation) ->
@@ -96,7 +97,7 @@ app.service 'DataService', [
             #@method downloadCSV
             #@description downloads a csv
             downloadCSV: (name) ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                trimmedDataset = vidatio.helper.trimDataset(Table.getDataset()).trimmedDataset
 
                 if Table.useColumnHeadersFromDataset
                     csv = Papa.unparse

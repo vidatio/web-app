@@ -18,6 +18,9 @@ class window.vidatio.Helper
             dataset: dataset
 
         tmp = []
+        tableOffset =
+            rows: 0
+            columns: 0
 
         topRow = undefined
         leftCell = Infinity
@@ -37,11 +40,19 @@ class window.vidatio.Helper
                         rightCell = indexCell
 
         dataset.forEach (row, indexRow) ->
-            if indexRow < topRow or indexRow > bottomRow
+            if indexRow < topRow
+                tableOffset.rows += 1
+                return
+            else if indexRow > bottomRow
                 return
             tmp.push row.slice(leftCell, rightCell + 1)
 
-        return tmp
+        tableOffset.columns = leftCell
+
+        return {
+            trimmedDataset: tmp
+            tableOffset: tableOffset
+        }
 
     # Return specified amount of random rows
     # @method cutDataset
@@ -270,7 +281,7 @@ class window.vidatio.Helper
         failures = 0
 
         for key, value of column
-            if not value? and conditionFunction(value)
+            if value? and conditionFunction(value) and value isnt ""
                 if failures >= thresholdFailure
                     return false
                 else

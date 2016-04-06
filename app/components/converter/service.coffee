@@ -46,8 +46,6 @@ app.service 'ConverterService', [
                     dataset: dataset
                     indicesCoordinates: indicesCoordinates
 
-                dataset = vidatio.helper.trimDataset(dataset)
-
                 geoJSON =
                     "type": "FeatureCollection"
                     "features": []

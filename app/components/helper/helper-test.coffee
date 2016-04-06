@@ -164,7 +164,7 @@ describe "Service Helper", ->
             ]
         ]
 
-        expect(@Helper.trimDataset dataset).toEqual result
+        expect(@Helper.trimDataset(dataset).trimmedDataset).toEqual result
 
     it "should create a matrix with the initial value", ->
         dataset = [
