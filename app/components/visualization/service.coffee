@@ -67,8 +67,8 @@ app.service 'VisualizationService', [
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
+                #trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                recommendationResults = vidatio.recommender.run Table.getDataset(), Table.getHeader(), Table.useColumnHeadersFromDataset
 
                 if recommendationResults.error?
                     $log.error "Visualization Ctrl error at recommend diagram"

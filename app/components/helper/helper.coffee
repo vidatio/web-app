@@ -270,7 +270,7 @@ class window.vidatio.Helper
         failures = 0
 
         for key, value of column
-            if conditionFunction(value)
+            if not value? and conditionFunction(value)
                 if failures >= thresholdFailure
                     return false
                 else
