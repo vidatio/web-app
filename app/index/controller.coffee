@@ -16,11 +16,6 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
-            #$scope.categories.push(name: "Wirtschaft")
-            $scope.categories.push(name: "Kultur")
-            $scope.categories.push(name: "Gesundheit")
-            $scope.categories.push(name: "Tourismus")
-            $scope.categories.push(name: "Arbeit")
 
         , (error) ->
             $log.info "IndexCtrl error on query categories"
@@ -39,20 +34,13 @@ app.controller "IndexCtrl", [
 
         DatasetsFactory.query (response) ->
             $scope.vidatios = response
+
             categoryOccurrences = {}
 
             for vidatio in $scope.vidatios
                 if vidatio.metaData?.categoryId?
                     #count the occurrences per category over all datasets with category-attribute
                     categoryOccurrences[vidatio.metaData.categoryId.name] = (categoryOccurrences[vidatio.metaData.categoryId.name] or 0) + 1
-
-            categoryOccurrences["Wirtschaft"] = 1
-            categoryOccurrences["Gesundheit"] = 1
-            categoryOccurrences["Tourismus"] = 37
-            categoryOccurrences["Arbeit"] = 25
-            categoryOccurrences["Kultur"] = 13
-
-            console.log categoryOccurrences
 
             $scope.chartData = prepareChartData(categoryOccurrences)
             $scope.positions = setBubblePositions($scope.chartData)
@@ -135,15 +123,20 @@ app.controller "IndexCtrl", [
         # @param {array} occurrences
         prepareChartData = (occurrences) ->
             chartData = []
-            colors = ["#11DDC6", "#FF5444", "#000000"]
+            colors = ["#11DDC6", "#FF5444", "#000000"] # vidatio-green and -red, black
 
             currentColor = 0
 
             for category in $scope.categories
 
                 if occurrences[category.name]?
-                    # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
-                    chartData.push({"name": category.name, "datensätze": occurrences[category.name], "color": colors[currentColor]})
+                    categoryOccurrence = occurrences[category.name]
+                # if none of the dataset has current category, set its occurrence to 0
+                else
+                    categoryOccurrence = "0"
+
+                # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
+                chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
 
                 currentColor++
 
