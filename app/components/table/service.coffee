@@ -109,8 +109,8 @@ app.service 'TableService', [
             # @param {Number} xColumn
             # @param {Number} yColumn
             updateAxisSelection: (xColumn, yColumn) ->
-                #$log.info "TableService updateAxisSelection called"
-                #$log.debug
+                $log.info "TableService updateAxisSelection called"
+                $log.debug
                     xColumn: xColumn
                     yColumn: yColumn
 
