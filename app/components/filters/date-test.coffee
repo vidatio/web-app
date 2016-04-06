@@ -13,38 +13,38 @@ describe "Filter Catalog", ->
         it "should filter input correctly between minimum and maximum date", ->
             input = [
                 {
-                    createdAt: new Date("2016-02-06")
+                    createdAt: moment("2016-02-06")
                 },
                 {
-                    createdAt: new Date("2016-02-08")
+                    createdAt: moment("2016-02-08")
                 }
             ]
 
             result = [
                 {
-                    createdAt: new Date("2016-02-06")
+                    createdAt: moment("2016-02-06")
                 }
             ]
 
-            expect(@filter('dateFilter')(input, "2016-02-05", "2016-02-07")).toEqual(result)
+            expect(@filter('dateFilter')(input, moment("2016-02-05"), moment("2016-02-07"))).toEqual(result)
 
         it "should filter input correctly from minimum date", ->
             input = [
                 {
-                    createdAt: new Date("2016-02-06")
+                    createdAt: moment("2016-02-06")
                 },
                 {
-                    createdAt: new Date("2016-02-08")
+                    createdAt: moment("2016-02-08")
                 }
             ]
 
             result = [
                 {
-                    createdAt: new Date("2016-02-08")
+                    createdAt: moment("2016-02-08")
                 }
             ]
 
-            expect(@filter('dateFilter')(input, "2016-02-07")).toEqual(result)
+            expect(@filter('dateFilter')(input, moment("2016-02-07"))).toEqual(result)
 
         it "should filter input correctly to maximum date", ->
             input = [
