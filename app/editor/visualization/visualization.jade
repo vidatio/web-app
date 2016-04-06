@@ -26,7 +26,7 @@
                         a.icon-map(href="#" ng-click="selectDiagram('map')")
                             span {{ "DIAGRAMS.MAP" | translate }}
 
-            .color-selection.settings-button(ng-hide="visualization.type == 'map'")
+            .color-selection.settings-button(ng-hide="visualization.type == 'map' || data.metaData.fileType == 'shp'")
                 a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true" title="{{'CHANGE_COLOR'|translate}}")
                     span {{ "COLORS" | translate }}
 
