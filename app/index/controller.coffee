@@ -103,7 +103,7 @@ app.controller "IndexCtrl", [
             .width(width)
             .height(650)
             .legend(false)
-            .font("family": "Colaborate")
+            .font("family": "Colaborate-Regular")
             .messages($scope.message)
             .focus("tooltip": false)
             .background("none")
@@ -120,7 +120,8 @@ app.controller "IndexCtrl", [
         # @param {array} occurrences
         prepareChartData = (occurrences) ->
             chartData = []
-            colors = ["#11dcc6", "#F2B1B1", "#FF5444", "#ABF4E9", "#000000"]
+            colors = ["#11DDC6", "#FF5444", "#000000"]
+
             currentColor = 0
 
             for category in $scope.categories
