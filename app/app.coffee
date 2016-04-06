@@ -68,6 +68,11 @@ app.run [
             $rootScope.history.push
                 name: fromState.name
                 params: fromParams
+
+            if not $rootScope.authorized and $state.current.name is "app.share"
+                $rootScope.history.push
+                    name: "app.share"
+                    params: fromParams
 ]
 
 app.config [
@@ -207,8 +212,6 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
-                # TODO: show 404
-
                 locale =
                     locale: $translateProvider.preferredLanguage()
 

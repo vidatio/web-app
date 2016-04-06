@@ -6,19 +6,19 @@
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
-            .transpose-button.settings-button(ng-hide="data.meta.fileType == 'shp'" title="{{'TRANSPOSE_DATASET_TITLE'|translate}}")
+            .transpose-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'TRANSPOSE_DATASET_TITLE'|translate}}")
                 a(href='#' ng-click="transpose()").icon-transpose
                     span {{ "TRANSPOSE" | translate }}
 
-            .x-axis-button.settings-button(ng-hide="data.meta.fileType == 'shp'" title="{{'AXIS_SELECTION_X_TITLE'|translate}}")
+            .x-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_X_TITLE'|translate}}")
                 a(href='#' ng-click="axisSelection('x')").icon-xaxis
                     span {{ "VALUE_RANGE" | translate }}
 
-            .y-axis-button.settings-button(ng-hide="data.meta.fileType == 'shp'" title="{{'AXIS_SELECTION_Y_TITLE'|translate}}")
+            .y-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_Y_TITLE'|translate}}")
                 a(href='#' ng-click="axisSelection('y')").icon-yaxis
                     span {{ "VALUE_RANGE" | translate }}
 
-            .download-button.settings-button(ng-hide="data.meta.fileType == 'shp'" title="{{'DOWNLOAD'|translate}} {{'DATASET'|translate}}")
+            .download-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'DOWNLOAD'|translate}} {{'DATASET'|translate}}")
                 a(href="#" ng-click="download()").icon-download
                     span {{ "DOWNLOAD" | translate }}
 

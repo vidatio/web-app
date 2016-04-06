@@ -1,5 +1,5 @@
 #catalog.wrapper-content
-    .row
+    .row.content
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h2.filter-title {{ "FILTER_BY" | translate }}
             #time-filter
@@ -31,13 +31,13 @@
                 a(href="#" ng-click="reset()") {{ "RESET_ALL_FILTERS" | translate }}
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
-            .row
+            .row.cards
                 .col-xs-12.col-sm-6.col-md-4.col-lg-4(
                     ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | myVidatioFilter : filter.showMyVidatios"
                 )
                     .vidatio
                         a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                            img(src="{{ vidatio.image }}" alt="vidatio.title")
+                            img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.title")
 
                         .text
                             a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
@@ -45,5 +45,5 @@
                             p Kategorie: {{ vidatio.metaData.categoryId.name }}
                             p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
 
-                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)")
                             span {{ "OPEN_IN_EDITOR" | translate }}

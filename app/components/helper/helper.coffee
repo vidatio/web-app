@@ -157,7 +157,6 @@ class window.vidatio.Helper
                     @isCoordinateWGS84DegreeDecimalMinutesSeconds(coordinate)
 
     # allowed formats: N 90.123456, E 180.123456 to N -90.123456, E -180.123456
-    # TODO: But not without N or E
     # @method isCoordinateWGS84DegreeDecimal
     # @public
     # @param {String} coordinate
@@ -370,7 +369,6 @@ class window.vidatio.Helper
     # @param {Number} yColumn
     # @param {String} visualizationType
     # @return {Array}
-    # TODO pass names of header if available to use as default keys for x and y in visualization
     transformToArrayOfObjects: (dataset, xColumn, yColumn, visualizationType, headers, color) ->
         unless dataset or xColumn or yColumn or visualizationType
             return
@@ -437,7 +435,6 @@ class window.vidatio.Helper
                 if @isNumeric(x) and @isNumeric(y)
                     return true
             when "map"
-                # FIXME: inside the converter there is similar code
                 return false
             when "parallel"
                 return true

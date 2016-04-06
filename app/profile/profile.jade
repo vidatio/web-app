@@ -9,7 +9,7 @@
                         .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
                             .vidatio
                                 a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                                    img(src="{{ vidatio.image }}" alt="vidatio.name")
+                                    img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.name")
 
                                 .text
                                     a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")

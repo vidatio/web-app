@@ -1,11 +1,6 @@
-# # Converter Service
-
-
 "use strict"
 
 app = angular.module "app.services"
-
-# TODO: after extracting coordinates they have to be converted to decimal format
 
 app.service 'ConverterService', [
     "$timeout"
@@ -57,11 +52,10 @@ app.service 'ConverterService', [
                     if indicesCoordinates["x"] is indicesCoordinates["y"]
                         coordinates = vidatio.geoParser.extractCoordinatesOfOneCell row[indicesCoordinates["x"]]
                     else
-                        # TODO check for more formats than only decimal coordinates
                         latitude = parseFloat(row[indicesCoordinates["y"]])
                         longitude = parseFloat(row[indicesCoordinates["x"]])
-                        # TODO check here also maybe with isCoordinate()
-                        if(vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude))
+
+                        if vidatio.helper.isNumber(latitude) and vidatio.helper.isNumber(longitude) and vidatio.helper.isCoordinate(latitude) and vidatio.helper.isCoordinate(longitude)
                             coordinates.push(latitude)
                             coordinates.push(longitude)
 
@@ -84,7 +78,6 @@ app.service 'ConverterService', [
                         feature.geometry.coordinates = [longitude, latitude]
                         feature.geometry.type = "Point"
                     else
-                        # TODO: 2 Arrays: Line, mehr: Polygon, lat - long für GeoJSON vertauschen
                         return
 
                     # All none coordinate cell should be filled into the properties of the feature

@@ -1,4 +1,7 @@
 #profile.wrapper-content
+    .row.cards
+        width calc(100% + 30px)
+        margin-left -15px
 
     .area
         padding 30px
@@ -22,16 +25,20 @@
     li
         list-style-type none
 
-    .vidatios
-        .row.cards
-            display flex
-            flex-wrap wrap
+@media(max-width: 767px)
+    #profile
+        .vidatio
+            a.img
+                height 48vw
 
-            > div
-                display flex
+            img
+                max-height 45vw
 
-    .vidatio
-        width 100%
+@media(min-width: 768px) and (max-width: 991px)
+    #profile
+        .vidatio
+            a.img
+                height 26vw
 
-        img
-            background-color $color-white
+            img
+                max-height 24vw

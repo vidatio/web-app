@@ -1,20 +1,44 @@
+.vidatios
+    .row.cards
+        display flex
+        flex-wrap wrap
+
+        > div
+            display flex
+
 .vidatio
     margin-bottom 20px
     background #F2F2F2
     border-top 3px solid $color-green
     box-shadow $box-shadow-size $color-shadow
     position relative
+    width 100%
 
     h4, img
         font-size 18px
         width 100%
 
-    .img
+    a.img
+        height 130px
+        padding 0 10px
         background-color $color-white
         display block
 
+    img
+        position relative
+        top 50%
+        -webkit-transform translateY(-50%)
+        -ms-transform translateY(-50%)
+        transform translateY(-50%)
+        max-height 125px
+
+    img.placeholder
+        height 50%
+        opacity 0.4
+
     .text
         padding 10px 10px 25px
+        margin-bottom 30px
 
     .title
         margin-bottom 15px
@@ -29,10 +53,10 @@
     #create-vidatio
         font-size 14px
         padding 6px 8px
-        position relative
+        position absolute
+        bottom 0
         left 50%
         transform translate(-50%, -50%)
-        margin-top -15px
 
         span
             margin-left 2px

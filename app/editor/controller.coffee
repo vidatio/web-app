@@ -24,25 +24,6 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        # Resizing the visualizations
-        # using setTimeout to use only to the last resize action of the user
-        id = null
-
-        onWindowResizeCallback = ->
-            # a new visualization should only be created when the visualization is visible in editor
-            if viewsToDisplay[1] is true
-                clearTimeout id
-                id = setTimeout ->
-                    Visualization.create()
-                , 250
-
-        # resize event only should be fired if user is currently in editor
-        window.angular.element($window).on 'resize', $scope.$apply, onWindowResizeCallback
-
-        # resize watcher has to be removed when editor is leaved
-        $scope.$on '$destroy', ->
-            window.angular.element($window).off 'resize', onWindowResizeCallback
-
         # the displayed views are set accordingly to the clicked tab
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
@@ -63,9 +44,9 @@ app.controller "EditorCtrl", [
 
             # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
             if tabIndex isnt 0
-                setTimeout ->
+                $timeout ->
                     Visualization.create()
-                , 250
+                , 50
 
             [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 

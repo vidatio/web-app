@@ -4,13 +4,12 @@ app = angular.module("app.controllers")
 
 app.controller "ProfileCtrl", [
     "$scope"
-    "DatasetFactory"
     "UserDatasetsFactory"
     "ProgressService"
     "DataService"
     "$cookieStore"
     "$translate"
-    ($scope, DatasetFactory, UserDatasets, Progress, Data, $cookieStore, $translate) ->
+    ($scope, UserDatasets, Progress, Data, $cookieStore, $translate) ->
         $scope.vidatios = []
         globals = $cookieStore.get "globals" || {}
 
@@ -19,7 +18,7 @@ app.controller "ProfileCtrl", [
             $scope.vidatios = response
 
             for vidatio in $scope.vidatios
-                vidatio.image = if vidatio.visualizationOptions?.thumbnail then vidatio.visualizationOptions.thumbnail else "images/placeholder-featured-vidatios-arbeitslosenzahlen-salzburg.svg"
+                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
 
         # @method $scope.openInEditor
         # @description open dataset in Editor

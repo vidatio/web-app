@@ -7,20 +7,6 @@
     li
         list-style-type none
 
-    .vidatios
-        .row
-            display flex
-            flex-wrap wrap
-
-            > div
-                display flex
-
-    .vidatio
-        width 100%
-
-        img
-            background-color $color-white
-
     #filter
         position relative
         padding 15px
@@ -93,48 +79,71 @@
         padding-top 3px
 
 @media (max-width: 767px)
-    #filter
-        margin-bottom 20px !important
-        width calc(100% - 20vw)
-        margin-left 10vw
-        margin-right 10vw
+    #catalog
+        #filter
+            margin-bottom 20px !important
+            width calc(100% - 20vw)
+            margin-left 10vw
+            margin-right 10vw
 
-    .vidatio
-        margin-left calc(10vw - 15px)
-        margin-right calc(10vw - 15px)
+        .vidatios
+            margin-bottom 30px
 
-    .vidatios
-        margin-bottom 30px
+            .vidatio
+                margin-left calc(10vw - 15px)
+                margin-right calc(10vw - 15px)
 
-        > .row div .text
-            padding 10px 30px 25px !important
+                a.img
+                    height 45vw
 
-@media (min-width: 768px) and (max-width: 992px)
-    #filter
-        margin-bottom 20px !important
-        width calc(100% - 30px)
-        margin-left 15px
-        margin-right 15px
+                img
+                    max-height 42vw
 
-@media screen and (max-width: 992px)
-    .vidatios > .row
-        margin-left -15px
-        margin-right -15px
+@media (min-width: 768px) and (max-width: 991px)
+    #catalog
+        #filter
+            margin-bottom 20px !important
+            width calc(100% - 30px)
+            margin-left 15px
+            margin-right 15px
 
-        div .text
-            padding 10px 20px 25px
+        .vidatio
+            a.img
+                height 28vw
 
-    [id$="-filter"]
-        max-width 30em
-        margin 0 auto
-        padding 0 15px !important
-
-        .select2-container
-            width 100%
-
-    input + span + [date-picker-wrapper]
-        right 0
+            img
+                max-height 27vw
 
 @media screen and (max-width: 730px)
     #time-filter span.to
         display none
+
+@media screen and (max-width: 991px)
+    #catalog
+        .vidatios > .row
+            margin-left -15px
+            margin-right -15px
+
+        [id$="-filter"]
+            max-width 30em
+            margin 0 auto
+            padding 0 15px !important
+
+            .select2-container
+                width 100%
+
+        input + span + [date-picker-wrapper]
+            right 0
+
+@media(min-width: 992px)
+    #catalog
+        .row.content
+            padding 0 15px
+
+            .vidatios
+                padding 0
+
+                .row.cards
+                    width 100%
+                    padding 0
+                    margin-left 15px
