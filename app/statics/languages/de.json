@@ -109,7 +109,6 @@
     "CHANGE_COLOR": "Farbe ändern",
     "OPEN_DATA": "Open Data",
     "OPEN_DATA_DESCRIPTION": "Vidatio ist eine Sammelstelle für frei verfügbare Daten aller Art.",
-    "OPEN_IN_EDITOR": "Öffnen im Editor",
     "FILE_DROP": "Datei Landeplatz",
     "LINK_TO_FILE": "Link zur Datei",
     "IMPORT_VIA_LINK": "Import via Link",
@@ -145,7 +144,8 @@
         "CATEGORIES_COULD_NOT_BE_LOADED": "Kategorien können zurzeit nicht geladen werden.",
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
-        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen."
+        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen.",
+        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde gespeichert. Gehe zum Import um dein Vidatio weiter zu bearbeiten und zu verwenden."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",

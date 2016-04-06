@@ -32,7 +32,8 @@ app.run [
     "$cookieStore"
     "CONFIG"
     "$translate"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
+    "ngToast"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -73,6 +74,13 @@ app.run [
                 $rootScope.history.push
                     name: "app.share"
                     params: fromParams
+
+            # show toast-message for users when editor- or share-page is leaved 
+            if fromState.name in ["app.editor", "app.share"] and toState.name not in ["app.editor", "app.share"]
+                $translate('TOAST_MESSAGES.VIDATIO_CHANGES_SAVED')
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
 ]
 
 app.config [
