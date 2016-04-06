@@ -16,6 +16,11 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
+            #$scope.categories.push(name: "Wirtschaft")
+            $scope.categories.push(name: "Kultur")
+            $scope.categories.push(name: "Gesundheit")
+            $scope.categories.push(name: "Tourismus")
+            $scope.categories.push(name: "Arbeit")
 
         , (error) ->
             $log.info "IndexCtrl error on query categories"
@@ -40,6 +45,14 @@ app.controller "IndexCtrl", [
                 if vidatio.metaData?.categoryId?
                     #count the occurrences per category over all datasets with category-attribute
                     categoryOccurrences[vidatio.metaData.categoryId.name] = (categoryOccurrences[vidatio.metaData.categoryId.name] or 0) + 1
+
+            categoryOccurrences["Wirtschaft"] = 1
+            categoryOccurrences["Gesundheit"] = 1
+            categoryOccurrences["Tourismus"] = 37
+            categoryOccurrences["Arbeit"] = 25
+            categoryOccurrences["Kultur"] = 13
+
+            console.log categoryOccurrences
 
             $scope.chartData = prepareChartData(categoryOccurrences)
             $scope.positions = setBubblePositions($scope.chartData)
@@ -75,7 +88,8 @@ app.controller "IndexCtrl", [
         # @description set necessary parameters and draw categories bubble-visualization
         createCategoryBubbles = ->
             $chart = $("#bubble-categories")
-            width = $chart.parent().width()
+            width = $chart.parent().width() + 60    # +60px to enlarge the diagram as much as possible
+            $chart.css("margin-left", "-30px")      # set the left margin accordingly to the enlargement
 
             # draw new visualization only when $chart.parents' width has changed, return otherwise
             if lastWidth is width
@@ -103,7 +117,8 @@ app.controller "IndexCtrl", [
             .width(width)
             .height(650)
             .legend(false)
-            .font("family": "Colaborate-Regular")
+            .font("family": "Colaborate-Medium")
+            .labels("font": {"family": "Colaborate-Thin"})
             .messages($scope.message)
             .focus("tooltip": false)
             .background("none")
@@ -153,19 +168,35 @@ app.controller "IndexCtrl", [
 
             predefinedPositions = [
                 {
-                    "x": -17
-                    "y": 21
+                    "x": -14
+                    "y": 24
                 }
                 {
-                    "x": 17
-                    "y": 21
+                    "x": 14
+                    "y": 24
                 }
                 {
-                    "x": 34
+                    "x": 28
                     "y": 0
                 }
                 {
-                    "x": -34
+                    "x": -28
+                    "y": 0
+                }
+                {
+                    "x": 42
+                    "y": 24
+                }
+                {
+                    "x": -42
+                    "y": 24
+                }
+                {
+                    "x": 56
+                    "y": 0
+                }
+                {
+                    "x": -56
                     "y": 0
                 }
             ]

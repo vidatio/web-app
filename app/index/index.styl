@@ -175,18 +175,14 @@
 
     #popular-categories
         padding-top 50px
-        min-height 650px
+        overflow hidden
         background url(../images/placeholder-students.jpg) no-repeat
         width 100%
 
         .viz-container
             position relative
-            height 650px
 
             #bubble-categories
-                margin-top -98px
-                overflow hidden !important
-
                 text
                     fill #fafafa
 
@@ -257,38 +253,61 @@
                 margin-bottom 30px
                 font-size 20px
 
+        #popular-categories
+            height 380px
+
+            .viz-container
+                #bubble-categories
+                    margin-top -210px
+
+        #press
+            margin-bottom 20px
+
 @media(min-width: 768px)
-    #index #newest-vidatios
-        .title
-            font-size 16px
+    #index
+        #newest-vidatios
+            .title
+                font-size 16px
+
+        #popular-categories
+            height 500px
+
+            .viz-container
+                #bubble-categories
+                    margin-top -150px
 
 @media(max-width: 850px)
-    #index #intro
-        padding 0 0 100px 0
+    #index
+        #intro
+            padding 0 0 100px 0
 
 @media(min-width: 768px) and (max-width: 960px)
-    #index #intro .get-started
-        bottom -80px
-        right 100px
+    #index
+        #intro
+            .get-started
+                bottom -80px
+                right 100px
 
 @media(min-width: 768px) and (max-width: 991px)
-    #intro #press h3
-        height 40px
+    #index
+        #press h3
+            height 40px
 
-    #index #newest-vidatios
-        .img-container
-            height 19vw
-
-        img.newest
-            max-height 18vw
-
-@media(min-width: 992px)
-    #index #newest-vidatios
-        .img-container
-            height 190px
+        #newest-vidatios
+            .img-container
+                height 19vw
 
             img.newest
-                max-height 180px
+                max-height 18vw
 
-        .title
-            font-size 16px
+@media(min-width: 992px)
+    #index
+        #newest-vidatios
+            .img-container
+                height 190px
+
+                img.newest
+                    max-height 180px
+
+            .title
+                font-size 16px
