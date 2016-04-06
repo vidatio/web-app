@@ -9,7 +9,7 @@ section#newest-vidatios(ng-show="newestVidatios.length")
                 .col-wrapper
                     a(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                         .img-container
-                            img.newest(src="{{ vidatio.image }}")
+                            img.newest(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}")
                         .title {{ vidatio.metaData.name }}
 
         .browse
