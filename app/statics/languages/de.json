@@ -145,7 +145,7 @@
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
         "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen.",
-        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde gespeichert. Gehe zum Import um dein Vidatio weiter zu bearbeiten und zu verwenden."
+        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde zwischengespeichert. Gehe zum Import um dein Vidatio bearbeiten und verwenden zu können."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
