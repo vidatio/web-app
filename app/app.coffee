@@ -81,7 +81,10 @@ app.run [
                 if fromState.name is "app.share" and toState.name is "app.dataset"
                     return
 
-                $translate('TOAST_MESSAGES.VIDATIO_CHANGES_SAVED')
+                # show different toast-message when user goes back to import
+                toastMessage = if toState.name is "app.import" then 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED_IMPORT' else 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED'
+                    
+                $translate(toastMessage)
                 .then (translation) ->
                     ngToast.create
                         content: translation
