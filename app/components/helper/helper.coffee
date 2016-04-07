@@ -54,6 +54,17 @@ class window.vidatio.Helper
             tableOffset: tableOffset
         }
 
+    untrimDataset: (dataset, tableOffset) ->
+        dataset.forEach (row) ->
+            for counter in [1..tableOffset.columns]
+                row.unshift(null)
+
+        for counter in [1..tableOffset.rows]
+            dataset.unshift(new Array(26).fill(null))
+
+        return dataset
+
+
     # Return specified amount of random rows
     # @method cutDataset
     # @public

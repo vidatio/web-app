@@ -87,7 +87,9 @@ app.service 'DataService', [
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
 
-                    Table.setDataset data.data
+                    if data.visualizationOptions.tableOffset
+                        dataset = vidatio.helper.untrimDataset data.data, data.visualizationOptions.tableOffset
+                    Table.setDataset dataset
 
             #@method downloadCSV
             #@description downloads a csv
