@@ -5,46 +5,35 @@
 
     .row
         .col-sm-12
-            visualization
+            .visualization-box
+                .action-bar
+                    #create-vidatio.action-button
+                        a.icon-edit.icons(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                            span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
-            .row.buttons-first-row
-                .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
-                        span.icon-edit.icons
-                        span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
-
-                .col-xs-12.col-sm-4.middle
-                    #download-dataset
-                        a.title.btn.btn-primary(href='#')
-                            span.icon-download.icons
-                            span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
-
-                        ul
-                            li
-                                a(ng-click="downloadCSV()")
-                                    span.icon-downloaddataset
+                    #download-dataset.download-selection.action-button
+                        a(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
+                            span {{ "DOWNLOAD" | translate }}
+                        ul.download-menu
+                            li.download-button
+                                a.icon-downloaddataset(href="#" ng-click="downloadCSV()")
                                     span  {{ "DATASET" | translate }}
-                            li
-                                a(ng-click="downloadPNG()")
-                                    span.icon-downloadvisualization
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadPNG()")
                                     span  {{ "VISUALIZATION" | translate }}
 
-                .col-xs-12.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
-                        span.icon-link.icons
-                        span.button-text  {{ "LINK" | translate | uppercase }}
-
-                .col-xs-12
-                    #vidatio-link-box(ng-show="$root.showVidatioLink")
-                        p
-                            span.icon-link.link-box-icon
+                    #vidatio-link-box.share-button.action-button
+                        a.fui-cross.icon-link.link-box-icon(href="#" ng-click="hideVidatioLink()")
                             span  {{ "LINK_TO_SHARE" | translate }}
-                        a.fui-cross(href="#" ng-click="hideVidatioLink()")
-                        form
-                            input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
-                        a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
-                            span.icon-copyclipboard.icons
-                            span.button-text  {{"COPY_LINK" | translate | uppercase }}
+                        .share-link
+                            .input-group.form-link
+                                input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
+                                span.input-group-btn
+                                    #copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
+                                        span.icon-copyclipboard.icons
+                                        span.button-text  {{"COPY_LINK" | translate | uppercase }}
+
+                visualization
 
     .row
         .col-sm-12
