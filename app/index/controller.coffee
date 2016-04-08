@@ -17,6 +17,13 @@ app.controller "IndexCtrl", [
         CategoriesFactory.query (response) ->
             $scope.categories = response
 
+            $scope.categories.push(name: "Auto")
+            $scope.categories.push(name: "VW")
+            $scope.categories.push(name: "BMW")
+            $scope.categories.push(name: "Mercedes")
+            $scope.categories.push(name: "Real")
+            $scope.categories.push(name: "FCB")
+
         , (error) ->
             $log.info "IndexCtrl error on query categories"
             $log.error error
@@ -77,6 +84,7 @@ app.controller "IndexCtrl", [
         createCategoryBubbles = ->
             $chart = $("#bubble-categories")
             width = $chart.parent().width() + 60    # +60px to enlarge the diagram as much as possible
+            height = $chart.parent().height()
             $chart.css("margin-left", "-30px")      # set the left margin accordingly to the enlargement
 
             # draw new visualization only when $chart.parents' width has changed, return otherwise
@@ -103,7 +111,7 @@ app.controller "IndexCtrl", [
             .color("color")
             .size("datensätze")
             .width(width)
-            .height(650)
+            .height(height)
             .legend(false)
             .font("family": "Colaborate-Medium")
             .labels("font": {"family": "Colaborate-Thin"})
@@ -132,12 +140,11 @@ app.controller "IndexCtrl", [
                 if occurrences[category.name]?
                     categoryOccurrence = occurrences[category.name]
                 # if none of the dataset has current category, set its occurrence to 0
-                else
-                    categoryOccurrence = "0"
+                #else
+                #    categoryOccurrence = "0"
 
                 # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
                 chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
-
                 currentColor++
 
                 if currentColor is colors.length
@@ -152,6 +159,8 @@ app.controller "IndexCtrl", [
         setBubblePositions = (chartData) ->
 
             finalPositions = []
+
+            numberOfCategories = chartData.length
 
             # sort bubbleData according to their amount of datasets in descending order
             numericalSort = (a, b) ->
@@ -192,7 +201,34 @@ app.controller "IndexCtrl", [
                     "x": -56
                     "y": 0
                 }
+                {
+                    "x": 70
+                    "y": 24
+                }
+                {
+                    "x": -70
+                    "y": 24
+                }
+                {
+                    "x": 84
+                    "y": 0
+                }
+                {
+                    "x": -84
+                    "y": 0
+                }
+                {
+                    "x": 98
+                    "y": 24
+                }
+                {
+                    "x": -98
+                    "y": 24
+                }
             ]
+
+            predefinedPositions = predefinedPositions.slice(0, numberOfCategories - 1)
+            #bubbleData = bubbleData.slice(0, 6)
 
             predefinedPositions.sort ->
                 0.5 - Math.random()
