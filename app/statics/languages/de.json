@@ -145,7 +145,7 @@
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
         "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen.",
-        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde zwischengespeichert. Gehe zum Import um dein Vidatio bearbeiten und verwenden zu können.",
+        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde zwischengespeichert. Gehe zum Import, um dein Vidatio zu bearbeiten oder zu verwenden.",
         "VIDATIO_CHANGES_SAVED_IMPORT": "Dein Vidatio wurde zwischengespeichert. Klicke auf Bearbeiten oder Verwenden um es zu öffnen."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
@@ -167,7 +167,7 @@
         "SAVE_DATASET": "Vidatio wird gespeichert"
     },
     "IMPORT_DATA": "Daten importieren",
-    "IMPORT_OVERVIEW": "Öffnen der Importübersicht",
+    "OPEN_IMPORT": "Import",
     "PRICING": "Pricing",
     "FEATURES": "Features",
     "EMAIL": "E-Mail",
