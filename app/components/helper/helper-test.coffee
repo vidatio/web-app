@@ -284,12 +284,14 @@ describe "Service Helper", ->
                 "Banane": 123
                 "name": 123
                 "color": "#FF0"
+                "id": 0
             }
             {
                 "Apfel": "This is a test"
                 "Banane": 456
                 "name": 456
                 "color": "#FF0"
+                "id": 1
             }
         ]
 
@@ -317,12 +319,14 @@ describe "Service Helper", ->
                 "Banane": 123
                 "name": "Line 1"
                 "color": "#FF0"
+                "id": 0
             }
             {
                 "Apfel": "2016-02-29"
                 "Banane": 456
                 "name": "Line 1"
                 "color": "#FF0"
+                "id": 1
             }
         ]
 
