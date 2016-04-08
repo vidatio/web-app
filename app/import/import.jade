@@ -23,7 +23,7 @@
                         .option-icon.icon-searchfiles
                         h4 {{ "CHOOSE_FILE" | translate | uppercase }}
                         span.description-text (CSV, SHP)
-                        input#input-browse-filesystem(type="file" ng-file-select title="CSV & SHP {{'IMPORT'|translate}}")
+                        input#input-browse-filesystem(type="file" ng-file-select title="CSV & SHP {{'IMPORT'|translate|lowercase}}")
 
             .col-sm-4
                 #option-drag-and-drop.area

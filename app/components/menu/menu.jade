@@ -11,9 +11,9 @@ nav
             a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" title="{{ 'MY_PROFILE' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-profile
                 span.link-text {{ "MY_PROFILE" | translate }}
-            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()" title="{{ 'IMPORT_DATA' | translate }} {{ 'OPEN' | translate }}")
+            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()" title="{{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-import
-                span.link-text {{ "IMPORT_DATA" | translate }}
+                span.link-text {{ "IMPORT" | translate }}
             a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()" title="{{ 'OPEN_CATALOG' | translate }}")
                 span.icons.icon-opendata
                 span.link-text {{ "AVAILABLE_VIDATIOS" | translate }}
