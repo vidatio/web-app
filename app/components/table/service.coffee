@@ -12,6 +12,7 @@ app.service 'TableService', [
                 @useColumnHeadersFromDataset = true
                 @instanceTable = null
                 @diagramColumns = {}
+                @minColumns = 26
 
             # @method setInstance
             # @public

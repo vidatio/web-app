@@ -54,13 +54,14 @@ class window.vidatio.Helper
             tableOffset: tableOffset
         }
 
-    untrimDataset: (dataset, tableOffset) ->
+    untrimDataset: (dataset, tableOffset, minWidth) ->
+        cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
         dataset.forEach (row) ->
             for counter in [1..tableOffset.columns]
                 row.unshift(null)
 
         for counter in [1..tableOffset.rows]
-            dataset.unshift(new Array(26).fill(null))
+            dataset.unshift(new Array(cols).fill(null))
 
         return dataset
 
