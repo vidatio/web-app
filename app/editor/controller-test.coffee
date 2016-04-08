@@ -4,12 +4,10 @@ describe "Editor Controller", ->
     beforeEach ->
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, DataService, $compile, VisualizationService) ->
+        inject ($controller, $rootScope, $httpBackend, $compile) ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
-            @Data =
-                name: "My Vidatio"
             @Visualization =
                 create: ->
             @compile = $compile
@@ -20,14 +18,13 @@ describe "Editor Controller", ->
         @Visualization.create.calls.reset()
 
     describe "on page init", ->
-        xit "should display both the TableView and VisualizationView, a title should be set", ->
+        it "should display both the TableView and VisualizationView", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
-            expect(@Data.name).toBe("My Vidatio")
 
     describe "on clicked tab", ->
-        xit "should set the showTableView and showVisualizationView variables accordingly", ->
+        it "should set the showTableView and showVisualizationView variables accordingly", ->
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
@@ -48,7 +45,7 @@ describe "Editor Controller", ->
             expect(@scope.activeViews).toEqual(1)
 
     describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
-        xit 'should call Visualization.create() after a timeout of 10ms', (done) ->
+        it 'should call Visualization.create() after a timeout of 10ms', (done) ->
             @scope.tabClicked(0)
             setTimeout (->
                 done()
