@@ -11,19 +11,8 @@
                         a.icon-edit.icons(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                             span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
-                    #download-dataset.download-selection.action-button
-                        a(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
-                            span {{ "DOWNLOAD" | translate }}
-                        ul.download-menu
-                            li.download-button
-                                a.icon-downloaddataset(href="#" ng-click="downloadCSV()")
-                                    span  {{ "DATASET" | translate }}
-                            li.diagram-button
-                                a.icon-downloadvisualization(href="#" ng-click="downloadPNG()")
-                                    span  {{ "VISUALIZATION" | translate }}
-
                     #vidatio-link-box.share-button.action-button
-                        a.fui-cross.icon-link.link-box-icon(href="#" ng-click="hideVidatioLink()")
+                        a.icon-link(href="#")
                             span  {{ "LINK_TO_SHARE" | translate }}
                         .share-link
                             .input-group.form-link
@@ -32,6 +21,20 @@
                                     #copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
                                         span.icon-copyclipboard.icons
                                         span.button-text  {{"COPY_LINK" | translate | uppercase }}
+
+                    #download-dataset.download-selection.action-button
+                        a(href='#' ng-click="data.visualizationOptions.thumbnail !== 'data:,' || downloadCSV()" title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
+                            span {{ "DOWNLOAD" | translate }}
+                        ul.download-menu(ng-hide="data.visualizationOptions.thumbnail === 'data:,'")
+                            li.download-button
+                                a.icon-downloaddataset(href="#" ng-click="downloadCSV()")
+                                    span CSV
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('jpg')")
+                                    span JPEG
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('png')")
+                                    span PNG
 
                 visualization
 

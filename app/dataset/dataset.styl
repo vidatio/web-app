@@ -5,8 +5,9 @@
         margin-bottom 20px
 
     .visualization-box
+        border-top 3px solid $color-green
         box-shadow $box-shadow-size $color-shadow
-        padding 10px 20px 40px 20px
+        padding 10px 20px 20px
         min-height 450px
         width 100%
         margin-bottom 50px
@@ -42,6 +43,9 @@
 
                 &:first-child
                     margin-left 2px
+
+                &:last-child
+                    margin-left auto
 
         .download-menu
             justify-content space-around
@@ -79,9 +83,10 @@
                 right 0
                 bottom 100%
 
-        .download-selection:hover
-            .download-menu
-                display flex
+        .download-selection
+            &:hover
+                .download-menu
+                    display flex
 
         .share-link
             display none
@@ -104,13 +109,35 @@
                 right 0
                 bottom 100%
 
-            input
-                border-color $color-green
-
-        .share-button:hover
-            .share-link
+            span.test
                 display block
+                    text-transform uppercase
+                    position relative
+                    color inherit
+                    font-size 10px
 
+            input
+                border-color $color-input-border-inactive
+                border-radius 4px
+
+                &:hover
+                &:focus
+                    border-color $color-green
+
+
+            #copy-vidatio-link
+                border 2px solid $color-green
+                border-left-top-radius 0
+                border-left-bottom-radius 0
+
+                &:hover
+                &:focus
+                    border-color $color-hover-dark
+
+        .share-button
+            &:hover
+                .share-link
+                    display block
 
     .visualization
         & > div
@@ -159,6 +186,10 @@
     #dataset-view
         .metadata-container
             margin-bottom 80px
+
+        #copy-vidatio-link
+            span
+                font-size 14px
 
 @media (min-width: 768px) and (max-width: 1012px)
     #dataset-view
