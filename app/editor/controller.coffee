@@ -55,4 +55,8 @@ app.controller "EditorCtrl", [
             for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
+
+            $timeout ->
+                window.angular.element($window).triggerHandler("resize")
+            , 100
 ]
