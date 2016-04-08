@@ -76,14 +76,14 @@ app.run [
                     params: fromParams
 
             # show toast-message for users when editor- or share-page is leaved
-            if fromState.name in ["app.editor", "app.editor.id", "app.share"] and toState.name not in ["app.editor", "app.editor.id", "app.share"]
+            if fromState.name in ["app.editor", "app.editor.id", "app.share"] and toState.name not in ["app.editor", "app.editor.id", "app.share", "app.login"]
                 # don't show toast-message when user saves vidatio and continues to detailview
                 if fromState.name is "app.share" and toState.name is "app.dataset"
                     return
 
                 # show different toast-message when user goes back to import
                 toastMessage = if toState.name is "app.import" then 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED_IMPORT' else 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED'
-                    
+
                 $translate(toastMessage)
                 .then (translation) ->
                     ngToast.create
