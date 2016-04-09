@@ -24,7 +24,7 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
             .container(@containerSelector)
             .data(@chartData)
             .type("line")
-            .id("id")
+            .id("name")
             .text("name")
             .x(options.headers["x"])
             .y(options.headers["y"])
