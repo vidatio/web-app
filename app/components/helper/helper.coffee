@@ -365,7 +365,7 @@ class window.vidatio.Helper
         transformedDataset = []
         { x: xHeader, y: yHeader } = headers
 
-        dataset.forEach (row, index, array) =>
+        dataset.forEach (row, index) =>
             if not @isRowUsable row[xColumn], row[yColumn], visualizationType
                 return
 
