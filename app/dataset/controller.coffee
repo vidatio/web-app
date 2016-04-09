@@ -67,21 +67,9 @@ app.controller "DatasetCtrl", [
                 Progress.setMessage message
 
         # @method $scope.copyVidatioLink
-        # @description copy link to dataset to clipboard and show success-toast-message to user
+        # @description copy link to dataset to clipboard
         $scope.copyVidatioLink = ->
-            successful = vidatio.helper.copyVidatioLink("#vidatio-link")
-
-            if successful
-                $translate("TOAST_MESSAGES.LINK_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-            else
-                $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
+            Data.copyVidatioLink("#vidatio-link")
 
         #@method $scope.downloadVisualization
         #@description exports a
