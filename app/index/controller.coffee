@@ -16,7 +16,7 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
-            
+
         , (error) ->
             $log.info "IndexCtrl error on query categories"
             $log.error error
@@ -42,11 +42,11 @@ app.controller "IndexCtrl", [
                     #count the occurrences per category over all datasets with category-attribute
                     categoryOccurrences[vidatio.metaData.categoryId.name] = (categoryOccurrences[vidatio.metaData.categoryId.name] or 0) + 1
 
-            $scope.chartData = prepareChartData(categoryOccurrences)
-            $scope.positions = setBubblePositions($scope.chartData)
+            $scope.chartData = $scope.prepareChartData(categoryOccurrences)
+            $scope.positions = $scope.setBubblePositions($scope.chartData)
 
             setTimeout ->
-                createCategoryBubbles()
+                $scope.createCategoryBubbles()
             , 250
 
         , (error) ->
@@ -60,7 +60,7 @@ app.controller "IndexCtrl", [
         onWindowResizeCallback = ->
             clearTimeout id
             id = setTimeout ->
-                createCategoryBubbles()
+                $scope.createCategoryBubbles()
             , 250
 
         # resize event only should be fired if user is currently on landing-page
@@ -74,7 +74,7 @@ app.controller "IndexCtrl", [
 
         # @method createCategoryBubbles
         # @description set necessary parameters and draw categories bubble-visualization
-        createCategoryBubbles = ->
+        $scope.createCategoryBubbles = ->
             $chart = $("#bubble-categories")
             width = $chart.parent().width() + 60    # +60px to enlarge the diagram as much as possible
             height = $chart.parent().height()
@@ -123,7 +123,7 @@ app.controller "IndexCtrl", [
         #               set name, size (="datensätze") and color for each bubble
         # @param {Array} occurrences
         # @return {Array} chartData
-        prepareChartData = (occurrences) ->
+        $scope.prepareChartData = (occurrences) ->
             chartData = []
             colors = ["#11DDC6", "#FF5444", "#000000"] # vidatio-green and -red, black
 
@@ -134,7 +134,7 @@ app.controller "IndexCtrl", [
                 if occurrences[category.name]?
                     categoryOccurrence = occurrences[category.name]
 
-                # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
+                    # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
                     chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
                     currentColor++
 
@@ -148,7 +148,7 @@ app.controller "IndexCtrl", [
         #               the category with the most datasets is located in the middle, the categories with the fewest datasets are at the left and right hand side
         # @param {Array} chartData
         # @return {Array} finalPositions
-        setBubblePositions = (chartData) ->
+        $scope.setBubblePositions = (chartData) ->
 
             finalPositions = []
 
