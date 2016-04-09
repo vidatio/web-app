@@ -16,6 +16,7 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
+            
         , (error) ->
             $log.info "IndexCtrl error on query categories"
             $log.error error
@@ -151,7 +152,7 @@ app.controller "IndexCtrl", [
 
             finalPositions = []
 
-            numberOfCategories = chartData.length
+            numberOfCategories = chartData.length - 1
 
             # sort bubbleData according to their amount of datasets in descending order
             numericalSort = (a, b) ->
@@ -159,66 +160,38 @@ app.controller "IndexCtrl", [
 
             bubbleData = chartData.sort(numericalSort)
 
-            predefinedPositions = [
-                {
-                    "x": -14
-                    "y": 24
-                }
-                {
-                    "x": 14
-                    "y": 24
-                }
-                {
-                    "x": 28
-                    "y": 0
-                }
-                {
-                    "x": -28
-                    "y": 0
-                }
-                {
-                    "x": 42
-                    "y": 24
-                }
-                {
-                    "x": -42
-                    "y": 24
-                }
-                {
-                    "x": 56
-                    "y": 0
-                }
-                {
-                    "x": -56
-                    "y": 0
-                }
-                {
-                    "x": 70
-                    "y": 24
-                }
-                {
-                    "x": -70
-                    "y": 24
-                }
-                {
-                    "x": 84
-                    "y": 0
-                }
-                {
-                    "x": -84
-                    "y": 0
-                }
-                {
-                    "x": 98
-                    "y": 24
-                }
-                {
-                    "x": -98
-                    "y": 24
-                }
-            ]
+            predefinedPositions = []
 
-            predefinedPositions = predefinedPositions.slice(0, numberOfCategories - 1)
+            xvalueMultiplicator = 1
+            yvalueMultiplicator = 1
+            bubblesFirstLine = 0
+            bubblesSecondLine = 0
+
+            for data, index in chartData
+                if index is numberOfCategories
+                    break
+
+                if bubblesFirstLine < 2
+                    if bubblesFirstLine is 0
+                        predefinedPositions.push({"x": 14 * xvalueMultiplicator, "y": 24})
+                    else
+                        predefinedPositions.push({"x": (-1) * (14 * xvalueMultiplicator), "y": 24})
+
+                    bubblesFirstLine++
+
+                else
+                    if bubblesSecondLine is 0
+                        predefinedPositions.push({"x": 28 * yvalueMultiplicator, "y": 0})
+                    else
+                        predefinedPositions.push({"x": (-1) * (28 * yvalueMultiplicator), "y": 0})
+
+                    bubblesSecondLine++
+
+                    if bubblesSecondLine is 2
+                        bubblesFirstLine = 0
+                        bubblesSecondLine = 0
+                        xvalueMultiplicator += 2
+                        yvalueMultiplicator += 1
 
             predefinedPositions.sort ->
                 0.5 - Math.random()
