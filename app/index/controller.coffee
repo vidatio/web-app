@@ -16,14 +16,6 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
-
-            $scope.categories.push(name: "Auto")
-            $scope.categories.push(name: "VW")
-            $scope.categories.push(name: "BMW")
-            $scope.categories.push(name: "Mercedes")
-            $scope.categories.push(name: "Real")
-            $scope.categories.push(name: "FCB")
-
         , (error) ->
             $log.info "IndexCtrl error on query categories"
             $log.error error
@@ -128,7 +120,8 @@ app.controller "IndexCtrl", [
         # @method prepareChartData
         # @description prepare the necessary data for d3plus according to our categories and their occurrences;
         #               set name, size (="datensätze") and color for each bubble
-        # @param {array} occurrences
+        # @param {Array} occurrences
+        # @return {Array} chartData
         prepareChartData = (occurrences) ->
             chartData = []
             colors = ["#11DDC6", "#FF5444", "#000000"] # vidatio-green and -red, black
@@ -139,13 +132,10 @@ app.controller "IndexCtrl", [
 
                 if occurrences[category.name]?
                     categoryOccurrence = occurrences[category.name]
-                # if none of the dataset has current category, set its occurrence to 0
-                #else
-                #    categoryOccurrence = "0"
 
                 # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
-                chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
-                currentColor++
+                    chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
+                    currentColor++
 
                 if currentColor is colors.length
                     currentColor = 0
@@ -155,7 +145,8 @@ app.controller "IndexCtrl", [
         # @method setBubblePositions
         # @description set the bubbles' positions according to the amount of datasets the respective category has;
         #               the category with the most datasets is located in the middle, the categories with the fewest datasets are at the left and right hand side
-        # @param {array} chartData
+        # @param {Array} chartData
+        # @return {Array} finalPositions
         setBubblePositions = (chartData) ->
 
             finalPositions = []
@@ -228,7 +219,6 @@ app.controller "IndexCtrl", [
             ]
 
             predefinedPositions = predefinedPositions.slice(0, numberOfCategories - 1)
-            #bubbleData = bubbleData.slice(0, 6)
 
             predefinedPositions.sort ->
                 0.5 - Math.random()
