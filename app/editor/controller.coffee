@@ -43,7 +43,7 @@ app.controller "EditorCtrl", [
                 viewsToDisplay = [false, true]
 
             # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
-            if tabIndex isnt 0
+            unless tabIndex is 0
                 $timeout ->
                     Visualization.create()
                 , 100
@@ -56,7 +56,8 @@ app.controller "EditorCtrl", [
                 if tab
                     $scope.activeViews++
 
-            $timeout ->
-                window.angular.element($window).triggerHandler("resize")
-            , 100
+            unless tabIndex is 2
+                $timeout ->
+                    window.angular.element($window).triggerHandler("resize")
+                , 100
 ]
