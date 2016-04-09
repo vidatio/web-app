@@ -223,6 +223,11 @@ app.config [
             controller: "CatalogCtrl"
             title: "catalog"
 
+        .state "app.team",
+            url: "/team"
+            templateUrl: "team/team.html"
+            title: "team"
+
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
             url: '*path'
