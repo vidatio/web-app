@@ -2,7 +2,7 @@
 
 class window.vidatio.Helper
     constructor: ->
-        @subsetMin = 20
+        @subsetMin = 26
         @subsetMax = 100
         @subsetPercentage = 10
         @failureTolerancePercentage = 10
@@ -56,18 +56,27 @@ class window.vidatio.Helper
 
     untrimDataset: (dataset, tableOffset, minWidth) ->
         cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
+
+        # add columns before and after data
         dataset.forEach (row) ->
-            for counter in [1..tableOffset.columns]
+            for counter in [0...tableOffset.columns]
                 row.unshift(null)
 
-        for counter in [1..tableOffset.rows]
+            filteredRow = row.filter (value) ->
+                return value?
+
+            for counter in [tableOffset.columns + filteredRow.length...cols]
+                row.push(null)
+
+        # add rows before data
+        for counter in [0...tableOffset.rows]
             dataset.unshift(new Array(cols).fill(null))
 
         return dataset
 
 
     # Return specified amount of random rows
-    # @method cutDataset
+    # @method getSubset
     # @public
     # @param {Array} dataset
     # @return {Array}
@@ -291,13 +300,15 @@ class window.vidatio.Helper
         thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
         failures = 0
 
-        for key, value of column
-            if value? and conditionFunction(value) and value isnt ""
-                if failures >= thresholdFailure
-                    return false
-                else
-                    failures++
-        return true
+        if @arrayNotEmpty(column)
+            for key, value of column
+                if value? and conditionFunction(value) and value isnt ""
+                    if failures >= thresholdFailure
+                        return false
+                    else
+                        failures++
+            return true
+        return false
 
     # @method isCoordinateColumn
     # @public
@@ -469,3 +480,11 @@ class window.vidatio.Helper
             output.push element.toLowerCase()
 
         output
+
+    arrayNotEmpty: (data, idx) ->
+        data = data[idx] if idx
+        tmp = data.filter (value) ->
+            return value?
+
+        if tmp.length > 0 then true else false
+
