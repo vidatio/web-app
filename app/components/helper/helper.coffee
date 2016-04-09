@@ -2,7 +2,7 @@
 
 class window.vidatio.Helper
     constructor: ->
-        @subsetMin = 26
+        @subsetMin = 30
         @subsetMax = 100
         @subsetPercentage = 10
         @failureTolerancePercentage = 10
@@ -54,6 +54,11 @@ class window.vidatio.Helper
             tableOffset: tableOffset
         }
 
+    # shift dataset by a certain amount of rows and columns to undo trimming
+    # @method untrimDataset
+    # @public
+    # @param {Array} dataset
+    # @return {Array}
     untrimDataset: (dataset, tableOffset, minWidth) ->
         cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
 
@@ -297,10 +302,11 @@ class window.vidatio.Helper
     # @param {Function} conditionFunction function for type condition
     # @return {Boolean} are all cells of requested type
     isColumnOfType: (column, conditionFunction) ->
-        thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
+        cleanedColumn = @cleanArray(column)
+        thresholdFailure = Math.floor(cleanedColumn.length * (@failureTolerancePercentage / 100))
         failures = 0
 
-        if @arrayNotEmpty(column)
+        if cleanedColumn.length
             for key, value of column
                 if value? and conditionFunction(value) and value isnt ""
                     if failures >= thresholdFailure
@@ -481,10 +487,15 @@ class window.vidatio.Helper
 
         output
 
-    arrayNotEmpty: (data, idx) ->
+    # @description remove all NULL values from an array and return the resulting array
+    # @method cleanArray
+    # @public
+    # @param {Array} array
+    # @return {Array}
+    cleanArray: (data, idx) ->
         data = data[idx] if idx
         tmp = data.filter (value) ->
             return value?
 
-        if tmp.length > 0 then true else false
+        return tmp
 
