@@ -14,9 +14,7 @@ app.controller "ProfileCtrl", [
         globals = $cookieStore.get "globals" || {}
 
         UserDatasets.query {id: globals.currentUser.id}, (response) ->
-            response.splice(0, response.length - 4)
-            $scope.vidatios = response
-
+            $scope.vidatios = response.splice 0, 4
             for vidatio in $scope.vidatios
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
 

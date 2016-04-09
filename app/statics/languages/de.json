@@ -51,7 +51,7 @@
             "UNKNOWN": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!"
         }
     },
-    "API_DOCUMENTATION": "API Dokumentation",
+    "API_DOCUMENTATION": "API Dokumentation in neuem Tab",
     "HOME": "Startseite",
     "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
@@ -97,7 +97,7 @@
     "RECOMMEND_DESCRIPTION": "Vidatio empfiehlt dir die am besten geeignete Visualisierung für deine Daten.",
     "TWO_KLICKS": "2 Klicks",
     "TWO_KLICKS_DESCRIPTION": "Erstelle ansprechende Visualisierungen mit nur 2 Klicks.",
-    "IMPORT": "Import",
+    "IMPORT": "Importieren",
     "STEP": "Schritt",
     "USE": "Verwenden",
     "EXPORT": "Export",
@@ -109,7 +109,6 @@
     "CHANGE_COLOR": "Farbe ändern",
     "OPEN_DATA": "Open Data",
     "OPEN_DATA_DESCRIPTION": "Vidatio ist eine Sammelstelle für frei verfügbare Daten aller Art.",
-    "OPEN_IN_EDITOR": "Öffnen im Editor",
     "FILE_DROP": "Datei Landeplatz",
     "LINK_TO_FILE": "Link zur Datei",
     "IMPORT_VIA_LINK": "Import via Link",
@@ -145,7 +144,9 @@
         "CATEGORIES_COULD_NOT_BE_LOADED": "Kategorien können zurzeit nicht geladen werden.",
         "NO_DIAGRAM_POSSIBLE": "Datengrundlage nicht ausreichend für ein Diagramm!",
         "DATASET_COULD_NOT_BE_LOADED": "Das ausgewählte Vidatio kann momentan nicht geladen werden.",
-        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen."
+        "COLUMN_NOT_POSSIBLE":"Die Spalte '{{column}}' auf '{{axis}}' ist mit dieser Diagrammart nicht möglich. Bitte eine andere Spalte auswählen.",
+        "VIDATIO_CHANGES_SAVED": "Dein Vidatio wurde zwischengespeichert. Gehe zum Import, um dein Vidatio zu bearbeiten oder zu verwenden.",
+        "VIDATIO_CHANGES_SAVED_IMPORT": "Dein Vidatio wurde zwischengespeichert. Klicke auf Bearbeiten oder Verwenden um es zu öffnen."
     },
     "DESCRIPTION_VISUALITION_1": "Wasserverbrauch FH Salzburg",
     "DESCRIPTION_VISUALITION_2": "Arbeitslosigkeit Salzburger Land",
@@ -165,9 +166,8 @@
         "VISUALIZATION_PREPARED": "Visualisierung wird zum Download vorbereitet",
         "SAVE_DATASET": "Vidatio wird gespeichert"
     },
-    "AVAILABLE_DATASETS": "Öffentliche Vidatios",
     "IMPORT_DATA": "Daten importieren",
-    "IMPORT_OVERVIEW": "Öffnen der Importübersicht",
+    "OPEN_IMPORT": "Import",
     "PRICING": "Pricing",
     "FEATURES": "Features",
     "EMAIL": "E-Mail",
