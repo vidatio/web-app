@@ -20,7 +20,7 @@
 
                     .download-selection
                         .col-xs-4
-                            a.icon-emptytable.btn.btn-primary.center-block(href="#" ng-click="hasData && downloadCSV()" ng-disabled="!hasData") CSV
+                            a.icon-downloaddataset.btn.btn-primary.center-block(href="#" ng-click="hasData && downloadCSV()" ng-disabled="!hasData") CSV
                         .col-xs-4
                             a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('jpg')" ng-disabled="!visualization.type") JPG
                         .col-xs-4
@@ -31,7 +31,7 @@
                     .option-icon.icon-share
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
-                        p Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.
+                        p {{ "SAVE_AND_SHARE_DESCRIPTION" | translate }}
                     form(name="metadataForm")
                         .row
                             .input-group.form-group.first
@@ -46,16 +46,16 @@
                         .row
                             label.checkbox(for="publish")
                                 input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish" checked="checked")
-                                | Vidatio im öffentlichen Katalog anzeigen
+                                | {{ "PUBLISH_VIDATIO" | translate }}
 
                         .row
                             .tagsinput-primary
                                     input(name="tagsinput" class="tagsinput" data-role="tagsinput")
                                     span.add-tag +
-                                    span.placeholder Füge Tags hinzu, damit dein Vidatio besser gefunden wird
+                                    span.placeholder {{ "SAVE_AND_SHARE_TAGS" | translate }}
 
                         .row
-                            button.btn.btn-block.btn-embossed.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
+                            button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
                 login(ng-show="!globals.authorized")
 
@@ -82,3 +82,4 @@
 
                     .row
                         a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}
+                            span.icon-bracketright.go-icon

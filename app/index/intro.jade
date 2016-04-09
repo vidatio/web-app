@@ -24,7 +24,7 @@ section#intro
 
                 .get-started
                     //- generate link with correct language
-                    a.bold-font.btn.btn-primary.btn-embossed(ui-sref="app.import({ locale: locale })" title="{{ 'IMPORT_OVERVIEW' | translate }}")
+                    a.bold-font.btn.btn-primary(ui-sref="app.import({ locale: locale })" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
                         | {{ "GET_LANDING_PAGE" | translate | uppercase }}
                         br
                         | {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
