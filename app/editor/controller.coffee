@@ -14,8 +14,11 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization) ->
+    "MapService"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map) ->
         $scope.editor = Data
+        $scope.setBoundsToGeoJSON = ->
+            Map.setBoundsToGeoJSON()
 
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2

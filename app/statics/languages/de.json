@@ -107,6 +107,8 @@
     "AXIS_SELECTION_Y_TITLE": "Auswahl der Spalte für die Y-Achse",
     "CHANGE_DIAGRAM": "Diagrammart ändern",
     "CHANGE_COLOR": "Farbe ändern",
+    "CENTER_MARKER": "Markierungen zentrieren",
+    "CENTER": "Zentrieren",
     "OPEN_DATA": "Open Data",
     "OPEN_DATA_DESCRIPTION": "Vidatio ist eine Sammelstelle für frei verfügbare Daten aller Art.",
     "FILE_DROP": "Datei Landeplatz",
