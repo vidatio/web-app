@@ -4,191 +4,153 @@
         text-align center
         margin-bottom 20px
 
-    .visualization
+    .visualization-box
+        border-top 3px solid $color-green
         box-shadow $box-shadow-size $color-shadow
-        padding 20px 20px 40px 20px
-        height 450px
+        padding 10px 20px 20px
+        min-height 450px
         width 100%
+        margin-bottom 50px
+        position relative
 
+        .action-bar
+            height 60px
+            display flex
+            flex-direction row
+
+            .action-button
+                text-align center
+                margin-left: 25px
+
+                a
+                    font-size 24px
+                    display block
+                    color $color-black
+
+                    > span
+                        display block
+                        text-transform uppercase
+                        position relative
+                        color inherit
+                        font-size 10px
+                        margin-top -7px
+                        font-family Colaborate,Arial,Helvetica,sans-serif
+
+                &:hover
+                &.active
+                    > a
+                        color $color-hover-dark
+
+                &:first-child
+                    margin-left 2px
+
+                &:last-child
+                    margin-left auto
+
+        .download-menu
+            justify-content space-around
+            display none
+            list-style-type none
+            position absolute
+            left 20px
+            right 20px
+            padding 0
+            margin-top 6px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            > li
+                height 100%
+                width 33.333333%
+
+                > a
+                    padding 14px 12px
+                    display block
+
+                &:hover
+                &.active
+                    background $color-hover-light
+                    box-shadow 0 -2px $color-green
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+        .download-selection
+            &:hover
+                .download-menu
+                    display flex
+
+        .share-link
+            display none
+            position absolute
+            left 20px
+            right 20px
+            padding 20px
+            margin-top 6px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+            span.test
+                display block
+                    text-transform uppercase
+                    position relative
+                    color inherit
+                    font-size 10px
+
+            input
+                border-color $color-input-border-inactive
+                border-radius 4px
+
+                &:hover
+                &:focus
+                    border-color $color-green
+
+            input.form-control[readonly]
+                color $color-black
+
+            #copy-vidatio-link
+                border 2px solid $color-green
+                border-left-top-radius 0
+                border-left-bottom-radius 0
+
+                &:hover
+                &:focus
+                    border-color $color-hover-dark
+
+        .share-button
+            &:hover
+                .share-link
+                    display block
+
+    .visualization
         & > div
-            height 100%
+            height 400px
 
         .parcoords > svg
         .parcoords > canvas
             right 35px
 
-    .col-xs-pull-12
-        right 0
-
-    .col-xs-push-12
-        left 0
-
     .middle
         text-align center
-
-    .buttons-first-row
-        margin -23px -15px 50px -15px
-
-        .icons
-            font-size 20px
-
-        .button-text
-            position relative
-            top -1px
-
-        #create-vidatio
-        #link-dataset
-        #download-dataset
-            width 230px
-            height 45px
-            line-height 25px
-
-        #download-dataset
-            position relative
-            cursor pointer
-            margin 0 auto
-            text-align left
-
-            a.title
-                color $color-black
-                background $color-white
-                border 2px solid $color-green
-                width 230px
-                height 45px
-                line-height 23px
-
-                &:focus
-                    background $color-hover-light
-                    border-color $color-hover-light
-
-            ul
-                background $color-white none repeat scroll 0 0
-                border 2px solid $color-green
-                display none
-                position absolute
-                width 230px
-                list-style outside none none
-                padding 0
-                margin-top 12px
-                border-radius 4px
-                z-index 300
-
-                &::after
-                    border-color transparent transparent $color-white transparent
-                    border-style solid
-                    border-width 10px
-                    content ""
-                    left 103px
-                    position absolute
-                    top -20px
-                    z-index 1000
-
-                li
-                    display block
-                    position relative
-                    z-index 301
-
-                    &:first-child
-                        border-bottom 2px solid $color-green
-
-                        &::before
-                            border-color transparent
-                            border-style solid
-                            border-width 11px
-                            content ""
-                            left -2px
-                            position absolute
-                            top -20px
-                            z-index 1001
-                            width 230px
-
-                        &::after
-                            border-color transparent transparent $color-green transparent
-                            border-style solid
-                            border-width 11px
-                            content ""
-                            left 102px
-                            position absolute
-                            top -24px
-                            z-index 1001
-
-                    & > a
-                        color $color-black
-                        position relative
-                        text-decoration none
-                        white-space nowrap
-                        z-index 302
-                        line-height 30px
-                        font-size 16px
-                        font-weight 500
-                        margin-left 55px
-
-                    &:hover
-                        & > a
-                            color $color-green
-
-            &:hover
-                a.title
-                    background $color-hover-light
-                    border-color $color-hover-light
-
-                & > ul
-                    display block
-
-                & > a
-                    background-color $color-hover-dark
-
-    #vidatio-link-box
-        position relative
-        top 25px
-        box-shadow $box-shadow-size $color-shadow
-        background $color-white
-        border-top 3px solid $color-green
-        padding 10px 20px 20px 20px
-        text-align right
-        height 105px
-
-        .link-box-icon
-            font-size 14px
-            text-align left
-
-        p
-            float left
-            margin 0
-
-        .fui-cross
-            background $color-white
-            color $color-grey-dark
-            text-align right
-            &:hover
-                color $color-red
-
-        .form-control
-            border-color $color-input-border-inactive
-            width calc(100% - 160px)
-            border-bottom-right-radius 0
-            border-top-right-radius 0
-
-            &:hover
-            &:focus
-                border-color $color-green
-
-        #copy-vidatio-link
-            border 2px solid $color-green
-            top -42px
-            position relative
-            height 42px
-            background $color-green
-            line-height 18px
-
-            &:active
-                background-color $color-active
-                border-color $color-active
-
-            &:hover
-            &:focus
-                background-color $color-hover-dark
-                border-color $color-hover-dark
 
     .metadata-container
         margin-bottom 20px
@@ -218,37 +180,18 @@
 
 @media (max-width: 600px)
     #dataset-view
-        .buttons-first-row
-            #vidatio-link-box
-                height 150px
-                margin-bottom 30px
-
-                .form-control
-                    width 100%
-                    border-bottom-right-radius 4px
-                    border-top-right-radius 4px
-
-                #copy-vidatio-link
-                    top 10px
-                    margin-right calc(50% - 95px)
-                    width 190px
-
         .metadata-container
             .text
                 width 150px !important
 
 @media (max-width: 767px)
     #dataset-view
-        .buttons-first-row
-            margin -38px -15px 40px -15px
-
-            #create-vidatio
-            #link-dataset
-            #download-dataset
-                margin-top 15px
-
         .metadata-container
             margin-bottom 80px
+
+        #copy-vidatio-link
+            span
+                font-size 14px
 
 @media (min-width: 768px) and (max-width: 1012px)
     #dataset-view

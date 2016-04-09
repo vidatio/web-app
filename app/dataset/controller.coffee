@@ -26,7 +26,6 @@ app.controller "DatasetCtrl", [
     "ErrorHandler"
     ($http, $scope, $rootScope, $log, DataFactory, UserFactory, Table, Map, Converter, $timeout, Progress, $stateParams, $location, $translate, ngToast, Data, Visualization, ErrorHandler) ->
         $scope.downloadCSV = Data.downloadCSV
-        $scope.downloadJPEG = Data.downloadJPEG
         $scope.link = $location.$$absUrl
 
         $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
@@ -34,7 +33,6 @@ app.controller "DatasetCtrl", [
 
             # get dataset according to datasetId and set necessary metadata
             DataFactory.get {id: $stateParams.id}, (data) ->
-
                 $scope.data = data
                 $scope.data.updated = new Date($scope.data.updatedAt)
                 $scope.data.created = new Date($scope.data.createdAt)
@@ -68,41 +66,21 @@ app.controller "DatasetCtrl", [
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
-        # toggle link-box with vidatio-link
-        $scope.toggleVidatioLink = ->
-            $rootScope.showVidatioLink = if $rootScope.showVidatioLink then false else true
-
-        $scope.hideVidatioLink = ->
-            $rootScope.showVidatioLink = false
-
+        # @method $scope.copyVidatioLink
+        # @description copy link to dataset to clipboard
         $scope.copyVidatioLink = ->
-            window.getSelection().removeAllRanges()
-            link = document.querySelector "#vidatio-link"
-            range = document.createRange()
-            range.selectNode link
-            window.getSelection().addRange(range)
+            Data.copyVidatioLink("#vidatio-link")
 
-            try
-                successful = document.execCommand "copy"
+        #@method $scope.downloadVisualization
+        #@description exports a
+        #@params {string} type
+        $scope.downloadVisualization = (type) ->
+            $log.info "DatasetCtrl downloadVisualization called"
+            $log.debug
+                type: type
 
-                $translate("TOAST_MESSAGES.LINK_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-
-            catch error
-                $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
-
-            window.getSelection().removeAllRanges()
-
-        $scope.downloadPNG = ->
             fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
-
-            Visualization.downloadAsImage fileName, "png"
+            Visualization.downloadAsImage fileName, type
 
         $scope.downloadCSV = ->
             Data.downloadCSV($scope.data.title)
