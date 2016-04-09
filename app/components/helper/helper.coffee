@@ -495,7 +495,7 @@ class window.vidatio.Helper
     cleanArray: (data, idx) ->
         data = data[idx] if idx
         tmp = data.filter (value) ->
-            return value?
+            return value if value
 
         return tmp
 
