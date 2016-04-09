@@ -223,6 +223,11 @@ app.config [
             controller: "CatalogCtrl"
             title: "catalog"
 
+        .state "app.fourofour",
+            url: "/404"
+            templateUrl: "404/404.html"
+            title: "404"
+
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
             url: '*path'
@@ -234,5 +239,4 @@ app.config [
                 $state.get().forEach (state) ->
                     if $stateParams.path is state.url
                         $state.go state.name, locale
-
 ]
