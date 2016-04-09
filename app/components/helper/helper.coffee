@@ -446,3 +446,24 @@ class window.vidatio.Helper
             output.push element.toLowerCase()
 
         output
+
+    # @method copyVidatioLink
+    # @description copy link for dataset to clipboard and return success-state
+    # @public
+    # @param {String} element
+    # @return {Boolean}
+    copyVidatioLink: (element) ->
+        window.getSelection().removeAllRanges()
+        link = document.querySelector element
+        range = document.createRange()
+        range.selectNode link
+        window.getSelection().addRange(range)
+
+        try
+            successful =  document.execCommand "copy"
+
+        catch error
+            successful =  false
+
+        window.getSelection().removeAllRanges()
+        successful

@@ -120,27 +120,20 @@ app.controller "ShareCtrl", [
         $scope.downloadCSV = ->
             Data.downloadCSV($scope.vidatio.name)
 
+        # @method $scope.copyVidatioLink
+        # @description copy link to dataset to clipboard and show success to user
         $scope.copyVidatioLink = ->
-            window.getSelection().removeAllRanges()
-            link = document.querySelector "#vidatio-link"
-            range = document.createRange()
-            range.selectNode link
-            window.getSelection().addRange(range)
+            successful = vidatio.helper.copyVidatioLink("#vidatio-link")
 
-            try
-                successful = document.execCommand "copy"
-
+            if successful
                 $translate("TOAST_MESSAGES.LINK_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
-
-            catch error
+            else
                 $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
                 .then (translation) ->
                     ngToast.create
                         content: translation
                         className: "danger"
-
-            window.getSelection().removeAllRanges()
 ]

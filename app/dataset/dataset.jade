@@ -16,7 +16,7 @@
                             span  {{ "LINK_TO_SHARE" | translate }}
                         .share-link
                             .input-group.form-link
-                                input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
+                                input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
                                 span.input-group-btn
                                     #copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
                                         span.icon-copyclipboard.icons
