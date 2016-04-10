@@ -15,7 +15,8 @@ app.controller "EditorCtrl", [
     "$translate"
     "VisualizationService"
     "MapService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map) ->
+    "$window"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window) ->
         $scope.editor = Data
         $scope.setBoundsToGeoJSON = ->
             Map.setBoundsToGeoJSON()
