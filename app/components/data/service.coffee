@@ -18,11 +18,7 @@ app.service 'DataService', [
             constructor: ->
                 # Temporarily solution because there is redundance
                 # between @name, @metaData and @vidatio
-                @vidatio =
-                    _id: ""
-                    tags: ""
-                    publish: true
-                    name: ""
+                @vidatio = {}
                 @name = ""
                 @metaData =
                     "fileType": ""

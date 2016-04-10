@@ -30,7 +30,7 @@ app.controller "ShareCtrl", [
         $scope.vidatio.publish = true
 
         $translate("NEW_VIDATIO").then (translation) ->
-            $scope.vidatio.name = Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
+            $scope.vidatio.name = $scope.vidatio.name || Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
 
         Categories.query (response) ->
             $scope.categories = response
