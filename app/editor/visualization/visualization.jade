@@ -27,7 +27,7 @@
                             span {{ "DIAGRAMS.MAP" | translate }}
 
             .settings-button(ng-hide="visualization.type != 'map' && data.metaData.fileType != 'shp'")
-                a.icon-colorbucket(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="setBoundsToGeoJSON()")
+                a.icon-resize-small(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="setBoundsToGeoJSON()")
                     span {{ "CENTER" | translate }}
 
             .color-selection.settings-button(ng-hide="visualization.type == 'map' || data.metaData.fileType == 'shp'")
