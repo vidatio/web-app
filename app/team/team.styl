@@ -1,0 +1,74 @@
+#team
+	padding 70px 0 60px
+	.row
+		margin-bottom 75px
+
+		&.other
+			.col-sm-4
+				&:first-child
+					margin-left 15%
+
+		.img-and-text-wrapper
+			text-align center
+			margin 0 
+
+			img
+				width 100%
+				max-width 500px
+				height auto
+				border-radius 100%
+				padding 0 15px 
+				// border 8px solid #f2b1b1
+				&:hover 
+					transition opacity opacity 1s linear	
+
+			h3
+				display block
+				padding 30px 0 0
+				font-size 19px
+				font-family Colaborate-Light, $fonts
+				text-transform uppercase
+			p
+				{lightText}
+				margin 5px auto
+				width 85%
+
+			a
+				color $color-green
+				&:hover 
+					color $color-hover-dark
+
+#team-all
+	color $color-white
+	padding 60px 0
+	background url(../images/dotgrid.png) $color-grey-dark
+	overflow hidden
+	width 100%
+	text-align center
+
+	h1
+		margin-bottom 20px
+
+#team-photo
+	padding-top 50px
+	min-height 700px
+	background url(../images/vidatio-team-all.jpg) no-repeat scroll 50% 50%
+	width 100%
+
+.app-view
+	padding-bottom 80px
+
+
+					
+@media(max-width: 767px)
+	#team
+		.row
+			&.other
+				.col-sm-4
+					margin-bottom 50px 
+
+					&:first-child
+						margin-left 0
+	#team-photo
+		background-size auto 100%
+		min-height 400px
