@@ -26,8 +26,8 @@ app.controller "ShareCtrl", [
         $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options
 
-        $scope.vidatio =
-            publish: true
+        $scope.vidatio = Data.vidatio
+        $scope.vidatio.publish = true
 
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.vidatio.name = Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
