@@ -57,6 +57,7 @@ app.run [
             $http.defaults.headers.common["Authorization"] = "Basic " + $rootScope.globals.currentUser.authData
 
         $rootScope.history = []
+        fromEditor = false
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
             if toState.title?
                 $rootScope.title = toState.title
@@ -76,21 +77,37 @@ app.run [
                     name: "app.share"
                     params: fromParams
 
+            userPages = ["app.login", "app.registration"]
+            editorPages = ["app.editor", "app.editor.id", "app.share"]
+            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.login", "app.registration"]
+
+            # set boolean value true when user navigates from editor/share to login/registration
+            if fromState.name in editorPages and toState.name in userPages
+                fromEditor = true
+
+            # show toast-message when user navigates otherwise than back to editor/share and was before on login/registration
+            if fromEditor and fromState.name in userPages and toState.name not in editorAndUserPages
+                showToastMessage('TOAST_MESSAGES.VIDATIO_CHANGES_SAVED')
+                fromEditor = false
+                return
+
             # show toast-message for users when editor- or share-page is leaved
-            if fromState.name in ["app.editor", "app.editor.id", "app.share"] and toState.name not in ["app.editor", "app.editor.id", "app.share", "app.login"]
+            if fromState.name in editorPages and toState.name not in editorAndUserPages
                 # don't show toast-message when user saves vidatio and continues to detailview
                 if fromState.name is "app.share" and toState.name is "app.dataset"
                     return
 
                 # show different toast-message when user goes back to import
                 toastMessage = if toState.name is "app.import" then 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED_IMPORT' else 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED'
-
-                $translate(toastMessage)
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
+                showToastMessage(toastMessage)
 
             window.scrollTo 0, 0
+
+        showToastMessage = (message) ->
+            $translate(message)
+            .then (translation) ->
+                ngToast.create
+                    content: translation
 ]
 
 app.config [
