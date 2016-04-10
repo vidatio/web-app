@@ -33,7 +33,8 @@ app.run [
     "CONFIG"
     "$translate"
     "ngToast"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast) ->
+    "$window"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
         $rootScope.$state = $state
         $rootScope.$stateParams = $stateParams
 
@@ -88,6 +89,8 @@ app.run [
                 .then (translation) ->
                     ngToast.create
                         content: translation
+
+            window.scrollTo 0, 0
 ]
 
 app.config [
