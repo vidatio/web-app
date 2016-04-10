@@ -49,6 +49,7 @@ app.controller "EditorCtrl", [
             unless tabIndex is 0
                 $timeout ->
                     Visualization.create()
+                , 100
 
             [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
