@@ -63,19 +63,21 @@ class window.vidatio.Helper
         cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
 
         # add columns before and after data
-        dataset.forEach (row) ->
+        dataset.forEach (row) =>
             for counter in [0...tableOffset.columns]
                 row.unshift(null)
 
-            filteredRow = row.filter (value) ->
-                return value?
+            filteredRow = @cleanArray(row)
 
             for counter in [tableOffset.columns + filteredRow.length...cols]
                 row.push(null)
 
         # add rows before data
         for counter in [0...tableOffset.rows]
-            dataset.unshift(new Array(cols).fill(null))
+            emptyArray = []
+            for colIndex in [0...cols]
+                emptyArray.push(null)
+            dataset.unshift(emptyArray)
 
         return dataset
 

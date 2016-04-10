@@ -361,3 +361,40 @@ describe "Service Helper", ->
         expect(@Helper.isRowUsable("1", "test", "parallel")).toEqual(true)
         expect(@Helper.isRowUsable("test", "test", "parallel")).toEqual(true)
         expect(@Helper.isRowUsable("test", "1", "parallel")).toEqual(true)
+
+    it 'should untrim the dataset', ->
+        test = [
+            [1, 2]
+            [3, 4]
+        ]
+
+        tableOffset =
+            columns: 1
+            rows: 1
+
+        expectedResult = [
+            [
+                null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null
+            ]
+            [
+                null, 1, 2, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null
+            ]
+            [
+                null, 3, 4, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null, null, null,
+                null, null, null, null, null, null, null
+            ]
+        ]
+
+        expect(@Helper.untrimDataset test, tableOffset, 26).toEqual expectedResult
+
+    it 'should clean an array from unwanted values', ->
+        test = [null, null, 1, 2, null, 3, null]
+
+        expectedResult = [1, 2, 3]
+
+        expect(@Helper.cleanArray test).toEqual expectedResult
