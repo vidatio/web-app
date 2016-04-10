@@ -20,7 +20,7 @@ app.controller "ProfileCtrl", [
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
 
         , (error) ->
-            $log.info "ProfileCtrl error on query users' latest datasets"
+            $log.info "ProfileCtrl error on query users' newest datasets"
             $log.error error
 
         # @method $scope.openInEditor
