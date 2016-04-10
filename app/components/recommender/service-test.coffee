@@ -272,3 +272,50 @@ describe "Service Recommender", ->
         ]
         dataset = @helper.transposeDataset(dataset)
         expect(@recommender.getSchema(dataset)).not.toEqual(schema)
+
+    describe "when shifted by some rows and columns", ->
+        it "should also give the correct recommendations", ->
+            dataset = [
+                [null, null, null, null]
+                [null, null, "Apfel", 500]
+                [null, null, "Birne", 200]
+                [null, null, "Banane", 1200]
+                [null, null, "Orange", 523]
+                [null, null, "Balsamico", 213123]
+            ]
+
+            expect(@recommender.run dataset).toEqual(
+                "type": "bar"
+                "xColumn": 2
+                "yColumn": 3
+            )
+
+        it "should calculate the correct variances", ->
+            dataset = [
+                [null, null, null, null]
+                [null, null, "Apfel", 500]
+                [null, null, "Birne", 500]
+                [null, null, "Banane", 1200]
+                [null, null, "Orange", 523]
+                [null, null, "Balsamico", 213123]
+            ]
+
+            variances = [0, 0, 1, 0.8]
+
+            dataset = @helper.transposeDataset(dataset)
+            expect(@recommender.getVariances dataset).toEqual(variances)
+
+        it "should calculate the correct schema", ->
+            dataset = [
+                [null, null, null, null]
+                [null, null, "Apfel", 500]
+                [null, null, "Birne", 500]
+                [null, null, "Banane", 1200]
+                [null, null, "Orange", 523]
+                [null, null, "Balsamico", 213123]
+            ]
+
+            schema = [[], [], ["nominal"], ["numeric"]]
+
+            dataset = @helper.transposeDataset(dataset)
+            expect(@recommender.getSchema dataset).toEqual(schema)

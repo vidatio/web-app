@@ -54,13 +54,14 @@ class window.vidatio.Recommender
         dataset.forEach (column) ->
             differentValues = {}
             column.forEach (cell) ->
-                differentValues[cell] = true
+                differentValues[cell] = true if cell
 
             count = 0
             for own key of differentValues
                 count++
 
-            variances.push count / column.length
+            amountOfValues = vidatio.helper.cleanArray(column).length || 1
+            variances.push count / amountOfValues
 
         return variances
 
