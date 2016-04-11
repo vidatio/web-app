@@ -1,5 +1,5 @@
 #catalog.wrapper-content
-    .row.content
+    .row.content(ng-class="vidatios.length ? '' : 'same-height'")
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h2.filter-title {{ "FILTER_BY" | translate }}
             #time-filter
@@ -29,6 +29,9 @@
 
             .reset-filters
                 a(href="#" ng-click="reset()") {{ "RESET_ALL_FILTERS" | translate }}
+
+        .no-vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-hide="vidatios.length")
+            p.underline-red-light {{ "NO_DATASETS" | translate }}
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row.cards

@@ -78,6 +78,31 @@
     #my-vidatio-filter h2
         padding-top 3px
 
+    & > .same-height
+        display -webkit-box
+        display -webkit-flex
+        display -ms-flexbox
+        display flex
+        flex-wrap wrap
+
+        & [class*="col-"]
+            display flex
+            flex-direction column
+
+        .no-vidatios
+            display flex
+            align-items center
+            justify-content flex-start
+
+            background-image url(../images/logo-greyscale.svg)
+            background-repeat no-repeat
+            background-position center center
+            background-size 25%
+
+            p
+                max-width 50%
+
+
 @media (max-width: 767px)
     #catalog
         #filter

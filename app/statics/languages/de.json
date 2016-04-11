@@ -118,6 +118,7 @@
     "DATA": "Daten",
     "VIDATIO_TITLE": "Titel meines Vidatios",
     "DATASET": "Datensatz",
+    "NO_DATASETS": "Es konnten keine Datensets gefunden werden.",
     "VISUALIZATION": "Visualisierung",
     "DATASET + VISUALIZATION": "Datensatz + Visualisierung",
     "SAVE": "Speichern",
