@@ -16,6 +16,9 @@ app.service 'DataService', [
     ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
         class Data
             constructor: ->
+                # Temporarily solution because there is redundance
+                # between @name, @metaData and @vidatio
+                @vidatio = {}
                 @name = ""
                 @metaData =
                     "fileType": ""
