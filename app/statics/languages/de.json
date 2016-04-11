@@ -2,6 +2,7 @@
     "SLOGAN": "Seeing the bigger Picture",
     "API": {
         "NAME": "API",
+        "SAVE": "Sie sind nicht befugt zu speichern.",
         "ERROR": {
             "USER": {
                 "REGISTER": {
