@@ -31,7 +31,7 @@
                 a(href="#" ng-click="reset()") {{ "RESET_ALL_FILTERS" | translate }}
 
         .no-vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-hide="vidatios.length")
-            p.underline-red-light {{ "NO_DATASETS" | translate }}
+            p {{ "NO_DATASETS" | translate }}
 
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row.cards
