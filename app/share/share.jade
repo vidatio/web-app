@@ -64,9 +64,9 @@
                     h4 {{ "SHARE_VIDATIO" | translate | uppercase }}
                     .row
                         ul.share-options
-                            li: a.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}")
-                            li: a.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}")
-                            li: a.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}")
+                            li: a.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}" ng-click="openPopup('http://www.facebook.com/sharer.php?u=', 'Facebook Share', '600', '450')" href="#")
+                            li: a.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}" ng-click="openPopup('https://plus.google.com/share?url=', 'Google Plus Share', '500', '500')" href="#")
+                            li: a.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}" ng-click="openPopup('http://twitter.com/home?status=', 'Twitter Share', '500', '280')" href="#")
                             li: a.btn.btn-primary.icon-link(ng-click="copyVidatioLink()" title="{{'SHOW_LINK' | translate}}")
                             li: a.btn.btn-primary.icon-embeddedcode(title="{{'SHOW_EMBEDDED_CODE' | translate}}")
                     .row
