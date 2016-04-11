@@ -26,10 +26,10 @@
                                     img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.name")
 
                                 .text
-                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
+                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
                                         h4.title {{ vidatio.metaData.name }}
 
-                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)" title="{{'OPEN_IN_EDITOR'|translate}}")
                                     span  {{ "OPEN_IN_EDITOR" | translate }}
 
                     .row

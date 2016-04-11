@@ -36,6 +36,7 @@ app.run [
     "$window"
     ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
         $rootScope.$state = $state
+        $rootScope.hostUrl = "#{$location.protocol()}://#{$location.host()}"
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
@@ -59,11 +60,13 @@ app.run [
         $rootScope.history = []
         fromEditor = false
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            $rootScope.absUrl = $location.absUrl()
             if toState.title?
                 $rootScope.title = toState.title
             else
                 $translate("SLOGAN").then (slogan) ->
                     $rootScope.title = slogan
+
 
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
