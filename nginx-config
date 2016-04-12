@@ -16,8 +16,8 @@ http {
 
         error_log /var/www/logs debug;
 
-        root /var/www/build
-        index /statics/master.html
+        root /var/www/build;
+        index /statics/master.html;
 
         location / {
             try_files $uri @prerender;
