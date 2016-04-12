@@ -106,6 +106,7 @@
     "EXPORT": "Export",
     "TERMS": "Allgemeine Geschäftsbedinungen",
     "TERMS_SHORT": "AGB",
+    "TERMS_ACCEPT": "gelesen und akzeptiert",
     "TOGGLE_VIEW": "Ansicht umschalten",
     "TRANSPOSE_DATASET_TITLE": "Datensatz entlang der Diagonale spiegeln",
     "AXIS_SELECTION_X_TITLE": "Auswahl der Spalte für die X-Achse",

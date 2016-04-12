@@ -31,7 +31,14 @@
 
         .row
             .col-xs-12
-                button.btn.btn-block.btn-primary(type="submit" ng-disabled="registrationForm.$invalid || registrationForm.$pending" title="{{'SEND_REGISTRATION' | translate}}") {{ 'REGISTER' | translate }}
+                label.checkbox(for="terms")
+                    a.inverse(href="#" ui-sref="app.terms") {{ 'TERMS' | translate }}
+                    |  {{ 'TERMS_ACCEPT' | translate }}
+                    input#terms.custom-checkbox(data-toggle="checkbox" name="terms" type="checkbox" required="required" ng-model="terms")
+
+        .row
+            .col-xs-12
+                button.btn.btn-block.btn-primary(type="submit" ng-disabled="registrationForm.$invalid || registrationForm.$pending || !terms" title="{{'SEND_REGISTRATION' | translate}}") {{ 'REGISTER' | translate }}
 
     .row
         .col-xs-12.right
