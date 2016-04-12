@@ -19,29 +19,23 @@
         width 100%
 
     a.img
-        height 130px
-        padding 0 10px
+        padding 10px
         background-color $color-white
         display block
 
     img
-        position relative
-        top 50%
-        -webkit-transform translateY(-50%)
-        -ms-transform translateY(-50%)
-        transform translateY(-50%)
-        max-height 125px
+        width auto
+        height 125px
+        max-width: 100%
 
     img.placeholder
         height 50%
         opacity 0.4
 
     .text
-        padding 10px 10px 25px
-        margin-bottom 30px
-
-    .title
-        margin-bottom 15px
+        padding 0 10px
+        margin 15px 0
+        text-align left
 
     a.img:hover ~ .text a
         color $color-hover-dark
@@ -49,14 +43,3 @@
     p
         line-height 1.2
         font-size 14px
-
-    #create-vidatio
-        font-size 14px
-        padding 6px 8px
-        position absolute
-        bottom 0
-        left 50%
-        transform translate(-50%, -50%)
-
-        span
-            margin-left 2px
