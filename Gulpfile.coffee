@@ -80,6 +80,7 @@ BUILD =
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
+            "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
@@ -93,7 +94,6 @@ BUILD =
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
             "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
-            "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/shp/dist/shp.js"
             "./bower_components/leaflet/dist/leaflet-src.js"

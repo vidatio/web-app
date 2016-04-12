@@ -3,8 +3,8 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>Copyright (C) 2016 by original authors @ fontello.com</metadata>
 <defs>
-<font id="fontello" horiz-adv-x="1000" >
-<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<font id="icons" horiz-adv-x="1000" >
+<font-face font-family="icons" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
 <glyph glyph-name="piechart" unicode="&#xe800;" d="M1002 383c-7 115-53 219-124 300l-301-300h425z m-169 342c-89 78-205 125-332 125s-243-47-332-125l332-332 332 332z m-337-404c-1 0-2 0-3 1-1 0-2 0-3 1-1 0-2 1-3 1-1 1-2 1-3 2-1 1-3 2-5 4l-353 353c-78-88-126-204-126-331 0-277 225-502 502-502 266 0 484 208 500 470h-500c-2 0-4 1-6 1z" horiz-adv-x="1002" />
 
@@ -123,6 +123,8 @@
 <glyph glyph-name="x-axis" unicode="&#xe839;" d="M41-9v48h83v-48h-83z m0 103v48h83v-48h-83z m0 103v48h83v-48h-83z m0 103v48h83v-48h-83z m0 103v48h83v-48h-83z m7 131v-21h76v20h49l-83 316-89-316h48z m619-519v-53l-626 0v-69h626v-48l357 83z m-309 486l108-185s-114-188-112-188h56l86 156 89-156h54l-113 188 111 185h-52l-89-152-82 152h-56z" horiz-adv-x="1024" />
 
 <glyph glyph-name="diagramm_menu" unicode="&#xe83a;" d="M188-150h-188v813h188v-813z m250 1000h-188v-1000h188v1000z m250-375h-188v-625h188v625z" horiz-adv-x="688" />
+
+<glyph glyph-name="bounds" unicode="&#xe83b;" d="M704 33l-128-130 0 336 335 0-127-128 127-129-79-79z m-686 429l128 129-127 126 79 79 126-126 129 127 0-335-335 0z m0-480l128 129-128 128 335 0 0-336-129 130-127-130z m558 480l0 335 128-127 128 126 78-79-126-126 127-129-335 0z" horiz-adv-x="928" />
 </font>
 </defs>
 </svg>

@@ -21,16 +21,20 @@ app.controller "ShareCtrl", [
     "ngToast"
     "ErrorHandler"
     "$state"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state) ->
+    "$window"
+    "$location"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location) ->
         $scope.goToPreview = false
         $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options
+        $scope.vidatio = Data.vidatio
+        $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
-        $scope.vidatio =
-            publish: true
+        port = if $location.port() then ":" + $location.port() else ""
+        $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
 
         $translate("NEW_VIDATIO").then (translation) ->
-            $scope.vidatio.name = Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
+            $scope.vidatio.name = $scope.vidatio.name || Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
 
         Categories.query (response) ->
             $scope.categories = response
@@ -124,4 +128,20 @@ app.controller "ShareCtrl", [
         # @description copy link to dataset to clipboard
         $scope.copyVidatioLink = ->
             Data.copyVidatioLink("#vidatio-link")
+
+        # @method $scope.openPopup
+        # @description open social-media popups with base url as parameter in a new centered popup
+        $scope.openPopup = (url, title, w, h) ->
+            dualScreenLeft = if $window.screenLeft isnt undefined then $window.screenLeft else screen.left
+            dualScreenTop = if $window.screenTop isnt undefined then $window.screenTop else screen.top
+            width = if $window.innerWidth then $window.innerWidth else if document.documentElement.clientWidth then document.documentElement.clientWidth else screen.width
+            height = if $window.innerHeight then $window.innerHeight else if document.documentElement.clientHeight then document.documentElement.clientHeight else screen.height
+
+            left = width / 2 - (w / 2) + dualScreenLeft
+            top = height / 2 - (h / 2) + dualScreenTop
+            url = "#{url}#{decodeURIComponent($scope.link)}"
+            newWindow = $window.open(url, title, "scrollbars=yes, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left)
+            if $window.focus
+                newWindow.focus()
+
 ]

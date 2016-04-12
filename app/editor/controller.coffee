@@ -14,8 +14,12 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization) ->
+    "MapService"
+    "$window"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window) ->
         $scope.editor = Data
+        $scope.setBoundsToGeoJSON = ->
+            Map.setBoundsToGeoJSON()
 
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
@@ -42,7 +46,7 @@ app.controller "EditorCtrl", [
                 viewsToDisplay = [false, true]
 
             # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
-            if tabIndex isnt 0
+            unless tabIndex is 0
                 $timeout ->
                     Visualization.create()
                 , 100
@@ -54,4 +58,9 @@ app.controller "EditorCtrl", [
             for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
+
+            unless tabIndex is 2
+                $timeout ->
+                    window.angular.element($window).triggerHandler("resize")
+                , 100
 ]

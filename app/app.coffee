@@ -33,8 +33,10 @@ app.run [
     "CONFIG"
     "$translate"
     "ngToast"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast) ->
+    "$window"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
         $rootScope.$state = $state
+        $rootScope.hostUrl = "#{$location.protocol()}://#{$location.host()}"
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
@@ -58,14 +60,13 @@ app.run [
         $rootScope.history = []
         fromEditor = false
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
-
-            console.log fromEditor
-
+            $rootScope.absUrl = $location.absUrl()
             if toState.title?
                 $rootScope.title = toState.title
             else
                 $translate("SLOGAN").then (slogan) ->
                     $rootScope.title = slogan
+
 
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
@@ -102,7 +103,9 @@ app.run [
                 # show different toast-message when user goes back to import
                 toastMessage = if toState.name is "app.import" then 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED_IMPORT' else 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED'
                 showToastMessage(toastMessage)
-        
+
+            window.scrollTo 0, 0
+
         showToastMessage = (message) ->
             $translate(message)
             .then (translation) ->
@@ -213,6 +216,12 @@ app.config [
             controller: "ImportCtrl"
             title: "import"
 
+        .state "app.embedding",
+            url: "/embedding/:id"
+            templateUrl: "embedding/embedding.html"
+            controller: "EmbeddingCtrl"
+            title: "embedding"
+
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
@@ -242,6 +251,11 @@ app.config [
             templateUrl: "catalog/catalog.html"
             controller: "CatalogCtrl"
             title: "catalog"
+
+        .state "app.terms",
+            url: "/terms"
+            templateUrl: "terms/terms.html"
+            title: "terms"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
