@@ -107,10 +107,19 @@ app.controller "ImportCtrl", [
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                     Progress.setMessage message
 
-                initTableAndMap fileType, fileContent
-
-                $timeout ->
+                initTableAndMap(fileType, fileContent)
+                .then ->
                     $location.path editorPath
+
+                .catch (error) ->
+                    $translate(error.i18n).then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+
+                        Progress.setMessage ""
+
+
             , (error) ->
                 $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug
@@ -123,44 +132,41 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
-            Table.useColumnHeadersFromDataset = true
 
-            switch fileType
-                when "csv"
-                    Data.metaData.fileType = "csv"
-                    dataset = Converter.convertCSV2Arrays fileContent
-                    Table.setHeader dataset.shift()
-                    Table.setDataset dataset
-                    Visualization.useRecommendedOptions()
-                    $location.path editorPath
+            return new Promise (resolve, reject) ->
+                Table.useColumnHeadersFromDataset = true
 
-                when "zip"
-                    Data.metaData.fileType = "shp"
+                switch fileType
+                    when "csv"
+                        Data.metaData.fileType = "csv"
+                        dataset = Converter.convertCSV2Arrays fileContent
+                        Table.setHeader dataset.shift()
+                        Table.setDataset dataset
+                        Visualization.useRecommendedOptions()
+                        return resolve()
 
-                    Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
-                        dataset = Converter.convertGeoJSON2Arrays geoJSON
+                    when "zip"
+                        Data.metaData.fileType = "shp"
 
-                        if dataset.length
-                            Table.setDataset dataset
-                            Table.useColumnHeadersFromDataset = true
-                            Visualization.options.type = "map"
-                            Map.setGeoJSON geoJSON
-                            $location.path editorPath
-                        else
-                            $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
-                                .then (translation) ->
-                                    ngToast.create
-                                        content: translation
-                                        className: "danger"
+                        Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
+                            dataset = Converter.convertGeoJSON2Arrays geoJSON
 
-                    , (error) ->
-                        $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
-                        $log.debug
-                            error: error
+                            if dataset.length
+                                Table.setDataset dataset
+                                Table.useColumnHeadersFromDataset = true
+                                Visualization.options.type = "map"
+                                Map.setGeoJSON geoJSON
+                                return resolve()
+                            else
+                                return reject
+                                    i18n: "TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR"
 
-                        $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
-                            .then (translation) ->
-                                ngToast.create
-                                    content: translation
-                                    className: "danger"
+                        , (error) ->
+                            $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                            $log.debug
+                                error: error
+
+                            return reject
+                                i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
+
 ]
