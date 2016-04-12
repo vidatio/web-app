@@ -39,4 +39,7 @@ app.controller "LoginCtrl", [
             $(this).closest(".input-group, .form-group").addClass "focus"
         .on "blur", ".form-control", ->
             $(this).closest(".input-group, .form-group").removeClass "focus"
+
+        # terms checkbox
+        $("#terms").radiocheck()
 ]
