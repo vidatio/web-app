@@ -77,8 +77,12 @@
                     .row
                         h3 {{ "LINK" | translate }}
                             span.icon-link
-                        .input-group.single
-                            input.form-control#vidatio-link(ng-model="link" onClick="this.select();" readonly)
+                        .input-group.form-link.copy-vidatio-button-group
+                            input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
+                            span.input-group-btn
+                                #copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
+                                    span.icon-copyclipboard.icons
+                                    span.button-text  {{"COPY" | translate | uppercase }}
 
                     .row
                         a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}
