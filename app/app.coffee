@@ -252,6 +252,11 @@ app.config [
             controller: "CatalogCtrl"
             title: "catalog"
 
+        .state "app.terms",
+            url: "/terms"
+            templateUrl: "terms/terms.html"
+            title: "terms"
+
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
             url: '*path'
