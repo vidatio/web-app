@@ -49,12 +49,9 @@ http {
                 proxy_pass http://$prerender;
             }
             if ($prerender = 0) {
-                #rewrite .* /index.html break;
-                try_files $uri /statics/master.html;
+                rewrite .* /statics/master.html break;
             }
         }
-
-
 
         error_page   500 502 503 504  /50x.html;
         location = /50x.html {
