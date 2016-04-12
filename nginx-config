@@ -15,10 +15,9 @@ http {
         server_name  localhost;
 
         root /var/www/build;
-        try_files $uri /statics/master.html;
 
         location / {
-            try_files $uri @prerender;
+            try_files $uri @prerender /statics/master.html;
         }
 
         location @prerender {
