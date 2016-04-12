@@ -107,7 +107,7 @@ app.controller "IndexCtrl", [
             .height(height)
             .legend(false)
             .font("family": "Colaborate-Medium")
-            .labels("font": {"family": "Colaborate-Thin"})
+            .labels("font": {"family": "Colaborate-Regular"})
             .messages($scope.message)
             .focus("tooltip": false)
             .background("none")
