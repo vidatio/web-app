@@ -124,7 +124,7 @@ describe "Service Recommender", ->
             [300, "2013-01-01"]
         ]
         expect(@recommender.run dataset).toEqual(
-            "type": "timeseries"
+            "type": "line"
             "xColumn": 1
             "yColumn": 0
         )
