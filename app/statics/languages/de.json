@@ -54,6 +54,7 @@
     },
     "API_DOCUMENTATION": "API Dokumentation in neuem Tab",
     "HOME": "Startseite",
+    "BACK_HOME": "zurück zur Startseite",
     "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",
@@ -252,6 +253,6 @@
     "PUBLISH_VIDATIO": "Mein Vidatio im öffentlichen Katalog anzeigen",
     "SAVE_AND_SHARE_TAGS": "Füge Tags hinzu, damit dein Vidatio besser gefunden wird",
     "SHARE_VIDATIO": "Vidatio teilen",
-    "PAGE_NOT_FOUND": "Seite nicht gefunden",
-    "PAGE_NOT_FOUND_LONG": "Die aufgerufene Seite wurde leider nicht gefunden."
+    "PAGE_NOT_FOUND": "Upps, da ist etwas schief gelaufen...",
+    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden."
 }
