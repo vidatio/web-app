@@ -50,7 +50,7 @@ http {
             }
             if ($prerender = 0) {
                 #rewrite .* /index.html break;
-                try_files $uri @prerender;
+                try_files $uri /statics/master.html;
             }
         }
 
