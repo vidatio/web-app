@@ -34,13 +34,13 @@ describe "Controller Import", ->
             @httpBackend.whenGET(/index/).respond ""
             @httpBackend.whenGET(/editor/).respond ""
             @httpBackend.expectGET(/languages/).respond ""
+            @httpBackend.expectGET(/404/).respond ""
             @httpBackend.whenGET(@rootScope.apiBase + '/v0/forward?url=test.csv').respond
                 body: 'test,1\ntest,2\ntest,3'
                 fileType: 'csv'
             @scope.link = 'test.csv'
             @scope.load()
             @httpBackend.flush()
-
 
             expect(@Table.setDataset).toHaveBeenCalled()
 

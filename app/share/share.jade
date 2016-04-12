@@ -73,12 +73,16 @@
                         h3 Embed Code
                             span.icon-embeddedcode
                         .input-group.single
-                            textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
+                            textarea.form-control(rows="4" onClick="this.select();" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     .row
                         h3 {{ "LINK" | translate }}
                             span.icon-link
-                        .input-group.single
-                            input.form-control#vidatio-link(ng-model="link" onClick="this.select();" readonly)
+                        .input-group.form-link.copy-vidatio-button-group
+                            input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
+                            span.input-group-btn
+                                #copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
+                                    span.icon-copyclipboard.icons
+                                    span.button-text  {{"COPY" | translate | uppercase }}
 
                     .row
                         a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}
