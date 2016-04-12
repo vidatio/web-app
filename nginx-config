@@ -14,7 +14,7 @@ http {
         listen       80;
         server_name  localhost;
 
-        error_log /var/www/logs
+        error_log /var/www/logs;
 
         root /var/www/build
         index /statics/master.html
