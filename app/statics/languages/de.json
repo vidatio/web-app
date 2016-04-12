@@ -240,7 +240,7 @@
         "MAP": "Karte",
         "PARALLEL_COORDINATES": "Parallele Koordinaten",
         "BAR_CHART": "Balken-Diagramm",
-        "TIME_SERIES": "Zeitlicher Verlauf",
+        "LINE_CHART": "Linien-Diagramm",
         "RECOMMEND": "Diagramm empfehlen"
     },
     "LONGITUDE": "Long",

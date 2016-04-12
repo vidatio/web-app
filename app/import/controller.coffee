@@ -22,7 +22,8 @@ app.controller "ImportCtrl", [
     "ProgressService"
     "VisualizationService"
     "ErrorHandler"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization, ErrorHandler) ->
+    "$q"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization, ErrorHandler, $q) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
         $scope.importService = Import
         editorPath = "/" + $rootScope.locale + "/editor"
@@ -109,8 +110,6 @@ app.controller "ImportCtrl", [
 
                 initTableAndMap fileType, fileContent
 
-                $timeout ->
-                    $location.path editorPath
             , (error) ->
                 $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug
@@ -123,6 +122,10 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
+
+            deferred = $q.defer()
+            promise = deferred.promise
+
             Table.useColumnHeadersFromDataset = true
 
             switch fileType
@@ -132,7 +135,7 @@ app.controller "ImportCtrl", [
                     Table.setHeader dataset.shift()
                     Table.setDataset dataset
                     Visualization.useRecommendedOptions()
-                    $location.path editorPath
+                    deferred.resolve()
 
                 when "zip"
                     Data.metaData.fileType = "shp"
@@ -145,22 +148,28 @@ app.controller "ImportCtrl", [
                             Table.useColumnHeadersFromDataset = true
                             Visualization.options.type = "map"
                             Map.setGeoJSON geoJSON
-                            $location.path editorPath
+                            deferred.resolve()
                         else
-                            $translate('TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR')
-                                .then (translation) ->
-                                    ngToast.create
-                                        content: translation
-                                        className: "danger"
+                            deferred.reject
+                                i18n: "TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR"
 
                     , (error) ->
                         $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
                         $log.debug
                             error: error
 
-                        $translate('TOAST_MESSAGES.SHP2GEOJSON_ERROR')
-                            .then (translation) ->
-                                ngToast.create
-                                    content: translation
-                                    className: "danger"
+                        deferred.reject
+                            i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
+
+            promise.then ->
+                $location.path editorPath
+
+            .catch (error) ->
+                $translate(error.i18n).then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+
+                    Progress.setMessage ""
+
 ]

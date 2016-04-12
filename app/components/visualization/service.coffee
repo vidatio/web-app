@@ -30,7 +30,7 @@ app.service 'VisualizationService', [
                         "map": "DIAGRAMS.MAP"
                         "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
                         "bar": "DIAGRAMS.BAR_CHART"
-                        "timeseries": "DIAGRAMS.TIME_SERIES"
+                        "line": "DIAGRAMS.LINE_CHART"
 
             # @method resetOptions
             # @public
@@ -126,8 +126,8 @@ app.service 'VisualizationService', [
                         new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"
                         new vidatio.BarChart chartData, options, width, height, chartSelector
-                    when "timeseries"
-                        new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
+                    when "line"
+                        new vidatio.LineChart chartData, options, width, height, chartSelector
                     else
                         $log.warn "VisualizationCtrl type not set"
                         $log.debug
