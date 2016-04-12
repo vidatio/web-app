@@ -216,6 +216,12 @@ app.config [
             controller: "ImportCtrl"
             title: "import"
 
+        .state "app.iframe",
+            url: "/iframe/:id"
+            templateUrl: "iframe/iframe.html"
+            controller: "IframeCtrl"
+            title: "iframe"
+
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
@@ -250,6 +256,8 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
+                console.log "404", $state, $stateParams
+
                 locale =
                     locale: $translateProvider.preferredLanguage()
 

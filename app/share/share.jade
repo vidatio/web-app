@@ -73,7 +73,7 @@
                         h3 Embed Code
                             span.icon-embeddedcode
                         .input-group.single
-                            textarea.form-control(name="embedcode" rows="4" readonly) <a class="embed" href="http://www.vidatio.at/das/ist/ein/embed-code/code/">Mein Vidatio</a><script async charset="UTF8" src="//cdn.embedly.com/widget/platform.js"></script>
+                            textarea.form-control(rows="4" readonly) <iframe src="{{hostUrl}}/{{locale}}/iframe/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     .row
                         h3 {{ "LINK" | translate }}
                             span.icon-link
