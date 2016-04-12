@@ -252,6 +252,11 @@ app.config [
             controller: "CatalogCtrl"
             title: "catalog"
 
+        .state "app.fourofour",
+            url: "/404"
+            templateUrl: "404/404.html"
+            title: "404"
+
         .state "app.terms",
             url: "/terms"
             templateUrl: "terms/terms.html"
@@ -264,9 +269,14 @@ app.config [
                 locale =
                     locale: $translateProvider.preferredLanguage()
 
-                # iterate over all states and check if the requested url exists as a state
-                $state.get().forEach (state) ->
-                    if $stateParams.path is state.url
+                # iterate over all states and check if the requested url exists as a state; if not show 404-page
+                for state in $state.get()
+                    if $stateParams.path in ["/de", "/en"]
+                        $state.go "app.index", locale
+                        break
+                    else if $stateParams.path is state.url
                         $state.go state.name, locale
-
+                        break
+                    else
+                        $state.go "app.fourofour", locale
 ]

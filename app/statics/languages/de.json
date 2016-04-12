@@ -54,6 +54,7 @@
     },
     "API_DOCUMENTATION": "API Dokumentation in neuem Tab",
     "HOME": "Startseite",
+    "BACK_HOME": "zurück zur Startseite",
     "IMPRINT": "Impressum",
     "ONLY_LANDING_PAGE": "In nur",
     "THREE_STEPS_LANDING_PAGE": "drei Schritten",
@@ -255,5 +256,7 @@
     "SAVE_AND_SHARE_DESCRIPTION": "Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.",
     "PUBLISH_VIDATIO": "Mein Vidatio im öffentlichen Katalog anzeigen",
     "SAVE_AND_SHARE_TAGS": "Füge Tags hinzu, damit dein Vidatio besser gefunden wird",
-    "SHARE_VIDATIO": "Vidatio teilen"
+    "SHARE_VIDATIO": "Vidatio teilen",
+    "PAGE_NOT_FOUND": "Upps, da ist etwas schief gelaufen...",
+    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden."
 }
