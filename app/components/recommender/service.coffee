@@ -142,7 +142,7 @@ class window.vidatio.Recommender
                 @recommendedDiagram = "map"
 
             else if ("date" in schema[xIndex] and "numeric" in schema[yIndex]) or ("numeric" in schema[xIndex] and "date" in schema[yIndex])
-                @recommendedDiagram = "timeseries"
+                @recommendedDiagram = "line"
 
                 if "numeric" in schema[xIndex] and "date" in schema[yIndex]
                     tmp = xIndex

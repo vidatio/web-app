@@ -71,7 +71,7 @@ module.exports = (config) ->
             # Bugfix PhantomJS
             # TypeError: 'undefined' is not an object (evaluating 'parent.prototype')
             "./app/components/visualization/bar/*.coffee"
-            "./app/components/visualization/timeserie/*.coffee"
+            "./app/components/visualization/line/*.coffee"
             "./app/components/visualization/parallel/*.coffee"
             "./app/components/visualization/scatter/*.coffee"
             # Bugfix d3plus
