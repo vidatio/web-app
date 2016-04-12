@@ -14,10 +14,8 @@ http {
         listen       80;
         server_name  localhost;
 
-        error_log /var/www/logs
-
-        root /var/www/build
-        index /statics/master.html
+        root /var/www/build;
+        try_files $uri /statics/master.html;
 
         location / {
             try_files $uri @prerender;
@@ -51,7 +49,7 @@ http {
                 proxy_pass http://$prerender;
             }
             if ($prerender = 0) {
-                rewrite .* /index.html break;
+                rewrite .* /statics/master.html break;
             }
         }
 
