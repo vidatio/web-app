@@ -73,7 +73,7 @@
                         h3 Embed Code
                             span.icon-embeddedcode
                         .input-group.single
-                            textarea.form-control(rows="4" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                            textarea.form-control(rows="4" onClick="this.select();" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
                     .row
                         h3 {{ "LINK" | translate }}
                             span.icon-link
