@@ -11,7 +11,8 @@ app.service 'VisualizationService', [
     "$timeout"
     "ProgressService"
     "ngToast"
-    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast) ->
+    "$rootScope"
+    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast, $rootScope) ->
         class Visualization
 
             # @method constructor
@@ -132,7 +133,7 @@ app.service 'VisualizationService', [
                         $log.debug
                             type: options.type
 
-                unless options.type is "map" or options.type is "parallel"
+                if (options.type isnt "map" or options.type isnt "parallel") and $rootScope.title is "editor"
                     initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->
