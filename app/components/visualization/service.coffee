@@ -120,8 +120,7 @@ app.service 'VisualizationService', [
                             }
                             Map.setGeoJSON geoJSON
 
-                        $timeout ->
-                            Map.setInstance()
+                        Map.setInstance()
                     when "parallel"
                         new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"

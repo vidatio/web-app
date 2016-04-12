@@ -8,7 +8,7 @@
             .visualization-box
                 .action-bar
                     #create-vidatio.action-button
-                        a.icon-edit.icons(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                        a.icon-edit.icons(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                             span  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
 
                     #vidatio-link-box.share-button.action-button

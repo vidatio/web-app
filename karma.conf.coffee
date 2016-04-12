@@ -13,6 +13,7 @@ module.exports = (config) ->
         files: [
 
             # third party libs
+            "./bower_components/jquery/dist/jquery.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-animate/angular-animate.min.js"
             "./bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"
@@ -28,7 +29,6 @@ module.exports = (config) ->
             "./bower_components/flat-ui/dist/js/flat-ui.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/html2canvas/build/html2canvas.js"
-            "./bower_components/jquery/dist/jquery.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
             "./bower_components/loggly-jslogger/src/loggly.tracker.js"
             "./bower_components/leaflet/dist/leaflet-src.js"

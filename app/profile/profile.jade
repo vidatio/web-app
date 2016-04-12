@@ -2,6 +2,20 @@
     .row
         .col-xs-12
             .area
+
+                .no-vidatios(ng-hide="vidatios.length")
+                    .row.same-height
+                        .col-xs-6
+                            p {{ "MY_0_VIDATIOS1" | translate }}
+                            p {{ "MY_0_VIDATIOS2" | translate }}
+                        .col-xs-6
+                            .get-started
+                                a.bold-font.btn.btn-primary(ui-sref="app.import({ locale: locale })" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                                    | {{ "GET_LANDING_PAGE" | translate | uppercase }}
+                                    br
+                                    | {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
+                                    span.bg-cyan !
+
                 .vidatios(ng-show="vidatios.length")
                     h2 {{ "MY_VIDATIOS" | translate }}
 
@@ -12,10 +26,10 @@
                                     img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.name")
 
                                 .text
-                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#")
+                                    a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" href="#" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
                                         h4.title {{ vidatio.metaData.name }}
 
-                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })")
+                                a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)" title="{{'OPEN_IN_EDITOR'|translate}}")
                                     span  {{ "OPEN_IN_EDITOR" | translate }}
 
                     .row

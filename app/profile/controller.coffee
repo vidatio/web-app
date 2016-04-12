@@ -9,14 +9,19 @@ app.controller "ProfileCtrl", [
     "DataService"
     "$cookieStore"
     "$translate"
-    ($scope, UserDatasets, Progress, Data, $cookieStore, $translate) ->
+    "$log"
+    ($scope, UserDatasets, Progress, Data, $cookieStore, $translate, $log) ->
         $scope.vidatios = []
         globals = $cookieStore.get "globals" || {}
-
-        UserDatasets.query {id: globals.currentUser.id}, (response) ->
-            $scope.vidatios = response.splice 0, 4
+        
+        UserDatasets.datasetsLimit { "limit": 4 , id: globals.currentUser.id }, (response) ->
+            $scope.vidatios = response
             for vidatio in $scope.vidatios
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
+
+        , (error) ->
+            $log.info "ProfileCtrl error on query users' newest datasets"
+            $log.error error
 
         # @method $scope.openInEditor
         # @description open dataset in Editor

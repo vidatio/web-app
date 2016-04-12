@@ -2,6 +2,7 @@
     "SLOGAN": "Seeing the bigger Picture",
     "API": {
         "NAME": "API",
+        "SAVE": "Sie sind nicht befugt zu speichern.",
         "ERROR": {
             "USER": {
                 "REGISTER": {
@@ -88,6 +89,8 @@
     "NEW_VIDATIO_DESCRIPTION": "leere Tabelle",
     "ALL_VIDATIOS": "Alle Vidatios",
     "MY_VIDATIOS": "Meine Vidatios",
+    "MY_0_VIDATIOS1": "Hier würden sich deine Vidatios befinden.",
+    "MY_0_VIDATIOS2": "Zur Zeit hast du leider noch keine erstellt.",
     "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
@@ -107,6 +110,8 @@
     "AXIS_SELECTION_Y_TITLE": "Auswahl der Spalte für die Y-Achse",
     "CHANGE_DIAGRAM": "Diagrammart ändern",
     "CHANGE_COLOR": "Farbe ändern",
+    "CENTER_MARKER": "Markierungen zentrieren",
+    "CENTER": "Zentrieren",
     "OPEN_DATA": "Open Data",
     "OPEN_DATA_DESCRIPTION": "Vidatio ist eine Sammelstelle für frei verfügbare Daten aller Art.",
     "FILE_DROP": "Datei Landeplatz",
@@ -115,6 +120,7 @@
     "DATA": "Daten",
     "VIDATIO_TITLE": "Titel meines Vidatios",
     "DATASET": "Datensatz",
+    "NO_DATASETS": "Es konnten keine Datensets gefunden werden.",
     "VISUALIZATION": "Visualisierung",
     "DATASET + VISUALIZATION": "Datensatz + Visualisierung",
     "SAVE": "Speichern",
