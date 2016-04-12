@@ -22,12 +22,16 @@ app.controller "ShareCtrl", [
     "ErrorHandler"
     "$state"
     "$window"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window) ->
+    "$location"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location) ->
         $scope.goToPreview = false
         $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options
         $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
+
+        port = if $location.port() then ":" + $location.port() else ""
+        $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
 
         $translate("NEW_VIDATIO").then (translation) ->
             $scope.vidatio.name = $scope.vidatio.name || Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"

@@ -216,6 +216,12 @@ app.config [
             controller: "ImportCtrl"
             title: "import"
 
+        .state "app.embedding",
+            url: "/embedding/:id"
+            templateUrl: "embedding/embedding.html"
+            controller: "EmbeddingCtrl"
+            title: "embedding"
+
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
@@ -245,6 +251,11 @@ app.config [
             templateUrl: "catalog/catalog.html"
             controller: "CatalogCtrl"
             title: "catalog"
+
+        .state "app.terms",
+            url: "/terms"
+            templateUrl: "terms/terms.html"
+            title: "terms"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
