@@ -1,6 +1,6 @@
 .visualization
 
-    leaflet#map(geojson="geojson" ng-show="options.type == 'map'")
+    leaflet(id="map" geojson="geojson" ng-show="options.type == 'map'")
 
     #chart(ng-hide="options.type == 'map' || !options.type")
 

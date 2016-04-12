@@ -365,7 +365,7 @@ class window.vidatio.Helper
         transformedDataset = []
         { x: xHeader, y: yHeader } = headers
 
-        dataset.forEach (row) =>
+        dataset.forEach (row, index) =>
             if not @isRowUsable row[xColumn], row[yColumn], visualizationType
                 return
 
@@ -380,6 +380,7 @@ class window.vidatio.Helper
             dataItem[xHeader] = x
             dataItem[yHeader] = y
             dataItem["color"] = color
+            dataItem["id"] = index
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
