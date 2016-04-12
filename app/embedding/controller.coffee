@@ -2,7 +2,7 @@
 
 app = angular.module "app.controllers"
 
-app.controller "IframeCtrl", [
+app.controller "EmbeddingCtrl", [
     "$scope"
     "DatasetFactory"
     "ProgressService"
@@ -25,10 +25,10 @@ app.controller "IframeCtrl", [
                 for tag in $scope.data.metaData.tagIds
                     $scope.data.tags.push tag.name
 
-            $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
-            $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
-            $scope.data.author = if $scope.data.metaData.author? then $scope.data.metaData.author else "-"
-            $scope.data.title = $scope.data.metaData.name || "Vidatio"
+            $scope.data.category = $scope.data.metaData.categoryId.name
+            $scope.data.userName = $scope.data.metaData.userId.name
+            $scope.data.author = $scope.data.metaData.author
+            $scope.data.title = $scope.data.metaData.name
 
             Data.useSavedData $scope.data
 
