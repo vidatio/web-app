@@ -1,6 +1,14 @@
-vidatio-overview
+vidatio
     text-align center
     padding-bottom  20px
+
+    margin-bottom 20px
+    background #F2F2F2
+    border-top 3px solid $color-green
+    box-shadow $box-shadow-size $color-shadow
+    position relative
+    width 100%
+
 
     .content-container
         width 100%
@@ -46,11 +54,35 @@ vidatio-overview
             width 100%
             transform translateX(-50%)
 
-            .icon-edit
-            .icon-trash
-                width 50px
-                margin 0 10px
+            .action-button
+                a
+                    font-size 24px
+                    display inline-block
+                    margin 0 10px
+                    color $color-grey-dark
 
+                    > span
+                        display block
+                        text-transform uppercase
+                        position relative
+                        color inherit
+                        font-size 10px
+                        margin-top -7px
+                        font-family Colaborate,Arial,Helvetica,sans-serif
+
+                .icon-edit:hover
+                .icon-edit:active
+                    color $color-hover-dark
+
+                .icon-trash:hover
+                .icon-trash:active
+                    color $color-red
+
+                &:first-child
+                    margin-left 2px
+
+                &:last-child
+                    margin-left auto
 
 
 

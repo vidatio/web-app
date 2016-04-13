@@ -11,5 +11,8 @@
 
 .btns-container
     .btns
-        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
-        a#delete-vidatio.btn.btn-danger.icon-trash(ng-show="authorized" title="{{'DATASET_DELETE'|translate}}" ng-click="deleteVidatio()")
+        .action-button
+            a.icon-edit.icons(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                span  {{ "USE" | translate }}
+            a.icon-trash.icons(ng-show="authorized" title="{{'DATASET_DELETE'|translate}}" ng-click="deleteVidatio()")
+                span  {{ "DELETE" | translate }}

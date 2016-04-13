@@ -2,7 +2,7 @@
 
 app = angular.module "app.controllers"
 
-app.controller "VidatioOverviewCtrl", [
+app.controller "VidatioCtrl", [
     "$scope"
     "$translate"
     "ngToast"
