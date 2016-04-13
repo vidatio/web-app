@@ -78,6 +78,7 @@ app.controller "CatalogCtrl", [
             stateParams.tags = if $scope.filter.tags then $scope.filter.tags.join("|") else ""
             stateParams.from = if $scope.filter.dates.from then $scope.filter.dates.from.format("DD-MM-YYYY") else ""
             stateParams.to = if $scope.filter.dates.to then $scope.filter.dates.to.format("DD-MM-YYYY") else ""
+            stateParams.name = if $scope.filter.name then $scope.filter.name else ""
             $scope.changeURL()
 
         # @method reset

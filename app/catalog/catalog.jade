@@ -3,14 +3,19 @@
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h2.filter-title {{ "FILTER_BY" | translate }}
 
-            #search
-                input#search-filter.form-control.input-sm(type="text" ng-model="filter.name" ng-change="setStateParams()")
+            label(for="search-title") {{ "TITLE" | translate }}
+            #search-filter.input-group
+                input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
+                span.input-group-btn
+                    button.btn(type="submit", ng-click="setStateParams()")
+                        span.fui-search
 
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
                 span.to  -
                 input.form-control.input-sm(date-time ng-model="filter.dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+
             #category-filter
                 label {{ "CATEGORY" | translate }}
                 .btn-group
