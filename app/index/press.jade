@@ -1,26 +1,25 @@
-section#press
-    .wrapper-content
+#press.wrapper-content
         .row
             .col-sm-12
                 h1.underline-red-light {{ "PRESS" | translate | uppercase }}
 
         .row.items
             .col-xs-6.col-md-3
-                a(href="http://www.salzburger-landespreis.at/" target="_blank" title="{{ 'PRESS_PROVINCIAL_AWARD_TITLE' | translate }}")
+                a.dark(href="http://www.salzburger-landespreis.at/" target="_blank" title="{{ 'PRESS_PROVINCIAL_AWARD_TITLE' | translate }}")
                     img.salzburger-landespreis(src="images/landespreis_2016.png" alt="{{ 'PRESS_PROVINCIAL_AWARD_TITLE' | translate }}")
-                    h3 {{ "PRESS_PROVINCIAL_AWARD" | translate }}
+                    p {{ "PRESS_PROVINCIAL_AWARD" | translate }}
 
             .col-xs-6.col-md-3
-                a(href="http://data.salzburg.gv.at/" target="_blank" title="{{ 'PRESS_OGD_SALZBURG_TITLE' | translate }}")
-                        img(src="images/ogdsalzburg-logo.png" alt="{{ 'PRESS_OGD_SALZBURG_TITLE' | translate }}")
-                    h3 {{ "PRESS_OGD_SALZBURG" | translate }}
+                a.dark(href="http://data.salzburg.gv.at/" target="_blank" title="{{ 'PRESS_OGD_SALZBURG_TITLE' | translate }}")
+                    img(src="images/ogdsalzburg-logo.png" alt="{{ 'PRESS_OGD_SALZBURG_TITLE' | translate }}")
+                    p {{ "PRESS_OGD_SALZBURG" | translate }}
 
             .col-xs-6.col-md-3
-                a(href="https://open.wien.gv.at/site/" target="_blank" title="{{ 'PRESS_OGD_VIENNA_TITLE' | translate }}")
+                a.dark(href="https://open.wien.gv.at/site/" target="_blank" title="{{ 'PRESS_OGD_VIENNA_TITLE' | translate }}")
                     img(src="images/ogdwien-logo.png" alt="{{ 'PRESS_OGD_VIENNA_TITLE' | translate }}")
-                    h3 {{ "PRESS_OGD_VIENNA" | translate }}
+                    p {{ "PRESS_OGD_VIENNA" | translate }}
 
             .col-xs-6.col-md-3
-                a(href="http://odaal.salzburgresearch.at/" target="_blank" title="{{ 'PRESS_ODAAL_TITLE' | translate }}")
+                a.dark(href="http://odaal.salzburgresearch.at/" target="_blank" title="{{ 'PRESS_ODAAL_TITLE' | translate }}")
                     img(src="images/odaal.png" alt="{{ 'PRESS_ODAAL_TITLE' | translate }}")
-                    h3 {{ "PRESS_ODAAL" | translate }}
+                    p {{ "PRESS_ODAAL" | translate }}

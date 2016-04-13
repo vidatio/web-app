@@ -1,84 +1,23 @@
 #index
-#profile
-
-    h1
-        margin-bottom 20px
-
-    h2
-        font-size 19px
-
-    .get-started
-        position absolute
-        width 175px
-        right 170px
-        bottom -80px
-        transform rotate(-10deg)
-
-        a
-            width inherit
-            padding 10px
-            font-size 30px
-            text-align center
-            display inline-block
-            line-height 30px
-            border-radius 5px
-
-            &:visited
-                color $color-white
-
-            span
-                position absolute
-                width 50px
-                top -20px
-                right -15px
-                display inline-block
-                transform rotate(10deg)
-                font-size 50px
-                padding-top 15px
-                padding-bottom 15px
-                border-radius 5px
-
-            &:hover
-                span
-                    background-color $color-hover-dark
-
-            &:active
-                span
-                    background-color $color-active
-
     #intro
-        padding 0 0 70px 0
+        margin-bottom 50px
 
-        #slogan
-            font-family Colaborate-Thin, $fonts
+        h3
+            text-transform uppercase
+
+        .font-green-dark
+            font-family Colaborate-Bold, $fonts
             font-size 24px
-            margin-bottom 10px
-            transform translate(45px, -40px)
-
-        .diagram
-            img
-                width 100%
-                box-shadow 2px 2px 2px 0px $color-shadow
-                border-radius 4px
-
-        .description
-            margin-bottom 10px
-            font-family Colaborate-Light, $fonts
-
-            .font-green-dark
-                font-family Colaborate-Bold, $fonts
-                font-size 21px
 
         ol
             counter-reset li-counter
             list-style-type none
-            margin 0
+            margin 10px 0
             padding 0
 
-            > li
+            li
                 position relative
-                margin 0 0 15px 50px
-                font-size 18px
+                margin 0 0 10px 50px
 
                 &.active
                     &:before
@@ -86,7 +25,6 @@
 
                 &:before
                     position absolute
-                    top 2px
                     left -50px
                     width 36px
                     height 36px
@@ -97,102 +35,72 @@
                     text-align center
                     font-size 22px
 
-                &:first-child
-                    &:before
-                        font-size 24px
-
                 span
-                    top 6px
-                    position relative
-
-        .promo
-            .video
-                width 100%
-                padding 20px
-                background $color-white
-                border-top 3px solid $color-green
-                box-shadow -1px 1px 6px $color-shadow
-
-                img
-                    width 100%
+                    line-height 36px
+                    vertical-align middle
 
     #usp
         color $color-white
-        padding 0 0 50px
+        padding 50px
         background url(../images/dotgrid.png) $color-grey-dark
         overflow hidden
         width 100%
+        text-align center
 
-        .row
-            margin-top 40px
-
-            div
-                text-align center
-
-            p
-                line-height 20px
-
-            .usp-icon
-                font-size 90px
+        .usp-icon
+            font-size 90px
 
             .icon-2clicks
                 font-size 100px
-                margin-top -6px
                 height 164px
 
+        h1
+            margin-bottom 20px
+
     #newest-vidatios
-        padding 50px 0 72px
+        padding 50px
 
-        a
-            color $color-grey-dark
+        h1
+            margin-bottom 20px
 
-            &:hover
-                color $color-green
+        .img-container
+            box-shadow -1px 1px 6px $color-shadow
+            background $color-white
+            padding 0 10px
+            border-radius 4px
 
-            .img-container
-                box-shadow -1px 1px 6px $color-shadow
-                background $color-white
-                padding 0 10px
-                border-radius 4px
+            img.newest
+                width 100%
+                position relative
+                top 50%
+                -webkit-transform translateY(-50%)
+                -ms-transform translateY(-50%)
+                transform translateY(-50%)
 
-                img.newest
-                    width 100%
-                    position relative
-                    top 50%
-                    -webkit-transform translateY(-50%)
-                    -ms-transform translateY(-50%)
-                    transform translateY(-50%)
+            img.placeholder
+                height 50%
+                opacity 0.4
 
-                img.placeholder
-                    height 50%
-                    opacity 0.4
-
-            .title
-                font-family Colaborate-Medium, $fonts
-                margin-top 10px
-                text-align center
+        .title
+            margin-top 20px
+            text-align center
 
         .browse
             text-align center
             margin-top 30px
 
-            a
-                color $color-white
-
-                .browse-icon
-                    margin-left 5px
-                    font-size 14px
+            .browse-icon
+                margin-left 5px
+                font-size 14px
 
     #popular-categories
-        padding-top 50px
+        padding 50px
         min-height 500px
-
-        /* first image is in the foreground, second image in the background*/
         background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
 
     #press
-        padding-top 50px
+        padding 50px 50px 20px 50px
 
         h1
             margin-bottom 30px
@@ -206,11 +114,6 @@
                 margin auto
                 padding 10px
 
-            h3
-                color $color-grey-dark
-                margin-bottom 30px
-                line-height 20px
-
 @media(max-width: 400px)
     #index #intro #slogan
         transform none
@@ -218,10 +121,6 @@
 @media(max-width: 767px)
     #index
     #profile
-        h1
-        h2
-            margin 0 20px 30px
-
         #intro
             .row
                 .slogan
@@ -303,19 +202,3 @@
 
         .title
             font-size 16px
-
-@media(min-width: 1101px) and (max-width: 1200px)
-    #intro #popular-categories
-        background-size 85%, cover
-
-@media(min-width: 1201px) and (max-width: 1400px)
-    #intro #popular-categories
-        background-size 70%, cover
-
-@media(min-width: 1401px) and (max-width: 1600px)
-    #intro #popular-categories
-        background-size 65%, cover
-
-@media(min-width: 1601px)
-    #intro #popular-categories
-        background-size 52%, cover
