@@ -19,6 +19,9 @@ vidatio
             margin 15px 0
             text-align left
 
+            p:first-of-type
+                margin-top 15px
+
             p
                 line-height 1.2
                 font-size 14px
@@ -55,10 +58,14 @@ vidatio
             transform translateX(-50%)
 
             .action-button
+                .icon-edit
+                    margin-right 10px
+                .icon-trash
+                    margin-left 10px
                 a
                     font-size 24px
                     display inline-block
-                    margin 0 10px
+                    width 60px
                     color $color-grey-dark
 
                     > span
@@ -73,16 +80,12 @@ vidatio
                 .icon-edit:hover
                 .icon-edit:active
                     color $color-hover-dark
+                    cursor pointer
 
                 .icon-trash:hover
                 .icon-trash:active
                     color $color-red
-
-                &:first-child
-                    margin-left 2px
-
-                &:last-child
-                    margin-left auto
+                    cursor pointer
 
 
 
