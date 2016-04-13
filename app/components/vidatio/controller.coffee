@@ -17,7 +17,6 @@ app.controller "VidatioCtrl", [
             return unless $scope.vidatio
             globals = $cookieStore.get "globals"
             if globals?
-                console.log $scope.vidatio.metaData
                 $scope.authorized = globals.currentUser.id is $scope.vidatio.metaData.userId._id
             else
                 $scope.authorized = false
