@@ -136,6 +136,7 @@
         "READ_SUCCESS": "Die Datei wurde erfolgreich eingelesen.",
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
+        "DATASET_DELETED": "Datensatz wurde erfolgreich gelöscht.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
         "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
         "LINK_NOT_COPIED": "Der Link konnte nicht in die Zwischenablage kopiert werden. Bitte Seite neu laden und noch einmal versuchen.",
@@ -213,6 +214,7 @@
     "DATASET_ID": "ID des Datensatzes",
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
+    "DATASET_DELETE_CONFIRMATION": "Sind Sie sicher, dass dieses Vidatio gelöscht werden soll?",
     "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {
