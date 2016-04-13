@@ -27,6 +27,7 @@ app.controller "CatalogCtrl", [
                 to: if $stateParams.to then moment($stateParams.to, "DD-MM-YYYY") else ""
             category: if $stateParams.category then $stateParams.category else ""
             tags: if $stateParams.tags then $stateParams.tags.split("|") else ""
+            name: if $stateParams.name then $stateParams.name else ""
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
 
         stateParams = {}
