@@ -215,6 +215,7 @@
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
     "DATASET_DELETE_CONFIRMATION": "Sind Sie sicher, dass dieses Vidatio gelöscht werden soll?",
+    "DATASET_DELETE": "Vidatio löschen",
     "CATALOG": "Katalog",
     "FORM": {
         "ERROR": {

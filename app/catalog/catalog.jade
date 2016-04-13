@@ -38,4 +38,4 @@
                 .col-xs-12.col-sm-6.col-md-4.col-lg-4(
                     ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | myVidatioFilter : filter.showMyVidatios"
                 )
-                    vidatio-overview.vidatio(vidatio="vidatio", expand=true)
+                    vidatio-overview.vidatio(vidatio="vidatio")

@@ -21,7 +21,7 @@
 
                     .row.cards
                         .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
-                            vidatio-overview.vidatio(vidatio="vidatio", expand=false)
+                            vidatio-overview.vidatio(vidatio="vidatio")
                     .row
                         .col-xs-12.has-link
                             a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}...

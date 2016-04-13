@@ -6,12 +6,10 @@
     .text
         a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
             h4.title {{ vidatio.metaData.name }}
-        p(ng-show="expand") Kategorie: {{ vidatio.metaData.categoryId.name }}
-        p(ng-show="expand") {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
+        p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.categoryId.name }}
+        p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
 
 .btns-container
     .btns
         a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
-        //- span  {{ "OPEN_IN_EDITOR" | translate }}
-        a#delete-vidatio.btn.btn-danger.icon-trash(ng-show="authorized" title="{{'DELETE'|translate}}" ng-click="deleteVidatio()")
-    //- span  {{ "DELETE" | translate }}
+        a#delete-vidatio.btn.btn-danger.icon-trash(ng-show="authorized" title="{{'DATASET_DELETE'|translate}}" ng-click="deleteVidatio()")
