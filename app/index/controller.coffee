@@ -17,4 +17,19 @@ app.controller "IndexCtrl", [
         , (error) ->
             $log.info "IndexCtrl error on query newest datasets"
             $log.error error
+
+        addClassActive = (e) ->
+            if e.currentTarget.currentTime > 4
+                $("#intro ol li:nth-child(3)").addClass("active")
+            if e.currentTarget.currentTime > 2
+                $("#intro ol li:nth-child(2)").addClass("active")
+            if e.currentTarget.currentTime > 0
+                $("#intro ol li:nth-child(1)").addClass("active")
+
+        $("video").bind "timeupdate", addClassActive
+        $("video").bind "play", (e) ->
+            $("#intro ol li").removeClass("active")
+            addClassActive(e)
+
+
 ]

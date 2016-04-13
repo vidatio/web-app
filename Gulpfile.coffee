@@ -47,6 +47,7 @@ COPY_FILES =
         "./bower_components/flat-ui/dist/fonts/**/*.*"
     ]
     lang: "./app/statics/languages/**/*.json"
+    videos: "./app/statics/assets/videos/**/*"
 
 BASEURL = "http://localhost:3123"
 
@@ -104,6 +105,7 @@ BUILD =
             "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/flat-ui/dist/js/vendor/video.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
             "./bower_components/moment/locale/de.js"
@@ -133,6 +135,7 @@ BUILD =
         html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
+        videos: "./build/videos"
         lang: "./build/languages"
         docs: "./docs"
     module: "app"
@@ -371,6 +374,7 @@ gulp.task "copy",
         "copy:img"
         "copy:fonts"
         "copy:languages"
+        "copy:videos"
     ]
 
 gulp.task "copy:img",
@@ -396,7 +400,12 @@ gulp.task "copy:languages",
     ->
         gulp.src COPY_FILES.lang
         .pipe gulp.dest BUILD.dirs.lang
-        .pipe
+
+gulp.task "copy:videos",
+    false,
+    ->
+        gulp.src COPY_FILES.videos
+        .pipe gulp.dest BUILD.dirs.videos
 
 ###
     CLEANING

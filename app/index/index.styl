@@ -105,16 +105,18 @@
                     top 6px
                     position relative
 
-        .promo
-            .video
-                width 100%
-                padding 20px
-                background $color-white
-                border-top 3px solid $color-green
-                box-shadow -1px 1px 6px $color-shadow
+        .video-wrapper
+            padding-right 30px
 
-                img
-                    width 100%
+            video
+                width 100%
+
+            .vjs-seek-handle
+                background-color $color-green
+            .vjs-play-control > div:before, .vjs-play-control > div:after
+                color $color-green
+            .vjs-play-progress
+                background-color $color-hover-light
 
     #usp
         color $color-white
@@ -141,7 +143,7 @@
                 height 164px
 
     #newest-vidatios
-        padding 50px 0 72px
+        padding 50px 0 50px
 
         a
             color $color-grey-dark
@@ -174,7 +176,7 @@
 
         .browse
             text-align center
-            margin-top 30px
+            margin-top 20px
 
             a
                 color $color-white
@@ -185,11 +187,19 @@
 
     #popular-categories
         padding-top 50px
-        min-height 500px
-
-        /* first image is in the foreground, second image in the background*/
-        background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
+        background no-repeat scroll 50% 50%, url(../images/students.jpg) no-repeat
+        background-size 100%, cover
         width 100%
+
+        .center
+            text-align center
+
+        #placeholder
+            display inline-block
+            background url(../images/kategorien-overlay.svg) no-repeat
+            background-size 100%
+            width 80%
+            height 300px
 
     #press
         padding-top 50px
@@ -211,11 +221,14 @@
                 margin-bottom 30px
                 line-height 20px
 
-@media(max-width: 400px)
+@media (max-width: 400px)
     #index #intro #slogan
         transform none
 
-@media(max-width: 767px)
+@media (max-width: 767px)
+    #index #intro video
+        padding 20px 20px 15px 20px
+
     #index
     #profile
         h1
@@ -226,9 +239,6 @@
             .row
                 .slogan
                     height 10px
-
-                .promo
-                    margin-top 20px
 
             .description
                 margin-top 20px
@@ -259,26 +269,22 @@
                 margin-bottom 30px
                 font-size 20px
 
-        #popular-categories
-            /* first value concerns always the foreground image, the last value always the background image */
-            background-size 95%, cover
-
-@media(min-width: 768px)
+@media (min-width: 768px)
     #index #newest-vidatios
         .title
             font-size 16px
 
-@media(max-width: 850px)
+@media (max-width: 850px)
     #index #intro
         padding 0 0 100px 0
 
-@media(min-width: 768px) and (max-width: 960px)
+@media (min-width: 768px) and (max-width: 960px)
     #index #intro .get-started
     #profile .get-started
         bottom -80px
         right 100px
 
-@media(min-width: 768px) and (max-width: 991px)
+@media (min-width: 768px) and (max-width: 991px)
     #intro #press h3
         height 40px
 
@@ -289,11 +295,7 @@
         img.newest
             max-height 18vw
 
-@media(min-width: 768px) and (max-width: 1100px)
-    #intro #popular-categories
-        background-size 90%, cover
-
-@media(min-width: 992px)
+@media (min-width: 992px)
     #index #newest-vidatios
         .img-container
             height 190px
@@ -303,19 +305,3 @@
 
         .title
             font-size 16px
-
-@media(min-width: 1101px) and (max-width: 1200px)
-    #intro #popular-categories
-        background-size 85%, cover
-
-@media(min-width: 1201px) and (max-width: 1400px)
-    #intro #popular-categories
-        background-size 70%, cover
-
-@media(min-width: 1401px) and (max-width: 1600px)
-    #intro #popular-categories
-        background-size 65%, cover
-
-@media(min-width: 1601px)
-    #intro #popular-categories
-        background-size 52%, cover

@@ -5,9 +5,11 @@ section#intro
                 aside#slogan {{ "SLOGAN" | translate }}
 
         .row
-            .col-sm-6.promo
-                .video
-                   img(src="images/landing-page-placeholder-promo_video.svg", alt="Video Tutorial")
+            .col-sm-6.video-wrapper
+                video.video-js(preload="auto" data-setup="{}")
+                    source(src="videos/video.mp4", type="video/mp4")
+                    source(src="videos/video.webm" type="video/webm")
+
             .col-sm-6
                 h2.description
                     | {{ "ONLY_LANDING_PAGE" | translate }}
