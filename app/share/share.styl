@@ -1,7 +1,4 @@
-#register-wrapper
-#login-wrapper
 #share
-    margin 10px auto 0
     h4
         text-align center
         margin 15px auto
@@ -17,28 +14,11 @@
                 font-size 14px
                 margin-left 5px
 
-        .area
-            height 254px
-            border-top 3px solid $color-green
-            background $color-white
-            box-shadow $box-shadow-size $color-shadow
-            margin-bottom 56px
-
-            &:hover
-                background $color-white
-
         #download > div
             {fillParent}
             display inline
             color $color-grey-dark
 
-        .option-icon
-            width 100px
-            margin 15px auto 0
-            height 62px
-            font-size 45px
-            color $color-dark-grey
-            text-align center
 
         #preview
             position relative
@@ -91,18 +71,12 @@
                                 color $color-grey-light
                                 cursor pointer
 
-        #preview
-        #download
-            margin-right 13px
-
         #download
             height 215px
 
         .save-share
-            padding 0 45px 20px
             height auto
             min-height 564px
-            margin-left 13px
 
             .icon-save
                 font-size 50px
@@ -182,14 +156,6 @@
                &.icon-lock
                     margin-top 45px
 
-            .col-xs-6.left
-                text-align left
-                padding 0
-
-            .col-xs-6.right
-                text-align right
-                padding 0
-
             .checkbox
                 margin 20px 0
                 width 100%
@@ -210,19 +176,3 @@
             .bootstrap-tagsinput
                 padding 0 !important
 
-@media(max-width 768px)
-    #register-wrapper
-    #login-wrapper
-    #share
-        .row
-            .area
-                margin-bottom 25px !important
-
-            #download
-            #save-share
-                margin 0
-                padding 0 15px 20px
-
-            #download
-                form
-                    width 90%

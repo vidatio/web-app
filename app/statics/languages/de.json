@@ -70,6 +70,8 @@
     "SHARE_TWITTER": "Auf Twitter teilen",
     "SHARE_GOOGLEPLUS": "Auf Google+ teilen",
     "SAVE_PERMANENTLY": "Vidatio dauerhaft speichern",
+    "SAVE_DESCRIPTION": "Logge dich ein, um ein Vidatio in deinem Profil speichern zu können. Nur gespeicherte Vidatios können später weiter bearbeitet werden.",
+    "USERNAME_NOT_VALID": "Kein gültiger Benutzername!",
     "NEWEST_VIDATIOS": "Neueste Vidatios",
     "SEARCH_VIDATIOS": "Vidatios durchsuchen",
     "OPEN_CATALOG": "Katalog öffnen",

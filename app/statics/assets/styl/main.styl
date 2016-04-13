@@ -201,8 +201,8 @@ html, body
 
 .center-block
     display block
-    margin-left auto
-    margin-right auto
+    margin-left auto !important
+    margin-right auto !important
     float: none
 
 .copy-vidatio-button-group.input-group.focus .input-group-btn .btn
@@ -230,4 +230,30 @@ html, body
         &:focus
         &:active
             border-color $color-hover-dark
+
+.area
+    border-top 3px solid $color-green
+    background $color-white
+    box-shadow $box-shadow-size $color-shadow
+    min-width 130px
+    padding-bottom 25px
+    margin-bottom 25px
+
+.right
+    float right
+
+.form-group
+    margin-bottom 0
+
+    &:last-child
+        margin-bottom 20px
+
+
+.icon-save
+    width 100px
+    margin 15px auto 0
+    height 62px
+    font-size 45px
+    color $color-dark-grey
+    text-align center
 
