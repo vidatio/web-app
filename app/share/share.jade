@@ -55,7 +55,9 @@
                                     span.placeholder(ng-hide="vidatio.tags") {{ "SAVE_AND_SHARE_TAGS" | translate }}
 
                         .row
-                            button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
+                            p {{ visualization }}
+                        .row
+                            button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="!hasData || metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
                 login(ng-show="!globals.authorized")
 
