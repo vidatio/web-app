@@ -44,15 +44,13 @@
                                 select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" ng-selected="vidatio.categoryId" required)
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
                         .row
+                            .input-group.form-group
+                                select2#tags.form-control.multiselect(multiple ng-model="vidatio.tags" ajax-content="tags" ng-list=",")
+                        .row
                             label.checkbox(for="publish")
                                 input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish")
                                 | {{ "PUBLISH_VIDATIO" | translate }}
 
-                        .row
-                            .tagsinput-primary
-                                    input(name="tagsinput" class="tagsinput" data-role="tagsinput" ng-model="vidatio.tags")
-                                    span.add-tag +
-                                    span.placeholder(ng-hide="vidatio.tags") {{ "SAVE_AND_SHARE_TAGS" | translate }}
 
                         .row
                             button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
