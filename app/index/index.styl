@@ -64,50 +64,50 @@
             margin-bottom 20px
 
     #newest-vidatios
-        padding 50px
+        padding 50px 0
 
         h1
+            margin-bottom 25px
+
+        .col-wrapper, .browse
+            text-align center
+
+        .col-wrapper
             margin-bottom 20px
 
         .img-container
             box-shadow -1px 1px 6px $color-shadow
             background $color-white
-            padding 0 10px
+            padding 10px
             border-radius 4px
-            height 200px
+            height 150px
 
             img.newest
-                width 100%
-                position relative
-                top 50%
-                -webkit-transform translateY(-50%)
-                -ms-transform translateY(-50%)
-                transform translateY(-50%)
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                max-width 100%
+                max-height 100%
 
             img.placeholder
                 height 50%
                 opacity 0.4
 
         .title
-            margin-top 20px
-            text-align center
+            margin-top 10px
 
-        .browse
-            text-align center
-            margin-top 30px
-
-            .browse-icon
-                margin-left 5px
-                font-size 14px
+        .browse-icon
+            margin-left 5px
+            font-size 14px
 
     #popular-categories
-        padding 50px
+        padding 50px 0
         min-height 500px
         background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
         width 100%
 
     #press
-        padding 50px 50px 20px 50px
+        padding 50px 0 10px
 
         h1
             margin-bottom 30px
@@ -120,3 +120,7 @@
                 display block
                 margin auto
                 padding 10px
+
+@media (max-width: 767px)
+    #index #newest-vidatios .img-container
+        height 300px
