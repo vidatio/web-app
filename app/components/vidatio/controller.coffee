@@ -4,6 +4,7 @@ app = angular.module "app.controllers"
 
 app.controller "VidatioCtrl", [
     "$scope"
+    "$rootScope"
     "$translate"
     "ngToast"
     "$cookieStore"
@@ -12,7 +13,8 @@ app.controller "VidatioCtrl", [
     "DatasetFactory"
     "ErrorHandler"
     "$window"
-    ($scope, $translate, ngToast, $cookieStore, Progress, Data, DatasetFactory, ErrorHandler, $window) ->
+    ($scope, $rootScope, $translate, ngToast, $cookieStore, Progress, Data, DatasetFactory, ErrorHandler, $window) ->
+        $scope.locale = $rootScope.locale
         $scope.$watch "vidatio", ->
             return unless $scope.vidatio
             globals = $cookieStore.get "globals"
@@ -25,7 +27,7 @@ app.controller "VidatioCtrl", [
         $scope.openInEditor = ->
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
-                Data.useSavedData $scope.vidatio
+                $scope.useSavedData()
 
         $scope.deleteVidatio = ->
             return unless $window.confirm $translate.instant("DATASET_DELETE_CONFIRMATION")
@@ -39,5 +41,9 @@ app.controller "VidatioCtrl", [
                         content: translation
             , (error) ->
                 return ErrorHandler.format error
+
+        $scope.useSavedData = ->
+            Data.useSavedData $scope.vidatio
+
 
 ]
