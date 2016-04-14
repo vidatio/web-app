@@ -45,7 +45,8 @@
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
                         .row
                             .input-group.form-group
-                                select2#tags.form-control.multiselect(multiple ng-model="vidatio.tags" placeholder="{{ 'DATASET_TAGS' | translate }}" ajax-content="tags" ng-list=",")
+                                select2#tags.form-control.multiselect(multiple ng-model="vidatio.tags" custom-placeholder="'DATASET_TAGS'" ajax-content="tags" ng-list=",")
+                                    option
                         .row
                             label.checkbox(for="publish")
                                 input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish")
