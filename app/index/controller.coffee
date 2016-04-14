@@ -16,7 +16,6 @@ app.controller "IndexCtrl", [
 
         CategoriesFactory.query (response) ->
             $scope.categories = response
-
         , (error) ->
             $log.info "IndexCtrl error on query categories"
             $log.error error
@@ -27,14 +26,12 @@ app.controller "IndexCtrl", [
             for vidatio in $scope.newestVidatios
             # prevent that one of the newest vidatios has no image
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
-
         , (error) ->
             $log.info "IndexCtrl error on query newest datasets"
             $log.error error
 
         DatasetsFactory.query (response) ->
             $scope.vidatios = response
-
             categoryOccurrences = {}
 
             for vidatio in $scope.vidatios
@@ -48,7 +45,6 @@ app.controller "IndexCtrl", [
             setTimeout ->
                 $scope.createCategoryBubbles()
             , 250
-
         , (error) ->
             $log.info "IndexCtrl error on query all datasets"
             $log.error error
@@ -85,7 +81,6 @@ app.controller "IndexCtrl", [
                 return
 
             lastWidth = width
-
             $chart.empty()
 
             d3plus.viz()
@@ -126,7 +121,6 @@ app.controller "IndexCtrl", [
         $scope.prepareChartData = (occurrences) ->
             chartData = []
             colors = ["#11DDC6", "#FF5444", "#000000"] # vidatio-green and -red, black
-
             currentColor = 0
 
             for category in $scope.categories
@@ -149,9 +143,7 @@ app.controller "IndexCtrl", [
         # @param {Array} chartData
         # @return {Array} finalPositions
         $scope.setBubblePositions = (chartData) ->
-
             finalPositions = []
-
             numberOfCategories = chartData.length - 1
 
             # sort bubbleData according to their amount of datasets in descending order
@@ -159,7 +151,6 @@ app.controller "IndexCtrl", [
                 return b.datensätze - a.datensätze
 
             bubbleData = chartData.sort(numericalSort)
-
             predefinedPositions = []
 
             xvalueMultiplicator = 1
@@ -178,7 +169,6 @@ app.controller "IndexCtrl", [
                         predefinedPositions.push({"x": (-1) * (14 * xvalueMultiplicator), "y": 24})
 
                     bubblesFirstLine++
-
                 else
                     if bubblesSecondLine is 0
                         predefinedPositions.push({"x": 28 * yvalueMultiplicator, "y": 0})
