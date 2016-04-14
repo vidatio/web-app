@@ -247,7 +247,7 @@ app.config [
             title: "share"
 
         .state "app.catalog",
-            url: "/catalog?from&to&category&tags&myvidatios"
+            url: "/catalog?name&from&to&category&tags&myvidatios"
             templateUrl: "catalog/catalog.html"
             controller: "CatalogCtrl"
             title: "catalog"
