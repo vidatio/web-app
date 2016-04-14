@@ -34,14 +34,17 @@ h4
     font-family Colaborate-Light, $fonts
     font-size 18px
 
-input
-    &::-webkit-input-placeholder
-        font-size 16px
-        color $color-grey !important
-
-    &::-moz-placeholder
-        font-size 16px
-        color $color-grey !important
+::-webkit-input-placeholder
+    font-size 16px
+    color $color-grey !important
+// Firefox > 19
+::-moz-placeholder
+    font-size 16px
+    color $color-grey !important
+// Firefox < 19
+:-moz-placeholder
+    font-size 16px
+    color $color-grey !important
 
 a, a:visited
     color white
