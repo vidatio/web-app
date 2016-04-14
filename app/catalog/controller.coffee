@@ -100,10 +100,4 @@ app.controller "CatalogCtrl", [
                 notify: false
                 reload: $state.current
 
-        # @method $scope.openInEditor
-        # @description set the vidatio options from saved dataset
-        $scope.openInEditor = (data) ->
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
-                Data.useSavedData data
 ]

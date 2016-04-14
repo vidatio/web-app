@@ -5,28 +5,24 @@ app = angular.module("app.controllers")
 app.controller "ProfileCtrl", [
     "$scope"
     "UserDatasetsFactory"
-    "ProgressService"
-    "DataService"
     "$cookieStore"
     "$translate"
-    "$log"
-    ($scope, UserDatasets, Progress, Data, $cookieStore, $translate, $log) ->
+    "ErrorHandler"
+    ($scope, UserDatasets, $cookieStore, $translate, ErrorHandler) ->
         $scope.vidatios = []
         globals = $cookieStore.get "globals" || {}
-        
-        UserDatasets.datasetsLimit { "limit": 4 , id: globals.currentUser.id }, (response) ->
-            $scope.vidatios = response
-            for vidatio in $scope.vidatios
-                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
 
-        , (error) ->
-            $log.info "ProfileCtrl error on query users' newest datasets"
-            $log.error error
+        $scope.$watch "vidatios", ->
+            if $scope.vidatios.length < 4
+                loadDatasets()
+        , true
 
-        # @method $scope.openInEditor
-        # @description open dataset in Editor
-        $scope.openInEditor = (data) ->
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
-                Data.useSavedData data
+        loadDatasets = ->
+            UserDatasets.datasetsLimit { "limit": 4 , id: globals.currentUser.id }, (response) ->
+                $scope.vidatios = response
+                for vidatio in $scope.vidatios
+                    vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
+            , (error) ->
+                ErrorHandler.format error
+
 ]
