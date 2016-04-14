@@ -11,6 +11,20 @@ app.controller "IndexCtrl", [
     "$state"
     "$translate"
     ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate) ->
+
+        addClassActive = (e) ->
+            if e.currentTarget.currentTime > 4
+                $("#intro ol li:nth-child(3)").addClass("active")
+            if e.currentTarget.currentTime > 2
+                $("#intro ol li:nth-child(2)").addClass("active")
+            if e.currentTarget.currentTime > 0
+                $("#intro ol li:nth-child(1)").addClass("active")
+
+        $("video").bind "timeupdate", addClassActive
+        $("video").bind "play", (e) ->
+            $("#intro ol li").removeClass("active")
+            addClassActive(e)
+
         $translate("CATEGORIES_DIAGRAM_LOADING").then (translation) ->
             $scope.message = translation
 

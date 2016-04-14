@@ -1,6 +1,58 @@
 #index
+<<<<<<< HEAD
     #intro
         margin-bottom 40px
+=======
+#profile
+
+    h1
+        margin-bottom 20px
+
+    h2
+        font-size 19px
+
+    .get-started
+        position absolute
+        width 175px
+        right 180px
+        bottom -110px
+        transform rotate(-10deg)
+
+        a
+            width inherit
+            padding 10px
+            font-size 30px
+            text-align center
+            display inline-block
+            line-height 30px
+            border-radius 5px
+
+            &:visited
+                color $color-white
+
+            span
+                position absolute
+                width 50px
+                top -20px
+                right -15px
+                display inline-block
+                transform rotate(10deg)
+                font-size 50px
+                padding-top 15px
+                padding-bottom 15px
+                border-radius 5px
+
+            &:hover
+                span
+                    background-color $color-hover-dark
+
+            &:active
+                span
+                    background-color $color-active
+
+    #intro
+        padding 0 0 20px 0
+>>>>>>> feature/video
 
         h3
             text-transform uppercase
@@ -39,11 +91,18 @@
                     line-height 36px
                     vertical-align middle
 
-        .video
-            margin-bottom 30px
+        .video-wrapper
+            padding-right 30px
 
-            img
+            video
                 width 100%
+
+            .vjs-seek-handle
+                background-color $color-green
+            .vjs-play-control > div:before, .vjs-play-control > div:after
+                color $color-green
+            .vjs-play-progress
+                background-color $color-hover-light
 
     #usp
         color $color-white
@@ -121,6 +180,16 @@
                 text
                     fill $color-grey-light
 
+        .center
+            text-align center
+
+        #placeholder
+            display inline-block
+            background url(../images/kategorien-overlay.svg) no-repeat
+            background-size 100%
+            width 80%
+            height 300px
+
     #press
         padding 50px 0 10px
 
@@ -136,6 +205,7 @@
                 margin auto
                 padding 10px
 
+<<<<<<< HEAD
 @media (max-width: 767px)
     #index #newest-vidatios .img-container
         height 300px
@@ -149,3 +219,94 @@
             #bubble-categories
                 margin-top -45px
 
+=======
+            h3
+                color $color-grey-dark
+                margin-bottom 30px
+                line-height 20px
+
+@media (max-width: 400px)
+    #index #intro #slogan
+        transform none
+
+@media (max-width: 767px)
+    #index #intro video
+        padding 20px 20px 15px 20px
+
+    #index
+    #profile
+        h1
+        h2
+            margin 0 20px 30px
+
+        #intro
+            .row
+                .slogan
+                    height 10px
+
+            .description
+                margin-top 20px
+
+            ol
+                margin 0 20px
+
+        .get-started
+            position relative
+            top 40px
+            right 0
+            left calc(50% - 90px)
+
+        #usp
+            p
+                margin 0 20px
+
+        #newest-vidatios
+            .img-container
+                width 80%
+                margin 0 auto
+                height 45vw
+
+                img.newest
+                    max-height 44vw
+
+            .title
+                margin-bottom 30px
+                font-size 20px
+
+@media (min-width: 768px)
+    #index #newest-vidatios
+        .title
+            font-size 16px
+
+@media (max-width: 850px)
+    #index #intro
+        padding 0 0 100px 0
+
+@media (min-width: 768px) and (max-width: 960px)
+    #index #intro .get-started
+    #profile .get-started
+        bottom -80px
+        right 100px
+
+@media (min-width: 768px) and (max-width: 991px)
+    #intro #press h3
+        height 40px
+
+    #index #newest-vidatios
+        .img-container
+            height 19vw
+
+        img.newest
+            max-height 18vw
+
+@media (min-width: 992px)
+    #index #newest-vidatios
+        .img-container
+            height 190px
+
+            img.newest
+                max-height 180px
+
+        .title
+            font-size 16px
+>>>>>>> feature/video

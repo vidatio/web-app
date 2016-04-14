@@ -1,10 +1,11 @@
 #intro.wrapper-content
     .row
-        .col-sm-6.col-xs-12
-            .video
-               img(src="images/landing-page-placeholder-promo_video.svg", alt="Video Tutorial")
+        .col-sm-6.video-wrapper
+            video.video-js(preload="auto" data-setup="{}")
+                source(src="videos/video.mp4", type="video/mp4")
+                source(src="videos/video.webm" type="video/webm")
 
-        .col-sm-6.col-xs-12
+        .col-sm-6
             h3
                 | {{ "ONLY_LANDING_PAGE" | translate }}
                 span.font-green-dark  {{ "THREE_STEPS_LANDING_PAGE" | translate }}
