@@ -14,7 +14,14 @@ app.controller "CatalogCtrl", [
     "CategoriesFactory"
     "TagsService"
     "$log"
-    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
+    "$timeout"
+    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log, $timeout) ->
+        $timeout ->
+            $("#search-title").on "focus", ->
+                $("#search-filter").addClass "active"
+            .on "blur", ->
+                $("#search-filter").removeClass "active"
+
         angular.element('#my-vidatio-checkbox').radiocheck()
         stateParams = {}
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
