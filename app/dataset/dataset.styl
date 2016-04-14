@@ -6,11 +6,12 @@
 
     .visualization-box
         border-top 3px solid $color-green
+        background white
         box-shadow $box-shadow-size $color-shadow
         padding 10px 20px 20px
         min-height 450px
         width 100%
-        margin-bottom 50px
+        margin-bottom 40px
         position relative
 
         .action-bar
@@ -109,13 +110,6 @@
                 right 0
                 bottom 100%
 
-            span.test
-                display block
-                    text-transform uppercase
-                    position relative
-                    color inherit
-                    font-size 10px
-
         .share-button
             &:hover
                 .share-link
@@ -133,7 +127,7 @@
         text-align center
 
     .metadata-container
-        margin-bottom 20px
+        margin-bottom 40px
 
         .space
             margin 15px 0
@@ -163,15 +157,6 @@
         .metadata-container
             .text
                 width 150px !important
-
-@media (max-width: 767px)
-    #dataset-view
-        .metadata-container
-            margin-bottom 80px
-
-        #copy-vidatio-link
-            span
-                font-size 14px
 
 @media (min-width: 768px) and (max-width: 1012px)
     #dataset-view

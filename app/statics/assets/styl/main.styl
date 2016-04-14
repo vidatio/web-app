@@ -24,10 +24,18 @@ h3
 
 h4
     font-family Colaborate-Regular, $fonts
-    font-size 18px
+    font-weight bold
+    font-size 16px
 
 p
     line-height 20px
+
+input
+    &::-webkit-input-placeholder
+        color $color-grey !important
+
+    &::-moz-placeholder
+        color $color-grey !important
 
 a, a:visited, footer a, footer a:visited
     font-weight normal
@@ -98,8 +106,8 @@ html, body
     color $color-grey-dark
     background-color $color-grey-light
 
-p, input, label, .checkbox
-    font-size 16px !important
+p, input, label
+    font-size 16px
 
 .app-view
     padding-bottom 100px

@@ -17,7 +17,7 @@
                                     span.bg-cyan !
 
                 .vidatios(ng-show="vidatios.length")
-                    h2 {{ "MY_VIDATIOS" | translate }}
+                    h3 {{ "MY_VIDATIOS" | translate | uppercase }}
 
                     .row.cards
                         .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")

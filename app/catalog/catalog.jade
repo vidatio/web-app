@@ -1,12 +1,14 @@
 #catalog.wrapper-content
     .row.content(ng-class="vidatios.length ? '' : 'same-height'")
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
-            h2.filter-title {{ "FILTER_BY" | translate }}
+            h3  {{ "FILTER_BY" | translate }}
+
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
                 span.to  -
                 input.form-control.input-sm(date-time ng-model="filter.dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+
             #category-filter
                 label {{ "CATEGORY" | translate }}
                 .btn-group
@@ -20,11 +22,11 @@
 
             #tags-filter
                 label(for="tags") {{ "DATASET_TAGS" | translate }}
-                select2#tags.form-control.multiselect(multiple ng-model="filter.tags" ajax-content="tags" ng-list="," ng-change="setStateParams()")
+                select2#tags.form-control.multiselect(multiple ng-model="filter.tags" custom-placeholder="'DATASET_TAGS'" ajax-content="tags" ng-list="," ng-change="setStateParams()")
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
-                    h2 {{ "MY_VIDATIOS" | translate }}
+                    p {{ "MY_VIDATIOS" | translate }}
                     input#my-vidatio-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="filter.showMyVidatios" ng-click="setStateParams()")
 
             .reset-filters

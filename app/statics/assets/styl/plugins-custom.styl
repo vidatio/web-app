@@ -11,6 +11,7 @@ a
 .form-control
 .input-group-addon
     transition none
+    font-size 16px
 
 .row
     margin 0
@@ -93,7 +94,7 @@ a
         color $color-white
 
 .form-control.input-sm
-    font-size 14px
+    font-size 16px
 
     &:focus
         color $color-black
@@ -236,10 +237,11 @@ select.form-control
         z-index 1
         .input-group-addon
         .input-group-addon.focus
-        input.form-control:focus
+        .form-control:focus
+        .form-control:hover
         .form-control-feedback
         .selection.focus
-            border-color $color-green
+            border-color $color-green !important
 
 /* STATE VALID WITH FOCUS FOR SELECTION*/
 select.form-control:focus
@@ -282,44 +284,6 @@ span.error
 .radio input.custom-radio[type="radio"]:checked + .icons .icon-checked
     color $color-green
 
-/*tags flat-ui custom styles*/
-.tagsinput-primary
-    min-height 66px
-    margin-bottom 0
-    > span
-        {lightText}
-        margin -22px 0 0 32px
-        float left
-        &.add-tag
-            background-color $color-passive
-            border-radius 4px
-            color $color-white
-            display block
-            font-size 30px
-            height 27px
-            line-height 21px
-            margin -28px 0 0 0
-            text-align center
-            width 27px
-            cursor pointer
-            position relative
-            &:hover
-                background-color $color-hover-dark
-
-    .bootstrap-tagsinput
-        border none
-        padding 6px 1px 1px 1px
-
-        input[type="text"]
-            padding-left 35px
-            margin 0
-            height 27px
-            {lightText}
-        .tag
-            margin 0 5px 3px 0
-            float left
-            font-size 14px
-            font-family Colaborate-Light, $fonts
 
 [id^="s2id_"].select2-container:not(:hover)
     border-color #bdc3c7
@@ -327,3 +291,11 @@ span.error
 /* change cursor style for ngToast to indicate that message can be closed" */
 .ng-toast__list
     cursor pointer
+
+/* Select2 */
+.select2-search-choice
+    background $color-green
+
+.select2-input
+    font-size 16px !important
+    padding-left 4px !important
