@@ -99,7 +99,7 @@ app.controller "ShareCtrl", [
                         ErrorHandler.format errors
                         return false
 
-                    $scope.vidatio._id = response._id
+                    $scope.vidatio = response
 
                     $scope.link = $state.href("app.dataset", {id: response._id}, {absolute: true})
 
