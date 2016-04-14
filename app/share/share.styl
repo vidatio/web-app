@@ -152,11 +152,11 @@
                     select
                         height 42px
                         text-align left
-                        color $color-grey-dark
                         padding-left 8px
 
-                        &.selected
-                            color $color-grey-dark
+
+                        &:not(.selected)
+                            color $color-grey
 
                         option
                             color $color-grey-dark
