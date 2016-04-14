@@ -2,15 +2,15 @@
         .row
             .col-sm-6
                 #preview.area
-                    ul.metadata-preview(ng-show="goToPreview && vidatio.metaData")
+                    ul.metadata-preview(ng-show="goToPreview")
                         li.editor {{vidatio.metaData.userId.name}}
-                            span.author {{vidatio.metaData.creator}}
+                            span.author {{vidatio.metaData.author}}
                         li.title {{vidatio.metaData.name}}
                         li.category {{vidatio.metaData.categoryId.name}}
                         li.tags
-                            span.tag(ng-repeat="tag in vidatio.metaData.tagIds track by $index") {{tag.name}}
-                        //- li.edit
-                            a.fui-new(ng-click="show = 'metaData'")
+                            span.tag(ng-repeat="tag in vidatio.metaData.tagIds track by $index")
+                                | {{tag.name}}
+                                = " "
                     visualization
 
                 #download.area
