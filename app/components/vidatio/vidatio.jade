@@ -1,10 +1,10 @@
 .content-container
-    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{'OPEN_IN_DETAILVIEW' | translate }}")
+    a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{'OPEN_IN_DETAILVIEW' | translate }}" ng-click="useSavedData()")
 
         img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.name")
 
     .text
-        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
+        a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}" ng-click="useSavedData()")
             h4.title {{ vidatio.metaData.name }}
         p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.categoryId.name }}
         p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
