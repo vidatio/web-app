@@ -185,11 +185,20 @@
 
     #popular-categories
         padding-top 50px
-        min-height 500px
-
-        /* first image is in the foreground, second image in the background*/
-        background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
+        overflow hidden
+        background url(../images/students.jpg) no-repeat
         width 100%
+        background-size cover
+
+        h1
+            color $color-grey-light
+
+        .viz-container
+            position relative
+
+            #bubble-categories
+                text
+                    fill $color-grey-light
 
     #press
         padding-top 50px
@@ -260,17 +269,36 @@
                 font-size 20px
 
         #popular-categories
-            /* first value concerns always the foreground image, the last value always the background image */
-            background-size 95%, cover
+            height 440px
+
+            .viz-container
+                height 380px
+
+                #bubble-categories
+                    margin-top -45px
+
+        #press
+            margin-bottom 20px
 
 @media(min-width: 768px)
-    #index #newest-vidatios
-        .title
-            font-size 16px
+    #index
+        #newest-vidatios
+            .title
+                font-size 16px
+
+        #popular-categories
+            height 680px
+
+            .viz-container
+                height 600px
+
+                #bubble-categories
+                    margin-top -30px
 
 @media(max-width: 850px)
-    #index #intro
-        padding 0 0 100px 0
+    #index
+        #intro
+            padding 0 0 100px 0
 
 @media(min-width: 768px) and (max-width: 960px)
     #index #intro .get-started
@@ -279,43 +307,25 @@
         right 100px
 
 @media(min-width: 768px) and (max-width: 991px)
-    #intro #press h3
-        height 40px
+    #index
+        #press h3
+            height 40px
 
-    #index #newest-vidatios
-        .img-container
-            height 19vw
-
-        img.newest
-            max-height 18vw
-
-@media(min-width: 768px) and (max-width: 1100px)
-    #intro #popular-categories
-        background-size 90%, cover
-
-@media(min-width: 992px)
-    #index #newest-vidatios
-        .img-container
-            height 190px
+        #newest-vidatios
+            .img-container
+                height 19vw
 
             img.newest
-                max-height 180px
+                max-height 18vw
 
-        .title
-            font-size 16px
+@media(min-width: 992px)
+    #index
+        #newest-vidatios
+            .img-container
+                height 190px
 
-@media(min-width: 1101px) and (max-width: 1200px)
-    #intro #popular-categories
-        background-size 85%, cover
+                img.newest
+                    max-height 180px
 
-@media(min-width: 1201px) and (max-width: 1400px)
-    #intro #popular-categories
-        background-size 70%, cover
-
-@media(min-width: 1401px) and (max-width: 1600px)
-    #intro #popular-categories
-        background-size 65%, cover
-
-@media(min-width: 1601px)
-    #intro #popular-categories
-        background-size 52%, cover
+            .title
+                font-size 16px

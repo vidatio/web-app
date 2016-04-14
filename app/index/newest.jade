@@ -13,5 +13,5 @@ section#newest-vidatios(ng-show="newestVidatios.length")
                         .title {{ vidatio.metaData.name }}
 
         .browse
-            a.button.btn.btn-primary(ui-sref="app.catalog" href="") {{ "SEARCH_VIDATIOS" | translate | uppercase }}
+            a.button.btn.btn-primary(ui-sref="app.catalog" href="" title="{{ 'SHOW_AVAILABLE_VIDATIOS' | translate }}") {{ "SEARCH_VIDATIOS" | translate | uppercase }}
                 span.icon-bracketright.browse-icon
