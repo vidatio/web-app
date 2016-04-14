@@ -4,6 +4,7 @@ app = angular.module "app.controllers"
 
 app.controller "VidatioCtrl", [
     "$scope"
+    "$rootScope"
     "$translate"
     "ngToast"
     "$cookieStore"
@@ -12,7 +13,8 @@ app.controller "VidatioCtrl", [
     "DatasetFactory"
     "ErrorHandler"
     "$window"
-    ($scope, $translate, ngToast, $cookieStore, Progress, Data, DatasetFactory, ErrorHandler, $window) ->
+    ($scope, $rootScope, $translate, ngToast, $cookieStore, Progress, Data, DatasetFactory, ErrorHandler, $window) ->
+        $scope.locale = $rootScope.locale
         $scope.$watch "vidatio", ->
             return unless $scope.vidatio
             globals = $cookieStore.get "globals"
