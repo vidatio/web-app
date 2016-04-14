@@ -11,6 +11,7 @@ app.directive "select2", [
         scope:
             model: "=ngModel"
             ajaxContent: "="
+            customPlaceholder: "="
         template: "<input></input>"
         replace: true
         link: (scope, element) ->
@@ -35,6 +36,10 @@ app.directive "select2", [
                     formatNoMatches: ->
                         $translate.instant("SELECT2.NO_MATCHING_RESULTS")
                 )
+
+                $translate(scope.customPlaceholder)
+                .then (translation) ->
+                        angular.element("#s2id_autogen1").attr("placeholder", translation)
 
             scope.ajaxContent.then (fetchedContent) ->
                 scope.initializeSelect2(fetchedContent)
