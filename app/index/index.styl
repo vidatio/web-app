@@ -102,9 +102,20 @@
 
     #popular-categories
         padding 50px 0
-        min-height 500px
-        background url(../images/kategorien-overlay.svg) no-repeat scroll 50% 50%, url(../images/placeholder-students.jpg)
+        overflow hidden
+        background url(../images/students.jpg) no-repeat
         width 100%
+        background-size cover
+
+        h1
+            color $color-grey-light
+
+        .viz-container
+            position relative
+
+            #bubble-categories
+                text
+                    fill $color-grey-light
 
     #press
         padding 50px 0 10px
@@ -124,3 +135,22 @@
 @media (max-width: 767px)
     #index #newest-vidatios .img-container
         height 300px
+
+    #index #popular-categories
+        height 440px
+
+        .viz-container
+            height 380px
+
+            #bubble-categories
+                margin-top -45px
+
+@media(min-width: 768px)
+    #index #popular-categories
+        height 680px
+
+        .viz-container
+            height 600px
+
+            #bubble-categories
+                margin-top -30px

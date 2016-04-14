@@ -1,6 +1,8 @@
 #popular-categories
-    .wrapper-content
+    .wrapper-content(ng-show="vidatios.length")
         .row
             .col-sm-12
-                h1.underline-red-light {{ "CATEGORIES" | translate | uppercase }}
+                h1.underline-red-light {{ "POPULAR_CATEGORIES" | translate | uppercase }}
 
+                .viz-container
+                    #bubble-categories
