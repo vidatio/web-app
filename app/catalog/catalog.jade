@@ -3,6 +3,13 @@
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h3  {{ "FILTER_BY" | translate }}
 
+            #search-filter.input-group
+                label(for="search-title") {{ "TITLE" | translate }}
+                input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
+                span.input-group-btn
+                    button.btn(type="submit", ng-click="setStateParams()")
+                        span.fui-search
+
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
@@ -38,6 +45,6 @@
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row.cards
                 .col-xs-12.col-sm-6.col-md-4.col-lg-4(
-                    ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | myVidatioFilter : filter.showMyVidatios"
+                    ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | searchFilter: filter.name | myVidatioFilter : filter.showMyVidatios"
                 )
                     vidatio(vidatio="vidatio")
