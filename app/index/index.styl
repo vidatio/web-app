@@ -105,15 +105,19 @@
         overflow hidden
         background url(../images/students.jpg) no-repeat
         width 100%
+        height 680px
         background-size cover
 
         h1
             color $color-grey-light
 
         .viz-container
-            position relative
+            margin-top 40px
+            height 600px
 
             #bubble-categories
+                margin-top -30px
+
                 text
                     fill $color-grey-light
 
@@ -145,12 +149,3 @@
             #bubble-categories
                 margin-top -45px
 
-@media(min-width: 768px)
-    #index #popular-categories
-        height 680px
-
-        .viz-container
-            height 600px
-
-            #bubble-categories
-                margin-top -30px
