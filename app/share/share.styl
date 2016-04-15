@@ -1,12 +1,12 @@
-#register-wrapper
-#login-wrapper
 #share
-    margin 10px auto 0
     h4
         text-align center
         margin 15px auto
         width 100%
         font-family Colaborate-Regular, $fonts
+
+    #login
+        max-width 100%
 
     .row
         .to-detail-view
@@ -17,28 +17,11 @@
                 font-size 14px
                 margin-left 5px
 
-        .area
-            height 254px
-            border-top 3px solid $color-green
-            background $color-white
-            box-shadow $box-shadow-size $color-shadow
-            margin-bottom 56px
-
-            &:hover
-                background $color-white
-
         #download > div
             {fillParent}
             display inline
             color $color-grey-dark
 
-        .option-icon
-            width 100px
-            margin 15px auto 0
-            height 62px
-            font-size 45px
-            color $color-dark-grey
-            text-align center
 
         #preview
             position relative
@@ -54,9 +37,42 @@
                 margin-top -50px
                 margin-left -40px
 
-        #preview
-        #download
-            margin-right 13px
+            .metadata-preview
+                position absolute
+                z-index 1
+                width calc(100% - 40px)
+                background-color rgba($color-green, .4)
+                border-top 2px solid $color-table-odd-active
+                text-align left
+                padding 15px
+
+                li
+                    list-style-type none
+                    {lightText}
+                    line-height 16px
+                    max-width 70%
+                    span.author
+                        margin-left 5px
+                        font-family Colaborate-Thin, $fonts
+                    &.author
+                    &.title
+                        font-family Colaborate, $fonts
+                        font-size 15px
+                        line-height 17px
+                    &.tags
+                        color $color-active
+                    &.edit
+                        position absolute
+                        right 10px
+                        top 10px
+                        a
+                            padding 5px
+                            border-radius 4px
+                            &:hover
+                            &:focus
+                                background-color $color-passive
+                                color $color-grey-light
+                                cursor pointer
 
         #download
             height 215px
@@ -69,10 +85,8 @@
                     padding-top 9px
 
         .save-share
-            padding 0 45px 20px
             height auto
             min-height 564px
-            margin-left 13px
 
             .icon-save
                 font-size 50px
@@ -163,14 +177,6 @@
                &.icon-lock
                     margin-top 45px
 
-            .col-xs-6.left
-                text-align left
-                padding 0
-
-            .col-xs-6.right
-                text-align right
-                padding 0
-
             .checkbox
                 margin 20px 0
                 width 100%
@@ -191,19 +197,3 @@
             .select2-container
                 border-radius 0 0 4px 4px
 
-@media(max-width 768px)
-    #register-wrapper
-    #login-wrapper
-    #share
-        .row
-            .area
-                margin-bottom 25px !important
-
-            #download
-            #save-share
-                margin 0
-                padding 0 15px 20px
-
-            #download
-                form
-                    width 90%

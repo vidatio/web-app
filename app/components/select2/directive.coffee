@@ -39,7 +39,7 @@ app.directive "select2", [
 
                 $translate(scope.customPlaceholder)
                 .then (translation) ->
-                        angular.element("#s2id_autogen1").attr("placeholder", translation)
+                    angular.element(".select2-input").attr("placeholder", translation)
 
             scope.ajaxContent.then (fetchedContent) ->
                 scope.initializeSelect2(fetchedContent)
@@ -56,4 +56,7 @@ app.directive "select2", [
             , (newValue, oldValue) ->
                 angular.element(element).select2("val", "") if not newValue
             )
+
+            scope.$on "$destroy", ->
+                angular.element(element).select2("destroy")
 ]
