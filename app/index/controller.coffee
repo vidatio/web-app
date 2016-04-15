@@ -25,9 +25,6 @@ app.controller "IndexCtrl", [
             $("#intro ol li").removeClass("active")
             addClassActive(e)
 
-        $scope.$on "$destroy", ->
-            $scope.video.dispose()
-
         $translate("CATEGORIES_DIAGRAM_LOADING").then (translation) ->
             $scope.message = translation
 
