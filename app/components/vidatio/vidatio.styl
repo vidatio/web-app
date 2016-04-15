@@ -25,13 +25,11 @@ vidatio
             padding 10px
             background-color $color-white
             display block
+            height auto
 
             img
                 width 100%
-
-            img
-                width auto
-                height 125px
+                min-height 125px
                 max-width: 100%
 
             img.placeholder
@@ -81,7 +79,15 @@ vidatio
                     color $color-red
                     cursor pointer
 
+@media (max-width: 767px)
+    vidatio
+        margin-left calc(10vw - 15px)
+        margin-right calc(10vw - 15px)
 
+        img
+            height 42vw
 
-
-
+@media (min-width: 768px) and (max-width: 991px)
+    vidatio
+        img
+            height 27vw

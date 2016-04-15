@@ -23,11 +23,14 @@ a
 .container-fluid
     padding 0
 
-.btn-default:hover,
-.btn-default:active,
-.btn-default:focus
-    color $color-white
-    background-color $color-hover-light
+.btn-default
+    &:hover
+        color $color-white
+        background-color $color-green
+
+    &:active
+    &:focus
+        background-color $color-hover-dark
 
 .btn-danger
     background-color $color-red
