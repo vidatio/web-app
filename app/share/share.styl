@@ -71,27 +71,13 @@
                 font-size 50px
                 height 67px
 
-            .icon-twitter:before
-                margin-left 2px
-
-            .icon-embeddedcode
-                &:before
-                    font-weight bold
-
-            .embeddedcodeShowOne
-                font-size 32px !important
-
-                &:before
-                    position relative
-                    top -4px
-                    margin-left 2px
-
             .share-options
                 text-align center
                 padding 0
                 margin 0
                 list-style none outside none
                 height 45px
+
                 li
                     display inline
                     list-style-type none
@@ -104,6 +90,25 @@
                         font-size 25px
                         color $color-white
 
+                .icon-twitter:before
+                    margin-left 2px
+
+                .icon-googleplus
+                    font-size 26px
+
+            .icon-embeddedcode
+                &:before
+                    font-weight bold
+                    font-size 20px
+
+            .embeddedcodeShowOne
+                font-size 32px !important
+
+                &:before
+                    position relative
+                    top -4px
+                    margin-left 2px
+
             .input-group
                 margin-bottom 0
                 width 100%
@@ -115,8 +120,6 @@
                     select
                         height 42px
                         text-align left
-                        padding-left 8px
-
 
                         &:not(.selected)
                             color $color-grey
@@ -132,8 +135,15 @@
                     color $color-grey-dark
 
                 #vidatio-link
-                    border-top-left-radius 4px
-                    border-bottom-left-radius 4px
+                    border-radius 4px
+                    -webkit-border-radius 4px
+                    -moz-border-radius 4px
+
+                ul.select2-choices
+                    padding-left 3px
+
+                textarea.embed-code
+                    word-break break-all
 
             button[type="submit"]
                 margin-top 8px
