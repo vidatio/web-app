@@ -28,38 +28,38 @@ describe "Editor Controller", ->
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
 
-            @scope.tabClicked(0)
+            @scope.changeViews(0)
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeFalsy()
             expect(@scope.activeViews).toEqual(1)
 
-            @scope.tabClicked(1)
+            @scope.changeViews(1)
             expect(@scope.showTableView).toBeTruthy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(2)
 
-            @scope.tabClicked(2)
+            @scope.changeViews(2)
             expect(@scope.showTableView).toBeFalsy()
             expect(@scope.showVisualizationView).toBeTruthy()
             expect(@scope.activeViews).toEqual(1)
 
     describe "on clicked at tab 'dataset + visualization' or at tab 'visualization'", ->
         it 'should call Visualization.create() after a timeout of 10ms', (done) ->
-            @scope.tabClicked(0)
+            @scope.changeViews(0)
             setTimeout (->
                 done()
             ), 10
             return
             expect(@Visualization.create).not.toHaveBeenCalled()
 
-            @scope.tabClicked(1)
+            @scope.changeViews(1)
             setTimeout (->
                 done()
             ), 10
             return
             expect(@Visualization.create).toHaveBeenCalled()
 
-            @scope.tabClicked(2)
+            @scope.changeViews(2)
             setTimeout (->
                 done()
             ), 10

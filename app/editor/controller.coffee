@@ -16,7 +16,26 @@ app.controller "EditorCtrl", [
     "VisualizationService"
     "MapService"
     "$window"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window) ->
+    "$stateParams"
+    "$state"
+    "DatasetFactory"
+    "TableService"
+    "ProgressService"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, DatasetFactory, TableService, Progress) ->
+        if $stateParams.id and not TableService.dataset[0].length
+            # get dataset according to datasetId and set necessary metadata
+            DatasetFactory.get {id: $stateParams.id}, (data) ->
+                Data.useSavedData data
+
+                options = data.visualizationOptions
+                options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
+                Visualization.create(options)
+                Progress.setMessage()
+            , (error) ->
+                Progress.setMessage()
+                ErrorHandler.format error
+
+
         $scope.editor = Data
         $scope.setBoundsToGeoJSON = ->
             Map.setBoundsToGeoJSON()
@@ -27,10 +46,21 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        # the displayed views are set accordingly to the clicked tab
+        # call changeViews function and set stateParams to the new tab index
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
+            $scope.changeViews(tabIndex)
+
+            $stateParams.tabid = tabIndex
+            $state.go $state.current, $stateParams,
+                notify: false
+                reload: $state.current
+
+        # the displayed views are set accordingly to the clicked tab
+        # @method changeViews
+        # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
+        $scope.changeViews = (tabIndex) ->
             for i of $scope.activeTabs
                 $scope.activeTabs[i] = false
 
@@ -45,13 +75,13 @@ app.controller "EditorCtrl", [
             else
                 viewsToDisplay = [false, true]
 
+            [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
+
             # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
             unless tabIndex is 0
                 $timeout ->
                     Visualization.create()
                 , 100
-
-            [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
             # count activeViews to set bootstrap classes accordingly for editor-width
             $scope.activeViews = 0
@@ -63,4 +93,7 @@ app.controller "EditorCtrl", [
                 $timeout ->
                     window.angular.element($window).triggerHandler("resize")
                 , 100
+
+        if $stateParams.tabid and vidatio.helper.isNumeric($stateParams.tabid)
+            $scope.changeViews(parseInt($stateParams.tabid))
 ]

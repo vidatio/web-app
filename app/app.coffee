@@ -224,12 +224,15 @@ app.config [
 
         .state "app.editor",
             url: "/editor"
+            params:
+                id: null
+                tabid: null
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.editor.id",
-            url: "/editor/:id"
+            url: "/:id?tabid"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
