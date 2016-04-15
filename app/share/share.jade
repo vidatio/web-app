@@ -11,11 +11,14 @@
 
                     .download-selection
                         .col-xs-4
-                            a.icon-downloaddataset.btn.btn-primary.center-block(href="#" ng-click="hasData && downloadCSV()" ng-disabled="!hasData") CSV
+                            a.icon-downloaddataset.btn.btn-primary.center-block(href="#" ng-click="hasData && downloadCSV()" ng-disabled="!hasData")
+                                span  CSV
                         .col-xs-4
-                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('jpg')" ng-disabled="!visualization.type") JPG
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('jpg')" ng-disabled="!visualization.type")
+                                span  JPG
                         .col-xs-4
-                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('png')" ng-disabled="!visualization.type") PNG
+                            a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('png')" ng-disabled="!visualization.type")
+                                span  PNG
 
             .col-sm-6
                 .save-share.area(ng-show="!goToPreview && globals.authorized")
