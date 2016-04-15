@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5, h6
     font-weight normal
 
 h1
-    font-family Colaborate-Bold, $fonts
+    font-family Colaborate-Medium, $fonts
     font-size 30px
     text-transform uppercase
     line-height 25px
@@ -18,7 +18,7 @@ h2
     font-size 24px
 
 h3
-    font-family Colaborate, $fonts
+    font-family Colaborate-Regular, $fonts
     font-size 19px
     font-weight bold
 
@@ -44,28 +44,32 @@ p
 
 a, a:visited, footer a, footer a:visited
     font-weight normal
-    color white
+    color $color-white
     text-decoration none
 
     &.inverse
         color $color-green
+
     &.dark
         color $color-grey-dark
 
-a:hover, a:focus, footer a:hover, footer a:focus
-    color $color-hover-light
+a:hover, footer a:hover
+    color $color-green
 
     &.inverse
-    &.dark
         color $color-hover-dark
 
-a:active, footer a:active
+    &.dark
+        color $color-green
+
+a:active, a:focus, footer a:active, footer a:focus
     color $color-hover-dark
 
     &.inverse
         color $color-active
+
     &.dark
-        color $color-grey
+        color $color-hover-dark
 
 a:focus
     outline none
@@ -184,14 +188,8 @@ p, input, label
         .alert-success
             border-top 3px solid $color-green
 
-/* defines how many x-pixels the menu has to be pushed to the left side*/
-.cbp-spmenu-push-toleft
-    left -350px
 
 @media (max-width: 500px)
-    .cbp-spmenu-push-toleft
-        left -290px
-
     @keyframes fadeIn {
         from {
             opacity: 0
@@ -287,3 +285,7 @@ p, input, label
         &:active
             span
                 background-color $color-active
+
+.btn span.icon-bracketright
+    font-size 14px
+    margin-left 5px

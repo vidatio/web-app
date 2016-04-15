@@ -11,7 +11,7 @@
             background-color $color-passive
             float left
             height 38px
-            line-height 38px
+            line-height 42px
             margin-top 4px
             text-align center
             width 29%
@@ -41,7 +41,7 @@
                 background-color $color-hover-dark
                 color $color-white
 
-    .row
+    .row.editor-content
         height calc(100vh - 260px)
         min-height 400px
         border-top 3px solid $color-green
@@ -65,6 +65,10 @@
         #chart-placeholder
             width 100% !important
             overflow hidden
+            font-size 14px
+
+            a
+                font-size 14px
 
     .content
         height calc(100vh - 260px)
@@ -81,7 +85,10 @@
 
             .settings-button
                 text-align center
-                margin-left: 25px
+                margin-right 25px
+
+                &:last-child
+                    margin-right 0px
 
                 a
                     font-size 24px
@@ -129,16 +136,14 @@
                     width 100%
                     margin 2px 0
 
-        .row
+        .row.editor-content
             height 100%
             margin-bottom 40px
 
 @media (min-width: 768px) and (max-width: 946px)
     #editor
         .editor-panel
-            .tab
-                &.middle
-                    line-height 20px !important
+            width 80%
 
 @media (min-width: 947px) and (max-width: 955px)
     #editor
@@ -160,7 +165,7 @@
 
 @media (min-width: 768px) and (max-width: 991px)
     #editor
-        .row
+        .row.editor-content
             height 100%
 
         .editor-panel
@@ -171,17 +176,17 @@
                     &.active
                         padding-top 3px
 
-@media(min-width: 990px) and (max-width: 1079px)
+@media(min-width: 990px) and (max-width: 1125px)
     #editor
         .editor-panel
             .tab
                 &.middle
                     &.active
-                        line-height 45px
+                        line-height 20px
 
 @media(max-width: 991px)
     #editor
-        .row
+        .row.editor-content
             .seperator
                 height 2px
                 width calc(100% - 10px)
@@ -194,7 +199,7 @@
 
 @media(min-width: 992px)
     #editor
-        .row
+        .row.editor-content
             display flex
             flex-direction row
 

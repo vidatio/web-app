@@ -6,7 +6,7 @@
             h3 {{ "DATASET + VISUALIZATION" | translate | uppercase }}
         a.tab(href="#" ng-class="{'active': activeTabs[2]}" ng-click="tabClicked(2)" title="{{'TOGGLE_VIEW'|translate}}")
             h3 {{ "VISUALIZATION" | translate | uppercase }}
-    .row
+    .row.editor-content
         include table/table
         .seperator(ng-class="{'active': activeTabs[1]}")
         include visualization/visualization
