@@ -6,14 +6,16 @@
                 .no-vidatios(ng-hide="vidatios.length")
                     .row.same-height
                         .col-xs-6
-                            p {{ "MY_0_VIDATIOS1" | translate }}
-                            p {{ "MY_0_VIDATIOS2" | translate }}
+                            .no-vidatios-text
+                                p {{ "MY_0_VIDATIOS1" | translate }}
+                                br
+                                p {{ "MY_0_VIDATIOS2" | translate }}
                         .col-xs-6
                             .get-started
                                 a.bold-font.btn.btn-primary(ui-sref="app.import({ locale: locale })" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
-                                    | {{ "GET_LANDING_PAGE" | translate | uppercase }}
+                                    h1 {{ "GET_LANDING_PAGE" | translate | uppercase }}
                                     br
-                                    | {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
+                                    h1 {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
                                     span.bg-cyan !
 
                 .vidatios(ng-show="vidatios.length")
@@ -24,4 +26,5 @@
                             vidatio(vidatio="vidatio")
                     .row
                         .col-xs-12.has-link
-                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}...
+                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}
+                                span.icon-bracketright
