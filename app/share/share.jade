@@ -1,6 +1,6 @@
 #share.wrapper-content
         .row
-            .col-sm-6
+            .col-sm-7
                 #preview.area
                     ul.metadata-preview(ng-show="goToPreview && vidatio.metaData")
                         li.editor {{vidatio.metaData.userId.name}}
@@ -26,7 +26,7 @@
                         .col-xs-4
                             a.icon-downloadvisualization.btn.btn-primary.center-block(href="#" ng-click="visualization.type && downloadVisualization('png')" ng-disabled="!visualization.type") PNG
 
-            .col-sm-6
+            .col-sm-5
                 login(ng-show="!globals.authorized")
 
                 .col-xs-12.save-share.area(ng-show="!goToPreview && globals.authorized")
