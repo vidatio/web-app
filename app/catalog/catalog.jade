@@ -2,11 +2,20 @@
     .row.content(ng-class="vidatios.length ? '' : 'same-height'")
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h2.filter-title {{ "FILTER_BY" | translate }}
+
+            label(for="search-title") {{ "TITLE" | translate }}
+            #search-filter.input-group
+                input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
+                span.input-group-btn
+                    button.btn(type="submit", ng-click="setStateParams()")
+                        span.fui-search
+
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
                 input#from-filter.form-control.input-sm(date-time ng-model="filter.dates.from" placeholder="{{ 'FROM' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
                 span.to  -
                 input.form-control.input-sm(date-time ng-model="filter.dates.to" placeholder="{{ 'TO' | translate }}" format="DD.MM.YYYY" min-view="date" max-date="maxDate")
+
             #category-filter
                 label {{ "CATEGORY" | translate }}
                 .btn-group
@@ -20,7 +29,7 @@
 
             #tags-filter
                 label(for="tags") {{ "DATASET_TAGS" | translate }}
-                select2#tags.form-control.multiselect(multiple ng-model="filter.tags" ajax-content="tags" ng-list="," ng-change="setStateParams()")
+                select2#tags.form-control.multiselect(multiple ng-model="filter.tags" custom-placeholder="'DATASET_TAGS'" ajax-content="tags" ng-list="," ng-change="setStateParams()")
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
@@ -36,17 +45,6 @@
         .vidatios.col-xs-12.col-sm-12.col-md-9.col-lg-9(ng-show="vidatios.length")
             .row.cards
                 .col-xs-12.col-sm-6.col-md-4.col-lg-4(
-                    ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | myVidatioFilter : filter.showMyVidatios"
+                    ng-repeat="vidatio in vidatios | dateFilter: filter.dates.from : filter.dates.to | categoryFilter : filter.category| tagsFilter: filter.tags | searchFilter: filter.name | myVidatioFilter : filter.showMyVidatios"
                 )
-                    .vidatio
-                        a.img(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                            img(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}" alt="vidatio.title")
-
-                        .text
-                            a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}")
-                                h4.title {{ vidatio.title }}
-                            p Kategorie: {{ vidatio.metaData.categoryId.name }}
-                            p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
-
-                        a#create-vidatio.btn.btn-primary.icon-edit(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor(vidatio)")
-                            span {{ "OPEN_IN_EDITOR" | translate }}
+                    vidatio(vidatio="vidatio")

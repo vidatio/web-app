@@ -4,15 +4,14 @@ describe "Editor Controller", ->
     beforeEach ->
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, $compile) ->
+        inject ($controller, $rootScope, $httpBackend) ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
             @Visualization =
                 create: ->
-            @compile = $compile
             spyOn(@Visualization, "create")
-            EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, DataService: @Data, VisualizationService: @Visualization}
+            EditorCtrl = $controller "EditorCtrl",  {$scope: @scope, $rootScope: @rootScope, VisualizationService: @Visualization}
 
     afterEach ->
         @Visualization.create.calls.reset()

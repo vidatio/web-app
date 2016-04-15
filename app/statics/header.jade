@@ -160,8 +160,8 @@ header.ng-cloak
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "MENU" | translate | uppercase }}
 
-                .col-xs-12.col-sm-pull-2.col-sm-8.middle
-                    h1.underline-red-light.profile-title {{ "MY_PROFILE" | translate | uppercase }}
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.profile-title
+                    h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-6.col-sm-2.logo
@@ -180,8 +180,8 @@ header.ng-cloak
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "MENU" | translate | uppercase }}
 
-                .col-xs-12.col-sm-pull-2.col-sm-8.middle
-                    h1.underline-red-light.catalog-title {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.catalog-title
+                    h1.underline-red-light {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
