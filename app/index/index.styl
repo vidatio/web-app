@@ -90,17 +90,16 @@
             background $color-white
             padding 10px
             border-radius 4px
-            height 150px
+            display block
+            height auto
 
             img.newest
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
-                max-width 100%
+                width 100%
                 max-height 100%
+                height 170px
 
             img.placeholder
-                height 50%
+                padding 40px 0
                 opacity 0.4
 
         .title
@@ -154,7 +153,11 @@
 
 @media (max-width: 767px)
     #index #newest-vidatios .img-container
-        height 300px
+        margin-left calc(12vw - 15px)
+        margin-right calc(12vw - 15px)
+
+        img
+            height 42vw !important
 
     #index #popular-categories
         height 440px
@@ -164,3 +167,8 @@
 
             #bubble-categories
                 margin-top -45px
+
+@media (min-width: 768px) and (max-width: 991px)
+    #index #newest-vidatios .img-container
+        img
+            height 17vw !important
