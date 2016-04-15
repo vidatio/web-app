@@ -1,5 +1,4 @@
 #catalog
-#profile
     label
         display block
         margin-bottom 5px
@@ -132,7 +131,6 @@
                 max-width 50%
 
 @media (max-width: 767px)
-    #profile
     #catalog
         #filter
             margin-bottom 20px !important
@@ -143,14 +141,24 @@
         .vidatios
             margin-bottom 30px
 
+            vidatio
+                margin-left calc(10vw - 15px)
+                margin-right calc(10vw - 15px)
+
+                img
+                    height 37vw !important
+
 @media (min-width: 768px) and (max-width: 991px)
-    #profile
     #catalog
         #filter
             margin-bottom 20px !important
             width calc(100% - 30px)
             margin-left 15px
             margin-right 15px
+
+        vidatio
+            img
+                height 22vw !important
 
 @media screen and (max-width: 730px)
     #time-filter span.to
