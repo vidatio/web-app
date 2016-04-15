@@ -64,11 +64,6 @@ app.controller "DatasetCtrl", [
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
-        # @method $scope.copyVidatioLink
-        # @description copy link to dataset to clipboard
-        $scope.copyVidatioLink = ->
-            Data.copyVidatioLink("#vidatio-link")
-
         #@method $scope.downloadVisualization
         #@description exports a
         #@params {string} type
