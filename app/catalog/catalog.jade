@@ -3,8 +3,8 @@
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
             h3  {{ "FILTER_BY" | translate }}
 
+            label(for="search-title") {{ "TITLE" | translate }}
             #search-filter.input-group
-                label(for="search-title") {{ "TITLE" | translate }}
                 input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
                 span.input-group-btn
                     button.btn(type="submit", ng-click="setStateParams()")
