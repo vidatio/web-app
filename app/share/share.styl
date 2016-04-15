@@ -17,6 +17,10 @@
         max-width 100%
 
     .row
+
+        .right-content
+            padding-right 40px
+
         .to-detail-view
             margin-top 30px
             padding-left 20px
@@ -49,43 +53,6 @@
                 width 80px
                 margin-top -50px
                 margin-left -40px
-
-            .metadata-preview
-                position absolute
-                z-index 1
-                width calc(100% - 40px)
-                background-color rgba($color-green, .4)
-                border-top 2px solid $color-table-odd-active
-                text-align left
-                padding 15px
-
-                li
-                    list-style-type none
-                    {lightText}
-                    line-height 16px
-                    max-width 70%
-                    span.author
-                        margin-left 5px
-                        font-family Colaborate-Thin, $fonts
-                    &.author
-                    &.title
-                        font-family Colaborate, $fonts
-                        font-size 15px
-                        line-height 17px
-                    &.tags
-                        color $color-active
-                    &.edit
-                        position absolute
-                        right 10px
-                        top 10px
-                        a
-                            padding 5px
-                            border-radius 4px
-                            &:hover
-                            &:focus
-                                background-color $color-passive
-                                color $color-grey-light
-                                cursor pointer
 
         #download
             height 215px
