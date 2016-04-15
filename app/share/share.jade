@@ -28,6 +28,7 @@
                     h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
                         p {{ "SAVE_AND_SHARE_DESCRIPTION" | translate }}
+                        p {{ "SAVE_AND_SHARE_OPTIONS" | translate }}
                     form(name="metadataForm")
                         .row
                             .input-group.form-group.first
@@ -48,10 +49,8 @@
                                 input#publish.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="vidatio.publish")
                                 | {{ "PUBLISH_VIDATIO" | translate }}
 
-
                         .row
                             button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
-
 
                 .col-xs-12.save-share.area(ng-show="goToPreview")
                     .option-icon.icon-share
