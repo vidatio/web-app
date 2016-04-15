@@ -1,9 +1,9 @@
 #intro.wrapper-content
     .row
         .col-sm-6.video-wrapper
-            video.video-js(preload="auto" data-setup="{}")
-                source(src="videos/video.mp4", type="video/mp4")
+            video#video.video-js(preload="false" controls)
                 source(src="videos/video.webm" type="video/webm")
+                source(src="videos/video.mp4", type="video/mp4")
 
         .col-sm-6
             h3
