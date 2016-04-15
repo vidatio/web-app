@@ -10,7 +10,8 @@ app.controller "TableCtrl", [
     "ConverterService"
     "$log"
     "VisualizationService"
-    ($scope, Table, Data, Map, Converter, $log, Visualization) ->
+    "$timeout"
+    ($scope, Table, Data, Map, Converter, $log, Visualization, $timeout) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
         $scope.visualization = Visualization.options
@@ -110,4 +111,17 @@ app.controller "TableCtrl", [
         # remove focus-states from axis-buttons if other icons are clicked
         clearFocusedAxisButtons = ->
             $("[class*='-axis-button']").removeClass "focused"
+
+
+        # Testing remove event listener
+        $timeout ->
+            $(".ht_clone_top th").each (idx, element) ->
+                console.log "add on remove to ", $(element)
+                $(element).click (e) ->
+                    $(element).remove()
+                    console.log "clicked", e
+
+                $(element).on "remove", ->
+                    console.log "removed"
+                    console.log $(element)
 ]
