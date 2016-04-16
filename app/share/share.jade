@@ -1,13 +1,13 @@
 #share.wrapper-content
         .row
-            .col-sm-7
+            .col-sm-7.right-content
                 #preview.area
                     visualization
 
                 #download.area
                     div
                         .option-icon.icon-download
-                        h4 {{ "DOWNLOAD" | translate | uppercase }}
+                        h3 {{ "DOWNLOAD" | translate | uppercase }}
 
                     .download-selection
                         .col-xs-4
@@ -25,7 +25,7 @@
 
                 .col-xs-12.save-share.area(ng-show="!goToPreview && globals.authorized")
                     .option-icon.icon-share
-                    h4 {{ "SAVE_AND_SHARE" | translate | uppercase }}
+                    h3 {{ "SAVE_AND_SHARE" | translate | uppercase }}
                     .row
                         p {{ "SAVE_AND_SHARE_DESCRIPTION" | translate }}
                         p {{ "SAVE_AND_SHARE_OPTIONS" | translate }}
@@ -52,25 +52,25 @@
                         .row
                             button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
-                .col-xs-12.save-share.area(ng-show="goToPreview")
+                .col-xs-12.save-share.area(ng-show="goToPreview && globals.authorized")
                     .option-icon.icon-share
-                    h4 {{ "SHARE_VIDATIO" | translate | uppercase }}
+                    h3 {{ "SHARE_VIDATIO" | translate | uppercase }}
                     .row
                         ul.share-options
                             li: a.btn.btn-primary.icon-facebook(title="{{'SHARE_FACEBOOK' | translate}}" ng-click="openPopup('http://www.facebook.com/sharer.php?u=', 'Facebook Share', '600', '450')" href="#")
                             li: a.btn.btn-primary.icon-twitter(title="{{'SHARE_TWITTER' | translate}}" ng-click="openPopup('http://twitter.com/home?status=', 'Twitter Share', '500', '280')" href="#")
                             li: a.btn.btn-primary.icon-googleplus(title="{{'SHARE_GOOGLEPLUS' | translate}}" ng-click="openPopup('https://plus.google.com/share?url=', 'Google Plus Share', '500', '500')" href="#")
+
                     .row
-                        span.icon-embeddedcode
-                            h3 Embed Code
+                        h4.icon-embeddedcode Embedded Code
                         .input-group.single
                             textarea.form-control.embed-code(rows="4" onClick="this.select();" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+
                     .row
-                        span.icon-link
-                            h3 {{ "LINK" | translate }}
+                        h4.icon-link {{ "LINK" | translate }}
                         .input-group.form-link.copy-vidatio-button-group
                             input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
 
                     .row
-                        a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate | uppercase }}
-                            span.icon-bracketright.go-icon
+                        a.btn.btn-primary.center-block.to-detail-view(ui-sref="app.dataset({ id: vidatio._id, locale: locale })") {{ 'SHOW_DETAIL_VIEW' | translate }}
+                            span.icon-bracketright

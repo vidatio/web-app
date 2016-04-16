@@ -11,6 +11,7 @@ a
 .form-control
 .input-group-addon
     transition none
+    font-size 16px
 
 .row
     margin 0
@@ -22,11 +23,14 @@ a
 .container-fluid
     padding 0
 
-.btn-default:hover,
-.btn-default:active,
-.btn-default:focus
-    color $color-white
-    background-color $color-hover-light
+.btn-default
+    &:hover
+        color $color-white
+        background-color $color-green
+
+    &:active
+    &:focus
+        background-color $color-hover-dark
 
 .btn-danger
     background-color $color-red
@@ -54,6 +58,9 @@ a
 .btn-group .dropdown-menu
     margin-top 3px
     min-width 0
+
+.btn-group > button.btn.btn-default.dropdown-toggle
+    color $color-white
 
 .btn-group.open > button.btn.btn-default.dropdown-toggle
     background $color-green
@@ -96,7 +103,7 @@ a
         color $color-white
 
 .form-control.input-sm
-    font-size 14px
+    font-size 16px
 
     &:focus
         color $color-black
@@ -313,19 +320,6 @@ span.error
 
 .select2-dropdown-open
     border-color $color-green !important
-
-/* Firefox sets lower opacity to input-placeholders, so set placeholder opacity to 1 for all browssers to be on the safe side */
-input::-webkit-input-placeholder
-    opacity 1
-
-input:-moz-placeholder
-    opacity 1
-
-input::-moz-placeholder
-    opacity 1
-
-input:-ms-input-placeholder
-    opacity 1
 
 /* Style-Adaption for Firefox needed for category-selection */
 @-moz-document url-prefix()

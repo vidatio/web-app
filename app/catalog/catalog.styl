@@ -1,5 +1,4 @@
 #catalog
-#profile
     label
         display block
         margin-bottom 5px
@@ -17,10 +16,7 @@
         background $color-table-odd-passive
         border-top 3px solid $color-border
 
-        div
-            width 100%
-
-        .filter-title
+        h3
             width 100%
             text-align center
 
@@ -29,19 +25,21 @@
 
         .reset-filters
             text-align center
+
             > a
                 color #000
                 &:hover
                     color $color-green
 
         > div
-            margin-top 10px
+            margin-top 20px
 
         #time-filter, #category-filter
             padding 0
 
         #time-filter
             position relative
+
             input
                 width 46%
                 display inline
@@ -61,8 +59,10 @@
         #category-filter
             .btn-group
                 display block
+
                 button, ul
                     width 100%
+
                 button
                     float none
 
@@ -75,7 +75,9 @@
 
         #search-filter
             margin-top 0
+
             &:hover
+            &:focus
                 .btn
                     border-color $color-green
 
@@ -133,9 +135,7 @@
                 margin-top 25px
                 max-width 50%
 
-
 @media (max-width: 767px)
-    #profile
     #catalog
         #filter
             margin-bottom 20px !important
@@ -150,14 +150,10 @@
                 margin-left calc(10vw - 15px)
                 margin-right calc(10vw - 15px)
 
-                a.img
-                    height 45vw
-
                 img
-                    height 42vw
+                    height 37vw !important
 
 @media (min-width: 768px) and (max-width: 991px)
-    #profile
     #catalog
         #filter
             margin-bottom 20px !important
@@ -166,11 +162,8 @@
             margin-right 15px
 
         vidatio
-            a.img
-                height 28vw
-
             img
-                height 27vw
+                height 22vw !important
 
 @media screen and (max-width: 730px)
     #time-filter span.to

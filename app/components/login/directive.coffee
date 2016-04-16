@@ -4,7 +4,7 @@ app = angular.module "app.directives"
 
 app.directive "login", [ ->
     restrict: "E"
-    templateUrl: "components/login/directive.html"
+    templateUrl: "components/login/login.html"
     replace: true
     controller: "LoginCtrl"
 ]

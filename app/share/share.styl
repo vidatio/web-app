@@ -1,29 +1,45 @@
 #share
-    h4
-        text-align center
-        margin 15px auto
+    margin 10px auto 0
+
+    h3
+        margin 15px 0 25px
         width 100%
-        font-family Colaborate-Regular, $fonts
+        text-align center
+
+    h4
+        margin 20px 0 10px
+        width 100%
+
+    h4:first-child
+        margin-top 30px
 
     #login
         max-width 100%
 
     .row
+        .right-content
+            padding-right 40px
+
         .to-detail-view
             margin-top 30px
             padding-left 20px
 
-            .go-icon
-                font-size 14px
-                margin-left 5px
+        .area
+            min-height 254px
+            border-top 3px solid $color-green
+            background $color-white
+            box-shadow $box-shadow-size $color-shadow
+
+            &:hover
+                background $color-white
 
         #download > div
             {fillParent}
             display inline
             color $color-grey-dark
 
-
         #preview
+            margin-bottom 50px
             position relative
             width auto
             height 293px
@@ -37,56 +53,19 @@
                 margin-top -50px
                 margin-left -40px
 
-            .metadata-preview
-                position absolute
-                z-index 1
-                width calc(100% - 40px)
-                background-color rgba($color-green, .4)
-                border-top 2px solid $color-table-odd-active
-                text-align left
-                padding 15px
-
-                li
-                    list-style-type none
-                    {lightText}
-                    line-height 16px
-                    max-width 70%
-                    span.author
-                        margin-left 5px
-                        font-family Colaborate-Thin, $fonts
-                    &.author
-                    &.title
-                        font-family Colaborate, $fonts
-                        font-size 15px
-                        line-height 17px
-                    &.tags
-                        color $color-active
-                    &.edit
-                        position absolute
-                        right 10px
-                        top 10px
-                        a
-                            padding 5px
-                            border-radius 4px
-                            &:hover
-                            &:focus
-                                background-color $color-passive
-                                color $color-grey-light
-                                cursor pointer
-
         #download
-            height 226px
+            height 292px
 
             .download-selection
                 a
                     height 40px
                     width 100px
-                    margin-top 15px
+                    margin-top 30px
                     padding-top 9px
 
         .save-share
             height auto
-            min-height 544px
+            min-height 635px
 
             .icon-save
                 font-size 50px
@@ -166,13 +145,12 @@
 
                 textarea.embed-code
                     word-break break-all
-                    min-height 120px
+                    min-height 140px
 
             button[type="submit"]
                 margin-top 8px
 
             p
-                {lightText}
                 margin-bottom 20px
 
             .option-icon
@@ -182,19 +160,15 @@
             .checkbox
                 margin 20px 0
                 width 100%
-                {lightText}
                 line-height 20px
                 padding-left 32px
+                font-size 16px
 
                 .icons
                     left -0.5px
 
             .form-control[readonly]
                 color $color-passive
-                font-size 14px
-
-            h3
-                margin-top 30px
 
             .input-group.form-group.selection
                 &:hover
@@ -205,9 +179,6 @@
 
 @media (max-width: 767px)
     #share
-        .save-share
-            margin-bottom 50px
-
         .download-selection
             .col-xs-4
                 padding-left 0

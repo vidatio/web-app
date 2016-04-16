@@ -1,84 +1,23 @@
 #index
-#profile
-
-    h1
+    #intro
         margin-bottom 20px
 
-    h2
-        font-size 19px
+        h3
+            text-transform uppercase
 
-    .get-started
-        position absolute
-        width 175px
-        right 170px
-        bottom -80px
-        transform rotate(-10deg)
-
-        a
-            width inherit
-            padding 10px
-            font-size 30px
-            text-align center
-            display inline-block
-            line-height 30px
-            border-radius 5px
-
-            &:visited
-                color $color-white
-
-            span
-                position absolute
-                width 50px
-                top -20px
-                right -15px
-                display inline-block
-                transform rotate(10deg)
-                font-size 50px
-                padding-top 15px
-                padding-bottom 15px
-                border-radius 5px
-
-            &:hover
-                span
-                    background-color $color-hover-dark
-
-            &:active
-                span
-                    background-color $color-active
-
-    #intro
-        padding 0 0 70px 0
-
-        #slogan
-            font-family Colaborate-Thin, $fonts
+        .font-green-dark
+            font-family Colaborate-Bold, $fonts
             font-size 24px
-            margin-bottom 10px
-            transform translate(45px, -40px)
-
-        .diagram
-            img
-                width 100%
-                box-shadow 2px 2px 2px 0px $color-shadow
-                border-radius 4px
-
-        .description
-            margin-bottom 10px
-            font-family Colaborate-Light, $fonts
-
-            .font-green-dark
-                font-family Colaborate-Bold, $fonts
-                font-size 21px
 
         ol
             counter-reset li-counter
             list-style-type none
-            margin 0
+            margin 10px 0
             padding 0
 
-            > li
+            li
                 position relative
-                margin 0 0 15px 50px
-                font-size 18px
+                margin 0 0 10px 50px
 
                 &.active
                     &:before
@@ -86,7 +25,6 @@
 
                 &:before
                     position absolute
-                    top 2px
                     left -50px
                     width 36px
                     height 36px
@@ -97,111 +35,113 @@
                     text-align center
                     font-size 22px
 
-                &:first-child
-                    &:before
-                        font-size 24px
-
                 span
-                    top 6px
-                    position relative
+                    line-height 36px
+                    vertical-align middle
 
-        .promo
-            .video
+        .get-started
+            margin-bottom 30px
+
+        .video-wrapper
+            padding-right 30px
+
+            video
                 width 100%
-                padding 20px
-                background $color-white
-                border-top 3px solid $color-green
-                box-shadow -1px 1px 6px $color-shadow
 
-                img
-                    width 100%
+            .vjs-seek-handle
+                background-color $color-green
+            .vjs-play-control > div:before, .vjs-play-control > div:after
+                color $color-green
+            .vjs-play-progress
+                background-color $color-hover-light
 
     #usp
         color $color-white
-        padding 0 0 50px
+        padding 40px 0 50px 0
         background url(../images/dotgrid.png) $color-grey-dark
         overflow hidden
         width 100%
+        text-align center
 
-        .row
-            margin-top 40px
-
-            div
-                text-align center
-
-            p
-                line-height 20px
-
-            .usp-icon
-                font-size 90px
+        .usp-icon
+            font-size 90px
 
             .icon-2clicks
                 font-size 100px
-                margin-top -6px
                 height 164px
 
+        h1
+            margin-bottom 20px
+
     #newest-vidatios
-        padding 50px 0 72px
+        padding 50px 0
 
-        a
-            color $color-grey-dark
+        h1
+            margin-bottom 25px
 
-            &:hover
-                color $color-green
+        .newest-vidatio-container
+            padding 0 10px
 
-            .img-container
-                box-shadow -1px 1px 6px $color-shadow
-                background $color-white
-                padding 0 10px
-                border-radius 4px
-
-                img.newest
-                    width 100%
-                    position relative
-                    top 50%
-                    -webkit-transform translateY(-50%)
-                    -ms-transform translateY(-50%)
-                    transform translateY(-50%)
-
-                img.placeholder
-                    height 50%
-                    opacity 0.4
-
-            .title
-                font-family Colaborate-Medium, $fonts
-                margin-top 10px
-                text-align center
-
+        .col-wrapper
         .browse
             text-align center
-            margin-top 30px
 
-            a
-                color $color-white
+        .col-wrapper
+            margin-bottom 20px
 
-                .browse-icon
-                    margin-left 5px
-                    font-size 14px
+        .img-container
+            box-shadow -1px 1px 6px $color-shadow
+            background $color-white
+            padding 10px
+            border-radius 4px
+            display block
+            height auto
+
+            img.newest
+                width 100%
+                max-height 100%
+                height 150px
+
+            img.placeholder
+                padding 40px 0
+                opacity 0.4
+
+        .title
+            margin-top 10px
 
     #popular-categories
-        padding-top 50px
+        padding 50px 0
         overflow hidden
         background url(../images/students.jpg) no-repeat
         width 100%
+        height 680px
         background-size cover
 
         h1
             color $color-grey-light
 
         .viz-container
-            position relative
+            margin-top 40px
+            height 600px
 
             #bubble-categories
+                margin-top -30px
+
                 text
                     fill $color-grey-light
 
+        .center
+            text-align center
+
+        #placeholder
+            display inline-block
+            background url(../images/kategorien-overlay.svg) no-repeat
+            background-size 100%
+            width 80%
+            height 300px
+
     #press
-        padding-top 50px
+        padding 50px 0 10px
 
         h1
             margin-bottom 30px
@@ -215,117 +155,24 @@
                 margin auto
                 padding 10px
 
-            h3
-                color $color-grey-dark
-                margin-bottom 30px
-                line-height 20px
+@media (max-width: 767px)
+    #index #newest-vidatios .img-container
+        margin-left calc(12vw - 15px)
+        margin-right calc(12vw - 15px)
 
-@media(max-width: 400px)
-    #index #intro #slogan
-        transform none
+        img
+            height 35vw !important
 
-@media(max-width: 767px)
-    #index
-    #profile
-        h1
-        h2
-            margin 0 20px 30px
+    #index #popular-categories
+        height 440px
 
-        #intro
-            .row
-                .slogan
-                    height 10px
+        .viz-container
+            height 380px
 
-                .promo
-                    margin-top 20px
+            #bubble-categories
+                margin-top -45px
 
-            .description
-                margin-top 20px
-
-            ol
-                margin 0 20px
-
-        .get-started
-            position relative
-            top 40px
-            right 0
-            left calc(50% - 90px)
-
-        #usp
-            p
-                margin 0 20px
-
-        #newest-vidatios
-            .img-container
-                width 80%
-                margin 0 auto
-                height 45vw
-
-                img.newest
-                    max-height 44vw
-
-            .title
-                margin-bottom 30px
-                font-size 20px
-
-        #popular-categories
-            height 440px
-
-            .viz-container
-                height 380px
-
-                #bubble-categories
-                    margin-top -45px
-
-        #press
-            margin-bottom 20px
-
-@media(min-width: 768px)
-    #index
-        #newest-vidatios
-            .title
-                font-size 16px
-
-        #popular-categories
-            height 680px
-
-            .viz-container
-                height 600px
-
-                #bubble-categories
-                    margin-top -30px
-
-@media(max-width: 850px)
-    #index
-        #intro
-            padding 0 0 100px 0
-
-@media(min-width: 768px) and (max-width: 960px)
-    #index #intro .get-started
-    #profile .get-started
-        bottom -80px
-        right 100px
-
-@media(min-width: 768px) and (max-width: 991px)
-    #index
-        #press h3
-            height 40px
-
-        #newest-vidatios
-            .img-container
-                height 19vw
-
-            img.newest
-                max-height 18vw
-
-@media(min-width: 992px)
-    #index
-        #newest-vidatios
-            .img-container
-                height 190px
-
-                img.newest
-                    max-height 180px
-
-            .title
-                font-size 16px
+@media (min-width: 768px) and (max-width: 991px)
+    #index #newest-vidatios .img-container
+        img
+            height 14vw !important

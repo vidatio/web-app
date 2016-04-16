@@ -11,6 +11,30 @@ app.controller "IndexCtrl", [
     "$state"
     "$translate"
     ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate) ->
+        addClassActive = (e) ->
+            if e.currentTarget.currentTime > 4
+                $("#intro ol li:nth-child(3)").addClass("active")
+            if e.currentTarget.currentTime > 2
+                $("#intro ol li:nth-child(2)").addClass("active")
+            if e.currentTarget.currentTime > 0
+                $("#intro ol li:nth-child(1)").addClass("active")
+
+        $("video").bind "timeupdate", addClassActive
+        $("video").bind "play", (e) ->
+            $("#intro ol li").removeClass("active")
+            addClassActive(e)
+
+        options =
+            "controls": true,
+            "autoplay": false,
+            "preload": false
+
+        videojs "video", options, ->
+            $scope.video = this
+
+        $scope.$on "$destroy", ->
+            $scope.video.dispose()
+
         $translate("CATEGORIES_DIAGRAM_LOADING").then (translation) ->
             $scope.message = translation
 
@@ -20,11 +44,11 @@ app.controller "IndexCtrl", [
             $log.info "IndexCtrl error on query categories"
             $log.error error
 
-        DatasetsFactory.datasetsLimit { "limit": 3 }, (response) ->
+        DatasetsFactory.datasetsLimit {"limit": 3}, (response) ->
             $scope.newestVidatios = response
 
             for vidatio in $scope.newestVidatios
-            # prevent that one of the newest vidatios has no image
+                # prevent that one of the newest vidatios has no image
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
         , (error) ->
             $log.info "IndexCtrl error on query newest datasets"
@@ -72,9 +96,9 @@ app.controller "IndexCtrl", [
         # @description set necessary parameters and draw categories bubble-visualization
         $scope.createCategoryBubbles = ->
             $chart = $("#bubble-categories")
-            width = $chart.parent().width() + 60    # +60px to enlarge the diagram as much as possible
+            width = $chart.parent().width() + 60 # +60px to enlarge the diagram as much as possible
             height = $chart.parent().height()
-            $chart.css("margin-left", "-30px")      # set the left margin accordingly to the enlargement
+            $chart.css("margin-left", "-30px") # set the left margin accordingly to the enlargement
 
             # draw new visualization only when $chart.parents' width has changed, return otherwise
             if lastWidth is width
@@ -129,7 +153,11 @@ app.controller "IndexCtrl", [
                     categoryOccurrence = occurrences[category.name]
 
                     # key 'datensätze' is set in german consciously as this key is displayed within the tooltip on front-end
-                    chartData.push({"name": category.name, "datensätze": categoryOccurrence, "color": colors[currentColor]})
+                    chartData.push({
+                        "name": category.name,
+                        "datensätze": categoryOccurrence,
+                        "color": colors[currentColor]
+                    })
                     currentColor++
 
                 if currentColor is colors.length
@@ -190,7 +218,11 @@ app.controller "IndexCtrl", [
                 if index is 0
                     finalPositions.push({"name": category.name, "x": 0, "y": 0})
                 else
-                    finalPositions.push({"name": category.name, "x": predefinedPositions[index - 1].x, "y": predefinedPositions[index - 1].y})
+                    finalPositions.push({
+                        "name": category.name,
+                        "x": predefinedPositions[index - 1].x,
+                        "y": predefinedPositions[index - 1].y
+                    })
 
             finalPositions
 ]

@@ -2,9 +2,9 @@
 
 app = angular.module "app.directives"
 
-app.directive "register", [ ->
+app.directive "registration", [ ->
     restrict: "E"
-    templateUrl: "components/register/directive.html"
+    templateUrl: "components/registration/registration.html"
     replace: true
     controller: "LoginCtrl"
 ]

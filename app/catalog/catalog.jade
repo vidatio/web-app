@@ -1,14 +1,15 @@
 #catalog.wrapper-content
     .row.content(ng-class="vidatios.length ? '' : 'same-height'")
         #filter.col-xs-12.col-sm-12.col-md-3.col-lg-3
-            h2.filter-title {{ "FILTER_BY" | translate }}
+            h3  {{ "FILTER_BY" | translate }}
 
-            label(for="search-title") {{ "TITLE" | translate }}
-            #search-filter.input-group
-                input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
-                span.input-group-btn
-                    button.btn(type="submit", ng-click="setStateParams()")
-                        span.fui-search
+            #search-filter
+                label(for="search-title") {{ "TITLE" | translate }}
+                .input-group
+                    input#search-title.form-control.input-sm(placeholder="{{ 'SEARCH_TITLE' | translate }}" type="text" ng-model="filter.name" ng-change="setStateParams()")
+                    span.input-group-btn
+                        button.btn(type="submit", ng-click="setStateParams()")
+                            span.fui-search
 
             #time-filter
                 label(for="from-filter") {{ "TIME" | translate }}
@@ -33,7 +34,7 @@
 
             #my-vidatio-filter(ng-show="globals.authorized")
                 label.checkbox(for="my-vidatio-checkbox")
-                    h2 {{ "MY_VIDATIOS" | translate }}
+                    p {{ "MY_VIDATIOS" | translate }}
                     input#my-vidatio-checkbox.custom-checkbox(data-toggle="checkbox", type="checkbox", ng-model="filter.showMyVidatios" ng-click="setStateParams()")
 
             .reset-filters

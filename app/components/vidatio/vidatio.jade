@@ -5,9 +5,13 @@
 
     .text
         a.inverse(ui-sref="app.dataset({ id: vidatio._id, locale: locale })" title="{{ 'OPEN_IN_DETAILVIEW' | translate }}" ng-click="useSavedData()")
-            h4.title {{ vidatio.metaData.name }}
-        p {{ "CATEGORY" | translate }}: {{ vidatio.metaData.categoryId.name }}
-        p {{ "DATE" | translate }}: {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
+            h3 {{ vidatio.metaData.name }}
+        p
+            b {{ "CATEGORY" | translate }}
+            |  {{ vidatio.metaData.categoryId.name }}
+        p
+            b {{ "DATE" | translate }}
+            |  {{ vidatio.createdAt | date: "dd.MM.yyyy" }}
 
 .btns-container
     .btns
