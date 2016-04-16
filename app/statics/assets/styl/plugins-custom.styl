@@ -51,10 +51,13 @@ a
     &:active:focus
         background-color $color-active
 
-
 .btn-group .dropdown-menu
     margin-top 3px
     min-width 0
+
+.btn-group.open > button.btn.btn-default.dropdown-toggle
+    background $color-green
+    color $color-white
 
 .btn-embossed
     box-shadow inset 0 -4px 0 $color-border
@@ -287,6 +290,11 @@ span.error
 [id^="s2id_"].select2-container:not(:hover)
     border-color #bdc3c7
 
+[id^="s2id_"].select2-container
+    &:active
+    &:focus
+        border-color $color-green
+
 /* change cursor style for ngToast to indicate that message can be closed" */
 .ng-toast__list
     cursor pointer
@@ -302,3 +310,26 @@ span.error
 #s2id_tags.multiselect
     min-width 0
     width 100%
+
+.select2-dropdown-open
+    border-color $color-green !important
+
+/* Firefox sets lower opacity to input-placeholders, so set placeholder opacity to 1 for all browssers to be on the safe side */
+input::-webkit-input-placeholder
+    opacity 1
+
+input:-moz-placeholder
+    opacity 1
+
+input::-moz-placeholder
+    opacity 1
+
+input:-ms-input-placeholder
+    opacity 1
+
+/* Style-Adaption for Firefox needed for category-selection */
+@-moz-document url-prefix()
+    .input-group.form-group.selection
+        .form-control
+            padding-left 8px
+
