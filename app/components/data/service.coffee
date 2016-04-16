@@ -18,6 +18,7 @@ app.service 'DataService', [
             constructor: ->
                 # Temporarily solution because there is redundance
                 # between @name, @metaData and @vidatio
+                @datasetID = ""
                 @vidatio = {}
                 @name = ""
                 @metaData =
@@ -68,6 +69,9 @@ app.service 'DataService', [
             # @description from existing dataset
             # @param {Object} data
             useSavedData: (data) ->
+                if data._id?
+                    @datasetID = data._id
+
                 if data.metaData?
                     angular.extend @metaData, data.metaData
 
