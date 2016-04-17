@@ -34,7 +34,7 @@ app.controller "ShareCtrl", [
         port = if $location.port() then ":" + $location.port() else ""
         $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
 
-        $scope.vidatio.name = $scope.vidatio.name || Data.name || null
+        $scope.vidatio.name = null
 
         $scope.tags = Tags.getAndPreprocessTags()
 
