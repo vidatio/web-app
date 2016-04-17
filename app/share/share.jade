@@ -52,7 +52,7 @@
                         .row
                             button.btn.btn-block.btn-primary(ng-click="saveDataset()" type="button" ng-disabled="metadataForm.$invalid || metadataForm.$pending || metadataForm.category.$invalid") {{ 'SAVE' | translate }}
 
-                .col-xs-12.save-share.area(ng-show="goToPreview && globals.authorized")
+                .col-xs-12.save-share.area(ng-show="goToPreview")
                     .option-icon.icon-share
                     h3 {{ "SHARE_VIDATIO" | translate | uppercase }}
                     .row
@@ -64,7 +64,7 @@
                     .row
                         h4.icon-embeddedcode Embedded Code
                         .input-group.single
-                            textarea.form-control.embed-code(rows="4" onClick="this.select();" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" name="{{vidatio.name}}" title="{{vidatio.name}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                            textarea.form-control.embed-code(rows="4" onClick="this.select();" readonly) <iframe src="{{host}}/embedding/{{vidatio._id}}" width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
 
                     .row
                         h4.icon-link {{ "LINK" | translate }}
