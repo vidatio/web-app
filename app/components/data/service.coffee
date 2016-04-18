@@ -76,6 +76,7 @@ app.service 'DataService', [
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
+                    Table.setColumns()
                     Map.setGeoJSON data.data
                 else
                     Table.useColumnHeadersFromDataset = false
