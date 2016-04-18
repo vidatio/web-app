@@ -15,6 +15,8 @@ class vidatio.BarChart extends vidatio.Visualization
         @remove()
         @preProcess options
 
+        console.log @chartData, @containerSelector, options.headers
+
         # we need to wait for angular to finish rendering
         setTimeout =>
             d3plus
@@ -26,6 +28,7 @@ class vidatio.BarChart extends vidatio.Visualization
             .text("name")
             .x(options.headers["x"])
             .y(options.headers["y"])
+            .order("asc")
             .color("color")
             .width(@width)
             .height(@height)
