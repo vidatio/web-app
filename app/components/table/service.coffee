@@ -62,6 +62,32 @@ app.service 'TableService', [
                 tmp.forEach (cell, index) =>
                     @header[index] = cell
 
+            # @method setColumns
+            # @public
+            setColumns: ->
+                columns = @getColumns()
+
+                unless @instanceTable
+                    return $log.warn "TableService setColumns instanceTable is not defined"
+
+                @instanceTable.updateSettings
+                    columns: columns
+
+            # @method getColumns
+            # @public
+            # @return {Array}
+            getColumns: ->
+                columns = []
+
+                @header.forEach (element, index) ->
+                    if element is "type" or element.indexOf("bbox") > -1 or element is null
+                        columns.push
+                            readOnly: true
+                    else
+                        columns.push {}
+
+                return columns
+
             # @method takeHeaderFromDataset
             # @public
             takeHeaderFromDataset: ->
