@@ -30,7 +30,7 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .height(@height)
             .format
                 "text": (text, key) ->
-                    key.locale.error = window.d3PlusTranslations.error
+                    key.locale.error = window.vidatio.d3PlusTranslations.error
                     return text
             .draw()
         , 100

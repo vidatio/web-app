@@ -117,7 +117,7 @@ app.run [
             "D3PLUS.ERROR.METHOD"
             "D3PLUS.ERROR.METHODS"
         ]).then (translations) ->
-            window.d3PlusTranslations =
+            window.vidatio.d3PlusTranslations =
                 error:
                     accepted: translations["D3PLUS.ERROR.ACCEPTED"]
                     connections: translations["D3PLUS.ERROR.CONNECTIONS"]
