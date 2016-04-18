@@ -106,18 +106,12 @@ app.controller "ShareCtrl", [
                         content: translation
                         className: "danger"
 
-
         $scope.downloadVisualization = (type) ->
             fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
 
         $scope.downloadCSV = ->
             Data.downloadCSV($scope.vidatio.name)
-
-        # @method $scope.copyVidatioLink
-        # @description copy link to dataset to clipboard
-        $scope.copyVidatioLink = ->
-            Data.copyVidatioLink("#vidatio-link")
 
         # @method $scope.openPopup
         # @description open social-media popups with base url as parameter in a new centered popup
@@ -133,5 +127,4 @@ app.controller "ShareCtrl", [
             newWindow = $window.open(url, title, "scrollbars=yes, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left)
             if $window.focus
                 newWindow.focus()
-
 ]

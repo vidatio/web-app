@@ -13,6 +13,7 @@
             background $color-white
             box-shadow $box-shadow-size $color-shadow
             text-align center
+            padding 0
 
             @media(max-width 768px)
                 margin-bottom 25px !important
@@ -117,7 +118,7 @@
                         border-color $color-green
 
         .other, .file-read
-            margin-bottom 56px
+            margin-bottom 25px
 
             @media(max-width 768px)
                 margin-bottom 0px
@@ -159,25 +160,24 @@
                 padding 30px
                 height 100%
 
-        .area
+        .drop-zone-area
             {fillParent}
             border 10px solid white
-            box-sizing border-box
 
             .glyphicon-plus
                 {centerElement}
-                margin-left -188px
-                margin-top -207px
+                transform translate(-50%, -50%)
+                padding 0 0 25px 34px
                 font-size 400px
                 color $color-white
 
             .text
                 {centerElement}
-                margin-left -107px
-                margin-top -17px
+                padding-top 2px
+                transform translate(-50%, -50%)
                 font-size 30px
 
         .drop-area
             position fixed
-            z-index 999
+            z-index 99
             {overlayParent}

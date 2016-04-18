@@ -4,7 +4,7 @@
             h1.underline-red-light {{ "NEWEST_VIDATIOS" | translate | uppercase }}
 
     .row
-        .col-sm-4(ng-repeat="vidatio in newestVidatios")
+        .col-sm-4.newest-vidatio-container(ng-repeat="vidatio in newestVidatios")
             .col-wrapper
                 a.dark(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
                     .img-container

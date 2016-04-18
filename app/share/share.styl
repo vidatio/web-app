@@ -17,7 +17,6 @@
         max-width 100%
 
     .row
-
         .right-content
             padding-right 40px
 
@@ -30,7 +29,6 @@
             border-top 3px solid $color-green
             background $color-white
             box-shadow $box-shadow-size $color-shadow
-            margin-bottom 56px
 
             &:hover
                 background $color-white
@@ -41,6 +39,7 @@
             color $color-grey-dark
 
         #preview
+            margin-bottom 50px
             position relative
             width auto
             height 293px
@@ -55,30 +54,22 @@
                 margin-left -40px
 
         #download
-            height 215px
+            height 292px
+
+            .download-selection
+                a
+                    height 40px
+                    width 100px
+                    margin-top 30px
+                    padding-top 9px
 
         .save-share
             height auto
-            min-height 603px
+            min-height 635px
 
             .icon-save
                 font-size 50px
                 height 67px
-
-            .icon-twitter:before
-                margin-left 2px
-
-            .icon-embeddedcode
-                &:before
-                    font-weight bold
-
-            .embeddedcodeShowOne
-                font-size 32px !important
-
-                &:before
-                    position relative
-                    top -4px
-                    margin-left 2px
 
             .share-options
                 text-align center
@@ -99,6 +90,25 @@
                         font-size 25px
                         color $color-white
 
+                .icon-twitter:before
+                    margin-left 2px
+
+                .icon-googleplus
+                    font-size 26px
+
+            .icon-embeddedcode
+                &:before
+                    font-weight bold
+                    font-size 20px
+
+            .embeddedcodeShowOne
+                font-size 32px !important
+
+                &:before
+                    position relative
+                    top -4px
+                    margin-left 2px
+
             .input-group
                 margin-bottom 0
                 width 100%
@@ -110,8 +120,6 @@
                     select
                         height 42px
                         text-align left
-                        padding-left 8px
-
 
                         &:not(.selected)
                             color $color-grey
@@ -127,8 +135,17 @@
                     color $color-grey-dark
 
                 #vidatio-link
-                    border-top-left-radius 4px
-                    border-bottom-left-radius 4px
+                    border-radius 4px
+                    -webkit-border-radius 4px
+                    -moz-border-radius 4px
+
+                ul.select2-choices
+                    padding-left 3px
+                    margin-right 5px
+
+                textarea.embed-code
+                    word-break break-all
+                    min-height 140px
 
             button[type="submit"]
                 margin-top 8px
@@ -153,8 +170,20 @@
             .form-control[readonly]
                 color $color-passive
 
-            h3
-                margin-top 30px
+            .input-group.form-group.selection
+                &:hover
+                    z-index 2
 
             .select2-container
                 border-radius 0 0 4px 4px
+
+@media (max-width: 767px)
+    #share
+        .download-selection
+            .col-xs-4
+                padding-left 0
+
+                a
+                    width 80px !important
+                    padding-left 5px
+                    padding-right 5px
