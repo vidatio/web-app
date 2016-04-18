@@ -23,9 +23,6 @@ nav
             a.item(href="https://api.vidatio.com/v0/docs" target="_blank" ng-click="toggleMenu()" title="{{ 'API_DOCUMENTATION' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-api
                 span.link-text-api {{ "API" | translate }}
-            a.item(ui-sref="app.team()" href="#", ng-click="toggleMenu()" title="{{ 'OPEN_TEAM' | translate }}")
-                span.icons.icon-import
-                span.link-text {{ "TEAM" | translate }}
             br
             a.item(ui-sref="app.login({ locale: locale })" ng-show="!globals.authorized" ng-click="toggleMenu()" title="{{ 'LOG_ON' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-login
