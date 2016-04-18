@@ -32,12 +32,14 @@
                     form(name="metadataForm")
                         .row
                             .input-group.form-group(ng-class="{ 'has-error' : metadataForm.author.$invalid && !metadataForm.author.$pristine }")
-                                input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }} *" required ng-minlength=3 ng-maxlength=128)
-                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine") {{ 'FORM.ERROR.INVALID_AUTHOR' | translate }}
+                                input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }} *" required ng-minlength=3 ng-maxlength=128 validate-data-name)
+                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine && !metadataForm.author.$error.valid") {{ 'FORM.ERROR.INVALID_AUTHOR' | translate }}
+                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine && metadataForm.author.$error.valid") {{ 'FORM.ERROR.VALID_AUTHOR_NAME' | translate }}
                         .row
                             .input-group.form-group(ng-class="{ 'has-error' : metadataForm.title.$invalid && !metadataForm.title.$pristine }")
                                 input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }} *" required ng-minlength=3 ng-maxlength=128 validate-data-name)
                             span.error(ng-show="metadataForm.title.$invalid && !metadataForm.title.$pristine && metadataForm.title.$error.valid") {{ 'FORM.ERROR.VALID_DATASET_NAME' | translate }}
+                            span.error(ng-show="metadataForm.title.$invalid && !metadataForm.title.$pristine && !metadataForm.title.$error.valid") {{ 'FORM.ERROR.INVALID_DATASET_NAME_LENGTH' | translate }}
                         .row
                             .input-group.form-group.selection
                                 select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" ng-selected="vidatio.categoryId" required)
