@@ -13,11 +13,12 @@
             .row
                 .input-group.form-group(ng-class="{ 'has-error' : registrationForm.name.$invalid && !registrationForm.name.$pristine }")
                     span.input-group-addon.fui-user
-                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }}" required ng-minlength=3 ng-maxlength=128 validate-uniqueness="name")
+                    input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }}" required ng-minlength=3 ng-maxlength=128 validate-uniqueness="name", validate-name)
                     span.form-control-feedback.fui-check(ng-show="registrationForm.name.$valid")
                     span.form-control-feedback.fui-cross(ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine")
-                span.error(ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine && !registrationForm.name.$error.uniqueness") {{ 'FORM.ERROR.INVALID_USERNAME' | translate }}
+                span.error(ng-show="registrationForm.name.$invalid && !registrationForm.name.$pristine && !registrationForm.name.$error.uniqueness && !registrationForm.name.$error.valid") {{ 'FORM.ERROR.INVALID_USERNAME' | translate }}
                 span.error(ng-show="registrationForm.name.$error.uniqueness") {{ 'FORM.ERROR.UNIQUENESS_USERNAME' | translate }}
+                span.error(ng-show="registrationForm.name.$error.valid") {{ 'FORM.ERROR.VALID_USERNAME' | translate }}
 
             .row
                 .input-group.form-group(ng-class="{ 'has-error' : registrationForm.password.$invalid && !registrationForm.password.$pristine }")

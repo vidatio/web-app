@@ -231,6 +231,7 @@
             "UNIQUENESS_USERNAME": "Benutzername bereits vergeben!",
             "INVALID_EMAIL": "Keine gültige E-Mail (10-128 Zeichen)!",
             "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
+            "VALID_USERNAME": "Benutzername darf keine Sonderzeichen und keine Leerzeichen haben!",
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
