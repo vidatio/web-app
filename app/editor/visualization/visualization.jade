@@ -11,19 +11,19 @@
 
                 ul.diagram-menu
                     li.diagram-button
-                        a.icon-barchart(href="#" ng-click="selectDiagram('bar')")
+                        a.icon-barchart(href="#" ng-click="selectDiagram('bar')" ng-class="{active: visualization.type == 'bar'}")
                             span {{ "DIAGRAMS.BAR_CHART" | translate }}
                     li.diagram-button
-                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')")
+                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')" ng-class="{active: visualization.type == 'scatter'}")
                             span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
                     li.diagram-button
-                        a.icon-linechart(href="#" ng-click="selectDiagram('line')")
+                        a.icon-linechart(href="#" ng-click="selectDiagram('line')" ng-class="{active: visualization.type == 'line'}")
                             span {{ "DIAGRAMS.LINE_CHART" | translate }}
                     li.diagram-button
-                        a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')")
+                        a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')" ng-class="{active: visualization.type == 'parallel'}")
                             span {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
                     li.diagram-button
-                        a.icon-map(href="#" ng-click="selectDiagram('map')")
+                        a.icon-map(href="#" ng-click="selectDiagram('map')" ng-class="{active: visualization.type == 'map'}")
                             span {{ "DIAGRAMS.MAP" | translate }}
 
             .settings-button(ng-hide="visualization.type != 'map' && data.metaData.fileType != 'shp'")
