@@ -137,7 +137,7 @@
         "READ_ERROR": "Die Datei konnte leider nicht eingelesen werden.",
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
-        "DATASET_IS_EMPTY": "Eine leere Tabelle kann nicht gespeichert werden.",
+        "DATASET_IS_EMPTY": "Dein Vidatio darf nicht leer sein und muss die anzugebenden Metadaten enthalten.",
         "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
         "LINK_NOT_COPIED": "Der Link konnte nicht in die Zwischenablage kopiert werden. Bitte Seite neu laden und noch einmal versuchen.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
