@@ -12,18 +12,24 @@ app.controller "IndexCtrl", [
     "$translate"
     "$sce"
     ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate, $sce) ->
+
         addClassActive = (e) ->
-            if e.currentTarget.currentTime > 4
+            if e.currentTarget.currentTime >= 53
                 $("#intro ol li:nth-child(3)").addClass("active")
-            if e.currentTarget.currentTime > 2
+            if e.currentTarget.currentTime >= 25
                 $("#intro ol li:nth-child(2)").addClass("active")
-            if e.currentTarget.currentTime > 0
+            if e.currentTarget.currentTime >= 19
                 $("#intro ol li:nth-child(1)").addClass("active")
 
         $("video").bind "timeupdate", addClassActive
         $("video").bind "play", (e) ->
             $("#intro ol li").removeClass("active")
             addClassActive(e)
+
+        videojs document.getElementById('video'), {}, ->
+            $scope.video = @
+        $scope.$on "$destroy", ->
+            $scope.video.dispose()
 
         $translate("CATEGORIES_DIAGRAM_LOADING").then (translation) ->
             $scope.message = translation
