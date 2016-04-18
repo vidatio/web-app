@@ -239,12 +239,14 @@ app.config [
 
         .state "app.share",
             url: "/share"
+            params:
+                id: null
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
 
         .state "app.share.id",
-            url: "/share/:id"
+            url: "/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"

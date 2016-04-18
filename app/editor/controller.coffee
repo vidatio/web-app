@@ -18,23 +18,10 @@ app.controller "EditorCtrl", [
     "$window"
     "$stateParams"
     "$state"
-    "DatasetFactory"
     "TableService"
-    "ProgressService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, DatasetFactory, TableService, Progress) ->
-        if $stateParams.id and not TableService.dataset[0].length
-            # get dataset according to datasetId and set necessary metadata
-            DatasetFactory.get {id: $stateParams.id}, (data) ->
-                Data.useSavedData data
-
-                options = data.visualizationOptions
-                options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
-                Visualization.create(options)
-                Progress.setMessage()
-            , (error) ->
-                Progress.setMessage()
-                ErrorHandler.format error
-
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table) ->
+        if $stateParams.id and not Table.dataset[0].length
+            Data.requestVidatioViaID($stateParams.id)
 
         $scope.editor = Data
         $scope.setBoundsToGeoJSON = ->

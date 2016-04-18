@@ -13,7 +13,9 @@ app.service 'DataService', [
     "$translate"
     "$state"
     "ngToast"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
+    "ProgressService"
+    "ErrorHandler"
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, Progress, ErrorHandler) ->
         class Data
             constructor: ->
                 # Temporarily solution because there is redundance
@@ -140,6 +142,22 @@ app.service 'DataService', [
                             className: "danger"
 
                 window.getSelection().removeAllRanges()
+
+            # @method requestVidatioViaID
+            # @description load a vidatio and create the visualization
+            # @param {String} id
+            requestVidatioViaID: (id) ->
+                # get dataset according to datasetId and set necessary metadata
+                DatasetFactory.get {id: id}, (data) =>
+                    @useSavedData data
+
+                    options = data.visualizationOptions
+                    options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
+                    Visualization.create(options)
+                    Progress.setMessage()
+                , (error) ->
+                    Progress.setMessage()
+                    ErrorHandler.format error
 
         new Data
 ]

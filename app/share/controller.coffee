@@ -25,6 +25,9 @@ app.controller "ShareCtrl", [
     "$location"
     "TagsService"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
+        if $stateParams.id and not Table.dataset[0].length
+            Data.requestVidatioViaID($stateParams.id)
+
         $scope.goToPreview = false
         $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options

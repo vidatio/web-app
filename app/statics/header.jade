@@ -47,7 +47,10 @@ header.ng-cloak
                         a#edit-data.active(href='#' title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#use-data(ui-sref="app.share({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
+                        a#use-data(ng-if="datasetID" ui-sref="app.share.id({ id: datasetID, locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
@@ -104,10 +107,13 @@ header.ng-cloak
                         a#edit-data.clickable(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#edit-data.clickable(ui-sref="app.editor.id({ id: datasetID, locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
+                        a#edit-data.clickable(ng-if="datasetID" ui-sref="app.editor.id({ id: datasetID, locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-edit
                             span  {{"EDIT" | translate | uppercase}}
-                        a#use-data(ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                            span.icon-check
+                            span  {{"USE" | translate | uppercase}}
+                        a#use-data(ng-if="datasetID" ui-sref="app.share.id({ id: datasetID, locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-check
                             span  {{"USE" | translate | uppercase}}
 
