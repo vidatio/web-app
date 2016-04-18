@@ -269,6 +269,14 @@
     "PAGE_NOT_FOUND": "Upps, da ist etwas schief gelaufen...",
     "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden.",
     "D3PLUS":{
+        "MESSAGE":{
+            "DATA": "Daten werden analysiert.",
+            "DRAW": "Visualisierung wird gezeichnet.",
+            "INITIALIZING": "Initialisiere {0}.",
+            "LOADING": "Daten werden geladen.",
+            "TOOLTIPRESET": "Tooltips werden zurückgesetzt.",
+            "UI": "Oberfläche wird aktualisiert."
+        },
         "ERROR":{
         "ACCEPTED": "{0} ist kein gültiger {1} für {2}-Darstellungen. Benutzen Sie bitte: {3}.",
         "CONNECTIONS": "Keine Verbindungen verfügbar für {0}.",

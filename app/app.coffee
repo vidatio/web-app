@@ -116,8 +116,21 @@ app.run [
             "D3PLUS.ERROR.LIBS"
             "D3PLUS.ERROR.METHOD"
             "D3PLUS.ERROR.METHODS"
+            "D3PLUS.MESSAGE.DATA"
+            "D3PLUS.MESSAGE.DRAW"
+            "D3PLUS.MESSAGE.INITIALIZING"
+            "D3PLUS.MESSAGE.LOADING"
+            "D3PLUS.MESSAGE.TOOLTIPRESET"
+            "D3PLUS.MESSAGE.UI"
         ]).then (translations) ->
             window.vidatio.d3PlusTranslations =
+                message:
+                    data: translations["D3PLUS.MESSAGE.DATA"]
+                    draw: translations["D3PLUS.MESSAGE.DRAW"]
+                    initializing: translations["D3PLUS.MESSAGE.INITIALIZING"]
+                    loading: translations["D3PLUS.MESSAGE.LOADING"]
+                    tooltipReset: translations["D3PLUS.MESSAGE.TOOLTIPRESET"]
+                    ui: translations["D3PLUS.MESSAGE.UI"]
                 error:
                     accepted: translations["D3PLUS.ERROR.ACCEPTED"]
                     connections: translations["D3PLUS.ERROR.CONNECTIONS"]

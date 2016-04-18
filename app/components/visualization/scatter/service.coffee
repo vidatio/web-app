@@ -18,6 +18,11 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
         setTimeout =>
             d3plus.viz()
             .container(@containerSelector)
+            .format
+                "text": (text, key) ->
+                    key.locale.message = window.vidatio.d3PlusTranslations.message
+                    key.locale.error = window.vidatio.d3PlusTranslations.error
+                    return text
             .data(@chartData)
             .type("scatter")
             .id("id")
@@ -28,9 +33,5 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .color("color")
             .width(@width)
             .height(@height)
-            .format
-                "text": (text, key) ->
-                    key.locale.error = window.vidatio.d3PlusTranslations.error
-                    return text
             .draw()
         , 100
