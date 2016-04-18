@@ -56,6 +56,17 @@
 	h1
 		margin-bottom 20px
 
+	h2
+		border-bottom 3px solid $color-red-light
+		padding-bottom 3px
+		margin 50px 0 10px
+
+	ul 
+		padding-left 0
+		margin-bottom 0
+		li 
+			list-style-type none
+
 #team-photo
 	padding-top 50px
 	min-height 700px
@@ -64,12 +75,16 @@
 
 #team-photo-caption
 	background-color $color-overlay 
-	height 50px
+	height auto
 	margin-top -50px
 	padding 7px 10px
 
 	p
 		{lightText}
+		text-align center
+		height auto
+		margin-bottom 0
+		padding-bottom 3px
 
 .app-view
 	padding-bottom 80px
@@ -79,12 +94,22 @@
 @media(max-width: 767px)
 	#team
 		.row
+			margin-bottom 0
 			&.other
 				.col-sm-4
 					margin-bottom 50px 
 
 					&:first-child
 						margin-left 0
+			.img-and-text-wrapper
+				p
+					margin-bottom 100px
 	#team-photo
 		background-size auto 100%
 		min-height 400px
+	#team-photo-caption
+		margin-top 0
+		width 100%
+		height auto
+		p 
+			min-height 110px
