@@ -11,6 +11,10 @@
                         a.icon-edit.icons(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                             span  {{ "USE" | translate | uppercase }}
 
+                    #center-map(ng-hide="data.visualizationOptions.type != 'map' && data.metaData.fileType != 'shp'").action-button
+                        a.icon-resize-small(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="recenterMap()")
+                            span {{ "CENTER" | translate }}
+
                     #vidatio-link-box.share-button.action-button
                         a.icon-link(href="#")
                             span  {{ "LINK_TO_SHARE" | translate }}
