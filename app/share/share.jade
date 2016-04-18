@@ -31,13 +31,14 @@
                         p {{ "SAVE_AND_SHARE_OPTIONS" | translate }}
                     form(name="metadataForm")
                         .row
-                            .input-group.form-group.first
+                            .input-group.form-group.first(ng-class="{ 'has-error' : metadataForm.author.$invalid && !metadataForm.email.$pristine }")
                                 input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine") {{ 'FORM.ERROR.INVALID_EMAIL' | translate }}
                         .row
-                            .input-group.form-group
+                            .input-group.form-group(ng-class="{ 'has-error' : metadataForm.title.$invalid && !metadataForm.title.$pristine }")
                                 input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128)
                         .row
-                            .input-group.form-group.selection
+                            .input-group.form-group.selectionng-class="{ 'has-error' : metadataForm.category.$invalid && !metadataForm.category.$pristine }"
                                 select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" ng-selected="vidatio.categoryId" required)
                                     option(selected="selected" disabled="true" value="") {{ 'CATEGORY' | translate }}
                         .row
