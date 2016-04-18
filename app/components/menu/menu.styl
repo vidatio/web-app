@@ -1,0 +1,88 @@
+.cbp-spmenu-push-toleft
+    cursor pointer
+    left -300px
+
+nav
+    .cbp-spmenu-right
+        right -300px
+
+    .cbp-spmenu-vertical
+        width 300px
+
+        a
+            border none
+
+    .cbp-spmenu-open
+        cursor auto
+
+    .cbp-spmenu
+        background url(../images/dotgrid.png) $color-grey-dark
+
+        padding 40px 20px 20px 20px
+        text-transform uppercase
+        overflow-y scroll
+        overflow-x hidden
+
+        .menu-header
+            margin-top -2px
+            height 40px
+            width 100%
+            margin-bottom 30px
+
+            .menu-close-button
+                a
+                    position absolute
+                    left 0
+                    font-size 80px
+                    line-height 30px
+                    color $color-red
+                    cursor pointer
+                    padding 0
+
+                    &:hover
+                        color $color-green
+
+            #logo-menu
+                background url(../images/logo-text-white-align-right.svg) no-repeat
+                background-size 111px
+                width 111px
+                height 40px
+                position absolute
+                right 0
+
+                a
+                    padding 0
+                    height 100%
+                    width 100%
+
+        a
+            padding 8px 0
+            clear both
+
+            &:hover
+                background none
+                color $color-green
+
+            &:active
+                color $color-hover-dark
+
+    .item
+        display flex
+        flex-direction row
+        display -webkit-flex /* Safari */
+        -webkit-flex-direction row
+
+    .icons
+        width 35px
+        text-align center
+        font-size 22px
+
+    .icon-api
+        font-size 17px
+
+    .link-text
+    .link-text-api
+        margin-left 15px
+
+    .link-text
+        line-height 37px

@@ -1,0 +1,98 @@
+#visualization
+    position relative
+
+    .visualization
+        position absolute
+        top 70px
+        bottom 20px
+        left 20px
+        right 20px
+        height auto
+        width auto
+
+    .settings-bar
+        .recommend-button
+            height 40px
+            width  90px
+            line-height 1
+            position relative
+            margin 4px 25px 0 35px
+            padding 9px
+
+            .icon
+                position absolute
+                left -30px
+                bottom 0
+                width 40px
+                height 40px
+                border-radius 2px
+                background inherit
+                line-height 40px
+                font-size 25px
+                transform rotate(-15deg)
+                transform-origin 0
+
+            .text
+                display block
+                text-transform uppercase
+                position relative
+                font-size 12px
+                white-space pre-wrap
+                font-family Colaborate,Arial,Helvetica,sans-serif
+
+        .download-menu
+        .diagram-menu
+            justify-content space-around
+            display none
+            list-style-type none
+            position absolute
+            left 20px
+            right 20px
+            padding 0
+            height 80px
+            margin-top 8px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            > li
+                height 100%
+
+                > a
+                    padding 18px 12px
+                    display block
+                    height 100%
+
+                    &.active
+                        background rgba($color-green, .6)
+
+                        &:hover
+                            background $rgba($color-green, .8)
+
+                &:hover
+                    background $color-hover-light
+                    box-shadow 0 -2px $color-green
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+        .diagram-selection:hover
+        .download-selection:hover
+            .diagram-menu
+            .download-menu
+                display flex
+
+        .diagram-menu
+            > li
+                width 20%
+
+        .download-menu
+            > li
+                width 50%

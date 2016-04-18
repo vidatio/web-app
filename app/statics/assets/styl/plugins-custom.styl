@@ -1,0 +1,329 @@
+@require "colors"
+@require "helpers"
+
+/**
+ * Resetting bootstrap & flatUI
+ */
+
+/* deactivate FlatUIs hover transitions */
+a
+.btn
+.form-control
+.input-group-addon
+    transition none
+    font-size 16px
+
+.row
+    margin 0
+    padding 0
+
+.col-sm-4, .col-sm-3, .col-sm-6, .col-sm-12
+    margin 0
+
+.container-fluid
+    padding 0
+
+.btn-default
+    &:hover
+        color $color-white
+        background-color $color-green
+
+    &:active
+    &:focus
+        background-color $color-hover-dark
+
+.btn-danger
+    background-color $color-red
+    color $color-white
+    font-size 16px
+
+    &:hover,
+    &:focus
+        background-color $color-red-light
+
+.btn-primary
+    background-color $color-green
+    color $color-white
+    font-size 16px
+
+    &:hover,
+    &:focus
+        background-color $color-hover-dark
+
+    &:active,
+    &:active:hover,
+    &:active:focus
+        background-color $color-active
+
+.btn-group .dropdown-menu
+    margin-top 3px
+    min-width 0
+
+.btn-group > button.btn.btn-default.dropdown-toggle
+    color $color-white
+
+.btn-group.open > button.btn.btn-default.dropdown-toggle
+    background $color-green
+    color $color-white
+
+.btn-embossed
+    box-shadow inset 0 -4px 0 $color-border
+    position relative
+    top 0
+
+    &:hover
+        background-color $color-green
+        box-shadow inset 0 -3px 0 $color-border
+        top 1px
+
+        span
+            top: 1px
+            box-shadow none
+
+    &:focus,
+    &:active,
+    &:active:hover,
+    &:active:focus
+        top: 2px
+        background-color $color-green
+        box-shadow none
+
+        span
+            background-color $color-green
+
+    &[disabled]
+        color $color-white
+        &:hover
+            box-shadow none
+            top 0
+
+.dropdown-menu > li > a
+    &:hover
+        background-color $color-hover-dark
+        color $color-white
+
+.form-control.input-sm
+    font-size 16px
+
+    &:focus
+        color $color-black
+
+.btn-tip
+    font-size 16px
+
+.fui-check
+    color $color-green
+
+/* Arrows in our buttons */
+.fui-arrow-left
+    &::before
+        margin-right 7px
+
+.fui-arrow-right
+    &::before
+        margin-left 7px
+
+.fui-arrow-left
+.fui-arrow-right
+    &::before
+        font-size 14px
+
+
+/* Form specific styles */
+.form-control
+    border-radius 4px
+
+    &:focus
+    &:hover
+        border-color $color-green
+        position relative
+
+.input-group
+    margin-top -2px
+
+.input-group-addon
+    border-radius 0
+
+/*no round corners by default, see below*/
+input.form-control
+    border-radius 0
+
+/*first input top round corners, if many*/
+.input-group.first
+    .input-group-addon
+        border-top-left-radius 4px
+    input
+        border-top-right-radius 4px
+        &:first-child
+            border-radius 4px 4px 0 0
+
+/*last input bottom round corners, if many*/
+.input-group.last
+    .input-group-addon
+        border-bottom-left-radius 4px
+    input
+        border-bottom-right-radius 4px
+        &:first-child
+            border-radius 0 0 4px 4px
+    select
+        border-bottom-right-radius 4px
+        &:first-child
+            border-radius 0 0 4px 4px
+
+/*input round corners, if single*/
+.input-group.single
+    input.form-control
+    textarea.form-control
+        border-radius 4px
+
+.input-group
+    &:hover
+        z-index 1
+        .input-group-addon
+        input.form-control
+            border-color $color-green
+
+.input-group-btn .btn
+    background $color-green
+    border-color $color-green
+    color $color-white
+    &:hover
+        border-color $color-green
+        background $color-hover-dark
+
+.input-group-btn .btn-default
+    &:focus
+    &:active
+        background $color-green
+        border-color $color-green
+
+.form-group
+    label
+        {lightText}
+    &.selection
+        &::after
+            border-left 6px solid transparent
+            border-right 6px solid transparent
+            border-top 5px solid black
+            content ""
+            position absolute
+            top 68%
+            right 15px
+            z-index 3
+
+select.form-control
+    text-align center
+    -webkit-appearance none
+    -moz-appearance none
+    appearance none
+    height 34px
+    padding 5px 12px
+    &:focus
+    &:hover
+        position relative
+        z-index 2
+        outline none
+
+    option[disabled="true"]
+        display none
+
+/*hack to remove dotted focus from select in firefox*/
+.form-group
+    select.form-control:-moz-focusring
+        color transparent !important
+        text-shadow 0 0 0 #000
+
+/* STATE VALID */
+.input-group.form-group
+    .input-group-addon
+    .form-control-feedback
+        color $color-green
+        background white
+
+/* STATE VALID WITH FOCUS */
+.input-group.form-group
+    &.focus
+        z-index 1
+        .input-group-addon
+        .input-group-addon.focus
+        .form-control:focus
+        .form-control:hover
+        .form-control-feedback
+        .selection.focus
+            border-color $color-green !important
+
+/* STATE VALID WITH FOCUS FOR SELECTION*/
+select.form-control:focus
+    border-color $color-green !important
+
+/* STATE INVALID */
+.has-error.input-group.form-group
+    .input-group-addon
+    input.form-control
+    .form-control-feedback
+        color $color-red
+        border-color $color-red
+    &.focus
+        input.form-control
+            border-color $color-red
+
+.input-group.form-group
+input.form-control
+    &:focus
+        color $color-black
+
+span.error
+    width 100%
+    color $color-grey-light
+    text-align center
+    background $color-red
+    padding 5px 10px
+    display block
+
+    &.ng-hide-add
+        animation: 0.5s fadeOut ease;
+
+    &.ng-hide-remove
+        animation: 0.5s fadeIn ease;
+
+/*checboxes*/
+.checkbox input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked,
+.radio input.custom-checkbox[type="checkbox"]:checked + .icons .icon-checked,
+.checkbox input.custom-radio[type="radio"]:checked + .icons .icon-checked,
+.radio input.custom-radio[type="radio"]:checked + .icons .icon-checked
+    color $color-green
+
+
+[id^="s2id_"].select2-container:not(:hover)
+    border-color #bdc3c7
+
+[id^="s2id_"].select2-container
+    &:active
+    &:focus
+        border-color $color-green
+
+/* change cursor style for ngToast to indicate that message can be closed" */
+.ng-toast__list
+    cursor pointer
+
+/* Select2 */
+.select2-search-choice
+    background $color-green
+
+.select2-input
+    font-size 16px !important
+    padding-left 4px !important
+
+#s2id_tags.multiselect
+    min-width 0
+    width 100%
+
+.select2-dropdown-open
+    border-color $color-green !important
+
+/* Style-Adaption for Firefox needed for category-selection */
+@-moz-document url-prefix()
+    .input-group.form-group.selection
+        .form-control
+            padding-left 8px
+

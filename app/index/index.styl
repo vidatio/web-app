@@ -1,0 +1,179 @@
+#index
+    #intro
+        margin-bottom 20px
+
+        h3
+            text-transform uppercase
+
+        .font-green-dark
+            font-family Colaborate-Bold, $fonts
+            font-size 24px
+
+        ol
+            counter-reset li-counter
+            list-style-type none
+            margin 10px 0
+            padding 0
+
+            li
+                position relative
+                margin 0 0 10px 50px
+
+                &.active
+                    &:before
+                        background-color $color-green
+
+                &:before
+                    position absolute
+                    left -50px
+                    width 36px
+                    height 36px
+                    line-height 36px
+                    border-radius 50%
+                    background-color $color-grey-dark
+                    color $color-white
+                    text-align center
+                    font-size 22px
+
+                span
+                    line-height 36px
+                    vertical-align middle
+
+        .get-started
+            margin-bottom 30px
+
+        .video-wrapper #video
+            width 100%
+            height 100%
+            margin-bottom 40px
+
+            .vjs-tech
+                position relative
+
+            .vjs-big-play-button
+                border-radius 4px
+                transform translate(-50%,-50%)
+                top 50%
+                left 50%
+
+    #usp
+        color $color-white
+        padding 40px 0 50px 0
+        background url(../images/dotgrid.png) $color-grey-dark
+        overflow hidden
+        width 100%
+        text-align center
+
+        .usp-icon
+            font-size 90px
+
+            .icon-2clicks
+                font-size 100px
+                height 164px
+
+        h1
+            margin-bottom 20px
+
+    #newest-vidatios
+        padding 50px 0
+
+        h1
+            margin-bottom 25px
+
+        .newest-vidatio-container
+            padding 0 10px
+
+        .col-wrapper
+        .browse
+            text-align center
+
+        .col-wrapper
+            margin-bottom 20px
+
+        .img-container
+            box-shadow -1px 1px 6px $color-shadow
+            background $color-white
+            padding 10px
+            border-radius 4px
+            display block
+            height auto
+
+            img.newest
+                width 100%
+                max-height 100%
+                height 150px
+
+            img.placeholder
+                padding 40px 0
+                opacity 0.4
+
+        .title
+            margin-top 10px
+
+    #popular-categories
+        padding 50px 0
+        overflow hidden
+        background url(../images/students.jpg) no-repeat
+        width 100%
+        height 680px
+        background-size cover
+
+        h1
+            color $color-grey-light
+
+        .viz-container
+            margin-top 40px
+            height 600px
+
+            #bubble-categories
+                margin-top -30px
+
+                text
+                    fill $color-grey-light
+
+        .center
+            text-align center
+
+        #placeholder
+            display inline-block
+            background url(../images/kategorien-overlay.svg) no-repeat
+            background-size 100%
+            width 80%
+            height 300px
+
+    #press
+        padding 50px 0 10px
+
+        h1
+            margin-bottom 30px
+
+        .items
+            text-align center
+
+            img
+                height 120px
+                display block
+                margin auto
+                padding 10px
+
+@media (max-width: 767px)
+    #index #newest-vidatios .img-container
+        margin-left calc(12vw - 15px)
+        margin-right calc(12vw - 15px)
+
+        img
+            height 35vw !important
+
+    #index #popular-categories
+        height 440px
+
+        .viz-container
+            height 380px
+
+            #bubble-categories
+                margin-top -45px
+
+@media (min-width: 768px) and (max-width: 991px)
+    #index #newest-vidatios .img-container
+        img
+            height 14vw !important

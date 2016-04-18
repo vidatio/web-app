@@ -1,0 +1,23 @@
+doctype html
+html(ng-app="app")
+    head
+        base(href="/")
+        include includes/meta
+
+        title(ng-bind="title + ' | vidatio'")
+
+        include includes/js
+        include includes/styl
+
+    body.container-fluid(ng-file-drop-start)
+
+        .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
+            include header
+
+            toast
+            vidatio-progress
+            menu
+
+            .app-view(ui-view)
+
+            include footer

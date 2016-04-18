@@ -1,0 +1,8 @@
+FID,ID,GEOMETRIE,BEZEICHNUNG,ADRESSE,STRASSE_ID,STRASSENNAME,HAUSNR,HAUSNRA,TELEFON,FAX,MAIL
+bewohnerservicestelle.orgdb.455,orgdb.455,POINT (47.78342767787233 13.080313895132239),Bewohnerservice Aigen & Parsch,Aigner Straße 78,18,Aigner Straße,78,,+43 662 625008,+43 662 625009,bws.aigen-parsch@diakoniewerk.at
+bewohnerservicestelle.orgdb.456,orgdb.456,POINT (47.8087356508818 13.061943769791478),Bewohnerservice Gnigl & Schallmoos,Fritschgasse 5,945,Fritschgasse,5,,+43 662 643252,+43 662 643847,bws.gnigl-schallmoos@diakoniewerk.at
+bewohnerservicestelle.orgdb.457,orgdb.457,POINT (47.824624411192225 13.045495267530336),Bewohnerservice Itzling & Elisabeth-Vorstadt,Reimsstraße 6,513,Reimsstraße,6,,+43 662 455432,+43 662 455433,bws.itzling-evorstadt@diakoniewerk.at
+bewohnerservicestelle.orgdb.458,orgdb.458,POINT (47.82182494770949 13.024038662441294),Bewohnerservice Liefering,Laufenstraße 36,451,Laufenstraße,36,,+43 662 431925,+43 662 431925,bws.liefering@sbg.at
+bewohnerservicestelle.orgdb.471,orgdb.471,POINT (47.81373876171919 13.010045246596514),Bewohnerservice Maxglan & Taxham Aussenstelle,Norbert-Brüll-Straße 30,1124,Norbert-Brüll-Straße,30,,  ,  ,bws.maxglan-taxham@stadt-salzburg.at
+bewohnerservicestelle.orgdb.472,orgdb.472,POINT (47.834128280324464 13.00224897692294),Bewohnerservice Liefering Aussenstelle,Eugen-Müller-Straße 59,1013,Eugen-Müller-Straße,59,,  ,  ,bws.liefering@sbg.at
+bewohnerservicestelle.orgdb.52,orgdb.52,POINT (47.805298090965515 13.020602489132077),Bewohnerservice Maxglan & Taxham,Innsbrucker Bundesstraße 36,333,Innsbrucker Bundesstraße,36,,+43 662 428579,+43 662 428579,bws.maxglan-taxham@stadt-salzburg.at

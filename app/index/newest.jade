@@ -1,0 +1,18 @@
+#newest-vidatios.wrapper-content(ng-show="newestVidatios.length")
+    .row
+        .col-sm-12
+            h1.underline-red-light {{ "NEWEST_VIDATIOS" | translate | uppercase }}
+
+    .row
+        .col-sm-4.newest-vidatio-container(ng-repeat="vidatio in newestVidatios")
+            .col-wrapper
+                a.dark(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                    .img-container
+                        img.newest(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}")
+                    .title {{ vidatio.metaData.name }}
+
+    .row
+        .col-sm-12
+            .browse
+                a.button.btn.btn-primary(ui-sref="app.catalog" href="" title="{{ 'SHOW_AVAILABLE_VIDATIOS' | translate }}") {{ "SEARCH_VIDATIOS" | translate }}
+                    span.icon-bracketright

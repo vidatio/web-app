@@ -1,35 +1,30 @@
-FROM ubuntu
-MAINTAINER Christian Lehner <lehner.chri@gmail.com>
+FROM mhart/alpine-node:4.2.1
+MAINTAINER Christian Lehner <lehner.chri@gmail.com>, Lukas Wanko <lwanko.mmt-m2014@fh-salzburg.ac.at>
 
-# prevents a weird error message
-ENV DEBIAN_FRONTEND=noninteractive
+RUN apk update && \
+    apk upgrade && \
+    apk add nginx git python make g++
 
-RUN apt-get update
-RUN apt-get install -y nodejs npm
+WORKDIR /var/www/
 
-# install ruby (required by compass)
-RUN  apt-get install -y ruby-dev
-RUN apt-get install -y make
+# add package.json and bower.json before copying the entire app to use caching
+ADD package.json bower.json /var/www/
 
-# install compass
-RUN gem install --no-rdoc --no-ri compass
+# needed for bower/npm github installations
+RUN git config --global url."https://".insteadOf git://
 
-# node packages
-RUN npm install -g coffee-script
-RUN npm install -g jasmine
-RUN npm install -g bower
+RUN npm install
+RUN npm install -g bower gulp
+RUN bower install --allow-root --config.interactive=false
 
 # create folder var/www/vidatio and copy the app
-RUN mkdir -p /var/www/vidatio
-COPY . /var/www/vidatio/
+ADD . /var/www/
 
-# set bash start directory to /var/www/vidatio
-WORKDIR /var/www/vidatio
+# expose 80 to host OS
+EXPOSE 80
 
-# change directory and install node packages from package.json
-RUN npm install
+RUN gulp production
 
-# expose port 5000 to host OS
-EXPOSE 5000
+ADD nginx-config /etc/nginx/nginx.conf
 
-CMD ["nodejs", "server.js"]
+CMD ["nginx", "-g", "daemon off;"]

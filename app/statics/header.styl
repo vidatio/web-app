@@ -1,0 +1,324 @@
+header
+
+    #line-right
+        background $color-green
+        height 8px
+
+    #line-left
+        background $color-red
+        height 8px
+
+    h1
+        margin-top 10px
+        display inline
+        line-height 1.4
+
+.middle
+        text-align center
+
+    #navigation
+        clear both
+        max-width 1024px
+        margin 0 auto
+        padding 30px 0
+
+    #navigation.editor
+        max-width 98%
+
+    #logo
+        background url(../images/logo-text-black.svg) no-repeat
+        background-size 111px
+        width 113px
+        height 40px
+        float left
+
+    #process-nav
+        max-width 653px
+        height 50px
+        display block
+        margin 0 auto
+        position relative
+        margin-top -2px
+
+        a
+            font-family Colaborate-Medium, $fonts
+            border-bottom 3px solid $color-passive
+            color $color-passive
+            line-height 54px
+            float left
+            height 50px
+            text-align center
+            width 33.333%
+
+            //hover transitions for underline and color
+            &:nth-child(3)
+            &:nth-child(2)
+            &:first-child
+                &::before
+                    background $color-hover-dark
+                    bottom 0
+                    content ""
+                    display block
+                    height 3px
+                    position absolute
+                    transition width 0.3s ease 0s
+                    width 0
+
+                &:hover:not(.active):not(.disabled)
+                    &::before
+                        width 33.34%
+
+            &:nth-child(3)
+                &::before
+                    left calc(100%/3*2)
+
+            &:nth-child(2)
+                &::before
+                    right calc(100%/3)
+
+            &:first-child
+                &::before
+                    right calc(100%/3*2)
+
+            &:hover,
+            &:focus
+                color $color-hover-dark
+                -webkit-transition color 0.5s
+                transition color 0.5s
+
+            //active state with arrow in line
+            &.active
+                color $color-green
+                border-color $color-green
+
+                &::after
+                    border-left 16px solid transparent
+                    border-right 16px solid transparent
+                    border-top: 12px solid $color-grey-light
+                    content ""
+                    display block
+                    margin -16px auto 0
+                    width 15px
+
+                span
+                    //arrow in line on active, 1st span is icon
+                    &:nth-child(2)
+                        &::after
+                            border-left 16px solid transparent
+                            border-right 16px solid transparent
+                            border-top 12px solid $color-green
+                            content ""
+                            display block
+                            margin -7px auto 0
+                            width 15px
+
+                &:hover,
+                &:focus
+                    color $color-green
+                    border-color $color-green
+
+            &.disabled
+                opacity 0.15
+                cursor default
+                pointer-events none
+
+                &:hover,
+                &:focus
+                    color $color-passive
+                    border-color $color-passive
+
+        a#edit-data.clickable
+            &:nth-child(2)
+                &::before
+                    left calc(100%/3)
+
+    #back-to-import
+        margin-left 55px
+
+    #back-to-datasets-overview
+        margin-left 168px
+
+    // Firefox displays the text-descriptions 1px further down than chrome, so pull it 1px up
+    @-moz-document url-prefix()
+        #back-to-import
+        #back-to-datasets-overview
+            span
+                margin-top -1px
+
+    #back-to-datasets-overview
+    #back-to-import
+        z-index 501
+        position absolute
+        float left
+        text-align center
+        color $color-black
+        line-height 42px
+        font-size 26px
+        width 42px
+        height 42px
+        border-radius 4px
+        -webkit-border-radius 4px
+        -moz-border-radius 4px
+        top -5px
+        cursor pointer
+
+        &:hover, &:focus
+            color $color-grey-light
+            background-color $color-passive
+
+        &:active
+            color $color-green
+
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            height 11px
+            line-height 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+
+    .menu-buttons
+        height 42px
+        text-align right
+        z-index 500
+
+        div
+            display inline
+            position relative
+            top -5px
+
+        a#login-button
+        a#logout-button
+        a#profile-button
+        a#menu
+            color $color-black
+            line-height 42px
+            vertical-align middle
+            text-align center
+            width 42px
+            height 42px
+            display inline-block
+            margin-left 3px
+            border-radius 4px
+            -webkit-border-radius 4px
+            -moz-border-radius 4px
+            cursor pointer
+
+            &:hover, &:focus
+                color $color-grey-light
+                background-color $color-passive
+
+            &:active
+                color $color-green
+
+            &.menu-active
+                color $color-green !important
+
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            height 11px
+            line-height 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
+
+        a#menu
+            font-size 20px
+
+        a#login-button
+        a#logout-button
+            padding-left 2px
+
+        a#login-button
+            &:before
+                margin-left 3px
+
+        a#logout-button
+        a#login-button
+            font-size 24px
+
+            span
+                margin-left -2px
+
+        a#profile-button
+            font-size 23px
+            padding-left 2px
+
+            span
+                margin-left -3px
+
+    #link-overlay
+        position absolute
+        top 90px
+        right calc(100vw * 0.01)
+        z-index 310
+        box-shadow $box-shadow-size $color-shadow
+        background $color-white
+        border-top 3px solid $color-green
+        padding 5px 10px 10px 10px
+        text-align right
+        max-width 98%
+
+@media(max-width: 400px)
+    header
+        .menu-buttons
+            a#save-button
+                left -60px
+
+        #back-to-import
+            margin-left 25px
+
+        #back-to-datasets-overview
+            margin-left 138px
+
+@media(min-width: 401px) and (max-width: 500px)
+    header
+        .menu-buttons
+            a#save-button
+                left -100px
+
+@media(min-width: 501px) and (max-width: 1199px)
+    header
+        .menu-buttons
+            a#save-button
+                left -150px
+
+@media(max-width: 767px)
+    header
+        .catalog-title,
+        .profile-title
+            margin-top 30px
+
+        #process-nav
+            margin-top 25px
+
+@media(max-width: 800px)
+    header
+        #process-nav
+
+            a
+                height 65px
+                line-height 28px
+
+                &:nth-child(3)
+                &:nth-child(2)
+                &:first-child
+                    &::before
+                        bottom -15px
+
+                span
+                    display block
+
+                &.active
+                    span
+                        &:nth-child(2)
+                            &::after
+                                margin-top 5px
+
+@media(min-width: 768px) and (max-width: 1199px)
+    header
+        #process-nav
+            margin-top 70px
+

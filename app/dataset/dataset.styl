@@ -1,0 +1,166 @@
+#dataset-view
+
+    .dataset-title
+        text-align center
+        margin-bottom 20px
+
+    .visualization-box
+        border-top 3px solid $color-green
+        background white
+        box-shadow $box-shadow-size $color-shadow
+        padding 10px 20px 20px
+        min-height 450px
+        width 100%
+        margin-bottom 40px
+        position relative
+
+        .action-bar
+            height 60px
+            display flex
+            flex-direction row
+
+            .action-button
+                text-align center
+                margin-left: 25px
+
+                a
+                    font-size 24px
+                    display block
+                    color $color-black
+
+                    > span
+                        display block
+                        text-transform uppercase
+                        position relative
+                        color inherit
+                        font-size 10px
+                        margin-top -7px
+                        font-family Colaborate,Arial,Helvetica,sans-serif
+
+                &:hover
+                &.active
+                    > a
+                        color $color-hover-dark
+
+                &:first-child
+                    margin-left 2px
+
+                &:last-child
+                    margin-left auto
+
+        .download-menu
+            justify-content space-around
+            display none
+            list-style-type none
+            position absolute
+            left 20px
+            right 20px
+            padding 0
+            margin-top 6px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            > li
+                height 100%
+                width 33.333333%
+
+                > a
+                    padding 14px 12px
+                    display block
+
+                &:hover
+                &.active
+                    background $color-hover-light
+                    box-shadow 0 -2px $color-green
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+        .download-selection
+            &:hover
+                .download-menu
+                    display flex
+
+        .share-link
+            display none
+            position absolute
+            left 20px
+            right 20px
+            padding 20px
+            margin-top 6px
+            background rgba($color-white, .9)
+            border-top 2px solid $color-disabled-border
+            box-shadow -1px 1px 2px #e3e3e3
+            z-index 1100
+
+            &:before
+                content ''
+                width 100%
+                height 10px
+                position absolute
+                left 0
+                right 0
+                bottom 100%
+
+            .input-group
+                width 100%
+
+                input#vidatio-link
+                    border-radius 4px
+
+        .share-button
+            &:hover
+                .share-link
+                    display block
+
+    .visualization
+        & > div
+            height 400px
+
+    .middle
+        text-align center
+
+    .metadata-container
+        margin-bottom 40px
+
+        .space
+            margin 15px 0
+
+        .one-row
+            display flex
+            flex-direction row
+            display -webkit-flex /* Safari */
+            -webkit-flex-direction row
+
+            .description
+                margin 20px 0
+
+            .text
+                font-weight bold
+                width 200px
+
+            .tag
+                color $color-white
+                background-color $color-passive
+                border-radius 4px
+                padding: 0 5px 0 5px;
+                margin-right: 5px;
+
+@media (max-width: 600px)
+    #dataset-view
+        .metadata-container
+            .text
+                width 150px !important
+
+@media (min-width: 768px) and (max-width: 1012px)
+    #dataset-view
+        .dataset-title-text
+            margin-left 30px

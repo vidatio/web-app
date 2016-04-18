@@ -1,10 +1,8 @@
 IMAGE_NAME = "vidatio/app"
 CONTAINER_NAME = "vidatio"
 
-all: build run address
-
-# Mac OS only: Linux users execute "make ps" instead
-address: port ip
+all: rm_container build run port
+restart: rm_container run
 
 # build image from ubuntu
 build:
@@ -12,30 +10,25 @@ build:
 
 # create and start container from image
 run:
-	docker run -P -d --name $(CONTAINER_NAME) $(IMAGE_NAME)
+	docker run -d -p 4000:80 --name $(CONTAINER_NAME) $(IMAGE_NAME)
 
 # stop container
 stop:
-	docker stop $(CONTAINER_NAME)
+	docker stop $(CONTAINER_NAME) || true
 
 # start container
 rerun:
-	docker start $(CONTAINER_NAME)
+	docker start $(CONTAINER_NAME) || true
 
+rm_container:
+	docker rm -f $(CONTAINER_NAME) || true
+
+rm_image:
+	docker rmi -f $(IMAGE_NAME)
 # stop + delete container, delete image
 # fails if something went wrong during build process, because the image has no name or the container name is in use ...
-clean:
-	docker stop $(CONTAINER_NAME)
-	docker rm $(CONTAINER_NAME)
-	docker rmi -f $(IMAGE_NAME)
+clean: rm_container rm_image
 
-# show mapped port, which maps to exposed port inside the container (5000 in our case)
+# show mapped port, which maps to exposed port inside the container (80 in our case)
 port:
-	docker port $(CONTAINER_NAME) 5000
-
-# Mac OS only: 
-ip:
-	if [ boot2docker ] ; \
-	then \
-		boot2docker ip ; \
-	fi;
+	docker port $(CONTAINER_NAME) 80

@@ -1,0 +1,28 @@
+#intro.wrapper-content
+    .row
+        .col-sm-6.video-wrapper
+            video#video.video-js(controls preload="false" poster="images/poster.png")
+                source(src="videos/video.webm", type="video/webm")
+                p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that
+                    a(href="http://videojs.com/html5-video-support/" target="_blank") supports HTML5 video
+
+        .col-sm-6
+            h3
+                | {{ "ONLY_LANDING_PAGE" | translate }}
+                span.font-green-dark  {{ "THREE_STEPS_LANDING_PAGE" | translate }}
+                |  {{ "TO_YOUR_VIDATIO_LANDING_PAGE" | translate }}!
+
+            ol
+                li.active.icon-import
+                    span {{ "UPLOAD_FILE" | translate }}.
+                li.icon-edit
+                    span {{ "GENERATED_AUTOMATICALLY" | translate }}.
+                li.icon-check
+                    span {{ "SAVE_OR_SHARE" | translate }}.
+
+            .get-started
+                a.btn.btn-primary(ui-sref="app.import({ locale: locale })" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                    h1 {{ "GET_LANDING_PAGE" | translate | uppercase }}
+                    br
+                    h1 {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
+                    span.bg-cyan !

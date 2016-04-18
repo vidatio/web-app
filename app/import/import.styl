@@ -1,0 +1,183 @@
+#import
+    margin 0 auto
+    h3
+        text-align center
+        margin 15px auto 0px
+        width 100%
+        font-family Colaborate-Regular,Arial,Helvetica,sans-serif
+
+    .options
+        .area
+            height 254px
+            border-top 3px solid $color-green
+            background $color-white
+            box-shadow $box-shadow-size $color-shadow
+            text-align center
+            padding 0
+
+            @media(max-width 768px)
+                margin-bottom 25px !important
+
+            .icon-and-text-wrapper
+                position absolute
+                {overlayParent}
+
+        .option-icon
+            width 100px
+            margin 40px auto 0
+            height 100px
+            font-size 75px
+            color $color-dark-grey
+            text-align center
+
+        #option-browse-filesystem
+            cursor pointer
+            position relative
+
+            #input-browse-filesystem
+                position absolute
+                z-index 2
+                {overlayParent}
+                opacity 0
+                cursor pointer
+
+        #option-browse-filesystem:hover
+        .other .area:hover
+            background $color-hover-light
+
+        #option-empty-table
+            margin-right 13px
+
+        #option-browse-data
+            margin-left 13px
+
+        #option-drag-and-drop
+            position relative
+
+            .hover-wrapper
+                display none
+                background $color-hover-light
+                {fillParent}
+                padding 10px
+
+            &:hover
+                .option-icon
+                h3
+                .description-text
+                    display none
+
+                .hover-wrapper
+                    text-align center
+                    line-height 217px
+                    display block
+
+                    .area
+                        position relative
+                        box-shadow none
+                        {fillParent}
+                        border 7px solid white
+                        background none
+
+                        .glyphicon-plus
+                            margin-left 15px
+                            text-align center
+                            vertical-align middle
+                            cursor default
+                            font-size 13em
+                            color $color-white
+                            margin-top -15px
+
+                        .text
+                            position absolute
+                            z-index 999
+                            left 50%
+                            margin-left -54px
+                            cursor default
+                            font-size 16px
+                            height 100%
+                            vertical-align middle
+                            margin-top 3px
+
+        #option-link
+            position relative
+
+            .form-link
+                width 80%
+                margin 0 auto
+
+                &:hover
+                    .form-control
+                        border-color $color-grey
+
+                .form-control
+                    border-radius 4px
+                    -moz-border-radius 4px
+                    -webkit-border-radius 4px
+
+                    &:hover
+                        border-color $color-green
+
+        .other, .file-read
+            margin-bottom 25px
+
+            @media(max-width 768px)
+                margin-bottom 0px
+
+        .file-read .area a
+        .other .area a
+            {fillParent}
+            display inline-block
+            color $color-grey-dark
+
+        @media screen and (max-width: 768px)
+            #option-empty-table
+            #option-browse-data
+            #option-browse-filesystem
+            #option-drag-and-drop
+            #option-link
+                margin 0
+
+        #link-submit-button
+            top 0
+
+            &:hover
+            &:active
+            &:focus
+                border-color $color-hover-dark
+                background-color $color-hover-dark
+
+    #drop-zone
+        display none
+        background $color-dropzone
+        position fixed
+        z-index 999
+        {overlayParent}
+
+        .row
+            height 100%
+
+            .col-sm-12
+                padding 30px
+                height 100%
+
+        .drop-zone-area
+            {fillParent}
+            border 10px solid white
+
+            .glyphicon-plus
+                {centerElement}
+                transform translate(-50%, -50%)
+                padding 0 0 25px 34px
+                font-size 400px
+                color $color-white
+
+            .text
+                {centerElement}
+                padding-top 2px
+                transform translate(-50%, -50%)
+                font-size 30px
+
+        .drop-area
+            position fixed
+            z-index 99
+            {overlayParent}

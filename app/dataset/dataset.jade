@@ -1,0 +1,60 @@
+#dataset-view.wrapper-content
+    .row.dataset-title
+        .col-sm-12
+            h1.underline-red-light.dataset-title-text {{ data.title }}
+
+    .row
+        .col-sm-12
+            .visualization-box
+                .action-bar
+                    #create-vidatio.action-button
+                        a.icon-edit.icons(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                            span  {{ "USE" | translate | uppercase }}
+
+                    #vidatio-link-box.share-button.action-button
+                        a.icon-link(href="#")
+                            span  {{ "LINK_TO_SHARE" | translate }}
+                        .share-link
+                            .input-group.form-link.copy-vidatio-button-group
+                                input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
+
+                    #download-dataset.download-selection.action-button
+                        a(href='#' ng-click="data.visualizationOptions.thumbnail !== 'data:,' || downloadCSV()" title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
+                            span {{ "DOWNLOAD" | translate }}
+                        ul.download-menu(ng-hide="data.visualizationOptions.thumbnail === 'data:,'")
+                            li.download-button
+                                a.icon-downloaddataset(href="#" ng-click="downloadCSV()")
+                                    span CSV
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('jpg')")
+                                    span JPEG
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('png')")
+                                    span PNG
+
+                visualization
+
+    .row
+        .col-sm-12
+            h3.underline-red-light {{ "INFORMATION_DATASET" | translate | uppercase }}
+
+    .row
+        .col-sm-12
+            .metadata-container
+                .one-row.space
+                .one-row
+                    .text {{ "DATASET_AUTHOR" | translate }}:
+                    .dataset-info {{ data.author }}
+                .one-row
+                    .text {{ "DATASET_EDITOR" | translate }}:
+                    .dataset-info {{ data.userName }}
+                .one-row
+                    .text {{ "DATASET_CREATED" | translate }}:
+                    .dataset-info {{ data.created | date: "dd.MM.yyyy" }}
+                .one-row.space
+                .one-row
+                    .text {{ "CATEGORY" | translate }}:
+                    .dataset-info {{ data.category }}
+                .one-row
+                    .text {{ "DATASET_TAGS" | translate }}:
+                    span.tag(ng-repeat="tag in data.tags track by $index") {{tag}}

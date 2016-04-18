@@ -1,0 +1,58 @@
+#import.wrapper-content
+    .options
+        .row.other
+            .col-sm-6
+                #option-empty-table.area
+                    a(href="" ng-click="continueToEmptyTable()" title="{{ 'NEW_VIDATIO_DESCRIPTION' | translate }}")
+                        .option-icon.icon-emptytable
+                        h3 {{ "NEW_VIDATIO" | translate | uppercase }}
+                        span.description-text ({{ "NEW_VIDATIO_DESCRIPTION" | translate }})
+
+            .col-sm-6
+                #option-browse-data.area
+                    a(ui-sref="app.catalog({ locale: locale })" title="{{ 'ALL_VIDATIOS_DESCRIPTION' | translate }}")
+                        .option-icon.icon-opendata
+                        h3 {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
+                        span.description-text ({{ "ALL_VIDATIOS_DESCRIPTION" | translate }})
+
+        .row.file-read.layout-3-columns
+
+            .col-sm-4
+                #option-browse-filesystem.area
+                    .icon-and-text-wrapper
+                        .option-icon.icon-searchfiles
+                        h3 {{ "CHOOSE_FILE" | translate | uppercase }}
+                        span.description-text (CSV, SHP)
+                        input#input-browse-filesystem(type="file" ng-file-select title="CSV & SHP {{'IMPORT'|translate|lowercase}}")
+
+            .col-sm-4
+                #option-drag-and-drop.area
+                    .icon-and-text-wrapper
+                        .option-icon.icon-draganddrop
+                        h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
+                        span.description-text (CSV, SHP)
+
+                        .hover-wrapper
+                            .area
+                                .glyphicon.glyphicon-plus
+                                span.text {{ "FILE_DROP" | translate }}
+
+            .col-sm-4
+                #option-link.area
+                    .icon-and-text-wrapper
+                        .option-icon.icon-link
+                        h3 {{ "LINK" | translate | uppercase }}
+                        .input-group.form-link
+                            input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
+                            span.input-group-btn
+                                button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click='load("link")' title="{{'IMPORT_VIA_LINK'|translate}}")
+
+    #drop-zone
+        .row
+            .col-sm-12
+                .drop-zone-area
+                    div.glyphicon.glyphicon-plus
+                    span.text {{ "FILE_DROP" | translate }}
+
+        .row
+            .col-sm-12.drop-area(ng-file-drop-end)
