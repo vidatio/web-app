@@ -271,5 +271,25 @@
     "SAVE_AND_SHARE_TAGS": "Füge Tags hinzu, damit dein Vidatio besser gefunden wird",
     "SHARE_VIDATIO": "Vidatio teilen",
     "PAGE_NOT_FOUND": "Upps, da ist etwas schief gelaufen...",
-    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden."
+    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden.",
+    "D3PLUS":{
+        "MESSAGE":{
+            "DATA": "Daten werden analysiert.",
+            "DRAW": "Visualisierung wird gezeichnet.",
+            "INITIALIZING": "Initialisiere {0}.",
+            "LOADING": "Daten werden geladen.",
+            "TOOLTIPRESET": "Tooltips werden zurückgesetzt.",
+            "UI": "Oberfläche wird aktualisiert."
+        },
+        "ERROR":{
+        "ACCEPTED": "{0} ist kein gültiger {1} für {2}-Darstellungen. Benutzen Sie bitte: {3}.",
+        "CONNECTIONS": "Keine Verbindungen verfügbar für {0}.",
+        "DATA": "Keine Daten verfügbar",
+        "DATAYEAR": "Für {0} sind keine Daten verfügbar.",
+        "LIB": "{0}-Darstellungen erfordern das Laden der Bibliothek {1}.",
+        "LIBS": "{0}-Darstellungen erfordern das Laden folgender Bibliotheken: {1}.",
+        "METHOD": "{0}-Darstellungen erfordern die Methode {1}.",
+        "METHODS": "Weitere Einstellungen für folgende Methoden {1} sind bei {0}-Darstellungen erforderlich."
+        }
+    }
 }

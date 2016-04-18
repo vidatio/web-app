@@ -14,11 +14,16 @@ class vidatio.BarChart extends vidatio.Visualization
         @remove()
         @preProcess options
 
-        # we need to wait for angular to finish rendering
+         # we need to wait for angular to finish rendering
         setTimeout =>
             d3plus
             .viz()
             .container(@containerSelector)
+            .format
+                "text": (text, key) ->
+                    key.locale.message = window.vidatio.d3PlusTranslations.message
+                    key.locale.error = window.vidatio.d3PlusTranslations.error
+                    return text
             .data(@chartData)
             .type("bar")
             .id("id")
@@ -31,4 +36,3 @@ class vidatio.BarChart extends vidatio.Visualization
             .height(@height)
             .draw()
         , 100
-
