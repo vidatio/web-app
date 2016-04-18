@@ -57,7 +57,8 @@
     "shp": "^3.2",
     "angular-bootstrap-colorpicker": "https://github.com/MMTLukas/angular-bootstrap-colorpicker.git#^3.0.25",
     "pablo": "^0.5.0",
-    "select2": "^4.0.2"
+    "select2": "^4.0.2",
+    "jquery-observe": "^2.0.2"
   },
   "devDependencies": {
     "angular-mocks": "^1.4"

@@ -10,7 +10,8 @@ app.controller "TableCtrl", [
     "ConverterService"
     "$log"
     "VisualizationService"
-    ($scope, Table, Data, Map, Converter, $log, Visualization) ->
+    "$timeout"
+    ($scope, Table, Data, Map, Converter, $log, Visualization, $timeout) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
         $scope.visualization = Visualization.options
@@ -47,6 +48,11 @@ app.controller "TableCtrl", [
         $scope.download = ->
             clearFocusedAxisButtons()
             Data.downloadCSV($scope.data.name)
+
+        # https://github.com/kapetan/jquery-observe
+        $timeout ->
+            $('.ht_clone_top table thead > tr').observe 'childlist', 'th', (record) ->
+                console.log record
 
         #@method $scope.axisSelection
         #@description selects axis by clicking on the header and creates new visualization
