@@ -28,5 +28,9 @@ class window.vidatio.ScatterPlot extends window.vidatio.Visualization
             .color("color")
             .width(@width)
             .height(@height)
+            .format
+                "text": (text, key) ->
+                    key.locale.error = window.d3PlusTranslations.error
+                    return text
             .draw()
         , 100

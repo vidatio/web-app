@@ -32,5 +32,9 @@ class vidatio.LineChart extends vidatio.Visualization
             .color("color")
             .width(@width)
             .height(@height)
+            .format
+                "text": (text, key) ->
+                    key.locale.error = window.d3PlusTranslations.error
+                    return text
             .draw()
         , 100
