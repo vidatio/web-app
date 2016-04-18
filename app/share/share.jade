@@ -32,11 +32,11 @@
                     form(name="metadataForm")
                         .row
                             .input-group.form-group.first(ng-class="{ 'has-error' : metadataForm.author.$invalid && !metadataForm.email.$pristine }")
-                                input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128)
-                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine") {{ 'FORM.ERROR.INVALID_EMAIL' | translate }}
+                                input.form-control(type="text" name="author" ng-model="vidatio.author" placeholder="{{ 'AUTHOR' | translate }}" required ng-minlength=3 ng-maxlength=128 ng-model-options="{ updateOn: 'blur' }")
+                            span.error(ng-show="metadataForm.author.$invalid && !metadataForm.author.$pristine") not valid stuff :)
                         .row
                             .input-group.form-group(ng-class="{ 'has-error' : metadataForm.title.$invalid && !metadataForm.title.$pristine }")
-                                input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                                input.form-control(type="text" name="title" ng-model="vidatio.name" placeholder="{{ 'TITLE' | translate }}" required ng-minlength=3 ng-maxlength=128 ng-model-options="{ updateOn: 'blur' }")
                         .row
                             .input-group.form-group.selectionng-class="{ 'has-error' : metadataForm.category.$invalid && !metadataForm.category.$pristine }"
                                 select.form-control(name="category" ng-model="vidatio.categoryId" ng-options="category._id as category.name for category in categories" ng-selected="vidatio.categoryId" required)
