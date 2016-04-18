@@ -10,13 +10,15 @@ app.controller "IndexCtrl", [
     "$window"
     "$state"
     "$translate"
-    ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate) ->
+    "$sce"
+    ($scope, $log, CategoriesFactory, DatasetsFactory, $window, $state, $translate, $sce) ->
+
         addClassActive = (e) ->
-            if e.currentTarget.currentTime > 4
+            if e.currentTarget.currentTime >= 53
                 $("#intro ol li:nth-child(3)").addClass("active")
-            if e.currentTarget.currentTime > 2
+            if e.currentTarget.currentTime >= 25
                 $("#intro ol li:nth-child(2)").addClass("active")
-            if e.currentTarget.currentTime > 0
+            if e.currentTarget.currentTime >= 19
                 $("#intro ol li:nth-child(1)").addClass("active")
 
         $("video").bind "timeupdate", addClassActive
@@ -24,14 +26,8 @@ app.controller "IndexCtrl", [
             $("#intro ol li").removeClass("active")
             addClassActive(e)
 
-        options =
-            "controls": true,
-            "autoplay": false,
-            "preload": false
-
-        videojs "video", options, ->
-            $scope.video = this
-
+        videojs document.getElementById('video'), {}, ->
+            $scope.video = @
         $scope.$on "$destroy", ->
             $scope.video.dispose()
 
