@@ -10,12 +10,9 @@ class vidatio.BarChart extends vidatio.Visualization
             height: height
             chartSelector: chartSelector
 
-
         super dataset, options.color, width, height, chartSelector
         @remove()
         @preProcess options
-
-        console.log @chartData, @containerSelector, options.headers
 
         # we need to wait for angular to finish rendering
         setTimeout =>
