@@ -255,7 +255,6 @@ gulp.task "lint:coffee",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-        #.pipe cached "lint:coffee"
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
@@ -274,7 +273,6 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        #.pipe cached "plugins.js"
         .pipe concat(BUILD.plugin.js)
         .pipe gulp.dest(BUILD.dirs.js)
 
@@ -282,15 +280,14 @@ gulp.task "build:production:plugins:js",
     "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        .pipe uglify()
         .pipe concat(BUILD.plugin.js)
+        .pipe uglify()
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        #.pipe cached "plugins.css"
         .pipe concat(BUILD.plugin.css)
         .pipe gulp.dest(BUILD.dirs.css)
 
@@ -298,7 +295,6 @@ gulp.task "build:production:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        #.pipe cached "plugins.css"
         .pipe concat(BUILD.plugin.css)
         .pipe cleanCSS()
         .pipe gulp.dest(BUILD.dirs.css)
@@ -325,8 +321,8 @@ gulp.task "build:production:source:coffee",
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
-        .pipe uglify()
         .pipe concat(BUILD.app)
+        .pipe uglify({"mangle": false, "compress": true})
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:source:stylus",
@@ -395,14 +391,12 @@ gulp.task "copy:img",
     false,
     ->
         gulp.src COPY_FILES.img
-        #.pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     false,
     ->
         gulp.src COPY_FILES.fonts
-        #.pipe cached "copy:fonts"
         .pipe gif "**/flat-ui-icons-regular.*", rename (path) ->
             path.dirname = "/glyphicons"
         .pipe gif "**/lato*", rename (path) ->
