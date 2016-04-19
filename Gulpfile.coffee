@@ -11,7 +11,7 @@ stylint = require "gulp-stylint"
 
 karmaServer = require("karma").Server
 
-browserSync = require('browser-sync').create()
+browserSync = require("browser-sync").create()
 reload = browserSync.reload
 debug = require "gulp-debug"
 
@@ -27,7 +27,8 @@ modRewrite = require "connect-modrewrite"
 ngConstant = require "gulp-ng-constant"
 
 uglify = require "gulp-uglify"
-cleanCSS = require 'gulp-clean-css'
+cleanCSS = require "gulp-clean-css"
+ngAnnotate = require "gulp-ng-annotate"
 
 DOC_FILES = [
     "./README.MD"
@@ -322,7 +323,8 @@ gulp.task "build:production:source:coffee",
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
         .pipe concat(BUILD.app)
-        .pipe uglify({"mangle": false, "compress": true})
+        .pipe ngAnnotate()
+        .pipe uglify({"mangle": true, "compress": true})
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:source:stylus",
