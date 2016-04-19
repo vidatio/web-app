@@ -8,7 +8,7 @@
             .visualization-box
                 .action-bar
                     #create-vidatio.action-button
-                        a.icon-edit.icons(ui-sref="app.editor({ locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                        a.icon-edit.icons(ui-sref="app.editor.id({ id: data._id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                             span  {{ "USE" | translate | uppercase }}
 
                     #center-map.action-button(ng-hide="data.visualizationOptions.type != 'map' && data.metaData.fileType != 'shp'")

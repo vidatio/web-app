@@ -40,6 +40,11 @@ app.directive "hot", [
                     currentRowClassName: "current-row"
                     manualColumnResize: true
                     beforeChange: (change, source) ->
+                        # Prevents user to delete whole row or column in shp-files
+                        if change.length > 1 and Data.metaData.fileType is "shp"
+                            change.forEach (element, index) ->
+                                element[3] = element[2]
+
                         if Data.metaData.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                             change[0][3] = change[0][2]
 
@@ -63,6 +68,7 @@ app.directive "hot", [
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"
+                Table.setColumns()
             else
                 # Initialize "X" and "Y" on table header
                 xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1

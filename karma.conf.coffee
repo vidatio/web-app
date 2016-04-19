@@ -27,7 +27,7 @@ module.exports = (config) ->
             "./bower_components/d3/d3.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
-            "./bower_components/flat-ui/dist/js/vendor/video.js"
+            "./bower_components/video.js/dist/video.js"
             "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/html2canvas/build/html2canvas.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
