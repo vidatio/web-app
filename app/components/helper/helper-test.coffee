@@ -284,12 +284,14 @@ describe "Service Helper", ->
                 "Banane": 123
                 "name": 123
                 "color": "#FF0"
+                "id": 0
             }
             {
                 "Apfel": "This is a test"
                 "Banane": 456
                 "name": 456
                 "color": "#FF0"
+                "id": 1
             }
         ]
 
@@ -299,7 +301,7 @@ describe "Service Helper", ->
         actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "scatter", headers, color)
         expect(actualResult).not.toEqual(expectedResult)
 
-    it 'should transform 2 dimensional arrays to arrays of objects for a timeseries chart', ->
+    it 'should transform 2 dimensional arrays to arrays of objects for a line chart', ->
         dataset = [
             [ 123, "2016-02-28" ]
             [ 456, "2016-02-29" ]
@@ -317,16 +319,18 @@ describe "Service Helper", ->
                 "Banane": 123
                 "name": "Line 1"
                 "color": "#FF0"
+                "id": 0
             }
             {
                 "Apfel": "2016-02-29"
                 "Banane": 456
                 "name": "Line 1"
                 "color": "#FF0"
+                "id": 1
             }
         ]
 
-        actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "timeseries", headers, color)
+        actualResult = @Helper.transformToArrayOfObjects(dataset, xColumn, yColumn, "line", headers, color)
         expect(actualResult).toEqual(expectedResult)
 
     it 'should create a subset of a 2 dimensional array with x column first and y column second (where each column is an Array)', ->
@@ -355,8 +359,8 @@ describe "Service Helper", ->
         expect(@Helper.isRowUsable("0", "test", "bar")).toEqual(false)
         expect(@Helper.isRowUsable("test", "0", "bar")).toEqual(true)
 
-        expect(@Helper.isRowUsable("01.01.2016", "1", "timeseries")).toEqual(true)
-        expect(@Helper.isRowUsable("1", "01.01.2016", "timeseries")).toEqual(false)
+        expect(@Helper.isRowUsable("01.01.2016", "1", "line")).toEqual(true)
+        expect(@Helper.isRowUsable("1", "01.01.2016", "line")).toEqual(false)
 
         expect(@Helper.isRowUsable("1", "test", "parallel")).toEqual(true)
         expect(@Helper.isRowUsable("test", "test", "parallel")).toEqual(true)

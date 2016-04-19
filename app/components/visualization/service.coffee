@@ -11,7 +11,8 @@ app.service 'VisualizationService', [
     "$timeout"
     "ProgressService"
     "ngToast"
-    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast) ->
+    "$rootScope"
+    (Table, Converter, Map, $log, $translate, $timeout, Progress, ngToast, $rootScope) ->
         class Visualization
 
             # @method constructor
@@ -29,7 +30,7 @@ app.service 'VisualizationService', [
                         "map": "DIAGRAMS.MAP"
                         "parallel": "DIAGRAMS.PARALLEL_COORDINATES"
                         "bar": "DIAGRAMS.BAR_CHART"
-                        "timeseries": "DIAGRAMS.TIME_SERIES"
+                        "line": "DIAGRAMS.LINE_CHART"
 
             # @method resetOptions
             # @public
@@ -120,20 +121,19 @@ app.service 'VisualizationService', [
                             }
                             Map.setGeoJSON geoJSON
 
-                        $timeout ->
-                            Map.setInstance()
+                        Map.setInstance()
                     when "parallel"
                         new vidatio.ParallelCoordinates chartData, options, width, height, chartSelector
                     when "bar"
                         new vidatio.BarChart chartData, options, width, height, chartSelector
-                    when "timeseries"
-                        new vidatio.TimeseriesChart chartData, options, width, height, chartSelector
+                    when "line"
+                        new vidatio.LineChart chartData, options, width, height, chartSelector
                     else
                         $log.warn "VisualizationCtrl type not set"
                         $log.debug
                             type: options.type
 
-                unless options.type is "map" or options.type is "parallel"
+                if (options.type isnt "map" or options.type isnt "parallel") and $rootScope.title is "editor"
                     initInlineEditingLabels.call @
 
             initInlineEditingLabels = ->

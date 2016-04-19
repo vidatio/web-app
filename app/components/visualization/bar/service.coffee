@@ -10,6 +10,7 @@ class vidatio.BarChart extends vidatio.Visualization
             height: height
             chartSelector: chartSelector
 
+
         super dataset, options.color, width, height, chartSelector
         @remove()
         @preProcess options
@@ -21,7 +22,8 @@ class vidatio.BarChart extends vidatio.Visualization
             .container(@containerSelector)
             .data(@chartData)
             .type("bar")
-            .id("name")
+            .id("id")
+            .text("name")
             .x(options.headers["x"])
             .y(options.headers["y"])
             .color("color")

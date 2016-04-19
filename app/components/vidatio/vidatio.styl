@@ -1,0 +1,86 @@
+vidatio
+    text-align center
+    padding-bottom  20px
+
+    margin-bottom 20px
+    background #F2F2F2
+    border-top 3px solid $color-green
+    box-shadow $box-shadow-size $color-shadow
+    position relative
+    width 100%
+
+    .content-container
+        width 100%
+        height 100%
+
+        .text
+            padding 0 10px
+            margin 15px 0
+            text-align left
+
+            p:first-of-type
+                margin-top 15px
+
+        a.img
+            padding 10px
+            background-color $color-white
+            display block
+            height auto
+
+            img
+                width 100%
+                height 100px
+                max-width: 100%
+
+            img.placeholder
+                opacity 0.4
+                padding 12% 0
+
+        a.img:hover ~ .text a
+            color $color-hover-dark
+
+    .btns-container
+        width 100%
+        height 60px
+
+        .btns
+            position absolute
+            bottom 15px
+            left 50%
+            width 100%
+            transform translateX(-50%)
+
+            .action-button
+                .icon-edit
+                    margin-right 10px
+                .icon-trash
+                    margin-left 10px
+                a
+                    font-size 24px
+                    display inline-block
+                    width 60px
+                    color $color-grey-dark
+
+                    > span
+                        display block
+                        text-transform uppercase
+                        position relative
+                        color inherit
+                        font-size 10px
+                        margin-top -7px
+                        font-family Colaborate, $fonts
+
+                .icon-edit:hover
+                .icon-edit:active
+                    color $color-hover-dark
+                    cursor pointer
+
+                .icon-trash:hover
+                .icon-trash:active
+                    color $color-red
+                    cursor pointer
+
+@media (max-width: 767px)
+    vidatio
+        margin-left calc(10vw - 15px)
+        margin-right calc(10vw - 15px)

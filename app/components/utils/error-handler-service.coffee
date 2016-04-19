@@ -8,11 +8,18 @@ app.service "ErrorHandler", [
     ($translate, ngToast) ->
 
         format: (errors) ->
-            for error in errors.data.error.errors
-                for key, value of error
-                    $translate(error["#{key}"].i18n)
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
+            if errors.status? and errors.status is 401
+                $translate("API.SAVE")
+                .then (translation) ->
+                    ngToast.create
+                        content: translation
+                        className: "danger"
+            else
+                for error in errors.data.error.errors
+                    for key, value of error
+                        $translate(error["#{key}"].i18n)
+                        .then (translation) ->
+                            ngToast.create
+                                content: translation
+                                className: "danger"
 ]

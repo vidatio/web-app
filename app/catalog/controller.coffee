@@ -14,7 +14,14 @@ app.controller "CatalogCtrl", [
     "CategoriesFactory"
     "TagsService"
     "$log"
-    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log) ->
+    "$timeout"
+    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log, $timeout) ->
+        $timeout ->
+            $("#search-title").on "focus", ->
+                $("#search-filter").addClass "active"
+            .on "blur", ->
+                $("#search-filter").removeClass "active"
+
         angular.element('#my-vidatio-checkbox').radiocheck()
         stateParams = {}
         $scope.maxDate = moment.tz('UTC').hour(12).startOf('h')
@@ -27,7 +34,13 @@ app.controller "CatalogCtrl", [
                 to: if $stateParams.to then moment($stateParams.to, "DD-MM-YYYY") else ""
             category: if $stateParams.category then $stateParams.category else ""
             tags: if $stateParams.tags then $stateParams.tags.split("|") else ""
+            name: if $stateParams.name then $stateParams.name else ""
             showMyVidatios: if $stateParams.myvidatios then if $stateParams.myvidatios is "true" then true else false
+
+        stateParams = {}
+        $scope.maxDate = moment.tz('CET')
+
+        $scope.tags = Tags.getAndPreprocessTags()
 
         Categories.query (response) ->
             $scope.categories = response
@@ -72,6 +85,7 @@ app.controller "CatalogCtrl", [
             stateParams.tags = if $scope.filter.tags then $scope.filter.tags.join("|") else ""
             stateParams.from = if $scope.filter.dates.from then $scope.filter.dates.from.format("DD-MM-YYYY") else ""
             stateParams.to = if $scope.filter.dates.to then $scope.filter.dates.to.format("DD-MM-YYYY") else ""
+            stateParams.name = if $scope.filter.name then $scope.filter.name else ""
             $scope.changeURL()
 
         # @method reset
@@ -95,10 +109,4 @@ app.controller "CatalogCtrl", [
                 notify: false
                 reload: $state.current
 
-        # @method $scope.openInEditor
-        # @description set the vidatio options from saved dataset
-        $scope.openInEditor = (data) ->
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
-                Data.useSavedData data
 ]

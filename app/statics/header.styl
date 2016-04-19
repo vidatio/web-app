@@ -10,8 +10,10 @@ header
 
     h1
         margin-top 10px
+        display inline
+        line-height 1.4
 
-    .middle
+.middle
         text-align center
 
     #navigation
@@ -42,7 +44,6 @@ header
             font-family Colaborate-Medium, $fonts
             border-bottom 3px solid $color-passive
             color $color-passive
-            font-size 21px
             line-height 54px
             float left
             height 50px
@@ -108,7 +109,7 @@ header
                             border-top 12px solid $color-green
                             content ""
                             display block
-                            margin -5px auto 0
+                            margin -7px auto 0
                             width 15px
 
                 &:hover,
@@ -214,14 +215,14 @@ header
             &.menu-active
                 color $color-green !important
 
-            span
-                display block
-                position relative
-                color $color-black
-                font-size 10px
-                height 11px
-                line-height 10px
-                font-family Colaborate,Arial,Helvetica,sans-serif
+        span
+            display block
+            position relative
+            color $color-black
+            font-size 10px
+            height 11px
+            line-height 10px
+            font-family Colaborate,Arial,Helvetica,sans-serif
 
         a#menu
             font-size 20px
@@ -288,7 +289,7 @@ header
     header
         .catalog-title,
         .profile-title
-            margin-top 40px
+            margin-top 30px
 
         #process-nav
             margin-top 25px
@@ -310,9 +311,6 @@ header
                 span
                     display block
 
-                    &:nth-child(2)
-                        font-size 16px
-
                 &.active
                     span
                         &:nth-child(2)
@@ -324,6 +322,3 @@ header
         #process-nav
             margin-top 70px
 
-@media(max-width: 900px)
-    .catalog-title
-        margin-top 82px

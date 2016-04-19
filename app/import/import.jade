@@ -5,14 +5,14 @@
                 #option-empty-table.area
                     a(href="" ng-click="continueToEmptyTable()" title="{{ 'NEW_VIDATIO_DESCRIPTION' | translate }}")
                         .option-icon.icon-emptytable
-                        h4 {{ "NEW_VIDATIO" | translate | uppercase }}
+                        h3 {{ "NEW_VIDATIO" | translate | uppercase }}
                         span.description-text ({{ "NEW_VIDATIO_DESCRIPTION" | translate }})
 
             .col-sm-6
                 #option-browse-data.area
                     a(ui-sref="app.catalog({ locale: locale })" title="{{ 'ALL_VIDATIOS_DESCRIPTION' | translate }}")
                         .option-icon.icon-opendata
-                        h4 {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
+                        h3 {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
                         span.description-text ({{ "ALL_VIDATIOS_DESCRIPTION" | translate }})
 
         .row.file-read.layout-3-columns
@@ -21,15 +21,15 @@
                 #option-browse-filesystem.area
                     .icon-and-text-wrapper
                         .option-icon.icon-searchfiles
-                        h4 {{ "CHOOSE_FILE" | translate | uppercase }}
+                        h3 {{ "CHOOSE_FILE" | translate | uppercase }}
                         span.description-text (CSV, SHP)
-                        input#input-browse-filesystem(type="file" ng-file-select title="CSV & SHP {{'IMPORT'|translate}}")
+                        input#input-browse-filesystem(type="file" ng-file-select title="CSV & SHP {{'IMPORT'|translate|lowercase}}")
 
             .col-sm-4
                 #option-drag-and-drop.area
                     .icon-and-text-wrapper
                         .option-icon.icon-draganddrop
-                        h4 {{ "DRAG_AND_DROP" | translate | uppercase }}
+                        h3 {{ "DRAG_AND_DROP" | translate | uppercase }}
                         span.description-text (CSV, SHP)
 
                         .hover-wrapper
@@ -41,7 +41,7 @@
                 #option-link.area
                     .icon-and-text-wrapper
                         .option-icon.icon-link
-                        h4 {{ "LINK" | translate | uppercase }}
+                        h3 {{ "LINK" | translate | uppercase }}
                         .input-group.form-link
                             input.form-control(type="text" placeholder="{{ 'LINK_TO_FILE' | translate }}..." ng-model="link")
                             span.input-group-btn
@@ -50,8 +50,8 @@
     #drop-zone
         .row
             .col-sm-12
-                .area
-                    .glyphicon.glyphicon-plus
+                .drop-zone-area
+                    div.glyphicon.glyphicon-plus
                     span.text {{ "FILE_DROP" | translate }}
 
         .row

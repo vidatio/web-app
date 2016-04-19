@@ -1,57 +1,85 @@
 @require "colors"
 @require "helpers"
 
-.thin-font
-    font-family Colaborate-Thin, Arial, Helvetica, sans-serif
-
-.light-font
-    font-family Colaborate-Light, Arial, Helvetica, sans-serif
-
-.bold-font
-    font-family Colaborate-Bold, Arial, Helvetica, sans-serif
-
 h1, h2, h3, h4, h5, h6
     padding 0
     margin 0
     display inline-block
+    font-weight normal
 
 h1
-    font-family Colaborate-Bold, $fonts
+    font-family Colaborate-Medium, $fonts
     font-size 30px
     text-transform uppercase
     line-height 25px
 
 h2
-    font-family Colaborate-Bold, $fonts
-    font-size 16px
-    text-transform uppercase
+    font-family Colaborate-Thin, $fonts
+    font-size 24px
 
 h3
-    font-family Colaborate-Medium, $fonts
-    font-size 16px
+    font-family Colaborate-Regular, $fonts
+    font-size 19px
+    font-weight bold
 
 h4
-    font-family Colaborate-Light, $fonts
-    font-size 18px
+    font-family Colaborate-Regular, $fonts
+    font-weight bold
+    font-size 16px
 
-a, a:visited
-    color white
+p
+    line-height 20px
+
+::-webkit-input-placeholder
+    font-size 16px
+    color $color-grey !important
+    opacity 1
+
+// Firefox > 19
+::-moz-placeholder
+    font-size 16px
+    color $color-grey !important
+    opacity 1
+
+// Firefox < 19
+:-moz-placeholder
+    font-size 16px
+    color $color-grey !important
+    opacity 1
+
+input:-ms-input-placeholder
+    font-size 16px
+    color $color-grey !important
+    opacity 1
+
+a, a:visited, footer a, footer a:visited
+    font-weight normal
+    color $color-white
     text-decoration none
 
     &.inverse
         color $color-green
 
-a:hover, a:focus
-    color $color-hover-light
+    &.dark
+        color $color-grey-dark
+
+a:hover, footer a:hover
+    color $color-green
 
     &.inverse
         color $color-hover-dark
 
-a:active
+    &.dark
+        color $color-green
+
+a:active, a:focus, footer a:active, footer a:focus
     color $color-hover-dark
 
     &.inverse
         color $color-active
+
+    &.dark
+        color $color-hover-dark
 
 a:focus
     outline none
@@ -86,7 +114,6 @@ a:focus
 .bg-dark
     background-color $color-grey-dark
 
-
 html, body
     padding 0
     margin 0
@@ -97,6 +124,9 @@ html, body
     font-size 16px
     color $color-grey-dark
     background-color $color-grey-light
+
+p, input, label
+    font-size 16px
 
 .app-view
     padding-bottom 100px
@@ -132,8 +162,7 @@ html, body
             .col-wrapper
                 margin-left 28px
 
-
-@media(max-width 768px)
+@media (max-width 768px)
     .layout-3-columns .col-sm-4 .col-wrapper
         margin 0 !important
 
@@ -169,31 +198,25 @@ html, body
         .alert-success
             border-top 3px solid $color-green
 
-/* defines how many x-pixels the menu has to be pushed to the left side*/
-.cbp-spmenu-push-toleft
-    left -350px
 
-@media(max-width: 500px)
-    .cbp-spmenu-push-toleft
-        left -290px
+@media (max-width: 500px)
+    @keyframes fadeIn {
+        from {
+            opacity: 0
+        }
+        to {
+            opacity: 1
+        }
+    }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0
+    @keyframes fadeOut {
+        from {
+            opacity: 1
+        }
+        to {
+            opacity: 0
+        }
     }
-    to {
-        opacity: 1
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1
-    }
-    to {
-        opacity: 0
-    }
-}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak
     display none !important
@@ -202,7 +225,95 @@ html, body
     cursor: pointer
 
 .center-block
-  display block
-  margin-left auto
-  margin-right auto
-  float: none
+    display block
+    margin-left auto !important
+    margin-right auto !important
+    float: none
+
+.copy-vidatio-button-group
+    input
+        border-color $color-input-border-inactive
+        border-radius 4px
+
+        &:hover
+        &:focus
+            border-color $color-green
+
+    input.form-control[readonly]
+        color $color-black
+
+.get-started
+    position relative
+    left 50%
+    margin-left -90px
+    width 175px
+    transform rotate(-10deg)
+
+    a
+        width inherit
+        padding 15px 10px 10px 10px
+        text-align center
+        display inline-block
+        line-height 30px
+        vertical-align middle
+        border-radius 5px
+
+        &:visited
+            color $color-white
+
+        span
+            position absolute
+            width 50px
+            top -20px
+            right -15px
+            display inline-block
+            transform rotate(10deg)
+            font-size 50px
+            padding-top 15px
+            padding-bottom 15px
+            border-radius 5px
+            font-weight bold
+
+        &:hover
+            span
+                background-color $color-hover-dark
+
+        &:active
+        &:focus
+            background-color $color-active
+
+            span
+                background-color $color-active
+
+.btn span.icon-bracketright
+    font-size 14px
+    margin-left 5px
+
+.area
+    border-top 3px solid $color-green
+    background $color-white
+    box-shadow $box-shadow-size $color-shadow
+    min-width 130px
+    padding 0 30px 30px 30px
+    margin-bottom 25px
+
+.right
+    float right
+
+.form-group
+    margin-bottom 0
+
+    &:last-child
+        margin-bottom 20px
+
+.option-icon
+    width 100px
+    margin 15px auto 0
+    height 62px
+    font-size 45px
+    color $color-dark-grey
+    text-align center
+
+.option-icon.icon-save
+    margin 4px auto 10px
+    font-size 54px

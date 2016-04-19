@@ -17,14 +17,18 @@
                         a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')")
                             span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
                     li.diagram-button
-                        a.icon-linechart(href="#" ng-click="selectDiagram('timeseries')")
-                            span {{ "DIAGRAMS.TIME_SERIES" | translate }}
+                        a.icon-linechart(href="#" ng-click="selectDiagram('line')")
+                            span {{ "DIAGRAMS.LINE_CHART" | translate }}
                     li.diagram-button
                         a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')")
                             span {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
                     li.diagram-button
                         a.icon-map(href="#" ng-click="selectDiagram('map')")
                             span {{ "DIAGRAMS.MAP" | translate }}
+
+            .settings-button(ng-hide="visualization.type != 'map' && data.metaData.fileType != 'shp'")
+                a.icon-resize-small(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="setBoundsToGeoJSON()")
+                    span {{ "CENTER" | translate }}
 
             .color-selection.settings-button(ng-hide="visualization.type == 'map' || data.metaData.fileType == 'shp'")
                 a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true" title="{{'CHANGE_COLOR'|translate}}")
@@ -34,10 +38,10 @@
                 a(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
                     span {{ "DOWNLOAD" | translate }}
                 ul.download-menu
-                    li.download-button
+                    li.jpeg-button
                         a.icon-downloadvisualization(href="#" ng-click="shareVisualization('jpg')")
                             span JPEG
-                    li.diagram-button
+                    li.png-button
                         a.icon-downloadvisualization(href="#" ng-click="shareVisualization('png')")
                             span PNG
 

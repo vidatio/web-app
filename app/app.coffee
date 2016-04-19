@@ -32,8 +32,11 @@ app.run [
     "$cookieStore"
     "CONFIG"
     "$translate"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate) ->
+    "ngToast"
+    "$window"
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
         $rootScope.$state = $state
+        $rootScope.hostUrl = "#{$location.protocol()}://#{$location.host()}"
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
@@ -55,12 +58,15 @@ app.run [
             $http.defaults.headers.common["Authorization"] = "Basic " + $rootScope.globals.currentUser.authData
 
         $rootScope.history = []
+        fromEditor = false
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
+            $rootScope.absUrl = $location.absUrl()
             if toState.title?
                 $rootScope.title = toState.title
             else
                 $translate("SLOGAN").then (slogan) ->
                     $rootScope.title = slogan
+
 
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
@@ -73,6 +79,38 @@ app.run [
                 $rootScope.history.push
                     name: "app.share"
                     params: fromParams
+
+            userPages = ["app.login", "app.registration"]
+            editorPages = ["app.editor", "app.editor.id", "app.share"]
+            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.login", "app.registration"]
+
+            # set boolean value true when user navigates from editor/share to login/registration
+            if fromState.name in editorPages and toState.name in userPages
+                fromEditor = true
+
+            # show toast-message when user navigates otherwise than back to editor/share and was before on login/registration
+            if fromEditor and fromState.name in userPages and toState.name not in editorAndUserPages
+                showToastMessage('TOAST_MESSAGES.VIDATIO_CHANGES_SAVED')
+                fromEditor = false
+                return
+
+            # show toast-message for users when editor- or share-page is leaved
+            if fromState.name in editorPages and toState.name not in editorAndUserPages
+                # don't show toast-message when user saves vidatio and continues to detailview
+                if fromState.name is "app.share" and toState.name is "app.dataset"
+                    return
+
+                # show different toast-message when user goes back to import
+                toastMessage = if toState.name is "app.import" then 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED_IMPORT' else 'TOAST_MESSAGES.VIDATIO_CHANGES_SAVED'
+                showToastMessage(toastMessage)
+
+            window.scrollTo 0, 0
+
+        showToastMessage = (message) ->
+            $translate(message)
+            .then (translation) ->
+                ngToast.create
+                    content: translation
 ]
 
 app.config [
@@ -178,6 +216,12 @@ app.config [
             controller: "ImportCtrl"
             title: "import"
 
+        .state "app.embedding",
+            url: "/embedding/:id"
+            templateUrl: "embedding/embedding.html"
+            controller: "EmbeddingCtrl"
+            title: "embedding"
+
         .state "app.editor",
             url: "/editor"
             templateUrl: "editor/editor.html"
@@ -203,10 +247,20 @@ app.config [
             title: "share"
 
         .state "app.catalog",
-            url: "/catalog?from&to&category&tags&myvidatios"
+            url: "/catalog?name&from&to&category&tags&myvidatios"
             templateUrl: "catalog/catalog.html"
             controller: "CatalogCtrl"
             title: "catalog"
+
+        .state "app.fourofour",
+            url: "/404"
+            templateUrl: "404/404.html"
+            title: "404"
+
+        .state "app.terms",
+            url: "/terms"
+            templateUrl: "terms/terms.html"
+            title: "terms"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",
@@ -215,9 +269,14 @@ app.config [
                 locale =
                     locale: $translateProvider.preferredLanguage()
 
-                # iterate over all states and check if the requested url exists as a state
-                $state.get().forEach (state) ->
-                    if $stateParams.path is state.url
+                # iterate over all states and check if the requested url exists as a state; if not show 404-page
+                for state in $state.get()
+                    if $stateParams.path in ["/de", "/en"]
+                        $state.go "app.index", locale
+                        break
+                    else if $stateParams.path is state.url
                         $state.go state.name, locale
-
+                        break
+                    else
+                        $state.go "app.fourofour", locale
 ]

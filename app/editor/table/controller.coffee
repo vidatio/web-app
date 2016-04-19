@@ -49,6 +49,11 @@ app.controller "TableCtrl", [
             clearFocusedAxisButtons()
             Data.downloadCSV($scope.data.name)
 
+        # https://github.com/kapetan/jquery-observe
+        $timeout ->
+            $('.ht_clone_top table thead > tr').observe 'childlist', 'th', (record) ->
+                console.log record
+
         #@method $scope.axisSelection
         #@description selects axis by clicking on the header and creates new visualization
         $scope.axisSelection = (axis) ->

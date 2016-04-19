@@ -21,29 +21,27 @@ app.controller "ShareCtrl", [
     "ngToast"
     "ErrorHandler"
     "$state"
-    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state) ->
+    "$window"
+    "$location"
+    "TagsService"
+    ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
         $scope.goToPreview = false
         $scope.hasData = Table.dataset.length && Table.dataset[0].length
         $scope.visualization = Visualization.options
+        $scope.vidatio = Data.vidatio
+        $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
-        $scope.vidatio =
-            publish: true
+        port = if $location.port() then ":" + $location.port() else ""
+        $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
 
-        $translate("NEW_VIDATIO").then (translation) ->
-            $scope.vidatio.name = Data.name || "#{translation} #{moment().format("DD/MM/YYYY")}"
+        $scope.vidatio.name = $scope.vidatio.name || Data.name || null
+
+        $scope.tags = Tags.getAndPreprocessTags()
 
         Categories.query (response) ->
             $scope.categories = response
 
         $timeout ->
-            # initialize tagsinput on page-init for propper displaying the tagsinput-field
-            $(".tagsinput").tagsinput()
-
-            #to remove tags label on focus & remove flag-ui tags-input length
-            $(".tagsinput-primary ").on "focus", ".bootstrap-tagsinput input", ->
-                $("span.placeholder").hide()
-                $(this).attr("style", "width:auto")
-
             #to change color after user selection (impossible with css)
             $(".selection select").change -> $(this).addClass "selected"
 
@@ -84,10 +82,6 @@ app.controller "ShareCtrl", [
                     when "shp"
                         dataset = Map.getGeoJSON()
 
-                $scope.vidatio.tags = $(".tag").map ->
-                    return $(@).text()
-                .get()
-
                 Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
                     Progress.setMessage ""
 
@@ -95,7 +89,7 @@ app.controller "ShareCtrl", [
                         ErrorHandler.format errors
                         return false
 
-                    $scope.vidatio._id = response._id
+                    $scope.vidatio = response
 
                     $scope.link = $state.href("app.dataset", {id: response._id}, {absolute: true})
 
@@ -112,7 +106,6 @@ app.controller "ShareCtrl", [
                         content: translation
                         className: "danger"
 
-
         $scope.downloadVisualization = (type) ->
             fileName = $scope.vidatio.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
@@ -120,27 +113,18 @@ app.controller "ShareCtrl", [
         $scope.downloadCSV = ->
             Data.downloadCSV($scope.vidatio.name)
 
-        $scope.copyVidatioLink = ->
-            window.getSelection().removeAllRanges()
-            link = document.querySelector "#vidatio-link"
-            range = document.createRange()
-            range.selectNode link
-            window.getSelection().addRange(range)
+        # @method $scope.openPopup
+        # @description open social-media popups with base url as parameter in a new centered popup
+        $scope.openPopup = (url, title, w, h) ->
+            dualScreenLeft = if $window.screenLeft isnt undefined then $window.screenLeft else screen.left
+            dualScreenTop = if $window.screenTop isnt undefined then $window.screenTop else screen.top
+            width = if $window.innerWidth then $window.innerWidth else if document.documentElement.clientWidth then document.documentElement.clientWidth else screen.width
+            height = if $window.innerHeight then $window.innerHeight else if document.documentElement.clientHeight then document.documentElement.clientHeight else screen.height
 
-            try
-                successful = document.execCommand "copy"
-
-                $translate("TOAST_MESSAGES.LINK_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-
-            catch error
-                $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
-                .then (translation) ->
-                    ngToast.create
-                        content: translation
-                        className: "danger"
-
-            window.getSelection().removeAllRanges()
+            left = width / 2 - (w / 2) + dualScreenLeft
+            top = height / 2 - (h / 2) + dualScreenTop
+            url = "#{url}#{decodeURIComponent($scope.link)}"
+            newWindow = $window.open(url, title, "scrollbars=yes, width=" + w + ", height=" + h + ", top=" + top + ", left=" + left)
+            if $window.focus
+                newWindow.focus()
 ]

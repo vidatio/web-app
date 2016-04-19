@@ -1,6 +1,6 @@
 "use strict"
 
-class vidatio.TimeseriesChart extends vidatio.Visualization
+class vidatio.LineChart extends vidatio.Visualization
     constructor: (dataset, options, width, height, chartSelector) ->
         vidatio.log.info "Timeseries chart constructor called"
         vidatio.log.debug
@@ -16,7 +16,8 @@ class vidatio.TimeseriesChart extends vidatio.Visualization
 
         # handle different date formats and parse them for c3.js charts
         for element in @chartData
-            element[options.headers["x"]] = moment(element[options.headers["x"]], ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
+            if vidatio.helper.isDate(element[options.headers["x"]])
+                element[options.headers["x"]] = moment(element[options.headers["x"]], ["MM-DD-YYYY", "DD-MM-YYYY", "YYYY-MM-DD"]).format("YYYY-MM-DD")
 
         # we need to wait for angular to finish rendering
         setTimeout =>

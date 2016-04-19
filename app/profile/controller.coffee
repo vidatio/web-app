@@ -5,25 +5,24 @@ app = angular.module("app.controllers")
 app.controller "ProfileCtrl", [
     "$scope"
     "UserDatasetsFactory"
-    "ProgressService"
-    "DataService"
     "$cookieStore"
     "$translate"
-    ($scope, UserDatasets, Progress, Data, $cookieStore, $translate) ->
+    "ErrorHandler"
+    ($scope, UserDatasets, $cookieStore, $translate, ErrorHandler) ->
         $scope.vidatios = []
         globals = $cookieStore.get "globals" || {}
 
-        UserDatasets.query {id: globals.currentUser.id}, (response) ->
-            response.splice(0, response.length - 4)
-            $scope.vidatios = response
+        $scope.$watch "vidatios", ->
+            if $scope.vidatios.length < 4
+                loadDatasets()
+        , true
 
-            for vidatio in $scope.vidatios
-                vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
+        loadDatasets = ->
+            UserDatasets.datasetsLimit { "limit": 4 , id: globals.currentUser.id }, (response) ->
+                $scope.vidatios = response
+                for vidatio in $scope.vidatios
+                    vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
+            , (error) ->
+                ErrorHandler.format error
 
-        # @method $scope.openInEditor
-        # @description open dataset in Editor
-        $scope.openInEditor = (data) ->
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
-                Data.useSavedData data
 ]
