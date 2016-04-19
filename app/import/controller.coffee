@@ -102,24 +102,24 @@ app.controller "ImportCtrl", [
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                $rootScope.progressMessage = message
+                Progress.setMessage message
+            .then ->
+                Import.readFile($scope.file, fileType).then (fileContent) ->
+                    $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                        Progress.setMessage message
 
-            Import.readFile($scope.file, fileType).then (fileContent) ->
-                $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                    $rootScope.progressMessage = message
+                    initTableAndMap fileType, fileContent
 
-                initTableAndMap fileType, fileContent
+                , (error) ->
+                    $log.error "ImportCtrl Import.readFile promise error called"
+                    $log.debug
+                        error: error
 
-            , (error) ->
-                $log.error "ImportCtrl Import.readFile promise error called"
-                $log.debug
-                    error: error
-
-                $translate('TOAST_MESSAGES.READ_ERROR')
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
+                    $translate('TOAST_MESSAGES.READ_ERROR')
+                        .then (translation) ->
+                            ngToast.create
+                                content: translation
+                                className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
 
@@ -162,10 +162,6 @@ app.controller "ImportCtrl", [
                             i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
 
             promise.then ->
-                console.log("TEST")
-                $timeout ->
-                    $rootScope.progressMessage = null
-
                 $location.path editorPath
 
             .catch (error) ->
