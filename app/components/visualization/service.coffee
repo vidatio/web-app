@@ -198,6 +198,12 @@ app.service 'VisualizationService', [
 
                 return true
 
+            applyInlineStyle = (el) ->
+                for key, value of window.getComputedStyle(el)
+                    if key in ["font", "position", "fill", "stroke", "shape-rendering", "background-color", "opacity", "width", "height"]
+                        el.style["#{key}"] = value
+                return
+
             downloadAsImage: (fileName, type) ->
                 $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
                     Progress.setMessage translation
@@ -206,9 +212,14 @@ app.service 'VisualizationService', [
                     $targetElem = $("#map")
                 else if @options.type is "parallel"
                     $targetElem = $("#chart svg")
+                    $("#chart svg .axis").each (idx, element) ->
+                        applyInlineStyle element
+                        children = element.getElementsByTagName "*"
+                        for child in children
+                            applyInlineStyle child
+                        return
                 else
                     $targetElem = $("#d3plus")
-
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
                     Progress.setMessage ""
