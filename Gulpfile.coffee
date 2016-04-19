@@ -71,6 +71,7 @@ BUILD =
         ]
         jade: [
             "./app/**/*.jade"
+            "./app/**/*.jade"
         ]
         html: [
             "./build/html/**/*.html"
@@ -313,7 +314,7 @@ gulp.task "build:production:source:coffee",
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
-        #.pipe uglify()
+        .pipe uglify()
         .pipe concat(BUILD.app)
         .pipe gulp.dest(BUILD.dirs.js)
 
