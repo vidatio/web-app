@@ -75,13 +75,13 @@ app.controller "DatasetCtrl", [
             fileName = $scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
 
-        #@method $scope.dwonloadCSV
+        #@method $scope.downloadCSV
         #@description downloads the dataset in csv-format
         $scope.downloadCSV = ->
             Data.downloadCSV $scope.data.title
 
-        #@method $scope.recenterMap
+        #@method $scope.setBoundsToGeoJSON
         #@description recenters map to intial view of the map via
-        $scope.recenterMap = ->
+        $scope.setBoundsToGeoJSON = ->
             Map.setBoundsToGeoJSON()
 ]
