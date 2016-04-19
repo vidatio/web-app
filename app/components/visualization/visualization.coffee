@@ -189,7 +189,9 @@ class window.vidatio.Visualization
             targetElem: $targetElem
 
         $targetElemClone = $($targetElem).clone()
+        obj = {}
 
+        # chart is parallel coordinate
         if $targetElem.selector is "#chart svg"
 
             $canvasObject = $("#chart")
@@ -197,21 +199,32 @@ class window.vidatio.Visualization
             canvas = $($canvasObject).find(".marks")[0]
             ctx = canvas.getContext "2d"
 
+            saveBoundingRect = canvas.getBoundingClientRect()
+            ctx.canvas.width = $canvasObject.width()
+            ctx.canvas.height = $canvasObject.height()
+
             canvas2 = $($canvasObject).find(".brushed")[0]
             canvas3 = $($canvasObject).find(".foreground")[0]
             canvas4 = $($canvasObject).find(".highlight")[0]
-
-
-            ctx.drawImage canvas2, 0, 0
-            ctx.drawImage canvas3, 0, 0
-            ctx.drawImage canvas4, 0, 0
-            ctx.drawSvg (new XMLSerializer).serializeToString($targetElemClone[0]), 0, 0
+            (drawCanvases = ->
+                ctx.drawImage canvas2, 0, 0
+                ctx.drawImage canvas3, 0, 17
+                ctx.drawImage canvas4, 0, 0
+                ctx.drawSvg (new XMLSerializer).serializeToString($targetElemClone[0]), 0, -7
+            )()
 
             return new Promise (resolve, reject) ->
-                return resolve
-                    png: canvas.toDataURL "image/png"
-                    jpg: canvas.toDataURL "image/jpeg"
+                obj["png"] = canvas.toDataURL "image/png"
+                ctx.fillStyle = "#FFFFFF"
+                ctx.fillRect 0, 0, $canvasObject.width(), $canvasObject.height()
+                drawCanvases()
+                obj["jpg"] = canvas.toDataURL "image/jpeg"
+                ctx.clearRect 0, 0, $canvasObject.width(), $canvasObject.height()
+                ctx.canvas.width = saveBoundingRect.width
+                ctx.canvas.height = saveBoundingRect.height
+                return resolve(obj)
 
+        # chart is d3plus chart
         else
             return new Promise (resolve, reject) ->
                 Pablo($targetElemClone).dataUrl "png", (dataUrlPNG) ->
