@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="bower_components/moment/moment.js"></script>
+    <link href="bower_components/video.js/dist/video-js.css" type="text/css" rel="stylesheet"/>
+    <link href="bower_components/flat-ui/dist/css/flat-ui.css" type="text/css" rel="stylesheet"/>
+    <script src="bower_components/flat-ui/dist/js/vendor/jquery.min.js"></script>
+    <script src="bower_components/flat-ui/dist/js/vendor/video.js"></script>
+    <script src="bower_components/flat-ui/dist/js/flat-ui.js"></script>
+    <style>
+        html, body{
+            width: 500px;
+            height: 500px;
+        }
+    </style>
 </head>
-<body style="background: #EEE; width: 100%; height: 100%;">
+<body>
 
-    <img src="app/statics/assets/images/logo-text-black.svg" style="width: 500px; position: absolute; top: 420px; right: 150px;"/>
+<video class="video-js" preload="auto" poster="assets/img/video/poster.jpg" data-setup="{}">
+    <source src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.mp4" type="video/mp4">
+    <source src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.webm" type="video/webm">
+</video>
+
+<script type="text/javascript" rel="script">
+
+</script>
 
 </body>
 </html>

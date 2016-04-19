@@ -105,7 +105,7 @@ BUILD =
             "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
-            "./bower_components/flat-ui/dist/js/vendor/video.js"
+            "./bower_components/video.js/dist/video.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
             "./bower_components/moment/locale/de.js"
@@ -127,6 +127,7 @@ BUILD =
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
             "./bower_components/angular-bootstrap-colorpicker/css/colorpicker.css"
             "./bower_components/select2/dist/css/select2.css"
+            "./bower_components/video.js/dist/video-js.css"
         ]
     dirs:
         out: "./build"
