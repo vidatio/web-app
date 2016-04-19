@@ -18,6 +18,7 @@ app.directive 'ngFileDropStart', [ ->
 
             #enter: cursor enters the drop-zone
             el.bind "dragenter", (e) ->
+                return unless document.getElementById("drop-zone")?
                 document.getElementById("drop-zone").style.display = "block"
                 e.preventDefault()
                 false
@@ -28,6 +29,7 @@ app.directive 'ngFileDropEnd', [ ->
 
             #leave: cursor moves out of drop-zone
             el.bind "dragleave", (e) ->
+                return unless document.getElementById("drop-zone")?
                 document.getElementById("drop-zone").style.display = "none"
                 e.preventDefault()
                 false
@@ -40,6 +42,7 @@ app.directive 'ngFileDropEnd', [ ->
             #drop: file got dropped on the drop-zone
             el.bind "drop", (e) ->
                 e.preventDefault()
+                return unless document.getElementById("drop-zone")?
                 document.getElementById("drop-zone").style.display = "none"
                 $scope.file = e.originalEvent.dataTransfer.files[0]
                 $scope.getFile("dragged")
