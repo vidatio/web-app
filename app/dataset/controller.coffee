@@ -81,7 +81,7 @@ app.controller "DatasetCtrl", [
             Data.downloadCSV $scope.data.title
 
         #@method $scope.setBoundsToGeoJSON
-        #@description recenters map to intial view of the map via
+        #@description recenters map to intial view of the map
         $scope.setBoundsToGeoJSON = ->
             Map.setBoundsToGeoJSON()
 ]
