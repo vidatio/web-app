@@ -6,7 +6,7 @@
                 span.text {{ "DIAGRAMS.RECOMMEND" | translate }}
 
             .diagram-selection.settings-button(ng-hide="data.metaData.fileType == 'shp'")
-                a(href='#' title="{{'CHANGE_DIAGRAM'|translate}}").icon-diagrammenu
+                a.icon-diagrammenu(href='#' title="{{'CHANGE_DIAGRAM'|translate}}")
                     span {{ "DIAGRAMS.DIAGRAM_TYPE" | translate }}
 
                 ul.diagram-menu
@@ -35,7 +35,7 @@
                     span {{ "COLORS" | translate }}
 
             .download-selection.settings-button(ng-hide="!visualization.type")
-                a(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
+                a.icon-download(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}")
                     span {{ "DOWNLOAD" | translate }}
                 ul.download-menu
                     li.jpeg-button
