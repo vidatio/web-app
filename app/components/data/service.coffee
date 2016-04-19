@@ -10,10 +10,8 @@ app.service 'DataService', [
     "VisualizationService"
     "$log"
     "DatasetFactory"
-    "$translate"
     "$state"
-    "ngToast"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $state) ->
         class Data
             constructor: ->
                 # Temporarily solution because there is redundance
@@ -110,32 +108,6 @@ app.service 'DataService', [
                 csvURL = window.URL.createObjectURL(csvData)
 
                 vidatio.visualization.download fileName + ".csv", csvURL
-
-            # @method copyVidatioLink
-            # @description copy link for dataset to clipboard and return success-state
-            # @param {String} element
-            copyVidatioLink: (element) ->
-                window.getSelection().removeAllRanges()
-                link = document.querySelector element
-                range = document.createRange()
-                range.selectNode link
-                window.getSelection().addRange(range)
-
-                try
-                    document.execCommand "copy"
-                    $translate("TOAST_MESSAGES.LINK_COPIED")
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-
-                catch error
-                    $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                            className: "danger"
-
-                window.getSelection().removeAllRanges()
 
         new Data
 ]

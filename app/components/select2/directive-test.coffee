@@ -18,7 +18,6 @@ describe "Directive Select2", ->
 
             $httpBackend.when('GET', 'languages/de.json').respond({})
 
-
     it "should exist in the injector", ->
         expect(@injector.has('select2Directive')).toBeTruthy()
 

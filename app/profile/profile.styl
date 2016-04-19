@@ -18,35 +18,37 @@
         button
             width 200px
 
-    h2
-        display block
+    h3
         margin-bottom 15px
 
     li
         list-style-type none
 
     .no-vidatios .same-height
-        margin: 10px 0
-        p
+        margin 10px 0
+
+        .no-vidatios-text
+            padding-top 10px
+
+        .no-vidatios-text p
             text-align center
 
         .get-started
             bottom 0
+            margin-top 25px
+            margin-bottom 15px
 
-@media(max-width: 767px)
-    #profile
-        .vidatio
-            a.img
-                height 48vw
+@media (max-width: 550px)
+    vidatio
+        img
+            height 30vw !important
 
-            img
-                max-height 45vw
+@media (min-width: 551px) and (max-width: 767px)
+    vidatio
+        img
+            height 33vw !important
 
-@media(min-width: 768px) and (max-width: 991px)
-    #profile
-        .vidatio
-            a.img
-                height 26vw
-
-            img
-                max-height 24vw
+@media (min-width: 768px) and (max-width: 991px)
+    vidatio
+        img
+            height 20vw !important

@@ -1,28 +1,34 @@
-#register-wrapper
-#login-wrapper
 #share
     margin 10px auto 0
-    h4
-        text-align center
-        margin 15px auto
+
+    h3
+        margin 15px 0 25px
         width 100%
-        font-family Colaborate-Regular, $fonts
+        text-align center
+
+    h4
+        margin 20px 0 10px
+        width 100%
+
+    h4:first-child
+        margin-top 30px
+
+    #login
+        max-width 100%
 
     .row
+        .right-content
+            padding-right 40px
+
         .to-detail-view
             margin-top 30px
             padding-left 20px
 
-            .go-icon
-                font-size 14px
-                margin-left 5px
-
         .area
-            height 254px
+            min-height 254px
             border-top 3px solid $color-green
             background $color-white
             box-shadow $box-shadow-size $color-shadow
-            margin-bottom 56px
 
             &:hover
                 background $color-white
@@ -32,15 +38,8 @@
             display inline
             color $color-grey-dark
 
-        .option-icon
-            width 100px
-            margin 15px auto 0
-            height 62px
-            font-size 45px
-            color $color-dark-grey
-            text-align center
-
         #preview
+            margin-bottom 50px
             position relative
             width auto
             height 293px
@@ -54,74 +53,23 @@
                 margin-top -50px
                 margin-left -40px
 
-            .metadata-preview
-                position absolute
-                z-index 1
-                width calc(100% - 40px)
-                background-color rgba($color-green, .4)
-                border-top 2px solid $color-table-odd-active
-                text-align left
-                padding 15px
-
-                li
-                    list-style-type none
-                    {lightText}
-                    line-height 16px
-                    max-width 70%
-                    span.author
-                        margin-left 5px
-                        font-family Colaborate-Thin, $fonts
-                    &.author
-                    &.title
-                        font-family Colaborate, $fonts
-                        font-size 15px
-                        line-height 17px
-                    &.tags
-                        color $color-active
-                    &.edit
-                        position absolute
-                        right 10px
-                        top 10px
-                        a
-                            padding 5px
-                            border-radius 4px
-                            &:hover
-                            &:focus
-                                background-color $color-passive
-                                color $color-grey-light
-                                cursor pointer
-
-        #preview
         #download
-            margin-right 13px
+            height 292px
 
-        #download
-            height 215px
+            .download-selection
+                a
+                    height 40px
+                    width 100px
+                    margin-top 30px
+                    padding-top 9px
 
         .save-share
-            padding 0 45px 20px
             height auto
-            min-height 564px
-            margin-left 13px
+            min-height 635px
 
             .icon-save
                 font-size 50px
                 height 67px
-
-            .icon-twitter:before
-                margin-left 2px
-
-            .icon-embeddedcode
-                &:before
-                    font-weight bold
-
-            .embeddedcodeShowOne
-                font-size 32px !important
-
-                &:before
-                    position relative
-                    top -4px
-                    margin-left 2px
 
             .share-options
                 text-align center
@@ -129,6 +77,7 @@
                 margin 0
                 list-style none outside none
                 height 45px
+
                 li
                     display inline
                     list-style-type none
@@ -141,6 +90,25 @@
                         font-size 25px
                         color $color-white
 
+                .icon-twitter:before
+                    margin-left 2px
+
+                .icon-googleplus
+                    font-size 26px
+
+            .icon-embeddedcode
+                &:before
+                    font-weight bold
+                    font-size 20px
+
+            .embeddedcodeShowOne
+                font-size 32px !important
+
+                &:before
+                    position relative
+                    top -4px
+                    margin-left 2px
+
             .input-group
                 margin-bottom 0
                 width 100%
@@ -152,12 +120,11 @@
                     select
                         height 42px
                         text-align left
-                        color $color-grey-dark
-                        border-bottom-left-radius 4px
-                        border-bottom-right-radius 4px
-                        padding-left 8px
 
-                        &.selected
+                        &:not(.selected)
+                            color $color-grey
+
+                        &:selected
                             color $color-grey-dark
 
                         option
@@ -168,61 +135,55 @@
                     color $color-grey-dark
 
                 #vidatio-link
-                    border-top-left-radius 4px
-                    border-bottom-left-radius 4px
+                    border-radius 4px
+                    -webkit-border-radius 4px
+                    -moz-border-radius 4px
+
+                ul.select2-choices
+                    padding-left 3px
+                    margin-right 5px
+
+                textarea.embed-code
+                    word-break break-all
+                    min-height 140px
 
             button[type="submit"]
                 margin-top 8px
 
             p
-                {lightText}
                 margin-bottom 20px
 
             .option-icon
                &.icon-lock
                     margin-top 45px
 
-            .col-xs-6.left
-                text-align left
-                padding 0
-
-            .col-xs-6.right
-                text-align right
-                padding 0
-
             .checkbox
                 margin 20px 0
                 width 100%
-                {lightText}
                 line-height 20px
                 padding-left 32px
+                font-size 16px
 
                 .icons
                     left -0.5px
 
             .form-control[readonly]
                 color $color-passive
-                font-size 14px
 
-            h3
-                margin-top 30px
+            .input-group.form-group.selection
+                &:hover
+                    z-index 2
 
-            .bootstrap-tagsinput
-                padding 0 !important
+            .select2-container
+                border-radius 0 0 4px 4px
 
-@media(max-width 768px)
-    #register-wrapper
-    #login-wrapper
+@media (max-width: 767px)
     #share
-        .row
-            .area
-                margin-bottom 25px !important
+        .download-selection
+            .col-xs-4
+                padding-left 0
 
-            #download
-            #save-share
-                margin 0
-                padding 0 15px 20px
-
-            #download
-                form
-                    width 90%
+                a
+                    width 80px !important
+                    padding-left 5px
+                    padding-right 5px

@@ -3,11 +3,13 @@ footer
         .row
 
             .col-xs-12.col-sm-6
-                a.link(ui-sref="app.imprint()" href="#" title="{{ 'IMPRINT' | translate }} {{ 'OPEN' | translate }}") {{ "IMPRINT" | translate }}
+                a(ui-sref="app.imprint({ locale: locale })" href="#" title="{{ 'IMPRINT' | translate }} {{ 'OPEN' | translate }}") {{ "IMPRINT" | translate }}
                 | |
-                a.link(ui-sref="app.terms()" href="#" title="{{ 'TERMS' | translate }} {{ 'OPEN' | translate }}") {{ "TERMS_SHORT" | translate }}
+                a(ui-sref="app.terms({ locale: locale })" href="#" title="{{ 'TERMS' | translate }} {{ 'OPEN' | translate }}") {{ "TERMS_SHORT" | translate }}
                 | |
-                a.link(href="https://api.vidatio.com/v0/docs" target="_blank" title="{{ 'API_DOCUMENTATION' | translate }} {{ 'OPEN' | translate }}") {{ "API.NAME" | translate }}
+                a(ui-sref="app.team({ locale: locale })" href="#" title="{{ 'OPEN_TEAM' | translate }}" ) {{ "TEAM" | translate }}
+                | |
+                a(href="https://api.vidatio.com/v0/docs" target="_blank" title="{{ 'API_DOCUMENTATION' | translate }} {{ 'OPEN' | translate }}") {{ "API.NAME" | translate }}
 
             .col-xs-12.col-sm-6
                 a.link(href="mailto:office@vidatio.com" title="{{ 'WRITE_EMAIL' | translate }}")
