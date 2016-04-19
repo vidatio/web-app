@@ -19,7 +19,7 @@ app.service 'DataService', [
                 @vidatio = {}
                 @name = ""
                 @metaData =
-                    "fileType": ""
+                    "fileType": "csv"
 
             updateMap: (row, column, oldData, newData) ->
                 columnHeaders = Table.instanceTable.getColHeader()

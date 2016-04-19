@@ -140,6 +140,18 @@ app.service 'TableService', [
                     else if idx is yColumn
                         $(element).find("span").addClass "selected-y"
 
+            # @method hasData
+            # @description checks if the dataset has data
+            # @public
+            # @return {Boolean}
+            hasData: ->
+                hasData = false
+                @dataset.forEach (row, rowIndex) ->
+                    row.forEach (element, index) ->
+                        if element?
+                            hasData = true
+                return hasData
+
 
         new Table
 ]

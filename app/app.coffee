@@ -59,6 +59,7 @@ app.run [
 
         $rootScope.history = []
         fromEditor = false
+
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
             $rootScope.absUrl = $location.absUrl()
             if toState.title?
@@ -106,6 +107,40 @@ app.run [
 
             window.scrollTo 0, 0
 
+        $translate([
+            "D3PLUS.ERROR.ACCEPTED"
+            "D3PLUS.ERROR.CONNECTIONS"
+            "D3PLUS.ERROR.DATA"
+            "D3PLUS.ERROR.DATAYEAR"
+            "D3PLUS.ERROR.LIB"
+            "D3PLUS.ERROR.LIBS"
+            "D3PLUS.ERROR.METHOD"
+            "D3PLUS.ERROR.METHODS"
+            "D3PLUS.MESSAGE.DATA"
+            "D3PLUS.MESSAGE.DRAW"
+            "D3PLUS.MESSAGE.INITIALIZING"
+            "D3PLUS.MESSAGE.LOADING"
+            "D3PLUS.MESSAGE.TOOLTIPRESET"
+            "D3PLUS.MESSAGE.UI"
+        ]).then (translations) ->
+            window.vidatio.d3PlusTranslations =
+                message:
+                    data: translations["D3PLUS.MESSAGE.DATA"]
+                    draw: translations["D3PLUS.MESSAGE.DRAW"]
+                    initializing: translations["D3PLUS.MESSAGE.INITIALIZING"]
+                    loading: translations["D3PLUS.MESSAGE.LOADING"]
+                    tooltipReset: translations["D3PLUS.MESSAGE.TOOLTIPRESET"]
+                    ui: translations["D3PLUS.MESSAGE.UI"]
+                error:
+                    accepted: translations["D3PLUS.ERROR.ACCEPTED"]
+                    connections: translations["D3PLUS.ERROR.CONNECTIONS"]
+                    data: translations["D3PLUS.ERROR.DATA"]
+                    dataYear: translations["D3PLUS.ERROR.DATAYEAR"]
+                    lib: translations["D3PLUS.ERROR.LIB"]
+                    libs: translations["D3PLUS.ERROR.LIBS"]
+                    method: translations["D3PLUS.ERROR.METHOD"]
+                    methods: translations["D3PLUS.ERROR.METHODS"]
+
         showToastMessage = (message) ->
             $translate(message)
             .then (translation) ->
@@ -148,11 +183,11 @@ app.config [
 
         # I18N
         $translateProvider.useSanitizeValueStrategy "escape"
-        $translateProvider.preferredLanguage "de"
-        $translateProvider.fallbackLanguage "de"
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
+        $translateProvider.preferredLanguage "de"
+        $translateProvider.fallbackLanguage "de"
 
         # I18N for datepicker
         moment().locale "de"
@@ -261,6 +296,11 @@ app.config [
             url: "/terms"
             templateUrl: "terms/terms.html"
             title: "terms"
+
+        .state "app.team",
+            url: "/team"
+            templateUrl: "team/team.html"
+            title: "team"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",

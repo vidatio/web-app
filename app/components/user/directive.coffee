@@ -23,3 +23,18 @@ app.directive "validateUniqueness", [
                         , (error) ->
                             reject()
 ]
+
+app.directive "validateName", [
+    "$q"
+    ($q) ->
+        restrict: "A"
+        require: "ngModel"
+        link: (scope, element, attributes, controller) ->
+            controller.$asyncValidators.valid = (modelValue, viewValue) ->
+                return $q (resolve, reject) ->
+                    if viewValue? && viewValue.length
+                        if (/[\/;^<>|\()\[\]#"{}§°\s]+/.test(viewValue))
+                            reject()
+                        else
+                            resolve()
+]

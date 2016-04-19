@@ -58,6 +58,8 @@ app.controller "VisualizationCtrl", [
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.type = type
 
+
+
                 Visualization.create()
 
         #@method $scope.shareVisualization

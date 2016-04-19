@@ -42,18 +42,19 @@
         .get-started
             margin-bottom 30px
 
-        .video-wrapper
-            padding-right 30px
+        .video-wrapper #video
+            width 100%
+            height 100%
+            margin-bottom 40px
 
-            video
-                width 100%
+            .vjs-tech
+                position relative
 
-            .vjs-seek-handle
-                background-color $color-green
-            .vjs-play-control > div:before, .vjs-play-control > div:after
-                color $color-green
-            .vjs-play-progress
-                background-color $color-hover-light
+            .vjs-big-play-button
+                border-radius 4px
+                transform translate(-50%,-50%)
+                top 50%
+                left 50%
 
     #usp
         color $color-white
