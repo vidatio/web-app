@@ -10,7 +10,9 @@ app.controller "HeaderCtrl", [
     ($scope, Table, Data) ->
         $scope.header = Data
 
-        if Data.datasetID?
+        $scope.$watch ->
+            Data.datasetID
+        , ->
             $scope.datasetID = Data.datasetID
 
         # set bool value editorNotInitialized; 'true' means editor was not initialized with a dataset yet
