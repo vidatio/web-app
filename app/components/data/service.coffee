@@ -24,7 +24,7 @@ app.service 'DataService', [
                 @vidatio = {}
                 @name = ""
                 @metaData =
-                    "fileType": ""
+                    "fileType": "csv"
 
             updateMap: (row, column, oldData, newData) ->
                 columnHeaders = Table.instanceTable.getColHeader()
@@ -84,6 +84,7 @@ app.service 'DataService', [
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
+                    Table.setColumns()
                     Map.setGeoJSON data.data
                 else
                     Table.useColumnHeadersFromDataset = false
