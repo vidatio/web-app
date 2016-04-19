@@ -29,6 +29,7 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
+            Data.datasetID = null
             Data.metaData.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
             Visualization.resetOptions()

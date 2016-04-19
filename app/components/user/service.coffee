@@ -91,10 +91,11 @@ app.service 'UserService', [
                 # After login success we want to route the user to the last page except login and registration
                 for element, index in $rootScope.history
                     element = $rootScope.history[$rootScope.history.length - (index + 1)]
+                    console.log element.name
 
                     unless element.name in ["app.login", "app.registration", ""]
                         # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
-                        unless element.name is "app.dataset"
+                        unless element.name in ["app.dataset", "app.editor.id", "app.share.id"]
                             return $state.go element.name, element.params.locale
 
                         return $state.go element.name, 'id': element.params.id, element.params.locale

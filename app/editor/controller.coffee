@@ -24,7 +24,6 @@ app.controller "EditorCtrl", [
         if $stateParams.id and not Table.dataset[0].length
             Data.requestVidatioViaID($stateParams.id)
 
-
         $scope.editor = Data
         $scope.setBoundsToGeoJSON = ->
             Map.setBoundsToGeoJSON()
