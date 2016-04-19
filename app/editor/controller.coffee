@@ -20,8 +20,10 @@ app.controller "EditorCtrl", [
     "$state"
     "TableService"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table) ->
+
         if $stateParams.id and not Table.dataset[0].length
             Data.requestVidatioViaID($stateParams.id)
+
 
         $scope.editor = Data
         $scope.setBoundsToGeoJSON = ->
@@ -37,17 +39,6 @@ app.controller "EditorCtrl", [
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
-            $scope.changeViews(tabIndex)
-
-            $stateParams.tabid = tabIndex
-            $state.go $state.current, $stateParams,
-                notify: false
-                reload: $state.current
-
-        # the displayed views are set accordingly to the clicked tab
-        # @method changeViews
-        # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
-        $scope.changeViews = (tabIndex) ->
             for i of $scope.activeTabs
                 $scope.activeTabs[i] = false
 
@@ -81,6 +72,4 @@ app.controller "EditorCtrl", [
                     window.angular.element($window).triggerHandler("resize")
                 , 100
 
-        if $stateParams.tabid and vidatio.helper.isNumeric($stateParams.tabid)
-            $scope.changeViews(parseInt($stateParams.tabid))
 ]
