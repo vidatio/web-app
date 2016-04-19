@@ -15,7 +15,6 @@ class vidatio.BarChart extends vidatio.Visualization
         @preProcess options
 
          # we need to wait for angular to finish rendering
-
         setTimeout =>
             d3plus
             .viz()
@@ -30,9 +29,8 @@ class vidatio.BarChart extends vidatio.Visualization
             .id("id")
             .x(options.headers["x"])
             .y(options.headers["y"])
-            .tooltip({
-                value: ["x", "y"]
-            })
+            .text("name")
+            .labels(false)
             .order("asc")
             .color("color")
             .width(@width)
