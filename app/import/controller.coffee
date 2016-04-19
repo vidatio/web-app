@@ -29,6 +29,7 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
+            Data.datasetID = null
             Data.metaData.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
             Visualization.resetOptions()
@@ -122,6 +123,7 @@ app.controller "ImportCtrl", [
                             className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
+            Data.datasetID = null
 
             deferred = $q.defer()
             promise = deferred.promise
