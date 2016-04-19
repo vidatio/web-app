@@ -16,6 +16,9 @@ app.controller "AppCtrl", [
         if $rootScope.locale != $stateParams.locale
             $rootScope.locale = $stateParams.locale
 
+        if not $rootScope.progressMessage
+            $rootScope.progressMessage = ""
+
         # switch language at runtime
         $scope.changeLanguage = (langKey) ->
             $translate.use langKey

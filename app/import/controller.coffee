@@ -102,11 +102,11 @@ app.controller "ImportCtrl", [
                 return
 
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                Progress.setMessage message
+                $rootScope.progressMessage = message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                    Progress.setMessage message
+                    $rootScope.progressMessage = message
 
                 initTableAndMap fileType, fileContent
 
@@ -162,6 +162,10 @@ app.controller "ImportCtrl", [
                             i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
 
             promise.then ->
+                console.log("TEST")
+                $timeout ->
+                    $rootScope.progressMessage = null
+
                 $location.path editorPath
 
             .catch (error) ->
