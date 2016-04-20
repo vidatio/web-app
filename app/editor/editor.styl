@@ -83,8 +83,10 @@
         .settings-bar
             height 52px
             display flex
-            flex-direction row
             display -webkit-flex /* Safari */
+            display -ms-flexbox /* IE */
+            flex-direction row
+            -ms-flex-direction row
             -webkit-flex-direction row
 
             .settings-button
