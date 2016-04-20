@@ -1,4 +1,5 @@
 {
+    "LANG_DE": "de",
     "SLOGAN": "Seeing the bigger Picture",
     "API": {
         "NAME": "API",
@@ -146,6 +147,7 @@
         "DATASET_SAVED": "Datensatz wurde erfolgreich gespeichert.",
         "DATASET_DELETED": "Datensatz wurde erfolgreich gelöscht.",
         "DATASET_NOT_SAVED": "Datensatz konnte nicht gespeichert werden.",
+        "DATASET_IS_EMPTY": "Dein Vidatio darf nicht leer sein und muss die anzugebenden Metadaten enthalten.",
         "LINK_COPIED": "Der Link wurde in die Zwischenablage kopiert.",
         "LINK_NOT_COPIED": "Der Link konnte nicht in die Zwischenablage kopiert werden. Bitte Seite neu laden und noch einmal versuchen.",
         "SHP2GEOJSON_ERROR": "Die ZIP-Datei enthält kein valides SHP-Format.",
@@ -188,6 +190,9 @@
     "OPEN_IMPORT": "Import",
     "PRICING": "Pricing",
     "FEATURES": "Features",
+    "TEAM": "Team",
+    "TEAM_SITE": "Teamseite",
+    "OPEN_TEAM": "Teamseite öffnen",
     "EMAIL": "E-Mail",
     "USERNAME": "Benutzername",
     "PASSWORD": "Passwort",
@@ -231,6 +236,11 @@
             "UNIQUENESS_USERNAME": "Benutzername bereits vergeben!",
             "INVALID_EMAIL": "Keine gültige E-Mail (10-128 Zeichen)!",
             "INVALID_USERNAME": "Kein gültiger Benutzername (3-128 Zeichen)!",
+            "INVALID_AUTHOR": "Kein gültiger Urheber (3-128 Zeichen)!",
+            "INVALID_DATASET_NAME_LENGTH": "Kein gültiger Titel (3-128 Zeichen)!",
+            "VALID_USERNAME": "Benutzername darf keine Sonderzeichen und keine Leerzeichen haben!",
+            "VALID_DATASET_NAME": "Titel darf keine Sonderzeichen haben!",
+            "VALID_AUTHOR_NAME": "Urheber darf keine Sonderzeichen haben!",
             "INVALID_PASSWORD": "Kein gültiges Passwort (8-128 Zeichen)!"
         }
     },
@@ -270,5 +280,25 @@
     "SAVE_AND_SHARE_TAGS": "Füge Tags hinzu, damit dein Vidatio besser gefunden wird",
     "SHARE_VIDATIO": "Vidatio teilen",
     "PAGE_NOT_FOUND": "Upps, da ist etwas schief gelaufen...",
-    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden."
+    "PAGE_NOT_FOUND_LONG": "Die von Dir aufgerufene Seite wurde leider nicht gefunden.",
+    "D3PLUS":{
+        "MESSAGE":{
+            "DATA": "Daten werden analysiert.",
+            "DRAW": "Visualisierung wird gezeichnet.",
+            "INITIALIZING": "Initialisiere {0}.",
+            "LOADING": "Daten werden geladen.",
+            "TOOLTIPRESET": "Tooltips werden zurückgesetzt.",
+            "UI": "Oberfläche wird aktualisiert."
+        },
+        "ERROR":{
+        "ACCEPTED": "{0} ist kein gültiger {1} für {2}-Darstellungen. Benutzen Sie bitte: {3}.",
+        "CONNECTIONS": "Keine Verbindungen verfügbar für {0}.",
+        "DATA": "Keine Daten verfügbar",
+        "DATAYEAR": "Für {0} sind keine Daten verfügbar.",
+        "LIB": "{0}-Darstellungen erfordern das Laden der Bibliothek {1}.",
+        "LIBS": "{0}-Darstellungen erfordern das Laden folgender Bibliotheken: {1}.",
+        "METHOD": "{0}-Darstellungen erfordern die Methode {1}.",
+        "METHODS": "Weitere Einstellungen für folgende Methoden {1} sind bei {0}-Darstellungen erforderlich."
+        }
+    }
 }

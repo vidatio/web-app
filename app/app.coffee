@@ -59,6 +59,7 @@ app.run [
 
         $rootScope.history = []
         fromEditor = false
+
         $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
             $rootScope.absUrl = $location.absUrl()
             if toState.title?
@@ -67,7 +68,6 @@ app.run [
                 $translate("SLOGAN").then (slogan) ->
                     $rootScope.title = slogan
 
-
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
@@ -75,14 +75,15 @@ app.run [
                 name: fromState.name
                 params: fromParams
 
-            if not $rootScope.authorized and $state.current.name is "app.share"
+            if not $rootScope.authorized and $state.current.name is "app.share" or $state.current.name is "app.share.id"
+                console.log $state.current.name
                 $rootScope.history.push
-                    name: "app.share"
+                    name: $state.current.name
                     params: fromParams
 
             userPages = ["app.login", "app.registration"]
-            editorPages = ["app.editor", "app.editor.id", "app.share"]
-            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.login", "app.registration"]
+            editorPages = ["app.editor", "app.editor.id", "app.share", "app.share.id"]
+            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.share.id", "app.login", "app.registration"]
 
             # set boolean value true when user navigates from editor/share to login/registration
             if fromState.name in editorPages and toState.name in userPages
@@ -105,6 +106,40 @@ app.run [
                 showToastMessage(toastMessage)
 
             window.scrollTo 0, 0
+
+        $translate([
+            "D3PLUS.ERROR.ACCEPTED"
+            "D3PLUS.ERROR.CONNECTIONS"
+            "D3PLUS.ERROR.DATA"
+            "D3PLUS.ERROR.DATAYEAR"
+            "D3PLUS.ERROR.LIB"
+            "D3PLUS.ERROR.LIBS"
+            "D3PLUS.ERROR.METHOD"
+            "D3PLUS.ERROR.METHODS"
+            "D3PLUS.MESSAGE.DATA"
+            "D3PLUS.MESSAGE.DRAW"
+            "D3PLUS.MESSAGE.INITIALIZING"
+            "D3PLUS.MESSAGE.LOADING"
+            "D3PLUS.MESSAGE.TOOLTIPRESET"
+            "D3PLUS.MESSAGE.UI"
+        ]).then (translations) ->
+            window.vidatio.d3PlusTranslations =
+                message:
+                    data: translations["D3PLUS.MESSAGE.DATA"]
+                    draw: translations["D3PLUS.MESSAGE.DRAW"]
+                    initializing: translations["D3PLUS.MESSAGE.INITIALIZING"]
+                    loading: translations["D3PLUS.MESSAGE.LOADING"]
+                    tooltipReset: translations["D3PLUS.MESSAGE.TOOLTIPRESET"]
+                    ui: translations["D3PLUS.MESSAGE.UI"]
+                error:
+                    accepted: translations["D3PLUS.ERROR.ACCEPTED"]
+                    connections: translations["D3PLUS.ERROR.CONNECTIONS"]
+                    data: translations["D3PLUS.ERROR.DATA"]
+                    dataYear: translations["D3PLUS.ERROR.DATAYEAR"]
+                    lib: translations["D3PLUS.ERROR.LIB"]
+                    libs: translations["D3PLUS.ERROR.LIBS"]
+                    method: translations["D3PLUS.ERROR.METHOD"]
+                    methods: translations["D3PLUS.ERROR.METHODS"]
 
         showToastMessage = (message) ->
             $translate(message)
@@ -148,11 +183,11 @@ app.config [
 
         # I18N
         $translateProvider.useSanitizeValueStrategy "escape"
-        $translateProvider.preferredLanguage "de"
-        $translateProvider.fallbackLanguage "de"
         $translateProvider.useStaticFilesLoader
             prefix: "languages/"
             suffix: ".json"
+        $translateProvider.preferredLanguage "de"
+        $translateProvider.fallbackLanguage "de"
 
         # I18N for datepicker
         moment().locale "de"
@@ -163,7 +198,6 @@ app.config [
                 if !moment.isMoment(m)
                     return ''
                 if tz then moment.tz(m, tz).format(format) else m.format(format)
-
 
         ngToast.configure(
             animation: "slide"
@@ -224,24 +258,28 @@ app.config [
 
         .state "app.editor",
             url: "/editor"
+            params:
+                id: null
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.editor.id",
-            url: "/editor/:id"
+            url: "/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
             url: "/share"
+            params:
+                id: null
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
 
         .state "app.share.id",
-            url: "/share/:id"
+            url: "/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
@@ -261,6 +299,11 @@ app.config [
             url: "/terms"
             templateUrl: "terms/terms.html"
             title: "terms"
+
+        .state "app.team",
+            url: "/team"
+            templateUrl: "team/team.html"
+            title: "team"
 
         # not match was found in the states before (e.g. no language was provided in the URL)
         .state "noMatch",

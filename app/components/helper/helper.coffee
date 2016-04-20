@@ -366,7 +366,7 @@ class window.vidatio.Helper
         { x: xHeader, y: yHeader } = headers
 
         dataset.forEach (row, index) =>
-            if not @isRowUsable row[xColumn], row[yColumn], visualizationType
+            unless @isRowUsable row[xColumn], row[yColumn], visualizationType
                 return
 
             x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]

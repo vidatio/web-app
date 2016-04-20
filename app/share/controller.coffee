@@ -25,8 +25,11 @@ app.controller "ShareCtrl", [
     "$location"
     "TagsService"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
+        if $stateParams.id and not Table.dataset[0].length
+            Data.requestVidatioViaID($stateParams.id)
+
         $scope.goToPreview = false
-        $scope.hasData = Table.dataset.length && Table.dataset[0].length
+        $scope.hasData = Table.hasData()
         $scope.visualization = Visualization.options
         $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
@@ -62,6 +65,14 @@ app.controller "ShareCtrl", [
             Visualization.create()
 
         $scope.saveDataset = ->
+            if not $scope.hasData
+                $translate('TOAST_MESSAGES.DATASET_IS_EMPTY')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+                return
+
             $translate("OVERLAY_MESSAGES.SAVE_DATASET").then (translation) ->
                 Progress.setMessage translation
 

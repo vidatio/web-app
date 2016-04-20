@@ -1,9 +1,8 @@
 #profile.wrapper-content(ng-controller="ProfileCtrl")
     .row
         .col-xs-12
-            .area
-
-                .no-vidatios(ng-hide="vidatios.length")
+            .no-vidatios(ng-hide="vidatios.length")
+                .area
                     .row.same-height
                         .col-xs-6
                             .no-vidatios-text
@@ -18,13 +17,13 @@
                                     h1 {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
                                     span.bg-cyan !
 
-                .vidatios(ng-show="vidatios.length")
-                    h3 {{ "MY_VIDATIOS" | translate | uppercase }}
+            .vidatios(ng-show="vidatios.length")
+                h3 {{ "MY_VIDATIOS" | translate | uppercase }}
 
-                    .row.cards
-                        .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
-                            vidatio(vidatio="vidatio")
-                    .row
-                        .col-xs-12.has-link
-                            a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}
-                                span.icon-bracketright
+                .row.cards
+                    .col-xs-12.col-sm-6.col-md-3(ng-repeat="vidatio in vidatios")
+                        vidatio(vidatio="vidatio")
+                .row
+                    .col-xs-12.has-link
+                        a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}
+                            span.icon-bracketright
