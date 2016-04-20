@@ -114,7 +114,6 @@ BUILD =
             "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
             "./bower_components/pablo/pablo.js"
             "./bower_components/select2/dist/js/select2.js"
-            "./bower_components/jquery-observe/jquery-observe.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
