@@ -20,18 +20,6 @@
             font-weight normal
             font-size 14px
 
-    /* move labels for right axis in parallel coordinates viz out of the diagram-view */
-    #chart.parcoords
-        .dimension
-            &:not(:first-child)
-                .tick
-                    text
-                        text-anchor start !important
-                        transform translate(18px)
-
-                    line
-                        transform translate(6px)
-
     .angular-leaflet-map
         a:link, a:visited
             color $color-black

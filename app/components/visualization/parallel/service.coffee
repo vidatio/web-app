@@ -24,6 +24,16 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             .render()
             .ticks(3)
             .createAxes()
+
+            $svg = $("#{@containerSelector} svg")
+            $svg.find(".dimension:not(:first-child) .tick").each (index, element) ->
+                text = $(element).find("text")
+                text.attr "x", Math.abs(Number(text.attr("x")))
+                text.attr "style", "text-anchor: start;"
+
+                line = $(element).find("line")
+                line.attr "x2", Math.abs(Number(line.attr("x2")))
+
         , 100
 
     # we overwrite the parent preProcess method
