@@ -21,6 +21,8 @@ app = angular.module "app", [
     "logglyLogger"
     "datePicker"
     "colorpicker.module"
+    "angulartics"
+    "angulartics.piwik"
 ]
 
 app.run [

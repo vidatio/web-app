@@ -9,6 +9,25 @@ html(ng-app="app" lang="{{ 'LANG_DE' | translate}}")
         include includes/js
         include includes/styl
 
+        script.
+            var _paq = _paq || [];
+            _paq.push(['enableLinkTracking']);
+            (function () {
+                var u = "//piwik.vidatio.com/";
+                _paq.push(['setTrackerUrl', u + 'piwik.php']);
+                _paq.push(['setSiteId', 1]);
+                var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+                console.log(g, s);
+                g.type = 'text/javascript';
+                g.async = true;
+                g.defer = true;
+                g.src = u + 'piwik.js';
+                console.log(s.parentNode);
+                s.parentNode.insertBefore(g, s);
+            })();
+        noscript
+            img(src="//piwik.vidatio.com/piwik.php?idsite=1" style="border:0;")
+
     body.container-fluid(ng-file-drop-start)
 
         .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
