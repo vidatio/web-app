@@ -54,7 +54,7 @@ app.controller "ImportCtrl", [
 
                     # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                     $timeout ->
-                        Progress.setMessage ""
+                        Progress.resetMessage()
                         $location.path editorPath
 
                 .error (resp) ->
@@ -62,7 +62,7 @@ app.controller "ImportCtrl", [
                     $log.debug
                         resp: resp
 
-                    Progress.setMessage ""
+                    Progress.resetMessage()
                     ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
@@ -170,6 +170,6 @@ app.controller "ImportCtrl", [
                         content: translation
                         className: "danger"
 
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
 ]

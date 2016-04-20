@@ -19,5 +19,5 @@ describe "Service Progress", ->
         expect(@rootScope.progressMessage).toEqual "This is a test!"
 
     it "should be possible to reset messages", ->
-        @progress.setMessage("")
+        @progress.resetMessage()
         expect(@rootScope.progressMessage).toEqual ""

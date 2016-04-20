@@ -11,5 +11,8 @@ app.service "ProgressService", [
             setMessage: (msg) ->
                 $rootScope.progressMessage = msg
 
+            resetMessage: ->
+                $rootScope.progressMessage = ""
+
         new Progress
 ]

@@ -83,7 +83,7 @@ app.controller "ShareCtrl", [
                         dataset = Map.getGeoJSON()
 
                 Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
                     if errors?
                         ErrorHandler.format errors
