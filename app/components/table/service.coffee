@@ -100,6 +100,7 @@ app.service 'TableService', [
             # @param {Number} xColumn
             # @param {Number} yColumn
             updateAxisSelection: (xColumn, yColumn) ->
+                console.log "(xColumn, yColumn)", xColumn, yColumn
                 $header = $(".ht_clone_top th")
 
                 $header.find("span").removeClass "selected-x-y"
