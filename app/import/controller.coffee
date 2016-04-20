@@ -79,13 +79,13 @@ app.controller "ImportCtrl", [
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
-                Progress.resetMessage()
                 $log.warn "ImportCtrl maxFileSize exceeded"
                 $log.debug
                     fileSize: $scope.file.size
 
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
+                    Progress.resetMessage()
                     ngToast.create(
                         content: translation
                         className: "danger"
@@ -93,13 +93,13 @@ app.controller "ImportCtrl", [
                 return
 
             if fileType isnt "csv" and fileType isnt "zip"
-                Progress.resetMessage()
                 $log.info "ImportCtrl data format not supported"
                 $log.debug
                     format: fileType
 
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
+                    Progress.resetMessage()
                     ngToast.create(
                         content: translation
                         className: "danger"
