@@ -59,25 +59,22 @@ class window.vidatio.Helper
     # @public
     # @param {Array} dataset
     # @return {Array}
-    untrimDataset: (dataset, tableOffset, minWidth) ->
+    untrimDataset: (dataset, tableOffset, minWidth, minHeight) ->
         cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
+        rows = if dataset.length - minHeight > 0 then dataset.length else minHeight
 
         # add columns before and after data
-        dataset.forEach (row) =>
-            for counter in [0...tableOffset.columns]
-                row.unshift(null)
-
-            filteredRow = @cleanArray(row)
-
-            for counter in [tableOffset.columns + filteredRow.length...cols]
-                row.push(null)
+        for counter in [0...dataset.length]
+            dataset[counter] = dataset[counter].concat(@createArray(null, cols - tableOffset.columns - dataset[counter].length))
+            dataset[counter] = @createArray(null, tableOffset.columns).concat(dataset[counter])
 
         # add rows before data
         for counter in [0...tableOffset.rows]
-            emptyArray = []
-            for colIndex in [0...cols]
-                emptyArray.push(null)
-            dataset.unshift(emptyArray)
+            dataset.unshift(@createArray(null, cols))
+
+        # add rows after data
+        for counter in [0...rows - dataset.length]
+            dataset.push(@createArray(null, cols))
 
         return dataset
 
@@ -501,4 +498,7 @@ class window.vidatio.Helper
             return value if value
 
         return tmp
+
+    createArray: (value, length) ->
+        return (value for [0...length])
 

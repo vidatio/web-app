@@ -13,6 +13,7 @@ app.service 'TableService', [
                 @instanceTable = null
                 @diagramColumns = {}
                 @minColumns = 26
+                @minRows = 26
 
             # @method setInstance
             # @public

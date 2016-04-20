@@ -97,8 +97,12 @@ app.service 'DataService', [
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
 
-                    if data.visualizationOptions.tableOffset
-                        data.data = vidatio.helper.untrimDataset data.data, data.visualizationOptions.tableOffset, Table.minColumns
+                    if !data.visualizationOptions.tableOffset
+                        data.visualizationOptions.tableOffset =
+                            rows: 0
+                            columns: 0
+
+                    data.data = vidatio.helper.untrimDataset data.data, data.visualizationOptions.tableOffset, Table.minColumns, Table.minRows
                     Table.setDataset data.data
 
             #@method downloadCSV
