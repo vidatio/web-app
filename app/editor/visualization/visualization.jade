@@ -6,38 +6,42 @@
                 span.text {{ "DIAGRAMS.RECOMMEND" | translate }}
 
             .diagram-selection.settings-button(ng-hide="data.metaData.fileType == 'shp'")
-                a(href='#' title="{{'CHANGE_DIAGRAM'|translate}}").icon-diagrammenu
+                a.icon-diagrammenu(href='#' title="{{'CHANGE_DIAGRAM'|translate}}")
                     span {{ "DIAGRAMS.DIAGRAM_TYPE" | translate }}
 
                 ul.diagram-menu
                     li.diagram-button
-                        a.icon-barchart(href="#" ng-click="selectDiagram('bar')")
+                        a.icon-barchart(href="#" ng-click="selectDiagram('bar')" ng-class="{active: visualization.type == 'bar'}")
                             span {{ "DIAGRAMS.BAR_CHART" | translate }}
                     li.diagram-button
-                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')")
+                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')" ng-class="{active: visualization.type == 'scatter'}")
                             span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
                     li.diagram-button
-                        a.icon-linechart(href="#" ng-click="selectDiagram('timeseries')")
-                            span {{ "DIAGRAMS.TIME_SERIES" | translate }}
+                        a.icon-linechart(href="#" ng-click="selectDiagram('line')" ng-class="{active: visualization.type == 'line'}")
+                            span {{ "DIAGRAMS.LINE_CHART" | translate }}
                     li.diagram-button
-                        a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')")
+                        a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')" ng-class="{active: visualization.type == 'parallel'}")
                             span {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
                     li.diagram-button
-                        a.icon-map(href="#" ng-click="selectDiagram('map')")
+                        a.icon-map(href="#" ng-click="selectDiagram('map')" ng-class="{active: visualization.type == 'map'}")
                             span {{ "DIAGRAMS.MAP" | translate }}
+
+            .settings-button(ng-hide="visualization.type != 'map' && data.metaData.fileType != 'shp'")
+                a.icon-resize-small(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="setBoundsToGeoJSON()")
+                    span {{ "CENTER" | translate }}
 
             .color-selection.settings-button(ng-hide="visualization.type == 'map' || data.metaData.fileType == 'shp'")
                 a.icon-colorbucket(href="#" colorpicker="hex" colorpicker-position="bottom" ng-model="visualization.color" colorpicker-with-input="true" title="{{'CHANGE_COLOR'|translate}}")
                     span {{ "COLORS" | translate }}
 
             .download-selection.settings-button(ng-hide="!visualization.type")
-                a(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}").icon-download
+                a.icon-download(href='#' title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}")
                     span {{ "DOWNLOAD" | translate }}
                 ul.download-menu
-                    li.download-button
+                    li.jpeg-button
                         a.icon-downloadvisualization(href="#" ng-click="shareVisualization('jpg')")
                             span JPEG
-                    li.diagram-button
+                    li.png-button
                         a.icon-downloadvisualization(href="#" ng-click="shareVisualization('png')")
                             span PNG
 

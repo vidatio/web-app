@@ -4,6 +4,9 @@
         margin-bottom 5px
         line-height 1.2
 
+    label:first-of-type
+        margin-top 10px
+
     li
         list-style-type none
 
@@ -13,7 +16,7 @@
         background $color-table-odd-passive
         border-top 3px solid $color-border
 
-        .filter-title
+        h3
             width 100%
             text-align center
 
@@ -22,12 +25,13 @@
 
         .reset-filters
             text-align center
+
             > a
                 color #000
                 &:hover
                     color $color-green
 
-        > div:not(#time-filter)
+        > div
             margin-top 20px
 
         #time-filter, #category-filter
@@ -35,10 +39,10 @@
 
         #time-filter
             position relative
+
             input
                 width 46%
                 display inline
-                padding 8px
 
             span.to
                 display inline-block
@@ -55,14 +59,41 @@
         #category-filter
             .btn-group
                 display block
+
                 button, ul
                     width 100%
+
                 button
                     float none
 
         #tags-filter
             .select2-search-choice
                 background $color-green
+
+        #search-filter.active .btn
+            border-color $color-green !important
+
+        #search-filter
+            margin-top 0
+
+            &:hover
+            &:focus
+                .btn
+                    border-color $color-green
+
+            .btn
+                height 35px
+                background-color white
+                border-color $color-grey
+                color $color-grey
+
+                .fui-search
+                    top -1px
+
+            input:focus
+                border-right 0
+                border-top-right-radius 0
+                border-bottom-right-radius 0
 
     [date-picker] .active, [date-picker] .active.now
         background-color $color-green
@@ -78,6 +109,32 @@
     #my-vidatio-filter h2
         padding-top 3px
 
+    .same-height
+        display -webkit-box
+        display -webkit-flex
+        display -ms-flexbox
+        display flex
+        flex-wrap wrap
+
+        & > [class*="col-"]
+            display flex
+            flex-direction column
+
+        .no-vidatios
+            display flex
+            align-items center
+            justify-content flex-start
+
+            opacity 0.6
+            background-image url(../images/logo-greyscale.svg)
+            background-repeat no-repeat
+            background-position center center
+            background-size 15%
+
+            p
+                margin-top 25px
+                max-width 50%
+
 @media (max-width: 767px)
     #catalog
         #filter
@@ -89,15 +146,12 @@
         .vidatios
             margin-bottom 30px
 
-            .vidatio
+            vidatio
                 margin-left calc(10vw - 15px)
                 margin-right calc(10vw - 15px)
 
-                a.img
-                    height 45vw
-
                 img
-                    max-height 42vw
+                    height 37vw !important
 
 @media (min-width: 768px) and (max-width: 991px)
     #catalog
@@ -107,12 +161,9 @@
             margin-left 15px
             margin-right 15px
 
-        .vidatio
-            a.img
-                height 28vw
-
+        vidatio
             img
-                max-height 27vw
+                height 22vw !important
 
 @media screen and (max-width: 730px)
     #time-filter span.to
@@ -128,9 +179,14 @@
             max-width 30em
             margin 0 auto
             padding 0 15px !important
-
             .select2-container
                 width 100%
+
+        #search-filter
+            width 100%
+
+        .no-vidatios
+            min-height 300px
 
         input + span + [date-picker-wrapper]
             right 0

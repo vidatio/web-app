@@ -13,7 +13,7 @@ app.factory 'UserDatasetsFactory', [
     "$resource"
     "$rootScope"
     ($resource, $rootScope) ->
-        $resource $rootScope.apiBase + $rootScope.apiVersion + "/users/:id/datasets"
+        $resource $rootScope.apiBase + $rootScope.apiVersion + "/users/:id/datasets", { "limit": @limit }, { datasetsLimit: { "method": "GET", "params": { "limit": @limit }, isArray: true } }
 ]
 
 app.factory 'UserAuthFactory', [

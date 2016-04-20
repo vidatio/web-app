@@ -13,12 +13,18 @@ app.service 'DataService', [
     "$translate"
     "$state"
     "ngToast"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast) ->
+    "ProgressService"
+    "ErrorHandler"
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, Progress, ErrorHandler) ->
         class Data
             constructor: ->
+                # Temporarily solution because there is redundance
+                # between @name, @metaData and @vidatio
+                @datasetID = ""
+                @vidatio = {}
                 @name = ""
                 @metaData =
-                    "fileType": ""
+                    "fileType": "csv"
 
             updateMap: (row, column, oldData, newData) ->
                 columnHeaders = Table.instanceTable.getColHeader()
@@ -68,6 +74,9 @@ app.service 'DataService', [
             # @description from existing dataset
             # @param {Object} data
             useSavedData: (data) ->
+                if data._id?
+                    @datasetID = data._id
+
                 if data.metaData?
                     angular.extend @metaData, data.metaData
 
@@ -78,6 +87,7 @@ app.service 'DataService', [
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
                     Table.useColumnHeadersFromDataset = true
                     Table.setHeader Converter.convertGeoJSON2ColHeaders data.data
+                    Table.setColumns()
                     Map.setGeoJSON data.data
                 else
                     Table.useColumnHeadersFromDataset = false
@@ -112,6 +122,48 @@ app.service 'DataService', [
                 csvURL = window.URL.createObjectURL(csvData)
 
                 vidatio.visualization.download fileName + ".csv", csvURL
+
+            # @method copyVidatioLink
+            # @description copy link for dataset to clipboard and return success-state
+            # @param {String} element
+            copyVidatioLink: (element) ->
+                window.getSelection().removeAllRanges()
+                link = document.querySelector element
+                range = document.createRange()
+                range.selectNode link
+                window.getSelection().addRange(range)
+
+                try
+                    document.execCommand "copy"
+                    $translate("TOAST_MESSAGES.LINK_COPIED")
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+
+                catch error
+                    $translate("TOAST_MESSAGES.LINK_NOT_COPIED")
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+
+                window.getSelection().removeAllRanges()
+
+            # @method requestVidatioViaID
+            # @description load a vidatio and create the visualization
+            # @param {String} id
+            requestVidatioViaID: (id) ->
+                # get dataset according to datasetId and set necessary metadata
+                DatasetFactory.get {id: id}, (data) =>
+                    @useSavedData data
+
+                    options = data.visualizationOptions
+                    options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
+                    Visualization.create(options)
+                    Progress.setMessage()
+                , (error) ->
+                    Progress.setMessage()
+                    ErrorHandler.format error
 
         new Data
 ]

@@ -8,30 +8,35 @@ describe "Dataset Controller", ->
             @httpBackend = $httpBackend
             @rootScope = $rootScope
             @scope = $rootScope.$new()
-            @Table =
-                setDataset: (result) ->
+            @Visualization =
+                downloadAsImage: (fileName, type) ->
             @Data =
-                useSavedData: (data) ->
+                downloadCSV: ->
+            @scope.data =
+                title: "Filename"
 
-            DatasetCtrl = $controller "DatasetCtrl",  {$scope: @scope, $rootScope: @rootScope, TableService: @Table, DataService: @Data}
+            spyOn(@Visualization, "downloadAsImage")
+            spyOn(@Data, "downloadCSV")
 
-    describe "on clicked getLink-button", ->
-        it "should show the Vidatio-link box including the link to the current Vidatio on click at link-button", ->
-            @httpBackend.whenGET(/index/).respond ""
-            @httpBackend.whenGET(/editor/).respond ""
-            @httpBackend.expectGET(/languages/).respond ""
+            DatasetCtrl = $controller "DatasetCtrl",  {$scope: @scope, $rootScope: @rootScope, VisualizationService: @Visualization, DataService: @Data}
 
-            @scope.toggleVidatioLink()
-            expect(@rootScope.showVidatioLink).toEqual(true)
+    afterEach ->
+        @Visualization.downloadAsImage.calls.reset()
+        @Data.downloadCSV.calls.reset()
 
-            @scope.toggleVidatioLink()
-            expect(@rootScope.showVidatioLink).toEqual(false)
+    describe "on clicked download PNG", ->
+        it "should download the visualization in PNG-format", ->
+            @scope.downloadVisualization("png")
+            filename = @scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+            expect(@Visualization.downloadAsImage).toHaveBeenCalledWith(filename, "png")
 
-    describe "on clicked close-cross in link-box", ->
-        it "should hide the Vidatio-link box on click at the cross", ->
-            @httpBackend.whenGET(/index/).respond ""
-            @httpBackend.whenGET(/editor/).respond ""
-            @httpBackend.expectGET(/languages/).respond ""
+    describe "on clicked download JPEG", ->
+        it "should download the visualization in JPEG-format", ->
+            @scope.downloadVisualization("jpeg")
+            filename = @scope.data.title + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
+            expect(@Visualization.downloadAsImage).toHaveBeenCalledWith(filename, "jpeg")
 
-            @scope.hideVidatioLink()
-            expect(@rootScope.showVidatioLink).toEqual(false)
+    describe "on clicked download CSV", ->
+        it "should download the dataset in CSV-format", ->
+            @scope.downloadCSV()
+            expect(@Data.downloadCSV).toHaveBeenCalledWith(@scope.data.title)

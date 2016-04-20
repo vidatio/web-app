@@ -70,5 +70,4 @@ app.controller "VisualizationCtrl", [
 
             fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
-
 ]

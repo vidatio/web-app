@@ -14,9 +14,19 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
+    "MapService"
     "$window"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, $window) ->
+    "$stateParams"
+    "$state"
+    "TableService"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table) ->
+
+        if $stateParams.id and not Table.dataset[0].length
+            Data.requestVidatioViaID($stateParams.id)
+
         $scope.editor = Data
+        $scope.setBoundsToGeoJSON = ->
+            Map.setBoundsToGeoJSON()
 
         # set the initial values and display both Table- and Display-View on start
         $scope.activeViews = 2
@@ -24,7 +34,7 @@ app.controller "EditorCtrl", [
         viewsToDisplay = [true, true]
         [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
 
-        # the displayed views are set accordingly to the clicked tab
+        # call changeViews function and set stateParams to the new tab index
         # @method tabClicked
         # @param {Number} tabIndex Number from 0 - 2 which represent the clicked tab
         $scope.tabClicked = (tabIndex) ->
@@ -42,17 +52,23 @@ app.controller "EditorCtrl", [
             else
                 viewsToDisplay = [false, true]
 
+            [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
+
             # call Visualization.create() each time the tabs 1 and 2 are clicked as the diagram needs to be resized
-            if tabIndex isnt 0
+            unless tabIndex is 0
                 $timeout ->
                     Visualization.create()
-                , 50
-
-            [$rootScope.showTableView, $rootScope.showVisualizationView] = viewsToDisplay
+                , 100
 
             # count activeViews to set bootstrap classes accordingly for editor-width
             $scope.activeViews = 0
             for tab in viewsToDisplay
                 if tab
                     $scope.activeViews++
+
+            unless tabIndex is 2
+                $timeout ->
+                    window.angular.element($window).triggerHandler("resize")
+                , 100
+
 ]

@@ -1,0 +1,24 @@
+#login.login-registration-container
+    .area.col-xs-12
+        .option-icon.icon-save
+        h3 {{ "SAVE_PERMANENTLY" | translate | uppercase }}
+        .row
+            p {{ "SAVE_DESCRIPTION" | translate }}
+
+        form(name="loginForm" ng-submit="logon()")
+            form(name="loginForm" ng-submit="logon()")
+                .row
+                    .input-group.form-group.first(ng-class="{ 'has-error' : loginForm.name.$invalid && !loginForm.name.$pristine }")
+                        span.input-group-addon.fui-user
+                        input.form-control(type="name" name="name" ng-model="user.name" placeholder="{{ 'USERNAME' | translate }} / {{ 'EMAIL' | translate }}" required ng-minlength=3 ng-maxlength=128)
+                    span.error(ng-show="loginForm.name.$invalid && !loginForm.name.$pristine && !loginForm.name.$error.uniqueness") {{ "USERNAME_NOT_VALID" | translate }}
+                .row
+                    .input-group.form-group.last(ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }")
+                        span.input-group-addon.fui-lock
+                        input.form-control(type="password" ng-model="user.password" name="password" placeholder="{{ 'PASSWORD' | translate }}" required ng-minlength=8 ng-maxlength=128)
+
+                .row
+                    button.btn.btn-block.btn-primary(type="submit" ng-disabled="loginForm.$invalid || loginForm.$pending" title="{{ 'SEND_LOGIN_DATA' | translate }}") {{ 'LOG_ON' | translate }}
+
+            .row
+                a.inverse.right(ui-sref="app.registration({ locale: locale })" title="{{'REGISTRATION'|translate}} {{'OPEN'|translate}}") {{ 'REGISTER' | translate }}

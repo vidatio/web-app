@@ -5,50 +5,42 @@
 
     .row
         .col-sm-12
-            visualization
+            .visualization-box
+                .action-bar
+                    #create-vidatio.action-button
+                        a.icon-edit.icons(ui-sref="app.editor.id({ id: data._id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+                            span  {{ "USE" | translate | uppercase }}
 
-            .row.buttons-first-row
-                .col-xs-12.col-sm-4.middle
-                    a#create-vidatio.btn.btn-primary(ui-sref="app.editor.id({ id: info.id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
-                        span.icon-edit.icons
-                        span.button-text  {{ "OPEN_IN_EDITOR" | translate | uppercase }}
+                    #center-map.action-button(ng-hide="data.visualizationOptions.type != 'map' && data.metaData.fileType != 'shp'")
+                        a.icon-resize-small(href="#" title="{{ 'CENTER_MARKER' | translate }}" ng-click="setBoundsToGeoJSON()")
+                            span {{ "CENTER" | translate }}
 
-                .col-xs-12.col-sm-4.middle
-                    #download-dataset
-                        a.title.btn.btn-primary(href='#')
-                            span.icon-download.icons
-                            span.button-text  {{ "DOWNLOAD" | translate | uppercase }}
-
-                        ul
-                            li
-                                a(ng-click="downloadCSV()")
-                                    span.icon-downloaddataset
-                                    span  {{ "DATASET" | translate }}
-                            li
-                                a(ng-click="downloadPNG()")
-                                    span.icon-downloadvisualization
-                                    span  {{ "VISUALIZATION" | translate }}
-
-                .col-xs-12.col-sm-4.middle
-                    a#link-dataset.btn.btn-primary(href='#' ng-click="toggleVidatioLink()")
-                        span.icon-link.icons
-                        span.button-text  {{ "LINK" | translate | uppercase }}
-
-                .col-xs-12
-                    #vidatio-link-box(ng-show="$root.showVidatioLink")
-                        p
-                            span.icon-link.link-box-icon
+                    #vidatio-link-box.share-button.action-button
+                        a.icon-link(href="#")
                             span  {{ "LINK_TO_SHARE" | translate }}
-                        a.fui-cross(href="#" ng-click="hideVidatioLink()")
-                        form
-                            input#vidatio-link.form-control(ng-model="link" onClick="this.select();")
-                        a#copy-vidatio-link.btn.btn-primary(ng-click="copyVidatioLink()")
-                            span.icon-copyclipboard.icons
-                            span.button-text  {{"COPY_LINK" | translate | uppercase }}
+                        .share-link
+                            .input-group.form-link.copy-vidatio-button-group
+                                input#vidatio-link.form-control(ng-model="link" onClick="this.select();" readonly)
+
+                    #download-dataset.download-selection.action-button
+                        a.icon-download(href='#' ng-click="data.visualizationOptions.thumbnail !== 'data:,' || downloadCSV()" title="{{'DOWNLOAD'|translate}} {{'VISUALIZATION'|translate}}")
+                            span {{ "DOWNLOAD" | translate }}
+                        ul.download-menu(ng-hide="data.visualizationOptions.thumbnail === 'data:,'")
+                            li.download-button
+                                a.icon-downloaddataset(href="#" ng-click="downloadCSV()")
+                                    span CSV
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('jpg')")
+                                    span JPEG
+                            li.diagram-button
+                                a.icon-downloadvisualization(href="#" ng-click="downloadVisualization('png')")
+                                    span PNG
+
+                visualization
 
     .row
         .col-sm-12
-            h1.underline-red-light {{ "INFORMATION_DATASET" | translate | uppercase }}
+            h3.underline-red-light {{ "INFORMATION_DATASET" | translate | uppercase }}
 
     .row
         .col-sm-12

@@ -11,7 +11,7 @@ stylint = require "gulp-stylint"
 
 karmaServer = require("karma").Server
 
-browserSync = require('browser-sync').create()
+browserSync = require("browser-sync").create()
 reload = browserSync.reload
 debug = require "gulp-debug"
 
@@ -25,7 +25,10 @@ cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
 ngConstant = require "gulp-ng-constant"
+
 uglify = require "gulp-uglify"
+cleanCSS = require "gulp-clean-css"
+ngAnnotate = require "gulp-ng-annotate"
 
 DOC_FILES = [
     "./README.MD"
@@ -47,6 +50,7 @@ COPY_FILES =
         "./bower_components/flat-ui/dist/fonts/**/*.*"
     ]
     lang: "./app/statics/languages/**/*.json"
+    videos: "./app/statics/assets/videos/**/*"
 
 BASEURL = "http://localhost:3123"
 
@@ -70,6 +74,7 @@ BUILD =
         ]
         jade: [
             "./app/**/*.jade"
+            "./app/**/*.jade"
         ]
         html: [
             "./build/html/**/*.html"
@@ -80,6 +85,7 @@ BUILD =
     plugins:
         js: [
             "./bower_components/jquery/dist/jquery.js"
+            "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/jPushMenu/js/jPushMenu.js"
             "./bower_components/angular/angular.js"
             "./bower_components/angular-ui-router/release/angular-ui-router.js"
@@ -93,7 +99,6 @@ BUILD =
             "./bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"
             "./bower_components/angular-cookies/angular-cookies.js"
             "./bower_components/ngToast/dist/ngToast.min.js"
-            "./bower_components/handsontable/dist/handsontable.full.js"
             "./bower_components/papa-parse/papaparse.js"
             "./bower_components/shp/dist/shp.js"
             "./bower_components/leaflet/dist/leaflet-src.js"
@@ -104,6 +109,7 @@ BUILD =
             "./bower_components/d3plus/d3plus.js"
             "./bower_components/d3.parcoords.js/d3.parcoords.js"
             "./bower_components/flat-ui/dist/js/flat-ui.js"
+            "./bower_components/video.js/dist/video.js"
             "./bower_components/moment/min/moment.min.js"
             "./bower_components/moment-timezone/builds/moment-timezone-with-data.min.js"
             "./bower_components/moment/locale/de.js"
@@ -125,6 +131,7 @@ BUILD =
             "./bower_components/angular-datepicker/dist/angular-datepicker.css"
             "./bower_components/angular-bootstrap-colorpicker/css/colorpicker.css"
             "./bower_components/select2/dist/css/select2.css"
+            "./bower_components/video.js/dist/video-js.css"
         ]
     dirs:
         out: "./build"
@@ -133,6 +140,7 @@ BUILD =
         html: "./build/html"
         fonts: "./build/fonts"
         images: "./build/images"
+        videos: "./build/videos"
         lang: "./build/languages"
         docs: "./docs"
     module: "app"
@@ -203,7 +211,7 @@ gulp.task "production",
         "copy"
         "config:production"
         "build:production:plugins:js"
-        "build:plugins:css"
+        "build:production:plugins:css"
         "build:production:source:coffee"
         "build:production:source:stylus"
         "clean:html"
@@ -248,7 +256,6 @@ gulp.task "lint:coffee",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-        #.pipe cached "lint:coffee"
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
@@ -267,25 +274,31 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        #.pipe cached "plugins.js"
-        .pipe gif "*.js", concat(BUILD.plugin.js)
-        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+        .pipe concat(BUILD.plugin.js)
+        .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:production:plugins:js",
     "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        #.pipe uglify()
-        .pipe gif "*.js", concat(BUILD.plugin.js)
-        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+        .pipe concat(BUILD.plugin.js)
+        .pipe uglify()
+        .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        #.pipe cached "plugins.css"
-        .pipe gif "*.css", concat(BUILD.plugin.css)
-        .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
+        .pipe concat(BUILD.plugin.css)
+        .pipe gulp.dest(BUILD.dirs.css)
+
+gulp.task "build:production:plugins:css",
+    "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
+    ->
+        gulp.src BUILD.plugins.css
+        .pipe concat(BUILD.plugin.css)
+        .pipe cleanCSS()
+        .pipe gulp.dest(BUILD.dirs.css)
 
 ###
     BUILDING SOURCE
@@ -309,8 +322,9 @@ gulp.task "build:production:source:coffee",
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
-        #.pipe uglify()
         .pipe concat(BUILD.app)
+        .pipe ngAnnotate()
+        .pipe uglify({"mangle": true, "compress": true})
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:source:stylus",
@@ -333,6 +347,7 @@ gulp.task "build:production:source:stylus",
         gulp.src BUILD.source.stylus
         .pipe stylus
             compress: true
+        .pipe cleanCSS()
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:source:jade",
@@ -371,20 +386,19 @@ gulp.task "copy",
         "copy:img"
         "copy:fonts"
         "copy:languages"
+        "copy:videos"
     ]
 
 gulp.task "copy:img",
     false,
     ->
         gulp.src COPY_FILES.img
-        #.pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     false,
     ->
         gulp.src COPY_FILES.fonts
-        #.pipe cached "copy:fonts"
         .pipe gif "**/flat-ui-icons-regular.*", rename (path) ->
             path.dirname = "/glyphicons"
         .pipe gif "**/lato*", rename (path) ->
@@ -396,7 +410,12 @@ gulp.task "copy:languages",
     ->
         gulp.src COPY_FILES.lang
         .pipe gulp.dest BUILD.dirs.lang
-        .pipe
+
+gulp.task "copy:videos",
+    false,
+    ->
+        gulp.src COPY_FILES.videos
+        .pipe gulp.dest BUILD.dirs.videos
 
 ###
     CLEANING

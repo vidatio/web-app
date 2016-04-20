@@ -407,8 +407,8 @@ class window.vidatio.Helper
         transformedDataset = []
         { x: xHeader, y: yHeader } = headers
 
-        dataset.forEach (row) =>
-            if not @isRowUsable row[xColumn], row[yColumn], visualizationType
+        dataset.forEach (row, index) =>
+            unless @isRowUsable row[xColumn], row[yColumn], visualizationType
                 return
 
             x = if @isNumeric row[xColumn] then parseFloat row[xColumn] else row[xColumn]
@@ -422,10 +422,11 @@ class window.vidatio.Helper
             dataItem[xHeader] = x
             dataItem[yHeader] = y
             dataItem["color"] = color
+            dataItem["id"] = index
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
-            else if visualizationType is "timeseries"
+            else if visualizationType is "line"
                 dataItem["name"] = "Line 1"
 
             transformedDataset.push dataItem
@@ -470,10 +471,10 @@ class window.vidatio.Helper
             when "parallel"
                 return true
             when "bar"
-                if @isNumeric(y) and String(x).length > 0
+                if String(x).length > 0 and @isNumeric(y)
                     return true
-            when "timeseries"
-                if @isDate(x) and @isNumeric(y)
+            when "line"
+                if String(x).length > 0 and @isNumeric(y)
                     return true
 
         return false

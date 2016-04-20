@@ -11,7 +11,7 @@ nav
             a.item(ui-sref="app.profile({ locale: locale })", ng-show="globals.authorized", ng-click="toggleMenu()" title="{{ 'MY_PROFILE' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-profile
                 span.link-text {{ "MY_PROFILE" | translate }}
-            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()" title="{{ 'IMPORT_DATA' | translate }} {{ 'OPEN' | translate }}")
+            a.item(ui-sref="app.import({ locale: locale })", ng-click="toggleMenu()" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-import
                 span.link-text {{ "IMPORT_DATA" | translate }}
             a.item(ui-sref="app.catalog({ locale: locale })", ng-click="toggleMenu()" title="{{ 'OPEN_CATALOG' | translate }}")
@@ -20,6 +20,9 @@ nav
             a.item(ui-sref="app.index({ locale: locale, '#': 'usp' })", ng-click="toggleMenu()" title="{{ 'FEATURES' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-plus
                 span.link-text {{ "FEATURES" | translate }}
+            a.item(ui-sref="app.team({ locale: locale })", ng-click="toggleMenu()" title="{{ 'TEAM_SITE' | translate }} {{ 'OPEN' | translate }}")
+                span.icons.icon-team
+                span.link-text {{ "TEAM" | translate }}
             a.item(href="https://api.vidatio.com/v0/docs" target="_blank" ng-click="toggleMenu()" title="{{ 'API_DOCUMENTATION' | translate }} {{ 'OPEN' | translate }}")
                 span.icons.icon-api
                 span.link-text-api {{ "API" | translate }}
