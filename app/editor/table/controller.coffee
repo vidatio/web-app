@@ -15,8 +15,6 @@ app.controller "TableCtrl", [
         $scope.dataset = Table.dataset
         $scope.data = Data
         $scope.visualization = Visualization.options
-        $scope.offset = 0
-        $scope.extraOffset = 0
         # attention: one way data binding
         $scope.useColumnHeadersFromDataset = Table.useColumnHeadersFromDataset
 
@@ -50,46 +48,6 @@ app.controller "TableCtrl", [
         $scope.download = ->
             clearFocusedAxisButtons()
             Data.downloadCSV($scope.data.name)
-
-        headerLength = 0
-
-        # https://github.com/kapetan/jquery-observe
-        $timeout ->
-            $header = $(".ht_clone_top th")
-
-            headerLength = $header.length
-            headerLengthInit = $header.length
-
-            $('.ht_clone_top table thead > tr').observe 'childlist', 'th', (record) ->
-                $header = $(".ht_clone_top th")
-
-                console.log "\n\n ---------"
-
-                console.log "headerLengthInit", headerLengthInit
-                console.log "headerLength", headerLength
-                console.log "$header.length", $header.length
-                console.log record
-
-
-                offset = Math.abs(headerLength - $header.length)
-
-                if headerLength - $header.length > 0
-                    offset = offset * -1
-
-                console.log "offset", offset
-                console.log "$scope.offset", $scope.offset
-                $scope.offset += offset
-                console.log "$scope.offset", $scope.offset
-
-                $scope.extraOffset = -Math.max(Math.abs(headerLength - headerLengthInit), Math.abs($header.length - headerLengthInit)) + 1
-
-                console.log "$scope.extraOffset", $scope.extraOffset
-
-                Table.updateAxisSelection $scope.visualization.xColumn + $scope.offset + $scope.extraOffset, $scope.visualization.yColumn + $scope.offset + $scope.extraOffset
-
-                headerLength = $header.length
-
-
 
         #@method $scope.axisSelection
         #@description selects axis by clicking on the header and creates new visualization
@@ -126,11 +84,7 @@ app.controller "TableCtrl", [
                         $header.find("span").removeClass "selected-x-y"
 
                         if axis is "x"
-                            $scope.visualization.xColumn = $(element).context.cellIndex - $scope.offset - $scope.extraOffset
-                            console.log "$(element).context.cellIndex", $(element).context.cellIndex
-                            console.log "$scope.offset", $scope.offset
-                            console.log "$scope.extraOffset", $scope.extraOffset
-                            console.log "X", $scope.visualization.xColumn
+                            $scope.visualization.xColumn = $(element).context.cellIndex - 1
                             $header.find("span").removeClass "selected-x"
                             $(element).find("span").addClass "selected-x"
 
@@ -138,11 +92,7 @@ app.controller "TableCtrl", [
                                 $(element).find("span").addClass "selected-x-y"
 
                         else
-                            $scope.visualization.yColumn = $(element).context.cellIndex - $scope.offset - $scope.extraOffset
-                            console.log "$(element).context.cellIndex", $(element).context.cellIndex
-                            console.log "$scope.offset", $scope.offset
-                            console.log "$scope.extraOffset", $scope.extraOffset
-                            console.log "Y", $scope.visualization.yColumn
+                            $scope.visualization.yColumn = $(element).context.cellIndex - 1
                             $header.find("span").removeClass "selected-y"
                             $(element).find("span").addClass "selected-y"
 

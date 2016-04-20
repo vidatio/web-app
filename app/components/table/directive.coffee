@@ -36,6 +36,7 @@ app.directive "hot", [
                     minRows: minHeight
                     rowHeaders: true
                     colHeaders: header
+                    viewportColumnRenderingOffset: 1000
                     currentColClassName: "current-col"
                     currentRowClassName: "current-row"
                     manualColumnResize: true
