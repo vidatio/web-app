@@ -67,6 +67,9 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                Progress.setMessage message
+
             # Can't use file.type because of chromes File API
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
@@ -76,6 +79,7 @@ app.controller "ImportCtrl", [
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
+                Progress.resetMessage()
                 $log.warn "ImportCtrl maxFileSize exceeded"
                 $log.debug
                     fileSize: $scope.file.size
@@ -89,6 +93,7 @@ app.controller "ImportCtrl", [
                 return
 
             if fileType isnt "csv" and fileType isnt "zip"
+                Progress.resetMessage()
                 $log.info "ImportCtrl data format not supported"
                 $log.debug
                     format: fileType
@@ -101,25 +106,24 @@ app.controller "ImportCtrl", [
                     )
                 return
 
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                Progress.setMessage message
-            .then ->
-                Import.readFile($scope.file, fileType).then (fileContent) ->
-                    $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                        Progress.setMessage message
+            Import.readFile($scope.file, fileType).then (fileContent) ->
+                $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                    Progress.setMessage message
 
-                    initTableAndMap fileType, fileContent
+                initTableAndMap fileType, fileContent
 
-                , (error) ->
-                    $log.error "ImportCtrl Import.readFile promise error called"
-                    $log.debug
-                        error: error
+            , (error) ->
+                $log.error "ImportCtrl Import.readFile promise error called"
+                $log.debug
+                    error: error
 
-                    $translate('TOAST_MESSAGES.READ_ERROR')
-                        .then (translation) ->
-                            ngToast.create
-                                content: translation
-                                className: "danger"
+                Progress.resetMessage()
+
+                $translate('TOAST_MESSAGES.READ_ERROR')
+                    .then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
 
         initTableAndMap = (fileType, fileContent) ->
 
