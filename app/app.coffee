@@ -76,7 +76,6 @@ app.run [
                 params: fromParams
 
             if not $rootScope.authorized and $state.current.name is "app.share" or $state.current.name is "app.share.id"
-                console.log $state.current.name
                 $rootScope.history.push
                     name: $state.current.name
                     params: fromParams
