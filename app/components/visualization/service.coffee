@@ -68,8 +68,8 @@ app.service 'VisualizationService', [
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
+                #trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                recommendationResults = vidatio.recommender.run Table.getDataset(), Table.getHeader(), Table.useColumnHeadersFromDataset
 
                 if recommendationResults.error?
                     $log.error "Visualization Ctrl error at recommend diagram"
@@ -94,7 +94,8 @@ app.service 'VisualizationService', [
                 $log.debug
                     options: options
 
-                chartData = vidatio.helper.trimDataset Table.getDataset()
+                chartData = Table.getDataset()
+
                 headers = Table.getHeader()
                 options["headers"] =
                     "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
@@ -211,7 +212,7 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 

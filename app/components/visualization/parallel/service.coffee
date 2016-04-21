@@ -35,3 +35,20 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
                 line.attr "x2", Math.abs(Number(line.attr("x2")))
 
         , 100
+
+
+#    # we overwrite the parent preProcess method
+#    preProcess: (options) =>
+#        vidatio.log.info "ParallelCoordinates preprocess called"
+#        vidatio.log.debug
+#            options: options
+#
+#        # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
+#        transposedDataset = vidatio.helper.transposeDataset @dataset
+#
+#        for row, index in transposedDataset
+#            transposedDataset[index] = vidatio.helper.cleanArray(row)
+#
+#        chartData = vidatio.helper.subsetWithXColumnFirst transposedDataset, options.xColumn, options.yColumn
+#        @chartData = vidatio.helper.transposeDataset chartData
+#

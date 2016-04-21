@@ -53,9 +53,9 @@ app.controller "DatasetCtrl", [
                 options.fileType = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "csv"
 
                 Visualization.create(options)
-                Progress.setMessage()
+                Progress.resetMessage()
             , (error) ->
-                Progress.setMessage()
+                Progress.resetMessage()
                 ErrorHandler.format error
 
         # @method $scope.openInEditor

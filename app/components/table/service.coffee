@@ -12,6 +12,8 @@ app.service 'TableService', [
                 @useColumnHeadersFromDataset = true
                 @instanceTable = null
                 @diagramColumns = {}
+                @minColumns = 26
+                @minRows = 26
 
             # @method setInstance
             # @public
@@ -126,6 +128,11 @@ app.service 'TableService', [
             # @param {Number} xColumn
             # @param {Number} yColumn
             updateAxisSelection: (xColumn, yColumn) ->
+                $log.info "TableService updateAxisSelection called"
+                $log.debug
+                    xColumn: xColumn
+                    yColumn: yColumn
+
                 $header = $(".ht_clone_top th")
 
                 $header.find("span").removeClass "selected-x-y"
