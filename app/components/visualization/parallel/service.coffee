@@ -15,9 +15,10 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
         @preProcess options
 
         setTimeout =>
+            parcoordsData = [{"test" : @chartData[0][0], "aber": @chartData[0][1]}]
             $(@containerSelector).addClass "parcoords"
             d3.parcoords()(@containerSelector)
-            .data(@chartData)
+            .data(parcoordsData)
             .color(@color)
             .width(@width)
             .height(@height)
