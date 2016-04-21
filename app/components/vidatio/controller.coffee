@@ -52,6 +52,4 @@ app.controller "VidatioCtrl", [
 
         $scope.useSavedData = ->
             Data.useSavedData $scope.vidatio
-
-
 ]
