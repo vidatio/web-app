@@ -15,6 +15,7 @@ app.directive "visualization", [
             $scope.geojson = Map.leaflet
 
             widthParent = element.parent().width()
+            heightParent = element.parent().height()
 
             # Resizing the visualizations
             # using setTimeout to use only to the last resize action of the user
@@ -22,9 +23,11 @@ app.directive "visualization", [
             id = null
             onWindowResizeCallback = ->
                 currentWidthParent = element.parent().width()
+                currentHeightParent = element.parent().height()
 
-                unless $(element).is(":visible") and currentWidthParent is widthParent
+                unless $(element).is(":visible") and (currentWidthParent is widthParent and currentHeightParent is heightParent)
                     widthParent = currentWidthParent
+                    heightParent = currentHeightParent
 
                     clearTimeout id
                     id = setTimeout ->
