@@ -31,18 +31,18 @@ describe "Controller Import", ->
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
-            #@httpBackend.whenGET(/index/).respond ""
-            #@httpBackend.whenGET(/editor/).respond ""
-            #@httpBackend.expectGET(/languages/).respond ""
-            #@httpBackend.expectGET(/404/).respond ""
-            #@httpBackend.whenGET(@rootScope.apiBase + '/v0/forward?url=test.csv').respond
-            #    body: 'test,1\ntest,2\ntest,3'
-            #    fileType: 'csv'
-            #@scope.link = 'test.csv'
-            #@scope.load()
-            #@httpBackend.flush()
-#
-            #expect(@Table.setDataset).toHaveBeenCalled()
+            @httpBackend.whenGET(/index/).respond ""
+            @httpBackend.whenGET(/editor/).respond ""
+            @httpBackend.expectGET(/languages/).respond ""
+            @httpBackend.whenGET(/404/).respond ""
+            @httpBackend.whenGET(@rootScope.apiBase + '/v0/forward?url=test.csv').respond
+                body: 'test,1\ntest,2\ntest,3'
+                fileType: 'csv'
+            @scope.link = 'test.csv'
+            @scope.load()
+            @httpBackend.flush()
+
+            expect(@Table.setDataset).toHaveBeenCalled()
 
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
