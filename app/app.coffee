@@ -42,7 +42,7 @@ app.run [
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
-            $rootScope.apiBase = "https://api.vidatio.com"
+            $rootScope.apiBase = "#{CONFIG.API}"
             $rootScope.apiVersion = "/v0"
         else
             $rootScope.apiBase = "http://localhost:3000"
