@@ -11,7 +11,7 @@
                                 p {{ "MY_0_VIDATIOS2" | translate }}
                         .col-xs-6
                             .get-started
-                                a.bold-font.btn.btn-primary(ui-sref="app.import({ locale: locale })" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                                a.bold-font.btn.btn-primary(ui-sref="app.import" title="{{ 'OPEN_IMPORT' | translate }} {{ 'OPEN' | translate }}")
                                     h1 {{ "GET_LANDING_PAGE" | translate | uppercase }}
                                     br
                                     h1 {{ "STARTED_LANDING_PAGE" | translate | uppercase }}
@@ -25,5 +25,5 @@
                         vidatio(vidatio="vidatio")
                 .row
                     .col-xs-12.has-link
-                        a.btn.btn-primary(ui-sref="app.catalog({ locale: locale, myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}
+                        a.btn.btn-primary(ui-sref="app.catalog({myvidatios: true })" title="{{'OPEN_CATALOG' | translate }}") {{ "MORE_VIDATIOS" | translate }}
                             span.icon-bracketright

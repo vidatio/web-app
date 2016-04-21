@@ -209,7 +209,6 @@ app.config [
         # abstract state for language as parameter in URL
         .state "app",
             abstract: true
-            url: "/{locale}"
             controller: "AppCtrl"
             template: "<ui-view/>"
 
@@ -293,18 +292,5 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
-                locale =
-                    locale: $translateProvider.preferredLanguage()
-
-                # iterate over all states and check if the requested url exists as a state; if not show 404-page
-                for state in $state.get()
-                    console.log $stateParams.path, state.url
-                    if $stateParams.path in ["/de", "/en"]
-                        $state.go "app.index", locale
-                        break
-                    else if state.url.startsWith($stateParams.path)
-                        $state.go state.name, locale
-                        break
-                    else
-                        $state.go "app.fourofour", locale
+                $state.go "app.fourofour"
 ]

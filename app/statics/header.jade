@@ -9,16 +9,16 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="dataset")
                 .col-xs-6.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
-                    #back-to-datasets-overview.header-button.icon-opendata(ui-sref='app.catalog({ locale: locale })')
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    #back-to-datasets-overview.header-button.icon-opendata(ui-sref='app.catalog')
                         span {{ "OVERVIEW" | translate | uppercase }}
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -26,14 +26,14 @@ header.ng-cloak
 
             #navigation.row.editor(ng-switch-when="editor" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -41,7 +41,7 @@ header.ng-cloak
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#import-data(ui-sref="app.import({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                        a#import-data(ui-sref="app.import" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-import
                             span
                                 h3 {{ "IMPORT" | translate | uppercase }}
@@ -49,7 +49,7 @@ header.ng-cloak
                             span.icon-edit
                             span
                                 h3 {{"EDIT" | translate | uppercase}}
-                        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                        a#use-data(ng-if="!datasetID" ui-sref="app.share" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-check
                             span
                                 h3 {{"USE" | translate | uppercase}}
@@ -60,14 +60,14 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="share" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -75,11 +75,11 @@ header.ng-cloak
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#import-data(ui-sref="app.import({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                        a#import-data(ui-sref="app.import" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-import
                             span
                                 h3 {{ "IMPORT" | translate | uppercase }}
-                        a#edit-data(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
+                        a#edit-data(ng-if="!datasetID" ui-sref="app.editor" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-edit
                             span
                                 h3 {{"EDIT" | translate | uppercase}}
@@ -94,14 +94,14 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="import" ng-controller="HeaderCtrl")
                 .col-xs-6.col-sm-2.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -109,11 +109,11 @@ header.ng-cloak
 
                 .col-xs-12.col-sm-pull-2.col-sm-8
                     #process-nav
-                        a#import-data.active(ui-sref="app.import({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
+                        a#import-data.active(ui-sref="app.import" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-import
                             span
                               h3 {{ "IMPORT" | translate | uppercase }}
-                        a#edit-data.clickable(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
+                        a#edit-data.clickable(ng-if="!datasetID" ui-sref="app.editor"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-edit
                             span
                                 h3 {{"EDIT" | translate | uppercase}}
@@ -121,7 +121,7 @@ header.ng-cloak
                             span.icon-edit
                             span
                                 h3 {{"EDIT" | translate | uppercase}}
-                        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+                        a#use-data(ng-if="!datasetID" ui-sref="app.share" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
                             span.icon-check
                             span
                                 h3 {{"USE" | translate | uppercase}}
@@ -132,17 +132,17 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="agb")
                 .col-xs-3.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.middle
                     h1.underline-red-light {{ "TERMS" | translate | uppercase }}
 
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -150,7 +150,7 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="login")
                 .col-xs-3.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.middle
                     h1.underline-red-light {{ "LOGIN" | translate | uppercase }}
@@ -163,7 +163,7 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="registration")
                 .col-xs-3.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.middle
                     h1.underline-red-light {{ "REGISTRATION" | translate | uppercase }}
@@ -175,7 +175,7 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="profile")
                 .col-xs-6.col-sm-2.logo
-                    a#logo(ui-sref="app.index({ locale: locale })"  title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index"  title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
@@ -190,16 +190,16 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="catalog")
                 .col-xs-6.col-sm-2.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
-                    a#back-to-import.button.icon-import(ui-sref='app.import({ locale: locale })' title="{{ 'IMPORT_OVERVIEW' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#back-to-import.button.icon-import(ui-sref='app.import' title="{{ 'IMPORT_OVERVIEW' | translate }}")
                         span IMPORT
 
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -210,17 +210,17 @@ header.ng-cloak
 
             #navigation.row(ng-switch-when="team")
                 .col-xs-3.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.middle
                     h1.underline-red-light {{ "TEAM" | translate | uppercase }}
 
                 .col-xs-3.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
@@ -228,14 +228,14 @@ header.ng-cloak
 
             #navigation.row(ng-switch-default)
                 .col-xs-6.logo
-                    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+                    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
                 .col-xs-6.menu-buttons
                     div(ng-if="globals.authorized")
-                        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+                        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "PROFILE" | translate | uppercase }}
                     div(ng-if="!globals.authorized")
-                        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+                        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
                             span {{ "LOGIN" | translate | uppercase }}
                     div
                         a#menu.button.icon-hamburger.toggle-menu.menu-right.push-body(href='#' title="{{ 'MENU' | translate }} {{ 'OPEN' | translate }}")
