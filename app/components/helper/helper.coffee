@@ -389,6 +389,9 @@ class window.vidatio.Helper
 
             transformedDataset.push dataItem
 
+
+        console.log transformedDataset
+
         transformedDataset
 
     # @method subsetWithXColumnFirst
