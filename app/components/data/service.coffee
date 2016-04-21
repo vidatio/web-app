@@ -43,8 +43,10 @@ app.service 'DataService', [
             saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
                 angular.extend @metaData, metaData
 
+                trimResult = vidatio.helper.trimDataset(dataset)
+
                 DatasetFactory.save
-                    data: dataset
+                    data: trimResult.trimmedDataset
                     published: @metaData.publish
                     metaData: @metaData
                     visualizationOptions:
@@ -54,6 +56,7 @@ app.service 'DataService', [
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
+                        tableOffset: trimResult.tableOffset
                 , (response) ->
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
@@ -79,6 +82,7 @@ app.service 'DataService', [
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
+                    Table.updateAxisSelection(Number(data.visualizationOptions.xColumn) + 1, Number(data.visualizationOptions.yColumn) + 1)
 
                 if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
@@ -93,13 +97,21 @@ app.service 'DataService', [
 
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
+                    else
+                        Table.setHeader()
 
+                    if !data.visualizationOptions.tableOffset
+                        data.visualizationOptions.tableOffset =
+                            rows: 0
+                            columns: 0
+
+                    data.data = vidatio.helper.untrimDataset data.data, data.visualizationOptions.tableOffset, Table.minColumns, Table.minRows
                     Table.setDataset data.data
 
             #@method downloadCSV
             #@description downloads a csv
             downloadCSV: (name) ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                trimmedDataset = vidatio.helper.trimDataset(Table.getDataset()).trimmedDataset
 
                 if Table.useColumnHeadersFromDataset
                     csv = Papa.unparse

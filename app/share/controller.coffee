@@ -29,7 +29,6 @@ app.controller "ShareCtrl", [
             Data.requestVidatioViaID($stateParams.id)
 
         $scope.goToPreview = false
-        $scope.hasData = Table.hasData()
         $scope.visualization = Visualization.options
         $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
@@ -65,7 +64,7 @@ app.controller "ShareCtrl", [
             Visualization.create()
 
         $scope.saveDataset = ->
-            if not $scope.hasData
+            if not Table.hasData()
                 $translate('TOAST_MESSAGES.DATASET_IS_EMPTY')
                     .then (translation) ->
                         ngToast.create
@@ -89,12 +88,12 @@ app.controller "ShareCtrl", [
                     when "csv"
                         dataset = Table.dataset.slice()
                         if Table.useColumnHeadersFromDataset
-                            dataset.unshift Table.instanceTable.getColHeader()
+                            dataset.unshift Table.header
                     when "shp"
                         dataset = Map.getGeoJSON()
 
                 Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
                     if errors?
                         ErrorHandler.format errors
@@ -112,6 +111,7 @@ app.controller "ShareCtrl", [
                     return $scope.goToPreview = !$scope.goToPreview
 
             .catch (error) ->
+                $log.error error
                 $translate(error.i18n).then (translation) ->
                     ngToast.create
                         content: translation

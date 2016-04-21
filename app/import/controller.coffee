@@ -63,11 +63,14 @@ app.controller "ImportCtrl", [
                     $log.debug
                         resp: resp
 
-                    Progress.setMessage ""
+                    Progress.resetMessage()
                     ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
+            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
+                Progress.setMessage message
+
             # Can't use file.type because of chromes File API
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
@@ -83,6 +86,7 @@ app.controller "ImportCtrl", [
 
                 $translate('TOAST_MESSAGES.FILE_SIZE_EXCEEDED', {maxFileSize: maxFileSize / 1048576})
                 .then (translation) ->
+                    Progress.resetMessage()
                     ngToast.create(
                         content: translation
                         className: "danger"
@@ -96,14 +100,12 @@ app.controller "ImportCtrl", [
 
                 $translate('TOAST_MESSAGES.NOT_SUPPORTED', { format: fileType })
                 .then (translation) ->
+                    Progress.resetMessage()
                     ngToast.create(
                         content: translation
                         className: "danger"
                     )
                 return
-
-            $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
-                Progress.setMessage message
 
             Import.readFile($scope.file, fileType).then (fileContent) ->
                 $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
@@ -115,6 +117,8 @@ app.controller "ImportCtrl", [
                 $log.error "ImportCtrl Import.readFile promise error called"
                 $log.debug
                     error: error
+
+                Progress.resetMessage()
 
                 $translate('TOAST_MESSAGES.READ_ERROR')
                     .then (translation) ->
@@ -172,6 +176,6 @@ app.controller "ImportCtrl", [
                         content: translation
                         className: "danger"
 
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
 ]

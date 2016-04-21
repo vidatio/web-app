@@ -44,5 +44,9 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
 
         # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
         transposedDataset = vidatio.helper.transposeDataset @dataset
+
+        for row, index in transposedDataset
+            transposedDataset[index] = vidatio.helper.cleanArray(row)
+
         chartData = vidatio.helper.subsetWithXColumnFirst transposedDataset, options.xColumn, options.yColumn
         @chartData = vidatio.helper.transposeDataset chartData

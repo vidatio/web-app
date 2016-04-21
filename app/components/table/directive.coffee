@@ -28,12 +28,20 @@ app.directive "hot", [
             else
                 header = true
 
+            columns = minWidth - Table.getDataset()[0].length
+            minSpareCols = if columns > 0 then columns else 0
+
+            rows = minHeight - Table.getDataset().length
+            minSpareRows = if rows > 0 then rows else 0
+
             hot = null
             do ->
                 hot = new Handsontable($element[0],
-                    data: $scope.dataset
+                    data: Table.dataset
                     minCols: minWidth
                     minRows: minHeight
+                    minSpareCols: minSpareCols
+                    minSpareRows: minSpareRows
                     rowHeaders: true
                     colHeaders: header
                     viewportColumnRenderingOffset: 1000

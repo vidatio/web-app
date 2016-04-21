@@ -4,12 +4,13 @@ describe "Controller Import", ->
     beforeEach ->
         module "app"
 
-        inject ($controller, $rootScope, $httpBackend, $q, $http, $location) ->
+        inject ($controller, $rootScope, $httpBackend, $q, $http, $location, $timeout) ->
             @httpBackend = $httpBackend
             @scope = $rootScope.$new()
             @rootScope = $rootScope
             @location = $location
             @deferred = $q.defer()
+            @timeout = $timeout
 
             @Table =
                 dataset: [[]]
@@ -44,14 +45,16 @@ describe "Controller Import", ->
 
             expect(@Table.setDataset).toHaveBeenCalled()
 
+
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
             @scope.file =
                 name: "test.csv"
             @scope.getFile()
 
-            expect(@Import.readFile).toHaveBeenCalled()
-            expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
+            @timeout ->
+                expect(@Import.readFile).toHaveBeenCalled()
+                expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
 
         # Disabled because of promise gets never resolved
         xit 'should set the dataset of the table after reading the file', ->

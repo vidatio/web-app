@@ -143,7 +143,6 @@ describe "Service Data", ->
             data.visualizationOptions.useColumnHeadersFromDataset = false
             @Data.useSavedData data
             expect(@Table.setDataset).toHaveBeenCalled()
-            expect(@Table.setHeader).not.toHaveBeenCalled()
 
 
 
