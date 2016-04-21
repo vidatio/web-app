@@ -33,7 +33,7 @@ app.controller "VisualizationCtrl", [
             # because the watcher fires at initialization the diagram gets immediately drawn
             # FIXME: What should happen, if a person clears the table after watching shp?!
             Visualization.create()
-            Progress.setMessage ""
+            Progress.resetMessage()
 
         $scope.$on "colorpicker-selected", ->
             $timeout ->
