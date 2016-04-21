@@ -298,7 +298,6 @@ app.config [
 
                 # iterate over all states and check if the requested url exists as a state; if not show 404-page
                 for state in $state.get()
-                    console.log $stateParams.path, state.url
                     if $stateParams.path in ["/de", "/en"]
                         $state.go "app.index", locale
                         break

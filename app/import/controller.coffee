@@ -23,10 +23,10 @@ app.controller "ImportCtrl", [
     "VisualizationService"
     "ErrorHandler"
     "$q"
-    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization, ErrorHandler, $q) ->
+    "$state"
+    ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Import, Table, Converter, Map, Data, ngToast, Progress, Visualization, ErrorHandler, $q, $state) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
         $scope.importService = Import
-        editorPath = "/" + $rootScope.locale + "/editor"
 
         $scope.continueToEmptyTable = ->
             Data.datasetID = null
@@ -38,7 +38,7 @@ app.controller "ImportCtrl", [
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
-                $location.path editorPath
+                $state.go "app.editor"
 
         # Read via link
         $scope.load = ->
@@ -56,7 +56,7 @@ app.controller "ImportCtrl", [
                     # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                     $timeout ->
                         Progress.setMessage ""
-                        $location.path editorPath
+                        $state.go "app.editor"
 
                 .error (resp) ->
                     $log.error "ImportCtrl load file by url error called"
@@ -164,7 +164,7 @@ app.controller "ImportCtrl", [
                             i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
 
             promise.then ->
-                $location.path editorPath
+                $state.go "app.editor"
 
             .catch (error) ->
                 $translate(error.i18n).then (translation) ->
