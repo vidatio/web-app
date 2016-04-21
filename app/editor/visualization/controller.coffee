@@ -58,8 +58,6 @@ app.controller "VisualizationCtrl", [
                 $scope.visualization.selectedDiagramName = translation
                 $scope.visualization.type = type
 
-
-
                 Visualization.create()
 
         #@method $scope.shareVisualization
@@ -72,5 +70,4 @@ app.controller "VisualizationCtrl", [
 
             fileName = $scope.data.name + "_" + moment().format('DD/MM/YYYY') + "_" + moment().format("HH:MM")
             Visualization.downloadAsImage fileName, type
-
 ]

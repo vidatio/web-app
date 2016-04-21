@@ -10,7 +10,8 @@ app.controller "TableCtrl", [
     "ConverterService"
     "$log"
     "VisualizationService"
-    ($scope, Table, Data, Map, Converter, $log, Visualization) ->
+    "$timeout"
+    ($scope, Table, Data, Map, Converter, $log, Visualization, $timeout) ->
         $scope.dataset = Table.dataset
         $scope.data = Data
         $scope.visualization = Visualization.options
@@ -60,7 +61,7 @@ app.controller "TableCtrl", [
                     $(".x-axis-button").removeClass "focused"
                     $header.removeClass "highlighted"
                     return true
-                currentColumn = Number($scope.visualization.xColumn) + 1
+                currentColumn = Number($scope.visualization.xColumn) + $scope.offset + 1
                 $(".y-axis-button").removeClass "focused"
                 $(".x-axis-button").addClass "focused"
             else
@@ -68,7 +69,7 @@ app.controller "TableCtrl", [
                     $(".y-axis-button").removeClass "focused"
                     $header.removeClass "highlighted"
                     return true
-                currentColumn = Number($scope.visualization.yColumn) + 1
+                currentColumn = Number($scope.visualization.yColumn) + $scope.offset + 1
                 $(".x-axis-button").removeClass "focused"
                 $(".y-axis-button").addClass "focused"
 
@@ -110,4 +111,5 @@ app.controller "TableCtrl", [
         # remove focus-states from axis-buttons if other icons are clicked
         clearFocusedAxisButtons = ->
             $("[class*='-axis-button']").removeClass "focused"
+
 ]

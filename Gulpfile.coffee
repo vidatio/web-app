@@ -11,7 +11,7 @@ stylint = require "gulp-stylint"
 
 karmaServer = require("karma").Server
 
-browserSync = require('browser-sync').create()
+browserSync = require("browser-sync").create()
 reload = browserSync.reload
 debug = require "gulp-debug"
 
@@ -25,7 +25,10 @@ cached = require "gulp-cached"
 shell = require "gulp-shell"
 modRewrite = require "connect-modrewrite"
 ngConstant = require "gulp-ng-constant"
+
 uglify = require "gulp-uglify"
+cleanCSS = require "gulp-clean-css"
+ngAnnotate = require "gulp-ng-annotate"
 
 DOC_FILES = [
     "./README.MD"
@@ -71,6 +74,7 @@ BUILD =
         ]
         jade: [
             "./app/**/*.jade"
+            "./app/**/*.jade"
         ]
         html: [
             "./build/html/**/*.html"
@@ -114,6 +118,8 @@ BUILD =
             "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
             "./bower_components/pablo/pablo.js"
             "./bower_components/select2/dist/js/select2.js"
+            "./bower_components/angulartics/src/angulartics.js"
+            "./bower_components/angulartics-piwik/src/angulartics-piwik.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -207,7 +213,7 @@ gulp.task "production",
         "copy"
         "config:production"
         "build:production:plugins:js"
-        "build:plugins:css"
+        "build:production:plugins:css"
         "build:production:source:coffee"
         "build:production:source:stylus"
         "clean:html"
@@ -252,7 +258,6 @@ gulp.task "lint:coffee",
     "Lints all CoffeeScript source files.",
     ->
         gulp.src APP_FILES
-        #.pipe cached "lint:coffee"
         .pipe coffeelint()
         .pipe coffeelint.reporter()
 
@@ -271,25 +276,31 @@ gulp.task "build:plugins:js",
     "Concatenates and saves '#{BUILD.plugin.js}' to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        #.pipe cached "plugins.js"
-        .pipe gif "*.js", concat(BUILD.plugin.js)
-        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+        .pipe concat(BUILD.plugin.js)
+        .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:production:plugins:js",
     "Uglifies, concatenates and saves '#{BUILD.plugin.js}' for production to '#{BUILD.dirs.js}'.",
     ->
         gulp.src BUILD.plugins.js
-        #.pipe uglify()
-        .pipe gif "*.js", concat(BUILD.plugin.js)
-        .pipe gif "*.js", gulp.dest(BUILD.dirs.js)
+        .pipe concat(BUILD.plugin.js)
+        .pipe uglify()
+        .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:plugins:css",
     "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
     ->
         gulp.src BUILD.plugins.css
-        #.pipe cached "plugins.css"
-        .pipe gif "*.css", concat(BUILD.plugin.css)
-        .pipe gif "*.css", gulp.dest(BUILD.dirs.css)
+        .pipe concat(BUILD.plugin.css)
+        .pipe gulp.dest(BUILD.dirs.css)
+
+gulp.task "build:production:plugins:css",
+    "Concatenates and saves '#{BUILD.dirs.css}' to '#{BUILD.dirs.css}'.",
+    ->
+        gulp.src BUILD.plugins.css
+        .pipe concat(BUILD.plugin.css)
+        .pipe cleanCSS()
+        .pipe gulp.dest(BUILD.dirs.css)
 
 ###
     BUILDING SOURCE
@@ -313,8 +324,9 @@ gulp.task "build:production:source:coffee",
     ->
         gulp.src BUILD.source.coffee
         .pipe coffee().on "error", util.log
-        #.pipe uglify()
         .pipe concat(BUILD.app)
+        .pipe ngAnnotate()
+        .pipe uglify({"mangle": true, "compress": true})
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:source:stylus",
@@ -337,6 +349,7 @@ gulp.task "build:production:source:stylus",
         gulp.src BUILD.source.stylus
         .pipe stylus
             compress: true
+        .pipe cleanCSS()
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:source:jade",
@@ -382,14 +395,12 @@ gulp.task "copy:img",
     false,
     ->
         gulp.src COPY_FILES.img
-        #.pipe cached "copy:img"
         .pipe gulp.dest BUILD.dirs.images
 
 gulp.task "copy:fonts",
     false,
     ->
         gulp.src COPY_FILES.fonts
-        #.pipe cached "copy:fonts"
         .pipe gif "**/flat-ui-icons-regular.*", rename (path) ->
             path.dirname = "/glyphicons"
         .pipe gif "**/lato*", rename (path) ->

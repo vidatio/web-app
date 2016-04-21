@@ -36,10 +36,16 @@ app.directive "hot", [
                     minRows: minHeight
                     rowHeaders: true
                     colHeaders: header
+                    viewportColumnRenderingOffset: 1000
                     currentColClassName: "current-col"
                     currentRowClassName: "current-row"
                     manualColumnResize: true
                     beforeChange: (change, source) ->
+                        # Prevents user to delete whole row or column in shp-files
+                        if change.length > 1 and Data.metaData.fileType is "shp"
+                            change.forEach (element, index) ->
+                                element[3] = element[2]
+
                         if Data.metaData.fileType is "shp" and !Data.validateInput(change[0][0], change[0][1], change[0][2], change[0][3])
                             change[0][3] = change[0][2]
 
@@ -63,20 +69,11 @@ app.directive "hot", [
                 geoJSON = Map.getGeoJSON()
                 columnHeaders = Converter.convertGeoJSON2ColHeaders geoJSON
                 Table.setHeader columnHeaders, "shp"
+                Table.setColumns()
             else
                 # Initialize "X" and "Y" on table header
                 xColumn = if Visualization.options?.xColumn? then Number(Visualization.options.xColumn) + 1 else 1
                 yColumn = if Visualization.options?.yColumn? then Number(Visualization.options.yColumn) + 1 else 2
-
-                $header = $(".ht_clone_top th")
-
-                $header.each (idx, element) ->
-                    if idx is xColumn and idx is yColumn
-                        $(element).find("span").addClass "selected-x-y"
-                    else if idx is xColumn
-                        $(element).find("span").addClass "selected-x"
-                    else if idx is yColumn
-                        $(element).find("span").addClass "selected-y"
 
                 Table.updateAxisSelection(xColumn, yColumn)
 

@@ -21,6 +21,8 @@ app = angular.module "app", [
     "logglyLogger"
     "datePicker"
     "colorpicker.module"
+    "angulartics"
+    "angulartics.piwik"
 ]
 
 app.run [
@@ -40,7 +42,7 @@ app.run [
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
-            $rootScope.apiBase = "https://api.vidatio.com"
+            $rootScope.apiBase = "#{CONFIG.API}"
             $rootScope.apiVersion = "/v0"
         else
             $rootScope.apiBase = "http://localhost:3000"
@@ -68,7 +70,6 @@ app.run [
                 $translate("SLOGAN").then (slogan) ->
                     $rootScope.title = slogan
 
-
             if $rootScope.history.length > 20
                 $rootScope.history.splice(0, 1)
 
@@ -76,14 +77,14 @@ app.run [
                 name: fromState.name
                 params: fromParams
 
-            if not $rootScope.authorized and $state.current.name is "app.share"
+            if not $rootScope.authorized and $state.current.name is "app.share" or $state.current.name is "app.share.id"
                 $rootScope.history.push
-                    name: "app.share"
+                    name: $state.current.name
                     params: fromParams
 
             userPages = ["app.login", "app.registration"]
-            editorPages = ["app.editor", "app.editor.id", "app.share"]
-            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.login", "app.registration"]
+            editorPages = ["app.editor", "app.editor.id", "app.share", "app.share.id"]
+            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.share.id", "app.login", "app.registration"]
 
             # set boolean value true when user navigates from editor/share to login/registration
             if fromState.name in editorPages and toState.name in userPages
@@ -199,7 +200,6 @@ app.config [
                     return ''
                 if tz then moment.tz(m, tz).format(format) else m.format(format)
 
-
         ngToast.configure(
             animation: "slide"
             dismissButton: true
@@ -259,24 +259,28 @@ app.config [
 
         .state "app.editor",
             url: "/editor"
+            params:
+                id: null
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.editor.id",
-            url: "/editor/:id"
+            url: "/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
             url: "/share"
+            params:
+                id: null
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
 
         .state "app.share.id",
-            url: "/share/:id"
+            url: "/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
