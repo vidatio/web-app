@@ -25,7 +25,7 @@ app.directive "visualization", [
                 currentWidthParent = element.parent().width()
                 currentHeightParent = element.parent().height()
 
-                unless $(element).is(":visible") and (currentWidthParent is widthParent and currentHeightParent is heightParent)
+                if $(element).is(":visible") and (currentWidthParent isnt widthParent or currentHeightParent isnt heightParent)
                     widthParent = currentWidthParent
                     heightParent = currentHeightParent
 
