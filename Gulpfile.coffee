@@ -118,6 +118,8 @@ BUILD =
             "./bower_components/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js"
             "./bower_components/pablo/pablo.js"
             "./bower_components/select2/dist/js/select2.js"
+            "./bower_components/angulartics/src/angulartics.js"
+            "./bower_components/angulartics-piwik/src/angulartics-piwik.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
