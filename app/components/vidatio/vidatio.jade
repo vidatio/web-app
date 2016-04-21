@@ -16,7 +16,7 @@
 .btns-container
     .btns
         .action-button
-            a.icon-edit.icons(ui-sref="app.editor.id({ id: vidatio._id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
+            a.icon-edit.icons(ui-sref="app.editor({ id: vidatio._id, locale: locale })" ng-click="openInEditor()" title="{{'OPEN_IN_EDITOR'|translate}}")
                 span  {{ "USE" | translate }}
             a.icon-trash.icons(ng-show="authorized" title="{{'DATASET_DELETE'|translate}}" ng-click="deleteVidatio()")
                 span  {{ "DELETE" | translate }}
