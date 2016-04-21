@@ -295,5 +295,12 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
-                $state.go "app.fourofour"
+                unless $stateParams.path in ["/editor", "/share"]
+                    $state.go "app.fourofour"
+
+                if $stateParams.path is "/share"
+                    $state.go "app.share"
+
+                if $stateParams.path is "/editor"
+                    $state.go "app.editor"
 ]
