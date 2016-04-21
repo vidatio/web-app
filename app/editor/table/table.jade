@@ -18,6 +18,10 @@
                 a(href='#' ng-click="axisSelection('y')").icon-yaxis
                     span {{ "VALUE_RANGE" | translate }}
 
+            .y-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_Y_TITLE'|translate}}")
+                a(href='#' ng-click="changeAxis()").icon-yaxis
+                    span {{ "VALUE_RANGE" | translate }}
+
             .download-button.settings-button(title="{{'DOWNLOAD'|translate}} {{'DATASET'|translate}}")
                 a(href="#" ng-click="download()").icon-download
                     span {{ "DOWNLOAD" | translate }}
