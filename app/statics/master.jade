@@ -8,14 +8,15 @@ html(ng-app="app" lang="{{ 'LANG_DE' | translate}}")
 
         include includes/js
         include includes/styl
+        include includes/analytics
 
-    body.container-fluid(ng-file-drop-start)
+body.container-fluid(ng-file-drop-start)
 
         .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
             include header
 
             toast
-            vidatio-progress
+            vidatio-progress(progress-message="progressMessage")
             menu
 
             .app-view(ui-view)

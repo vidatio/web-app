@@ -82,12 +82,8 @@
 
         .settings-bar
             height 52px
-            display flex
-            display -webkit-flex /* Safari */
-            display -ms-flexbox /* IE */
-            flex-direction row
-            -ms-flex-direction row
-            -webkit-flex-direction row
+            {displayFlex}
+            flex-direction(row)
 
             .settings-button
                 text-align center
@@ -206,8 +202,8 @@
 @media(min-width: 992px)
     #editor
         .row.editor-content
-            display flex
-            flex-direction row
+            {displayFlex}
+            flex-direction(row)
 
             .col-md-6
                 width calc(50% - 1px)

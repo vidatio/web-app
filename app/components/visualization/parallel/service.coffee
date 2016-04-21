@@ -24,6 +24,16 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             .render()
             .ticks(3)
             .createAxes()
+
+            $svg = $("#{@containerSelector} svg")
+            $svg.find(".dimension:not(:first-child) .tick").each (index, element) ->
+                text = $(element).find("text")
+                text.attr "x", Math.abs(Number(text.attr("x")))
+                text.attr "style", "text-anchor: start;"
+
+                line = $(element).find("line")
+                line.attr "x2", Math.abs(Number(line.attr("x2")))
+
         , 100
 
     # we overwrite the parent preProcess method
@@ -34,5 +44,9 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
 
         # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
         transposedDataset = vidatio.helper.transposeDataset @dataset
+
+        for row, index in transposedDataset
+            transposedDataset[index] = vidatio.helper.cleanArray(row)
+
         chartData = vidatio.helper.subsetWithXColumnFirst transposedDataset, options.xColumn, options.yColumn
         @chartData = vidatio.helper.transposeDataset chartData
