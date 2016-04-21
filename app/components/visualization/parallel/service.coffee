@@ -15,7 +15,6 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
         @preProcess options
 
         setTimeout =>
-            parcoordsData = [{"test": @chartData[0][0], "aber": @chartData[0][1]}]
             $(@containerSelector).addClass "parcoords"
             d3.parcoords()(@containerSelector)
             .data(@chartData)
@@ -36,14 +35,3 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
                 line.attr "x2", Math.abs(Number(line.attr("x2")))
 
         , 100
-
-    # we overwrite the parent preProcess method
-    preProcess: (options) =>
-        vidatio.log.info "ParallelCoordinates preprocess called"
-        vidatio.log.debug
-            options: options
-
-        # Parallel coordinate chart needs the columns as rows and the values in x direction need to be first
-        transposedDataset = vidatio.helper.transposeDataset @dataset
-        chartData = vidatio.helper.subsetWithXColumnFirst transposedDataset, options.xColumn, options.yColumn
-        @chartData = vidatio.helper.transposeDataset chartData

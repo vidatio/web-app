@@ -377,10 +377,15 @@ class window.vidatio.Helper
                 x = String(x)
 
             dataItem = {}
-            dataItem[xHeader] = x
-            dataItem[yHeader] = y
-            dataItem["color"] = color
-            dataItem["id"] = index
+            # parcoords chart needd x- and y-values in reversed order and no id or color
+            if visualizationType is "parallel"
+                dataItem[yHeader] = x
+                dataItem[xHeader] = y
+            else
+                dataItem[xHeader] = x
+                dataItem[yHeader] = y
+                dataItem["color"] = color
+                dataItem["id"] = index
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
@@ -388,10 +393,7 @@ class window.vidatio.Helper
                 dataItem["name"] = "Line 1"
 
             transformedDataset.push dataItem
-
-
-        console.log transformedDataset
-
+            
         transformedDataset
 
     # @method subsetWithXColumnFirst
