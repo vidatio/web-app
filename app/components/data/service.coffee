@@ -82,6 +82,7 @@ app.service 'DataService', [
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
+                    Table.updateAxisSelection(Number(data.visualizationOptions.xColumn) + 1, Number(data.visualizationOptions.yColumn) + 1)
 
                 if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
@@ -96,6 +97,8 @@ app.service 'DataService', [
 
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
+                    else
+                        Table.setHeader()
 
                     if !data.visualizationOptions.tableOffset
                         data.visualizationOptions.tableOffset =
