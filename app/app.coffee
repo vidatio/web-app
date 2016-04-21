@@ -75,15 +75,15 @@ app.run [
                 name: fromState.name
                 params: fromParams
 
-            if not $rootScope.authorized and $state.current.name is "app.share" or $state.current.name is "app.share.id"
+            if not $rootScope.authorized and $state.current.name is "app.share"
                 console.log $state.current.name
                 $rootScope.history.push
                     name: $state.current.name
                     params: fromParams
 
             userPages = ["app.login", "app.registration"]
-            editorPages = ["app.editor", "app.editor.id", "app.share", "app.share.id"]
-            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.share.id", "app.login", "app.registration"]
+            editorPages = ["app.editor", "app.share"]
+            editorAndUserPages = ["app.editor", "app.share", "app.login", "app.registration"]
 
             # set boolean value true when user navigates from editor/share to login/registration
             if fromState.name in editorPages and toState.name in userPages
@@ -257,29 +257,13 @@ app.config [
             title: "embedding"
 
         .state "app.editor",
-            url: "/editor"
-            params:
-                id: null
-            templateUrl: "editor/editor.html"
-            controller: "EditorCtrl"
-            title: "editor"
-
-        .state "app.editor.id",
-            url: "/:id"
+            url: "/editor/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
-            url: "/share"
-            params:
-                id: null
-            templateUrl: "share/share.html"
-            controller: "ShareCtrl"
-            title: "share"
-
-        .state "app.share.id",
-            url: "/:id"
+            url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
@@ -314,10 +298,11 @@ app.config [
 
                 # iterate over all states and check if the requested url exists as a state; if not show 404-page
                 for state in $state.get()
+                    console.log $stateParams.path, state.url
                     if $stateParams.path in ["/de", "/en"]
                         $state.go "app.index", locale
                         break
-                    else if $stateParams.path is state.url
+                    else if state.url.startsWith($stateParams.path)
                         $state.go state.name, locale
                         break
                     else
