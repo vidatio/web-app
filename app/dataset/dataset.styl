@@ -16,8 +16,8 @@
 
         .action-bar
             height 60px
-            display flex
-            flex-direction row
+            {displayFlex}
+            flex-direction(row)
 
             .action-button
                 text-align center
@@ -87,7 +87,7 @@
         .download-selection
             &:hover
                 .download-menu
-                    display flex
+                    {displayFlex}
 
         .share-link
             display none
@@ -135,10 +135,8 @@
             margin 15px 0
 
         .one-row
-            display flex
-            flex-direction row
-            display -webkit-flex /* Safari */
-            -webkit-flex-direction row
+            {displayFlex}
+            flex-direction(row)
 
             .description
                 margin 20px 0
