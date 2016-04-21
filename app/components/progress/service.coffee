@@ -3,9 +3,8 @@
 app = angular.module "app.services"
 
 app.service "ProgressService", [
-    "$timeout"
     "$rootScope"
-    ($timeout, $rootScope) ->
+    ($rootScope) ->
         class Progress
 
             setMessage: (msg) ->
