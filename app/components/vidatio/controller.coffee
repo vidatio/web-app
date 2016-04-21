@@ -30,19 +30,25 @@ app.controller "VidatioCtrl", [
                 $scope.useSavedData()
 
         $scope.deleteVidatio = ->
-
-            bootbox.confirm $translate.instant("DATASET_DELETE_CONFIRMATION"), (result) ->
-                return unless result
-
-                DatasetFactory.delete {id: $scope.vidatio._id}, (data) ->
-                    idx = $scope.$parent.vidatios.indexOf $scope.vidatio
-                    $scope.$parent.vidatios.splice idx, 1
-                    $translate("TOAST_MESSAGES.DATASET_DELETED")
-                    .then (translation) ->
-                        ngToast.create
-                            content: translation
-                , (error) ->
-                    return ErrorHandler.format error
+            bootbox.dialog
+                message: $translate.instant("DATASET_DELETE_CONFIRMATION")
+                buttons:
+                    default:
+                        label: $translate.instant("ABORT")
+                        className: "btn-default"
+                    danger:
+                        label: $translate.instant("DELETE")
+                        className: "btn-danger"
+                        callback: ->
+                            DatasetFactory.delete {id: $scope.vidatio._id}, (data) ->
+                                idx = $scope.$parent.vidatios.indexOf $scope.vidatio
+                                $scope.$parent.vidatios.splice idx, 1
+                                $translate("TOAST_MESSAGES.DATASET_DELETED")
+                                .then (translation) ->
+                                    ngToast.create
+                                        content: translation
+                            , (error) ->
+                                return ErrorHandler.format error
 
         $scope.useSavedData = ->
             Data.useSavedData $scope.vidatio
