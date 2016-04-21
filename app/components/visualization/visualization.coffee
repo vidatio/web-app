@@ -21,6 +21,11 @@ class window.vidatio.Visualization
         { type, xColumn, yColumn, headers } = options
         @chartData = vidatio.helper.transformToArrayOfObjects @dataset, xColumn, yColumn, type, headers, @color
 
+    applyStylesInline = (el) ->
+        for key, value of window.getComputedStyle(el)
+            if key in ["font", "position", "fill", "stroke", "shape-rendering", "background-color", "opacity", "width", "height"]
+                el.style["#{key}"] = value
+        return
 
     visualizationToBase64String: ($targetElem) ->
         vidatio.log.info "Visualization visualizationToBase64String called"
@@ -30,6 +35,12 @@ class window.vidatio.Visualization
         if $targetElem.selector is "#map"
             return mapToImage $targetElem
         else
+            if $targetElem.selector is "#chart svg"
+                $("#chart svg .axis").each (idx, element) ->
+                    applyStylesInline element
+                    for child in element.getElementsByTagName "*"
+                        applyStylesInline child
+                    return
             return chartToImage $targetElem
 
     # @method mapToImg

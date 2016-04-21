@@ -6,7 +6,7 @@
     .row
         .col-sm-4.newest-vidatio-container(ng-repeat="vidatio in newestVidatios")
             .col-wrapper
-                a.dark(ui-sref="app.dataset({ id: vidatio._id, locale: locale })")
+                a.dark(ui-sref="app.dataset({ id: vidatio._id })")
                     .img-container
                         img.newest(ng-class="{placeholder: vidatio.image == 'images/logo-greyscale.svg'}" src="{{ vidatio.image }}")
                     .title {{ vidatio.metaData.name }}

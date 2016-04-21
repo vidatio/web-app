@@ -21,6 +21,8 @@ app = angular.module "app", [
     "logglyLogger"
     "datePicker"
     "colorpicker.module"
+    "angulartics"
+    "angulartics.piwik"
 ]
 
 app.run [
@@ -40,7 +42,7 @@ app.run [
         $rootScope.$stateParams = $stateParams
 
         if CONFIG.ENV is "production"
-            $rootScope.apiBase = "https://api.vidatio.com"
+            $rootScope.apiBase = "#{CONFIG.API}"
             $rootScope.apiVersion = "/v0"
         else
             $rootScope.apiBase = "http://localhost:3000"
@@ -77,6 +79,7 @@ app.run [
 
             if not $rootScope.authorized and $state.current.name is "app.share"
                 console.log $state.current.name
+
                 $rootScope.history.push
                     name: $state.current.name
                     params: fromParams

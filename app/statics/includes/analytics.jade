@@ -1,0 +1,20 @@
+script.
+    var _paq = _paq || [];
+    _paq.push(["setDocumentTitle", document.domain + "/" + document.title]);
+    _paq.push(["setDomains", ["develop.vidatio.com", "www.vidatio.com", "vidatio.com"]]);
+    _paq.push(['enableLinkTracking']);
+    (function () {
+        var u = "//piwik.vidatio.com/";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
+        _paq.push(['setSiteId', 1]);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        console.log(g, s);
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        console.log(s.parentNode);
+        s.parentNode.insertBefore(g, s);
+    })();
+noscript
+    img(src="//piwik.vidatio.com/piwik.php?idsite=1&rec=1" style="border:0;")
