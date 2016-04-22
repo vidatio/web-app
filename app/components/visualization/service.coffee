@@ -212,7 +212,7 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 

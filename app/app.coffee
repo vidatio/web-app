@@ -44,8 +44,7 @@ app.run [
     "CONFIG"
     "$translate"
     "ngToast"
-    "$window"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast) ->
         $rootScope.$state = $state
         $rootScope.hostUrl = "#{$location.protocol()}://#{$location.host()}"
         $rootScope.$stateParams = $stateParams

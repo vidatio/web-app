@@ -225,17 +225,14 @@ header
         a#login-button
         a#logout-button
             padding-left 2px
-
-        a#login-button
-            &:before
-                margin-left 3px
-
-        a#logout-button
-        a#login-button
             font-size 24px
 
             span
                 margin-left -2px
+
+        a#login-button
+            &:before
+                margin-left 3px
 
         a#profile-button
             font-size 23px
@@ -244,41 +241,14 @@ header
             span
                 margin-left -3px
 
-    #link-overlay
-        position absolute
-        top 90px
-        right calc(100vw * 0.01)
-        z-index 310
-        box-shadow $box-shadow-size $color-shadow
-        background $color-white
-        border-top 3px solid $color-green
-        padding 5px 10px 10px 10px
-        text-align right
-        max-width 98%
-
 @media(max-width: 400px)
     header
         .menu-buttons
-            a#save-button
-                left -60px
+            #back-to-import
+                margin-left 25px
 
-        #back-to-import
-            margin-left 25px
-
-        #back-to-datasets-overview
-            margin-left 138px
-
-@media(min-width: 401px) and (max-width: 500px)
-    header
-        .menu-buttons
-            a#save-button
-                left -100px
-
-@media(min-width: 501px) and (max-width: 1199px)
-    header
-        .menu-buttons
-            a#save-button
-                left -150px
+            #back-to-datasets-overview
+                margin-left 138px
 
 @media(max-width: 767px)
     header
@@ -316,4 +286,3 @@ header
     header
         #process-nav
             margin-top 70px
-

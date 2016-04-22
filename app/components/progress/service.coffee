@@ -3,21 +3,15 @@
 app = angular.module "app.services"
 
 app.service "ProgressService", [
-    "$timeout"
-    ($timeout) ->
+    "$rootScope"
+    ($rootScope) ->
         class Progress
 
-            _message = null
-
-            constructor: ->
-                _message = ""
-
-            getMessage: ->
-                _message
-
             setMessage: (msg) ->
-                $timeout ->
-                    _message = msg
+                $rootScope.progressMessage = msg
+
+            resetMessage: ->
+                $rootScope.progressMessage = ""
 
         new Progress
 ]
