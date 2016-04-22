@@ -13,7 +13,7 @@ mixin navigation-bar(state)
                     +button-menu()
 
             when "share"
-                .col-xs-6.logo
+                .col-xs-6.col-sm-2.logo
                     +button-logo()
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     +button-user()
@@ -68,7 +68,9 @@ mixin navigation-bar(state)
                 .col-xs-6.col-sm-2.logo
                     +button-logo()
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
-                    +button-user()
+                    div(ng-if="globals.authorized")
+                        a#logout-button.button.icon-logout(ng-click="logout()" title="{{ 'LOG_OUT' | translate }}")
+                            span {{ "LOG_OUT" | translate | uppercase }}
                     +button-menu()
                 .col-xs-12.col-sm-pull-2.col-sm-8.middle.profile-title
                     h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
