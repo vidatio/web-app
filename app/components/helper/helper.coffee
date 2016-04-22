@@ -416,13 +416,11 @@ class window.vidatio.Helper
                 x = String(x)
 
             dataItem = {}
-            # parcoords chart needd x- and y-values in reversed order and no id or color
-            if visualizationType is "parallel"
-                dataItem[yHeader] = x
-                dataItem[xHeader] = y
-            else
-                dataItem[xHeader] = x
-                dataItem[yHeader] = y
+            dataItem[xHeader] = x
+            dataItem[yHeader] = y
+
+            # parcoords chart needs no id or color
+            unless visualizationType is "parallel"
                 dataItem["color"] = color
                 dataItem["id"] = index
 

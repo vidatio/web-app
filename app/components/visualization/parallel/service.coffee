@@ -26,6 +26,10 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             .createAxes()
 
             $svg = $("#{@containerSelector} svg")
+            $svg.find(".dimension .axis").each (index, element) ->
+                label = $(element).find(".label")
+                label.attr "transform", "translate(0, -8) rotate(0)"
+
             $svg.find(".dimension:not(:first-child) .tick").each (index, element) ->
                 text = $(element).find("text")
                 text.attr "x", Math.abs(Number(text.attr("x")))
