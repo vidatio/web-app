@@ -28,7 +28,11 @@ app.controller "ImportCtrl", [
         $scope.importService = Import
         editorPath = "/" + $rootScope.locale + "/editor"
 
+        resetMetaData = ->
+            Data.metaData.name = Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
+
         $scope.continueToEmptyTable = ->
+            resetMetaData()
             Data.datasetID = null
             Data.metaData.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
@@ -124,6 +128,8 @@ app.controller "ImportCtrl", [
 
         initTableAndMap = (fileType, fileContent) ->
             Data.datasetID = null
+
+            resetMetaData()
 
             deferred = $q.defer()
             promise = deferred.promise
