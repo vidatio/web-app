@@ -327,7 +327,7 @@ gulp.task "build:production:source:coffee",
         .pipe coffee().on "error", util.log
         .pipe concat(BUILD.app)
         .pipe ngAnnotate()
-        #.pipe uglify({"mangle": true, "compress": true})
+        .pipe uglify({"mangle": true, "compress": true, "preserveComments": "license"})
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:source:stylus",

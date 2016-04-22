@@ -1,14 +1,3 @@
-###
-# Vidatio
-# @version v0.0.48
-# @link https://vidatio.com
-# Copyright 2014-2016 Vidato Team
-#
-# It is not allowed to use this code commercial
-# without permission of the owner. Released for
-# privat use only.
-###
-
 "use strict"
 
 app = angular.module "app", [
