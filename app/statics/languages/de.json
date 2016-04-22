@@ -121,6 +121,8 @@
     "TRANSPOSE_DATASET_TITLE": "Datensatz entlang der Diagonale spiegeln",
     "AXIS_SELECTION_X_TITLE": "Auswahl der Spalte für die X-Achse",
     "AXIS_SELECTION_Y_TITLE": "Auswahl der Spalte für die Y-Achse",
+    "SWAP_AXIS" :"Vertauschen",
+    "SWAP_AXIS_TITLE": "Spalten für X- und Y-Achse vertauschen",
     "CHANGE_DIAGRAM": "Diagrammart ändern",
     "CHANGE_COLOR": "Farbe ändern",
     "CENTER_MARKER": "Markierungen zentrieren",
