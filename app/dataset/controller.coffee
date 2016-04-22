@@ -39,8 +39,6 @@ app.controller "DatasetCtrl", [
 
                 if $scope.data.metaData.tagIds?
                     $scope.data.tags = vidatio.helper.flattenArray $scope.data.metaData.tagIds, "name"
-#                    for tag in $scope.data.metaData.tagIds
-#                        $scope.data.tags.push tag.name
 
                 $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
                 $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
