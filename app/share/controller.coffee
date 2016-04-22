@@ -29,6 +29,7 @@ app.controller "ShareCtrl", [
             Data.requestVidatioViaID($stateParams.id)
 
         $scope.goToPreview = false
+        $scope.hasData = Table.hasData()
         $scope.visualization = Visualization.options
         $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
