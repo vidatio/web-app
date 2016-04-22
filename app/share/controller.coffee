@@ -25,18 +25,27 @@ app.controller "ShareCtrl", [
     "$location"
     "TagsService"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
+        setMetaData = ->
+            $scope.vidatio = Data.metaData
+
+            if Data.metaData.tagIds?
+                $scope.vidatio.tags = vidatio.helper.flattenArray Data.metaData.tagIds, "name"
+            else
+                $scope.vidatio.tags = null
+
         if $stateParams.id and not Table.dataset[0].length
-            Data.requestVidatioViaID($stateParams.id)
+            promise = Data.requestVidatioViaID($stateParams.id)
+            promise.then ->
+                setMetaData()
+
+        setMetaData()
 
         $scope.goToPreview = false
         $scope.visualization = Visualization.options
-        $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
         port = if $location.port() then ":" + $location.port() else ""
         $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
-
-        $scope.vidatio.name = $scope.vidatio.name || Data.name || null
 
         $scope.tags = Tags.getAndPreprocessTags()
 
