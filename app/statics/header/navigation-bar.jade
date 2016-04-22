@@ -1,5 +1,6 @@
 include button
 include process-navigation
+include headline
 
 mixin navigation-bar(state)
     #navigation.row&attributes(attributes)
@@ -43,7 +44,7 @@ mixin navigation-bar(state)
                 .col-xs-3.logo
                     +button-logo()
                 .col-xs-6.middle
-                    h1.underline-red-light {{ "TERMS" | translate | uppercase }}
+                    +headline("TERMS")
                 .col-xs-3.menu-buttons
                     +button-user()
                     +button-menu()
@@ -52,7 +53,7 @@ mixin navigation-bar(state)
                 .col-xs-3.logo
                     +button-logo()
                 .col-xs-6.middle
-                    h1.underline-red-light {{ "LOGIN" | translate | uppercase }}
+                    +headline("LOGIN")
                 .col-xs-3.menu-buttons
                     +button-menu()
 
@@ -60,7 +61,7 @@ mixin navigation-bar(state)
                 .col-xs-3.logo
                     +button-logo()
                 .col-xs-6.middle
-                    h1.underline-red-light {{ "REGISTRATION" | translate | uppercase }}
+                    +headline("REGISTRATION")
                 .col-xs-3.menu-buttons
                     +button-menu()
 
@@ -73,7 +74,7 @@ mixin navigation-bar(state)
                             span {{ "LOG_OUT" | translate | uppercase }}
                     +button-menu()
                 .col-xs-12.col-sm-pull-2.col-sm-8.middle.profile-title
-                    h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
+                    +headline("MY_PROFILE")
 
             when "catalog"
                 .col-xs-6.col-sm-2.logo
@@ -83,13 +84,13 @@ mixin navigation-bar(state)
                     +button-user()
                     +button-menu()
                 .col-xs-12.col-sm-pull-2.col-sm-8.middle.catalog-title
-                    h1.underline-red-light {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
+                    +headline("AVAILABLE_VIDATIOS")
 
             when "team"
-                .col-xs-3.logo
+                .col-xs-6.col-sm-2.logo
                     +button-logo()
                 .col-xs-6.middle
-                    h1.underline-red-light {{ "TEAM" | translate | uppercase }}
+                    +headline("TEAM")
                 .col-xs-3.menu-buttons
                     +button-user()
                     +button-menu()
