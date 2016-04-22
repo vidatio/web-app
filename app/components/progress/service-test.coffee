@@ -4,10 +4,11 @@
 describe "Service Progress", ->
     beforeEach ->
         module "app"
-        inject (ProgressService, $injector, $timeout) ->
+        inject (ProgressService, $injector, $timeout, $rootScope) ->
             @injector = $injector
             @progress = ProgressService
             @timeout = $timeout
+            @rootScope = $rootScope
 
     it "should be defined and included", ->
         expect(@progress).toBeDefined()
@@ -15,9 +16,8 @@ describe "Service Progress", ->
 
     it "should be possible to set messages", ->
         @progress.setMessage "This is a test!"
-        @timeout ->
-            expect(@progress.getMessage()).toEqual "This is a test!"
+        expect(@rootScope.progressMessage).toEqual "This is a test!"
 
     it "should be possible to reset messages", ->
-        @progress.setMessage("")
-        expect(@progress.getMessage()).toEqual ""
+        @progress.resetMessage()
+        expect(@rootScope.progressMessage).toEqual ""
