@@ -4,42 +4,19 @@ mixin process-navigation()
             span.icon-import
             span
                 h3 {{ "IMPORT" | translate | uppercase }}
-        a#edit-data(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}" ng-class="{ 'active' : $state.current.title == 'editor' }")
+        a#edit-data(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}" ng-disabled="header.editorNotInitialized" ng-class="{ 'active' : $state.current.title == 'editor', 'disabled': header.editorNotInitialized, 'clickable': $state.current.title == 'import'}")
             span.icon-edit
             span
                 h3 {{"EDIT" | translate | uppercase}}
-        a#edit-data(ng-if="datasetID" ui-sref="app.editor.id({ id: datasetID, locale: locale })" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}" ng-class="{ 'active' : $state.current.title == 'editor' }")
+        a#edit-data(ng-if="datasetID" ui-sref="app.editor.id({ id: datasetID, locale: locale })" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}" ng-disabled="header.editorNotInitialized" ng-class="{ 'active' : $state.current.title == 'editor', 'disabled': header.editorNotInitialized, 'clickable': $state.current.title == 'import'}")
             span.icon-edit
             span
                 h3 {{"EDIT" | translate | uppercase}}
-        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}" ng-class="{ 'active' : $state.current.title == 'share' }")
+        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}" ng-disabled="header.editorNotInitialized" ng-class="{ 'active' : $state.current.title == 'share', 'disabled': header.editorNotInitialized}")
             span.icon-check
             span
                 h3 {{"USE" | translate | uppercase}}
-        a#use-data(ng-if="datasetID" ui-sref="app.share.id({ id: datasetID, locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}" ng-class="{ 'active' : $state.current.title == 'share' }")
-            span.icon-check
-            span
-                h3 {{"USE" | translate | uppercase}}
-
-mixin process-navigation-import()
-    #process-nav
-        a#import-data.active(ui-sref="app.import({ locale: locale })" title="{{ 'STEP' | translate }} {{ 'IMPORT' | translate }} {{ 'OPEN' | translate }}")
-            span.icon-import
-            span
-              h3 {{ "IMPORT" | translate | uppercase }}
-        a#edit-data.clickable(ng-if="!datasetID" ui-sref="app.editor({ locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
-            span.icon-edit
-            span
-                h3 {{"EDIT" | translate | uppercase}}
-        a#edit-data.clickable(ng-if="datasetID" ui-sref="app.editor.id({ id: datasetID, locale: locale })"  ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'EDIT' | translate }} {{ 'OPEN' | translate }}")
-            span.icon-edit
-            span
-                h3 {{"EDIT" | translate | uppercase}}
-        a#use-data(ng-if="!datasetID" ui-sref="app.share({ locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
-            span.icon-check
-            span
-                h3 {{"USE" | translate | uppercase}}
-        a#use-data(ng-if="datasetID" ui-sref="app.share.id({ id: datasetID, locale: locale })" ng-disabled="header.editorNotInitialized" ng-class="{'disabled': header.editorNotInitialized}" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}")
+        a#use-data(ng-if="datasetID" ui-sref="app.share.id({ id: datasetID, locale: locale })" title="{{ 'STEP' | translate }} {{ 'USE' | translate }} {{ 'OPEN' | translate }}" ng-disabled="header.editorNotInitialized" ng-class="{ 'active' : $state.current.title == 'share', 'disabled': header.editorNotInitialized}")
             span.icon-check
             span
                 h3 {{"USE" | translate | uppercase}}
