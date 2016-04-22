@@ -419,7 +419,7 @@ class window.vidatio.Helper
             dataItem[xHeader] = x
             dataItem[yHeader] = y
 
-            # parcoords chart needs no id or color
+            # parcoords chart needs doesn't work with id- or color-key in data-array
             unless visualizationType is "parallel"
                 dataItem["color"] = color
                 dataItem["id"] = index

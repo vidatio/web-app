@@ -55,4 +55,4 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
 #
 #        chartData = vidatio.helper.subsetWithXColumnFirst transposedDataset, options.xColumn, options.yColumn
 #        @chartData = vidatio.helper.transposeDataset chartData
-#
+
