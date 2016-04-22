@@ -24,27 +24,31 @@ a
     padding 0
 
 .btn-default
+    background-color $color-grey-dark
+
     &:hover
-        color $color-white
         background-color $color-green
 
     &:active
+        background-color $color-hover-dark
+
     &:focus
         background-color $color-hover-dark
 
 .btn-danger
-    background-color $color-red
-    color $color-white
-    font-size 16px
+    background-color $color-grey-dark
 
-    &:hover,
+    &:hover
+        background-color $color-red
+
+    &:active
+        background-color $color-red-light
+
     &:focus
         background-color $color-red-light
 
 .btn-primary
     background-color $color-green
-    color $color-white
-    font-size 16px
 
     &:hover,
     &:focus
