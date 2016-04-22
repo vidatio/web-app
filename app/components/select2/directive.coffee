@@ -54,7 +54,10 @@ app.directive "select2", [
             scope.$watch( ->
                 scope.model
             , (newValue, oldValue) ->
-                angular.element(element).select2("val", "") if not newValue
+                if not newValue
+                    angular.element(element).select2("val", "")
+                else if not oldValue
+                    angular.element(element).select2("val", newValue)
             )
 
             scope.$on "$destroy", ->
