@@ -1,0 +1,102 @@
+include button
+include process-navigation
+
+mixin navigation-bar(state)
+    #navigation.row&attributes(attributes)
+        case state
+            when "dataset"
+                .col-xs-6.logo
+                    +button-logo()
+                    +button-back-to-datasets()
+                .col-xs-6.menu-buttons
+                    +button-user()
+                    +button-menu()
+
+            when "share"
+                .col-xs-6.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    +process-navigation()
+
+            when "editor"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    +process-navigation()
+
+            when "import"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    +process-navigation-import()
+
+            when "agb"
+                .col-xs-3.logo
+                    +button-logo()
+                .col-xs-6.middle
+                    h1.underline-red-light {{ "TERMS" | translate | uppercase }}
+                .col-xs-3.menu-buttons
+                    +button-user()
+                    +button-menu()
+
+            when "login"
+                .col-xs-3.logo
+                    +button-logo()
+                .col-xs-6.middle
+                    h1.underline-red-light {{ "LOGIN" | translate | uppercase }}
+                .col-xs-3.menu-buttons
+                    +button-menu()
+
+            when "registration"
+                .col-xs-3.logo
+                    +button-logo()
+                .col-xs-6.middle
+                    h1.underline-red-light {{ "REGISTRATION" | translate | uppercase }}
+                .col-xs-3.menu-buttons
+                    +button-menu()
+
+            when "profile"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.profile-title
+                    h1.underline-red-light {{ "MY_PROFILE" | translate | uppercase }}
+
+            when "catalog"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                    +button-back-to-import()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.catalog-title
+                    h1.underline-red-light {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
+
+            when "team"
+                .col-xs-3.logo
+                    +button-logo()
+                .col-xs-6.middle
+                    h1.underline-red-light {{ "TEAM" | translate | uppercase }}
+                .col-xs-3.menu-buttons
+                    +button-user()
+                    +button-menu()
+
+            default
+                .col-xs-6.logo
+                    +button-logo()
+                .col-xs-6.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-sm-12
+                    h2 {{ "SLOGAN" | translate }}
