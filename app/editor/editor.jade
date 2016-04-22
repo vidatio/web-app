@@ -1,4 +1,4 @@
-#editor.wrapper-content
+#editor.wrapper-content(ng-file-drop-start)
     .editor-panel
         a.tab(href="#" ng-class="{'active': activeTabs[0]}" ng-click="tabClicked(0)" title="{{'TOGGLE_VIEW'|translate}}")
             h3 {{ "DATASET" | translate | uppercase }}
@@ -10,3 +10,5 @@
         include table/table
         .seperator(ng-class="{'active': activeTabs[1]}")
         include visualization/visualization
+
+dropzone

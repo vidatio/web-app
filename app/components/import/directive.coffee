@@ -44,14 +44,21 @@ app.directive 'ngFileDropEnd', [ ->
                 e.preventDefault()
                 return unless document.getElementById("drop-zone")?
                 document.getElementById("drop-zone").style.display = "none"
-                $scope.file = e.originalEvent.dataTransfer.files[0]
-                $scope.getFile("dragged")
+                file = e.originalEvent.dataTransfer.files[0]
+                $scope.getFile(file)
                 false
 ]
 
 app.directive 'ngFileSelect', [ ->
         link: ($scope, el) ->
             el.bind "change", (e) ->
-                $scope.file = (e.srcElement or e.target).files[0]
-                $scope.getFile()
+                file = (e.srcElement or e.target).files[0]
+                $scope.getFile(file)
 ]
+
+app.directive "dropzone", [ ->
+        templateUrl: "components/import/dropzone.html"
+        replace: true
+        restrict: "E"
+]
+
