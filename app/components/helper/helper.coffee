@@ -432,7 +432,7 @@ class window.vidatio.Helper
                 dataItem["name"] = "Line 1"
 
             transformedDataset.push dataItem
-            
+
         transformedDataset
 
     # @method subsetWithXColumnFirst
