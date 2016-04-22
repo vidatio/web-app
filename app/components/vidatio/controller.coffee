@@ -49,7 +49,7 @@ app.controller "VidatioCtrl", [
                                         content: translation
                             , (error) ->
                                 return ErrorHandler.format error
-
+            return
         $scope.useSavedData = ->
             Data.useSavedData $scope.vidatio
 ]
