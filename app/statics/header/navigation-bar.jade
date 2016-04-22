@@ -2,6 +2,15 @@ include button
 include process-navigation
 include headline
 
+mixin default(text)
+    .col-xs-6.col-sm-2.logo
+        +button-logo()
+    .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+        +button-user()
+        +button-menu()
+    .col-xs-12.col-sm-pull-2.col-sm-8.middle&attributes(attributes)
+        +headline("text")
+
 mixin navigation-bar(state)
     #navigation.row&attributes(attributes)
         case state
@@ -14,14 +23,6 @@ mixin navigation-bar(state)
                     +button-menu()
 
             when "share"
-                .col-xs-6.col-sm-2.logo
-                    +button-logo()
-                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
-                    +button-user()
-                    +button-menu()
-                .col-xs-12.col-sm-pull-2.col-sm-8
-                    +process-navigation()
-
             when "editor"
                 .col-xs-6.col-sm-2.logo
                     +button-logo()
@@ -41,29 +42,13 @@ mixin navigation-bar(state)
                     +process-navigation-import()
 
             when "agb"
-                .col-xs-3.logo
-                    +button-logo()
-                .col-xs-6.middle
-                    +headline("TERMS")
-                .col-xs-3.menu-buttons
-                    +button-user()
-                    +button-menu()
+                +default("TERMS")
 
             when "login"
-                .col-xs-3.logo
-                    +button-logo()
-                .col-xs-6.middle
-                    +headline("LOGIN")
-                .col-xs-3.menu-buttons
-                    +button-menu()
+                +default("LOGIN")
 
             when "registration"
-                .col-xs-3.logo
-                    +button-logo()
-                .col-xs-6.middle
-                    +headline("REGISTRATION")
-                .col-xs-3.menu-buttons
-                    +button-menu()
+                +default("REGISTRATION")
 
             when "profile"
                 .col-xs-6.col-sm-2.logo
@@ -87,13 +72,7 @@ mixin navigation-bar(state)
                     +headline("AVAILABLE_VIDATIOS")
 
             when "team"
-                .col-xs-6.col-sm-2.logo
-                    +button-logo()
-                .col-xs-6.middle
-                    +headline("TEAM")
-                .col-xs-3.menu-buttons
-                    +button-user()
-                    +button-menu()
+                +default("TEAM")
 
             default
                 .col-xs-6.logo
