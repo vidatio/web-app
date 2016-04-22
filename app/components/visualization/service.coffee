@@ -68,8 +68,8 @@ app.service 'VisualizationService', [
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
+                #trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                recommendationResults = vidatio.recommender.run Table.getDataset(), Table.getHeader(), Table.useColumnHeadersFromDataset
 
                 if recommendationResults.error?
                     $log.error "Visualization Ctrl error at recommend diagram"
@@ -94,7 +94,8 @@ app.service 'VisualizationService', [
                 $log.debug
                     options: options
 
-                chartData = vidatio.helper.trimDataset Table.getDataset()
+                chartData = Table.getDataset()
+
                 headers = Table.getHeader()
                 options["headers"] =
                     "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
@@ -198,12 +199,6 @@ app.service 'VisualizationService', [
 
                 return true
 
-            applyInlineStyle = (el) ->
-                for key, value of window.getComputedStyle(el)
-                    if key in ["font", "position", "fill", "stroke", "shape-rendering", "background-color", "opacity", "width", "height"]
-                        el.style["#{key}"] = value
-                return
-
             downloadAsImage: (fileName, type) ->
                 $translate("OVERLAY_MESSAGES.VISUALIZATION_PREPARED").then (translation) ->
                     Progress.setMessage translation
@@ -212,14 +207,9 @@ app.service 'VisualizationService', [
                     $targetElem = $("#map")
                 else if @options.type is "parallel"
                     $targetElem = $("#chart svg")
-                    $("#chart svg .axis").each (idx, element) ->
-                        applyInlineStyle element
-                        children = element.getElementsByTagName "*"
-                        for child in children
-                            applyInlineStyle child
-                        return
                 else
                     $targetElem = $("#d3plus")
+
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
                     Progress.setMessage ""
