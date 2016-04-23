@@ -29,7 +29,7 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         resetMetaData = ->
-            Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
+            Data.metaData.name = Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
 
         $scope.continueToEmptyTable = ->
             resetMetaData()
@@ -46,6 +46,8 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
+            resetMetaData()
+
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
@@ -72,6 +74,8 @@ app.controller "ImportCtrl", [
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = ->
+            resetMetaData()
+
             # Can't use file.type because of chromes File API
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
@@ -128,8 +132,6 @@ app.controller "ImportCtrl", [
 
         initTableAndMap = (fileType, fileContent) ->
             Data.datasetID = null
-
-            resetMetaData()
 
             deferred = $q.defer()
             promise = deferred.promise
