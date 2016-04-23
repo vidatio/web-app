@@ -14,11 +14,11 @@
                         a.icon-barchart(href="#" ng-click="selectDiagram('bar')" ng-class="{active: visualization.type == 'bar'}")
                             span {{ "DIAGRAMS.BAR_CHART" | translate }}
                     li.diagram-button
-                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')" ng-class="{active: visualization.type == 'scatter'}")
-                            span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
-                    li.diagram-button
                         a.icon-linechart(href="#" ng-click="selectDiagram('line')" ng-class="{active: visualization.type == 'line'}")
                             span {{ "DIAGRAMS.LINE_CHART" | translate }}
+                    li.diagram-button
+                        a.icon-scatterplotchart(href="#" ng-click="selectDiagram('scatter')" ng-class="{active: visualization.type == 'scatter'}")
+                            span {{ "DIAGRAMS.SCATTER_PLOT" | translate }}
                     li.diagram-button
                         a.icon-parallelcoordinateschart(href="#" ng-click="selectDiagram('parallel')" ng-class="{active: visualization.type == 'parallel'}")
                             span {{ "DIAGRAMS.PARALLEL_COORDINATES" | translate }}
