@@ -7,7 +7,7 @@
 # University of Applied Science
 # MultiMediaTechnology Master
 #
-# Commercial use without owners’ permission is prohibited
+# Commercial use without owners' permission is prohibited
 ###
 
 # App Init-Dependencies
