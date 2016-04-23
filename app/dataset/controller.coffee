@@ -29,34 +29,37 @@ app.controller "DatasetCtrl", [
         $scope.downloadCSV = Data.downloadCSV
         $scope.link = $location.$$absUrl
 
-        $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-            Progress.setMessage message
+        unless $stateParams.id
+            $state.go "app.fourofour"
+            return
 
-            # get dataset according to datasetId and set necessary metadata
-            DataFactory.get {id: $stateParams.id}, (data) ->
-                $scope.data = data
-                $scope.data.updated = new Date($scope.data.updatedAt)
-                $scope.data.created = new Date($scope.data.createdAt)
+        Progress.setMessage $translate.instant("OVERLAY_MESSAGES.PARSING_DATA")
 
-                if $scope.data.metaData.tagIds?
-                    $scope.data.tags = vidatio.helper.flattenArray $scope.data.metaData.tagIds, "name"
+        # get dataset according to datasetId and set necessary metadata
+        DataFactory.get {id: $stateParams.id}, (data) ->
+            $scope.data = data
+            $scope.data.updated = new Date($scope.data.updatedAt)
+            $scope.data.created = new Date($scope.data.createdAt)
 
-                $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
-                $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
-                $scope.data.author = if $scope.data.metaData.author? then $scope.data.metaData.author else "-"
-                $scope.data.title = $scope.data.metaData.name || "Vidatio"
+            if $scope.data.metaData.tagIds?
+                $scope.data.tags = vidatio.helper.flattenArray $scope.data.metaData.tagIds, "name"
 
-                Data.useSavedData $scope.data
+            $scope.data.category = if $scope.data.metaData.categoryId?.name? then $scope.data.metaData.categoryId.name else "-"
+            $scope.data.userName = if $scope.data.metaData.userId?.name? then $scope.data.metaData.userId.name else "-"
+            $scope.data.author = if $scope.data.metaData.author? then $scope.data.metaData.author else "-"
+            $scope.data.title = $scope.data.metaData.name || "Vidatio"
 
-                options = $scope.data.visualizationOptions
-                options.fileType = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "csv"
+            Data.useSavedData $scope.data
 
-                Visualization.create(options)
-                Progress.resetMessage()
-            , (error) ->
-                Progress.resetMessage()
-                $state.go "app.fourofour"
-                ErrorHandler.format error
+            options = $scope.data.visualizationOptions
+            options.fileType = if $scope.data.metaData?.fileType? then $scope.data.metaData.fileType else "csv"
+
+            Visualization.create(options)
+            Progress.resetMessage()
+        , (error) ->
+            Progress.resetMessage()
+            $state.go "app.fourofour"
+            ErrorHandler.format error
 
         # @method $scope.openInEditor
         # @description open dataset in Editor
