@@ -29,7 +29,7 @@ app.controller "ImportCtrl", [
         editorPath = "/" + $rootScope.locale + "/editor"
 
         resetMetaData = ->
-            Data.metaData.name = Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
+            Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
 
         $scope.continueToEmptyTable = ->
             resetMetaData()
@@ -77,7 +77,7 @@ app.controller "ImportCtrl", [
             fileType = fileType[fileType.length - 1]
             fileName = $scope.file.name.toString()
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
-            Data.name = fileName
+            Data.metaData.name = fileName
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
