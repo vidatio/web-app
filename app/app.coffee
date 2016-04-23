@@ -290,20 +290,29 @@ app.config [
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
+                # editor and share page need different behaviour as they have a longer url with id
                 unless $stateParams.path in ["/editor", "/share"]
-                    #console.log state, $stateParams.path
 
                     for state in $state.get()
                         if state.name in ["app", "app.index"]
                             continue
 
+                        # check if url could be assigned to state
                         if $stateParams.path.startsWith(state.url)
-                            if state.name is "app.dataset"
-                                $state.go "app.catalog"
-                            else
-                                $state.go state.name
+                            $state.go state.name
                             return
 
+                        # redirect to catalog if url has only catalog in it
+                        if state.name is "app.catalog" and $stateParams.path.startsWith("/catalog")
+                            $state.go "app.catalog"
+                            return
+
+                        # redirect to catalog if url has vidatio in it
+                        if state.name is "app.dataset" and $stateParams.path.startsWith("/vidatio")
+                            $state.go "app.catalog"
+                            return
+                    
+                    # go to 404 otherwise
                     $state.go "app.fourofour"
 
                 if $stateParams.path is "/share"
@@ -312,5 +321,4 @@ app.config [
 
                 if $stateParams.path is "/editor"
                     $state.go "app.editor"
-                    return
 ]
