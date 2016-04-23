@@ -26,7 +26,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
             .createAxes()
 
             $svg = $("#{@containerSelector} svg")
-            fontOptions = "font-family: 'Helvetica Neue'; font-weight: normal;"
+            fontOptions = "font-family: 'Helvetica Neue', 'Arial', 'Helvetica', sans-serif; font-weight: normal;"
 
             $svg.find(".dimension .axis").each (index, element) ->
                 label = $(element).find(".label")
