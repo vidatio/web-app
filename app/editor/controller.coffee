@@ -21,7 +21,6 @@ app.controller "EditorCtrl", [
     "TableService"
     "ImportService"
     ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table, Import) ->
-
         if $stateParams.id and not Table.dataset[0].length
             Data.requestVidatioViaID($stateParams.id)
 

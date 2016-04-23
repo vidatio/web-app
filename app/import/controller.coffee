@@ -25,7 +25,6 @@ app.controller "ImportCtrl", [
     "$q"
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Table, Converter, Map, Data, Import, ngToast, Progress, Visualization, ErrorHandler, $q) ->
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
-        editorPath = "/editor"
 
         $scope.continueToEmptyTable = ->
             Data.datasetID = null
@@ -37,7 +36,7 @@ app.controller "ImportCtrl", [
 
             # REFACTOR Need to wait for leaflet directive to reset its geoJSON
             $timeout ->
-                $location.path editorPath
+                $state.go "app.editor"
 
         # Read via link
         $scope.load = ->
@@ -55,7 +54,7 @@ app.controller "ImportCtrl", [
                     # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
                     $timeout ->
                         Progress.resetMessage()
-                        $location.path editorPath
+                        $state.go "app.editor"
 
                 .error (resp) ->
                     $log.error "ImportCtrl load file by url error called"

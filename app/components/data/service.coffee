@@ -12,12 +12,11 @@ app.service 'DataService', [
     "DatasetFactory"
     "$translate"
     "$state"
-    "$location"
     "$q"
     "ngToast"
     "ProgressService"
     "ErrorHandler"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, $location, $q, ngToast, Progress, ErrorHandler) ->
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, $q, ngToast, Progress, ErrorHandler) ->
         class Data
             constructor: ->
                 # Temporarily solution because there is redundance
@@ -219,7 +218,8 @@ app.service 'DataService', [
                                 i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
 
                 promise.then ->
-                    $location.path "/editor"
+                    $state.go "app.editor", {}, { "reload": true }
+
                 .catch (error) ->
                     $translate(error.i18n).then (translation) ->
                         ngToast.create
