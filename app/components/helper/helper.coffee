@@ -418,8 +418,11 @@ class window.vidatio.Helper
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
-            dataItem["color"] = color
-            dataItem["id"] = index
+
+            # parallel viz doesn't work with id- or color-key in data-array, so set this parameters only when visualizationType is not 'parallel"
+            unless visualizationType is "parallel"
+                dataItem["color"] = color
+                dataItem["id"] = index
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
