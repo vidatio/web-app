@@ -16,10 +16,31 @@
                 font-size 10px
                 font-family Colaborate,Arial,Helvetica,sans-serif
 
+            @-moz-document url-prefix()
+                label
+                    margin 31px 0 0
+
             .icons
                 font-size 22px
-                margin-top -27px
+                margin-top -26px
                 left 9px
+
+        .swap-axis-button
+            a.icon-swapaxis
+                &:before
+                    font-size 13px
+                    position relative
+                    top -2px
+
+                @-moz-document url-prefix()
+                    span
+                        margin-top 1px
+
+        .x-axis-button.focused
+        .y-axis-button.focused
+            .icon-xaxis
+            .icon-yaxis
+                color $color-hover-dark !important
 
     #datatable
         .ht_master .wtHolder
@@ -80,12 +101,6 @@
 
             &.current
                 background-color $color-green !important
-
-    .x-axis-button.focused
-    .y-axis-button.focused
-        .icon-xaxis
-        .icon-yaxis
-            color $color-hover-dark !important
 
     .highlighted
         background $color-grey-dark !important
