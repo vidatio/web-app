@@ -1,0 +1,76 @@
+include button
+include process-navigation
+include headline
+
+mixin default(text)
+    .col-xs-6.col-sm-2.logo
+        +button-logo()
+    .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+        +button-user()
+        +button-menu()
+    .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
+        +headline(text)
+
+mixin navigation-bar(state)
+    #navigation.row&attributes(attributes)
+        case state
+            when "dataset"
+                .col-xs-6.logo
+                    +button-logo()
+                    +button-back-to-datasets()
+                .col-xs-6.menu-buttons
+                    +button-user()
+                    +button-menu()
+
+            when "import"
+            when "editor"
+            when "share"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8
+                    +process-navigation()
+
+            when "agb"
+                +default("TERMS")
+
+            when "login"
+                +default("LOGIN")
+
+            when "registration"
+                +default("REGISTRATION")
+
+            when "team"
+                +default("TEAM")
+
+            when "profile"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    div(ng-if="globals.authorized")
+                        a#logout-button.button.icon-logout(ng-click="logout()" title="{{ 'LOG_OUT' | translate }}")
+                            span {{ "LOG_OUT" | translate | uppercase }}
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
+                    +headline("MY_PROFILE")
+
+            when "catalog"
+                .col-xs-6.col-sm-2.logo
+                    +button-logo()
+                    +button-back-to-import()
+                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
+                    +headline("AVAILABLE_VIDATIOS")
+
+            default
+                .col-xs-6.logo
+                    +button-logo()
+                .col-xs-6.menu-buttons
+                    +button-user()
+                    +button-menu()
+                .col-sm-12
+                    h2 {{ "SLOGAN" | translate }}

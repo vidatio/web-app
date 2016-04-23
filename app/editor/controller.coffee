@@ -72,6 +72,8 @@ app.controller "EditorCtrl", [
                 , 100
 
         # Read via Browsing and Drag-and-Drop
-        $scope.getFile = (file) ->
+        $scope.getFile = ->
+            Progress.setMessage $translate.instant("OVERLAY_MESSAGES.READING_FILE")
+            Data.resetMetaData()
             Import.getFile file
 ]

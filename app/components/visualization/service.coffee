@@ -98,8 +98,8 @@ app.service 'VisualizationService', [
 
                 headers = Table.getHeader()
                 options["headers"] =
-                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
-                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
+                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "X"
+                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "Y"
 
                 # set width and height of the visualization for dynamic resizing
                 chartSelector = "#chart"
@@ -212,7 +212,8 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    Progress.resetMessage()
+                    $timeout ->
+                        Progress.resetMessage()
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 

@@ -27,6 +27,7 @@ app.controller "ImportCtrl", [
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.continueToEmptyTable = ->
+            Data.resetMetaData()
             Data.datasetID = null
             Data.metaData.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
@@ -40,6 +41,7 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
+            Data.resetMetaData()
             Progress.setMessage $translate.instant("OVERLAY_MESSAGES.PARSING_DATA")
 
             $http.get($rootScope.apiBase + "/v0/forward"
@@ -62,6 +64,8 @@ app.controller "ImportCtrl", [
                 ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
-        $scope.getFile = (file) ->
+        $scope.getFile = ->
+            Progress.setMessage $translate.instant("OVERLAY_MESSAGES.READING_FILE")
+            Data.resetMetaData()
             Import.getFile file
 ]

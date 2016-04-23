@@ -48,8 +48,6 @@ app.service 'ImportService', [
             # @method getFile
             # @param {String} file
             getFile: (file) ->
-                Progress.setMessage $translate.instant("OVERLAY_MESSAGES.READING_FILE")
-
                 # Can't use file.type because of chromes File API
                 fileType = file.name.split "."
                 fileType = fileType[fileType.length - 1]
