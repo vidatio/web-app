@@ -43,10 +43,16 @@ app.service 'DataService', [
             saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
                 angular.extend @metaData, metaData
 
-                trimResult = vidatio.helper.trimDataset(dataset)
+                data = dataset
+                tableOffset =
+                    rows: 0
+                    columns: 0
+
+                if @metaData.fileType is "csv"
+                    { trimmedDataset: data, tableOffset: tableOffset } = vidatio.helper.trimDataset(dataset)
 
                 DatasetFactory.save
-                    data: trimResult.trimmedDataset
+                    data: data
                     published: @metaData.publish
                     metaData: @metaData
                     visualizationOptions:
@@ -56,7 +62,7 @@ app.service 'DataService', [
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
-                        tableOffset: trimResult.tableOffset
+                        tableOffset: tableOffset
                 , (response) ->
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
@@ -79,6 +85,12 @@ app.service 'DataService', [
 
                 if data.metaData?
                     angular.extend @metaData, data.metaData
+
+                if data.metaData.tagIds
+                    @metaData.tagIds = vidatio.helper.flattenArray data.metaData.tagIds, "name"
+
+                if data.metaData.categoryId
+                    @metaData.categoryId = data.metaData.categoryId._id
 
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
@@ -161,13 +173,17 @@ app.service 'DataService', [
             # @param {String} id
             requestVidatioViaID: (id) ->
                 # get dataset according to datasetId and set necessary metadata
-                DatasetFactory.get {id: id}, (data) =>
+                DatasetFactory.get {id: id}
+                .$promise
+                .then (data) =>
                     @useSavedData data
 
                     options = data.visualizationOptions
                     options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
                     Visualization.create(options)
                     Progress.setMessage()
+
+                    return data
                 , (error) ->
                     Progress.setMessage()
                     ErrorHandler.format error

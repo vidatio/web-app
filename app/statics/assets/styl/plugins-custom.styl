@@ -36,7 +36,10 @@ a
         background-color $color-hover-dark
 
 .btn-default.dropdown-toggle
-    background-color #bdc3c7
+    background-color $color-grey
+
+    &:hover
+        background-color $color-green
 
 .btn-danger
     background-color $color-grey-dark
@@ -134,7 +137,6 @@ a
 .fui-arrow-right
     &::before
         font-size 14px
-
 
 /* Form specific styles */
 .form-control
@@ -238,7 +240,7 @@ select.form-control
 .form-group
     select.form-control:-moz-focusring
         color transparent !important
-        text-shadow 0 0 0 #000
+        text-shadow 0 0 0 $color-black
 
 /* STATE VALID */
 .input-group.form-group
@@ -302,7 +304,7 @@ span.error
 
 
 [id^="s2id_"].select2-container:not(:hover)
-    border-color #bdc3c7
+    border-color $color-grey
 
 [id^="s2id_"].select2-container
     &:active
