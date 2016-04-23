@@ -1,5 +1,3 @@
-# Vidatio App
-# ===========
 "use strict"
 
 app = angular.module "app", [
