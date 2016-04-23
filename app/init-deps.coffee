@@ -7,8 +7,7 @@
 # University of Applied Science
 # MultiMediaTechnology Master
 #
-# It is not allowed to use this code commercial without
-# permission of the owner. Released for private use only.
+# Commercial use without owners’ permission is prohibited
 ###
 
 # App Init-Dependencies

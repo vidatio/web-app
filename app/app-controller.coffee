@@ -1,6 +1,3 @@
-# Animals - App Controller
-# ========================
-
 "use strict"
 
 app = angular.module "app.controllers"
