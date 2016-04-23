@@ -22,17 +22,9 @@ mixin navigation-bar(state)
                     +button-user()
                     +button-menu()
 
-            when "share"
-            when "editor"
-                .col-xs-6.col-sm-2.logo
-                    +button-logo()
-                .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
-                    +button-user()
-                    +button-menu()
-                .col-xs-12.col-sm-pull-2.col-sm-8
-                    +process-navigation()
-
             when "import"
+            when "editor"
+            when "share"
                 .col-xs-6.col-sm-2.logo
                     +button-logo()
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
@@ -49,6 +41,9 @@ mixin navigation-bar(state)
 
             when "registration"
                 +default("REGISTRATION")
+
+            when "team"
+                +default("TEAM")
 
             when "profile"
                 .col-xs-6.col-sm-2.logo
@@ -70,9 +65,6 @@ mixin navigation-bar(state)
                     +button-menu()
                 .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
                     +headline("AVAILABLE_VIDATIOS")
-
-            when "team"
-                +default("TEAM")
 
             default
                 .col-xs-6.logo
