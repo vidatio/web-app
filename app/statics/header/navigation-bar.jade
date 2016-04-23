@@ -8,7 +8,7 @@ mixin default(text)
     .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
         +button-user()
         +button-menu()
-    .col-xs-12.col-sm-pull-2.col-sm-8.middle&attributes(attributes)
+    .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
         +headline(text)
 
 mixin navigation-bar(state)
@@ -58,7 +58,7 @@ mixin navigation-bar(state)
                         a#logout-button.button.icon-logout(ng-click="logout()" title="{{ 'LOG_OUT' | translate }}")
                             span {{ "LOG_OUT" | translate | uppercase }}
                     +button-menu()
-                .col-xs-12.col-sm-pull-2.col-sm-8.middle.profile-title
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
                     +headline("MY_PROFILE")
 
             when "catalog"
@@ -68,7 +68,7 @@ mixin navigation-bar(state)
                 .col-xs-6.col-sm-push-8.col-sm-2.menu-buttons
                     +button-user()
                     +button-menu()
-                .col-xs-12.col-sm-pull-2.col-sm-8.middle.catalog-title
+                .col-xs-12.col-sm-pull-2.col-sm-8.middle.margin-title
                     +headline("AVAILABLE_VIDATIOS")
 
             when "team"
