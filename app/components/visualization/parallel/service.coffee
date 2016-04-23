@@ -33,7 +33,7 @@ class vidatio.ParallelCoordinates extends vidatio.Visualization
                 label.attr "transform", "translate(0, -8) rotate(0)"
                 label.attr "style", "font-size: 11px;" + fontOptions
 
-            $svg.find(".dimension .tick").each (index, element) ->
+            $svg.find(".dimension:first-child .tick").each (index, element) ->
                 text = $(element).find("text")
                 text.attr "style", "text-anchor: end; font-size: 12px;" + fontOptions
 
