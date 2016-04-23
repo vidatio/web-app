@@ -286,7 +286,7 @@ app.config [
             templateUrl: "team/team.html"
             title: "team"
 
-        # not match was found in the states before (e.g. no language was provided in the URL)
+        # no match was found in the states before
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
@@ -305,11 +305,6 @@ app.config [
 
                         # redirect to catalog if url has only catalog in it
                         if state.name is "app.catalog" and $stateParams.path.startsWith("/catalog")
-                            $state.go "app.catalog"
-                            return
-
-                        # redirect to catalog if url has vidatio in it
-                        if state.name is "app.dataset" and $stateParams.path.startsWith("/vidatio")
                             $state.go "app.catalog"
                             return
 
