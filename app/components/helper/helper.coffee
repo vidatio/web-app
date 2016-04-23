@@ -503,9 +503,9 @@ class window.vidatio.Helper
         return (value for [0...length])
 
     flattenArray: (array, key) ->
-        if not array.length or not key
-            return
-        
+        if not array?.length or not key
+            return null
+
         temp = []
         for element in array
             temp.push element[key]

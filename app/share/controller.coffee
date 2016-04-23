@@ -28,11 +28,6 @@ app.controller "ShareCtrl", [
         setMetaData = ->
             $scope.vidatio = Data.metaData
 
-            if Data.metaData.tagIds?
-                $scope.vidatio.tags = vidatio.helper.flattenArray Data.metaData.tagIds, "name"
-            else
-                $scope.vidatio.tags = null
-
         if $stateParams.id and not Table.dataset[0].length
             promise = Data.requestVidatioViaID($stateParams.id)
             promise.then ->

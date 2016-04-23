@@ -86,6 +86,12 @@ app.service 'DataService', [
                 if data.metaData?
                     angular.extend @metaData, data.metaData
 
+                if data.metaData.tagIds
+                    @metaData.tagIds = vidatio.helper.flattenArray data.metaData.tagIds, "name"
+
+                if data.metaData.categoryId
+                    @metaData.categoryId = data.metaData.categoryId._id
+
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
                     Table.updateAxisSelection(Number(data.visualizationOptions.xColumn) + 1, Number(data.visualizationOptions.yColumn) + 1)

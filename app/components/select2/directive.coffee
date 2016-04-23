@@ -56,7 +56,7 @@ app.directive "select2", [
             , (newValue, oldValue) ->
                 if not newValue
                     angular.element(element).select2("val", "")
-                else if not oldValue
+                else if not oldValue or newValue is oldValue
                     angular.element(element).select2("val", newValue)
             )
 
