@@ -25,18 +25,18 @@ app.controller "ShareCtrl", [
     "$location"
     "TagsService"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
-        setMetaData = ->
+        setScopeData = ->
+            $scope.hasData = Table.hasData()
             $scope.vidatio = Data.metaData
 
         if $stateParams.id and not Table.dataset[0].length
             promise = Data.requestVidatioViaID($stateParams.id)
             promise.then ->
-                setMetaData()
+                setScopeData()
 
-        setMetaData()
+        setScopeData()
 
         $scope.goToPreview = false
-        $scope.hasData = Table.hasData()
         $scope.visualization = Visualization.options
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
