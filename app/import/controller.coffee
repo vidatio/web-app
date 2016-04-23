@@ -40,29 +40,26 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
-            $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
-                Progress.setMessage message
+            Progress.setMessage $translate.instant("OVERLAY_MESSAGES.PARSING_DATA")
 
-                url = $scope.link
-                $http.get($rootScope.apiBase + "/v0/forward"
-                    params:
-                        url: url
-                ).success (resp) ->
-                    fileContent = if resp.fileType is 'zip' then resp.body.data else resp.body
-                    Data.initTableAndMap resp.fileType, fileContent
+            $http.get($rootScope.apiBase + "/v0/forward"
+                params:
+                    url: $scope.link
+            ).success (resp) ->
+                fileContent = if resp.fileType is 'zip' then resp.body.data else resp.body
+                Data.initTableAndMap resp.fileType, fileContent
 
-                    # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
-                    $timeout ->
-                        Progress.resetMessage()
-                        $state.go "app.editor"
+                # REFACTOR Needed to wait for leaflet directive to reset its geoJSON
+                $timeout ->
+                    $state.go "app.editor"
 
-                .error (resp) ->
-                    $log.error "ImportCtrl load file by url error called"
-                    $log.debug
-                        resp: resp
+            .error (resp) ->
+                $log.error "ImportCtrl load file by url error called"
+                $log.debug
+                    resp: resp
 
-                    Progress.resetMessage()
-                    ErrorHandler.format resp
+                Progress.resetMessage()
+                ErrorHandler.format resp
 
         # Read via Browsing and Drag-and-Drop
         $scope.getFile = (file) ->
