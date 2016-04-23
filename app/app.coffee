@@ -294,6 +294,7 @@ app.config [
                 unless $stateParams.path in ["/editor", "/share"]
 
                     for state in $state.get()
+                        # Because '/' always delivers 'true'
                         if state.name in ["app", "app.index"]
                             continue
 
@@ -311,7 +312,7 @@ app.config [
                         if state.name is "app.dataset" and $stateParams.path.startsWith("/vidatio")
                             $state.go "app.catalog"
                             return
-                    
+
                     # go to 404 otherwise
                     $state.go "app.fourofour"
 
