@@ -22,7 +22,7 @@ describe "Controller Import", ->
                 getFile: (file) ->
             @Data =
                 initTableAndMap: (p1, p2) ->
-
+                resetMetaData: ->
 
             spyOn(@Import, 'getFile').and.returnValue(@deferred.promise)
             spyOn(@Data, 'initTableAndMap')
@@ -55,7 +55,7 @@ describe "Controller Import", ->
 
             @timeout ->
                 expect(@Import.readFile).toHaveBeenCalled()
-                expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
+                expect(@Import.readFile).toHaveBeenCalledWith({name: "test.csv"})
 
         # Disabled because of promise gets never resolved
         xit 'should set the dataset of the table after reading the file', ->
