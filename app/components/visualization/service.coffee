@@ -212,7 +212,8 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    Progress.resetMessage()
+                    $timeout ->
+                        Progress.resetMessage()
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 

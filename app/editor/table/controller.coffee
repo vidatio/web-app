@@ -32,6 +32,19 @@ app.controller "TableCtrl", [
 
             Visualization.create()
 
+        $scope.changeAxis = ->
+            xColumn = $scope.visualization.xColumn
+            $scope.visualization.xColumn = $scope.visualization.yColumn
+            $scope.visualization.yColumn = xColumn
+
+            xColumnTh = $(".ht_clone_top th .selected-x")
+            yColumnTh = $(".ht_clone_top th .selected-y")
+
+            xColumnTh.addClass("selected-y").removeClass("selected-x")
+            yColumnTh.addClass("selected-x").removeClass("selected-y")
+
+            Visualization.create()
+
         #@method $scope.transpose
         #@description transpose the dataset including the header
         $scope.transpose = ->

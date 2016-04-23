@@ -28,7 +28,11 @@ app.controller "ImportCtrl", [
         $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
         $scope.importService = Import
 
+        resetMetaData = ->
+            Data.metaData.name = Data.metaData.categoryId = Data.metaData.tagIds = Data.metaData.author = Data.metaData.publish = null
+
         $scope.continueToEmptyTable = ->
+            resetMetaData()
             Data.datasetID = null
             Data.metaData.fileType = "csv"
             Table.useColumnHeadersFromDataset = false
@@ -42,6 +46,8 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
+            resetMetaData()
+
             $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
                 Progress.setMessage message
 
@@ -71,12 +77,14 @@ app.controller "ImportCtrl", [
             $translate("OVERLAY_MESSAGES.READING_FILE").then (message) ->
                 Progress.setMessage message
 
+            resetMetaData()
+
             # Can't use file.type because of chromes File API
             fileType = $scope.file.name.split "."
             fileType = fileType[fileType.length - 1]
             fileName = $scope.file.name.toString()
             fileName = fileName.substring 0, fileName.lastIndexOf(".")
-            Data.name = fileName
+            Data.metaData.name = fileName
 
             maxFileSize = 52428800
             if $scope.file.size > maxFileSize
