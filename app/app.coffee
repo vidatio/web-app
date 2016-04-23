@@ -77,8 +77,6 @@ app.run [
                 params: fromParams
 
             if not $rootScope.authorized and $state.current.name is "app.share"
-                console.log $state.current.name
-
                 $rootScope.history.push
                     name: $state.current.name
                     params: fromParams
@@ -295,11 +293,26 @@ app.config [
             url: '*path'
             onEnter: ($state, $stateParams) ->
                 unless $stateParams.path in ["/editor", "/share"]
+                    #console.log state, $stateParams.path
+
+                    for state in $state.get()
+                        if state.name in ["app", "app.index"]
+                            continue
+
+                        if $stateParams.path.startsWith(state.url)
+                            if state.name is "app.dataset"
+                                $state.go "app.catalog"
+                            else
+                                $state.go state.name
+                            return
+
                     $state.go "app.fourofour"
 
                 if $stateParams.path is "/share"
                     $state.go "app.share"
+                    return
 
                 if $stateParams.path is "/editor"
                     $state.go "app.editor"
+                    return
 ]
