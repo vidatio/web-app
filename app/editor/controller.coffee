@@ -14,13 +14,14 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
+    "ProgressService"
     "MapService"
     "$window"
     "$stateParams"
     "$state"
     "TableService"
     "ImportService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table, Import) ->
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Progress, Map, $window, $stateParams, $state, Table, Import) ->
         if $stateParams.id and not Table.dataset[0].length
             Data.requestVidatioViaID($stateParams.id)
 
