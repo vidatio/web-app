@@ -41,7 +41,7 @@ app.controller "ShareCtrl", [
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
         port = if $location.port() then ":" + $location.port() else ""
-        $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
+        $scope.host = $rootScope.hostUrl + port
 
         $scope.tags = Tags.getAndPreprocessTags()
 

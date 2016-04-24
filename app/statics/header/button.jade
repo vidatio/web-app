@@ -1,9 +1,9 @@
 mixin button-user()
     div(ng-if="globals.authorized")
-        a#profile-button.button.icon-profile(ui-sref="app.profile({ locale: locale })" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
+        a#profile-button.button.icon-profile(ui-sref="app.profile" title="{{ 'PROFILE' | translate }} {{ 'OPEN' | translate }}")
             span {{ "PROFILE" | translate | uppercase }}
     div(ng-if="!globals.authorized")
-        a#login-button.button.icon-login(ui-sref="app.login({ locale: locale })" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
+        a#login-button.button.icon-login(ui-sref="app.login" title="{{ 'LOGIN' | translate }} {{ 'OPEN' | translate }}")
             span {{ "LOGIN" | translate | uppercase }}
 
 mixin button-menu()
@@ -12,12 +12,12 @@ mixin button-menu()
             span {{ "MENU" | translate | uppercase }}
 
 mixin button-logo()
-    a#logo(ui-sref="app.index({ locale: locale })" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
+    a#logo(ui-sref="app.index" title="{{ 'HOME' | translate }} {{ 'OPEN' | translate }}")
 
 mixin button-back-to-datasets()
-    #back-to-datasets-overview.header-button.icon-opendata(ui-sref='app.catalog({ locale: locale })')
+    #back-to-datasets-overview.header-button.icon-opendata(ui-sref='app.catalog')
         span {{ "OVERVIEW" | translate | uppercase }}
 
 mixin button-back-to-import()
-    a#back-to-import.button.icon-import(ui-sref='app.import({ locale: locale })' title="{{ 'IMPORT_OVERVIEW' | translate }}")
+    a#back-to-import.button.icon-import(ui-sref='app.import' title="{{ 'IMPORT_OVERVIEW' | translate }}")
         span IMPORT
