@@ -3,7 +3,7 @@
     "SLOGAN": "Seeing the bigger Picture",
     "API": {
         "NAME": "API",
-        "SAVE": "Sie sind nicht befugt zu speichern.",
+        "SAVE": "Du bist nicht dazu befugt zu speichern.",
         "ERROR": {
             "USER": {
                 "REGISTER": {
@@ -45,12 +45,12 @@
                     }
                 }
             },
-            "MONGO": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+            "MONGO": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuche es erneut!",
             "PARAMETER": "Dein Vidatio muss mindestens die Metadaten und tatsächliche Daten beinhalten",
             "HEADER": "Der angegebene Link kann von uns leider nicht verwendet werden, da die externen Servereinstellungen nicht angegeben wurden.",
             "NOTFOUND": "Die angegebene Url kann leider nicht gefunden werden",
-            "CAST": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
-            "UNKNOWN": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!"
+            "CAST": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuche es erneut!",
+            "UNKNOWN": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuche es erneut!"
         }
     },
     "API_DOCUMENTATION": "API Dokumentation in neuem Tab",
@@ -100,14 +100,14 @@
     "ALL_VIDATIOS": "Alle Vidatios",
     "MY_VIDATIOS": "Meine Vidatios",
     "MY_0_VIDATIOS1": "Hier würden sich deine Vidatios befinden.",
-    "MY_0_VIDATIOS2": "Zur Zeit hast du leider noch keine erstellt.",
+    "MY_0_VIDATIOS2": "Zur Zeit hast Du leider noch keine erstellt.",
     "AVAILABLE_VIDATIOS": "Verfügbare Vidatios",
     "ALL_VIDATIOS_DESCRIPTION": "alle Datensätze und Visualisierungen",
     "CHOOSE_FILE": "Datei auswählen",
     "DRAG_AND_DROP": "Drag and Drop",
     "USP": "USP",
     "RECOMMEND": "Automatisiert",
-    "RECOMMEND_DESCRIPTION": "Vidatio empfiehlt dir die am besten geeignete Visualisierung für deine Daten.",
+    "RECOMMEND_DESCRIPTION": "Vidatio empfiehlt Dir die am besten geeignete Visualisierung für deine Daten.",
     "TWO_KLICKS": "2 Klicks",
     "TWO_KLICKS_DESCRIPTION": "Erstelle ansprechende Visualisierungen mit nur 2 Klicks.",
     "IMPORT": "Importieren",
@@ -162,7 +162,7 @@
             "MAP_NOT_VISIBLE": "Die Karte ist nicht sichtbar.",
             "POPUP_NOT_VISIBLE": "Das Popup in der Karte ist nicht sichtbar."
         },
-        "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut!",
+        "SERVER_ERROR": "Aufgrund hoher Belastung ist ein Fehler aufgetreten. Bitte versuche es erneut!",
         "NOT_AUTHORIZED": "E-Mail oder Benutzername stimmen mit dem Passwort nicht überein!",
         "REGISTRATION_SUCCESS": "Registrierung erfolgreich!",
         "VIDATIOS_COULD_NOT_BE_LOADED": "Vidatios können zurzeit nicht geladen werden.",
@@ -231,7 +231,7 @@
     "DATASET_ID": "ID des Datensatzes",
     "DATASET_PARENT": "Original Datensatz",
     "DATASET_TAGS": "Tags",
-    "DATASET_DELETE_CONFIRMATION": "Sind Sie sicher, dass dieses Vidatio gelöscht werden soll?",
+    "DATASET_DELETE_CONFIRMATION": "Bist Du sicher, dass dieses Vidatio gelöscht werden soll?",
     "DATASET_DELETE": "Vidatio löschen",
     "CATALOG": "Katalog",
     "FORM": {
@@ -278,8 +278,8 @@
         "NO_MATCHING_RESULTS": "Keine Übereinstimmungen gefunden"
     },
     "SHOW_DETAIL_VIEW": "Detailansicht",
-    "SAVE_AND_SHARE_DESCRIPTION": "Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von dir verwendeten Datenset ein.",
-    "SAVE_AND_SHARE_OPTIONS": "Diese Angaben sind notwendig, damit du dein Vidatio später teilen oder per Link verbreiten kannst.",
+    "SAVE_AND_SHARE_DESCRIPTION": "Damit alle Vidatio-Nutzer sich auf nachprüfbare Daten verlassen können, gebe bitte folgende Daten zu dem von Dir verwendeten Datenset ein.",
+    "SAVE_AND_SHARE_OPTIONS": "Diese Angaben sind notwendig, damit Du dein Vidatio später teilen oder per Link verbreiten kannst.",
     "PUBLISH_VIDATIO": "Mein Vidatio im öffentlichen Katalog anzeigen",
     "SAVE_AND_SHARE_TAGS": "Füge Tags hinzu, damit dein Vidatio besser gefunden wird",
     "SHARE_VIDATIO": "Vidatio teilen",
@@ -295,9 +295,9 @@
             "UI": "Oberfläche wird aktualisiert."
         },
         "ERROR":{
-        "ACCEPTED": "{0} ist kein gültiger {1} für {2}-Darstellungen. Benutzen Sie bitte: {3}.",
+        "ACCEPTED": "{0} ist kein gültiger {1} für {2}-Darstellungen. Benutze bitte: {3}.",
         "CONNECTIONS": "Keine Verbindungen verfügbar für {0}.",
-        "DATA": "Keine Daten verfügbar",
+        "DATA": "Die gewählte Visualisierung kann nicht erstellt werden, mögliche Gründe: keine Daten vorhanden, die vorliegenden Daten sind für die gewählte Visualisierung nicht geeignet oder die Wahl des Wertebereichs ist für die gewählte Visualisierung nicht passend.",
         "DATAYEAR": "Für {0} sind keine Daten verfügbar.",
         "LIB": "{0}-Darstellungen erfordern das Laden der Bibliothek {1}.",
         "LIBS": "{0}-Darstellungen erfordern das Laden folgender Bibliotheken: {1}.",
