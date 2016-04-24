@@ -25,7 +25,8 @@ app.controller "ImportCtrl", [
     "$q"
     "$state"
     ($scope, $http, $location, $log, $rootScope, $timeout, $translate, Table, Converter, Map, Data, Import, ngToast, Progress, Visualization, ErrorHandler, $state) ->
-        $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
+        # Only needed for development
+        # $scope.link = "http://data.ooe.gv.at/files/cms/Mediendateien/OGD/ogd_abtStat/Wahl_LT_09_OGD.csv"
 
         $scope.continueToEmptyTable = ->
             Data.resetMetaData()
@@ -42,8 +43,8 @@ app.controller "ImportCtrl", [
 
         # Read via link
         $scope.load = ->
-            Data.resetMetaData()
             Progress.setMessage $translate.instant("OVERLAY_MESSAGES.PARSING_DATA")
+            Data.resetMetaData()
 
             $http.get($rootScope.apiBase + "/v0/forward"
                 params:

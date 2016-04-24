@@ -53,7 +53,7 @@ app.service 'ImportService', [
                 fileType = fileType[fileType.length - 1]
                 fileName = file.name.toString()
                 fileName = fileName.substring 0, fileName.lastIndexOf(".")
-                Data.name = fileName
+                Data.metaData.name = fileName
 
                 # we only want import files < 50MB because of otherwise reading the file takes too long
                 maxFileSize = 52428800
