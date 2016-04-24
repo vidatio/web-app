@@ -1,6 +1,5 @@
 ###!
 # Vidatio
-# @version v0.0.48
 # @link https://vidatio.com
 # @copyright 2014-2016 Vidatio
 #
