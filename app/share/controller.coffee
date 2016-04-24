@@ -25,19 +25,23 @@ app.controller "ShareCtrl", [
     "$location"
     "TagsService"
     ($scope, $rootScope, $translate, Data, $log, Map, Table, $timeout, Categories, Visualization, $stateParams, Progress, ngToast, ErrorHandler, $state, $window, $location, Tags) ->
+        setScopeData = ->
+            $scope.hasData = Table.hasData()
+            $scope.vidatio = Data.metaData
+
         if $stateParams.id and not Table.dataset[0].length
-            Data.requestVidatioViaID($stateParams.id)
+            promise = Data.requestVidatioViaID($stateParams.id)
+            promise.then ->
+                setScopeData()
+
+        setScopeData()
 
         $scope.goToPreview = false
-        $scope.hasData = Table.hasData()
         $scope.visualization = Visualization.options
-        $scope.vidatio = Data.vidatio
         $scope.vidatio.publish = if $scope.vidatio.publish? then $scope.vidatio.publish else true
 
         port = if $location.port() then ":" + $location.port() else ""
-        $scope.host = $rootScope.hostUrl + port + "/" + $rootScope.locale
-
-        $scope.vidatio.name = $scope.vidatio.name || Data.name || null
+        $scope.host = $rootScope.hostUrl + port
 
         $scope.tags = Tags.getAndPreprocessTags()
 
@@ -65,7 +69,7 @@ app.controller "ShareCtrl", [
             Visualization.create()
 
         $scope.saveDataset = ->
-            if not $scope.hasData
+            if not Table.hasData()
                 $translate('TOAST_MESSAGES.DATASET_IS_EMPTY')
                     .then (translation) ->
                         ngToast.create
@@ -89,12 +93,12 @@ app.controller "ShareCtrl", [
                     when "csv"
                         dataset = Table.dataset.slice()
                         if Table.useColumnHeadersFromDataset
-                            dataset.unshift Table.instanceTable.getColHeader()
+                            dataset.unshift Table.header
                     when "shp"
                         dataset = Map.getGeoJSON()
 
                 Data.saveViaAPI dataset, $scope.vidatio, obj["png"], (errors, response) ->
-                    Progress.setMessage ""
+                    Progress.resetMessage()
 
                     if errors?
                         ErrorHandler.format errors
@@ -112,6 +116,7 @@ app.controller "ShareCtrl", [
                     return $scope.goToPreview = !$scope.goToPreview
 
             .catch (error) ->
+                $log.error error
                 $translate(error.i18n).then (translation) ->
                     ngToast.create
                         content: translation

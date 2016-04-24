@@ -2,7 +2,7 @@
 
 class window.vidatio.Helper
     constructor: ->
-        @subsetMin = 20
+        @subsetMin = 30
         @subsetMax = 100
         @subsetPercentage = 10
         @failureTolerancePercentage = 10
@@ -18,6 +18,9 @@ class window.vidatio.Helper
             dataset: dataset
 
         tmp = []
+        tableOffset =
+            rows: 0
+            columns: 0
 
         topRow = undefined
         leftCell = Infinity
@@ -37,14 +40,47 @@ class window.vidatio.Helper
                         rightCell = indexCell
 
         dataset.forEach (row, indexRow) ->
-            if indexRow < topRow or indexRow > bottomRow
+            if indexRow < topRow
+                tableOffset.rows += 1
+                return
+            else if indexRow > bottomRow
                 return
             tmp.push row.slice(leftCell, rightCell + 1)
 
-        return tmp
+        tableOffset.columns = leftCell
+
+        return {
+            trimmedDataset: tmp
+            tableOffset: tableOffset
+        }
+
+    # shift dataset by a certain amount of rows and columns to undo trimming
+    # @method untrimDataset
+    # @public
+    # @param {Array} dataset
+    # @return {Array}
+    untrimDataset: (dataset, tableOffset, minWidth, minHeight) ->
+        cols = if dataset[0].length - minWidth > 0 then dataset[0].length else minWidth
+        rows = if dataset.length - minHeight > 0 then dataset.length else minHeight
+
+        # add columns before and after data
+        for counter in [0...dataset.length]
+            dataset[counter] = dataset[counter].concat(@createArray(null, cols - tableOffset.columns - dataset[counter].length))
+            dataset[counter] = @createArray(null, tableOffset.columns).concat(dataset[counter])
+
+        # add rows before data
+        for counter in [0...tableOffset.rows]
+            dataset.unshift(@createArray(null, cols))
+
+        # add rows after data
+        for counter in [0...rows - dataset.length]
+            dataset.push(@createArray(null, cols))
+
+        return dataset
+
 
     # Return specified amount of random rows
-    # @method cutDataset
+    # @method getSubset
     # @public
     # @param {Array} dataset
     # @return {Array}
@@ -265,16 +301,19 @@ class window.vidatio.Helper
     # @param {Function} conditionFunction function for type condition
     # @return {Boolean} are all cells of requested type
     isColumnOfType: (column, conditionFunction) ->
-        thresholdFailure = Math.floor(column.length * (@failureTolerancePercentage / 100))
+        cleanedColumn = @cleanArray(column)
+        thresholdFailure = Math.floor(cleanedColumn.length * (@failureTolerancePercentage / 100))
         failures = 0
 
-        for key, value of column
-            if conditionFunction(value)
-                if failures >= thresholdFailure
-                    return false
-                else
-                    failures++
-        return true
+        if cleanedColumn.length
+            for key, value of column
+                if value? and conditionFunction(value) and value isnt ""
+                    if failures >= thresholdFailure
+                        return false
+                    else
+                        failures++
+            return true
+        return false
 
     # @method isCoordinateColumn
     # @public
@@ -379,8 +418,11 @@ class window.vidatio.Helper
             dataItem = {}
             dataItem[xHeader] = x
             dataItem[yHeader] = y
-            dataItem["color"] = color
-            dataItem["id"] = index
+
+            # parallel viz doesn't work with id- or color-key in data-array, so set this parameters only when visualizationType is not 'parallel"
+            unless visualizationType is "parallel"
+                dataItem["color"] = color
+                dataItem["id"] = index
 
             if visualizationType is "bar" or visualizationType is "scatter"
                 dataItem["name"] = y
@@ -447,3 +489,29 @@ class window.vidatio.Helper
             output.push element.toLowerCase()
 
         output
+
+    # @description remove all NULL values from an array and return the resulting array
+    # @method cleanArray
+    # @public
+    # @param {Array} array
+    # @return {Array}
+    cleanArray: (data, idx) ->
+        data = data[idx] if idx
+        tmp = data.filter (value) ->
+            return value if value
+
+        return tmp
+
+    createArray: (value, length) ->
+        return (value for [0...length])
+
+    flattenArray: (array, key) ->
+        if not array?.length or not key
+            return null
+
+        temp = []
+        for element in array
+            temp.push element[key]
+
+        return temp
+

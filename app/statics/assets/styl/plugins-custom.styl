@@ -24,27 +24,37 @@ a
     padding 0
 
 .btn-default
+    background-color $color-grey-dark
+
     &:hover
-        color $color-white
         background-color $color-green
 
     &:active
+        background-color $color-hover-dark
+
     &:focus
         background-color $color-hover-dark
 
-.btn-danger
-    background-color $color-red
-    color $color-white
-    font-size 16px
+.btn-default.dropdown-toggle
+    background-color $color-grey
 
-    &:hover,
+    &:hover
+        background-color $color-green
+
+.btn-danger
+    background-color $color-grey-dark
+
+    &:hover
+        background-color $color-red
+
+    &:active
+        background-color $color-red-light
+
     &:focus
         background-color $color-red-light
 
 .btn-primary
     background-color $color-green
-    color $color-white
-    font-size 16px
 
     &:hover,
     &:focus
@@ -127,7 +137,6 @@ a
 .fui-arrow-right
     &::before
         font-size 14px
-
 
 /* Form specific styles */
 .form-control
@@ -231,7 +240,7 @@ select.form-control
 .form-group
     select.form-control:-moz-focusring
         color transparent !important
-        text-shadow 0 0 0 #000
+        text-shadow 0 0 0 $color-black
 
 /* STATE VALID */
 .input-group.form-group
@@ -295,7 +304,7 @@ span.error
 
 
 [id^="s2id_"].select2-container:not(:hover)
-    border-color #bdc3c7
+    border-color $color-grey
 
 [id^="s2id_"].select2-container
     &:active

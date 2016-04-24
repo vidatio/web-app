@@ -94,10 +94,10 @@ app.service 'UserService', [
 
                     unless element.name in ["app.login", "app.registration", ""]
                         # redirect to detailview needs vidatio-id, so an additional if is necessary to transfer the id
-                        unless element.name in ["app.dataset", "app.editor.id", "app.share.id"]
-                            return $state.go element.name, element.params.locale
+                        unless element.name in ["app.dataset", "app.editor", "app.share"]
+                            return $state.go element.name
 
-                        return $state.go element.name, 'id': element.params.id, element.params.locale
+                        return $state.go element.name, 'id': element.params.id
 
                 return $state.go "app.index"
 

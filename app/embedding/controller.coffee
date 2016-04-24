@@ -11,9 +11,17 @@ app.controller "EmbeddingCtrl", [
     "DataService"
     "VisualizationService"
     "ErrorHandler"
-    ($scope, DataFactory, Progress, $stateParams, $translate, Data, Visualization, ErrorHandler) ->
+    "$state"
+    ($scope, DataFactory, Progress, $stateParams, $translate, Data, Visualization, ErrorHandler, $state) ->
+        $scope.error = false
+        
         $("header").hide()
         $("footer").hide()
+
+        unless $stateParams.id
+            Visualization.options.type = false
+            $scope.error = true
+            return
 
         DataFactory.get {id: $stateParams.id}, (data) ->
             $scope.data = data
@@ -37,6 +45,7 @@ app.controller "EmbeddingCtrl", [
 
             Visualization.create(options)
         , (error) ->
+            Visualization.options.type = false
+            $scope.error = true
             ErrorHandler.format error
 ]
-

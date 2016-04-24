@@ -1,4 +1,4 @@
-#import.wrapper-content
+#import.wrapper-content(ng-file-drop-start)
     .options
         .row.other
             .col-sm-6
@@ -10,7 +10,7 @@
 
             .col-sm-6
                 #option-browse-data.area
-                    a(ui-sref="app.catalog({ locale: locale })" title="{{ 'ALL_VIDATIOS_DESCRIPTION' | translate }}")
+                    a(ui-sref="app.catalog" title="{{ 'ALL_VIDATIOS_DESCRIPTION' | translate }}")
                         .option-icon.icon-opendata
                         h3 {{ "AVAILABLE_VIDATIOS" | translate | uppercase }}
                         span.description-text ({{ "ALL_VIDATIOS_DESCRIPTION" | translate }})
@@ -47,12 +47,4 @@
                             span.input-group-btn
                                 button#link-submit-button.btn.btn-default.glyphicon.glyphicon-arrow-right(type="button" ng-click='load("link")' title="{{'IMPORT_VIA_LINK'|translate}}")
 
-    #drop-zone
-        .row
-            .col-sm-12
-                .drop-zone-area
-                    div.glyphicon.glyphicon-plus
-                    span.text {{ "FILE_DROP" | translate }}
-
-        .row
-            .col-sm-12.drop-area(ng-file-drop-end)
+dropzone

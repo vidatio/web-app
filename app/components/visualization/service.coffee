@@ -68,8 +68,8 @@ app.service 'VisualizationService', [
             # @method useRecommendedOptions
             # @public
             useRecommendedOptions: ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
-                recommendationResults = vidatio.recommender.run trimmedDataset, Table.getHeader(), Table.useColumnHeadersFromDataset
+                #trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                recommendationResults = vidatio.recommender.run Table.getDataset(), Table.getHeader(), Table.useColumnHeadersFromDataset
 
                 if recommendationResults.error?
                     $log.error "Visualization Ctrl error at recommend diagram"
@@ -89,16 +89,22 @@ app.service 'VisualizationService', [
             # @method create
             # @public
             # @param {String} type
-            create: (options = @options) ->
+            create: (options = null) ->
                 $log.info "VisualizationService create called"
                 $log.debug
                     options: options
 
-                chartData = vidatio.helper.trimDataset Table.getDataset()
+                unless options?
+                    options = @options
+                else
+                    angular.merge @options, options
+
+                chartData = Table.getDataset()
+
                 headers = Table.getHeader()
                 options["headers"] =
-                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "x"
-                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "y"
+                    "x": if headers[options.xColumn]? then headers[options.xColumn] else "X"
+                    "y": if headers[options.yColumn]? then headers[options.yColumn] else "Y"
 
                 # set width and height of the visualization for dynamic resizing
                 chartSelector = "#chart"
@@ -211,7 +217,8 @@ app.service 'VisualizationService', [
 
                 vidatio.visualization.visualizationToBase64String($targetElem)
                 .then (obj) ->
-                    Progress.setMessage ""
+                    $timeout ->
+                        Progress.resetMessage()
 
                     vidatio.visualization.download "#{fileName}.#{type}", obj[type]
 

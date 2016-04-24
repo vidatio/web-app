@@ -4,7 +4,7 @@
 
         .header-button
             position relative
-            margin-right 25px
+            //margin-right 25px
 
             label
                 margin 30px 0 0
@@ -15,11 +15,33 @@
                 color $color-black
                 font-size 10px
                 font-family Colaborate,Arial,Helvetica,sans-serif
+                text-align center
+
+            @-moz-document url-prefix()
+                label
+                    margin 31px 0 0
 
             .icons
                 font-size 22px
-                margin-top -27px
-                left 9px
+                margin-top -26px
+                margin-left calc(50% - 15px)
+
+        .swap-axis-button
+            a.icon-swapaxis
+                &:before
+                    font-size 13px
+                    position relative
+                    top -2px
+
+                @-moz-document url-prefix()
+                    span
+                        margin-top 1px
+
+        .x-axis-button.focused
+        .y-axis-button.focused
+            .icon-xaxis
+            .icon-yaxis
+                color $color-hover-dark !important
 
     #datatable
         .ht_master .wtHolder
@@ -55,6 +77,7 @@
 
             tbody tr
                 &:nth-child(odd) td
+                &:nth-child(odd) td
                     background $color-table-odd-passive
                     &.current-col
                     &.current-row
@@ -80,12 +103,6 @@
 
             &.current
                 background-color $color-green !important
-
-    .x-axis-button.focused
-    .y-axis-button.focused
-        .icon-xaxis
-        .icon-yaxis
-            color $color-hover-dark !important
 
     .highlighted
         background $color-grey-dark !important

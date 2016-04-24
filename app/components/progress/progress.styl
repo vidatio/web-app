@@ -4,6 +4,10 @@
     position absolute
     z-index 3000
     top 0
+    display none
+
+    &.active
+        display block
 
     .progress-overlay-background
         position fixed
@@ -42,7 +46,7 @@
             background white
 
         .pie
-            background #FF5444
+            background $color-red
             position absolute
             width 100px
             height 100px
@@ -79,7 +83,7 @@
             height 55px
             margin 0 auto
             border-radius 50% 50% 50% 0
-            background #11DDC6
+            background $color-green
             position relative
             z-index 100
             transform rotate(-45deg)

@@ -5,9 +5,7 @@ app = angular.module "app.services"
 app.service 'ConverterService', [
     "$timeout"
     "$log"
-    "$q"
-    "TableService"
-    ($timeout, $log, $q, Table) ->
+    ($timeout, $log) ->
         class Converter
 
             # adds multiple column headers with the same name and an incrementing counter.
@@ -40,8 +38,6 @@ app.service 'ConverterService', [
                 $log.debug
                     dataset: dataset
                     indicesCoordinates: indicesCoordinates
-
-                dataset = vidatio.helper.trimDataset(dataset)
 
                 geoJSON =
                     "type": "FeatureCollection"

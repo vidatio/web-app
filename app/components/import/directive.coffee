@@ -9,49 +9,56 @@
 app = angular.module "app.directives"
 
 app.directive 'ngFileDropStart', [ ->
-        link: ($scope, el) ->
+    link: ($scope, el) ->
 
-            #over: cursor currently moves over the drop-zone
-            el.bind "dragover", (e) ->
-                e.preventDefault()
-                false
+        #over: cursor currently moves over the drop-zone
+        el.bind "dragover", (e) ->
+            e.preventDefault()
+            false
 
-            #enter: cursor enters the drop-zone
-            el.bind "dragenter", (e) ->
-                return unless document.getElementById("drop-zone")?
-                document.getElementById("drop-zone").style.display = "block"
-                e.preventDefault()
-                false
+        #enter: cursor enters the drop-zone
+        el.bind "dragenter", (e) ->
+            return unless document.getElementById("drop-zone")?
+            document.getElementById("drop-zone").style.display = "block"
+            e.preventDefault()
+            false
 ]
 
 app.directive 'ngFileDropEnd', [ ->
-        link: ($scope, el) ->
+    link: ($scope, el) ->
 
-            #leave: cursor moves out of drop-zone
-            el.bind "dragleave", (e) ->
-                return unless document.getElementById("drop-zone")?
-                document.getElementById("drop-zone").style.display = "none"
-                e.preventDefault()
-                false
+        #leave: cursor moves out of drop-zone
+        el.bind "dragleave", (e) ->
+            return unless document.getElementById("drop-zone")?
+            document.getElementById("drop-zone").style.display = "none"
+            e.preventDefault()
+            false
 
-            #over: cursor currently moves over the drop-zone
-            el.bind "dragover", (e) ->
-                e.preventDefault()
-                false
+        #over: cursor currently moves over the drop-zone
+        el.bind "dragover", (e) ->
+            e.preventDefault()
+            false
 
-            #drop: file got dropped on the drop-zone
-            el.bind "drop", (e) ->
-                e.preventDefault()
-                return unless document.getElementById("drop-zone")?
-                document.getElementById("drop-zone").style.display = "none"
-                $scope.file = e.originalEvent.dataTransfer.files[0]
-                $scope.getFile("dragged")
-                false
+        #drop: file got dropped on the drop-zone
+        el.bind "drop", (e) ->
+            e.preventDefault()
+            return unless document.getElementById("drop-zone")?
+            document.getElementById("drop-zone").style.display = "none"
+            file = e.originalEvent.dataTransfer.files[0]
+            $scope.getFile file
+            false
 ]
 
 app.directive 'ngFileSelect', [ ->
-        link: ($scope, el) ->
-            el.bind "change", (e) ->
-                $scope.file = (e.srcElement or e.target).files[0]
-                $scope.getFile()
+    link: ($scope, el) ->
+        el.bind "change", (e) ->
+            file = (e.srcElement or e.target).files[0]
+            $scope.getFile file
 ]
+
+app.directive "dropzone", [ ->
+    templateUrl: "components/import/dropzone.html"
+    replace: true
+    restrict: "E"
+]
+

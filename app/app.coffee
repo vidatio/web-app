@@ -1,5 +1,3 @@
-# Vidatio App
-# ===========
 "use strict"
 
 app = angular.module "app", [
@@ -35,8 +33,7 @@ app.run [
     "CONFIG"
     "$translate"
     "ngToast"
-    "$window"
-    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast, $window) ->
+    ( $rootScope, $state, $stateParams, $http, $location, $cookieStore, CONFIG, $translate, ngToast) ->
         $rootScope.$state = $state
         $rootScope.hostUrl = "#{$location.protocol()}://#{$location.host()}"
         $rootScope.$stateParams = $stateParams
@@ -77,14 +74,14 @@ app.run [
                 name: fromState.name
                 params: fromParams
 
-            if not $rootScope.authorized and $state.current.name is "app.share" or $state.current.name is "app.share.id"
+            if not $rootScope.authorized and $state.current.name is "app.share"
                 $rootScope.history.push
                     name: $state.current.name
                     params: fromParams
 
             userPages = ["app.login", "app.registration"]
-            editorPages = ["app.editor", "app.editor.id", "app.share", "app.share.id"]
-            editorAndUserPages = ["app.editor", "app.editor.id", "app.share", "app.share.id", "app.login", "app.registration"]
+            editorPages = ["app.editor", "app.share"]
+            editorAndUserPages = ["app.editor", "app.share", "app.login", "app.registration"]
 
             # set boolean value true when user navigates from editor/share to login/registration
             if fromState.name in editorPages and toState.name in userPages
@@ -210,7 +207,6 @@ app.config [
         # abstract state for language as parameter in URL
         .state "app",
             abstract: true
-            url: "/{locale}"
             controller: "AppCtrl"
             template: "<ui-view/>"
 
@@ -258,29 +254,13 @@ app.config [
             title: "embedding"
 
         .state "app.editor",
-            url: "/editor"
-            params:
-                id: null
-            templateUrl: "editor/editor.html"
-            controller: "EditorCtrl"
-            title: "editor"
-
-        .state "app.editor.id",
-            url: "/:id"
+            url: "/editor/:id"
             templateUrl: "editor/editor.html"
             controller: "EditorCtrl"
             title: "editor"
 
         .state "app.share",
-            url: "/share"
-            params:
-                id: null
-            templateUrl: "share/share.html"
-            controller: "ShareCtrl"
-            title: "share"
-
-        .state "app.share.id",
-            url: "/:id"
+            url: "/share/:id"
             templateUrl: "share/share.html"
             controller: "ShareCtrl"
             title: "share"
@@ -306,21 +286,35 @@ app.config [
             templateUrl: "team/team.html"
             title: "team"
 
-        # not match was found in the states before (e.g. no language was provided in the URL)
+        # no match was found in the states before
         .state "noMatch",
             url: '*path'
             onEnter: ($state, $stateParams) ->
-                locale =
-                    locale: $translateProvider.preferredLanguage()
+                # editor and share page need different behaviour as they have a longer url with id
+                unless $stateParams.path in ["/editor", "/share"]
 
-                # iterate over all states and check if the requested url exists as a state; if not show 404-page
-                for state in $state.get()
-                    if $stateParams.path in ["/de", "/en"]
-                        $state.go "app.index", locale
-                        break
-                    else if $stateParams.path is state.url
-                        $state.go state.name, locale
-                        break
-                    else
-                        $state.go "app.fourofour", locale
+                    for state in $state.get()
+                        # Because '/' always delivers 'true'
+                        if state.name in ["app", "app.index"]
+                            continue
+
+                        # check if url could be assigned to state
+                        if $stateParams.path.startsWith(state.url)
+                            $state.go state.name
+                            return
+
+                        # redirect to catalog if url has only catalog in it
+                        if state.name is "app.catalog" and $stateParams.path.startsWith("/catalog")
+                            $state.go "app.catalog"
+                            return
+
+                    # go to 404 otherwise
+                    $state.go "app.fourofour"
+
+                if $stateParams.path is "/share"
+                    $state.go "app.share"
+                    return
+
+                if $stateParams.path is "/editor"
+                    $state.go "app.editor"
 ]

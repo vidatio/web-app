@@ -14,13 +14,14 @@ app.controller "EditorCtrl", [
     "ngToast"
     "$translate"
     "VisualizationService"
+    "ProgressService"
     "MapService"
     "$window"
     "$stateParams"
     "$state"
     "TableService"
-    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Map, $window, $stateParams, $state, Table) ->
-
+    "ImportService"
+    ($scope, $rootScope, $log, $timeout, Data, ngToast, $translate, Visualization, Progress, Map, $window, $stateParams, $state, Table, Import) ->
         if $stateParams.id and not Table.dataset[0].length
             Data.requestVidatioViaID($stateParams.id)
 
@@ -71,4 +72,9 @@ app.controller "EditorCtrl", [
                     window.angular.element($window).triggerHandler("resize")
                 , 100
 
+        # Read via Browsing and Drag-and-Drop
+        $scope.getFile = (file) ->
+            Progress.setMessage $translate.instant("OVERLAY_MESSAGES.READING_FILE")
+            Data.resetMetaData()
+            Import.getFile file
 ]

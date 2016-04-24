@@ -11,12 +11,22 @@
         width auto
 
     .settings-bar
+        {displayFlex}
+        flex-direction(row)
+
+        .settings-button
+            margin-right 8%
+
+            &:last-child
+                margin-right 4%
+                margin-left auto
+
         .recommend-button
             height 40px
             width  90px
             line-height 1
             position relative
-            margin 4px 25px 0 35px
+            margin 4px 8% 0 35px
             padding 9px
 
             .icon
@@ -53,7 +63,7 @@
             margin-top 8px
             background rgba($color-white, .9)
             border-top 2px solid $color-disabled-border
-            box-shadow -1px 1px 2px #e3e3e3
+            box-shadow -1px 1px 2px $color-shadow
             z-index 1100
 
             > li
@@ -96,3 +106,10 @@
         .download-menu
             > li
                 width 50%
+
+@media (max-width: 500px)
+    #visualization
+        .settings-bar
+            .recommend-button
+            .settings-button
+                margin-right 3%

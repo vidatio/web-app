@@ -12,10 +12,11 @@ app.service 'DataService', [
     "DatasetFactory"
     "$translate"
     "$state"
+    "$q"
     "ngToast"
     "ProgressService"
     "ErrorHandler"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, Progress, ErrorHandler) ->
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, $q, ngToast, Progress, ErrorHandler) ->
         class Data
             constructor: ->
                 # Temporarily solution because there is redundance
@@ -25,6 +26,9 @@ app.service 'DataService', [
                 @name = ""
                 @metaData =
                     "fileType": "csv"
+
+            resetMetaData: ->
+                @metaData.name = @metaData.categoryId = @metaData.tagIds = @metaData.author = @metaData.publish = null
 
             updateMap: (row, column, oldData, newData) ->
                 columnHeaders = Table.instanceTable.getColHeader()
@@ -43,8 +47,16 @@ app.service 'DataService', [
             saveViaAPI: (dataset, metaData, thumbnail = "-", cb) ->
                 angular.extend @metaData, metaData
 
+                data = dataset
+                tableOffset =
+                    rows: 0
+                    columns: 0
+
+                if @metaData.fileType is "csv"
+                    { trimmedDataset: data, tableOffset: tableOffset } = vidatio.helper.trimDataset(dataset)
+
                 DatasetFactory.save
-                    data: dataset
+                    data: data
                     published: @metaData.publish
                     metaData: @metaData
                     visualizationOptions:
@@ -54,6 +66,7 @@ app.service 'DataService', [
                         color: Visualization.options.color
                         useColumnHeadersFromDataset: Table.useColumnHeadersFromDataset
                         thumbnail: thumbnail
+                        tableOffset: tableOffset
                 , (response) ->
                     link = $state.href("app.dataset", {id: response._id}, {absolute: true})
                     $rootScope.link = link
@@ -77,8 +90,15 @@ app.service 'DataService', [
                 if data.metaData?
                     angular.extend @metaData, data.metaData
 
+                if data.metaData.tagIds
+                    @metaData.tagIds = vidatio.helper.flattenArray data.metaData.tagIds, "name"
+
+                if data.metaData.categoryId
+                    @metaData.categoryId = data.metaData.categoryId._id
+
                 if data.visualizationOptions?
                     Visualization.setOptions(data.visualizationOptions)
+                    Table.updateAxisSelection(Number(data.visualizationOptions.xColumn) + 1, Number(data.visualizationOptions.yColumn) + 1)
 
                 if data.metaData.fileType is "shp"
                     Table.setDataset Converter.convertGeoJSON2Arrays data.data
@@ -93,13 +113,21 @@ app.service 'DataService', [
 
                     if Table.useColumnHeadersFromDataset
                         Table.setHeader data.data.shift()
+                    else
+                        Table.setHeader()
 
+                    if !data.visualizationOptions.tableOffset
+                        data.visualizationOptions.tableOffset =
+                            rows: 0
+                            columns: 0
+
+                    data.data = vidatio.helper.untrimDataset data.data, data.visualizationOptions.tableOffset, Table.minColumns, Table.minRows
                     Table.setDataset data.data
 
             #@method downloadCSV
             #@description downloads a csv
             downloadCSV: (name) ->
-                trimmedDataset = vidatio.helper.trimDataset Table.getDataset()
+                trimmedDataset = vidatio.helper.trimDataset(Table.getDataset()).trimmedDataset
 
                 if Table.useColumnHeadersFromDataset
                     csv = Papa.unparse
@@ -149,16 +177,74 @@ app.service 'DataService', [
             # @param {String} id
             requestVidatioViaID: (id) ->
                 # get dataset according to datasetId and set necessary metadata
-                DatasetFactory.get {id: id}, (data) =>
+                DatasetFactory.get {id: id}
+                .$promise
+                .then (data) =>
                     @useSavedData data
 
                     options = data.visualizationOptions
                     options.fileType = if data.metaData?.fileType? then data.metaData.fileType else "csv"
                     Visualization.create(options)
                     Progress.setMessage()
+
+                    return data
                 , (error) ->
                     Progress.setMessage()
                     ErrorHandler.format error
 
+            # @method initTableAndMap
+            # @param {String} fileType
+            # @param {String} fileContent
+            initTableAndMap: (fileType, fileContent) ->
+                @datasetID = null
+
+                deferred = $q.defer()
+                promise = deferred.promise
+
+                Table.useColumnHeadersFromDataset = true
+
+                switch fileType
+                    when "csv"
+                        @metaData.fileType = "csv"
+                        dataset = Converter.convertCSV2Arrays fileContent
+                        Table.setHeader dataset.shift()
+                        Table.setDataset dataset
+                        Visualization.useRecommendedOptions()
+                        deferred.resolve()
+
+                    when "zip"
+                        @metaData.fileType = "shp"
+
+                        Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
+                            dataset = Converter.convertGeoJSON2Arrays geoJSON
+
+                            if dataset.length
+                                Table.setDataset dataset
+                                Table.useColumnHeadersFromDataset = true
+                                Visualization.options.type = "map"
+                                Map.setGeoJSON geoJSON
+                                deferred.resolve()
+                            else
+                                deferred.reject
+                                    i18n: "TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR"
+
+                        , (error) ->
+                            $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                            $log.debug
+                                error: error
+
+                            deferred.reject
+                                i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
+
+                promise.then ->
+                    $state.go "app.editor", {}, { "reload": true }
+
+                .catch (error) ->
+                    $translate(error.i18n).then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+
+                        Progress.resetMessage()
         new Data
 ]
