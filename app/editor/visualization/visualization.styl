@@ -11,6 +11,16 @@
         width auto
 
     .settings-bar
+        {displayFlex}
+        flex-direction(row)
+
+        .settings-button
+            margin-right 8%
+
+            &:last-child
+                margin-right 4%
+                margin-left auto
+
         .recommend-button
             height 40px
             width  90px
@@ -96,3 +106,9 @@
         .download-menu
             > li
                 width 50%
+
+@media display and (max-width: 500px)
+    #visualization
+        .settings-bar
+            .settings-button
+                margin-right 3%
