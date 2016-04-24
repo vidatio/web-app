@@ -89,10 +89,15 @@ app.service 'VisualizationService', [
             # @method create
             # @public
             # @param {String} type
-            create: (options = @options) ->
+            create: (options = null) ->
                 $log.info "VisualizationService create called"
                 $log.debug
                     options: options
+
+                unless options?
+                    options = @options
+                else
+                    angular.merge @options, options
 
                 chartData = Table.getDataset()
 

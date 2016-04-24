@@ -33,7 +33,8 @@ app.controller "DatasetCtrl", [
             $state.go "app.fourofour"
             return
 
-        Progress.setMessage $translate.instant("OVERLAY_MESSAGES.PARSING_DATA")
+        $translate("OVERLAY_MESSAGES.PARSING_DATA").then (message) ->
+                Progress.setMessage message
 
         # get dataset according to datasetId and set necessary metadata
         DataFactory.get {id: $stateParams.id}, (data) ->
