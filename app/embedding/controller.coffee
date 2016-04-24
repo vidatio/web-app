@@ -13,15 +13,14 @@ app.controller "EmbeddingCtrl", [
     "ErrorHandler"
     "$state"
     ($scope, DataFactory, Progress, $stateParams, $translate, Data, Visualization, ErrorHandler, $state) ->
+        $("header").hide()
+        $("footer").hide()
 
         unless $stateParams.id
             $state.go "app.fourofour"
             return
 
         DataFactory.get {id: $stateParams.id}, (data) ->
-            $("header").hide()
-            $("footer").hide()
-            
             $scope.data = data
             $scope.data.updated = new Date($scope.data.updatedAt)
             $scope.data.created = new Date($scope.data.createdAt)
