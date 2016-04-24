@@ -12,10 +12,11 @@ app.service 'DataService', [
     "DatasetFactory"
     "$translate"
     "$state"
+    "$q"
     "ngToast"
     "ProgressService"
     "ErrorHandler"
-    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, ngToast, Progress, ErrorHandler) ->
+    ($rootScope, Map, Table, Converter, Visualization, $log, DatasetFactory, $translate, $state, $q, ngToast, Progress, ErrorHandler) ->
         class Data
             constructor: ->
                 # Temporarily solution because there is redundance
@@ -25,6 +26,9 @@ app.service 'DataService', [
                 @name = ""
                 @metaData =
                     "fileType": "csv"
+
+            resetMetaData: ->
+                @metaData.name = @metaData.categoryId = @metaData.tagIds = @metaData.author = @metaData.publish = null
 
             updateMap: (row, column, oldData, newData) ->
                 columnHeaders = Table.instanceTable.getColHeader()
@@ -188,5 +192,59 @@ app.service 'DataService', [
                     Progress.setMessage()
                     ErrorHandler.format error
 
+            # @method initTableAndMap
+            # @param {String} fileType
+            # @param {String} fileContent
+            initTableAndMap: (fileType, fileContent) ->
+                @datasetID = null
+
+                deferred = $q.defer()
+                promise = deferred.promise
+
+                Table.useColumnHeadersFromDataset = true
+
+                switch fileType
+                    when "csv"
+                        @metaData.fileType = "csv"
+                        dataset = Converter.convertCSV2Arrays fileContent
+                        Table.setHeader dataset.shift()
+                        Table.setDataset dataset
+                        Visualization.useRecommendedOptions()
+                        deferred.resolve()
+
+                    when "zip"
+                        @metaData.fileType = "shp"
+
+                        Converter.convertSHP2GeoJSON(fileContent).then (geoJSON) ->
+                            dataset = Converter.convertGeoJSON2Arrays geoJSON
+
+                            if dataset.length
+                                Table.setDataset dataset
+                                Table.useColumnHeadersFromDataset = true
+                                Visualization.options.type = "map"
+                                Map.setGeoJSON geoJSON
+                                deferred.resolve()
+                            else
+                                deferred.reject
+                                    i18n: "TOAST_MESSAGES.GEOJSON2ARRAYS_ERROR"
+
+                        , (error) ->
+                            $log.error "ImportCtrl Converter.convertSHP2GeoJSON promise error called"
+                            $log.debug
+                                error: error
+
+                            deferred.reject
+                                i18n: "TOAST_MESSAGES.SHP2GEOJSON_ERROR"
+
+                promise.then ->
+                    $state.go "app.editor", {}, { "reload": true }
+
+                .catch (error) ->
+                    $translate(error.i18n).then (translation) ->
+                        ngToast.create
+                            content: translation
+                            className: "danger"
+
+                        Progress.resetMessage()
         new Data
 ]

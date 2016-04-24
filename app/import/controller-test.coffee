@@ -19,16 +19,19 @@ describe "Controller Import", ->
                 setHeader: (header) ->
                     @header = header
             @Import =
-                readFile: (file, scope) ->
+                getFile: (file) ->
+            @Data =
+                initTableAndMap: (p1, p2) ->
+                resetMetaData: ->
 
-            spyOn(@Import, 'readFile').and.returnValue(@deferred.promise)
-            spyOn(@Table, 'setDataset')
+            spyOn(@Import, 'getFile').and.returnValue(@deferred.promise)
+            spyOn(@Data, 'initTableAndMap')
 
-            ImportCtrl = $controller "ImportCtrl", $scope: @scope, $http: $http, TableService: @Table, ImportService: @Import
+            ImportCtrl = $controller "ImportCtrl", $scope: @scope, $http: $http, DataService: @Data, ImportService: @Import
 
     afterEach ->
-        @Import.readFile.calls.reset()
-        @Table.setDataset.calls.reset()
+        @Import.getFile.calls.reset()
+        @Data.initTableAndMap.calls.reset()
 
     describe "on upload via link", ->
         it 'should set the dataset of the table', ->
@@ -43,24 +46,21 @@ describe "Controller Import", ->
             @scope.load()
             @httpBackend.flush()
 
-            expect(@Table.setDataset).toHaveBeenCalled()
-
+            expect(@Data.initTableAndMap).toHaveBeenCalled()
 
     describe "on upload via browse and drag and drop", ->
         it 'should read the file via the ImportService', ->
-            @scope.file =
+            @scope.getFile
                 name: "test.csv"
-            @scope.getFile()
 
             @timeout ->
                 expect(@Import.readFile).toHaveBeenCalled()
-                expect(@Import.readFile).toHaveBeenCalledWith(@scope.file, "csv")
+                expect(@Import.readFile).toHaveBeenCalledWith({name: "test.csv"})
 
         # Disabled because of promise gets never resolved
         xit 'should set the dataset of the table after reading the file', ->
-            @scope.file =
+            @scope.getFile
                 name: "test.csv"
-            @scope.getFile()
             @deferred.resolve('test,1\ntest,2\ntest,3')
 
             expect(@Table.setDataset).toHaveBeenCalled()

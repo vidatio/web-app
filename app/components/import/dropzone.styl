@@ -1,0 +1,35 @@
+#drop-zone
+    display none
+    background $color-dropzone
+    position fixed
+    z-index 999
+    {overlayParent}
+
+    .row
+        height 100%
+
+        .col-sm-12
+            padding 30px
+            height 100%
+
+    .drop-zone-area
+        {fillParent}
+        border 10px solid white
+
+        .glyphicon-plus
+            {centerElement}
+            transform translate(-50%, -50%)
+            padding 0 0 0 34px
+            font-size 400px
+            color $color-white
+
+        .text
+            {centerElement}
+            padding-top 2px
+            transform translate(-50%, -50%)
+            font-size 30px
+
+    .drop-area
+        position fixed
+        z-index 99
+        {overlayParent}
