@@ -63,6 +63,7 @@ app.controller "CatalogCtrl", [
                 vidatio.createdAt = new Date(vidatio.createdAt)
             Progress.resetMessage()
         , (error) ->
+            Progress.resetMessage()
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
                     content: translation
