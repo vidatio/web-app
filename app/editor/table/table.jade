@@ -1,29 +1,30 @@
 #table.wrapper-content(ng-controller="TableCtrl" ng-show="$root.showTableView" ng-class="{'col-md-6': $parent.activeViews === 2, 'col-md-12': $parent.activeViews === 1}")
     .content(ng-class="{'active': activeTabs[1]}")
-        .settings-bar
+        .settings-bar.row
 
-            .header-button(ng-hide="data.metaData.fileType == 'shp'")
+            .header-button(ng-hide="data.metaData.fileType == 'shp'" ng-class="{'col-xs-4 col-sm-2 col-md-2': data.metaData.fileType != 'shp'}")
                 label.checkbox(for="column-headers-checkbox") {{ "HEADER" | translate }}
                     input#column-headers-checkbox.custom-checkbox(data-toggle="checkbox" type="checkbox" ng-model="useColumnHeadersFromDataset" ng-change="toggleHeader()")
 
-            .transpose-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'TRANSPOSE_DATASET_TITLE'|translate}}")
+            .transpose-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'TRANSPOSE_DATASET_TITLE'|translate}}" ng-class="{'col-xs-4 col-sm-2 col-md-2': data.metaData.fileType != 'shp'}")
                 a.icon-transpose(href='#' ng-click="transpose()")
                     span {{ "TRANSPOSE" | translate }}
-
-            .x-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_X_TITLE'|translate}}")
-                a.icon-xaxis(href='#' ng-click="axisSelection('x')")
-                    span {{ "VALUE_RANGE" | translate }}
-
-            .y-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_Y_TITLE'|translate}}")
-                a.icon-yaxis(href='#' ng-click="axisSelection('y')")
-                    span {{ "VALUE_RANGE" | translate }}
-
-            .swap-axis-button.settings-button(ng-hide="data.metaData.fileType == 'shp'" title="{{'SWAP_AXIS_TITLE'|translate}}")
-                a.icon-swapaxis(href='#' ng-click="changeAxis()")
-                    span {{ "SWAP_AXIS" | translate }}
-
-            .download-button.settings-button(title="{{'DOWNLOAD'|translate}} {{'DATASET'|translate}}")
+            .download-button.settings-button(title="{{'DOWNLOAD'|translate}} {{'DATASET'|translate}}" ng-class="{'col-xs-2 col-xs-push-10': data.metaData.fileType == 'shp', ' col-xs-4 col-sm-2 col-sm-push-6 col-md-2': data.metaData.fileType != 'shp'}")
                 a.icon-download(href="#" ng-click="download()")
                     span {{ "DOWNLOAD" | translate }}
+
+            div(ng-class="{'col-xs-12 col-sm-6 col-sm-pull-2 col-md-6': data.metaData.fileType != 'shp'}")
+                .row.sub-row
+                    .x-axis-button.settings-button.col-xs-4(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_X_TITLE'|translate}}")
+                        a.icon-xaxis(href='#' ng-click="axisSelection('x')")
+                            span {{ "AXIS" | translate }}
+
+                    .y-axis-button.settings-button.col-xs-4(ng-hide="data.metaData.fileType == 'shp'" title="{{'AXIS_SELECTION_Y_TITLE'|translate}}")
+                        a.icon-yaxis(href='#' ng-click="axisSelection('y')")
+                            span {{ "AXIS" | translate }}
+
+                    .swap-axis-button.settings-button.col-xs-4(ng-hide="data.metaData.fileType == 'shp'" title="{{'SWAP_AXIS_TITLE'|translate}}")
+                        a.icon-swapaxis(href='#' ng-click="changeAxis()")
+                            span {{ "SWAP_AXIS" | translate }}
 
         hot(dataset="dataset" active-views="activeViews" column-headers="columnHeaders")

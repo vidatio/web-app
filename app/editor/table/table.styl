@@ -4,7 +4,7 @@
 
         .header-button
             position relative
-            margin-right 25px
+            //margin-right 25px
 
             label
                 margin 30px 0 0
@@ -15,6 +15,7 @@
                 color $color-black
                 font-size 10px
                 font-family Colaborate,Arial,Helvetica,sans-serif
+                text-align center
 
             @-moz-document url-prefix()
                 label
@@ -23,7 +24,7 @@
             .icons
                 font-size 22px
                 margin-top -26px
-                left 9px
+                margin-left calc(50% - 15px)
 
         .swap-axis-button
             a.icon-swapaxis
@@ -75,6 +76,7 @@
                 border 2px solid $color-white
 
             tbody tr
+                &:nth-child(odd) td
                 &:nth-child(odd) td
                     background $color-table-odd-passive
                     &.current-col

@@ -81,15 +81,16 @@
 
         .settings-bar
             height 52px
-            {displayFlex}
-            flex-direction(row)
+
+            &.row div
+                padding 0 !important
+
+            .sub-row
+                div
+                    padding 0 !important
 
             .settings-button
                 text-align center
-                margin-right 25px
-
-                &:last-child
-                    margin-right 0px
 
                 a
                     font-size 24px
@@ -108,9 +109,6 @@
                 &.active
                     > a
                         color $color-hover-dark
-
-                &:last-child
-                    margin-left auto
 
     .wrapper-content
         max-width 100%
@@ -143,6 +141,12 @@
         .row.editor-content
             height 100%
             margin-bottom 40px
+
+        #datatable
+            height calc(100% - 100px) !important
+
+        .settings-bar .row.sub-row
+            margin-bottom 10px !important
 
 @media (min-width: 768px) and (max-width: 946px)
     #editor
