@@ -15,7 +15,8 @@ app.controller "CatalogCtrl", [
     "TagsService"
     "$log"
     "$timeout"
-    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log, $timeout) ->
+    "ProgressService"
+    ($scope, Progress, Data, $translate, ngToast, $stateParams, $state, Datasets, Categories, Tags, $log, $timeout, ProgressService) ->
         $timeout ->
             $("#search-title").on "focus", ->
                 $("#search-filter").addClass "active"
@@ -50,6 +51,9 @@ app.controller "CatalogCtrl", [
                     content: translation
                     className: "danger"
 
+        $translate("VIDATIOS_LOADING").then (translation) ->
+            Progress.setMessage translation
+
         Datasets.query (response) ->
             $scope.vidatios = response
 
@@ -57,6 +61,7 @@ app.controller "CatalogCtrl", [
                 vidatio.title = vidatio.metaData.name
                 vidatio.image = if /(png|jpg)/.test(vidatio.visualizationOptions.thumbnail) then vidatio.visualizationOptions.thumbnail else "images/logo-greyscale.svg"
                 vidatio.createdAt = new Date(vidatio.createdAt)
+            Progress.resetMessage()
         , (error) ->
             $translate('TOAST_MESSAGES.VIDATIOS_COULD_NOT_BE_LOADED').then (translation) ->
                 ngToast.create
