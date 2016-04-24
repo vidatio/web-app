@@ -14,7 +14,7 @@ app.controller "EmbeddingCtrl", [
     "$state"
     ($scope, DataFactory, Progress, $stateParams, $translate, Data, Visualization, ErrorHandler, $state) ->
         $scope.error = false
-
+        
         $("header").hide()
         $("footer").hide()
 
