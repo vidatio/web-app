@@ -19,7 +19,7 @@ concat = require "gulp-concat"
 gif = require "gulp-if"
 del = require "del"
 rename = require "gulp-rename"
-sourcemaps = require "gulp-sourcemaps"
+sourceMaps = require "gulp-sourceMaps"
 util = require "gulp-util"
 cached = require "gulp-cached"
 shell = require "gulp-shell"
@@ -29,16 +29,6 @@ ngConstant = require "gulp-ng-constant"
 uglify = require "gulp-uglify"
 cleanCSS = require "gulp-clean-css"
 ngAnnotate = require "gulp-ng-annotate"
-
-DOC_FILES = [
-    "./README.MD"
-    "./app/init-deps.coffee"
-    "./app/app.coffee"
-    "./app/app-controller.coffee"
-    "./app/**/*.coffee"
-    "!./app/**/*-test.coffee"
-    "!./app/**/*-e2e.coffee"
-]
 
 COPY_FILES =
     img: [
@@ -52,12 +42,8 @@ COPY_FILES =
     lang: "./app/statics/languages/**/*.json"
     videos: "./app/statics/assets/videos/**/*"
 
-BASEURL = "http://localhost:3123"
-
-E2E_FILES = "./app/**/*-e2e.coffee"
-
 APP_FILES = "./app/**/*.coffee"
-STYL_FILES = "./app/**/*.styl"
+STYLUS_FILES = "./app/**/*.styl"
 
 BUILD =
     source:
@@ -265,7 +251,7 @@ gulp.task "lint:coffee",
 gulp.task "lint:stylus",
     "Lints all Stylus source files.",
     ->
-        gulp.src STYL_FILES
+        gulp.src STYLUS_FILES
         .pipe cached "lint:stylus"
         .pipe stylint
             config: './.stylintrc'
@@ -313,10 +299,10 @@ gulp.task "build:source:coffee",
     ]
     ->
         gulp.src BUILD.source.coffee
-        .pipe sourcemaps.init()
+        .pipe sourceMaps.init()
         .pipe coffee().on "error", util.log
         .pipe concat(BUILD.app)
-        .pipe sourcemaps.write('./map')
+        .pipe sourceMaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.js)
 
 gulp.task "build:production:source:coffee",
@@ -337,10 +323,10 @@ gulp.task "build:source:stylus",
     ]
     ->
         gulp.src BUILD.source.stylus
-        .pipe sourcemaps.init()
+        .pipe sourceMaps.init()
         .pipe stylus
             compress: true
-        .pipe sourcemaps.write('./map')
+        .pipe sourceMaps.write('./map')
         .pipe gulp.dest(BUILD.dirs.css)
 
 gulp.task "build:production:source:stylus",
@@ -554,7 +540,7 @@ gulp.task "build:source:stylus:watch",
         "build:source:stylus"
     ]
     ->
-        gulp.watch STYL_FILES, ["build:source:stylus:reload"]
+        gulp.watch STYLUS_FILES, ["build:source:stylus:reload"]
 
 gulp.task "build:source:coffee:watch",
     "Builds coffeescript files from '#{BUILD.source.coffee}' to '#{BUILD.dirs.js}'.",

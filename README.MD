@@ -6,8 +6,6 @@ Authors:
 - Fabio Batz
 - Andreas Frank
 - Georg Eschbacher
-- Fabian Schneider
-- Michael Poschacher
 
 and a lot more...
 
@@ -132,11 +130,11 @@ For visualizations of geo coded data the library [Leaflet.js](http://leafletjs.c
 
 ## Subdomains
 
-* api.vidatio.mediacube.at
-* db.vidatio.mediacube.at
-* develop.vidatio.mediacube.at
-* log.vidatio.mediacube.at
-* test.vidatio.mediacube.at
+* ci.vidatio.com
+* develop.api.vidatio.com
+* api.vidatio.com
+* develop.vidatio.com
+* vidatio.com
 
 ## Some thoughts
 The application is designed in a highly modularized way.

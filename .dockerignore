@@ -1,6 +1,5 @@
 .dockerignore
 Dockerfile
 
-
 node_modules/
 bower_components/
