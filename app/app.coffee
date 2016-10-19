@@ -21,6 +21,7 @@ app = angular.module "app", [
     "colorpicker.module"
     "angulartics"
     "angulartics.piwik"
+    "angular-cookie-law"
 ]
 
 app.run [

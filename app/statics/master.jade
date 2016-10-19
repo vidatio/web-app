@@ -12,6 +12,8 @@ html(ng-app="app" lang="{{ 'LANG_DE' | translate}}")
 
 body.container-fluid(ng-file-drop-start)
 
+        include includes/cookie-law-banner
+
         .wrapper(ng-controller="AppCtrl" ng-click="disableMenuActive()")
             include header
 

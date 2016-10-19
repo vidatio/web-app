@@ -107,6 +107,7 @@ BUILD =
             "./bower_components/angulartics/src/angulartics.js"
             "./bower_components/angulartics-piwik/src/angulartics-piwik.js"
             "./bower_components/bootbox.js/bootbox.js"
+            "./bower_components/angular-cookie-law/dist/angular-cookie-law.min.js"
         ]
         css: [
             "./bower_components/bootstrap/dist/css/bootstrap.css"
@@ -121,6 +122,7 @@ BUILD =
             "./bower_components/angular-bootstrap-colorpicker/css/colorpicker.css"
             "./bower_components/select2/dist/css/select2.css"
             "./bower_components/video.js/dist/video-js.css"
+            "./bower_components/angular-cookie-law/dist/angular-cookie-law.min.css"
         ]
     dirs:
         out: "./build"
