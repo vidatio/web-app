@@ -128,14 +128,6 @@ The `.editorconfig` contains all relevant styles for your editor, your IDE/Edito
 
 For visualizations of geo coded data the library [Leaflet.js](http://leafletjs.com/) is used.
 
-## Subdomains
-
-* ci.vidatio.com
-* develop.api.vidatio.com
-* api.vidatio.com
-* develop.vidatio.com
-* vidatio.com
-
 ## Some thoughts
 The application is designed in a highly modularized way.
 
